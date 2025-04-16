@@ -1,31 +1,44 @@
-import { ReactNode } from 'react';
+import { ReactNode, useState, useEffect } from 'react';
 import { AppBar, Toolbar, Typography, Button, Box, Container } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
+import { isTokenValid } from '../utils/auth';
 
 interface LayoutProps {
   children: ReactNode;
 }
 
 const Layout = ({ children }: LayoutProps) => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    setIsAuthenticated(isTokenValid());
+  }, []);
+
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', width: '100%' }}>
       <AppBar position="static" sx={{ width: '100%' }}>
         <Toolbar>
           <RouterLink to={"/"}>
-          <Box
-            component="img"
-            src="../src/assets/logo_expat.png"
-            alt="Expat Logo"
-            sx={{ height: 20, mr: 2 }}
-          />
+            <Box
+              component="img"
+              src="../src/assets/logo_expat.png"
+              alt="Expat Logo"
+              sx={{ height: 20, mr: 2 }}
+            />
           </RouterLink>
           <Box sx={{ ml: "auto", gap: 2, display: "flex"}}>
-          <Button  color="inherit" component={RouterLink} to="/companies">
-            Companies
-          </Button>
-          <Button color="inherit" component={RouterLink} to="/login">
-            Login
-          </Button>
+            <Button color="inherit" component={RouterLink} to="/companies">
+              Companies
+            </Button>
+            {isAuthenticated ? (
+              <Button color="inherit" component={RouterLink} to="/profile">
+                Profile
+              </Button>
+            ) : (
+              <Button color="inherit" component={RouterLink} to="/login">
+                Login
+              </Button>
+            )}
           </Box>
         </Toolbar>
       </AppBar>

@@ -9,6 +9,7 @@ import {
   CircularProgress,
   Button,
 } from '@mui/material';
+import { COMPANY_ENDPOINTS } from '../constants/api';
 
 interface CompanyDetails {
   businessId: string;
@@ -31,8 +32,9 @@ const CompanyDetails = () => {
     const fetchCompanyDetails = async () => {
       try {
         setLoading(true);
-        // TODO: Replace with actual API call
-        const response = await fetch(`/api/companies/${id}`);
+        if (!id) return;
+
+        const response = await fetch(COMPANY_ENDPOINTS.DETAILS(id));
         const data = await response.json();
         setCompany(data);
       } catch (error) {

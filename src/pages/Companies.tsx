@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {
   Box,
   Typography,
@@ -7,60 +7,97 @@ import {
   CardContent,
   CardActions,
   Button,
-  TextField,
   Container,
-  Pagination,
+  Grid,
 } from '@mui/material';
+import { COMPANY_ENDPOINTS } from '../constants/api';
+import { getAuthHeaders } from '../utils/auth';
+import { useNotification } from '../contexts/NotificationContext';
 
 interface Company {
-  businessId: string;
+  id: number;
   name: string;
-  street: string;
-  postCode: string;
-  city: string;
-  mainBusinessLine: string;
+  description: string;
 }
 
 const Companies = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const { showNotification } = useNotification();
   const [companies, setCompanies] = useState<Company[]>([]);
   const [loading, setLoading] = useState(true);
-  const [page, setPage] = useState(1);
-  const [searchQuery, setSearchQuery] = useState(searchParams.get('search') || '');
-  const itemsPerPage = 10;
+  const [error, setError] = useState('');
 
   useEffect(() => {
     const fetchCompanies = async () => {
       try {
-        setLoading(true);
-        // TODO: Replace with actual API call
-        const response = await fetch(`/api/companies?search=${searchQuery}`);
-        const data = await response.json();
+        const headers = getAuthHeaders();
+        if (Object.keys(headers).length === 0) {
+          return; // Redirect will happen in getAuthHeaders
+        }
+
+        const response = await fetch(COMPANY_ENDPOINTS.LIST, {
+          headers,
+        });
+
+        if (!response.ok) {
+        
+          const errorData = await response.json();
+          throw new Error(errorData.message || 'Failed to fetch companies');
+        }
+
+        const {data} = await response.json();
+        console.log(data, 'data is not ok');
+        if (!data || !Array.isArray(data)) {
+          throw new Error('Invalid data format received from server');
+        }
+
         setCompanies(data);
-      } catch (error) {
-        console.error('Error fetching companies:', error);
+      } catch (err) {
+        const errorMessage = err instanceof Error ? err.message : 'An error occurred while fetching companies';
+        setError(errorMessage);
+        showNotification(errorMessage, 'error');
       } finally {
         setLoading(false);
       }
     };
 
     fetchCompanies();
-  }, [searchQuery]);
+  }, [showNotification]);
 
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    setSearchParams({ search: searchQuery });
-    setPage(1);
-  };
+  if (loading) {
+    return (
+      <Container>
+        <Typography>Loading...</Typography>
+      </Container>
+    );
+  }
 
-  const handlePageChange = (_: React.ChangeEvent<unknown>, value: number) => {
-    setPage(value);
-  };
+  if (error) {
+    return (
+      <Container>
+        <Typography color="error" sx={{ mt: 4 }}>
+          {error}
+        </Typography>
+        <Button 
+          variant="contained" 
+          onClick={() => window.location.reload()}
+          sx={{ mt: 2 }}
+        >
+          Try Again
+        </Button>
+      </Container>
+    );
+  }
 
-  const paginatedCompanies = companies.slice(
-    (page - 1) * itemsPerPage,
-    page * itemsPerPage
-  );
+  if (companies.length === 0) {
+    return (
+      <Container>
+        <Typography sx={{ mt: 4 }}>
+          No companies found.
+        </Typography>
+      </Container>
+    );
+  }
 
   return (
     <Container>
@@ -68,59 +105,30 @@ const Companies = () => {
         <Typography variant="h4" component="h1" gutterBottom>
           Companies
         </Typography>
-        <Box component="form" onSubmit={handleSearch} sx={{ mb: 4 }}>
-          <TextField
-            fullWidth
-            variant="outlined"
-            placeholder="Search companies..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            sx={{ mb: 2 }}
-          />
-          <Button type="submit" variant="contained">
-            Search
-          </Button>
-        </Box>
-
-        {loading ? (
-          <Typography>Loading...</Typography>
-        ) : (
-          <>
-            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 3 }}>
-              {paginatedCompanies.map((company) => (
-                <Card key={company.businessId} sx={{ flex: '1 1 300px', maxWidth: '100%' }}>
-                  <CardContent>
-                    <Typography variant="h6" component="h2">
-                      {company.name}
-                    </Typography>
-                    <Typography color="text.secondary">
-                      {company.street}
-                    </Typography>
-                    <Typography color="text.secondary">
-                      {company.postCode} {company.city}
-                    </Typography>
-                    <Typography variant="body2">
-                      Business Line: {company.mainBusinessLine}
-                    </Typography>
-                  </CardContent>
-                  <CardActions>
-                    <Button size="small" href={`/companies/${company.businessId}`}>
-                      View Details
-                    </Button>
-                  </CardActions>
-                </Card>
-              ))}
-            </Box>
-            <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
-              <Pagination
-                count={Math.ceil(companies.length / itemsPerPage)}
-                page={page}
-                onChange={handlePageChange}
-                color="primary"
-              />
-            </Box>
-          </>
-        )}
+        <Grid container spacing={3}>
+          {companies.map((company) => (
+            <Grid item xs={12} sm={6} md={4} key={company.id}>
+              <Card>
+                <CardContent>
+                  <Typography variant="h5" component="h2">
+                    {company.name}
+                  </Typography>
+                  <Typography color="textSecondary" gutterBottom>
+                    {company.description}
+                  </Typography>
+                </CardContent>
+                <CardActions>
+                  <Button
+                    size="small"
+                    onClick={() => navigate(`/companies/${company.id}`)}
+                  >
+                    Learn More
+                  </Button>
+                </CardActions>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
       </Box>
     </Container>
   );

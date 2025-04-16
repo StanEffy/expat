@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { ThemeProvider, CssBaseline, Box } from '@mui/material';
+import { ThemeProvider, CssBaseline, Box, Container } from '@mui/material';
 import { createTheme } from '@mui/material/styles';
+import { NotificationProvider } from './contexts/NotificationContext';
 import Layout from './components/Layout';
 import Home from './pages/Home';
 import Companies from './pages/Companies';
@@ -33,26 +34,30 @@ const theme = createTheme({
   }
 });
 
-function App() {
+const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Box sx={{ width: '100%', minHeight: '100vh' }}>
-        <Router>
-          <Layout>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/companies" element={<Companies />} />
-              <Route path="/companies/:id" element={<CompanyDetails />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
-              <Route path="/profile" element={<Profile />} />
-            </Routes>
-          </Layout>
-        </Router>
-      </Box>
+      <NotificationProvider>
+        <Box sx={{ width: '100%', minHeight: '100vh' }}>
+          <Router>
+            <Layout>
+              <Container maxWidth="lg" sx={{ mt: 4 }}>
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/companies" element={<Companies />} />
+                  <Route path="/companies/:id" element={<CompanyDetails />} />
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/register" element={<Register />} />
+                  <Route path="/profile" element={<Profile />} />
+                </Routes>
+              </Container>
+            </Layout>
+          </Router>
+        </Box>
+      </NotificationProvider>
     </ThemeProvider>
   );
-}
+};
 
 export default App;

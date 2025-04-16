@@ -14,6 +14,10 @@
     "loading": "Laddar...",
     "error": "Fel",
     "notFound": "Hittades inte",
-    "back": "Tillbaka"
+    "back": "Tillbaka",
+    "tryAgain": "Försök igen",
+    "noCompanies": "Inga företag hittades",
+    "viewDetails": "Visa detaljer",
+    "showMore": "Visa mer"
   }
 } 

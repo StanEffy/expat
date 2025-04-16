@@ -14,6 +14,10 @@
     "loading": "Ladataan...",
     "error": "Virhe",
     "notFound": "Ei löytynyt",
-    "back": "Takaisin"
+    "back": "Takaisin",
+    "tryAgain": "Yritä uudelleen",
+    "noCompanies": "Yrityksiä ei löytynyt",
+    "viewDetails": "Näytä tiedot",
+    "showMore": "Näytä lisää"
   }
 } 

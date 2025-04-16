@@ -11,7 +11,8 @@ export const AUTH_ENDPOINTS = {
 
 // Company Endpoints
 export const COMPANY_ENDPOINTS = {
-  LIST: `${API_BASE_URL}/api/companies/`,
+  LIST: (page: number = 1, count: number = 10) => 
+    `${API_BASE_URL}/api/companies/?page=${page}&count=${count}`,
   DETAILS: (id: string) => `${API_BASE_URL}/api/companies/${id}`,
   SEARCH: (query: string) => `${API_BASE_URL}/api/companies?search=${encodeURIComponent(query)}`,
 };

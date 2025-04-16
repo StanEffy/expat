@@ -18,6 +18,7 @@
     "tryAgain": "Yritä uudelleen",
     "noCompanies": "Yrityksiä ei löytynyt",
     "viewDetails": "Näytä tiedot",
-    "showMore": "Näytä lisää"
+    "showMore": "Näytä lisää",
+    "itemsPerPage": "Kohteita per sivu"
   }
 } 

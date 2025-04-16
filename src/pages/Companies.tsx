@@ -8,8 +8,12 @@ import {
   CardActions,
   Button,
   Container,
-  Grid,
   CircularProgress,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  SelectChangeEvent,
 } from '@mui/material';
 import { COMPANY_ENDPOINTS } from '../constants/api';
 import { getAuthHeaders } from '../utils/auth';
@@ -22,7 +26,7 @@ interface Company {
   description: string;
 }
 
-const DEFAULT_COUNT = 10;
+const ITEMS_PER_PAGE_OPTIONS = [10, 25, 50];
 
 const Companies = () => {
   const navigate = useNavigate();
@@ -34,6 +38,7 @@ const Companies = () => {
   const [error, setError] = useState('');
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
 
   const fetchCompanies = async (pageNumber: number, append: boolean = false) => {
     try {
@@ -42,7 +47,7 @@ const Companies = () => {
         return;
       }
 
-      const response = await fetch(COMPANY_ENDPOINTS.LIST(pageNumber, DEFAULT_COUNT), {
+      const response = await fetch(COMPANY_ENDPOINTS.LIST(pageNumber, itemsPerPage), {
         headers,
       });
 
@@ -58,7 +63,7 @@ const Companies = () => {
       }
 
       setCompanies(prev => append ? [...prev, ...data] : data);
-      setHasMore(data.length === DEFAULT_COUNT);
+      setHasMore(data.length === itemsPerPage);
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'An error occurred while fetching companies';
       setError(errorMessage);
@@ -70,14 +75,21 @@ const Companies = () => {
   };
 
   useEffect(() => {
+    setPage(1);
+    setCompanies([]);
     fetchCompanies(1);
-  }, [showNotification]);
+  }, [itemsPerPage, showNotification]);
 
   const handleLoadMore = () => {
     const nextPage = page + 1;
     setPage(nextPage);
     setLoadingMore(true);
     fetchCompanies(nextPage, true);
+  };
+
+  const handleItemsPerPageChange = (event: SelectChangeEvent) => {
+    const newValue = parseInt(event.target.value);
+    setItemsPerPage(newValue);
   };
 
   if (loading) {
@@ -119,30 +131,56 @@ const Companies = () => {
 
   return (
     <Container>
-      <Grid container spacing={3} sx={{ mt: 2 }}>
+      <Box sx={{ display: 'flex', justifyContent: 'flex-end', mb: 2 }}>
+        <FormControl size="small" sx={{ minWidth: 120 }}>
+          <InputLabel id="items-per-page-label">{t('common.itemsPerPage')}</InputLabel>
+          <Select
+            labelId="items-per-page-label"
+            value={itemsPerPage.toString()}
+            label={t('common.itemsPerPage')}
+            onChange={handleItemsPerPageChange}
+          >
+            {ITEMS_PER_PAGE_OPTIONS.map((option) => (
+              <MenuItem key={option} value={option}>
+                {option}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      </Box>
+      <Box sx={{ 
+        display: 'grid', 
+        gridTemplateColumns: { 
+          xs: '1fr', 
+          sm: 'repeat(2, 1fr)', 
+          md: 'repeat(4, 1fr)' 
+        }, 
+        gap: 3, 
+        mt: 2 
+      }}>
         {companies.map((company) => (
-          <Grid item xs={12} sm={6} md={4} key={company.id}>
-            <Card>
-              <CardContent>
-                <Typography variant="h6" component="h2">
-                  {company.name}
-                </Typography>
-                <Typography color="text.secondary" sx={{ mt: 1 }}>
-                  {company.description}
-                </Typography>
-              </CardContent>
-              <CardActions>
-                <Button
-                  size="small"
-                  onClick={() => navigate(`/companies/${company.id}`)}
-                >
-                  {t('common.viewDetails')}
-                </Button>
-              </CardActions>
-            </Card>
-          </Grid>
+          <Card key={company.id} sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+            <CardContent sx={{ flexGrow: 1 }}>
+              <Typography variant="h6" component="h2">
+                {company.name}
+              </Typography>
+              <Typography color="text.secondary" sx={{ mt: 1 }}>
+                {company.description}
+              </Typography>
+            </CardContent>
+            <CardActions sx={{ p: 2 }}>
+              <Button
+                fullWidth
+                variant="contained"
+                size="small"
+                onClick={() => navigate(`/companies/${company.id}`)}
+              >
+                {t('common.viewDetails')}
+              </Button>
+            </CardActions>
+          </Card>
         ))}
-      </Grid>
+      </Box>
       {hasMore && (
         <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4, mb: 4 }}>
           <Button

@@ -1,15 +1,22 @@
 import { ReactNode, useState, useEffect } from 'react';
-import { AppBar, Toolbar, Typography, Button, Box, Container } from '@mui/material';
+import { AppBar, Toolbar, Typography, Button, Box, Container, useMediaQuery, useTheme } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import { isTokenValid } from '../utils/auth';
+import MobileMenu from './MobileMenu';
+import { useTranslation } from 'react-i18next';
 import LanguageSwitcher from './LanguageSwitcher';
 
 interface LayoutProps {
   children: ReactNode;
+  currentLanguage: string;
+  onLanguageChange: (language: string) => void;
 }
 
-const Layout = ({ children }: LayoutProps) => {
+const Layout = ({ children, currentLanguage, onLanguageChange }: LayoutProps) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const { t } = useTranslation();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   useEffect(() => {
     setIsAuthenticated(isTokenValid());
@@ -29,18 +36,26 @@ const Layout = ({ children }: LayoutProps) => {
           </RouterLink>
           <Box sx={{ ml: "auto", gap: 2, display: "flex", alignItems: "center" }}>
             <LanguageSwitcher />
-            <Button color="inherit" component={RouterLink} to="/companies">
-              Companies
-            </Button>
-            {isAuthenticated ? (
-              <Button color="inherit" component={RouterLink} to="/profile">
-                Profile
-              </Button>
-            ) : (
-              <Button color="inherit" component={RouterLink} to="/login">
-                Login
-              </Button>
+            {!isMobile && (
+              <>
+                <Button color="inherit" component={RouterLink} to="/companies">
+                  {t('navigation.companies')}
+                </Button>
+                {isAuthenticated ? (
+                  <Button color="inherit" component={RouterLink} to="/profile">
+                    {t('navigation.profile')}
+                  </Button>
+                ) : (
+                  <Button color="inherit" component={RouterLink} to="/login">
+                    {t('navigation.login')}
+                  </Button>
+                )}
+              </>
             )}
+            <MobileMenu 
+              currentLanguage={currentLanguage}
+              onLanguageChange={onLanguageChange}
+            />
           </Box>
         </Toolbar>
       </AppBar>

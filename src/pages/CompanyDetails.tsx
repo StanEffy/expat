@@ -6,60 +6,109 @@ import {
   Card,
   CardContent,
   Container,
-  CircularProgress,
-  Button,
+  Grid,
+  Link,
 } from '@mui/material';
 import { COMPANY_ENDPOINTS } from '../constants/api';
+import { getAuthHeaders } from '../utils/auth';
+import { useNotification } from '../contexts/NotificationContext';
+import { useTranslation } from 'react-i18next';
 
 interface CompanyDetails {
-  businessId: string;
+  id: number;
+  businessid: string;
   name: string;
-  street: string;
-  postCode: string;
-  city: string;
-  buildingNumber: string;
-  apartmentNumber: string;
-  mainBusinessLine: string;
+  mainbusinessline: string;
   website: string;
+  street: string;
+  postcode: string;
+  city: string;
+  buildingnumber: string;
+  apartmentnumber: string | null;
+  company_description: string | null;
+  recruitment_page: string | null;
+  industry: string;
+  size: string;
+  founded: string;
+  country: string;
 }
 
 const CompanyDetails = () => {
-  const { id } = useParams();
+  const { id } = useParams<{ id: string }>();
+  const { showNotification } = useNotification();
   const [company, setCompany] = useState<CompanyDetails | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+  const { t } = useTranslation();
 
   useEffect(() => {
     const fetchCompanyDetails = async () => {
-      try {
-        setLoading(true);
-        if (!id) return;
+      if (!id) return;
 
-        const response = await fetch(COMPANY_ENDPOINTS.DETAILS(id));
+      try {
+        const headers = getAuthHeaders();
+        if (Object.keys(headers).length === 0) {
+          return;
+        }
+
+        const response = await fetch(COMPANY_ENDPOINTS.DETAILS(id), {
+          headers,
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.message || 'Failed to fetch company details');
+        }
+
         const data = await response.json();
-        setCompany(data);
-      } catch (error) {
-        console.error('Error fetching company details:', error);
+        
+        if (data.length > 0) {
+          setCompany(data[0]);
+        } else {
+          setError('Company not found');
+          showNotification('Company not found', 'error');
+        }
+      
+      } catch (err) {
+        const errorMessage = err instanceof Error ? err.message : 'An error occurred while fetching company details';
+        setError(errorMessage);
+        showNotification(errorMessage, 'error');
       } finally {
         setLoading(false);
       }
     };
 
     fetchCompanyDetails();
-  }, [id]);
+  }, [id, showNotification]);
+
+  const getGoogleMapsUrl = (company: CompanyDetails) => {
+    const address = `${company.street} ${company.buildingnumber}${company.apartmentnumber ? `, ${company.apartmentnumber}` : ''}, ${company.postcode} ${company.city}`;
+    return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
+  };
 
   if (loading) {
     return (
-      <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
-        <CircularProgress />
-      </Box>
+      <Container>
+        <Typography>Loading...</Typography>
+      </Container>
+    );
+  }
+
+  if (error) {
+    return (
+      <Container>
+        <Typography color="error" sx={{ mt: 4 }}>
+          {error}
+        </Typography>
+      </Container>
     );
   }
 
   if (!company) {
     return (
       <Container>
-        <Typography variant="h5" sx={{ mt: 4 }}>
-          Company not found
+        <Typography sx={{ mt: 4 }}>
+          Company not found.
         </Typography>
       </Container>
     );
@@ -71,41 +120,101 @@ const CompanyDetails = () => {
         <Typography variant="h4" component="h1" gutterBottom>
           {company.name}
         </Typography>
-        <Card sx={{ mb: 4 }}>
-          <CardContent>
-            <Typography variant="h6" gutterBottom>
-              Company Information
-            </Typography>
-            <Typography>
-              <strong>Business ID:</strong> {company.businessId}
-            </Typography>
-            <Typography>
-              <strong>Address:</strong> {company.street} {company.buildingNumber}
-              {company.apartmentNumber && `, ${company.apartmentNumber}`}
-            </Typography>
-            <Typography>
-              <strong>Postal Code:</strong> {company.postCode}
-            </Typography>
-            <Typography>
-              <strong>City:</strong> {company.city}
-            </Typography>
-            <Typography>
-              <strong>Main Business Line:</strong> {company.mainBusinessLine}
-            </Typography>
-            {company.website && (
-              <Typography>
-                <strong>Website:</strong>{' '}
-                <Button
-                  href={company.website}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Visit Website
-                </Button>
-              </Typography>
+        <Grid container spacing={3}>
+          <Grid item xs={12} md={6}>
+            <Card>
+              <CardContent>
+                <Typography variant="h6" gutterBottom>
+                  {t('company.information')}
+                </Typography>
+                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+                  <Typography>
+                    <strong>{t('company.businessId')}:</strong> {company.businessid}
+                  </Typography>
+                  <Typography>
+                    <strong>{t('company.mainBusinessLine')}:</strong> {company.mainbusinessline}
+                  </Typography>
+                  {company.website && (
+                    <Typography>
+                      <strong>{t('company.website')}:</strong>{' '}
+                      <Link href={`https://${company.website}`} target="_blank" rel="noopener noreferrer">
+                        {company.website}
+                      </Link>
+                    </Typography>
+                  )}
+                </Box>
+              </CardContent>
+            </Card>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            {company.street && company.city ? (
+              <Link
+                href={getGoogleMapsUrl(company)}
+                target="_blank"
+                rel="noopener noreferrer"
+                sx={{ textDecoration: 'none' }}
+              >
+                <Card sx={{ '&:hover': { boxShadow: 6 } }}>
+                  <CardContent>
+                    <Typography variant="h6" gutterBottom>
+                      {t('company.address')}
+                    </Typography>
+                    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+                      <Typography>
+                        {company.street} {company.buildingnumber}
+                        {company.apartmentnumber && `, ${company.apartmentnumber}`}
+                      </Typography>
+                      <Typography>
+                        {company.postcode} {company.city}
+                      </Typography>
+                    </Box>
+                  </CardContent>
+                </Card>
+              </Link>
+            ) : (
+              <Card>
+                <CardContent>
+                  <Typography variant="h6" gutterBottom>
+                    {t('company.address')}
+                  </Typography>
+                  <Typography color="textSecondary">
+                    {t('company.noAddress')}
+                  </Typography>
+                </CardContent>
+              </Card>
             )}
-          </CardContent>
-        </Card>
+          </Grid>
+          {company.company_description && (
+            <Grid item xs={12}>
+              <Card>
+                <CardContent>
+                  <Typography variant="h6" gutterBottom>
+                    {t('company.description')}
+                  </Typography>
+                  <Typography>
+                    {company.company_description}
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+          )}
+          {company.recruitment_page && (
+            <Grid item xs={12}>
+              <Card>
+                <CardContent>
+                  <Typography variant="h6" gutterBottom>
+                    {t('company.recruitment')}
+                  </Typography>
+                  <Typography>
+                    <Link href={company.recruitment_page} target="_blank" rel="noopener noreferrer">
+                      {t('company.visitRecruitmentPage')}
+                    </Link>
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+          )}
+        </Grid>
       </Box>
     </Container>
   );

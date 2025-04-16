@@ -9,6 +9,7 @@ import CompanyDetails from './pages/CompanyDetails';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Profile from './pages/Profile';
+import './i18n/config';
 
 const theme = createTheme({
   palette: {

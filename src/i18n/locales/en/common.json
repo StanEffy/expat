@@ -1,0 +1,19 @@
+{
+  "company": {
+    "information": "Company Information",
+    "businessId": "Business ID",
+    "mainBusinessLine": "Main Business Line",
+    "website": "Website",
+    "address": "Address",
+    "noAddress": "No address available",
+    "description": "Description",
+    "recruitment": "Recruitment",
+    "visitRecruitmentPage": "Visit Recruitment Page"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "notFound": "Not Found",
+    "back": "Back"
+  }
+} 

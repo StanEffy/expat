@@ -1,0 +1,19 @@
+{
+  "company": {
+    "information": "Yrityksen tiedot",
+    "businessId": "Y-tunnus",
+    "mainBusinessLine": "Päätoimiala",
+    "website": "Verkkosivusto",
+    "address": "Osoite",
+    "noAddress": "Osoitetta ei saatavilla",
+    "description": "Kuvaus",
+    "recruitment": "Rekrytointi",
+    "visitRecruitmentPage": "Siirry rekrytointisivulle"
+  },
+  "common": {
+    "loading": "Ladataan...",
+    "error": "Virhe",
+    "notFound": "Ei löytynyt",
+    "back": "Takaisin"
+  }
+} 

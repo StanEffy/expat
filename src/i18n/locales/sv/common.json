@@ -1,0 +1,19 @@
+{
+  "company": {
+    "information": "Företagsinformation",
+    "businessId": "Företags-ID",
+    "mainBusinessLine": "Huvudverksamhet",
+    "website": "Webbplats",
+    "address": "Adress",
+    "noAddress": "Ingen adress tillgänglig",
+    "description": "Beskrivning",
+    "recruitment": "Rekrytering",
+    "visitRecruitmentPage": "Besök rekryteringssidan"
+  },
+  "common": {
+    "loading": "Laddar...",
+    "error": "Fel",
+    "notFound": "Hittades inte",
+    "back": "Tillbaka"
+  }
+} 

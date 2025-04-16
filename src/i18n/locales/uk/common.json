@@ -1,0 +1,19 @@
+{
+  "company": {
+    "information": "Інформація про компанію",
+    "businessId": "Ідентифікатор бізнесу",
+    "mainBusinessLine": "Основна діяльність",
+    "website": "Веб-сайт",
+    "address": "Адреса",
+    "noAddress": "Адреса недоступна",
+    "description": "Опис",
+    "recruitment": "Рекрутинг",
+    "visitRecruitmentPage": "Відвідати сторінку рекрутингу"
+  },
+  "common": {
+    "loading": "Завантаження...",
+    "error": "Помилка",
+    "notFound": "Не знайдено",
+    "back": "Назад"
+  }
+} 

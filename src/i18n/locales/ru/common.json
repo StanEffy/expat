@@ -1,0 +1,19 @@
+{
+  "company": {
+    "information": "Информация о компании",
+    "businessId": "Идентификатор бизнеса",
+    "mainBusinessLine": "Основной вид деятельности",
+    "website": "Веб-сайт",
+    "address": "Адрес",
+    "noAddress": "Адрес недоступен",
+    "description": "Описание",
+    "recruitment": "Рекрутинг",
+    "visitRecruitmentPage": "Посетить страницу рекрутинга"
+  },
+  "common": {
+    "loading": "Загрузка...",
+    "error": "Ошибка",
+    "notFound": "Не найдено",
+    "back": "Назад"
+  }
+} 

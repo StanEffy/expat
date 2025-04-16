@@ -2,6 +2,7 @@ import { ReactNode, useState, useEffect } from 'react';
 import { AppBar, Toolbar, Typography, Button, Box, Container } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import { isTokenValid } from '../utils/auth';
+import LanguageSwitcher from './LanguageSwitcher';
 
 interface LayoutProps {
   children: ReactNode;
@@ -26,7 +27,8 @@ const Layout = ({ children }: LayoutProps) => {
               sx={{ height: 20, mr: 2 }}
             />
           </RouterLink>
-          <Box sx={{ ml: "auto", gap: 2, display: "flex"}}>
+          <Box sx={{ ml: "auto", gap: 2, display: "flex", alignItems: "center" }}>
+            <LanguageSwitcher />
             <Button color="inherit" component={RouterLink} to="/companies">
               Companies
             </Button>

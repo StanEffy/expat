@@ -161,11 +161,11 @@ const Companies = () => {
         {companies.map((company) => (
           <Card key={company.id} sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
             <CardContent sx={{ flexGrow: 1 }}>
-              <Typography variant="h6" component="h2">
+              <Typography sx={{ fontSize: '1rem', fontWeight: 'bold' }} component="h3">
                 {company.name}
               </Typography>
               <Typography color="text.secondary" sx={{ mt: 1 }}>
-                {company.description}
+                {company.mainbusinessline}
               </Typography>
             </CardContent>
             <CardActions sx={{ p: 2 }}>

@@ -120,8 +120,8 @@ const CompanyDetails = () => {
         <Typography variant="h4" component="h1" gutterBottom>
           {company.name}
         </Typography>
-        <Grid container spacing={3}>
-          <Grid item xs={12} md={6}>
+        <Grid container spacing={3} sx={{ display: 'flex', flexDirection: 'column', gap: 2, alignItems: 'left' }}>
+          <Grid item xs={12}>
             <Card>
               <CardContent>
                 <Typography variant="h6" gutterBottom>
@@ -146,7 +146,7 @@ const CompanyDetails = () => {
               </CardContent>
             </Card>
           </Grid>
-          <Grid item xs={12} md={6}>
+          <Grid item xs={12} >
             {company.street && company.city ? (
               <Link
                 href={getGoogleMapsUrl(company)}
@@ -154,8 +154,47 @@ const CompanyDetails = () => {
                 rel="noopener noreferrer"
                 sx={{ textDecoration: 'none' }}
               >
-                <Card sx={{ '&:hover': { boxShadow: 6 } }}>
-                  <CardContent>
+                <Card sx={{ 
+                position: 'relative',
+                overflow: 'hidden',               
+                width: '100%',
+                minWidth: 350,
+                mx: 'auto',
+                "&:hover": {
+                  boxShadow: "0 0 10px 5px rgba(0, 0, 0, 0.2)"
+                },
+                '&::before': {
+                  content: '""',
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  background: 'url("../src/assets/map_bg.png")',
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                  zIndex: 0,
+                },
+                '&::after': {
+                  content: '""',
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  right: '50%',
+                  bottom: 0,
+                  background: 'linear-gradient(to right, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.4))',
+                  backdropFilter: 'blur(8px)',
+                  zIndex: 1,
+                }
+              }}>
+                <CardContent sx={{ 
+                  position: 'relative', 
+                  zIndex: 2,
+                  minHeight: 200,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center'
+                }}>
                     <Typography variant="h6" gutterBottom>
                       {t('company.address')}
                     </Typography>
@@ -172,8 +211,44 @@ const CompanyDetails = () => {
                 </Card>
               </Link>
             ) : (
-              <Card>
-                <CardContent>
+              <Card sx={{ 
+                position: 'relative',
+                overflow: 'hidden',
+                maxWidth: 600,
+                width: '100%',
+                mx: 'auto',
+                '&::before': {
+                  content: '""',
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  background: 'url("../src/assets/map_bg.png")',
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                  zIndex: 0,
+                },
+                '&::after': {
+                  content: '""',
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  right: '50%',
+                  bottom: 0,
+                  background: 'linear-gradient(to right, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.4))',
+                  backdropFilter: 'blur(4px)',
+                  zIndex: 1,
+                }
+              }}>
+                <CardContent sx={{ 
+                  position: 'relative', 
+                  zIndex: 2,
+                  minHeight: 200,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center'
+                }}>
                   <Typography variant="h6" gutterBottom>
                     {t('company.address')}
                   </Typography>

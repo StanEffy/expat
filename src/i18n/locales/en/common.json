@@ -18,7 +18,12 @@
     "noAddress": "No address available",
     "description": "Description",
     "recruitment": "Recruitment",
-    "visitRecruitmentPage": "Visit Recruitment Page"
+    "visitRecruitmentPage": "Visit Recruitment Page",
+    "filter": {
+      "title": "Filter Companies",
+      "searchCities": "Search cities",
+      "selectCities": "Select cities"
+    }
   },
   "common": {
     "loading": "Loading...",

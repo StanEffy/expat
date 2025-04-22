@@ -18,7 +18,12 @@
     "noAddress": "Адреса недоступна",
     "description": "Опис",
     "recruitment": "Рекрутинг",
-    "visitRecruitmentPage": "Відвідати сторінку рекрутингу"
+    "visitRecruitmentPage": "Відвідати сторінку рекрутингу",
+    "filter": {
+      "title": "Фільтр компаній",
+      "searchCities": "Пошук міст",
+      "selectCities": "Виберіть міста"
+    }
   },
   "common": {
     "loading": "Завантаження...",

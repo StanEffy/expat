@@ -6,7 +6,6 @@ import {
   Card,
   CardContent,
   Container,
-  Grid,
   Link,
 } from '@mui/material';
 import { COMPANY_ENDPOINTS } from '../constants/api';
@@ -120,41 +119,39 @@ const CompanyDetails = () => {
         <Typography variant="h4" component="h1" gutterBottom>
           {company.name}
         </Typography>
-        <Grid container spacing={3} sx={{ display: 'flex', flexDirection: 'column', gap: 2, alignItems: 'left' }}>
-          <Grid item xs={12}>
-            <Card>
-              <CardContent>
-                <Typography variant="h6" gutterBottom>
-                  {t('company.information')}
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+          <Card>
+            <CardContent>
+              <Typography variant="h6" gutterBottom>
+                {t('company.information')}
+              </Typography>
+              <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+                <Typography>
+                  <strong>{t('company.businessId')}:</strong> {company.businessid}
                 </Typography>
-                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+                <Typography>
+                  <strong>{t('company.mainBusinessLine')}:</strong> {company.mainbusinessline}
+                </Typography>
+                {company.website && (
                   <Typography>
-                    <strong>{t('company.businessId')}:</strong> {company.businessid}
+                    <strong>{t('company.website')}:</strong>{' '}
+                    <Link href={`https://${company.website}`} target="_blank" rel="noopener noreferrer">
+                      {company.website}
+                    </Link>
                   </Typography>
-                  <Typography>
-                    <strong>{t('company.mainBusinessLine')}:</strong> {company.mainbusinessline}
-                  </Typography>
-                  {company.website && (
-                    <Typography>
-                      <strong>{t('company.website')}:</strong>{' '}
-                      <Link href={`https://${company.website}`} target="_blank" rel="noopener noreferrer">
-                        {company.website}
-                      </Link>
-                    </Typography>
-                  )}
-                </Box>
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid item xs={12} >
-            {company.street && company.city ? (
-              <Link
-                href={getGoogleMapsUrl(company)}
-                target="_blank"
-                rel="noopener noreferrer"
-                sx={{ textDecoration: 'none' }}
-              >
-                <Card sx={{ 
+                )}
+              </Box>
+            </CardContent>
+          </Card>
+
+          {company.street && company.city && (
+            <Link
+              href={getGoogleMapsUrl(company)}
+              target="_blank"
+              rel="noopener noreferrer"
+              sx={{ textDecoration: 'none' }}
+            >
+              <Card sx={{ 
                 position: 'relative',
                 overflow: 'hidden',               
                 width: '100%',
@@ -195,101 +192,51 @@ const CompanyDetails = () => {
                   flexDirection: 'column',
                   justifyContent: 'center'
                 }}>
-                    <Typography variant="h6" gutterBottom>
-                      {t('company.address')}
-                    </Typography>
-                    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-                      <Typography>
-                        {company.street} {company.buildingnumber}
-                        {company.apartmentnumber && `, ${company.apartmentnumber}`}
-                      </Typography>
-                      <Typography>
-                        {company.postcode} {company.city}
-                      </Typography>
-                    </Box>
-                  </CardContent>
-                </Card>
-              </Link>
-            ) : (
-              <Card sx={{ 
-                position: 'relative',
-                overflow: 'hidden',
-                maxWidth: 600,
-                width: '100%',
-                mx: 'auto',
-                '&::before': {
-                  content: '""',
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  bottom: 0,
-                  background: 'url("../src/assets/map_bg.png")',
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                  zIndex: 0,
-                },
-                '&::after': {
-                  content: '""',
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  right: '50%',
-                  bottom: 0,
-                  background: 'linear-gradient(to right, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.4))',
-                  backdropFilter: 'blur(4px)',
-                  zIndex: 1,
-                }
-              }}>
-                <CardContent sx={{ 
-                  position: 'relative', 
-                  zIndex: 2,
-                  minHeight: 200,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'center'
-                }}>
                   <Typography variant="h6" gutterBottom>
                     {t('company.address')}
                   </Typography>
-                  <Typography color="textSecondary">
-                    {t('company.noAddress')}
+                  <Typography>
+                    {company.street} {company.buildingnumber}
+                    {company.apartmentnumber && `, ${company.apartmentnumber}`}
+                  </Typography>
+                  <Typography>
+                    {company.postcode} {company.city}
                   </Typography>
                 </CardContent>
               </Card>
-            )}
-          </Grid>
+            </Link>
+          )}
+
           {company.company_description && (
-            <Grid item xs={12}>
-              <Card>
-                <CardContent>
-                  <Typography variant="h6" gutterBottom>
-                    {t('company.description')}
-                  </Typography>
-                  <Typography>
-                    {company.company_description}
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
+            <Card>
+              <CardContent>
+                <Typography variant="h6" gutterBottom>
+                  {t('company.description')}
+                </Typography>
+                <Typography>
+                  {company.company_description}
+                </Typography>
+              </CardContent>
+            </Card>
           )}
+
           {company.recruitment_page && (
-            <Grid component="div" item xs={12}>
-              <Card>
-                <CardContent>
-                  <Typography variant="h6" gutterBottom>
-                    {t('company.recruitment')}
-                  </Typography>
-                  <Typography>
-                    <Link href={company.recruitment_page} target="_blank" rel="noopener noreferrer">
-                      {t('company.visitRecruitmentPage')}
-                    </Link>
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
+            <Card>
+              <CardContent>
+                <Typography variant="h6" gutterBottom>
+                  {t('company.recruitment')}
+                </Typography>
+                <Link
+                  href={company.recruitment_page}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {t('company.visitRecruitmentPage')}
+                </Link>
+              </CardContent>
+            </Card>
           )}
-        </Grid>
+        </Box>
       </Box>
     </Container>
   );

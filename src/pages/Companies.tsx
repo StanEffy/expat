@@ -19,15 +19,17 @@ import { COMPANY_ENDPOINTS } from '../constants/api';
 import { getAuthHeaders } from '../utils/auth';
 import { useNotification } from '../contexts/NotificationContext';
 import { useTranslation } from 'react-i18next';
-import CompanyFilter from '../components/CompanyFilter';
 import data from '../mock_data/cities.json';
+
+interface City {
+  id: number;
+  name: string;
+}
 
 interface Company {
   id: number;
   name: string;
   description: string;
-  mainbusinessline: string;
-  city: string;
 }
 
 const ITEMS_PER_PAGE_OPTIONS = [10, 25, 50];
@@ -43,10 +45,10 @@ const Companies = () => {
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const [itemsPerPage, setItemsPerPage] = useState(10);
-  const [selectedCities, setSelectedCities] = useState<string[]>([]);
-  const cities = data.cities;
-
-  const handleCityChange = (newCities: string[]) => {
+  const [selectedCities, setSelectedCities] = useState<City[]>([]);
+  const {cities : defaultCities} = data;
+  const [cities, setCities] = useState<City[]>(defaultCities);
+  const handleCityChange = (newCities: City[]) => {
     setSelectedCities(newCities);
     setPage(1);
     setCompanies([]);
@@ -104,14 +106,6 @@ const Companies = () => {
     setItemsPerPage(newValue);
   };
 
-  const filteredCompanies = selectedCities.length > 0
-    ? companies.filter(company => 
-        selectedCities.some(city => 
-          company.city.toLowerCase() === city.toLowerCase()
-        )
-      )
-    : companies;
-
   if (loading) {
     return (
       <Container>
@@ -151,11 +145,7 @@ const Companies = () => {
 
   return (
     <Container>
-      <CompanyFilter
-        cities={cities}
-        selectedCities={selectedCities}
-        onCityChange={handleCityChange}
-      />
+      
       <Box sx={{ display: 'flex', justifyContent: 'flex-end', mb: 2 }}>
         <FormControl size="small" sx={{ minWidth: 120 }}>
           <InputLabel id="items-per-page-label">{t('common.itemsPerPage')}</InputLabel>
@@ -183,7 +173,7 @@ const Companies = () => {
         gap: 3, 
         mt: 2 
       }}>
-        {filteredCompanies.map((company) => (
+        {companies.map((company) => (
           <Card key={company.id} sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
             <CardContent sx={{ flexGrow: 1 }}>
               <Typography sx={{ fontSize: '1rem', fontWeight: 'bold' }} component="h3">
@@ -191,9 +181,6 @@ const Companies = () => {
               </Typography>
               <Typography color="text.secondary" sx={{ mt: 1 }}>
                 {company.mainbusinessline}
-              </Typography>
-              <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
-                {company.city}
               </Typography>
             </CardContent>
             <CardActions sx={{ p: 2 }}>

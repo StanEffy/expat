@@ -15,5 +15,13 @@
     "error": "Error",
     "notFound": "Not Found",
     "back": "Back"
+  },
+  "navigation": {
+    "companies": "Companies",
+    "login": "Login"
+  },
+  "home": {
+    "welcome": "Welcome to Expat",
+    "findCompanies": "Find companies and job opportunities in Finland"
   }
 } 

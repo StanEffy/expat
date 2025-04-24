@@ -1,14 +1,4 @@
 {
-  "app": {
-    "title": "Експат Додаток"
-  },
-  "navigation": {
-    "home": "Головна",
-    "companies": "Компанії",
-    "about": "Про нас",
-    "login": "Увійти",
-    "profile": "Профіль"
-  },
   "company": {
     "information": "Інформація про компанію",
     "businessId": "Ідентифікатор бізнесу",
@@ -18,12 +8,7 @@
     "noAddress": "Адреса недоступна",
     "description": "Опис",
     "recruitment": "Рекрутинг",
-    "visitRecruitmentPage": "Відвідати сторінку рекрутингу",
-    "filter": {
-      "title": "Фільтр компаній",
-      "searchCities": "Пошук міст",
-      "selectCities": "Виберіть міста"
-    }
+    "visitRecruitmentPage": "Відвідати сторінку рекрутингу"
   },
   "common": {
     "loading": "Завантаження...",
@@ -35,5 +20,17 @@
     "viewDetails": "Переглянути деталі",
     "showMore": "Показати більше",
     "itemsPerPage": "Елементів на сторінку"
+  },
+  "home": {
+    "welcome": "Ласкаво просимо в Expat App",
+    "description": "Знайдіть компанії та вакансії в Фінляндіі"
+  },
+  "navigation": {
+    "home": "Головна",
+    "companies": "Компанії",
+    "about": "Про нас",
+    "login": "Вхід",
+    "profile": "Профіль",
+    "signup": "Реєстрація"
   }
 } 

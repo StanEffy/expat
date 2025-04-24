@@ -16,18 +16,18 @@ const Home = () => {
     <Container >
       <Box sx={{ textAlign: 'center', my: 8 }}>
         <Typography variant="h4" component="h1" gutterBottom>
-          Welcome to Expat
+        {t('home.welcome')}
         </Typography>
         <Typography variant="h5" color="text.secondary" paragraph>
-          Find companies and job opportunities in Finland
+        {t('home.description')}
         </Typography>
-        <Box sx={{ mt: 4 }}>
+        <Box sx={{ mt: 4, display: 'flex', justifyContent: 'center', gap: 2 }}>
         {isAuthenticated ? (
-                  <Button  component={RouterLink} to="/companies">
+                  <Button sx={{width: '200px', color: 'white'}} component={RouterLink} to="/companies">
                     {t('navigation.companies')}
                   </Button>
                 ) : (
-                  <Button  component={RouterLink} to="/login">
+                  <Button sx={{width: '200px', color: 'white'}}  component={RouterLink} to="/login">
                     {t('navigation.login')}
                   </Button>
                 )}

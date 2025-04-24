@@ -7,7 +7,8 @@
     "companies": "Companies",
     "about": "About",
     "login": "Login",
-    "profile": "Profile"
+    "profile": "Profile",
+    "signup": "Signup"
   },
   "company": {
     "information": "Company Information",
@@ -35,5 +36,9 @@
     "viewDetails": "View Details",
     "showMore": "Show More",
     "itemsPerPage": "Items per page"
+  },
+  "home": {
+    "welcome": "Welcome to Expat App",
+    "description": "Find companies and job opportunities in Finland"
   }
 } 

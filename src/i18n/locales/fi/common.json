@@ -20,5 +20,17 @@
     "viewDetails": "Näytä tiedot",
     "showMore": "Näytä lisää",
     "itemsPerPage": "Kohteita per sivu"
+  },
+  "home": {
+    "welcome": "Tervetuloa Expat Appille",
+    "description": "Etsi yrityksiä ja työpaikkoja Suomessa"
+  },
+  "navigation": {
+    "home": "Etusivu",
+    "companies": "Yritykset",
+    "about": "Tietoa meistä",
+    "login": "Kirjaudu sisään",
+    "profile": "Profiili",
+    "signup": "Rekisteröidy"
   }
 } 

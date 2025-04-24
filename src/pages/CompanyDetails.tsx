@@ -274,7 +274,7 @@ const CompanyDetails = () => {
             </Grid>
           )}
           {company.recruitment_page && (
-            <Grid item xs={12}>
+            <Grid component="div" item xs={12}>
               <Card>
                 <CardContent>
                   <Typography variant="h6" gutterBottom>

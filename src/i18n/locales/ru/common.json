@@ -19,5 +19,17 @@
     "noCompanies": "Компании не найдены",
     "viewDetails": "Просмотреть детали",
     "showMore": "Показать больше"
+  },
+  "home": {
+    "welcome": "Добро пожаловать в Expat App",
+    "description": "Найдите компании и вакансии в Финляндии"
+  },
+  "navigation": {
+    "home": "Главная",
+    "companies": "Компании",
+    "about": "О нас",
+    "login": "Вход",
+    "profile": "Профиль",
+    "signup": "Регистрация"
   }
 } 

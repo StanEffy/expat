@@ -20,5 +20,17 @@
     "viewDetails": "Visa detaljer",
     "showMore": "Visa mer",
     "itemsPerPage": "Objekt per sida"
+  },
+  "home": {
+    "welcome": "Välkommen till Expat App",
+    "description": "Hitta företag och jobb tillgängliga i Finland"
+  },
+  "navigation": {
+    "home": "Hem",
+    "companies": "Företag",
+    "about": "Om oss",
+    "login": "Logga in",
+    "profile": "Profil",
+    "signup": "Registrera"
   }
 } 

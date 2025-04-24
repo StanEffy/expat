@@ -1,5 +1,5 @@
 // API Configuration
-export const API_BASE_URL = 'http://localhost:8080';
+export const API_BASE_URL = 'https://57ee-YOUR_SERVER_IP.ngrok-free.app';
 
 // Auth Endpoints
 export const AUTH_ENDPOINTS = {

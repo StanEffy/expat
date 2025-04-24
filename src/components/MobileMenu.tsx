@@ -5,20 +5,13 @@ import {
   MenuItem,
   useMediaQuery,
   useTheme,
-  FormControl,
-  Select,
-  SelectChangeEvent,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
-interface MobileMenuProps {
-  onLanguageChange: (language: string) => void;
-  currentLanguage: string;
-}
 
-const MobileMenu = ({ onLanguageChange, currentLanguage }: MobileMenuProps) => {
+const MobileMenu = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -33,9 +26,6 @@ const MobileMenu = ({ onLanguageChange, currentLanguage }: MobileMenuProps) => {
     setAnchorEl(null);
   };
 
-  const handleLanguageChange = (event: SelectChangeEvent) => {
-    onLanguageChange(event.target.value);
-  };
 
   const handleNavigation = (path: string) => {
     navigate(path);

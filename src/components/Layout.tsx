@@ -8,11 +8,9 @@ import LanguageSwitcher from './LanguageSwitcher';
 
 interface LayoutProps {
   children: ReactNode;
-  currentLanguage: string;
-  onLanguageChange: (language: string) => void;
 }
 
-const Layout = ({ children, currentLanguage, onLanguageChange }: LayoutProps) => {
+const Layout = ({ children }: LayoutProps) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const { t } = useTranslation();
   const theme = useTheme();
@@ -52,10 +50,7 @@ const Layout = ({ children, currentLanguage, onLanguageChange }: LayoutProps) =>
                 )}
               </>
             )}
-            <MobileMenu 
-              currentLanguage={currentLanguage}
-              onLanguageChange={onLanguageChange}
-            />
+            <MobileMenu />
           </Box>
         </Toolbar>
       </AppBar>

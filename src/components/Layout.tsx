@@ -8,6 +8,8 @@ import LanguageSwitcher from './LanguageSwitcher';
 
 interface LayoutProps {
   children: ReactNode;
+  currentLanguage: string;
+  onLanguageChange: (language: string) => void;
 }
 
 const Layout = ({ children }: LayoutProps) => {
@@ -50,7 +52,8 @@ const Layout = ({ children }: LayoutProps) => {
                 )}
               </>
             )}
-            <MobileMenu />
+            <MobileMenu 
+            />
           </Box>
         </Toolbar>
       </AppBar>

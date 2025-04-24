@@ -19,17 +19,12 @@ import { COMPANY_ENDPOINTS } from '../constants/api';
 import { getAuthHeaders } from '../utils/auth';
 import { useNotification } from '../contexts/NotificationContext';
 import { useTranslation } from 'react-i18next';
-import data from '../mock_data/cities.json';
-
-interface City {
-  id: number;
-  name: string;
-}
 
 interface Company {
   id: number;
   name: string;
   description: string;
+  mainbusinessline: string;
 }
 
 const ITEMS_PER_PAGE_OPTIONS = [10, 25, 50];
@@ -45,14 +40,6 @@ const Companies = () => {
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const [itemsPerPage, setItemsPerPage] = useState(10);
-  const [selectedCities, setSelectedCities] = useState<City[]>([]);
-  const {cities : defaultCities} = data;
-  const [cities, setCities] = useState<City[]>(defaultCities);
-  const handleCityChange = (newCities: City[]) => {
-    setSelectedCities(newCities);
-    setPage(1);
-    setCompanies([]);
-  };
 
   const fetchCompanies = async (pageNumber: number, append: boolean = false) => {
     try {

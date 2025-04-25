@@ -1,5 +1,5 @@
 // API Configuration
-export const API_BASE_URL = 'http://aixx5ss5rf.loclx.io';
+export const API_BASE_URL = 'http://7gawroobea.loclx.io';
 
 // Auth Endpoints
 export const AUTH_ENDPOINTS = {

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import {
   Box,
   Typography,
@@ -31,6 +31,7 @@ const ITEMS_PER_PAGE_OPTIONS = [10, 25, 50];
 
 const Companies = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams(); 
   const { showNotification } = useNotification();
   const { t } = useTranslation();
   const [companies, setCompanies] = useState<Company[]>([]);
@@ -41,14 +42,26 @@ const Companies = () => {
   const [hasMore, setHasMore] = useState(true);
   const [itemsPerPage, setItemsPerPage] = useState(10);
 
-  const fetchCompanies = async (pageNumber: number, append: boolean = false) => {
+
+  useEffect(() => {
+    const initialPage = parseInt(searchParams.get('page') || '1');
+    const initialItemsPerPage = parseInt(searchParams.get('limit') || '10');
+    
+    setPage(initialPage);
+    setItemsPerPage(initialItemsPerPage);
+    
+    
+    fetchCompanies(initialPage, initialItemsPerPage, false);
+  }, []); 
+
+  const fetchCompanies = async (pageNumber: number, limit: number, append: boolean = false) => {
     try {
       const headers = getAuthHeaders();
       if (Object.keys(headers).length === 0) {
         return;
       }
 
-      const response = await fetch(COMPANY_ENDPOINTS.LIST(pageNumber, itemsPerPage), {
+      const response = await fetch(COMPANY_ENDPOINTS.LIST(pageNumber, limit), {
         headers,
       });
 
@@ -64,7 +77,7 @@ const Companies = () => {
       }
 
       setCompanies(prev => append ? [...prev, ...data] : data);
-      setHasMore(data.length === itemsPerPage);
+      setHasMore(data.length === limit);
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'An error occurred while fetching companies';
       setError(errorMessage);
@@ -76,21 +89,36 @@ const Companies = () => {
   };
 
   useEffect(() => {
-    setPage(1);
-    setCompanies([]);
-    fetchCompanies(1);
-  }, [itemsPerPage, showNotification]);
+   
+    if (page === 1 && itemsPerPage === 10) return;
+    
+    setLoading(true);
+    fetchCompanies(1, itemsPerPage, false);
+    setPage(1); 
+  }, [itemsPerPage]);
 
   const handleLoadMore = () => {
     const nextPage = page + 1;
     setPage(nextPage);
     setLoadingMore(true);
-    fetchCompanies(nextPage, true);
+    fetchCompanies(nextPage, itemsPerPage, true);
+    
+    // Update URL
+    const newSearchParams = new URLSearchParams(searchParams);
+    newSearchParams.set('page', nextPage.toString());
+    newSearchParams.set('limit', itemsPerPage.toString());
+    navigate(`?${newSearchParams.toString()}`, { replace: true });
   };
 
   const handleItemsPerPageChange = (event: SelectChangeEvent) => {
     const newValue = parseInt(event.target.value);
     setItemsPerPage(newValue);
+    
+    // Update URL
+    const newSearchParams = new URLSearchParams(searchParams);
+    newSearchParams.set('page', '1');
+    newSearchParams.set('limit', newValue.toString());
+    navigate(`?${newSearchParams.toString()}`, { replace: true });
   };
 
   if (loading) {
@@ -132,7 +160,6 @@ const Companies = () => {
 
   return (
     <Container>
-      
       <Box sx={{ display: 'flex', justifyContent: 'flex-end', mb: 2 }}>
         <FormControl size="small" sx={{ minWidth: 120 }}>
           <InputLabel id="items-per-page-label">{t('common.itemsPerPage')}</InputLabel>

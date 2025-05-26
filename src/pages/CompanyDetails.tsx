@@ -17,7 +17,7 @@ interface CompanyDetails {
   id: number;
   businessid: string;
   name: string;
-  mainbusinessline: string;
+  mainbusinesslinename: string;
   website: string;
   street: string;
   postcode: string;
@@ -130,7 +130,7 @@ const CompanyDetails = () => {
                   <strong>{t('company.businessId')}:</strong> {company.businessid}
                 </Typography>
                 <Typography>
-                  <strong>{t('company.mainBusinessLine')}:</strong> {company.mainbusinessline}
+                  <strong>{t('company.mainBusinessLine')}:</strong> {company.mainbusinesslinename}
                 </Typography>
                 {company.website && (
                   <Typography>

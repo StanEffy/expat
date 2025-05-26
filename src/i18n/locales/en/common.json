@@ -22,7 +22,7 @@
     "visitRecruitmentPage": "Visit Recruitment Page",
     "filter": {
       "title": "Filter Companies",
-      "searchCities": "Search cities",
+      "searchCities": "Search cities...",
       "selectCities": "Select cities"
     }
   },

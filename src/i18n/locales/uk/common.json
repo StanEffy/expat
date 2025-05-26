@@ -8,18 +8,23 @@
     "noAddress": "Адреса недоступна",
     "description": "Опис",
     "recruitment": "Рекрутинг",
-    "visitRecruitmentPage": "Відвідати сторінку рекрутингу"
+    "visitRecruitmentPage": "Відвідати сторінку рекрутингу",
+    "filter": {
+      "title": "Фільтр компаній",
+      "searchCities": "Пошук міст...",
+      "selectCities": "Виберіть міста"
+    }
   },
   "common": {
     "loading": "Завантаження...",
     "error": "Помилка",
     "notFound": "Не знайдено",
     "back": "Назад",
-    "tryAgain": "Спробувати знову",
+    "tryAgain": "Спробувати ще раз",
     "noCompanies": "Компаній не знайдено",
-    "viewDetails": "Переглянути деталі",
+    "viewDetails": "Деталі",
     "showMore": "Показати більше",
-    "itemsPerPage": "Елементів на сторінку"
+    "itemsPerPage": "Елементів на сторінці"
   },
   "home": {
     "welcome": "Ласкаво просимо в Expat App",
@@ -29,7 +34,7 @@
     "home": "Головна",
     "companies": "Компанії",
     "about": "Про нас",
-    "login": "Вхід",
+    "login": "Увійти",
     "profile": "Профіль",
     "signup": "Реєстрація"
   }

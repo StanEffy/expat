@@ -8,7 +8,8 @@
     "about": "About",
     "login": "Login",
     "profile": "Profile",
-    "signup": "Signup"
+    "signup": "Signup",
+    "categories": "Categories"
   },
   "company": {
     "information": "Company Information",
@@ -20,11 +21,19 @@
     "description": "Description",
     "recruitment": "Recruitment",
     "visitRecruitmentPage": "Visit Recruitment Page",
+    "editInformation": "Edit Company Information",
+    "recruitmentPageUrl": "Recruitment Page URL",
+    "updateInformation": "Update Information",
+    "confirmUpdate": "Confirm Update",
+    "confirmUpdateMessage": "Are you sure you want to update the company information?",
     "filter": {
       "title": "Filter Companies",
       "searchCities": "Search cities...",
       "selectCities": "Select cities"
     }
+  },
+  "categories": {
+    "title": "Business Categories"
   },
   "common": {
     "loading": "Loading...",
@@ -33,9 +42,13 @@
     "back": "Back",
     "tryAgain": "Try Again",
     "noCompanies": "No companies found",
+    "noCategories": "No categories found",
     "viewDetails": "View Details",
     "showMore": "Show More",
-    "itemsPerPage": "Items per page"
+    "itemsPerPage": "Items per page",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "updating": "Updating..."
   },
   "home": {
     "welcome": "Welcome to Expat App",

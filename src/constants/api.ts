@@ -20,7 +20,7 @@ export const COMPANY_ENDPOINTS = {
 
 // Default Configuration
 export const DEFAULT_CONFIG = {
-  INVITE_CODE: "invite123", // This should match your .env INVITE_CODE
+  INVITE_CODE: "123456", // This should match your .env INVITE_CODE
   ITEMS_PER_PAGE: 10,
 };
 

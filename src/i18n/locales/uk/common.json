@@ -9,6 +9,11 @@
     "description": "Опис",
     "recruitment": "Рекрутинг",
     "visitRecruitmentPage": "Відвідати сторінку рекрутингу",
+    "editInformation": "Редагувати інформацію про компанію",
+    "recruitmentPageUrl": "URL сторінки рекрутингу",
+    "updateInformation": "Оновити інформацію",
+    "confirmUpdate": "Підтвердити оновлення",
+    "confirmUpdateMessage": "Ви впевнені, що хочете оновити інформацію про компанію?",
     "filter": {
       "title": "Фільтр компаній",
       "searchCities": "Пошук міст...",
@@ -22,9 +27,13 @@
     "back": "Назад",
     "tryAgain": "Спробувати ще раз",
     "noCompanies": "Компаній не знайдено",
+    "noCategories": "Категорій не знайдено",
     "viewDetails": "Деталі",
     "showMore": "Показати більше",
-    "itemsPerPage": "Елементів на сторінці"
+    "itemsPerPage": "Елементів на сторінці",
+    "cancel": "Скасувати",
+    "confirm": "Підтвердити",
+    "updating": "Оновлення..."
   },
   "home": {
     "welcome": "Ласкаво просимо в Expat App",
@@ -36,6 +45,10 @@
     "about": "Про нас",
     "login": "Увійти",
     "profile": "Профіль",
-    "signup": "Реєстрація"
+    "signup": "Реєстрація",
+    "categories": "Категорії"
+  },
+  "categories": {
+    "title": "Бізнес категорії"
   }
 } 

@@ -1,18 +1,18 @@
-import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { ThemeProvider, CssBaseline, Box, Container } from '@mui/material';
-import { createTheme } from '@mui/material/styles';
-import { NotificationProvider } from './contexts/NotificationContext';
+import { ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
 import { I18nextProvider } from 'react-i18next';
 import i18n from './i18n/config';
+import { createTheme } from '@mui/material/styles';
 import Layout from './components/Layout';
 import Home from './pages/Home';
 import Companies from './pages/Companies';
 import CompanyDetails from './pages/CompanyDetails';
+import Categories from './pages/Categories';
 import Login from './pages/Login';
-import Register from './pages/Register';
 import Profile from './pages/Profile';
-import './i18n/config';
+import { NotificationProvider } from './contexts/NotificationContext';
+import { useState } from 'react';
 
 const theme = createTheme({
   palette: {
@@ -24,21 +24,21 @@ const theme = createTheme({
       main: '#E8A654',
     },
   },
-  components :{
-  MuiButton: {
-    styleOverrides: {
+  components: {
+    MuiButton: {
+      styleOverrides: {
         root: {
-          backgroundColor: '#5E2A9F', 
+          backgroundColor: '#5E2A9F',
           '&:hover': {
             backgroundColor: '#7E4ABF',
           },
         },
       },
-  }
+    }
   }
 });
 
-const App = () => {
+function App() {
   const [language, setLanguage] = useState('en');
 
   const handleLanguageChange = (newLanguage: string) => {
@@ -51,29 +51,22 @@ const App = () => {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <NotificationProvider>
-          <Box sx={{ width: '100%', minHeight: '100vh' }}>
-            <Router>
-                         <Layout 
-                currentLanguage={language}
-                onLanguageChange={handleLanguageChange}
-              >
-                <Container maxWidth="lg" sx={{ mt: 4 }}>
-                  <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/companies" element={<Companies />} />
-                    <Route path="/companies/:id" element={<CompanyDetails />} />
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/register" element={<Register />} />
-                    <Route path="/profile" element={<Profile />} />
-                  </Routes>
-                </Container>
-              </Layout>
-            </Router>
-          </Box>
+          <Router>
+            <Layout currentLanguage={language} onLanguageChange={handleLanguageChange}>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/companies" element={<Companies />} />
+                <Route path="/companies/:id" element={<CompanyDetails />} />
+                <Route path="/categories" element={<Categories />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/profile" element={<Profile />} />
+              </Routes>
+            </Layout>
+          </Router>
         </NotificationProvider>
       </ThemeProvider>
     </I18nextProvider>
   );
-};
+}
 
 export default App;

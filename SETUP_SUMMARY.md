@@ -58,28 +58,27 @@ npm run dev
 # Build Docker image with your production API URL
 docker build \
   --build-arg VITE_API_BASE_URL=https://api.expat.yourdomain.com \
-  -t your-registry/expat-frontend:v1.0.0 \
+  -t holydonk/expat-frontend:v1  \
   .
 
 # Example with Docker Hub:
 docker build \
   --build-arg VITE_API_BASE_URL=https://api.expat.yourdomain.com \
-  -t staneff/expat-frontend:v1.0.0 \
+  -t holydonk/expat-frontend:v1  \
   .
 
 # Test locally before pushing
-docker run -p 8080:80 staneff/expat-frontend:v1.0.0
+docker run -p 8080:80 holydonk/expat-frontend:v1 
 # Visit http://localhost:8080
 
 # Push to registry
-docker push staneff/expat-frontend:v1.0.0
+docker push holydonk/expat-frontend:v1 
 ```
 
 ### 3. Update Backend Repository
 
 ```bash
 # Go to your backend project
-cd /home/stan/projects/expat_back_latest/expat-app
 
 # Edit the frontend deployment manifest
 vim k8s/frontend-deployment.yaml
@@ -160,7 +159,7 @@ export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localho
 │   └── constants/api.ts                ✅ UPDATED
 └── ... (rest of your React app)
 
-/home/stan/projects/expat_back_latest/expat-app/   ← BACKEND
+/expat-app/   ← BACKEND
 └── k8s/                                ← Kubernetes manifests here!
     ├── frontend-deployment.yaml        ← Update this with your image
     ├── backend-deployment.yaml
@@ -173,7 +172,7 @@ export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localho
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │ 1. Develop Frontend (this directory)                        │
-│    cd /home/stan/projects/expat-app                         │
+│    cd /projects/expat-app                         │
 │    npm run dev                                               │
 │    (make your changes)                                       │
 └─────────────────────────────────────────────────────────────┘
@@ -186,7 +185,7 @@ export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localho
                             ↓
 ┌─────────────────────────────────────────────────────────────┐
 │ 3. Update K8s Manifest (backend directory)                  │
-│    cd /home/stan/projects/expat_back_latest/expat-app       │
+│    cd /expat-app       │
 │    vim k8s/frontend-deployment.yaml                         │
 │    (update image: line)                                      │
 └─────────────────────────────────────────────────────────────┘
@@ -272,7 +271,7 @@ docker run -p 8080:80 expat-test
 
 ## 🎉 You're Ready!
 
-Your frontend at `/home/stan/projects/expat-app` is now **fully configured** for Kubernetes deployment!
+Your frontend at `/expat-app` is now **fully configured** for Kubernetes deployment!
 
 **Next Steps:**
 1. Read `KUBERNETES_INSTRUCTIONS.md` for detailed deployment steps
@@ -282,8 +281,5 @@ Your frontend at `/home/stan/projects/expat-app` is now **fully configured** for
 
 ---
 
-**Location**: `/home/stan/projects/expat-app/`
-**Backend**: `/home/stan/projects/expat_back_latest/expat-app/`
-**K8s Manifests**: Backend repo at `k8s/` directory
 
 

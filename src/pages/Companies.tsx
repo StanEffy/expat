@@ -15,16 +15,28 @@ import {
   MenuItem,
   SelectChangeEvent,
 } from "@mui/material";
-import { COMPANY_ENDPOINTS } from "../constants/api";
+import { COMPANY_ENDPOINTS, CITY_ENDPOINTS, CATEGORY_ENDPOINTS } from "../constants/api";
 import { getAuthHeaders } from "../utils/auth";
 import { useNotification } from "../contexts/NotificationContext";
 import { useTranslation } from "react-i18next";
+import CompanyFilter from "../components/CompanyFilter";
+import CategoryFilter from "../components/CategoryFilter";
+import type { GeneralCategoryItem } from "../components/CategoryFilter";
 
 interface Company {
   id: number;
   name: string;
-  description: string;
-  mainbusinessline: string;
+  mainbusinesslinename?: string | null;
+}
+
+interface BackendCityItem {
+  city?: string | null;
+}
+
+interface BackendCategoryItem {
+  mainbusinessline?: string | null; // id (code)
+  name?: string | null; // FI
+  name_en?: string | null; // EN
 }
 
 const ITEMS_PER_PAGE_OPTIONS = [10, 25, 50];
@@ -37,33 +49,118 @@ const Companies = () => {
   const [companies, setCompanies] = useState<Company[]>([]);
   const [loading, setLoading] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
-  const [error, setError] = useState("");
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const [itemsPerPage, setItemsPerPage] = useState(10);
 
+  const [cities, setCities] = useState<string[]>([]);
+  const [selectedCities, setSelectedCities] = useState<string[]>([]);
+
+  const [categories, setCategories] = useState<BackendCategoryItem[]>([]);
+  const [generalCategories, setGeneralCategories] = useState<GeneralCategoryItem[]>([]);
+  const [selectedCategoryId, setSelectedCategoryId] = useState<string>("");
+
+  // Load initial params from URL
   useEffect(() => {
     const initialPage = parseInt(searchParams.get("page") || "1");
     const initialItemsPerPage = parseInt(searchParams.get("limit") || "10");
 
+    const initialCategory = searchParams.get("mainbusinesslineid") || "";
+    const urlCities = searchParams.getAll("cities");
+
     setPage(initialPage);
     setItemsPerPage(initialItemsPerPage);
+    setSelectedCategoryId(initialCategory);
+    setSelectedCities(urlCities);
 
-    fetchCompanies(initialPage, initialItemsPerPage, false);
+    fetchCompanies({
+      pageNumber: initialPage,
+      limit: initialItemsPerPage,
+      append: false,
+      mainbusinesslineid: initialCategory || undefined,
+      cities: urlCities.length ? urlCities : undefined,
+    });
   }, []);
 
-  const fetchCompanies = async (
-    pageNumber: number,
-    limit: number,
-    append: boolean = false
-  ) => {
+  // Fetch filter options (cities and categories)
+  useEffect(() => {
+    const loadOptions = async () => {
+      try {
+        const headers = getAuthHeaders();
+        if (Object.keys(headers).length === 0) {
+          return;
+        }
+
+        const [citiesRes, categoriesRes] = await Promise.all([
+          fetch(CITY_ENDPOINTS.LIST, { headers }),
+          fetch(CATEGORY_ENDPOINTS.LIST, { headers }),
+        ]);
+
+        const generalRes = await fetch(CATEGORY_ENDPOINTS.GENERAL, { headers });
+
+        if (citiesRes.ok) {
+          const { data: citiesData } = await citiesRes.json();
+          const options = (citiesData as BackendCityItem[])
+            .map((c) => (c.city ?? "").toString())
+            .filter((c) => c && c.length > 0);
+          setCities(options);
+        }
+
+        if (categoriesRes.ok) {
+          const { data: categoriesData } = await categoriesRes.json();
+          setCategories(categoriesData as BackendCategoryItem[]);
+        }
+        if (generalRes.ok) {
+          const { data: generalData } = await generalRes.json();
+          setGeneralCategories(generalData as GeneralCategoryItem[]);
+        }
+      } catch (err) {
+        // Non-fatal; filters just won't load
+      }
+    };
+
+    loadOptions();
+  }, []);
+
+  const fetchCompanies = async ({
+    pageNumber,
+    limit,
+    append = false,
+    mainbusinesslineid,
+    cities,
+  }: {
+    pageNumber: number;
+    limit: number;
+    append?: boolean;
+    mainbusinesslineid?: string;
+    cities?: string[];
+  }) => {
     try {
       const headers = getAuthHeaders();
       if (Object.keys(headers).length === 0) {
         return;
       }
 
-      const response = await fetch(COMPANY_ENDPOINTS.LIST(pageNumber, limit), {
+      let url: string;
+      if (selectedCategoryId.startsWith('general:')) {
+        const generalCode = selectedCategoryId.split(':')[1];
+        const page = pageNumber;
+        const count = limit;
+        const parts: string[] = [`page=${page}`, `count=${count}`, `generalcategory=${encodeURIComponent(generalCode)}`];
+        if (cities && cities.length > 0) {
+          for (const city of cities) parts.push(`cities=${encodeURIComponent(city)}`);
+        }
+        url = `${COMPANY_ENDPOINTS.LIST(page, count)}&generalcategory=${encodeURIComponent(generalCode)}${cities && cities.length ? cities.map(c => `&cities=${encodeURIComponent(c)}`).join('') : ''}`;
+      } else {
+        url = COMPANY_ENDPOINTS.FILTERED({
+          page: pageNumber,
+          count: limit,
+          mainbusinesslineid,
+          cities,
+        });
+      }
+
+      const response = await fetch(url, {
         headers,
       });
 
@@ -72,20 +169,35 @@ const Companies = () => {
         throw new Error(errorData.message || "Failed to fetch companies");
       }
 
-      const { data } = await response.json();
+      const json = await response.json();
+      const data = Array.isArray(json?.data) ? json.data : [];
+      const totalCount: number | undefined = typeof json?.count === 'number' ? json.count : undefined;
 
-      if (!data || !Array.isArray(data)) {
-        throw new Error("Invalid data format received from server");
+      // If backend returns null or non-array for data, treat as empty page
+      if (!Array.isArray(json?.data)) {
+        // Show a gentle info when we attempted to load more but there's nothing
+        if (append) {
+          showNotification("No more companies", "info");
+        }
       }
 
-      setCompanies((prev) => (append ? [...prev, ...data] : data));
-      setHasMore(data.length === limit);
+      setCompanies((prev) => (append ? (data.length ? [...prev, ...data] : prev) : data));
+
+      // Determine hasMore conservatively
+      let nextHasMore = true;
+      if (data.length < limit) {
+        nextHasMore = false;
+      }
+      if (typeof totalCount === 'number' && pageNumber * limit >= totalCount) {
+        nextHasMore = false;
+      }
+      setHasMore(nextHasMore);
     } catch (err) {
       const errorMessage =
         err instanceof Error
           ? err.message
           : "An error occurred while fetching companies";
-      setError(errorMessage);
+      // Keep existing list; just notify the user
       showNotification(errorMessage, "error");
     } finally {
       setLoading(false);
@@ -93,24 +205,79 @@ const Companies = () => {
     }
   };
 
+  // Refetch when itemsPerPage changes
   useEffect(() => {
     if (page === 1 && itemsPerPage === 10) return;
 
     setLoading(true);
-    fetchCompanies(1, itemsPerPage, false);
+    fetchCompanies({
+      pageNumber: 1,
+      limit: itemsPerPage,
+      append: false,
+      mainbusinesslineid: selectedCategoryId || undefined,
+      cities: selectedCities.length ? selectedCities : undefined,
+    });
     setPage(1);
   }, [itemsPerPage]);
+
+  // Refetch on filter changes
+  useEffect(() => {
+    // Skip the first render handled by initial effect
+    if (!loading) {
+      setLoading(true);
+      fetchCompanies({
+        pageNumber: 1,
+        limit: itemsPerPage,
+        append: false,
+        mainbusinesslineid: selectedCategoryId || undefined,
+        cities: selectedCities.length ? selectedCities : undefined,
+      });
+      setPage(1);
+
+      // Update URL
+      const newSearchParams = new URLSearchParams(searchParams);
+      newSearchParams.set("page", "1");
+      newSearchParams.set("limit", itemsPerPage.toString());
+
+      if (selectedCategoryId) {
+        newSearchParams.set("mainbusinesslineid", selectedCategoryId);
+      } else {
+        newSearchParams.delete("mainbusinesslineid");
+      }
+
+      newSearchParams.delete("cities");
+      for (const c of selectedCities) {
+        newSearchParams.append("cities", c);
+      }
+
+      navigate(`?${newSearchParams.toString()}`, { replace: true });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedCategoryId, selectedCities]);
 
   const handleLoadMore = () => {
     const nextPage = page + 1;
     setPage(nextPage);
     setLoadingMore(true);
-    fetchCompanies(nextPage, itemsPerPage, true);
+    fetchCompanies({
+      pageNumber: nextPage,
+      limit: itemsPerPage,
+      append: true,
+      mainbusinesslineid: selectedCategoryId || undefined,
+      cities: selectedCities.length ? selectedCities : undefined,
+    });
 
     // Update URL
     const newSearchParams = new URLSearchParams(searchParams);
     newSearchParams.set("page", nextPage.toString());
     newSearchParams.set("limit", itemsPerPage.toString());
+    if (selectedCategoryId) {
+      newSearchParams.set("mainbusinesslineid", selectedCategoryId);
+    }
+    newSearchParams.delete("cities");
+    for (const c of selectedCities) {
+      newSearchParams.append("cities", c);
+    }
     navigate(`?${newSearchParams.toString()}`, { replace: true });
   };
 
@@ -125,29 +292,20 @@ const Companies = () => {
     navigate(`?${newSearchParams.toString()}`, { replace: true });
   };
 
+  const handleCityChange = (citiesNew: string[]) => {
+    setSelectedCities(citiesNew);
+  };
+
+  const handleCategoryChange = (event: SelectChangeEvent) => {
+    setSelectedCategoryId(event.target.value);
+  };
+
   if (loading) {
     return (
       <Container>
         <Box sx={{ display: "flex", justifyContent: "center", mt: 4 }}>
           <CircularProgress />
         </Box>
-      </Container>
-    );
-  }
-
-  if (error) {
-    return (
-      <Container>
-        <Typography color="error" sx={{ mt: 4 }}>
-          {error}
-        </Typography>
-        <Button
-          variant="contained"
-          onClick={() => window.location.reload()}
-          sx={{ mt: 2 }}
-        >
-          {t("common.tryAgain")}
-        </Button>
       </Container>
     );
   }
@@ -162,8 +320,21 @@ const Companies = () => {
 
   return (
     <Container>
-      <Box sx={{ mt: 2, display: "flex", justifyContent: "flex-end", mb: 2 }}>
-        <FormControl size="small" sx={{ minWidth: 120 }}>
+      <Box sx={{ mt: 2, display: "flex", gap: 2, flexWrap: "wrap", mb: 2 }}>
+        <Box sx={{ minWidth: 280, flex: 1 }}>
+          <CompanyFilter
+            cities={cities}
+            selectedCities={selectedCities}
+            onCityChange={handleCityChange}
+          />
+        </Box>
+        <CategoryFilter
+          categories={categories}
+          generalCategories={generalCategories}
+          value={selectedCategoryId}
+          onChange={handleCategoryChange}
+        />
+        <FormControl size="small" sx={{ minWidth: 120, marginLeft: "auto" }}>
           <InputLabel id="items-per-page-label">
             {t("common.itemsPerPage")}
           </InputLabel>
@@ -206,7 +377,7 @@ const Companies = () => {
                 {company.name}
               </Typography>
               <Typography color="text.secondary" sx={{ mt: 1 }}>
-                {company.mainbusinessline}
+                {company.mainbusinesslinename || ""}
               </Typography>
             </CardContent>
             <CardActions sx={{ p: 2 }}>

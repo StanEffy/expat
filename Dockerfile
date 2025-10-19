@@ -1,31 +1,41 @@
+# Multi-stage build for production-ready frontend
+
 # Build stage
 FROM node:18-alpine as build
 
 WORKDIR /app
 
+# Copy package files
 COPY package*.json ./
 
-RUN npm install
+# Install dependencies
+RUN npm ci --only=production
 
+# Copy source code
 COPY . .
 
-# Set environment variables for the build
-ENV REACT_APP_API_URL=http://localhost:${EXPAT_APP_PORT}
-ENV REACT_APP_API_VERSION=v1
+# Build argument for API URL (can be overridden at build time)
+ARG VITE_API_BASE_URL=http://localhost:8000
+ENV VITE_API_BASE_URL=$VITE_API_BASE_URL
 
+# Build the application
 RUN npm run build
 
 # Production stage
 FROM nginx:alpine
 
-# Copy built assets from build stage
-COPY --from=build /app/build /usr/share/nginx/html
-
-# Copy nginx configuration
+# Copy custom nginx configuration
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Expose the port that matches your frontend port
-EXPOSE ${EXPAT_APP_PORT}
+# Copy built assets from build stage (Vite outputs to 'dist' directory)
+COPY --from=build /app/dist /usr/share/nginx/html
+
+# Expose port 80 (standard HTTP port)
+EXPOSE 80
+
+# Health check for Kubernetes
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+  CMD wget --quiet --tries=1 --spider http://localhost/ || exit 1
 
 # Start nginx
 CMD ["nginx", "-g", "daemon off;"]

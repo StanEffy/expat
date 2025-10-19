@@ -1,5 +1,7 @@
 // API Configuration
-export const API_BASE_URL = "http://localhost:8000";
+// In production, this will be set at build time via VITE_API_BASE_URL
+// In Kubernetes, it will be set in the deployment manifest or at build time
+export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:8000";
 
 // Auth Endpoints
 export const AUTH_ENDPOINTS = {
@@ -20,7 +22,7 @@ export const COMPANY_ENDPOINTS = {
 
 // Default Configuration
 export const DEFAULT_CONFIG = {
-  INVITE_CODE: "123456", // This should match your .env INVITE_CODE
+  INVITE_CODE: "invite123", // This should match your backend INVITE_CODE
   ITEMS_PER_PAGE: 10,
 };
 

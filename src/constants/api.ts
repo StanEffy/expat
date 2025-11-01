@@ -1,51 +1,16 @@
 // API Configuration
 // In production, this will be set at build time via VITE_API_BASE_URL
 // In Kubernetes, it will be set in the deployment manifest or at build time
-// For runtime detection: if no env var is set, try to detect from current host
 function getApiBaseUrl(): string {
-  // Check if we're in a browser environment
-  if (typeof window === 'undefined') {
-    // SSR or unknown context - fallback
-    return import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
-  }
-
-  const hostname = window.location.hostname;
-  const protocol = window.location.protocol;
-  
-  // If running on localhost/127.0.0.1, use localhost:8000 for dev
-  if (hostname === 'localhost' || hostname === '127.0.0.1') {
-    return 'http://localhost:8000';
-  }
-  
-  // In production (not localhost), detect from current host
-  // Override VITE_API_BASE_URL if it's set to localhost (means wrong build config)
-  const buildTimeUrl = import.meta.env.VITE_API_BASE_URL;
-  const isLocalhostInBuild = buildTimeUrl && (
-    buildTimeUrl.includes('localhost') || 
-    buildTimeUrl.includes('127.0.0.1')
-  );
-  
-  // If build-time URL is explicitly set and not localhost, use it
-  if (buildTimeUrl && !isLocalhostInBuild) {
-    return buildTimeUrl;
-  }
-  
-  // Otherwise, auto-detect from current hostname
-  // SECURITY NOTE: This uses the current hostname + port 8000
-  // For better security, set VITE_API_BASE_URL at build time with a domain name
-  const apiPort = ':8000';
-  const apiUrl = `${protocol}//${hostname}${apiPort}`;
-  
-  return apiUrl;
+  // Use build-time env var if set, otherwise default to localhost:8000
+  return import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
 }
 
 export const API_BASE_URL = getApiBaseUrl();
 
-// Log API URL for debugging (always log in production to help diagnose issues)
-if (typeof window !== 'undefined') {
+// Log API URL for debugging (only in development)
+if (typeof window !== 'undefined' && import.meta.env.DEV) {
   console.log('[API Config] Using API Base URL:', API_BASE_URL);
-  console.log('[API Config] Current hostname:', window.location.hostname);
-  console.log('[API Config] Build-time VITE_API_BASE_URL:', import.meta.env.VITE_API_BASE_URL || 'not set');
 }
 
 // Auth Endpoints

@@ -2,11 +2,25 @@
 // In production, this will be set at build time via VITE_API_BASE_URL
 // In Kubernetes, it will be set in the deployment manifest or at build time
 function getApiBaseUrl(): string {
-  // Use build-time env var if set, otherwise default to x-pat.duckdns.org
-  // For local development with backend on port 8000, use: http://localhost:8000
-  // For production, use standard HTTP port (80) - no port number needed
-  // If backend is behind a reverse proxy/ingress, use the domain without port
-  return import.meta.env.VITE_API_BASE_URL || 'http://x-pat.duckdns.org';
+  // Use build-time env var if explicitly set
+  if (import.meta.env.VITE_API_BASE_URL) {
+    return import.meta.env.VITE_API_BASE_URL;
+  }
+
+  // Default behavior based on environment
+  const domain = 'x-pat.duckdns.org';
+  
+  if (import.meta.env.PROD) {
+    // In production, use HTTPS (port 443) or HTTP (port 80) based on current page protocol
+    // This ensures API calls match the frontend's protocol to avoid mixed content issues
+    const protocol = typeof window !== 'undefined' && window.location.protocol === 'https:' 
+      ? 'https:' 
+      : 'http:';
+    return `${protocol}//${domain}`;
+  } else {
+    // In development, default to localhost with explicit port
+    return 'http://localhost:8000';
+  }
 }
 
 export const API_BASE_URL = getApiBaseUrl();

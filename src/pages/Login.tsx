@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import {
   Box,
   Typography,
@@ -39,17 +39,28 @@ function TabPanel(props: TabPanelProps) {
 
 const Login = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const [tabValue, setTabValue] = useState(0);
+  
+  // Read invite code from query parameter or use default
+  const inviteCodeFromQuery = searchParams.get('invite_code') || DEFAULT_CONFIG.INVITE_CODE;
+  
   const [formData, setFormData] = useState({
     username: '',
     password: '',
     confirmPassword: '',
-    inviteCode: DEFAULT_CONFIG.INVITE_CODE,
+    inviteCode: inviteCodeFromQuery,
     name: '',
   });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [forgotPasswordMode, setForgotPasswordMode] = useState(false);
+
+  // Update invite code when query parameter changes
+  useEffect(() => {
+    const inviteCodeFromQuery = searchParams.get('invite_code') || DEFAULT_CONFIG.INVITE_CODE;
+    setFormData((prev) => ({ ...prev, inviteCode: inviteCodeFromQuery }));
+  }, [searchParams]);
 
   const handleTabChange = (_: React.SyntheticEvent, newValue: number) => {
     setTabValue(newValue);
@@ -119,6 +130,30 @@ const Login = () => {
 
       if (!response.ok) {
         throw new Error('Registration failed');
+      }
+
+      // Automatically sign in after successful registration
+      try {
+        const loginResponse = await fetch(AUTH_ENDPOINTS.LOGIN, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            username: formData.username,
+            password: formData.password,
+          }),
+        });
+
+        if (loginResponse.ok) {
+          const data = await loginResponse.json();
+          setToken(data.token);
+          window.location.href = '/';
+          return;
+        }
+      } catch (loginErr) {
+        // If auto login fails, navigate to login page
+        console.error('Auto login failed:', loginErr);
       }
 
       navigate('/login');
@@ -229,6 +264,7 @@ const Login = () => {
                 onChange={handleChange}
                 margin="normal"
                 required
+                autoComplete="username"
               />
               <TextField
                 fullWidth
@@ -239,11 +275,16 @@ const Login = () => {
                 onChange={handleChange}
                 margin="normal"
                 required
+                autoComplete="current-password"
               />
               <Link
                 component="button"
+                type="button"
                 variant="body2"
-                onClick={() => setForgotPasswordMode(true)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  setForgotPasswordMode(true);
+                }}
                 sx={{ display: 'block', mb: 2 }}
               >
                 Forgot password?

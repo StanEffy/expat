@@ -59,7 +59,7 @@ export const CITY_ENDPOINTS = {
 
 // Default Configuration
 export const DEFAULT_CONFIG = {
-  INVITE_CODE: "invite123", // This should match your backend INVITE_CODE
+  INVITE_CODE: "9965", // This should match your backend INVITE_CODE
   ITEMS_PER_PAGE: 10,
 };
 

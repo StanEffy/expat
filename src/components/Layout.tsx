@@ -5,6 +5,7 @@ import { isTokenValid } from '../utils/auth';
 import MobileMenu from './MobileMenu';
 import { useTranslation } from 'react-i18next';
 import LanguageSwitcher from './LanguageSwitcher';
+import logoExpat from '../assets/logo_expat.png';
 
 interface LayoutProps {
   children: ReactNode;
@@ -29,7 +30,7 @@ const Layout = ({ children }: LayoutProps) => {
           <RouterLink to={"/"}>
             <Box
               component="img"
-              src="../src/assets/logo_expat.png"
+              src={logoExpat}
               alt="Expat Logo"
               sx={{ height: 20, mr: 2 }}
             />

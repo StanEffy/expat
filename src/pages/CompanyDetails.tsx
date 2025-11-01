@@ -13,6 +13,7 @@ import { getAuthHeaders } from "../utils/auth";
 import { useNotification } from "../contexts/NotificationContext";
 import { useTranslation } from "react-i18next";
 import CompanyInfoEditor from "../components/CompanyInfoEditor";
+import mapBg from "../assets/map_bg.png";
 
 interface CompanyDetails {
   id: number;
@@ -181,7 +182,7 @@ const CompanyDetails = () => {
                     left: 0,
                     right: 0,
                     bottom: 0,
-                    background: 'url("../src/assets/map_bg.png")',
+                    background: `url(${mapBg})`,
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                     zIndex: 0,

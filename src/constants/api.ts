@@ -3,47 +3,49 @@
 // In Kubernetes, it will be set in the deployment manifest or at build time
 // For runtime detection: if no env var is set, try to detect from current host
 function getApiBaseUrl(): string {
-  // First, check if VITE_API_BASE_URL is set (build-time env var)
-  if (import.meta.env.VITE_API_BASE_URL) {
-    return import.meta.env.VITE_API_BASE_URL;
+  // Check if we're in a browser environment
+  if (typeof window === 'undefined') {
+    // SSR or unknown context - fallback
+    return import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
   }
 
-  // Check if we're in development (localhost)
-  if (typeof window !== 'undefined') {
-    const hostname = window.location.hostname;
-    const protocol = window.location.protocol;
-    
-    // If running on localhost, use localhost:8000 for dev
-    if (hostname === 'localhost' || hostname === '127.0.0.1') {
-      return 'http://localhost:8000';
-    }
-    
-    // In production, construct API URL from current host
-    // SECURITY NOTE: If frontend and backend are on same domain, use relative URLs
-    // Otherwise, use same hostname with port 8000
-    // IMPORTANT: Set VITE_API_BASE_URL at build time to use a domain name instead of IP
-    
-    // Option 1: If backend is on same domain (e.g., behind reverse proxy)
-    // Use relative URL which is more secure
-    // return '/api';  // Uncomment if using path-based routing
-    
-    // Option 2: Backend on same host, different port
-    const isHttps = protocol === 'https:';
-    const apiPort = ':8000';
-    const apiUrl = `${protocol}//${hostname}${apiPort}`;
-    
-    return apiUrl;
+  const hostname = window.location.hostname;
+  const protocol = window.location.protocol;
+  
+  // If running on localhost/127.0.0.1, use localhost:8000 for dev
+  if (hostname === 'localhost' || hostname === '127.0.0.1') {
+    return 'http://localhost:8000';
   }
-
-  // Fallback for SSR or unknown context
-  return 'http://localhost:8000';
+  
+  // In production (not localhost), detect from current host
+  // Override VITE_API_BASE_URL if it's set to localhost (means wrong build config)
+  const buildTimeUrl = import.meta.env.VITE_API_BASE_URL;
+  const isLocalhostInBuild = buildTimeUrl && (
+    buildTimeUrl.includes('localhost') || 
+    buildTimeUrl.includes('127.0.0.1')
+  );
+  
+  // If build-time URL is explicitly set and not localhost, use it
+  if (buildTimeUrl && !isLocalhostInBuild) {
+    return buildTimeUrl;
+  }
+  
+  // Otherwise, auto-detect from current hostname
+  // SECURITY NOTE: This uses the current hostname + port 8000
+  // For better security, set VITE_API_BASE_URL at build time with a domain name
+  const apiPort = ':8000';
+  const apiUrl = `${protocol}//${hostname}${apiPort}`;
+  
+  return apiUrl;
 }
 
 export const API_BASE_URL = getApiBaseUrl();
 
-// Only log API URL in development mode (not in production)
-if (typeof window !== 'undefined' && import.meta.env.DEV) {
-  console.log('Using API Base URL:', API_BASE_URL);
+// Log API URL for debugging (always log in production to help diagnose issues)
+if (typeof window !== 'undefined') {
+  console.log('[API Config] Using API Base URL:', API_BASE_URL);
+  console.log('[API Config] Current hostname:', window.location.hostname);
+  console.log('[API Config] Build-time VITE_API_BASE_URL:', import.meta.env.VITE_API_BASE_URL || 'not set');
 }
 
 // Auth Endpoints

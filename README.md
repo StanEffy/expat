@@ -36,7 +36,7 @@ npm install
 # Copy environment variables
 cp .env.example .env.local
 
-# Edit .env.local with your backend URL if different from localhost:8000
+# Edit .env.local with your backend URL if different from x-pat.duckdns.org:8000
 # vim .env.local
 
 # Start development server
@@ -49,7 +49,7 @@ The app will be available at **http://localhost:3000**
 
 Create `.env.local` file:
 ```bash
-VITE_API_BASE_URL=http://localhost:8000
+VITE_API_BASE_URL=http://x-pat.duckdns.org:8000
 ```
 
 ## 🏗️ Building for Production
@@ -70,7 +70,7 @@ npm run preview
 ### Docker Build
 
 ```bash
-# Build with default API URL (localhost:8000)
+# Build with default API URL (x-pat.duckdns.org:8000)
 docker build -t expat-frontend .
 
 # Build with custom API URL (RECOMMENDED for production)
@@ -137,7 +137,7 @@ The frontend needs to know where the backend API is located.
 ### Development
 ```bash
 # .env.local
-VITE_API_BASE_URL=http://localhost:8000
+VITE_API_BASE_URL=http://x-pat.duckdns.org:8000
 ```
 
 ### Production - Option 1: Build Time (Recommended)
@@ -226,7 +226,7 @@ Backend API endpoints are defined in `src/constants/api.ts`.
 
 ```bash
 # Test API connectivity
-curl http://localhost:8000/health
+curl http://x-pat.duckdns.org:8000/health
 ```
 
 ### Build issues
@@ -276,7 +276,7 @@ docker run -p 8080:80 expat-frontend-test
 # Make sure backend is running
 # Then build frontend with backend URL
 docker build \
-  --build-arg VITE_API_BASE_URL=http://localhost:8000 \
+  --build-arg VITE_API_BASE_URL=http://x-pat.duckdns.org:8000 \
   -t expat-frontend-test .
 
 docker run -p 8080:80 expat-frontend-test

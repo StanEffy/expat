@@ -1,7 +1,50 @@
 // API Configuration
 // In production, this will be set at build time via VITE_API_BASE_URL
 // In Kubernetes, it will be set in the deployment manifest or at build time
-export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:8000";
+// For runtime detection: if no env var is set, try to detect from current host
+function getApiBaseUrl(): string {
+  // First, check if VITE_API_BASE_URL is set (build-time env var)
+  if (import.meta.env.VITE_API_BASE_URL) {
+    return import.meta.env.VITE_API_BASE_URL;
+  }
+
+  // Check if we're in development (localhost)
+  if (typeof window !== 'undefined') {
+    const hostname = window.location.hostname;
+    const protocol = window.location.protocol;
+    
+    // If running on localhost, use localhost:8000 for dev
+    if (hostname === 'localhost' || hostname === '127.0.0.1') {
+      return 'http://localhost:8000';
+    }
+    
+    // In production, construct API URL from current host
+    // SECURITY NOTE: If frontend and backend are on same domain, use relative URLs
+    // Otherwise, use same hostname with port 8000
+    // IMPORTANT: Set VITE_API_BASE_URL at build time to use a domain name instead of IP
+    
+    // Option 1: If backend is on same domain (e.g., behind reverse proxy)
+    // Use relative URL which is more secure
+    // return '/api';  // Uncomment if using path-based routing
+    
+    // Option 2: Backend on same host, different port
+    const isHttps = protocol === 'https:';
+    const apiPort = ':8000';
+    const apiUrl = `${protocol}//${hostname}${apiPort}`;
+    
+    return apiUrl;
+  }
+
+  // Fallback for SSR or unknown context
+  return 'http://localhost:8000';
+}
+
+export const API_BASE_URL = getApiBaseUrl();
+
+// Only log API URL in development mode (not in production)
+if (typeof window !== 'undefined' && import.meta.env.DEV) {
+  console.log('Using API Base URL:', API_BASE_URL);
+}
 
 // Auth Endpoints
 export const AUTH_ENDPOINTS = {

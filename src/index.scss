@@ -1050,3 +1050,39 @@ input {
   background-color: $primary-0;
   color: $complement-4;
 }
+
+// Custom Scrollbar Styles with Company Colors
+// WebKit browsers (Chrome, Safari, Edge)
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(red($primary-2), green($primary-2), blue($primary-2), 0.4);
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $complement-4;
+  border-radius: 6px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+
+  &:hover {
+    background: $primary-1;
+    background-clip: padding-box;
+  }
+
+  &:active {
+    background: $primary-2;
+    background-clip: padding-box;
+  }
+}
+
+// Firefox
+* {
+  scrollbar-width: thin;
+  scrollbar-color: $complement-4
+    rgba(red($primary-2), green($primary-2), blue($primary-2), 0.1);
+}

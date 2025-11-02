@@ -6,9 +6,11 @@ import { isTokenValid } from "../utils/auth";
 import MobileMenu from "./MobileMenu";
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "./LanguageSwitcher";
-import AnimatedLogo from "./AnimatedLogo";
+import GeometricBackground from "./GeometricBackground";
+import logoExpat from "../assets/logo_expat.png";
 import "./Layout.scss";
 import styles from "./Layout.module.scss";
+import AnimatedLogo from "./AnimatedLogo.tsx";
 
 interface LayoutProps {
   children: ReactNode;
@@ -18,7 +20,6 @@ interface LayoutProps {
 
 const Layout = ({ children }: LayoutProps) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -26,20 +27,8 @@ const Layout = ({ children }: LayoutProps) => {
     setIsAuthenticated(isTokenValid());
   }, []);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 0);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   const start = (
-    <Link
-      to="/"
-      className={styles.startLink}
-    >
+    <Link to="/" className={styles.startLink}>
       <AnimatedLogo />
     </Link>
   );
@@ -73,11 +62,8 @@ const Layout = ({ children }: LayoutProps) => {
 
   return (
     <div className={"wrapper"}>
-      <Menubar
-        start={start}
-        end={end}
-        className={`layout-menubar ${isScrolled ? "scrolled" : ""}`}
-      />
+      <GeometricBackground />
+      <Menubar start={start} end={end} className="layout-menubar" />
       <main className={"main"}>{children}</main>
       <footer className={styles.footer}>
         <div className={styles.footerContent}>

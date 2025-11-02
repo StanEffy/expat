@@ -1,8 +1,6 @@
-@import "../styles/variables";
-
 .layout-menubar {
   position: fixed;
-  z-index: 2;
+  z-index: 1;
   top: 0;
   width: 100%;
   background-color: $primary-2; // Using primary-2 color variable
@@ -32,7 +30,7 @@
   width: 100%;
   min-height: 100vh;
   height: 100%;
-  background-color: $primary-4;
+  background-color: $primary-1;
 }
 
 .main {

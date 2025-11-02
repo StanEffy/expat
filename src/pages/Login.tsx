@@ -1,41 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import {
-  Box,
-  Typography,
-  TextField,
-  Button,
-  Container,
-  Paper,
-  Alert,
-  Link,
-  Tabs,
-  Tab,
-} from '@mui/material';
+import { InputText } from 'primereact/inputtext';
+import { Password } from 'primereact/password';
+import { Button } from 'primereact/button';
+import { Card } from 'primereact/card';
+import { TabView, TabPanel } from 'primereact/tabview';
+import { Message } from 'primereact/message';
 import { AUTH_ENDPOINTS, DEFAULT_CONFIG } from '../constants/api';
 import { setToken } from '../utils/auth';
-
-interface TabPanelProps {
-  children?: React.ReactNode;
-  index: number;
-  value: number;
-}
-
-function TabPanel(props: TabPanelProps) {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`auth-tabpanel-${index}`}
-      aria-labelledby={`auth-tab-${index}`}
-      {...other}
-    >
-      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
-    </div>
-  );
-}
 
 const Login = () => {
   const navigate = useNavigate();
@@ -62,14 +34,18 @@ const Login = () => {
     setFormData((prev) => ({ ...prev, inviteCode: inviteCodeFromQuery }));
   }, [searchParams]);
 
-  const handleTabChange = (_: React.SyntheticEvent, newValue: number) => {
-    setTabValue(newValue);
+  const handleTabChange = (e: { index: number }) => {
+    setTabValue(e.index);
     setError('');
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handlePasswordChange = (e: { value: string }, fieldName: string) => {
+    setFormData((prev) => ({ ...prev, [fieldName]: e.value }));
   };
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -192,186 +168,200 @@ const Login = () => {
 
   if (forgotPasswordMode) {
     return (
-      <Container maxWidth="sm">
-        <Box sx={{ my: 4 }}>
-          <Paper elevation={3} sx={{ p: 4 }}>
-            <Typography variant="h5" component="h1" gutterBottom align="center">
-              Reset Password
-            </Typography>
-            {error && (
-              <Alert severity={error.includes('sent') ? 'success' : 'error'} sx={{ mb: 2 }}>
-                {error}
-              </Alert>
-            )}
-            <Box component="form" onSubmit={handleForgotPassword}>
-              <TextField
-                fullWidth
-                label="Username"
+      <div style={{ maxWidth: '500px', margin: '32px auto', padding: '0 16px' }}>
+        <Card title="Reset Password">
+          {error && (
+            <Message 
+              severity={error.includes('sent') ? 'success' : 'error'} 
+              text={error}
+              style={{ marginBottom: '16px' }}
+            />
+          )}
+          <form onSubmit={handleForgotPassword} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            <div className="p-field">
+              <label htmlFor="username">Username</label>
+              <InputText
+                id="username"
                 name="username"
                 value={formData.username}
                 onChange={handleChange}
-                margin="normal"
                 required
+                style={{ width: '100%' }}
               />
-              <Box sx={{ display: 'flex', gap: 2, mt: 2 }}>
-                <Button
-                  variant="outlined"
-                  fullWidth
-                  onClick={() => setForgotPasswordMode(false)}
-                >
-                  Back to Login
-                </Button>
-                <Button
-                  type="submit"
-                  variant="contained"
-                  fullWidth
-                  disabled={loading}
-                >
-                  {loading ? 'Sending...' : 'Send Reset Link'}
-                </Button>
-              </Box>
-            </Box>
-          </Paper>
-        </Box>
-      </Container>
+            </div>
+            <div style={{ display: 'flex', gap: '8px', marginTop: '8px' }}>
+              <Button
+                label="Back to Login"
+                outlined
+                onClick={() => setForgotPasswordMode(false)}
+                style={{ flex: 1 }}
+              />
+              <Button
+                type="submit"
+                label={loading ? 'Sending...' : 'Send Reset Link'}
+                disabled={loading}
+                loading={loading}
+                style={{ flex: 1 }}
+              />
+            </div>
+          </form>
+        </Card>
+      </div>
     );
   }
 
   return (
-    <Container maxWidth="sm">
-      <Box sx={{ my: 4 }}>
-        <Paper elevation={3}>
-          <Tabs value={tabValue} onChange={handleTabChange} centered>
-            <Tab label="Sign In" />
-            <Tab label="Sign Up" />
-          </Tabs>
-
-          <TabPanel value={tabValue} index={0}>
-            <Typography variant="h5" component="h1" gutterBottom align="center">
-              Sign In
-            </Typography>
+    <div style={{ maxWidth: '500px', margin: '32px auto', padding: '0 16px' }}>
+      <Card>
+        <TabView activeIndex={tabValue} onTabChange={handleTabChange}>
+          <TabPanel header="Sign In">
+            <h2 style={{ textAlign: 'center', marginBottom: '24px' }}>Sign In</h2>
             {error && (
-              <Alert severity="error" sx={{ mb: 2 }}>
-                {error}
-              </Alert>
+              <Message 
+                severity="error" 
+                text={error}
+                style={{ marginBottom: '16px' }}
+              />
             )}
-            <Box component="form" onSubmit={handleLogin}>
-              <TextField
-                fullWidth
-                label="Username"
-                name="username"
-                value={formData.username}
-                onChange={handleChange}
-                margin="normal"
-                required
-                autoComplete="username"
-              />
-              <TextField
-                fullWidth
-                label="Password"
-                type="password"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-                margin="normal"
-                required
-                autoComplete="current-password"
-              />
-              <Link
-                component="button"
+            <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+              <div className="p-field">
+                <label htmlFor="login-username">Username</label>
+                <InputText
+                  id="login-username"
+                  name="username"
+                  value={formData.username}
+                  onChange={handleChange}
+                  required
+                  autoComplete="username"
+                  style={{ width: '100%' }}
+                />
+              </div>
+              <div className="p-field">
+                <label htmlFor="login-password">Password</label>
+                <Password
+                  id="login-password"
+                  name="password"
+                  value={formData.password}
+                  onChange={(e) => handlePasswordChange(e, 'password')}
+                  required
+                  autoComplete="current-password"
+                  feedback={false}
+                  toggleMask
+                  style={{ width: '100%' }}
+                  inputStyle={{ width: '100%' }}
+                />
+              </div>
+              <button
                 type="button"
-                variant="body2"
                 onClick={(e) => {
                   e.preventDefault();
                   setForgotPasswordMode(true);
                 }}
-                sx={{ display: 'block', mb: 2 }}
+                style={{ 
+                  background: 'none', 
+                  border: 'none', 
+                  color: '#007bff', 
+                  textDecoration: 'underline', 
+                  cursor: 'pointer',
+                  textAlign: 'left',
+                  padding: 0
+                }}
               >
                 Forgot password?
-              </Link>
+              </button>
               <Button
                 type="submit"
-                variant="contained"
-                fullWidth
-                sx={{ mt: 2 }}
+                label={loading ? 'Signing in...' : 'Sign In'}
                 disabled={loading}
-              >
-                {loading ? 'Signing in...' : 'Sign In'}
-              </Button>
-            </Box>
+                loading={loading}
+                style={{ width: '100%', marginTop: '8px' }}
+              />
+            </form>
           </TabPanel>
 
-          <TabPanel value={tabValue} index={1}>
-            <Typography variant="h5" component="h1" gutterBottom align="center">
-              Sign Up
-            </Typography>
+          <TabPanel header="Sign Up">
+            <h2 style={{ textAlign: 'center', marginBottom: '24px' }}>Sign Up</h2>
             {error && (
-              <Alert severity="error" sx={{ mb: 2 }}>
-                {error}
-              </Alert>
+              <Message 
+                severity="error" 
+                text={error}
+                style={{ marginBottom: '16px' }}
+              />
             )}
-            <Box component="form" onSubmit={handleRegister}>
-              <TextField
-                fullWidth
-                label="Name"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                margin="normal"
-                required
-              />
-              <TextField
-                fullWidth
-                label="Username"
-                name="username"
-                value={formData.username}
-                onChange={handleChange}
-                margin="normal"
-                required
-              />
-              <TextField
-                fullWidth
-                label="Password"
-                type="password"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-                margin="normal"
-                required
-              />
-              <TextField
-                fullWidth
-                label="Confirm Password"
-                type="password"
-                name="confirmPassword"
-                value={formData.confirmPassword}
-                onChange={handleChange}
-                margin="normal"
-                required
-              />
-              <TextField
-                fullWidth
-                label="Invite Code"
-                name="inviteCode"
-                value={formData.inviteCode}
-                onChange={handleChange}
-                margin="normal"
-                required
-              />
+            <form onSubmit={handleRegister} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+              <div className="p-field">
+                <label htmlFor="name">Name</label>
+                <InputText
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                  style={{ width: '100%' }}
+                />
+              </div>
+              <div className="p-field">
+                <label htmlFor="register-username">Username</label>
+                <InputText
+                  id="register-username"
+                  name="username"
+                  value={formData.username}
+                  onChange={handleChange}
+                  required
+                  style={{ width: '100%' }}
+                />
+              </div>
+              <div className="p-field">
+                <label htmlFor="register-password">Password</label>
+                <Password
+                  id="register-password"
+                  name="password"
+                  value={formData.password}
+                  onChange={(e) => handlePasswordChange(e, 'password')}
+                  required
+                  feedback={false}
+                  toggleMask
+                  style={{ width: '100%' }}
+                  inputStyle={{ width: '100%' }}
+                />
+              </div>
+              <div className="p-field">
+                <label htmlFor="confirm-password">Confirm Password</label>
+                <Password
+                  id="confirm-password"
+                  name="confirmPassword"
+                  value={formData.confirmPassword}
+                  onChange={(e) => handlePasswordChange(e, 'confirmPassword')}
+                  required
+                  feedback={false}
+                  toggleMask
+                  style={{ width: '100%' }}
+                  inputStyle={{ width: '100%' }}
+                />
+              </div>
+              <div className="p-field">
+                <label htmlFor="inviteCode">Invite Code</label>
+                <InputText
+                  id="inviteCode"
+                  name="inviteCode"
+                  value={formData.inviteCode}
+                  onChange={handleChange}
+                  required
+                  style={{ width: '100%' }}
+                />
+              </div>
               <Button
                 type="submit"
-                variant="contained"
-                fullWidth
-                sx={{ mt: 2 }}
+                label={loading ? 'Signing up...' : 'Sign Up'}
                 disabled={loading}
-              >
-                {loading ? 'Signing up...' : 'Sign Up'}
-              </Button>
-            </Box>
+                loading={loading}
+                style={{ width: '100%', marginTop: '8px' }}
+              />
+            </form>
           </TabPanel>
-        </Paper>
-      </Box>
-    </Container>
+        </TabView>
+      </Card>
+    </div>
   );
 };
 

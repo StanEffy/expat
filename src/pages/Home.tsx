@@ -1,10 +1,11 @@
-import { Box, Typography, Button, Container } from '@mui/material';
+import { Button } from 'primereact/button';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { isTokenValid } from '../utils/auth';
-import { Link as RouterLink } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
 const Home = () => {
-  
+  const navigate = useNavigate();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const { t } = useTranslation();
 
@@ -13,27 +14,19 @@ const Home = () => {
   }, []);
 
   return (
-    <Container >
-      <Box sx={{ textAlign: 'center', my: 8 }}>
-        <Typography variant="h4" component="h1" gutterBottom>
-        {t('home.welcome')}
-        </Typography>
-        <Typography variant="h5" color="text.secondary" paragraph>
+    <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '64px 16px', textAlign: 'center' }}>
+      <h1 style={{ marginBottom: '16px' }}>{t('home.welcome')}</h1>
+      <p style={{ fontSize: '1.25rem', color: '#666', marginBottom: '32px' }}>
         {t('home.description')}
-        </Typography>
-        <Box sx={{ mt: 4, display: 'flex', justifyContent: 'center', gap: 2 }}>
+      </p>
+      <div style={{ marginTop: '32px', display: 'flex', justifyContent: 'center', gap: '16px' }}>
         {isAuthenticated ? (
-                  <Button sx={{width: '200px', color: 'white'}} component={RouterLink} to="/companies">
-                    {t('navigation.companies')}
-                  </Button>
-                ) : (
-                  <Button sx={{width: '200px', color: 'white'}}  component={RouterLink} to="/login">
-                    {t('navigation.login')}
-                  </Button>
-                )}
-        </Box>
-      </Box>
-    </Container>
+          <Button label={t('navigation.companies')} onClick={() => navigate('/companies')} style={{ width: '200px' }} />
+        ) : (
+          <Button label={t('navigation.login')} onClick={() => navigate('/login')} style={{ width: '200px' }} />
+        )}
+      </div>
+    </div>
   );
 };
 

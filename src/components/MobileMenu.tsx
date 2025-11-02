@@ -1,34 +1,43 @@
-import { useState } from "react";
-import {
-  IconButton,
-  Menu,
-  MenuItem,
-  useMediaQuery,
-  useTheme,
-} from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
+import { useState, useRef, useEffect } from "react";
+import { Button } from "primereact/button";
+import { Menu } from "primereact/menu";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import "./MobileMenu.css";
 
 const MobileMenu = () => {
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const menu = useRef<Menu>(null);
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
-  const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const handleNavigation = (path: string) => {
     navigate(path);
-    handleClose();
+    menu.current?.hide();
   };
+
+  const items = [
+    {
+      label: t("navigation.home"),
+      command: () => handleNavigation("/"),
+    },
+    {
+      label: t("navigation.companies"),
+      command: () => handleNavigation("/companies"),
+    },
+    {
+      label: t("navigation.about"),
+      command: () => handleNavigation("/about"),
+    },
+  ];
 
   if (!isMobile) {
     return null;
@@ -36,49 +45,14 @@ const MobileMenu = () => {
 
   return (
     <>
-      <IconButton
-        edge="start"
-        color="inherit"
+      <Button
+        icon="pi pi-bars"
+        text
+        rounded
         aria-label="menu"
-        onClick={handleMenu}
-      >
-        <MenuIcon />
-      </IconButton>
-      <Menu
-        anchorEl={anchorEl}
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "right",
-        }}
-        keepMounted
-        transformOrigin={{
-          vertical: "top",
-          horizontal: "right",
-        }}
-        open={Boolean(anchorEl)}
-        onClose={handleClose}
-        sx={{
-          "& .MuiPaper-root": {
-            minWidth: "200px",
-            boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.2)",
-            top: "64px!important",
-          },
-          "& .MuiMenuItem-root": {
-            fontSize: "16px",
-            padding: "8px 16px",
-          },
-        }}
-      >
-        <MenuItem onClick={() => handleNavigation("/")}>
-          {t("navigation.home")}
-        </MenuItem>
-        <MenuItem onClick={() => handleNavigation("/companies")}>
-          {t("navigation.companies")}
-        </MenuItem>
-        <MenuItem onClick={() => handleNavigation("/about")}>
-          {t("navigation.about")}
-        </MenuItem>
-      </Menu>
+        onClick={(e) => menu.current?.toggle(e)}
+      />
+      <Menu ref={menu} model={items} popup className="mobile-menu" />
     </>
   );
 };

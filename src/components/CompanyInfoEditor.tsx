@@ -1,21 +1,10 @@
 import React, { useState } from "react";
-import {
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-  Box,
-  Button,
-  TextField,
-  Typography,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogContentText,
-  DialogActions,
-  Paper,
-  CircularProgress,
-} from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { Accordion, AccordionTab } from "primereact/accordion";
+import { Button } from "primereact/button";
+import { InputText } from "primereact/inputtext";
+import { InputTextarea } from "primereact/inputtextarea";
+import { Dialog } from "primereact/dialog";
+import { ProgressSpinner } from "primereact/progressspinner";
 import { useTranslation } from "react-i18next";
 import { useNotification } from "../contexts/NotificationContext";
 import { getAuthHeaders } from "../utils/auth";
@@ -42,10 +31,10 @@ const CompanyInfoEditor: React.FC<CompanyInfoEditorProps> = ({
     recruitment_page: initialData?.recruitment_page || "",
   });
   const [openDialog, setOpenDialog] = useState(false);
-  const [expanded, setExpanded] = useState(false);
+  const [expanded, setExpanded] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
@@ -88,7 +77,7 @@ const CompanyInfoEditor: React.FC<CompanyInfoEditorProps> = ({
 
       onUpdate(updateData);
       setOpenDialog(false);
-      setExpanded(false);
+      setExpanded(null);
       showNotification("Company information updated successfully", "success");
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : "An error occurred while updating company information";
@@ -102,96 +91,75 @@ const CompanyInfoEditor: React.FC<CompanyInfoEditorProps> = ({
     setOpenDialog(false);
   };
 
-  const toggleAccordion = () => {
-    setExpanded(!expanded);
-  };
-
   // Check if both fields are empty
   const isFormEmpty = !formData.company_description.trim() && !formData.recruitment_page.trim();
 
+  const footer = (
+    <div>
+      <Button 
+        label={t("common.cancel")} 
+        onClick={handleCloseDialog} 
+        disabled={loading}
+        text
+      />
+      <Button 
+        label={loading ? t("common.updating") : t("common.confirm")} 
+        onClick={handleConfirmUpdate} 
+        disabled={loading}
+        loading={loading}
+      />
+    </div>
+  );
+
   return (
-    <Box sx={{ mt: 3 }}>
-      <Accordion expanded={expanded} onChange={toggleAccordion}>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="company-info-content"
-          id="company-info-header"
-        >
-          <Typography variant="subtitle1">{t("company.editInformation")}</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Box component="form" onSubmit={handleSubmit}>
-            <Paper elevation={0} sx={{ p: 1 }}>
-              <Box sx={{ gap: 1, display: "flex", flexDirection: "column" }}>
-                <Box>
-                  <TextField
-                    fullWidth
-                    label={t("company.description")}
-                    name="company_description"
-                    value={formData.company_description}
-                    onChange={handleChange}
-                    multiline
-                    rows={4}
-                    variant="outlined"
-                  />
-                </Box>
-                <Box>
-                  <TextField
-                    fullWidth
-                    label={t("company.recruitmentPageUrl")}
-                    name="recruitment_page"
-                    value={formData.recruitment_page}
-                    onChange={handleChange}
-                    variant="outlined"
-                    placeholder="https://example.com/careers"
-                  />
-                </Box>
-                <Box>
-                  <Button 
-                    type="submit" 
-                    variant="contained" 
-                    color="primary"
-                    disabled={isFormEmpty || loading}
-                    startIcon={loading ? <CircularProgress size={20} /> : null}
-                  >
-                    {loading ? t("common.updating") : t("company.updateInformation")}
-                  </Button>
-                </Box>
-              </Box>
-            </Paper>
-          </Box>
-        </AccordionDetails>
+    <div style={{ marginTop: '24px' }}>
+      <Accordion activeIndex={expanded !== null ? 0 : null} onTabChange={(e) => setExpanded(e.index !== null ? '0' : null)}>
+        <AccordionTab header={t("company.editInformation")}>
+          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+            <div className="p-field">
+              <label htmlFor="company_description">{t("company.description")}</label>
+              <InputTextarea
+                id="company_description"
+                name="company_description"
+                value={formData.company_description}
+                onChange={handleChange}
+                rows={4}
+                style={{ width: '100%' }}
+              />
+            </div>
+            <div className="p-field">
+              <label htmlFor="recruitment_page">{t("company.recruitmentPageUrl")}</label>
+              <InputText
+                id="recruitment_page"
+                name="recruitment_page"
+                value={formData.recruitment_page}
+                onChange={handleChange}
+                placeholder="https://example.com/careers"
+                style={{ width: '100%' }}
+              />
+            </div>
+            <div>
+              <Button 
+                type="submit" 
+                label={loading ? t("common.updating") : t("company.updateInformation")}
+                disabled={isFormEmpty || loading}
+                loading={loading}
+              />
+            </div>
+          </form>
+        </AccordionTab>
       </Accordion>
 
-      {/* Confirmation Dialog */}
       <Dialog
-        open={openDialog}
-        onClose={handleCloseDialog}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
+        visible={openDialog}
+        onHide={handleCloseDialog}
+        header={t("company.confirmUpdate")}
+        footer={footer}
+        modal
       >
-        <DialogTitle id="alert-dialog-title">{t("company.confirmUpdate")}</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            {t("company.confirmUpdateMessage")}
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleCloseDialog} disabled={loading}>
-            {t("common.cancel")}
-          </Button>
-          <Button 
-            onClick={handleConfirmUpdate} 
-            autoFocus 
-            color="primary"
-            disabled={loading}
-            startIcon={loading ? <CircularProgress size={20} /> : null}
-          >
-            {loading ? t("common.updating") : t("common.confirm")}
-          </Button>
-        </DialogActions>
+        <p>{t("company.confirmUpdateMessage")}</p>
       </Dialog>
-    </Box>
+    </div>
   );
 };
 

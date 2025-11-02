@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormControl, InputLabel, Select, MenuItem, SelectChangeEvent, ListSubheader } from '@mui/material';
+import { Dropdown } from 'primereact/dropdown';
 import { useTranslation } from 'react-i18next';
 
 export interface BackendCategoryItem {
@@ -19,7 +19,12 @@ interface CategoryFilterProps {
   categories: BackendCategoryItem[];
   generalCategories?: GeneralCategoryItem[];
   value: string;
-  onChange: (event: SelectChangeEvent) => void;
+  onChange: (event: { value: string }) => void;
+}
+
+interface OptionGroup {
+  label: string;
+  items: { id: string; label: string }[];
 }
 
 const CategoryFilter: React.FC<CategoryFilterProps> = ({ categories, generalCategories = [], value, onChange }) => {
@@ -41,51 +46,40 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({ categories, generalCate
     .map((g) => ({ id: `general:${g.code}`, label: i18n.language === 'fi' ? g.name_fi : g.name_en }))
     .sort((a, b) => a.label.localeCompare(b.label));
 
+  // Create option groups for PrimeReact Dropdown
+  const optionGroups: OptionGroup[] = [];
+  const allOptions: { id: string; label: string }[] = [];
+
+  // Add "All" option
+  allOptions.push({ id: '', label: t('common.all') });
+
+  // Add general categories
+  if (general.length > 0) {
+    allOptions.push(...general);
+  }
+
+  // Add NACE English
+  if (naceEnglish.length > 0) {
+    allOptions.push(...naceEnglish);
+  }
+
+  // Add NACE Finnish
+  if (naceFinnish.length > 0) {
+    allOptions.push(...naceFinnish);
+  }
+
   return (
-    <FormControl size="small" sx={{ minWidth: 280 }}>
-      <InputLabel id="category-filter-label">{t('company.filter.workArea')}</InputLabel>
-      <Select
-        labelId="category-filter-label"
-        value={value}
-        label={t('company.filter.workArea')}
-        onChange={onChange}
-        renderValue={(selected) => {
-          if (!selected) return t('common.all');
-          // Try to resolve a label from all groups for display
-          const all = [...naceEnglish, ...naceFinnish];
-          const found = all.find((o) => o.id === selected);
-          return found ? found.label : selected;
-        }}
-      >
-        <MenuItem value="">{t('common.all')}</MenuItem>
-        {general.length > 0 && (
-          <ListSubheader disableSticky>{i18n.language === 'fi' ? 'Yleiset toimialat' : 'General Categories'}</ListSubheader>
-        )}
-        {general.map((opt) => (
-          <MenuItem key={opt.id} value={opt.id}>
-            {opt.label}
-          </MenuItem>
-        ))}
-
-        {naceEnglish.length > 0 && (
-          <ListSubheader disableSticky>{i18n.language === 'fi' ? 'NACE (englanniksi)' : 'NACE (English)'}</ListSubheader>
-        )}
-        {naceEnglish.map((opt) => (
-          <MenuItem key={opt.id} value={opt.id}>
-            {opt.label}
-          </MenuItem>
-        ))}
-
-        {naceFinnish.length > 0 && (
-          <ListSubheader disableSticky>{i18n.language === 'fi' ? 'NACE (suomeksi)' : 'NACE (Finnish)'}</ListSubheader>
-        )}
-        {naceFinnish.map((opt) => (
-          <MenuItem key={opt.id} value={opt.id}>
-            {opt.label}
-          </MenuItem>
-        ))}
-      </Select>
-    </FormControl>
+    <Dropdown
+      value={value}
+      options={allOptions}
+      onChange={(e) => onChange({ value: e.value || '' })}
+      optionLabel="label"
+      optionValue="id"
+      placeholder={t('company.filter.workArea')}
+      style={{ minWidth: '280px' }}
+      size="small"
+      showClear
+    />
   );
 };
 

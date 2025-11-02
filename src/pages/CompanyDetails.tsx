@@ -1,13 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import {
-  Box,
-  Typography,
-  Card,
-  CardContent,
-  Container,
-  Link,
-} from "@mui/material";
+import { Card } from "primereact/card";
 import { COMPANY_ENDPOINTS } from "../constants/api";
 import { getAuthHeaders } from "../utils/auth";
 import { useNotification } from "../contexts/NotificationContext";
@@ -97,179 +90,156 @@ const CompanyDetails = () => {
 
   if (loading) {
     return (
-      <Container>
-        <Typography>Loading...</Typography>
-      </Container>
+      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '16px' }}>
+        <p>Loading...</p>
+      </div>
     );
   }
 
   if (error) {
     return (
-      <Container>
-        <Typography color="error" sx={{ mt: 4 }}>
-          {error}
-        </Typography>
-      </Container>
+      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '16px' }}>
+        <p style={{ color: 'red', marginTop: '32px' }}>{error}</p>
+      </div>
     );
   }
 
   if (!company) {
     return (
-      <Container>
-        <Typography sx={{ mt: 4 }}>Company not found.</Typography>
-      </Container>
+      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '16px' }}>
+        <p style={{ marginTop: '32px' }}>Company not found.</p>
+      </div>
     );
   }
 
   return (
-    <Container>
-      <Box sx={{ my: 4 }}>
-        <Typography variant="h4" component="h1" gutterBottom>
-          {company.name}
-        </Typography>
-        <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
-          <Card>
-            <CardContent>
-              <Typography variant="h6" gutterBottom>
-                {t("company.information")}
-              </Typography>
-              <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
-                <Typography>
-                  <strong>{t("company.businessId")}:</strong>{" "}
-                  {company.businessid}
-                </Typography>
-                <Typography>
-                  <strong>{t("company.mainBusinessLine")}:</strong>{" "}
-                  {company.mainbusinesslinename}
-                </Typography>
-                {company.website && (
-                  <Typography>
-                    <strong>{t("company.website")}:</strong>{" "}
-                    <Link
-                      href={`https://${company.website}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {company.website}
-                    </Link>
-                  </Typography>
-                )}
-              </Box>
-            </CardContent>
-          </Card>
-
-          {company.street && company.city && (
-            <Link
-              href={getGoogleMapsUrl(company)}
-              target="_blank"
-              rel="noopener noreferrer"
-              sx={{ textDecoration: "none" }}
-            >
-              <Card
-                sx={{
-                  position: "relative",
-                  overflow: "hidden",
-                  width: "100%",
-                  minWidth: 350,
-                  mx: "auto",
-                  "&:hover": {
-                    boxShadow: "0 0 10px 5px rgba(0, 0, 0, 0.2)",
-                  },
-                  "&::before": {
-                    content: '""',
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    background: `url(${mapBg})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                    zIndex: 0,
-                  },
-                  "&::after": {
-                    content: '""',
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    right: "50%",
-                    bottom: 0,
-                    background:
-                      "linear-gradient(to right, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.4))",
-                    backdropFilter: "blur(8px)",
-                    zIndex: 1,
-                  },
-                }}
-              >
-                <CardContent
-                  sx={{
-                    position: "relative",
-                    zIndex: 2,
-                    minHeight: 200,
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center",
-                  }}
-                >
-                  <Typography variant="h6" gutterBottom>
-                    {t("company.address")}
-                  </Typography>
-                  <Typography>
-                    {company.street} {company.buildingnumber}
-                    {company.apartmentnumber && `, ${company.apartmentnumber}`}
-                  </Typography>
-                  <Typography>
-                    {company.postcode} {company.city}
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Link>
-          )}
-
-          {company.company_description && (
-            <Card>
-              <CardContent>
-                <Typography variant="h6" gutterBottom>
-                  {t("company.description")}
-                </Typography>
-                <Typography>{company.company_description}</Typography>
-              </CardContent>
-            </Card>
-          )}
-
-          {company.recruitment_page && (
-            <Card>
-              <CardContent>
-                <Typography variant="h6" gutterBottom>
-                  {t("company.recruitment")}
-                </Typography>
-                <Link
-                  href={company.recruitment_page}
+    <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '32px 16px' }}>
+      <h1 style={{ marginBottom: '32px' }}>{company.name}</h1>
+      <div style={{ display: "flex", flexDirection: "column", gap: '24px' }}>
+        <Card title={t("company.information")}>
+          <div style={{ display: "flex", flexDirection: "column", gap: '8px' }}>
+            <p>
+              <strong>{t("company.businessId")}:</strong>{" "}
+              {company.businessid}
+            </p>
+            <p>
+              <strong>{t("company.mainBusinessLine")}:</strong>{" "}
+              {company.mainbusinesslinename}
+            </p>
+            {company.website && (
+              <p>
+                <strong>{t("company.website")}:</strong>{" "}
+                <a
+                  href={`https://${company.website}`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  {t("company.visitRecruitmentPage")}
-                </Link>
-              </CardContent>
-            </Card>
-          )}
+                  {company.website}
+                </a>
+              </p>
+            )}
+          </div>
+        </Card>
 
-          <CompanyInfoEditor 
-            companyId={id!}
-            initialData={{
-              company_description: company.company_description,
-              recruitment_page: company.recruitment_page,
-            }}
-            onUpdate={(updatedData) => {
-              setCompany(prev => prev ? {
-                ...prev,
-                ...updatedData
-              } : null);
-            }}
-          />
-        </Box>
-      </Box>
-    </Container>
+        {company.street && company.city && (
+          <a
+            href={getGoogleMapsUrl(company)}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ textDecoration: "none", display: 'block' }}
+          >
+            <Card
+              style={{
+                position: "relative",
+                overflow: "hidden",
+                width: "100%",
+                minWidth: 350,
+                margin: "0 auto",
+                cursor: "pointer",
+              }}
+            >
+              <div
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  background: `url(${mapBg})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                  zIndex: 0,
+                }}
+              />
+              <div
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  right: "50%",
+                  bottom: 0,
+                  background: "linear-gradient(to right, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.4))",
+                  backdropFilter: "blur(8px)",
+                  zIndex: 1,
+                }}
+              />
+              <div
+                style={{
+                  position: "relative",
+                  zIndex: 2,
+                  minHeight: 200,
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  padding: '16px',
+                }}
+              >
+                <h3 style={{ marginBottom: '8px' }}>{t("company.address")}</h3>
+                <p>
+                  {company.street} {company.buildingnumber}
+                  {company.apartmentnumber && `, ${company.apartmentnumber}`}
+                </p>
+                <p>
+                  {company.postcode} {company.city}
+                </p>
+              </div>
+            </Card>
+          </a>
+        )}
+
+        {company.company_description && (
+          <Card title={t("company.description")}>
+            <p>{company.company_description}</p>
+          </Card>
+        )}
+
+        {company.recruitment_page && (
+          <Card title={t("company.recruitment")}>
+            <a
+              href={company.recruitment_page}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {t("company.visitRecruitmentPage")}
+            </a>
+          </Card>
+        )}
+
+        <CompanyInfoEditor 
+          companyId={id!}
+          initialData={{
+            company_description: company.company_description,
+            recruitment_page: company.recruitment_page,
+          }}
+          onUpdate={(updatedData) => {
+            setCompany(prev => prev ? {
+              ...prev,
+              ...updatedData
+            } : null);
+          }}
+        />
+      </div>
+    </div>
   );
 };
 

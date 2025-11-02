@@ -1,0 +1,10 @@
+.mobile-menu {
+  min-width: 200px;
+}
+
+@media (min-width: 769px) {
+  .mobile-menu-container {
+    display: none;
+  }
+}
+

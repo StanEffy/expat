@@ -1,14 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {
-  Box,
-  Typography,
-  Card,
-  CardContent,
-  Container,
-  Button,
-  Alert,
-} from '@mui/material';
+import { Card } from 'primereact/card';
+import { Button } from 'primereact/button';
+import { Message } from 'primereact/message';
 
 interface UserProfile {
   email: string;
@@ -63,55 +57,46 @@ const Profile = () => {
 
   if (loading) {
     return (
-      <Container>
-        <Typography>Loading...</Typography>
-      </Container>
+      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '16px' }}>
+        <p>Loading...</p>
+      </div>
     );
   }
 
   if (error) {
     return (
-      <Container>
-        <Alert severity="error">{error}</Alert>
-      </Container>
+      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '16px' }}>
+        <Message severity="error" text={error} />
+      </div>
     );
   }
 
   return (
-    <Container>
-      <Box sx={{ my: 4 }}>
-        <Typography variant="h4" component="h1" gutterBottom>
-          Profile
-        </Typography>
-        <Card sx={{ maxWidth: 600 }}>
-          <CardContent>
-            <Typography variant="h6" gutterBottom>
-              User Information
-            </Typography>
-            <Typography>
-              <strong>Email:</strong> {profile?.email}
-            </Typography>
-            <Typography>
-              <strong>Role:</strong> {profile?.role}
-            </Typography>
-            <Typography>
-              <strong>Member since:</strong>{' '}
-              {profile?.createdAt
-                ? new Date(profile.createdAt).toLocaleDateString()
-                : 'N/A'}
-            </Typography>
-          </CardContent>
-        </Card>
-        <Button
-          variant="contained"
-          color="secondary"
-          onClick={handleLogout}
-          sx={{ mt: 3 }}
-        >
-          Logout
-        </Button>
-      </Box>
-    </Container>
+    <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '32px 16px' }}>
+      <h1 style={{ marginBottom: '32px' }}>Profile</h1>
+      <Card title="User Information" style={{ maxWidth: 600 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+          <p>
+            <strong>Email:</strong> {profile?.email}
+          </p>
+          <p>
+            <strong>Role:</strong> {profile?.role}
+          </p>
+          <p>
+            <strong>Member since:</strong>{' '}
+            {profile?.createdAt
+              ? new Date(profile.createdAt).toLocaleDateString()
+              : 'N/A'}
+          </p>
+        </div>
+      </Card>
+      <Button
+        label="Logout"
+        onClick={handleLogout}
+        severity="secondary"
+        style={{ marginTop: '24px' }}
+      />
+    </div>
   );
 };
 

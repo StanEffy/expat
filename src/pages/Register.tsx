@@ -1,14 +1,10 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {
-  Box,
-  Typography,
-  TextField,
-  Button,
-  Container,
-  Paper,
-  Alert,
-} from '@mui/material';
+import { InputText } from 'primereact/inputtext';
+import { Password } from 'primereact/password';
+import { Button } from 'primereact/button';
+import { Card } from 'primereact/card';
+import { Message } from 'primereact/message';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -24,6 +20,10 @@ const Register = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handlePasswordChange = (e: { value: string }, fieldName: string) => {
+    setFormData((prev) => ({ ...prev, [fieldName]: e.value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -64,70 +64,77 @@ const Register = () => {
   };
 
   return (
-    <Container maxWidth="sm">
-      <Box sx={{ my: 4 }}>
-        <Paper elevation={3} sx={{ p: 4 }}>
-          <Typography variant="h4" component="h1" gutterBottom align="center">
-            Register
-          </Typography>
-          {error && (
-            <Alert severity="error" sx={{ mb: 2 }}>
-              {error}
-            </Alert>
-          )}
-          <Box component="form" onSubmit={handleSubmit}>
-            <TextField
-              fullWidth
-              label="Email"
+    <div style={{ maxWidth: '500px', margin: '32px auto', padding: '0 16px' }}>
+      <Card title="Register">
+        {error && (
+          <Message 
+            severity="error" 
+            text={error}
+            style={{ marginBottom: '16px' }}
+          />
+        )}
+        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          <div className="p-field">
+            <label htmlFor="email">Email</label>
+            <InputText
+              id="email"
               type="email"
               name="email"
               value={formData.email}
               onChange={handleChange}
-              margin="normal"
               required
+              style={{ width: '100%' }}
             />
-            <TextField
-              fullWidth
-              label="Password"
-              type="password"
+          </div>
+          <div className="p-field">
+            <label htmlFor="password">Password</label>
+            <Password
+              id="password"
               name="password"
               value={formData.password}
-              onChange={handleChange}
-              margin="normal"
+              onChange={(e) => handlePasswordChange(e, 'password')}
               required
+              feedback={false}
+              toggleMask
+              style={{ width: '100%' }}
+              inputStyle={{ width: '100%' }}
             />
-            <TextField
-              fullWidth
-              label="Confirm Password"
-              type="password"
+          </div>
+          <div className="p-field">
+            <label htmlFor="confirmPassword">Confirm Password</label>
+            <Password
+              id="confirmPassword"
               name="confirmPassword"
               value={formData.confirmPassword}
-              onChange={handleChange}
-              margin="normal"
+              onChange={(e) => handlePasswordChange(e, 'confirmPassword')}
               required
+              feedback={false}
+              toggleMask
+              style={{ width: '100%' }}
+              inputStyle={{ width: '100%' }}
             />
-            <TextField
-              fullWidth
-              label="Invite Code"
+          </div>
+          <div className="p-field">
+            <label htmlFor="inviteCode">Invite Code</label>
+            <InputText
+              id="inviteCode"
               name="inviteCode"
               value={formData.inviteCode}
               onChange={handleChange}
-              margin="normal"
               required
+              style={{ width: '100%' }}
             />
-            <Button
-              type="submit"
-              variant="contained"
-              fullWidth
-              sx={{ mt: 3 }}
-              disabled={loading}
-            >
-              {loading ? 'Registering...' : 'Register'}
-            </Button>
-          </Box>
-        </Paper>
-      </Box>
-    </Container>
+          </div>
+          <Button
+            type="submit"
+            label={loading ? 'Registering...' : 'Register'}
+            disabled={loading}
+            loading={loading}
+            style={{ width: '100%', marginTop: '24px' }}
+          />
+        </form>
+      </Card>
+    </div>
   );
 };
 

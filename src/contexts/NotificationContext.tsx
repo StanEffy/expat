@@ -1,5 +1,5 @@
-import { createContext, useContext, useState, ReactNode } from 'react';
-import { Alert, Snackbar } from '@mui/material';
+import { createContext, useContext, useRef, ReactNode } from 'react';
+import { Toast } from 'primereact/toast';
 
 interface NotificationContextType {
   showNotification: (message: string, severity: 'success' | 'error' | 'info' | 'warning') => void;
@@ -20,33 +20,21 @@ interface NotificationProviderProps {
 }
 
 export const NotificationProvider = ({ children }: NotificationProviderProps) => {
-  const [open, setOpen] = useState(false);
-  const [message, setMessage] = useState('');
-  const [severity, setSeverity] = useState<'success' | 'error' | 'info' | 'warning'>('info');
+  const toast = useRef<Toast>(null);
 
-  const showNotification = (newMessage: string, newSeverity: 'success' | 'error' | 'info' | 'warning') => {
-    setMessage(newMessage);
-    setSeverity(newSeverity);
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
+  const showNotification = (message: string, severity: 'success' | 'error' | 'info' | 'warning') => {
+    toast.current?.show({
+      severity,
+      summary: severity === 'error' ? 'Error' : severity.charAt(0).toUpperCase() + severity.slice(1),
+      detail: message,
+      life: 6000,
+    });
   };
 
   return (
     <NotificationContext.Provider value={{ showNotification }}>
       {children}
-      <Snackbar
-        open={open}
-        autoHideDuration={6000}
-        onClose={handleClose}
-        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-      >
-        <Alert onClose={handleClose} severity={severity} sx={{ width: '100%' }}>
-          {message}
-        </Alert>
-      </Snackbar>
+      <Toast ref={toast} position="top-center" />
     </NotificationContext.Provider>
   );
 }; 

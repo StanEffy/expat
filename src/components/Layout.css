@@ -1,0 +1,16 @@
+.layout-menubar {
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .hidden.md\\:flex {
+    display: none !important;
+  }
+}
+
+@media (min-width: 769px) {
+  .hidden.md\\:flex {
+    display: flex !important;
+  }
+}
+

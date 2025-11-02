@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { Select, MenuItem, FormControl, InputLabel, SelectChangeEvent } from '@mui/material';
+import { Dropdown } from 'primereact/dropdown';
 
 const languages = [
   { code: 'en', name: 'English' },
@@ -12,26 +12,23 @@ const languages = [
 const LanguageSwitcher = () => {
   const { i18n } = useTranslation();
 
-  const handleLanguageChange = (event: SelectChangeEvent) => {
-    i18n.changeLanguage(event.target.value);
+  const handleLanguageChange = (e: { value: string }) => {
+    i18n.changeLanguage(e.value);
   };
 
+  const currentLanguageCode = i18n.language || 'en';
+
   return (
-    <FormControl size="small" sx={{ minWidth: 120 }}>
-      <InputLabel id="language-select-label">Language</InputLabel>
-      <Select
-        labelId="language-select-label"
-        value={i18n.language}
-        label="Language"
-        onChange={handleLanguageChange}
-      >
-        {languages.map((lang) => (
-          <MenuItem key={lang.code} value={lang.code}>
-            {lang.name}
-          </MenuItem>
-        ))}
-      </Select>
-    </FormControl>
+    <Dropdown
+      value={currentLanguageCode}
+      options={languages}
+      onChange={handleLanguageChange}
+      optionLabel="name"
+      optionValue="code"
+      placeholder="Language"
+      style={{ minWidth: '120px' }}
+      size="small"
+    />
   );
 };
 

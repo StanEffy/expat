@@ -1,13 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
-import {
-  Box,
-  Typography,
-  Card,
-  CardContent,
-  Container,
-  CircularProgress,
-  Button,
-} from '@mui/material';
+import { Card } from 'primereact/card';
+import { Button } from 'primereact/button';
+import { ProgressSpinner } from 'primereact/progressspinner';
 import { useTranslation } from 'react-i18next';
 import { useNotification } from '../contexts/NotificationContext';
 import { getAuthHeaders } from '../utils/auth';
@@ -78,87 +72,83 @@ const Categories = () => {
 
   if (loading) {
     return (
-      <Container>
-        <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
-          <CircularProgress />
-        </Box>
-      </Container>
+      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '16px' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '32px' }}>
+          <ProgressSpinner />
+        </div>
+      </div>
     );
   }
 
   if (error) {
     return (
-      <Container>
-        <Typography color="error" sx={{ mt: 4 }}>
-          {error}
-        </Typography>
+      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '16px' }}>
+        <p style={{ color: 'red', marginTop: '32px' }}>{error}</p>
         <Button 
-          variant="contained" 
+          label={t('common.tryAgain')}
           onClick={() => window.location.reload()}
-          sx={{ mt: 2 }}
-        >
-          {t('common.tryAgain')}
-        </Button>
-      </Container>
+          style={{ marginTop: '16px' }}
+        />
+      </div>
     );
   }
 
   return (
-    <Container>
-      <Typography variant="h4" component="h1" sx={{ mt: 4, mb: 2 }}>
+    <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '16px' }}>
+      <h1 style={{ marginTop: '32px', marginBottom: '16px' }}>
         {t('categories.title')}
-      </Typography>
+      </h1>
 
       {/* General Categories */}
-      <Typography variant="h6" sx={{ mt: 2, mb: 2 }}>
+      <h2 style={{ marginTop: '16px', marginBottom: '16px' }}>
         {i18n.language === 'fi' ? 'Yleiset toimialat' : 'General Categories'}
-      </Typography>
-      <Box sx={{ 
+      </h2>
+      <div style={{ 
         display: 'grid', 
-        gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)' }, 
-        gap: 3 
+        gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', 
+        gap: '24px' 
       }}>
         {generalCategories.map((cat) => (
-          <Card key={cat.id} sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-            <CardContent sx={{ flexGrow: 1 }}>
-              <Typography sx={{ fontSize: '1.1rem', fontWeight: 'bold' }} component="h3">
+          <Card key={cat.id} style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+            <div style={{ flexGrow: 1, padding: '16px' }}>
+              <h3 style={{ fontSize: '1.1rem', fontWeight: 'bold', margin: 0 }}>
                 {i18n.language === 'fi' ? cat.name_fi : cat.name_en}
-              </Typography>
+              </h3>
               {(cat.description_en || cat.description_fi) && (
-                <Typography color="text.secondary" sx={{ mt: 1 }}>
+                <p style={{ color: '#666', marginTop: '8px', marginBottom: 0 }}>
                   {i18n.language === 'fi' ? (cat.description_fi ?? '') : (cat.description_en ?? '')}
-                </Typography>
+                </p>
               )}
-            </CardContent>
+            </div>
           </Card>
         ))}
-      </Box>
+      </div>
 
       {/* NACE Categories */}
-      <Typography variant="h6" sx={{ mt: 4, mb: 2 }}>
+      <h2 style={{ marginTop: '32px', marginBottom: '16px' }}>
         {i18n.language === 'fi' ? 'NACE-toimialat' : 'NACE Categories'}
-      </Typography>
-      <Box sx={{ 
+      </h2>
+      <div style={{ 
         display: 'grid', 
-        gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)' }, 
-        gap: 3 
+        gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', 
+        gap: '24px' 
       }}>
         {naceCategories.map((category, idx) => (
-          <Card key={`${category.mainbusinessline ?? 'n'}-${idx}`} sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-            <CardContent sx={{ flexGrow: 1 }}>
-              <Typography sx={{ fontSize: '1.1rem', fontWeight: 'bold' }} component="h3">
+          <Card key={`${category.mainbusinessline ?? 'n'}-${idx}`} style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+            <div style={{ flexGrow: 1, padding: '16px' }}>
+              <h3 style={{ fontSize: '1.1rem', fontWeight: 'bold', margin: 0 }}>
                 {i18n.language === 'fi' ? (category.name ?? category.name_en ?? '') : (category.name_en ?? category.name ?? '')}
-              </Typography>
+              </h3>
               {category.mainbusinessline && (
-                <Typography color="text.secondary" sx={{ mt: 1 }}>
+                <p style={{ color: '#666', marginTop: '8px', marginBottom: 0 }}>
                   {category.mainbusinessline}
-                </Typography>
+                </p>
               )}
-            </CardContent>
+            </div>
           </Card>
         ))}
-      </Box>
-    </Container>
+      </div>
+    </div>
   );
 };
 

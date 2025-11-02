@@ -1,20 +1,9 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import {
-  Box,
-  Typography,
-  Card,
-  CardContent,
-  CardActions,
-  Button,
-  Container,
-  CircularProgress,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-  SelectChangeEvent,
-} from "@mui/material";
+import { Card } from "primereact/card";
+import { Button } from "primereact/button";
+import { Dropdown } from "primereact/dropdown";
+import { ProgressSpinner } from "primereact/progressspinner";
 import { COMPANY_ENDPOINTS, CITY_ENDPOINTS, CATEGORY_ENDPOINTS } from "../constants/api";
 import { getAuthHeaders } from "../utils/auth";
 import { useNotification } from "../contexts/NotificationContext";
@@ -281,8 +270,8 @@ const Companies = () => {
     navigate(`?${newSearchParams.toString()}`, { replace: true });
   };
 
-  const handleItemsPerPageChange = (event: SelectChangeEvent) => {
-    const newValue = parseInt(event.target.value);
+  const handleItemsPerPageChange = (e: { value: number }) => {
+    const newValue = e.value;
     setItemsPerPage(newValue);
 
     // Update URL
@@ -296,119 +285,96 @@ const Companies = () => {
     setSelectedCities(citiesNew);
   };
 
-  const handleCategoryChange = (event: SelectChangeEvent) => {
-    setSelectedCategoryId(event.target.value);
+  const handleCategoryChange = (event: { value: string }) => {
+    setSelectedCategoryId(event.value);
   };
+
+  const itemsPerPageOptions = ITEMS_PER_PAGE_OPTIONS.map(opt => ({ label: opt.toString(), value: opt }));
 
   if (loading) {
     return (
-      <Container>
-        <Box sx={{ display: "flex", justifyContent: "center", mt: 4 }}>
-          <CircularProgress />
-        </Box>
-      </Container>
+      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '16px' }}>
+        <div style={{ display: "flex", justifyContent: "center", marginTop: '32px' }}>
+          <ProgressSpinner />
+        </div>
+      </div>
     );
   }
 
   if (companies.length === 0) {
     return (
-      <Container>
-        <Typography sx={{ mt: 4 }}>{t("common.noCompanies")}</Typography>
-      </Container>
+      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '16px' }}>
+        <p style={{ marginTop: '32px' }}>{t("common.noCompanies")}</p>
+      </div>
     );
   }
 
   return (
-    <Container>
-      <Box sx={{ mt: 2, display: "flex", gap: 2, flexWrap: "wrap", mb: 2 }}>
-        <Box sx={{ minWidth: 280, flex: 1 }}>
+    <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '16px' }}>
+      <div style={{ marginTop: '16px', display: "flex", gap: '16px', flexWrap: "wrap", marginBottom: '16px' }}>
+        <div style={{ minWidth: '280px', flex: 1 }}>
           <CompanyFilter
             cities={cities}
             selectedCities={selectedCities}
             onCityChange={handleCityChange}
           />
-        </Box>
+        </div>
         <CategoryFilter
           categories={categories}
           generalCategories={generalCategories}
           value={selectedCategoryId}
           onChange={handleCategoryChange}
         />
-        <FormControl size="small" sx={{ minWidth: 120, marginLeft: "auto" }}>
-          <InputLabel id="items-per-page-label">
-            {t("common.itemsPerPage")}
-          </InputLabel>
-          <Select
-            labelId="items-per-page-label"
-            value={itemsPerPage.toString()}
-            label={t("common.itemsPerPage")}
-            onChange={handleItemsPerPageChange}
-          >
-            {ITEMS_PER_PAGE_OPTIONS.map((option) => (
-              <MenuItem key={option} value={option}>
-                {option}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-      </Box>
-      <Box
-        sx={{
+        <Dropdown
+          value={itemsPerPage}
+          options={itemsPerPageOptions}
+          onChange={handleItemsPerPageChange}
+          optionLabel="label"
+          optionValue="value"
+          placeholder={t("common.itemsPerPage")}
+          style={{ minWidth: '120px', marginLeft: "auto" }}
+          size="small"
+        />
+      </div>
+      <div
+        style={{
           display: "grid",
-          gridTemplateColumns: {
-            xs: "1fr",
-            sm: "repeat(2, 1fr)",
-            md: "repeat(4, 1fr)",
-          },
-          gap: 3,
-          mt: 2,
+          gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))",
+          gap: '24px',
+          marginTop: '16px',
         }}
       >
         {companies.map((company) => (
-          <Card
-            key={company.id}
-            sx={{ height: "100%", display: "flex", flexDirection: "column" }}
-          >
-            <CardContent sx={{ flexGrow: 1 }}>
-              <Typography
-                sx={{ fontSize: "1rem", fontWeight: "bold" }}
-                component="h3"
-              >
+          <Card key={company.id} style={{ height: "100%", display: "flex", flexDirection: "column" }}>
+            <div style={{ flexGrow: 1, padding: '16px' }}>
+              <h3 style={{ fontSize: "1rem", fontWeight: "bold", margin: 0 }}>
                 {company.name}
-              </Typography>
-              <Typography color="text.secondary" sx={{ mt: 1 }}>
+              </h3>
+              <p style={{ color: "#666", marginTop: '8px', marginBottom: 0 }}>
                 {company.mainbusinesslinename || ""}
-              </Typography>
-            </CardContent>
-            <CardActions sx={{ p: 2 }}>
+              </p>
+            </div>
+            <div style={{ padding: '16px' }}>
               <Button
-                fullWidth
-                variant="contained"
-                size="small"
+                label={t("common.viewDetails")}
                 onClick={() => navigate(`/companies/${company.id}`)}
-              >
-                {t("common.viewDetails")}
-              </Button>
-            </CardActions>
+                style={{ width: '100%' }}
+              />
+            </div>
           </Card>
         ))}
-      </Box>
+      </div>
       {hasMore && (
-        <Box sx={{ display: "flex", justifyContent: "center", mt: 4, mb: 4 }}>
+        <div style={{ display: "flex", justifyContent: "center", marginTop: '32px', marginBottom: '32px' }}>
           <Button
-            variant="contained"
+            label={loadingMore ? t("common.loading") : t("common.showMore")}
             onClick={handleLoadMore}
             disabled={loadingMore}
-          >
-            {loadingMore ? (
-              <CircularProgress size={24} />
-            ) : (
-              t("common.showMore")
-            )}
-          </Button>
-        </Box>
+            loading={loadingMore}
+          />
+        </div>
       )}
-    </Container>
+    </div>
   );
 };
 

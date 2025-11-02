@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Autocomplete, TextField, Chip } from '@mui/material';
+import { AutoComplete } from 'primereact/autocomplete';
 import { useTranslation } from 'react-i18next';
 
 interface CompanyFilterProps {
@@ -16,30 +16,17 @@ const CompanyFilter: React.FC<CompanyFilterProps> = ({
   const { t } = useTranslation();
 
   return (
-    <Box sx={{ mb: 3 }}>
-      <Autocomplete
+    <div style={{ marginBottom: '24px' }}>
+      <AutoComplete
         multiple
-        id="city-filter"
-        options={cities}
         value={selectedCities}
-        onChange={(_, newValue) => onCityChange(newValue)}
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            label={t('company.filter.selectCities')}
-            placeholder={t('company.filter.searchCities')}
-          />
-        )}
-        renderTags={(value, getTagProps) =>
-          value.map((option, index) => (
-            <Chip
-              label={option}
-              {...getTagProps({ index })}
-            />
-          ))
-        }
+        suggestions={cities}
+        completeMethod={() => {}}
+        onChange={(e) => onCityChange(e.value)}
+        placeholder={t('company.filter.selectCities')}
+        style={{ width: '100%' }}
       />
-    </Box>
+    </div>
   );
 };
 

@@ -92,7 +92,7 @@ const Register = () => {
               id="password"
               name="password"
               value={formData.password}
-              onChange={(e) => handlePasswordChange(e, 'password')}
+              onChange={(e) => handlePasswordChange({ value: e.target.value }, 'password')}
               required
               feedback={false}
               toggleMask
@@ -106,7 +106,7 @@ const Register = () => {
               id="confirmPassword"
               name="confirmPassword"
               value={formData.confirmPassword}
-              onChange={(e) => handlePasswordChange(e, 'confirmPassword')}
+              onChange={(e) => handlePasswordChange({ value: e.target.value }, 'confirmPassword')}
               required
               feedback={false}
               toggleMask

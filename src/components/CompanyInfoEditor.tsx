@@ -4,7 +4,6 @@ import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
 import { InputTextarea } from "primereact/inputtextarea";
 import { Dialog } from "primereact/dialog";
-import { ProgressSpinner } from "primereact/progressspinner";
 import { useTranslation } from "react-i18next";
 import { useNotification } from "../contexts/NotificationContext";
 import { getAuthHeaders } from "../utils/auth";

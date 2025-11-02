@@ -1,0 +1,86 @@
+// Color Variables
+
+// Primary Colors
+$primary-0: rgba(98, 44, 144, 1);
+$primary-1: rgba(82, 52, 108, 1);
+$primary-2: rgba(57, 14, 94, 1);
+$primary-3: rgba(151, 96, 200, 1);
+$primary-4: rgba(164, 123, 200, 1);
+
+// Secondary Colors A
+$secondary-a-0: rgba(160, 41, 127, 1);
+$secondary-a-1: rgba(120, 53, 101, 1);
+$secondary-a-2: rgba(104, 13, 79, 1);
+$secondary-a-3: rgba(207, 91, 175, 1);
+$secondary-a-4: rgba(207, 122, 184, 1);
+
+// Secondary Colors B
+$secondary-b-0: rgba(164, 203, 51, 1);
+$secondary-b-1: rgba(130, 152, 67, 1);
+$secondary-b-2: rgba(102, 132, 17, 1);
+$secondary-b-3: rgba(196, 229, 101, 1);
+$secondary-b-4: rgba(205, 229, 135, 1);
+
+// Complement Colors
+$complement-0: rgba(214, 207, 54, 1);
+$complement-1: rgba(160, 156, 71, 1);
+$complement-2: rgba(139, 134, 18, 1);
+$complement-3: rgba(234, 229, 103, 1);
+$complement-4: rgba(234, 230, 138, 1);
+
+// CSS Variables for runtime usage
+:root {
+  // Primary
+  --primary-0: #{$primary-0};
+  --primary-1: #{$primary-1};
+  --primary-2: #{$primary-2};
+  --primary-3: #{$primary-3};
+  --primary-4: #{$primary-4};
+
+  // Secondary A
+  --secondary-a-0: #{$secondary-a-0};
+  --secondary-a-1: #{$secondary-a-1};
+  --secondary-a-2: #{$secondary-a-2};
+  --secondary-a-3: #{$secondary-a-3};
+  --secondary-a-4: #{$secondary-a-4};
+
+  // Secondary B
+  --secondary-b-0: #{$secondary-b-0};
+  --secondary-b-1: #{$secondary-b-1};
+  --secondary-b-2: #{$secondary-b-2};
+  --secondary-b-3: #{$secondary-b-3};
+  --secondary-b-4: #{$secondary-b-4};
+
+  // Complement
+  --complement-0: #{$complement-0};
+  --complement-1: #{$complement-1};
+  --complement-2: #{$complement-2};
+  --complement-3: #{$complement-3};
+  --complement-4: #{$complement-4};
+}
+
+// Utility classes for colors
+.primary-0 { color: $primary-0; }
+.primary-1 { color: $primary-1; }
+.primary-2 { color: $primary-2; }
+.primary-3 { color: $primary-3; }
+.primary-4 { color: $primary-4; }
+
+.secondary-a-0 { color: $secondary-a-0; }
+.secondary-a-1 { color: $secondary-a-1; }
+.secondary-a-2 { color: $secondary-a-2; }
+.secondary-a-3 { color: $secondary-a-3; }
+.secondary-a-4 { color: $secondary-a-4; }
+
+.secondary-b-0 { color: $secondary-b-0; }
+.secondary-b-1 { color: $secondary-b-1; }
+.secondary-b-2 { color: $secondary-b-2; }
+.secondary-b-3 { color: $secondary-b-3; }
+.secondary-b-4 { color: $secondary-b-4; }
+
+.complement-0 { color: $complement-0; }
+.complement-1 { color: $complement-1; }
+.complement-2 { color: $complement-2; }
+.complement-3 { color: $complement-3; }
+.complement-4 { color: $complement-4; }
+

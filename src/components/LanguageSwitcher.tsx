@@ -12,22 +12,23 @@ const languages = [
 const LanguageSwitcher = () => {
   const { i18n } = useTranslation();
 
-  const handleLanguageChange = (e: { value: string }) => {
-    i18n.changeLanguage(e.value);
+  const handleLanguageChange = (e: { value: { code: string; name: string } }) => {
+    i18n.changeLanguage(e.value.code);
   };
 
   const currentLanguageCode = i18n.language || 'en';
 
+  const selectedLanguage = languages.find(lang => lang.code === currentLanguageCode) || languages[0];
+
   return (
     <Dropdown
-      value={currentLanguageCode}
+      value={selectedLanguage}
       options={languages}
       onChange={handleLanguageChange}
       optionLabel="name"
       optionValue="code"
       placeholder="Language"
       style={{ minWidth: '120px' }}
-      size="small"
     />
   );
 };

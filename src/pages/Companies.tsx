@@ -270,8 +270,8 @@ const Companies = () => {
     navigate(`?${newSearchParams.toString()}`, { replace: true });
   };
 
-  const handleItemsPerPageChange = (e: { value: number }) => {
-    const newValue = e.value;
+  const handleItemsPerPageChange = (e: { value: { label: string; value: number } }) => {
+    const newValue = e.value.value;
     setItemsPerPage(newValue);
 
     // Update URL
@@ -326,14 +326,13 @@ const Companies = () => {
           onChange={handleCategoryChange}
         />
         <Dropdown
-          value={itemsPerPage}
+          value={itemsPerPageOptions.find(opt => opt.value === itemsPerPage) || itemsPerPageOptions[0]}
           options={itemsPerPageOptions}
           onChange={handleItemsPerPageChange}
           optionLabel="label"
           optionValue="value"
           placeholder={t("common.itemsPerPage")}
           style={{ minWidth: '120px', marginLeft: "auto" }}
-          size="small"
         />
       </div>
       <div

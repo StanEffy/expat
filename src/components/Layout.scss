@@ -1,0 +1,30 @@
+@use '../styles/variables' as *;
+
+.layout-menubar {
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  width: 100%;
+  background-color: $primary-2; // Using primary-2 color variable
+  border: none;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  box-shadow: 0px 0px 15px $secondary-b-4; // Using secondary-b-4 for glow
+}
+
+.expat-logo {
+  filter: brightness(80%);
+}
+
+@media (max-width: 768px) {
+  .hidden.md\\:flex {
+    display: none !important;
+  }
+}
+
+@media (min-width: 769px) {
+  .hidden.md\\:flex {
+    display: flex !important;
+  }
+}
+

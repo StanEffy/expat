@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client";
 import "primereact/resources/themes/lara-light-purple/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
-import "./index.css";
+import "./index.scss";
 import App from "./App.tsx";
 
 createRoot(document.getElementById("root")!).render(

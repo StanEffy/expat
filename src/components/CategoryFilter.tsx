@@ -22,11 +22,6 @@ interface CategoryFilterProps {
   onChange: (event: { value: string }) => void;
 }
 
-interface OptionGroup {
-  label: string;
-  items: { id: string; label: string }[];
-}
-
 const CategoryFilter: React.FC<CategoryFilterProps> = ({ categories, generalCategories = [], value, onChange }) => {
   const { t, i18n } = useTranslation();
 
@@ -47,7 +42,6 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({ categories, generalCate
     .sort((a, b) => a.label.localeCompare(b.label));
 
   // Create option groups for PrimeReact Dropdown
-  const optionGroups: OptionGroup[] = [];
   const allOptions: { id: string; label: string }[] = [];
 
   // Add "All" option
@@ -68,16 +62,17 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({ categories, generalCate
     allOptions.push(...naceFinnish);
   }
 
+  const selectedOption = allOptions.find(opt => opt.id === value) || allOptions[0];
+
   return (
     <Dropdown
-      value={value}
+      value={selectedOption}
       options={allOptions}
-      onChange={(e) => onChange({ value: e.value || '' })}
+      onChange={(e) => onChange({ value: e.value?.id || '' })}
       optionLabel="label"
       optionValue="id"
       placeholder={t('company.filter.workArea')}
       style={{ minWidth: '280px' }}
-      size="small"
       showClear
     />
   );

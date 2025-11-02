@@ -3,7 +3,7 @@ import { Button } from "primereact/button";
 import { Menu } from "primereact/menu";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import "./MobileMenu.css";
+import "./MobileMenu.scss";
 
 const MobileMenu = () => {
   const menu = useRef<Menu>(null);
@@ -21,7 +21,7 @@ const MobileMenu = () => {
 
   const handleNavigation = (path: string) => {
     navigate(path);
-    menu.current?.hide();
+    // Menu will auto-close on navigation
   };
 
   const items = [

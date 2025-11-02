@@ -23,9 +23,10 @@ export const NotificationProvider = ({ children }: NotificationProviderProps) =>
   const toast = useRef<Toast>(null);
 
   const showNotification = (message: string, severity: 'success' | 'error' | 'info' | 'warning') => {
+    const primeSeverity = severity === 'warning' ? 'warn' : severity;
     toast.current?.show({
-      severity,
-      summary: severity === 'error' ? 'Error' : severity.charAt(0).toUpperCase() + severity.slice(1),
+      severity: primeSeverity as 'success' | 'error' | 'info' | 'warn',
+      summary: severity === 'error' ? 'Error' : severity === 'warning' ? 'Warning' : severity.charAt(0).toUpperCase() + severity.slice(1),
       detail: message,
       life: 6000,
     });

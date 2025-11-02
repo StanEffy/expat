@@ -8,6 +8,7 @@ import { useTranslation } from "react-i18next";
 import { useNotification } from "../contexts/NotificationContext";
 import { getAuthHeaders } from "../utils/auth";
 import { COMPANY_ENDPOINTS } from "../constants/api";
+import styles from "./CompanyInfoEditor.module.scss";
 
 interface CompanyInfoEditorProps {
   companyId: string;
@@ -111,10 +112,10 @@ const CompanyInfoEditor: React.FC<CompanyInfoEditorProps> = ({
   );
 
   return (
-    <div style={{ marginTop: '24px' }}>
+    <div className={styles.container}>
       <Accordion activeIndex={expanded !== null ? 0 : null} onTabChange={(e) => setExpanded(e.index !== null ? '0' : null)}>
         <AccordionTab header={t("company.editInformation")}>
-          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+          <form onSubmit={handleSubmit} className={styles.form}>
             <div className="p-field">
               <label htmlFor="company_description">{t("company.description")}</label>
               <InputTextarea
@@ -123,7 +124,7 @@ const CompanyInfoEditor: React.FC<CompanyInfoEditorProps> = ({
                 value={formData.company_description}
                 onChange={handleChange}
                 rows={4}
-                style={{ width: '100%' }}
+                className={styles.textarea}
               />
             </div>
             <div className="p-field">
@@ -134,7 +135,7 @@ const CompanyInfoEditor: React.FC<CompanyInfoEditorProps> = ({
                 value={formData.recruitment_page}
                 onChange={handleChange}
                 placeholder="https://example.com/careers"
-                style={{ width: '100%' }}
+                className={styles.input}
               />
             </div>
             <div>

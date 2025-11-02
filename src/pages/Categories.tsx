@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { useNotification } from '../contexts/NotificationContext';
 import { getAuthHeaders } from '../utils/auth';
 import { CATEGORY_ENDPOINTS } from '../constants/api';
+import styles from './Categories.module.scss';
 
 interface NaceCategory {
   mainbusinessline?: string | null;
@@ -72,8 +73,8 @@ const Categories = () => {
 
   if (loading) {
     return (
-      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '16px' }}>
-        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '32px' }}>
+      <div className={styles.container}>
+        <div className={styles.loadingContainer}>
           <ProgressSpinner />
         </div>
       </div>
@@ -82,40 +83,36 @@ const Categories = () => {
 
   if (error) {
     return (
-      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '16px' }}>
-        <p style={{ color: 'red', marginTop: '32px' }}>{error}</p>
+      <div className={styles.container}>
+        <p className={styles.errorText}>{error}</p>
         <Button 
           label={t('common.tryAgain')}
           onClick={() => window.location.reload()}
-          style={{ marginTop: '16px' }}
+          className={styles.retryButton}
         />
       </div>
     );
   }
 
   return (
-    <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '16px' }}>
-      <h1 style={{ marginTop: '32px', marginBottom: '16px' }}>
+    <div className={styles.container}>
+      <h1 className={styles.title}>
         {t('categories.title')}
       </h1>
 
       {/* General Categories */}
-      <h2 style={{ marginTop: '16px', marginBottom: '16px' }}>
+      <h2 className={styles.sectionTitle}>
         {i18n.language === 'fi' ? 'Yleiset toimialat' : 'General Categories'}
       </h2>
-      <div style={{ 
-        display: 'grid', 
-        gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', 
-        gap: '24px' 
-      }}>
+      <div className={styles.grid}>
         {generalCategories.map((cat) => (
-          <Card key={cat.id} style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-            <div style={{ flexGrow: 1, padding: '16px' }}>
-              <h3 style={{ fontSize: '1.1rem', fontWeight: 'bold', margin: 0 }}>
+          <Card key={cat.id} className={styles.card}>
+            <div className={styles.cardContent}>
+              <h3 className={styles.cardTitle}>
                 {i18n.language === 'fi' ? cat.name_fi : cat.name_en}
               </h3>
               {(cat.description_en || cat.description_fi) && (
-                <p style={{ color: '#666', marginTop: '8px', marginBottom: 0 }}>
+                <p className={styles.cardDescription}>
                   {i18n.language === 'fi' ? (cat.description_fi ?? '') : (cat.description_en ?? '')}
                 </p>
               )}
@@ -125,22 +122,18 @@ const Categories = () => {
       </div>
 
       {/* NACE Categories */}
-      <h2 style={{ marginTop: '32px', marginBottom: '16px' }}>
+      <h2 className={styles.sectionTitleLarge}>
         {i18n.language === 'fi' ? 'NACE-toimialat' : 'NACE Categories'}
       </h2>
-      <div style={{ 
-        display: 'grid', 
-        gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', 
-        gap: '24px' 
-      }}>
+      <div className={styles.grid}>
         {naceCategories.map((category, idx) => (
-          <Card key={`${category.mainbusinessline ?? 'n'}-${idx}`} style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-            <div style={{ flexGrow: 1, padding: '16px' }}>
-              <h3 style={{ fontSize: '1.1rem', fontWeight: 'bold', margin: 0 }}>
+          <Card key={`${category.mainbusinessline ?? 'n'}-${idx}`} className={styles.card}>
+            <div className={styles.cardContent}>
+              <h3 className={styles.cardTitle}>
                 {i18n.language === 'fi' ? (category.name ?? category.name_en ?? '') : (category.name_en ?? category.name ?? '')}
               </h3>
               {category.mainbusinessline && (
-                <p style={{ color: '#666', marginTop: '8px', marginBottom: 0 }}>
+                <p className={styles.cardDescription}>
                   {category.mainbusinessline}
                 </p>
               )}

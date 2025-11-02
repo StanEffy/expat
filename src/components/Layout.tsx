@@ -8,6 +8,7 @@ import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "./LanguageSwitcher";
 import logoExpat from "../assets/logo_expat.png";
 import "./Layout.scss";
+import styles from "./Layout.module.scss";
 
 interface LayoutProps {
   children: ReactNode;
@@ -27,21 +28,21 @@ const Layout = ({ children }: LayoutProps) => {
   const start = (
     <Link
       to="/"
-      style={{ display: "flex", alignItems: "center", textDecoration: "none" }}
+      className={styles.startLink}
     >
       <img
         className={"expat-logo"}
         src={logoExpat}
         alt="Expat Logo"
-        style={{ height: "20px", marginRight: "8px" }}
+        className={styles.logo}
       />
     </Link>
   );
 
   const end = (
-    <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+    <div className={styles.end}>
       <LanguageSwitcher />
-      <div className="hidden md:flex" style={{ display: "flex", gap: "8px" }}>
+      <div className={`hidden md:flex ${styles.desktopNavButtons}`}>
         <Button
           label={t("navigation.companies")}
           text
@@ -69,23 +70,9 @@ const Layout = ({ children }: LayoutProps) => {
     <div className={"wrapper"}>
       <Menubar start={start} end={end} className="layout-menubar" />
       <main className={"main"}>{children}</main>
-      <footer
-        style={{
-          padding: "24px 16px",
-          marginTop: "auto",
-          backgroundColor: "#e0e0e0",
-          width: "100%",
-        }}
-      >
-        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-          <p
-            style={{
-              textAlign: "center",
-              color: "#666",
-              margin: 0,
-              fontSize: "0.875rem",
-            }}
-          >
+      <footer className={styles.footer}>
+        <div className={styles.footerContent}>
+          <p className={styles.footerText}>
             © {new Date().getFullYear()} Expat. All rights reserved.
           </p>
         </div>

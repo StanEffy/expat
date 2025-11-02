@@ -7,6 +7,7 @@ import { useNotification } from "../contexts/NotificationContext";
 import { useTranslation } from "react-i18next";
 import CompanyInfoEditor from "../components/CompanyInfoEditor";
 import mapBg from "../assets/map_bg.png";
+import styles from "./CompanyDetails.module.scss";
 
 interface CompanyDetails {
   id: number;
@@ -90,7 +91,7 @@ const CompanyDetails = () => {
 
   if (loading) {
     return (
-      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '16px' }}>
+      <div className={styles.loadingContainer}>
         <p>Loading...</p>
       </div>
     );
@@ -98,26 +99,26 @@ const CompanyDetails = () => {
 
   if (error) {
     return (
-      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '16px' }}>
-        <p style={{ color: 'red', marginTop: '32px' }}>{error}</p>
+      <div className={styles.errorContainer}>
+        <p className={styles.errorText}>{error}</p>
       </div>
     );
   }
 
   if (!company) {
     return (
-      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '16px' }}>
-        <p style={{ marginTop: '32px' }}>Company not found.</p>
+      <div className={styles.errorContainer}>
+        <p className={styles.notFoundText}>Company not found.</p>
       </div>
     );
   }
 
   return (
-    <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '32px 16px' }}>
-      <h1 style={{ marginBottom: '32px' }}>{company.name}</h1>
-      <div style={{ display: "flex", flexDirection: "column", gap: '24px' }}>
+    <div className={styles.container}>
+      <h1 className={styles.title}>{company.name}</h1>
+      <div className={styles.content}>
         <Card title={t("company.information")}>
-          <div style={{ display: "flex", flexDirection: "column", gap: '8px' }}>
+          <div className={styles.infoSection}>
             <p>
               <strong>{t("company.businessId")}:</strong>{" "}
               {company.businessid}
@@ -146,55 +147,18 @@ const CompanyDetails = () => {
             href={getGoogleMapsUrl(company)}
             target="_blank"
             rel="noopener noreferrer"
-            style={{ textDecoration: "none", display: 'block' }}
+            className={styles.addressLink}
           >
-            <Card
-              style={{
-                position: "relative",
-                overflow: "hidden",
-                width: "100%",
-                minWidth: 350,
-                margin: "0 auto",
-                cursor: "pointer",
-              }}
-            >
+            <Card className={styles.addressCard}>
               <div
+                className={styles.addressCardBackground}
                 style={{
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  bottom: 0,
-                  background: `url(${mapBg})`,
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                  zIndex: 0,
-                }}
+                  '--map-bg-url': `url(${mapBg})`,
+                } as React.CSSProperties}
               />
-              <div
-                style={{
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  right: "50%",
-                  bottom: 0,
-                  background: "linear-gradient(to right, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.4))",
-                  backdropFilter: "blur(8px)",
-                  zIndex: 1,
-                }}
-              />
-              <div
-                style={{
-                  position: "relative",
-                  zIndex: 2,
-                  minHeight: 200,
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "center",
-                  padding: '16px',
-                }}
-              >
-                <h3 style={{ marginBottom: '8px' }}>{t("company.address")}</h3>
+              <div className={styles.addressCardOverlay} />
+              <div className={styles.addressCardContent}>
+                <h3 className={styles.addressTitle}>{t("company.address")}</h3>
                 <p>
                   {company.street} {company.buildingnumber}
                   {company.apartmentnumber && `, ${company.apartmentnumber}`}

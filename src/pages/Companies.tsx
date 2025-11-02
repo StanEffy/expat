@@ -11,6 +11,7 @@ import { useTranslation } from "react-i18next";
 import CompanyFilter from "../components/CompanyFilter";
 import CategoryFilter from "../components/CategoryFilter";
 import type { GeneralCategoryItem } from "../components/CategoryFilter";
+import styles from "./Companies.module.scss";
 
 interface Company {
   id: number;
@@ -293,8 +294,8 @@ const Companies = () => {
 
   if (loading) {
     return (
-      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '16px' }}>
-        <div style={{ display: "flex", justifyContent: "center", marginTop: '32px' }}>
+      <div className={styles.container}>
+        <div className={styles.loadingContainer}>
           <ProgressSpinner />
         </div>
       </div>
@@ -303,16 +304,16 @@ const Companies = () => {
 
   if (companies.length === 0) {
     return (
-      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '16px' }}>
-        <p style={{ marginTop: '32px' }}>{t("common.noCompanies")}</p>
+      <div className={styles.container}>
+        <p className={styles.noCompanies}>{t("common.noCompanies")}</p>
       </div>
     );
   }
 
   return (
-    <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '16px' }}>
-      <div style={{ marginTop: '16px', display: "flex", gap: '16px', flexWrap: "wrap", marginBottom: '16px' }}>
-        <div style={{ minWidth: '280px', flex: 1 }}>
+    <div className={styles.container}>
+      <div className={styles.filters}>
+        <div className={styles.filterItem}>
           <CompanyFilter
             cities={cities}
             selectedCities={selectedCities}
@@ -332,39 +333,32 @@ const Companies = () => {
           optionLabel="label"
           optionValue="value"
           placeholder={t("common.itemsPerPage")}
-          style={{ minWidth: '120px', marginLeft: "auto" }}
+          className={styles.itemsPerPageDropdown}
         />
       </div>
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))",
-          gap: '24px',
-          marginTop: '16px',
-        }}
-      >
+      <div className={styles.grid}>
         {companies.map((company) => (
-          <Card key={company.id} style={{ height: "100%", display: "flex", flexDirection: "column" }}>
-            <div style={{ flexGrow: 1, padding: '16px' }}>
-              <h3 style={{ fontSize: "1rem", fontWeight: "bold", margin: 0 }}>
+          <Card key={company.id} className={styles.card}>
+            <div className={styles.cardContent}>
+              <h3 className={styles.cardTitle}>
                 {company.name}
               </h3>
-              <p style={{ color: "#666", marginTop: '8px', marginBottom: 0 }}>
+              <p className={styles.cardSubtitle}>
                 {company.mainbusinesslinename || ""}
               </p>
             </div>
-            <div style={{ padding: '16px' }}>
+            <div className={styles.cardActions}>
               <Button
                 label={t("common.viewDetails")}
                 onClick={() => navigate(`/companies/${company.id}`)}
-                style={{ width: '100%' }}
+                className={styles.viewDetailsButton}
               />
             </div>
           </Card>
         ))}
       </div>
       {hasMore && (
-        <div style={{ display: "flex", justifyContent: "center", marginTop: '32px', marginBottom: '32px' }}>
+        <div className={styles.loadMoreContainer}>
           <Button
             label={loadingMore ? t("common.loading") : t("common.showMore")}
             onClick={handleLoadMore}

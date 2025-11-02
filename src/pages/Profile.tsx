@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
 import { Message } from 'primereact/message';
+import styles from './Profile.module.scss';
 
 interface UserProfile {
   email: string;
@@ -57,7 +58,7 @@ const Profile = () => {
 
   if (loading) {
     return (
-      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '16px' }}>
+      <div className={styles.container}>
         <p>Loading...</p>
       </div>
     );
@@ -65,17 +66,17 @@ const Profile = () => {
 
   if (error) {
     return (
-      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '16px' }}>
+      <div className={styles.container}>
         <Message severity="error" text={error} />
       </div>
     );
   }
 
   return (
-    <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '32px 16px' }}>
-      <h1 style={{ marginBottom: '32px' }}>Profile</h1>
-      <Card title="User Information" style={{ maxWidth: 600 }}>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+    <div className={styles.container}>
+      <h1 className={styles.title}>Profile</h1>
+      <Card title="User Information" className={styles.card}>
+        <div className={styles.profileInfo}>
           <p>
             <strong>Email:</strong> {profile?.email}
           </p>
@@ -94,7 +95,7 @@ const Profile = () => {
         label="Logout"
         onClick={handleLogout}
         severity="secondary"
-        style={{ marginTop: '24px' }}
+        className={styles.logoutButton}
       />
     </div>
   );

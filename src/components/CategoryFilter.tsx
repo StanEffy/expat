@@ -1,6 +1,7 @@
 import React from 'react';
 import { Dropdown } from 'primereact/dropdown';
 import { useTranslation } from 'react-i18next';
+import styles from './CategoryFilter.module.scss';
 
 export interface BackendCategoryItem {
   mainbusinessline?: string | null; // id/code
@@ -72,7 +73,7 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({ categories, generalCate
       optionLabel="label"
       optionValue="id"
       placeholder={t('company.filter.workArea')}
-      style={{ minWidth: '280px' }}
+      className={styles.dropdown}
       showClear
     />
   );

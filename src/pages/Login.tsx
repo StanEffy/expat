@@ -8,6 +8,7 @@ import { TabView, TabPanel } from 'primereact/tabview';
 import { Message } from 'primereact/message';
 import { AUTH_ENDPOINTS, DEFAULT_CONFIG } from '../constants/api';
 import { setToken } from '../utils/auth';
+import styles from './Login.module.scss';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -168,16 +169,16 @@ const Login = () => {
 
   if (forgotPasswordMode) {
     return (
-      <div style={{ maxWidth: '500px', margin: '32px auto', padding: '0 16px' }}>
+      <div className={styles.container}>
         <Card title="Reset Password">
           {error && (
             <Message 
               severity={error.includes('sent') ? 'success' : 'error'} 
               text={error}
-              style={{ marginBottom: '16px' }}
+              className={styles.errorMessage}
             />
           )}
-          <form onSubmit={handleForgotPassword} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          <form onSubmit={handleForgotPassword} className={styles.form}>
             <div className="p-field">
               <label htmlFor="username">Username</label>
               <InputText
@@ -186,22 +187,22 @@ const Login = () => {
                 value={formData.username}
                 onChange={handleChange}
                 required
-                style={{ width: '100%' }}
+                className={styles.input}
               />
             </div>
-            <div style={{ display: 'flex', gap: '8px', marginTop: '8px' }}>
+            <div className={styles.buttonGroup}>
               <Button
                 label="Back to Login"
                 outlined
                 onClick={() => setForgotPasswordMode(false)}
-                style={{ flex: 1 }}
+                className={styles.buttonGroupButton}
               />
               <Button
                 type="submit"
                 label={loading ? 'Sending...' : 'Send Reset Link'}
                 disabled={loading}
                 loading={loading}
-                style={{ flex: 1 }}
+                className={styles.buttonGroupButton}
               />
             </div>
           </form>
@@ -211,19 +212,19 @@ const Login = () => {
   }
 
   return (
-    <div style={{ maxWidth: '500px', margin: '32px auto', padding: '0 16px' }}>
+    <div className={styles.container}>
       <Card>
         <TabView activeIndex={tabValue} onTabChange={handleTabChange}>
           <TabPanel header="Sign In">
-            <h2 style={{ textAlign: 'center', marginBottom: '24px' }}>Sign In</h2>
+            <h2 className={styles.title}>Sign In</h2>
             {error && (
               <Message 
                 severity="error" 
                 text={error}
-                style={{ marginBottom: '16px' }}
+                className={styles.errorMessage}
               />
             )}
-            <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            <form onSubmit={handleLogin} className={styles.form}>
               <div className="p-field">
                 <label htmlFor="login-username">Username</label>
                 <InputText
@@ -233,7 +234,7 @@ const Login = () => {
                   onChange={handleChange}
                   required
                   autoComplete="username"
-                  style={{ width: '100%' }}
+                  className={styles.input}
                 />
               </div>
               <div className="p-field">
@@ -247,7 +248,7 @@ const Login = () => {
                   autoComplete="current-password"
                   feedback={false}
                   toggleMask
-                  style={{ width: '100%' }}
+                  className={styles.passwordInput}
                   inputStyle={{ width: '100%' }}
                 />
               </div>
@@ -257,15 +258,7 @@ const Login = () => {
                   e.preventDefault();
                   setForgotPasswordMode(true);
                 }}
-                style={{ 
-                  background: 'none', 
-                  border: 'none', 
-                  color: '#007bff', 
-                  textDecoration: 'underline', 
-                  cursor: 'pointer',
-                  textAlign: 'left',
-                  padding: 0
-                }}
+                className={styles.forgotPasswordButton}
               >
                 Forgot password?
               </button>
@@ -274,21 +267,21 @@ const Login = () => {
                 label={loading ? 'Signing in...' : 'Sign In'}
                 disabled={loading}
                 loading={loading}
-                style={{ width: '100%', marginTop: '8px' }}
+                className={styles.submitButton}
               />
             </form>
           </TabPanel>
 
           <TabPanel header="Sign Up">
-            <h2 style={{ textAlign: 'center', marginBottom: '24px' }}>Sign Up</h2>
+            <h2 className={styles.title}>Sign Up</h2>
             {error && (
               <Message 
                 severity="error" 
                 text={error}
-                style={{ marginBottom: '16px' }}
+                className={styles.errorMessage}
               />
             )}
-            <form onSubmit={handleRegister} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            <form onSubmit={handleRegister} className={styles.form}>
               <div className="p-field">
                 <label htmlFor="name">Name</label>
                 <InputText
@@ -297,7 +290,7 @@ const Login = () => {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  style={{ width: '100%' }}
+                  className={styles.input}
                 />
               </div>
               <div className="p-field">
@@ -308,7 +301,7 @@ const Login = () => {
                   value={formData.username}
                   onChange={handleChange}
                   required
-                  style={{ width: '100%' }}
+                  className={styles.input}
                 />
               </div>
               <div className="p-field">
@@ -321,7 +314,7 @@ const Login = () => {
                   required
                   feedback={false}
                   toggleMask
-                  style={{ width: '100%' }}
+                  className={styles.passwordInput}
                   inputStyle={{ width: '100%' }}
                 />
               </div>
@@ -335,7 +328,7 @@ const Login = () => {
                   required
                   feedback={false}
                   toggleMask
-                  style={{ width: '100%' }}
+                  className={styles.passwordInput}
                   inputStyle={{ width: '100%' }}
                 />
               </div>
@@ -347,7 +340,7 @@ const Login = () => {
                   value={formData.inviteCode}
                   onChange={handleChange}
                   required
-                  style={{ width: '100%' }}
+                  className={styles.input}
                 />
               </div>
               <Button
@@ -355,7 +348,7 @@ const Login = () => {
                 label={loading ? 'Signing up...' : 'Sign Up'}
                 disabled={loading}
                 loading={loading}
-                style={{ width: '100%', marginTop: '8px' }}
+                className={styles.submitButton}
               />
             </form>
           </TabPanel>

@@ -1,0 +1,94 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 16px;
+}
+
+.loadingContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.errorContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.errorText {
+  color: red;
+  margin-top: 32px;
+}
+
+.notFoundText {
+  margin-top: 32px;
+}
+
+.title {
+  margin-bottom: 32px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.infoSection {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.addressLink {
+  text-decoration: none;
+  display: block;
+}
+
+.addressCard {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  min-width: 350px;
+  margin: 0 auto;
+  cursor: pointer;
+}
+
+.addressCardBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--map-bg-url);
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+}
+
+.addressCardOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 50%;
+  bottom: 0;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.4));
+  backdrop-filter: blur(8px);
+  z-index: 1;
+}
+
+.addressCardContent {
+  position: relative;
+  z-index: 2;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 16px;
+}
+
+.addressTitle {
+  margin-bottom: 8px;
+}
+

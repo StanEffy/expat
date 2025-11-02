@@ -1,0 +1,41 @@
+.startLink {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.logo {
+  height: 20px;
+  margin-right: 8px;
+}
+
+.end {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer {
+  padding: 24px 16px;
+  margin-top: auto;
+  background-color: #e0e0e0;
+  width: 100%;
+}
+
+.footerContent {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footerText {
+  text-align: center;
+  color: #666;
+  margin: 0;
+  font-size: 0.875rem;
+}
+
+.desktopNavButtons {
+  display: flex;
+  gap: 8px;
+}
+

@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { Dropdown } from 'primereact/dropdown';
+import styles from './LanguageSwitcher.module.scss';
 
 const languages = [
   { code: 'en', name: 'English' },
@@ -28,7 +29,7 @@ const LanguageSwitcher = () => {
       optionLabel="name"
       optionValue="code"
       placeholder="Language"
-      style={{ minWidth: '120px' }}
+      className={styles.dropdown}
     />
   );
 };

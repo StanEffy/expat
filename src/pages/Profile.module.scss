@@ -1,0 +1,24 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 16px;
+}
+
+.title {
+  margin-bottom: 32px;
+}
+
+.card {
+  max-width: 600px;
+}
+
+.profileInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.logoutButton {
+  margin-top: 24px;
+}
+

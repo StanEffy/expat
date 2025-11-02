@@ -1,6 +1,7 @@
 import React from 'react';
 import { AutoComplete } from 'primereact/autocomplete';
 import { useTranslation } from 'react-i18next';
+import styles from './CompanyFilter.module.scss';
 
 interface CompanyFilterProps {
   cities: string[];
@@ -16,7 +17,7 @@ const CompanyFilter: React.FC<CompanyFilterProps> = ({
   const { t } = useTranslation();
 
   return (
-    <div style={{ marginBottom: '24px' }}>
+    <div className={styles.container}>
       <AutoComplete
         multiple
         value={selectedCities}
@@ -24,7 +25,7 @@ const CompanyFilter: React.FC<CompanyFilterProps> = ({
         completeMethod={() => {}}
         onChange={(e) => onCityChange(e.value)}
         placeholder={t('company.filter.selectCities')}
-        style={{ width: '100%' }}
+        className={styles.autocomplete}
       />
     </div>
   );

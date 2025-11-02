@@ -1,0 +1,65 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.loadingContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 32px;
+}
+
+.errorText {
+  color: red;
+  margin-top: 32px;
+}
+
+.retryButton {
+  margin-top: 16px;
+}
+
+.title {
+  margin-top: 32px;
+  margin-bottom: 16px;
+}
+
+.sectionTitle {
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+.sectionTitleLarge {
+  margin-top: 32px;
+  margin-bottom: 16px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.cardContent {
+  flex-grow: 1;
+  padding: 16px;
+}
+
+.cardTitle {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.cardDescription {
+  color: #666;
+  margin-top: 8px;
+  margin-bottom: 0;
+}
+

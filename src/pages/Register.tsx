@@ -5,6 +5,7 @@ import { Password } from 'primereact/password';
 import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';
 import { Message } from 'primereact/message';
+import styles from './Register.module.scss';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -64,16 +65,16 @@ const Register = () => {
   };
 
   return (
-    <div style={{ maxWidth: '500px', margin: '32px auto', padding: '0 16px' }}>
+    <div className={styles.container}>
       <Card title="Register">
         {error && (
           <Message 
             severity="error" 
             text={error}
-            style={{ marginBottom: '16px' }}
+            className={styles.errorMessage}
           />
         )}
-        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+        <form onSubmit={handleSubmit} className={styles.form}>
           <div className="p-field">
             <label htmlFor="email">Email</label>
             <InputText
@@ -83,7 +84,7 @@ const Register = () => {
               value={formData.email}
               onChange={handleChange}
               required
-              style={{ width: '100%' }}
+              className={styles.input}
             />
           </div>
           <div className="p-field">
@@ -96,7 +97,7 @@ const Register = () => {
               required
               feedback={false}
               toggleMask
-              style={{ width: '100%' }}
+              className={styles.passwordInput}
               inputStyle={{ width: '100%' }}
             />
           </div>
@@ -110,7 +111,7 @@ const Register = () => {
               required
               feedback={false}
               toggleMask
-              style={{ width: '100%' }}
+              className={styles.passwordInput}
               inputStyle={{ width: '100%' }}
             />
           </div>
@@ -122,7 +123,7 @@ const Register = () => {
               value={formData.inviteCode}
               onChange={handleChange}
               required
-              style={{ width: '100%' }}
+              className={styles.input}
             />
           </div>
           <Button
@@ -130,7 +131,7 @@ const Register = () => {
             label={loading ? 'Registering...' : 'Register'}
             disabled={loading}
             loading={loading}
-            style={{ width: '100%', marginTop: '24px' }}
+            className={styles.submitButton}
           />
         </form>
       </Card>

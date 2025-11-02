@@ -1,0 +1,54 @@
+.container {
+  max-width: 500px;
+  margin: 32px auto;
+  padding: 0 16px;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.errorMessage {
+  margin-bottom: 16px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.input {
+  width: 100%;
+}
+
+.passwordInput {
+  width: 100%;
+}
+
+.forgotPasswordButton {
+  background: none;
+  border: none;
+  color: #007bff;
+  text-decoration: underline;
+  cursor: pointer;
+  text-align: left;
+  padding: 0;
+}
+
+.submitButton {
+  width: 100%;
+  margin-top: 8px;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.buttonGroupButton {
+  flex: 1;
+}
+

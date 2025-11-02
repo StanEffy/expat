@@ -35,7 +35,7 @@
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 24px;
+  gap: 12px;
   margin-top: 16px;
 }
 
@@ -43,23 +43,33 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  background-color: $primary-4;
+  border-radius: 12px;
+  transition: all 0.5s ease-in-out;
+  &:hover {
+    box-shadow: 0px 0px 15px $primary-3;
+  }
 }
 
 .cardContent {
   flex-grow: 1;
-  padding: 16px;
+  padding: 12px;
 }
 
 .cardTitle {
   font-size: 1rem;
   font-weight: bold;
   margin: 0;
+  min-height: 50px;
+  color: #000000;
 }
 
 .cardSubtitle {
-  color: #666;
+  color: $complement-4;
+  text-shadow: 1px 1px $primary-0;
   margin-top: 8px;
   margin-bottom: 0;
+  min-height: 40px;
 }
 
 .cardActions {
@@ -68,6 +78,7 @@
 
 .viewDetailsButton {
   width: 100%;
+  color: $complement-4;
 }
 
 .loadMoreContainer {
@@ -76,4 +87,3 @@
   margin-top: 32px;
   margin-bottom: 32px;
 }
-

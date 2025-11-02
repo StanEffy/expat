@@ -1,0 +1,147 @@
+.logoContainer {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  perspective: 1000px;
+  --letter-h: 32px;
+}
+
+.logoText {
+  display: inline-flex;
+  align-items: center;
+  font-size: 24px;
+  font-weight: bold;
+  color: inherit;
+  line-height: 1;
+  gap: 1px;
+}
+
+.letterSlot {
+  display: inline-block;
+  position: relative;
+  height: var(--letter-h);
+  width: auto;
+  min-width: 0.65em;
+  vertical-align: top;
+  overflow: hidden; // Critical for hiding letters that scroll out
+}
+
+.letterStack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  will-change: transform;
+}
+
+.letter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--letter-h);
+  white-space: nowrap;
+  min-width: 0.65em;
+  flex-shrink: 0;
+}
+
+.letterStatic {
+  display: inline-block;
+  font-size: inherit;
+  font-weight: inherit;
+  white-space: nowrap;
+  min-width: 0.65em;
+}
+
+.xContainer {
+  display: inline-flex;
+  position: relative;
+  perspective: 300px;
+  gap: 0;
+  align-items: center;
+  transform-style: preserve-3d;
+}
+
+.xLetter {
+  display: inline-block;
+  position: relative;
+  font-size: inherit;
+  font-weight: inherit;
+  transition:
+    transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.3s ease;
+  transform-style: preserve-3d;
+  opacity: 1;
+
+  &:first-child {
+    opacity: 0.5;
+    filter: blur(1px);
+  }
+
+  &:last-child {
+    opacity: 0.5;
+    filter: blur(1px);
+  }
+}
+
+/* Final-state triple X styling */
+.xTriple {
+  --x-accent: #ffd54f; /* warm yellow accent; adjust to theme as needed */
+  position: relative;
+}
+
+.xBack {
+  color: var(--x-accent);
+  transform: translateX(-8px) translateZ(-10px) scale(0.82);
+  opacity: 0.85;
+  z-index: 0;
+  position: absolute;
+}
+
+.xMid {
+  color: var(--x-accent);
+  transform: translateZ(0) scale(1);
+  z-index: 1;
+}
+
+.xFront {
+  color: var(--x-accent);
+  transform: translateX(3px) translateZ(-10px) scale(1.28);
+  opacity: 0.9;
+  z-index: 2;
+  position: absolute;
+}
+
+.logoContainer:hover .xBack,
+.logoContainer:hover .xFront {
+  transform: translateX(0) translateZ(0) scale(1);
+  opacity: 0; /* visually merge to a single X */
+}
+
+@media (max-width: 768px) {
+  .logoContainer {
+    --letter-h: 26px;
+  }
+  .logoText {
+    font-size: 18px;
+  }
+
+  .letterSlot {
+    height: var(--letter-h);
+  }
+  .letter {
+    height: var(--letter-h);
+  }
+
+  .xContainer {
+    min-width: 1em;
+  }
+
+  .xLetter {
+    &:first-child {
+      transform: translateX(-4px) translateZ(-18px) !important;
+    }
+
+    &:last-child {
+      transform: translateX(4px) translateZ(18px) !important;
+    }
+  }
+}

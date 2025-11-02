@@ -28,6 +28,14 @@ $complement-2: rgba(139, 134, 18, 1);
 $complement-3: rgba(234, 229, 103, 1);
 $complement-4: rgba(234, 230, 138, 1);
 
+// Shadow Variables
+$shadow-sm: 0px 2px 4px rgba(0, 0, 0, 0.1);
+$shadow-md: 0px 4px 8px rgba(0, 0, 0, 0.15);
+$shadow-lg: 0px 8px 16px rgba(234, 230, 138, 0.3);
+
+// Footer Background
+$footer-bg: rgba(224, 224, 224, 1);
+
 // CSS Variables for runtime usage
 :root {
   // Primary
@@ -57,30 +65,77 @@ $complement-4: rgba(234, 230, 138, 1);
   --complement-2: #{$complement-2};
   --complement-3: #{$complement-3};
   --complement-4: #{$complement-4};
+
+  // Shadows
+  --shadow-sm: #{$shadow-sm};
+  --shadow-md: #{$shadow-md};
+  --shadow-lg: #{$shadow-lg};
+
+  // Footer
+  --footer-bg: #{$footer-bg};
 }
 
 // Utility classes for colors
-.primary-0 { color: $primary-0; }
-.primary-1 { color: $primary-1; }
-.primary-2 { color: $primary-2; }
-.primary-3 { color: $primary-3; }
-.primary-4 { color: $primary-4; }
+.primary-0 {
+  color: $primary-0;
+}
+.primary-1 {
+  color: $primary-1;
+}
+.primary-2 {
+  color: $primary-2;
+}
+.primary-3 {
+  color: $primary-3;
+}
+.primary-4 {
+  color: $primary-4;
+}
 
-.secondary-a-0 { color: $secondary-a-0; }
-.secondary-a-1 { color: $secondary-a-1; }
-.secondary-a-2 { color: $secondary-a-2; }
-.secondary-a-3 { color: $secondary-a-3; }
-.secondary-a-4 { color: $secondary-a-4; }
+.secondary-a-0 {
+  color: $secondary-a-0;
+}
+.secondary-a-1 {
+  color: $secondary-a-1;
+}
+.secondary-a-2 {
+  color: $secondary-a-2;
+}
+.secondary-a-3 {
+  color: $secondary-a-3;
+}
+.secondary-a-4 {
+  color: $secondary-a-4;
+}
 
-.secondary-b-0 { color: $secondary-b-0; }
-.secondary-b-1 { color: $secondary-b-1; }
-.secondary-b-2 { color: $secondary-b-2; }
-.secondary-b-3 { color: $secondary-b-3; }
-.secondary-b-4 { color: $secondary-b-4; }
+.secondary-b-0 {
+  color: $secondary-b-0;
+}
+.secondary-b-1 {
+  color: $secondary-b-1;
+}
+.secondary-b-2 {
+  color: $secondary-b-2;
+}
+.secondary-b-3 {
+  color: $secondary-b-3;
+}
+.secondary-b-4 {
+  color: $secondary-b-4;
+}
 
-.complement-0 { color: $complement-0; }
-.complement-1 { color: $complement-1; }
-.complement-2 { color: $complement-2; }
-.complement-3 { color: $complement-3; }
-.complement-4 { color: $complement-4; }
-
+.complement-0 {
+  color: $complement-0;
+}
+.complement-1 {
+  color: $complement-1;
+}
+.complement-2 {
+  color: $complement-2;
+}
+.complement-3 {
+  color: $complement-3;
+}
+.complement-4 {
+  color: $complement-4;
+}

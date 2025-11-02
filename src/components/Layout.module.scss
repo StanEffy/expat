@@ -15,10 +15,12 @@
   gap: 8px;
 }
 
+@import "../styles/variables";
+
 .footer {
   padding: 24px 16px;
   margin-top: auto;
-  background-color: #e0e0e0;
+  background-color: $primary-0;
   width: 100%;
 }
 
@@ -29,7 +31,7 @@
 
 .footerText {
   text-align: center;
-  color: #666;
+  color: $complement-4;
   margin: 0;
   font-size: 0.875rem;
 }
@@ -38,4 +40,3 @@
   display: flex;
   gap: 8px;
 }
-

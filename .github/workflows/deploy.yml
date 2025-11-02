@@ -16,7 +16,7 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
-            cd /path/to/your/frontend/directory
+            cd /var/www/expat/
             git pull origin master
             npm ci --only=production
             npm run build

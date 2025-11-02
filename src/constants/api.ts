@@ -2,25 +2,25 @@
 // In production, this will be set at build time via VITE_API_BASE_URL
 // In Kubernetes, it will be set in the deployment manifest or at build time
 function getApiBaseUrl(): string {
-  // Use build-time env var if explicitly set
+  // In development mode, use relative URLs so Vite proxy can forward to localhost:8000
+  // This avoids CORS issues and uses the proxy we configured in vite.config.ts
+  if (import.meta.env.DEV) {
+    return '';
+  }
+
+  // In production, use build-time env var if explicitly set
   if (import.meta.env.VITE_API_BASE_URL) {
     return import.meta.env.VITE_API_BASE_URL;
   }
 
-  // Default behavior based on environment
+  // Default production behavior based on domain
   const domain = 'x-pat.duckdns.org';
-  
-  if (import.meta.env.PROD) {
-    // In production, use HTTPS (port 443) or HTTP (port 80) based on current page protocol
-    // This ensures API calls match the frontend's protocol to avoid mixed content issues
-    const protocol = typeof window !== 'undefined' && window.location.protocol === 'https:' 
-      ? 'https:' 
-      : 'http:';
-    return `${protocol}//${domain}`;
-  } else {
-    // In development, use relative URLs so Vite proxy can forward to port 8000
-    return '';
-  }
+  // In production, use HTTPS (port 443) or HTTP (port 80) based on current page protocol
+  // This ensures API calls match the frontend's protocol to avoid mixed content issues
+  const protocol = typeof window !== 'undefined' && window.location.protocol === 'https:' 
+    ? 'https:' 
+    : 'http:';
+  return `${protocol}//${domain}`;
 }
 
 export const API_BASE_URL = getApiBaseUrl();

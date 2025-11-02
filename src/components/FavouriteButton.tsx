@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
-import { Button } from 'primereact/button';
-import { FAVOURITES_ENDPOINTS } from '../constants/api';
-import { getAuthHeaders } from '../utils/auth';
-import { useNotification } from '../contexts/NotificationContext';
-import { useTranslation } from 'react-i18next';
-import styles from './FavouriteButton.module.scss';
+import { useState, useEffect } from "react";
+import { Button } from "primereact/button";
+import { FAVOURITES_ENDPOINTS } from "../constants/api";
+import { getAuthHeaders } from "../utils/auth";
+import { useNotification } from "../contexts/NotificationContext";
+import { useTranslation } from "react-i18next";
+import styles from "./FavouriteButton.module.scss";
 
 interface FavouriteButtonProps {
   companyId: number;
@@ -29,10 +29,10 @@ const FavouriteButton = ({ companyId, className }: FavouriteButtonProps) => {
         }
 
         const response = await fetch(FAVOURITES_ENDPOINTS.LIST, { headers });
-        
+
         if (response.ok) {
           const data = await response.json();
-          const favouriteIds = Array.isArray(data) 
+          const favouriteIds = Array.isArray(data)
             ? data.map((fav: any) => fav.company_id || fav.companyId)
             : [];
           setIsFavourite(favouriteIds.includes(companyId));
@@ -54,7 +54,7 @@ const FavouriteButton = ({ companyId, className }: FavouriteButtonProps) => {
     try {
       const headers = getAuthHeaders();
       if (Object.keys(headers).length === 0) {
-        showNotification('Please log in to add favourites', 'warn');
+        showNotification("Please log in to add favourites", "warning");
         return;
       }
 
@@ -62,7 +62,7 @@ const FavouriteButton = ({ companyId, className }: FavouriteButtonProps) => {
         ? FAVOURITES_ENDPOINTS.REMOVE(companyId)
         : FAVOURITES_ENDPOINTS.ADD(companyId);
 
-      const method = isFavourite ? 'DELETE' : 'POST';
+      const method = isFavourite ? "DELETE" : "POST";
 
       const response = await fetch(endpoint, {
         method,
@@ -70,20 +70,20 @@ const FavouriteButton = ({ companyId, className }: FavouriteButtonProps) => {
       });
 
       if (!response.ok) {
-        throw new Error('Failed to update favourite');
+        throw new Error("Failed to update favourite");
       }
 
       setIsFavourite(!isFavourite);
       showNotification(
         isFavourite
-          ? t('favourites.removedFromFavourites')
-          : t('favourites.addedToFavourites'),
-        'success'
+          ? t("favourites.removedFromFavourites")
+          : t("favourites.addedToFavourites"),
+        "success",
       );
     } catch (err) {
       showNotification(
-        err instanceof Error ? err.message : 'An error occurred',
-        'error'
+        err instanceof Error ? err.message : "An error occurred",
+        "error",
       );
     } finally {
       setLoading(false);
@@ -96,11 +96,15 @@ const FavouriteButton = ({ companyId, className }: FavouriteButtonProps) => {
 
   return (
     <Button
-      icon={isFavourite ? 'pi pi-heart-fill' : 'pi pi-heart'}
-      className={`${styles.favouriteButton} ${isFavourite ? styles.favourite : ''} ${className || ''}`}
+      icon={isFavourite ? "pi pi-heart-fill" : "pi pi-heart"}
+      className={`${styles.favouriteButton} ${isFavourite ? styles.favourite : ""} ${className || ""}`}
       onClick={handleToggleFavourite}
       loading={loading}
-      aria-label={isFavourite ? t('favourites.removeFromFavourites') : t('favourites.addToFavourites')}
+      aria-label={
+        isFavourite
+          ? t("favourites.removeFromFavourites")
+          : t("favourites.addToFavourites")
+      }
       severity="secondary"
       text
     />
@@ -108,4 +112,3 @@ const FavouriteButton = ({ companyId, className }: FavouriteButtonProps) => {
 };
 
 export default FavouriteButton;
-

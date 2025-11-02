@@ -27,3 +27,22 @@
   }
 }
 
+.cursorPattern {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: blur(0.3px); // Less blur for cursor follower
+  transition: left 0.2s ease-out, top 0.2s ease-out; // Smooth following with slightly longer transition
+  pointer-events: none; // Don't interfere with clicks
+  will-change: left, top; // Optimize for animation
+  
+  svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+}
+

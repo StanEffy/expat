@@ -2,7 +2,7 @@
 
 .layout-menubar {
   position: fixed;
-  z-index: 1;
+  z-index: 2;
   top: 0;
   width: 100%;
   background-color: $primary-2; // Using primary-2 color variable
@@ -10,10 +10,17 @@
   border-top-left-radius: 0;
   border-top-right-radius: 0;
   box-shadow: none;
-  transition: box-shadow 0.3s ease;
+  transition: all 0.3s ease;
 
   &.scrolled {
     box-shadow: $shadow-lg;
+    background-color: rgba(
+      red($primary-2),
+      green($primary-2),
+      blue($primary-2),
+      0.8
+    );
+    backdrop-filter: blur(10px);
   }
 }
 
@@ -25,12 +32,13 @@
   width: 100%;
   min-height: 100vh;
   height: 100%;
-  background-color: $primary-2;
+  background-color: $primary-4;
 }
 
 .main {
   height: 100%;
   min-height: 100vh;
+  padding-top: 45px;
 }
 
 @media (max-width: 768px) {

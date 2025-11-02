@@ -174,7 +174,8 @@ textarea {
  */
 
 button,
-input { /* 1 */
+input {
+  /* 1 */
   overflow: visible;
 }
 
@@ -184,7 +185,8 @@ input { /* 1 */
  */
 
 button,
-select { /* 1 */
+select {
+  /* 1 */
   text-transform: none;
 }
 
@@ -373,7 +375,7 @@ a {
   text-decoration: inherit;
 
   &:hover {
-    color: #E8A654;
+    color: #e8a654;
   }
 }
 
@@ -402,7 +404,7 @@ button {
   transition: border-color 0.25s;
 
   &:hover {
-    border-color: #E8A654;
+    border-color: #e8a654;
   }
 
   &:focus,
@@ -430,3 +432,621 @@ button {
   box-sizing: border-box;
 }
 
+@import "./styles/variables";
+
+// PrimeReact Dropdown Styles
+.p-dropdown {
+  background-color: $primary-2;
+  border-radius: 12px;
+  border: none;
+  height: 44px;
+  min-height: 44px;
+
+  .p-dropdown-label {
+    color: $complement-3;
+  }
+
+  .p-dropdown-trigger {
+    color: $complement-3;
+  }
+
+  &:not(.p-disabled):hover {
+    background-color: $primary-2;
+    border-color: transparent;
+  }
+
+  &:not(.p-disabled).p-focus {
+    background-color: $primary-2;
+    border-color: transparent;
+    box-shadow: none;
+  }
+
+  &.p-focus {
+    background-color: $primary-2;
+    border-color: transparent;
+  }
+}
+
+// Dropdown panel/list
+.p-dropdown-panel {
+  background-color: $primary-2;
+  border-radius: 12px;
+  border: none;
+  box-shadow: $shadow-md;
+
+  .p-dropdown-items {
+    padding: 0.5rem 0;
+
+    .p-dropdown-item {
+      color: $complement-3;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      margin: 0.125rem 0.5rem;
+
+      &:hover {
+        background-color: rgba(
+          red($complement-3),
+          green($complement-3),
+          blue($complement-3),
+          0.1
+        );
+        color: $complement-3;
+      }
+
+      &.p-highlight {
+        background-color: rgba(
+          red($complement-3),
+          green($complement-3),
+          blue($complement-3),
+          0.2
+        );
+        color: $complement-3;
+      }
+
+      &:focus {
+        background-color: rgba(
+          red($complement-3),
+          green($complement-3),
+          blue($complement-3),
+          0.15
+        );
+        color: $complement-3;
+      }
+    }
+
+    .p-dropdown-item-group {
+      color: $complement-3;
+      font-weight: 600;
+      padding: 0.75rem 1rem;
+    }
+
+    .p-dropdown-empty-message {
+      color: $complement-3;
+      padding: 0.75rem 1rem;
+    }
+  }
+
+  .p-dropdown-filter-container {
+    padding: 0.5rem 1rem;
+
+    .p-dropdown-filter {
+      background-color: rgba(
+        red($complement-3),
+        green($complement-3),
+        blue($complement-3),
+        0.1
+      );
+      color: $complement-3;
+      border-radius: 8px;
+      border: 1px solid
+        rgba(red($complement-3), green($complement-3), blue($complement-3), 0.2);
+
+      &:focus {
+        border-color: rgba(
+          red($complement-3),
+          green($complement-3),
+          blue($complement-3),
+          0.4
+        );
+        box-shadow: 0 0 0 0.2rem
+          rgba(
+            red($complement-3),
+            green($complement-3),
+            blue($complement-3),
+            0.1
+          );
+      }
+
+      &::placeholder {
+        color: rgba(
+          red($complement-3),
+          green($complement-3),
+          blue($complement-3),
+          0.6
+        );
+      }
+    }
+  }
+}
+
+// Filled state (when dropdown has a value)
+.p-dropdown.p-filled {
+  background-color: $primary-2;
+
+  .p-dropdown-label {
+    color: $complement-3;
+  }
+}
+
+// Disabled state
+.p-dropdown.p-disabled {
+  background-color: rgba(
+    red($primary-2),
+    green($primary-2),
+    blue($primary-2),
+    0.6
+  );
+  opacity: 0.6;
+
+  .p-dropdown-label {
+    color: rgba(
+      red($complement-3),
+      green($complement-3),
+      blue($complement-3),
+      0.6
+    );
+  }
+}
+
+// PrimeReact Input Styles
+.p-inputtext {
+  background-color: $primary-2;
+  color: $complement-3;
+  border-radius: 12px;
+  border: none;
+  height: 44px;
+  padding: 0.75rem 1rem;
+  width: 100%;
+
+  &:enabled:hover {
+    background-color: $primary-2;
+    border-color: transparent;
+  }
+
+  &:enabled:focus {
+    background-color: $primary-2;
+    border-color: transparent;
+    box-shadow: none;
+    outline: none;
+  }
+
+  &::placeholder {
+    color: rgba(
+      red($complement-3),
+      green($complement-3),
+      blue($complement-3),
+      0.6
+    );
+  }
+}
+
+.p-inputtext.p-filled {
+  background-color: $primary-2;
+  color: $complement-3;
+}
+
+.p-inputtext.p-disabled {
+  background-color: rgba(
+    red($primary-2),
+    green($primary-2),
+    blue($primary-2),
+    0.6
+  );
+  color: rgba(
+    red($complement-3),
+    green($complement-3),
+    blue($complement-3),
+    0.6
+  );
+  opacity: 0.6;
+}
+
+// PrimeReact Textarea Styles
+.p-inputtextarea {
+  background-color: $primary-2;
+  color: $complement-3;
+  border-radius: 12px;
+  border: none;
+  padding: 0.75rem 1rem;
+  width: 100%;
+  min-height: 44px;
+
+  &:enabled:hover {
+    background-color: $primary-2;
+    border-color: transparent;
+  }
+
+  &:enabled:focus {
+    background-color: $primary-2;
+    border-color: transparent;
+    box-shadow: none;
+    outline: none;
+  }
+
+  &::placeholder {
+    color: rgba(
+      red($complement-3),
+      green($complement-3),
+      blue($complement-3),
+      0.6
+    );
+  }
+}
+
+.p-inputtextarea.p-filled {
+  background-color: $primary-2;
+  color: $complement-3;
+}
+
+.p-inputtextarea.p-disabled {
+  background-color: rgba(
+    red($primary-2),
+    green($primary-2),
+    blue($primary-2),
+    0.6
+  );
+  color: rgba(
+    red($complement-3),
+    green($complement-3),
+    blue($complement-3),
+    0.6
+  );
+  opacity: 0.6;
+}
+
+// PrimeReact Password Styles
+.p-password {
+  width: 100%;
+
+  .p-password-input {
+    background-color: $primary-2;
+    color: $complement-3;
+    border-radius: 12px;
+    border: none;
+    height: 44px;
+    padding: 0.75rem 1rem;
+    width: 100%;
+
+    &:enabled:hover {
+      background-color: $primary-2;
+      border-color: transparent;
+    }
+
+    &:enabled:focus {
+      background-color: $primary-2;
+      border-color: transparent;
+      box-shadow: none;
+      outline: none;
+    }
+
+    &::placeholder {
+      color: rgba(
+        red($complement-3),
+        green($complement-3),
+        blue($complement-3),
+        0.6
+      );
+    }
+  }
+
+  .p-password-toggle {
+    color: $complement-3;
+  }
+
+  &.p-inputwrapper-filled {
+    .p-password-input {
+      background-color: $primary-2;
+      color: $complement-3;
+    }
+  }
+
+  &.p-inputwrapper-disabled {
+    .p-password-input {
+      background-color: rgba(
+        red($primary-2),
+        green($primary-2),
+        blue($primary-2),
+        0.6
+      );
+      color: rgba(
+        red($complement-3),
+        green($complement-3),
+        blue($complement-3),
+        0.6
+      );
+      opacity: 0.6;
+    }
+  }
+}
+
+// PrimeReact AutoComplete Styles
+.p-autocomplete {
+  width: 100%;
+
+  .p-autocomplete-input {
+    background-color: $primary-2;
+    color: $complement-3;
+    border-radius: 12px;
+    border: none;
+    height: 44px;
+    padding: 0.75rem 1rem;
+    width: 100%;
+
+    &:enabled:hover {
+      background-color: $primary-2;
+      border-color: transparent;
+    }
+
+    &:enabled:focus {
+      background-color: $primary-2;
+      border-color: transparent;
+      box-shadow: none;
+      outline: none;
+    }
+
+    &::placeholder {
+      color: rgba(
+        red($complement-3),
+        green($complement-3),
+        blue($complement-3),
+        0.6
+      );
+    }
+  }
+
+  &.p-inputwrapper-filled {
+    .p-autocomplete-input {
+      background-color: $primary-2;
+      color: $complement-3;
+    }
+  }
+
+  &.p-inputwrapper-disabled {
+    .p-autocomplete-input {
+      background-color: rgba(
+        red($primary-2),
+        green($primary-2),
+        blue($primary-2),
+        0.6
+      );
+      color: rgba(
+        red($complement-3),
+        green($complement-3),
+        blue($complement-3),
+        0.6
+      );
+      opacity: 0.6;
+    }
+  }
+}
+
+.p-autocomplete-panel {
+  background-color: $primary-2;
+  border-radius: 12px;
+  border: none;
+  box-shadow: $shadow-md;
+
+  .p-autocomplete-items {
+    padding: 0.5rem 0;
+
+    .p-autocomplete-item {
+      color: $complement-3;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      margin: 0.125rem 0.5rem;
+
+      &:hover {
+        background-color: rgba(
+          red($complement-3),
+          green($complement-3),
+          blue($complement-3),
+          0.1
+        );
+        color: $complement-3;
+      }
+
+      &.p-highlight {
+        background-color: rgba(
+          red($complement-3),
+          green($complement-3),
+          blue($complement-3),
+          0.2
+        );
+        color: $complement-3;
+      }
+    }
+
+    .p-autocomplete-empty-message {
+      color: $complement-3;
+      padding: 0.75rem 1rem;
+    }
+  }
+}
+
+// PrimeReact Button Styles
+.p-button {
+  background-color: $primary-2;
+  color: $complement-3;
+  border-radius: 12px;
+  border: none;
+  height: 44px;
+  min-height: 44px;
+  padding: 0.75rem 1.5rem;
+  font-weight: 500;
+
+  &:enabled:hover {
+    background-color: $primary-2;
+    border-color: transparent;
+    opacity: 0.9;
+  }
+
+  &:enabled:focus {
+    background-color: $primary-2;
+    border-color: transparent;
+    box-shadow: none;
+    outline: none;
+  }
+
+  &:enabled:active {
+    background-color: $primary-2;
+    border-color: transparent;
+    opacity: 0.8;
+  }
+
+  .p-button-label {
+    color: $complement-3;
+  }
+
+  .p-button-icon {
+    color: $complement-3;
+  }
+
+  &.p-disabled {
+    background-color: rgba(
+      red($primary-2),
+      green($primary-2),
+      blue($primary-2),
+      0.6
+    );
+    color: rgba(
+      red($complement-3),
+      green($complement-3),
+      blue($complement-3),
+      0.6
+    );
+    opacity: 0.6;
+
+    .p-button-label {
+      color: rgba(
+        red($complement-3),
+        green($complement-3),
+        blue($complement-3),
+        0.6
+      );
+    }
+
+    .p-button-icon {
+      color: rgba(
+        red($complement-3),
+        green($complement-3),
+        blue($complement-3),
+        0.6
+      );
+    }
+  }
+
+  &.p-button-outlined {
+    background-color: transparent;
+    border: 2px solid $primary-2;
+    color: $complement-3;
+
+    &:enabled:hover {
+      background-color: rgba(
+        red($primary-2),
+        green($primary-2),
+        blue($primary-2),
+        0.1
+      );
+      border-color: $primary-2;
+    }
+
+    &:enabled:focus {
+      background-color: rgba(
+        red($primary-2),
+        green($primary-2),
+        blue($primary-2),
+        0.1
+      );
+      border-color: $primary-2;
+    }
+
+    &.p-disabled {
+      background-color: transparent;
+      border-color: rgba(
+        red($primary-2),
+        green($primary-2),
+        blue($primary-2),
+        0.6
+      );
+      color: rgba(
+        red($complement-3),
+        green($complement-3),
+        blue($complement-3),
+        0.6
+      );
+    }
+  }
+
+  &.p-button-text {
+    background-color: transparent;
+    color: $complement-3;
+
+    &:enabled:hover {
+      background-color: rgba(
+        red($primary-2),
+        green($primary-2),
+        blue($primary-2),
+        0.1
+      );
+    }
+
+    &:enabled:focus {
+      background-color: rgba(
+        red($primary-2),
+        green($primary-2),
+        blue($primary-2),
+        0.1
+      );
+    }
+
+    &.p-disabled {
+      color: rgba(
+        red($complement-3),
+        green($complement-3),
+        blue($complement-3),
+        0.6
+      );
+    }
+  }
+}
+.p-dropdown-items-wrapper {
+  max-width: 400px;
+}
+.p-dropdown-panel
+  .p-dropdown-items
+  .p-dropdown-item:not(.p-highlight):not(.p-disabled).p-focus {
+  background-color: rgba(
+    red($primary-2),
+    green($primary-2),
+    blue($primary-2),
+    0.1
+  );
+}
+.p-autocomplete-multiple .p-inputtext {
+  padding: 0.25rem 1rem;
+}
+.p-autocomplete-multiple-container.p-focus {
+  outline: 1px solid $complement-1 !important;
+  border: none;
+}
+input {
+  color: $complement-1;
+  &:focus,
+  &:focus-visible {
+  }
+}
+.p-accordion-header,
+.p-accordion-content {
+  background-color: $primary-0;
+  color: $complement-4;
+}

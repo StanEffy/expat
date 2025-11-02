@@ -53,7 +53,7 @@ const CompanyDetails = () => {
         if (!response.ok) {
           const errorData = await response.json();
           throw new Error(
-            errorData.message || "Failed to fetch company details"
+            errorData.message || "Failed to fetch company details",
           );
         }
 
@@ -85,7 +85,7 @@ const CompanyDetails = () => {
       company.apartmentnumber ? `, ${company.apartmentnumber}` : ""
     }, ${company.postcode} ${company.city}`;
     return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-      address
+      address,
     )}`;
   };
 
@@ -117,11 +117,10 @@ const CompanyDetails = () => {
     <div className={styles.container}>
       <h1 className={styles.title}>{company.name}</h1>
       <div className={styles.content}>
-        <Card title={t("company.information")}>
+        <Card className={styles.card} title={t("company.information")}>
           <div className={styles.infoSection}>
             <p>
-              <strong>{t("company.businessId")}:</strong>{" "}
-              {company.businessid}
+              <strong>{t("company.businessId")}:</strong> {company.businessid}
             </p>
             <p>
               <strong>{t("company.mainBusinessLine")}:</strong>{" "}
@@ -152,9 +151,11 @@ const CompanyDetails = () => {
             <Card className={styles.addressCard}>
               <div
                 className={styles.addressCardBackground}
-                style={{
-                  '--map-bg-url': `url(${mapBg})`,
-                } as React.CSSProperties}
+                style={
+                  {
+                    "--map-bg-url": `url(${mapBg})`,
+                  } as React.CSSProperties
+                }
               />
               <div className={styles.addressCardOverlay} />
               <div className={styles.addressCardContent}>
@@ -189,17 +190,21 @@ const CompanyDetails = () => {
           </Card>
         )}
 
-        <CompanyInfoEditor 
+        <CompanyInfoEditor
           companyId={id!}
           initialData={{
             company_description: company.company_description,
             recruitment_page: company.recruitment_page,
           }}
           onUpdate={(updatedData) => {
-            setCompany(prev => prev ? {
-              ...prev,
-              ...updatedData
-            } : null);
+            setCompany((prev) =>
+              prev
+                ? {
+                    ...prev,
+                    ...updatedData,
+                  }
+                : null,
+            );
           }}
         />
       </div>

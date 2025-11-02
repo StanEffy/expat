@@ -3,6 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
 import { Message } from 'primereact/message';
+import { Badge } from 'primereact/badge';
+import { ProgressSpinner } from 'primereact/progressspinner';
+import { FAVOURITES_ENDPOINTS, NOTIFICATIONS_ENDPOINTS } from '../constants/api';
+import { getAuthHeaders } from '../utils/auth';
+import { useNotification } from '../contexts/NotificationContext';
+import { useTranslation } from 'react-i18next';
 import styles from './Profile.module.scss';
 
 interface UserProfile {
@@ -11,26 +17,54 @@ interface UserProfile {
   createdAt: string;
 }
 
+interface Favourite {
+  id: number;
+  company_id: number;
+  company?: {
+    id: number;
+    name: string;
+    mainbusinesslinename?: string | null;
+  };
+}
+
+interface Notification {
+  id: number;
+  user_id: number;
+  company_id: number;
+  notification_type: string;
+  message: string;
+  read: boolean;
+  created_at: string;
+  company?: {
+    id: number;
+    name: string;
+  };
+}
+
 const Profile = () => {
   const navigate = useNavigate();
+  const { showNotification } = useNotification();
+  const { t } = useTranslation();
   const [profile, setProfile] = useState<UserProfile | null>(null);
+  const [favourites, setFavourites] = useState<Favourite[]>([]);
+  const [notifications, setNotifications] = useState<Notification[]>([]);
+  const [unreadCount, setUnreadCount] = useState(0);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
+  const [favouritesLoading, setFavouritesLoading] = useState(false);
+  const [notificationsLoading, setNotificationsLoading] = useState(false);
 
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const token = localStorage.getItem('token');
-        if (!token) {
+        const headers = getAuthHeaders();
+        if (Object.keys(headers).length === 0) {
           navigate('/login');
           return;
         }
 
-        // TODO: Replace with actual API call
         const response = await fetch('/api/auth/profile', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+          headers,
         });
 
         if (!response.ok) {
@@ -49,7 +83,138 @@ const Profile = () => {
     };
 
     fetchProfile();
+    fetchFavourites();
+    fetchNotifications();
+    fetchUnreadCount();
   }, [navigate]);
+
+  const fetchFavourites = async () => {
+    try {
+      setFavouritesLoading(true);
+      const headers = getAuthHeaders();
+      if (Object.keys(headers).length === 0) {
+        return;
+      }
+
+      const response = await fetch(FAVOURITES_ENDPOINTS.LIST, { headers });
+      
+      if (response.ok) {
+        const data = await response.json();
+        setFavourites(Array.isArray(data) ? data : []);
+      }
+    } catch {
+      // Silent fail
+    } finally {
+      setFavouritesLoading(false);
+    }
+  };
+
+  const fetchNotifications = async () => {
+    try {
+      setNotificationsLoading(true);
+      const headers = getAuthHeaders();
+      if (Object.keys(headers).length === 0) {
+        return;
+      }
+
+      const response = await fetch(NOTIFICATIONS_ENDPOINTS.LIST, { headers });
+      
+      if (response.ok) {
+        const data = await response.json();
+        setNotifications(Array.isArray(data) ? data : []);
+      }
+    } catch {
+      // Silent fail
+    } finally {
+      setNotificationsLoading(false);
+    }
+  };
+
+  const fetchUnreadCount = async () => {
+    try {
+      const headers = getAuthHeaders();
+      if (Object.keys(headers).length === 0) {
+        return;
+      }
+
+      const response = await fetch(NOTIFICATIONS_ENDPOINTS.UNREAD_COUNT, { headers });
+      
+      if (response.ok) {
+        const data = await response.json();
+        setUnreadCount(typeof data.count === 'number' ? data.count : 0);
+      }
+    } catch {
+      // Silent fail
+    }
+  };
+
+  const handleMarkAsRead = async (notificationId: number) => {
+    try {
+      const headers = getAuthHeaders();
+      if (Object.keys(headers).length === 0) {
+        return;
+      }
+
+      const response = await fetch(NOTIFICATIONS_ENDPOINTS.MARK_READ(notificationId), {
+        method: 'PUT',
+        headers,
+      });
+
+      if (response.ok) {
+        setNotifications((prev) =>
+          prev.map((notif) =>
+            notif.id === notificationId ? { ...notif, read: true } : notif
+          )
+        );
+        setUnreadCount((prev) => Math.max(0, prev - 1));
+      }
+    } catch {
+      showNotification('Failed to mark notification as read', 'error');
+    }
+  };
+
+  const handleMarkAllAsRead = async () => {
+    try {
+      const headers = getAuthHeaders();
+      if (Object.keys(headers).length === 0) {
+        return;
+      }
+
+      const response = await fetch(NOTIFICATIONS_ENDPOINTS.MARK_ALL_READ, {
+        method: 'PUT',
+        headers,
+      });
+
+      if (response.ok) {
+        setNotifications((prev) => prev.map((notif) => ({ ...notif, read: true })));
+        setUnreadCount(0);
+        showNotification('All notifications marked as read', 'success');
+      }
+    } catch {
+      showNotification('Failed to mark all notifications as read', 'error');
+    }
+  };
+
+  const handleRemoveFavourite = async (companyId: number) => {
+    try {
+      const headers = getAuthHeaders();
+      if (Object.keys(headers).length === 0) {
+        return;
+      }
+
+      const response = await fetch(FAVOURITES_ENDPOINTS.REMOVE(companyId), {
+        method: 'DELETE',
+        headers,
+      });
+
+      if (response.ok) {
+        setFavourites((prev) => prev.filter((fav) => fav.company_id !== companyId));
+        showNotification(t('favourites.removedFromFavourites'), 'success');
+      }
+    } catch {
+      showNotification('Failed to remove favourite', 'error');
+    }
+  };
 
   const handleLogout = () => {
     localStorage.removeItem('token');
@@ -74,23 +239,133 @@ const Profile = () => {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>Profile</h1>
-      <Card title="User Information" className={styles.card}>
+      <h1 className={styles.title}>{t('navigation.profile')}</h1>
+      
+      <Card title={t('profile.userInformation')} className={styles.card}>
         <div className={styles.profileInfo}>
           <p>
-            <strong>Email:</strong> {profile?.email}
+            <strong>{t('profile.email')}:</strong> {profile?.email}
           </p>
           <p>
-            <strong>Role:</strong> {profile?.role}
+            <strong>{t('profile.role')}:</strong> {profile?.role}
           </p>
           <p>
-            <strong>Member since:</strong>{' '}
+            <strong>{t('profile.memberSince')}:</strong>{' '}
             {profile?.createdAt
               ? new Date(profile.createdAt).toLocaleDateString()
               : 'N/A'}
           </p>
         </div>
       </Card>
+
+      <Card title={t('favourites.title')} className={styles.card}>
+        {favouritesLoading ? (
+          <div className={styles.loadingContainer}>
+            <ProgressSpinner />
+          </div>
+        ) : favourites.length === 0 ? (
+          <p className={styles.emptyMessage}>{t('favourites.noFavourites')}</p>
+        ) : (
+          <div className={styles.favouritesList}>
+            {favourites.map((favourite) => (
+              <div key={favourite.id} className={styles.favouriteItem}>
+                <div className={styles.favouriteInfo}>
+                  <h4
+                    className={styles.favouriteCompanyName}
+                    onClick={() => navigate(`/companies/${favourite.company_id}`)}
+                  >
+                    {favourite.company?.name || `Company ID: ${favourite.company_id}`}
+                  </h4>
+                  {favourite.company?.mainbusinesslinename && (
+                    <p className={styles.favouriteCategory}>
+                      {favourite.company.mainbusinesslinename}
+                    </p>
+                  )}
+                </div>
+                <Button
+                  icon="pi pi-times"
+                  onClick={() => handleRemoveFavourite(favourite.company_id)}
+                  severity="secondary"
+                  text
+                  rounded
+                  aria-label={t('favourites.removeFromFavourites')}
+                />
+              </div>
+            ))}
+          </div>
+        )}
+      </Card>
+
+      <Card 
+        title={
+          <div className={styles.notificationsHeader}>
+            <span>{t('notifications.title')}</span>
+            {unreadCount > 0 && (
+              <Badge value={unreadCount} severity="danger" />
+            )}
+          </div>
+        }
+        className={styles.card}
+      >
+        {unreadCount > 0 && (
+          <div className={styles.markAllContainer}>
+            <Button
+              label={t('notifications.markAllAsRead')}
+              onClick={handleMarkAllAsRead}
+              severity="secondary"
+              size="small"
+              text
+            />
+          </div>
+        )}
+        {notificationsLoading ? (
+          <div className={styles.loadingContainer}>
+            <ProgressSpinner />
+          </div>
+        ) : notifications.length === 0 ? (
+          <p className={styles.emptyMessage}>{t('notifications.noNotifications')}</p>
+        ) : (
+          <div className={styles.notificationsList}>
+            {notifications.map((notification) => (
+              <div
+                key={notification.id}
+                className={`${styles.notificationItem} ${
+                  !notification.read ? styles.unread : ''
+                }`}
+              >
+                <div className={styles.notificationContent}>
+                  <div className={styles.notificationHeader}>
+                    <h4
+                      className={styles.notificationCompany}
+                      onClick={() => navigate(`/companies/${notification.company_id}`)}
+                    >
+                      {notification.company?.name || `Company ID: ${notification.company_id}`}
+                    </h4>
+                    {!notification.read && (
+                      <Badge value={t('notifications.unread')} severity="info" />
+                    )}
+                  </div>
+                  <p className={styles.notificationMessage}>{notification.message}</p>
+                  <p className={styles.notificationTime}>
+                    {new Date(notification.created_at).toLocaleString()}
+                  </p>
+                </div>
+                {!notification.read && (
+                  <Button
+                    icon="pi pi-check"
+                    onClick={() => handleMarkAsRead(notification.id)}
+                    severity="success"
+                    text
+                    rounded
+                    aria-label={t('notifications.markAsRead')}
+                  />
+                )}
+              </div>
+            ))}
+          </div>
+        )}
+      </Card>
+
       <Button
         label="Logout"
         onClick={handleLogout}

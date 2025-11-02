@@ -1,4 +1,16 @@
 {
+  "app": {
+    "title": "Expat App"
+  },
+  "navigation": {
+    "home": "Головна",
+    "companies": "Компанії",
+    "about": "Про нас",
+    "login": "Увійти",
+    "profile": "Профіль",
+    "signup": "Реєстрація",
+    "categories": "Категорії"
+  },
   "company": {
     "information": "Інформація про компанію",
     "businessId": "Ідентифікатор бізнесу",
@@ -17,8 +29,12 @@
     "filter": {
       "title": "Фільтр компаній",
       "searchCities": "Пошук міст...",
-      "selectCities": "Виберіть міста"
+      "selectCities": "Виберіть міста",
+      "workArea": "Сфера діяльності"
     }
+  },
+  "categories": {
+    "title": "Бізнес категорії"
   },
   "common": {
     "loading": "Завантаження...",
@@ -33,22 +49,37 @@
     "itemsPerPage": "Елементів на сторінці",
     "cancel": "Скасувати",
     "confirm": "Підтвердити",
-    "updating": "Оновлення..."
+    "updating": "Оновлення...",
+    "all": "Всі"
   },
   "home": {
     "welcome": "Ласкаво просимо в Expat App",
     "description": "Знайдіть компанії та вакансії в Фінляндіі"
   },
-  "navigation": {
-    "home": "Головна",
-    "companies": "Компанії",
-    "about": "Про нас",
-    "login": "Увійти",
-    "profile": "Профіль",
-    "signup": "Реєстрація",
-    "categories": "Категорії"
+  "favourites": {
+    "title": "Обрані компанії",
+    "noFavourites": "Поки немає обраних компаній",
+    "addToFavourites": "Додати до обраного",
+    "removeFromFavourites": "Видалити з обраного",
+    "addedToFavourites": "Додано до обраного",
+    "removedFromFavourites": "Видалено з обраного"
   },
-  "categories": {
-    "title": "Бізнес категорії"
+  "notifications": {
+    "title": "Сповіщення",
+    "noNotifications": "Немає сповіщень",
+    "unreadCount": "Непрочитані сповіщення",
+    "markAsRead": "Відзначити як прочитане",
+    "markAllAsRead": "Відзначити всі як прочитані",
+    "companyUpdated": "Компанію оновлено",
+    "read": "Прочитано",
+    "unread": "Не прочитано",
+    "descriptionUpdated": "Опис компанії було оновлено",
+    "recruitmentPageUpdated": "Сторінку рекрутингу було оновлено"
+  },
+  "profile": {
+    "userInformation": "Інформація про користувача",
+    "email": "Електронна пошта",
+    "role": "Роль",
+    "memberSince": "Учасник з"
   }
 } 

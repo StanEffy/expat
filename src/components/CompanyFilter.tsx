@@ -15,14 +15,23 @@ const CompanyFilter: React.FC<CompanyFilterProps> = ({
   onCityChange,
 }) => {
   const { t } = useTranslation();
+  const [filteredCities, setFilteredCities] = React.useState<string[]>([]);
+
+  const searchCities = (event: { query: string }) => {
+    const query = event.query.toLowerCase();
+    const filtered = cities.filter((city) =>
+      city.toLowerCase().includes(query)
+    );
+    setFilteredCities(filtered);
+  };
 
   return (
     <div className={styles.container}>
       <AutoComplete
         multiple
         value={selectedCities}
-        suggestions={cities}
-        completeMethod={() => {}}
+        suggestions={filteredCities}
+        completeMethod={searchCities}
         onChange={(e) => onCityChange(e.value)}
         placeholder={t('company.filter.selectCities')}
         className={styles.autocomplete}

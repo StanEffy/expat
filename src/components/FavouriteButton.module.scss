@@ -1,0 +1,16 @@
+.favouriteButton {
+  color: #6c757d; // grey
+  
+  &:hover {
+    color: #dc3545; // red on hover
+  }
+
+  &.favourite {
+    color: #dc3545; // red when favourited
+    
+    &:hover {
+      color: #c82333; // darker red on hover
+    }
+  }
+}
+

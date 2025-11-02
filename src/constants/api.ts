@@ -57,7 +57,11 @@ export const COMPANY_ENDPOINTS = {
       queryParts.push(`name=${encodeURIComponent(params.name)}`);
     }
     if (params.mainbusinesslineid && params.mainbusinesslineid.trim().length > 0) {
-      queryParts.push(`mainbusinesslineid=${encodeURIComponent(params.mainbusinesslineid)}`);
+      // Handle comma-separated values (split and add multiple parameters like cities)
+      const ids = params.mainbusinesslineid.split(',').map(id => id.trim()).filter(id => id.length > 0);
+      for (const id of ids) {
+        queryParts.push(`mainbusinesslineid=${encodeURIComponent(id)}`);
+      }
     }
     if (params.cities && params.cities.length > 0) {
       for (const city of params.cities) {
@@ -82,6 +86,22 @@ export const CATEGORY_ENDPOINTS = {
 export const CITY_ENDPOINTS = {
   LIST: `${API_BASE_URL}/api/cities/`,
   REGIONS: `${API_BASE_URL}/api/city-regions`,
+};
+
+// Favourites Endpoints
+export const FAVOURITES_ENDPOINTS = {
+  LIST: `${API_BASE_URL}/api/favourites`,
+  ADD: (companyId: number) => `${API_BASE_URL}/api/companies/${companyId}/favourite`,
+  REMOVE: (companyId: number) => `${API_BASE_URL}/api/companies/${companyId}/favourite`,
+};
+
+// Notifications Endpoints
+export const NOTIFICATIONS_ENDPOINTS = {
+  LIST: `${API_BASE_URL}/api/notifications`,
+  UNREAD: `${API_BASE_URL}/api/notifications/unread`,
+  UNREAD_COUNT: `${API_BASE_URL}/api/notifications/unread-count`,
+  MARK_READ: (notificationId: number) => `${API_BASE_URL}/api/notifications/${notificationId}/read`,
+  MARK_ALL_READ: `${API_BASE_URL}/api/notifications/read-all`,
 };
 
 // Default Configuration

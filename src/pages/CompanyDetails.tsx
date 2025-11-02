@@ -6,6 +6,7 @@ import { getAuthHeaders } from "../utils/auth";
 import { useNotification } from "../contexts/NotificationContext";
 import { useTranslation } from "react-i18next";
 import CompanyInfoEditor from "../components/CompanyInfoEditor";
+import FavouriteButton from "../components/FavouriteButton";
 import mapBg from "../assets/map_bg.png";
 import styles from "./CompanyDetails.module.scss";
 
@@ -115,7 +116,10 @@ const CompanyDetails = () => {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>{company.name}</h1>
+      <div className={styles.titleRow}>
+        <h1 className={styles.title}>{company.name}</h1>
+        <FavouriteButton companyId={company.id} className={styles.favouriteButtonDetails} />
+      </div>
       <div className={styles.content}>
         <Card className={styles.card} title={t("company.information")}>
           <div className={styles.infoSection}>

@@ -4,12 +4,13 @@ import { Card } from "primereact/card";
 import { Button } from "primereact/button";
 import { Dropdown } from "primereact/dropdown";
 import { ProgressSpinner } from "primereact/progressspinner";
-import { COMPANY_ENDPOINTS, CITY_ENDPOINTS, CATEGORY_ENDPOINTS } from "../constants/api";
+import { COMPANY_ENDPOINTS, CITY_ENDPOINTS, CATEGORY_ENDPOINTS, API_BASE_URL } from "../constants/api";
 import { getAuthHeaders } from "../utils/auth";
 import { useNotification } from "../contexts/NotificationContext";
 import { useTranslation } from "react-i18next";
 import CompanyFilter from "../components/CompanyFilter";
 import CategoryFilter from "../components/CategoryFilter";
+import FavouriteButton from "../components/FavouriteButton";
 import type { GeneralCategoryItem } from "../components/CategoryFilter";
 import styles from "./Companies.module.scss";
 
@@ -104,7 +105,7 @@ const Companies = () => {
           const { data: generalData } = await generalRes.json();
           setGeneralCategories(generalData as GeneralCategoryItem[]);
         }
-      } catch (err) {
+      } catch {
         // Non-fatal; filters just won't load
       }
     };
@@ -132,15 +133,15 @@ const Companies = () => {
       }
 
       let url: string;
-      if (selectedCategoryId.startsWith('general:')) {
-        const generalCode = selectedCategoryId.split(':')[1];
-        const page = pageNumber;
-        const count = limit;
-        const parts: string[] = [`page=${page}`, `count=${count}`, `generalcategory=${encodeURIComponent(generalCode)}`];
+      if (mainbusinesslineid && mainbusinesslineid.startsWith('general:')) {
+        const generalCode = mainbusinesslineid.split(':')[1];
+        const queryParts: string[] = [`page=${pageNumber}`, `count=${limit}`, `generalcategory=${encodeURIComponent(generalCode)}`];
         if (cities && cities.length > 0) {
-          for (const city of cities) parts.push(`cities=${encodeURIComponent(city)}`);
+          for (const city of cities) {
+            queryParts.push(`cities=${encodeURIComponent(city)}`);
+          }
         }
-        url = `${COMPANY_ENDPOINTS.LIST(page, count)}&generalcategory=${encodeURIComponent(generalCode)}${cities && cities.length ? cities.map(c => `&cities=${encodeURIComponent(c)}`).join('') : ''}`;
+        url = `${API_BASE_URL}/api/companies/?${queryParts.join("&")}`;
       } else {
         url = COMPANY_ENDPOINTS.FILTERED({
           page: pageNumber,
@@ -340,9 +341,12 @@ const Companies = () => {
         {companies.map((company) => (
           <Card key={company.id} className={styles.card}>
             <div className={styles.cardContent}>
-              <h3 className={styles.cardTitle}>
-                {company.name}
-              </h3>
+              <div className={styles.cardHeader}>
+                <h3 className={styles.cardTitle}>
+                  {company.name}
+                </h3>
+                <FavouriteButton companyId={company.id} className={styles.favouriteButtonCard} />
+              </div>
               <p className={styles.cardSubtitle}>
                 {company.mainbusinesslinename || ""}
               </p>

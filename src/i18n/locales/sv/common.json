@@ -1,4 +1,16 @@
 {
+  "app": {
+    "title": "Expat App"
+  },
+  "navigation": {
+    "home": "Hem",
+    "companies": "Företag",
+    "about": "Om oss",
+    "login": "Logga in",
+    "profile": "Profil",
+    "signup": "Registrera",
+    "categories": "Kategorier"
+  },
   "company": {
     "information": "Företagsinformation",
     "businessId": "Företags-ID",
@@ -8,7 +20,21 @@
     "noAddress": "Ingen adress tillgänglig",
     "description": "Beskrivning",
     "recruitment": "Rekrytering",
-    "visitRecruitmentPage": "Besök rekryteringssidan"
+    "visitRecruitmentPage": "Besök rekryteringssidan",
+    "editInformation": "Redigera företagsinformation",
+    "recruitmentPageUrl": "URL för rekryteringssidan",
+    "updateInformation": "Uppdatera information",
+    "confirmUpdate": "Bekräfta uppdatering",
+    "confirmUpdateMessage": "Är du säker på att du vill uppdatera företagsinformationen?",
+    "filter": {
+      "title": "Filtrera företag",
+      "searchCities": "Sök städer...",
+      "selectCities": "Välj städer",
+      "workArea": "Verksamhetsområde"
+    }
+  },
+  "categories": {
+    "title": "Företagskategorier"
   },
   "common": {
     "loading": "Laddar...",
@@ -17,20 +43,43 @@
     "back": "Tillbaka",
     "tryAgain": "Försök igen",
     "noCompanies": "Inga företag hittades",
+    "noCategories": "Inga kategorier hittades",
     "viewDetails": "Visa detaljer",
     "showMore": "Visa mer",
-    "itemsPerPage": "Objekt per sida"
+    "itemsPerPage": "Objekt per sida",
+    "cancel": "Avbryt",
+    "confirm": "Bekräfta",
+    "updating": "Uppdaterar...",
+    "all": "Alla"
   },
   "home": {
     "welcome": "Välkommen till Expat App",
     "description": "Hitta företag och jobb tillgängliga i Finland"
   },
-  "navigation": {
-    "home": "Hem",
-    "companies": "Företag",
-    "about": "Om oss",
-    "login": "Logga in",
-    "profile": "Profil",
-    "signup": "Registrera"
+  "favourites": {
+    "title": "Favoritföretag",
+    "noFavourites": "Inga favoritföretag ännu",
+    "addToFavourites": "Lägg till i favoriter",
+    "removeFromFavourites": "Ta bort från favoriter",
+    "addedToFavourites": "Tillagt i favoriter",
+    "removedFromFavourites": "Borttaget från favoriter"
+  },
+  "notifications": {
+    "title": "Notifikationer",
+    "noNotifications": "Inga notifikationer",
+    "unreadCount": "Olästa notifikationer",
+    "markAsRead": "Markera som läst",
+    "markAllAsRead": "Markera alla som lästa",
+    "companyUpdated": "Företag uppdaterat",
+    "read": "Läst",
+    "unread": "Oläst",
+    "descriptionUpdated": "Företagsbeskrivning uppdaterades",
+    "recruitmentPageUpdated": "Rekryteringssida uppdaterades"
+  },
+  "profile": {
+    "userInformation": "Användarinformation",
+    "email": "E-post",
+    "role": "Roll",
+    "memberSince": "Medlem sedan"
   }
 } 

@@ -1,4 +1,16 @@
 {
+  "app": {
+    "title": "Expat App"
+  },
+  "navigation": {
+    "home": "Главная",
+    "companies": "Компании",
+    "about": "О нас",
+    "login": "Вход",
+    "profile": "Профиль",
+    "signup": "Регистрация",
+    "categories": "Категории"
+  },
   "company": {
     "information": "Информация о компании",
     "businessId": "Идентификатор бизнеса",
@@ -8,7 +20,21 @@
     "noAddress": "Адрес недоступен",
     "description": "Описание",
     "recruitment": "Рекрутинг",
-    "visitRecruitmentPage": "Посетить страницу рекрутинга"
+    "visitRecruitmentPage": "Посетить страницу рекрутинга",
+    "editInformation": "Редактировать информацию о компании",
+    "recruitmentPageUrl": "URL страницы рекрутинга",
+    "updateInformation": "Обновить информацию",
+    "confirmUpdate": "Подтвердить обновление",
+    "confirmUpdateMessage": "Вы уверены, что хотите обновить информацию о компании?",
+    "filter": {
+      "title": "Фильтр компаний",
+      "searchCities": "Поиск городов...",
+      "selectCities": "Выберите города",
+      "workArea": "Сфера деятельности"
+    }
+  },
+  "categories": {
+    "title": "Бизнес категории"
   },
   "common": {
     "loading": "Загрузка...",
@@ -17,19 +43,43 @@
     "back": "Назад",
     "tryAgain": "Попробовать снова",
     "noCompanies": "Компании не найдены",
+    "noCategories": "Категории не найдены",
     "viewDetails": "Просмотреть детали",
-    "showMore": "Показать больше"
+    "showMore": "Показать больше",
+    "itemsPerPage": "Элементов на странице",
+    "cancel": "Отмена",
+    "confirm": "Подтвердить",
+    "updating": "Обновление...",
+    "all": "Все"
   },
   "home": {
     "welcome": "Добро пожаловать в Expat App",
     "description": "Найдите компании и вакансии в Финляндии"
   },
-  "navigation": {
-    "home": "Главная",
-    "companies": "Компании",
-    "about": "О нас",
-    "login": "Вход",
-    "profile": "Профиль",
-    "signup": "Регистрация"
+  "favourites": {
+    "title": "Избранные компании",
+    "noFavourites": "Пока нет избранных компаний",
+    "addToFavourites": "Добавить в избранное",
+    "removeFromFavourites": "Удалить из избранного",
+    "addedToFavourites": "Добавлено в избранное",
+    "removedFromFavourites": "Удалено из избранного"
+  },
+  "notifications": {
+    "title": "Уведомления",
+    "noNotifications": "Нет уведомлений",
+    "unreadCount": "Непрочитанные уведомления",
+    "markAsRead": "Отметить как прочитанное",
+    "markAllAsRead": "Отметить все как прочитанные",
+    "companyUpdated": "Компания обновлена",
+    "read": "Прочитано",
+    "unread": "Непрочитано",
+    "descriptionUpdated": "Описание компании было обновлено",
+    "recruitmentPageUpdated": "Страница рекрутинга была обновлена"
+  },
+  "profile": {
+    "userInformation": "Информация о пользователе",
+    "email": "Электронная почта",
+    "role": "Роль",
+    "memberSince": "Участник с"
   }
 } 

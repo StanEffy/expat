@@ -1,4 +1,16 @@
 {
+  "app": {
+    "title": "Expat App"
+  },
+  "navigation": {
+    "home": "Etusivu",
+    "companies": "Yritykset",
+    "about": "Tietoa meistä",
+    "login": "Kirjaudu sisään",
+    "profile": "Profiili",
+    "signup": "Rekisteröidy",
+    "categories": "Kategoriat"
+  },
   "company": {
     "information": "Yrityksen tiedot",
     "businessId": "Y-tunnus",
@@ -8,7 +20,21 @@
     "noAddress": "Osoitetta ei saatavilla",
     "description": "Kuvaus",
     "recruitment": "Rekrytointi",
-    "visitRecruitmentPage": "Siirry rekrytointisivulle"
+    "visitRecruitmentPage": "Siirry rekrytointisivulle",
+    "editInformation": "Muokkaa yrityksen tietoja",
+    "recruitmentPageUrl": "Rekrytointisivun URL",
+    "updateInformation": "Päivitä tiedot",
+    "confirmUpdate": "Vahvista päivitys",
+    "confirmUpdateMessage": "Haluatko varmasti päivittää yrityksen tiedot?",
+    "filter": {
+      "title": "Suodata yrityksiä",
+      "searchCities": "Etsi kaupunkeja...",
+      "selectCities": "Valitse kaupungit",
+      "workArea": "Toimiala"
+    }
+  },
+  "categories": {
+    "title": "Liiketoiminta kategoriat"
   },
   "common": {
     "loading": "Ladataan...",
@@ -17,20 +43,43 @@
     "back": "Takaisin",
     "tryAgain": "Yritä uudelleen",
     "noCompanies": "Yrityksiä ei löytynyt",
+    "noCategories": "Kategorioita ei löytynyt",
     "viewDetails": "Näytä tiedot",
     "showMore": "Näytä lisää",
-    "itemsPerPage": "Kohteita per sivu"
+    "itemsPerPage": "Kohteita per sivu",
+    "cancel": "Peruuta",
+    "confirm": "Vahvista",
+    "updating": "Päivitetään...",
+    "all": "Kaikki"
   },
   "home": {
     "welcome": "Tervetuloa Expat Appille",
     "description": "Etsi yrityksiä ja työpaikkoja Suomessa"
   },
-  "navigation": {
-    "home": "Etusivu",
-    "companies": "Yritykset",
-    "about": "Tietoa meistä",
-    "login": "Kirjaudu sisään",
-    "profile": "Profiili",
-    "signup": "Rekisteröidy"
+  "favourites": {
+    "title": "Suosikkiyritykset",
+    "noFavourites": "Ei suosikkiyrityksiä vielä",
+    "addToFavourites": "Lisää suosikkeihin",
+    "removeFromFavourites": "Poista suosikeista",
+    "addedToFavourites": "Lisätty suosikkeihin",
+    "removedFromFavourites": "Poistettu suosikeista"
+  },
+  "notifications": {
+    "title": "Ilmoitukset",
+    "noNotifications": "Ei ilmoituksia",
+    "unreadCount": "Lukemattomat ilmoitukset",
+    "markAsRead": "Merkitse luetuksi",
+    "markAllAsRead": "Merkitse kaikki luetuksi",
+    "companyUpdated": "Yritys päivitetty",
+    "read": "Luettu",
+    "unread": "Lukematon",
+    "descriptionUpdated": "Yrityksen kuvaus päivitettiin",
+    "recruitmentPageUpdated": "Rekrytointisivu päivitettiin"
+  },
+  "profile": {
+    "userInformation": "Käyttäjätiedot",
+    "email": "Sähköposti",
+    "role": "Rooli",
+    "memberSince": "Jäsen alkaen"
   }
 } 

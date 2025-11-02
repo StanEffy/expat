@@ -63,13 +63,11 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({ categories, generalCate
     allOptions.push(...naceFinnish);
   }
 
-  const selectedOption = allOptions.find(opt => opt.id === value) || allOptions[0];
-
   return (
     <Dropdown
-      value={selectedOption}
+      value={value}
       options={allOptions}
-      onChange={(e) => onChange({ value: e.value?.id || '' })}
+      onChange={(e) => onChange({ value: e.value || '' })}
       optionLabel="label"
       optionValue="id"
       placeholder={t('company.filter.workArea')}

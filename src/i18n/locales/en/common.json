@@ -29,7 +29,8 @@
     "filter": {
       "title": "Filter Companies",
       "searchCities": "Search cities...",
-      "selectCities": "Select cities"
+      "selectCities": "Select cities",
+      "workArea": "Work Area"
     }
   },
   "categories": {
@@ -48,10 +49,37 @@
     "itemsPerPage": "Items per page",
     "cancel": "Cancel",
     "confirm": "Confirm",
-    "updating": "Updating..."
+    "updating": "Updating...",
+    "all": "All"
   },
   "home": {
     "welcome": "Welcome to Expat App",
     "description": "Find companies and job opportunities in Finland"
+  },
+  "favourites": {
+    "title": "Favourite Companies",
+    "noFavourites": "No favourite companies yet",
+    "addToFavourites": "Add to favourites",
+    "removeFromFavourites": "Remove from favourites",
+    "addedToFavourites": "Added to favourites",
+    "removedFromFavourites": "Removed from favourites"
+  },
+  "notifications": {
+    "title": "Notifications",
+    "noNotifications": "No notifications",
+    "unreadCount": "Unread notifications",
+    "markAsRead": "Mark as read",
+    "markAllAsRead": "Mark all as read",
+    "companyUpdated": "Company updated",
+    "read": "Read",
+    "unread": "Unread",
+    "descriptionUpdated": "Company description was updated",
+    "recruitmentPageUpdated": "Recruitment page was updated"
+  },
+  "profile": {
+    "userInformation": "User Information",
+    "email": "Email",
+    "role": "Role",
+    "memberSince": "Member since"
   }
 } 

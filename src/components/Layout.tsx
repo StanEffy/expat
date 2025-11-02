@@ -7,7 +7,6 @@ import MobileMenu from "./MobileMenu";
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "./LanguageSwitcher";
 import GeometricBackground from "./GeometricBackground";
-import logoExpat from "../assets/logo_expat.png";
 import "./Layout.scss";
 import styles from "./Layout.module.scss";
 import AnimatedLogo from "./AnimatedLogo.tsx";

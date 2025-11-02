@@ -66,17 +66,9 @@ const Layout = ({ children }: LayoutProps) => {
   );
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        minHeight: "100vh",
-        width: "100%",
-        paddingTop: "60px",
-      }}
-    >
+    <div className={"wrapper"}>
       <Menubar start={start} end={end} className="layout-menubar" />
-      <main style={{ flex: 1, width: "100%" }}>{children}</main>
+      <main className={"main"}>{children}</main>
       <footer
         style={{
           padding: "24px 16px",

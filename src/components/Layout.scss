@@ -1,5 +1,3 @@
-@use '../styles/variables' as *;
-
 .layout-menubar {
   position: fixed;
   z-index: 1;
@@ -16,6 +14,17 @@
   filter: brightness(80%);
 }
 
+.wrapper {
+  width: 100%;
+  min-height: 100vh;
+  height: 100%;
+  background-color: $primary-2;
+}
+
+.main {
+  height: 100%;
+}
+
 @media (max-width: 768px) {
   .hidden.md\\:flex {
     display: none !important;
@@ -27,4 +36,3 @@
     display: flex !important;
   }
 }
-

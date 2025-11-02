@@ -10,6 +10,13 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@use "@/styles/variables" as *;`,
+      },
+    },
+  },
   server: {
     port: 3000,
     allowedHosts: ['localhost', '127.0.0.1', 'x-pat.duckdns.org', '57ee-YOUR_SERVER_IP.ngrok-free.app'],

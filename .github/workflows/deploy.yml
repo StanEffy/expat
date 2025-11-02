@@ -19,4 +19,5 @@ jobs:
             cd /var/www/expat/
             git pull origin master
             npm ci --only=production
+            npm install
             npm run build

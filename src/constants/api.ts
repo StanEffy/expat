@@ -18,8 +18,8 @@ function getApiBaseUrl(): string {
       : 'http:';
     return `${protocol}//${domain}`;
   } else {
-    // In development, default to localhost with explicit port
-    return 'http://localhost:8000';
+    // In development, use relative URLs so Vite proxy can forward to port 8000
+    return '';
   }
 }
 

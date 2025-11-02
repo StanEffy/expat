@@ -13,6 +13,18 @@ export default defineConfig({
   server: {
     port: 3000,
     allowedHosts: ['localhost', '127.0.0.1', 'x-pat.duckdns.org', '57ee-YOUR_SERVER_IP.ngrok-free.app'],
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8000',
+        changeOrigin: true,
+        secure: false,
+      },
+      '/auth': {
+        target: 'http://localhost:8000',
+        changeOrigin: true,
+        secure: false,
+      },
+    },
   },
   build: {
     outDir: 'dist',

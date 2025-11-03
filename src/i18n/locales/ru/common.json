@@ -19,6 +19,8 @@
     "address": "Адрес",
     "noAddress": "Адрес недоступен",
     "description": "Описание",
+    "complainToVero": "Пожаловаться в Vero",
+    "complaintSent": "Ваш запрос отправлен.",
     "recruitment": "Рекрутинг",
     "visitRecruitmentPage": "Посетить страницу рекрутинга",
     "editInformation": "Редактировать информацию о компании",

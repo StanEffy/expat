@@ -40,7 +40,7 @@ export const CategoriesProvider: React.FC<CategoriesProviderProps> = ({ children
 
     try {
       const headers = getAuthHeaders();
-      if (Object.keys(headers).length === 0) {
+      if (!headers) {
         setError('Authentication required');
         return;
       }

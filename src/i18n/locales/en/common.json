@@ -19,6 +19,8 @@
     "address": "Address",
     "noAddress": "No address available",
     "description": "Description",
+    "complainToVero": "Complain to Vero",
+    "complaintSent": "Your request has been sent.",
     "recruitment": "Recruitment",
     "visitRecruitmentPage": "Visit Recruitment Page",
     "editInformation": "Edit Company Information",

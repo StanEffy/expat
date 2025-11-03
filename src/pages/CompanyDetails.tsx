@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Card } from "primereact/card";
+import { Button } from "primereact/button";
 import { COMPANY_ENDPOINTS } from "../constants/api";
 import { getAuthHeaders } from "../utils/auth";
 import { useNotification } from "../contexts/NotificationContext";
@@ -43,7 +44,7 @@ const CompanyDetails = () => {
 
       try {
         const headers = getAuthHeaders();
-        if (Object.keys(headers).length === 0) {
+        if (!headers) {
           return;
         }
 
@@ -179,6 +180,17 @@ const CompanyDetails = () => {
         {company.company_description && (
           <Card title={t("company.description")}>
             <p>{company.company_description}</p>
+            <div className={styles.complainButtonContainer}>
+              <Button
+                label={t("company.complainToVero")}
+                onClick={() => {
+                  showNotification(t("company.complaintSent"), "success");
+                }}
+                className={styles.complainButton}
+                icon="pi pi-send"
+                outlined
+              />
+            </div>
           </Card>
         )}
 

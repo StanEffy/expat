@@ -19,6 +19,8 @@
     "address": "Adress",
     "noAddress": "Ingen adress tillgänglig",
     "description": "Beskrivning",
+    "complainToVero": "Klaga till Vero",
+    "complaintSent": "Din begäran har skickats.",
     "recruitment": "Rekrytering",
     "visitRecruitmentPage": "Besök rekryteringssidan",
     "editInformation": "Redigera företagsinformation",

@@ -122,3 +122,35 @@
   backdrop-filter: blur(8px);
   border-radius: 16px;
 }
+
+.complainButtonContainer {
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+}
+
+.complainButton {
+  font-size: 0.875rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  animation: pulse 2s infinite;
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}

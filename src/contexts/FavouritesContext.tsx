@@ -44,7 +44,7 @@ export const FavouritesProvider: React.FC<FavouritesProviderProps> = ({ children
     setLoading(true);
     try {
       const headers = getAuthHeaders();
-      if (Object.keys(headers).length === 0) {
+      if (!headers) {
         setLoading(false);
         return;
       }
@@ -83,7 +83,7 @@ export const FavouritesProvider: React.FC<FavouritesProviderProps> = ({ children
 
     try {
       const headers = getAuthHeaders();
-      if (Object.keys(headers).length === 0) {
+      if (!headers) {
         // Revert optimistic update
         setFavourites(prev => isFav 
           ? [...prev, { id: Date.now(), company_id: companyId }]

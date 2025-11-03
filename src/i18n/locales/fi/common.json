@@ -19,6 +19,8 @@
     "address": "Osoite",
     "noAddress": "Osoitetta ei saatavilla",
     "description": "Kuvaus",
+    "complainToVero": "Lodge valitus Veroon",
+    "complaintSent": "Pyyntösi on lähetetty.",
     "recruitment": "Rekrytointi",
     "visitRecruitmentPage": "Siirry rekrytointisivulle",
     "editInformation": "Muokkaa yrityksen tietoja",

@@ -51,7 +51,7 @@ const CompanyInfoEditor: React.FC<CompanyInfoEditorProps> = ({
     setLoading(true);
     try {
       const headers = getAuthHeaders();
-      if (Object.keys(headers).length === 0) {
+      if (!headers) {
         showNotification("Authentication required", "error");
         return;
       }

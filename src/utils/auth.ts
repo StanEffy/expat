@@ -42,29 +42,38 @@ export const getUserId = (): number | null => {
   }
 };
 
-export const getAuthHeaders = (): HeadersInit => {
+export const getAuthHeaders = (): HeadersInit | null => {
   const token = getToken();
   if (!token) {
-    removeToken();
-    window.location.href = '/login';
-    return {};
+    // Don't redirect here - let the calling component handle it
+    // This prevents infinite loops when called during render
+    return null;
   }
 
   try {
     const payload = JSON.parse(atob(token.split('.')[1])) as TokenPayload;
     if (payload.exp * 1000 <= Date.now()) {
       removeToken();
-      window.location.href = '/login';
-      return {};
+      // Don't redirect here - let the calling component handle it
+      return null;
     }
   } catch {
     removeToken();
-    window.location.href = '/login';
-    return {};
+    // Don't redirect here - let the calling component handle it
+    return null;
   }
 
   return {
     'Content-Type': 'application/json',
     'Authorization': `Bearer ${token}`,
   };
+};
+
+// Helper function to check if we should redirect to login
+export const shouldRedirectToLogin = (): boolean => {
+  // Check if we're already on the login page to prevent infinite loops
+  if (typeof window !== 'undefined' && window.location.pathname === '/login') {
+    return false;
+  }
+  return !isTokenValid();
 }; 

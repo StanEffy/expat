@@ -48,7 +48,7 @@ const Profile = () => {
     const fetchProfile = async () => {
       try {
         const headers = getAuthHeaders();
-        if (Object.keys(headers).length === 0) {
+        if (!headers) {
           navigate('/login');
           return;
         }

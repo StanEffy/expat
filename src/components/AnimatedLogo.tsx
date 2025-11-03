@@ -24,6 +24,7 @@ const AnimatedLogo = () => {
   const [letterPositions, setLetterPositions] = useState([0, 0, 0, 0, 0]);
   const [isAnimating, setIsAnimating] = useState(true);
   const [finalState, setFinalState] = useState(false);
+  const [isRelaxed, setIsRelaxed] = useState(false);
 
   const finalWord = useMemo(() => ["E", "X", "P", "A", "T"], []);
   const directions: Array<"up" | "down"> = useMemo(
@@ -72,12 +73,16 @@ const AnimatedLogo = () => {
           // Delay final state to let the last letters scroll into view
           setTimeout(() => {
             setFinalState(true);
+            // After final state is set, delay the relaxed state transition
+            setTimeout(() => {
+              setIsRelaxed(true);
+            }, 100);
           }, 300);
         }
 
         return newPositions;
       });
-    }, 250); // Stable 250ms interval
+    }, 150); // Stable 250ms interval
 
     return () => clearInterval(interval);
   }, [isAnimating, letterSequences]);
@@ -86,7 +91,9 @@ const AnimatedLogo = () => {
     if (finalState) {
       // Final state: hard-coded EXPAT; X is tripled with accent and hover-merge effect
       return (
-        <>
+        <div
+          className={`${styles.fullLogo} ${isRelaxed ? styles.fullLogoRelaxed : ""}`}
+        >
           <span className={styles.letterStatic}>E</span>
           <span className={`${styles.xContainer} ${styles.xTriple}`}>
             <span className={`${styles.xLetter} ${styles.xBack}`}>X</span>
@@ -96,7 +103,7 @@ const AnimatedLogo = () => {
           <span className={styles.letterStatic}>P</span>
           <span className={styles.letterStatic}>A</span>
           <span className={styles.letterStatic}>T</span>
-        </>
+        </div>
       );
     }
 
@@ -137,7 +144,7 @@ const AnimatedLogo = () => {
             style={{
               transform: translateY,
               transition:
-                "transform 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+                "transform 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
             }}
           >
             {seq.map((glyph, variationIndex) => (

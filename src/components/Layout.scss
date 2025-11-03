@@ -79,46 +79,46 @@ body.no-backdrop-filter .layout-menubar {
     height: 100%;
     z-index: -2;
     background: 
-      // Base dark gradient foundation - very dark purple/blue
+      // Base dark gradient foundation - very dark purple/blue (darker for better readability)
       linear-gradient(
         135deg,
-        #0a0515 0%,
-        #120824 15%,
-        #1a0f2e 30%,
-        #2d1b4e 50%,
-        #3a2358 65%,
-        #2d1b4e 80%,
-        #1a0f2e 90%,
-        #120824 100%
+        #05030a 0%,
+        #080510 15%,
+        #0d0818 30%,
+        #150a24 50%,
+        #1a0f2e 65%,
+        #150a24 80%,
+        #0d0818 90%,
+        #080510 100%
       ),
-      // Dark purple radial gradient (top-right corner) - deeper purple
+      // Dark purple radial gradient (top-right corner) - deeper purple (darker)
       radial-gradient(
           ellipse 85% 65% at 90% 10%,
-          rgba(75, 35, 130, 0.95) 0%,
-          rgba(60, 30, 100, 0.6) 35%,
-          rgba(45, 22, 80, 0.3) 60%,
+          rgba(50, 20, 90, 0.85) 0%,
+          rgba(40, 18, 70, 0.5) 35%,
+          rgba(30, 12, 55, 0.25) 60%,
           transparent 80%
         ),
-      // Dark magenta radial gradient (middle-right) - deeper magenta
+      // Dark magenta radial gradient (middle-right) - deeper magenta (darker)
       radial-gradient(
           ellipse 75% 55% at 80% 50%,
-          rgba(130, 15, 75, 0.85) 0%,
-          rgba(100, 12, 55, 0.5) 45%,
-          rgba(70, 10, 40, 0.25) 70%,
+          rgba(90, 8, 50, 0.7) 0%,
+          rgba(70, 6, 40, 0.4) 45%,
+          rgba(50, 5, 30, 0.2) 70%,
           transparent 85%
         ),
-      // Darker cyan/blue radial gradient (bottom-left) - creates triangular feel
+      // Darker cyan/blue radial gradient (bottom-left) - creates triangular feel (darker)
       radial-gradient(
           ellipse 65% 85% at 10% 90%,
-          rgba(15, 70, 110, 0.75) 0%,
-          rgba(12, 55, 90, 0.45) 40%,
-          rgba(8, 40, 70, 0.2) 65%,
+          rgba(8, 45, 75, 0.6) 0%,
+          rgba(6, 35, 60, 0.35) 40%,
+          rgba(4, 25, 45, 0.15) 65%,
           transparent 85%
         ),
-      // Additional dark purple overlay for blending (center-left)
+      // Additional dark purple overlay for blending (center-left) (darker)
       radial-gradient(
           ellipse 50% 60% at 25% 40%,
-          rgba(55, 25, 95, 0.4) 0%,
+          rgba(35, 15, 65, 0.3) 0%,
           transparent 70%
         );
     background-size:
@@ -145,29 +145,29 @@ body.no-backdrop-filter .layout-menubar {
         140deg,
         transparent 0%,
         transparent 35%,
-        rgba(10, 50, 85, 0.2) 55%,
-        rgba(15, 65, 105, 0.3) 75%,
-        rgba(20, 75, 115, 0.35) 100%
+        rgba(6, 35, 60, 0.15) 55%,
+        rgba(8, 45, 75, 0.2) 75%,
+        rgba(10, 50, 85, 0.25) 100%
       ),
-      // Dark magenta accent from top-right
+      // Dark magenta accent from top-right (darker)
       linear-gradient(
           220deg,
           transparent 0%,
           transparent 40%,
-          rgba(110, 12, 65, 0.15) 60%,
-          rgba(130, 18, 75, 0.25) 80%,
-          rgba(140, 20, 80, 0.3) 100%
+          rgba(70, 8, 40, 0.1) 60%,
+          rgba(85, 12, 50, 0.18) 80%,
+          rgba(90, 14, 55, 0.22) 100%
         ),
-      // Dark purple overlay for depth (center-right)
+      // Dark purple overlay for depth (center-right) (darker)
       radial-gradient(
           ellipse 55% 45% at 65% 25%,
-          rgba(70, 35, 120, 0.2) 0%,
+          rgba(45, 22, 80, 0.15) 0%,
           transparent 65%
         ),
-      // Additional subtle dark blue accent (bottom-right)
+      // Additional subtle dark blue accent (bottom-right) (darker)
       radial-gradient(
           ellipse 40% 50% at 70% 85%,
-          rgba(18, 65, 100, 0.15) 0%,
+          rgba(12, 45, 75, 0.1) 0%,
           transparent 60%
         );
     background-size:
@@ -176,7 +176,7 @@ body.no-backdrop-filter .layout-menubar {
       100% 100%,
       100% 100%;
     background-attachment: fixed;
-    opacity: 0.92;
+    opacity: 0.85;
   }
 }
 

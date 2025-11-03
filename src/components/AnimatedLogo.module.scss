@@ -50,6 +50,25 @@
   white-space: nowrap;
   min-width: 0.65em;
 }
+@keyframes relaxLogo {
+  0% {
+    width: 127px;
+    letter-spacing: 8px;
+  }
+  100% {
+    width: fit-content;
+    letter-spacing: normal;
+  }
+}
+
+.fullLogo {
+  width: 127px;
+  letter-spacing: 8px;
+}
+
+.fullLogoRelaxed {
+  animation: relaxLogo 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
 
 .xContainer {
   display: inline-flex;

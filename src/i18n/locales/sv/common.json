@@ -81,5 +81,9 @@
     "email": "E-post",
     "role": "Roll",
     "memberSince": "Medlem sedan"
+  },
+  "login": {
+    "forgotPasswordMessage": "Oj, så synd! Vi har inte skapat återställning av lösenord ännu...",
+    "backToLogin": "Tillbaka till inloggning"
   }
 } 

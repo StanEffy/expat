@@ -42,6 +42,8 @@ body {
   padding: 2em;
 }
 
+@import "./styles/variables";
+
 .read-the-docs {
-  color: #888;
+  color: $complement-1;
 }

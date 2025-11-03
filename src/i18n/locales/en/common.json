@@ -81,5 +81,9 @@
     "email": "Email",
     "role": "Role",
     "memberSince": "Member since"
+  },
+  "login": {
+    "forgotPasswordMessage": "Well, bad for you! We haven't created password restoration yet...",
+    "backToLogin": "Back to Login"
   }
 } 

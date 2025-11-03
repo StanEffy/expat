@@ -1,8 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Button } from "primereact/button";
-import { FAVOURITES_ENDPOINTS } from "../constants/api";
-import { getAuthHeaders } from "../utils/auth";
 import { useNotification } from "../contexts/NotificationContext";
+import { useFavourites } from "../contexts/FavouritesContext";
 import { useTranslation } from "react-i18next";
 import styles from "./FavouriteButton.module.scss";
 
@@ -12,70 +11,26 @@ interface FavouriteButtonProps {
 }
 
 const FavouriteButton = ({ companyId, className }: FavouriteButtonProps) => {
-  const [isFavourite, setIsFavourite] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [checking, setChecking] = useState(true);
   const { showNotification } = useNotification();
   const { t } = useTranslation();
+  const { isFavourite, toggleFavourite } = useFavourites();
 
-  // Check if company is already in favourites
-  useEffect(() => {
-    const checkFavourite = async () => {
-      try {
-        const headers = getAuthHeaders();
-        if (Object.keys(headers).length === 0) {
-          setChecking(false);
-          return;
-        }
-
-        const response = await fetch(FAVOURITES_ENDPOINTS.LIST, { headers });
-
-        if (response.ok) {
-          const data = await response.json();
-          const favouriteIds = Array.isArray(data)
-            ? data.map((fav: any) => fav.company_id || fav.companyId)
-            : [];
-          setIsFavourite(favouriteIds.includes(companyId));
-        }
-      } catch (err) {
-        // Silent fail - user might not be logged in
-      } finally {
-        setChecking(false);
-      }
-    };
-
-    checkFavourite();
-  }, [companyId]);
+  const isFavouriteValue = isFavourite(companyId);
 
   const handleToggleFavourite = async () => {
-    if (loading || checking) return;
+    if (loading) return;
 
     setLoading(true);
     try {
-      const headers = getAuthHeaders();
-      if (Object.keys(headers).length === 0) {
-        showNotification("Please log in to add favourites", "warning");
-        return;
-      }
+      const success = await toggleFavourite(companyId);
 
-      const endpoint = isFavourite
-        ? FAVOURITES_ENDPOINTS.REMOVE(companyId)
-        : FAVOURITES_ENDPOINTS.ADD(companyId);
-
-      const method = isFavourite ? "DELETE" : "POST";
-
-      const response = await fetch(endpoint, {
-        method,
-        headers,
-      });
-
-      if (!response.ok) {
+      if (!success) {
         throw new Error("Failed to update favourite");
       }
 
-      setIsFavourite(!isFavourite);
       showNotification(
-        isFavourite
+        isFavouriteValue
           ? t("favourites.removedFromFavourites")
           : t("favourites.addedToFavourites"),
         "success",
@@ -90,18 +45,14 @@ const FavouriteButton = ({ companyId, className }: FavouriteButtonProps) => {
     }
   };
 
-  if (checking) {
-    return null; // Don't show button while checking
-  }
-
   return (
     <Button
-      icon={isFavourite ? "pi pi-heart-fill" : "pi pi-heart"}
-      className={`${styles.favouriteButton} ${isFavourite ? styles.favourite : ""} ${className || ""}`}
+      icon={isFavouriteValue ? "pi pi-heart-fill" : "pi pi-heart"}
+      className={`${styles.favouriteButton} ${isFavouriteValue ? styles.favourite : ""} ${className || ""}`}
       onClick={handleToggleFavourite}
       loading={loading}
       aria-label={
-        isFavourite
+        isFavouriteValue
           ? t("favourites.removeFromFavourites")
           : t("favourites.addToFavourites")
       }

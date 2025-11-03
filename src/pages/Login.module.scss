@@ -29,6 +29,10 @@
     backdrop-filter: blur(10px);
   }
 
+  :global(.p-card .p-card-title) {
+    color: $complement-4;
+  }
+
   // Make TabView transparent
   :global(.p-tabview) {
     background: transparent;
@@ -141,4 +145,16 @@
 
 .buttonGroupButton {
   flex: 1;
+}
+
+.forgotPasswordMessage {
+  text-align: center;
+  padding: 24px 16px;
+  font-size: 1.1em;
+  line-height: 1.6;
+  color: $complement-4;
+  
+  p {
+    margin: 0;
+  }
 }

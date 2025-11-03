@@ -1,20 +1,27 @@
+@import "../styles/variables";
+
 .layout-menubar {
   position: fixed;
   z-index: 10000; //to be on top of everything else
   top: 0;
   width: 100%;
-  // Dark glass effect with semi-transparent background
-  background-color: rgba(255, 255, 255, 0.2);
+  // Linear gradient using primary colors (mostly dark)
+  background: linear-gradient(
+    135deg,
+    $primary-2 0%,
+    $primary-1 50%,
+    $primary-0 100%
+  );
   // Backdrop filter blur for glass effect with Safari support
   -webkit-backdrop-filter: blur(12px) saturate(180%);
   backdrop-filter: blur(12px) saturate(180%);
   // Fallback for browsers that don't support backdrop-filter (CSS @supports)
   @supports not (backdrop-filter: blur(12px)) {
-    background-color: rgba(
-      red($primary-2),
-      green($primary-2),
-      blue($primary-2),
-      0.95
+    background: linear-gradient(
+      135deg,
+      $primary-2 0%,
+      $primary-1 50%,
+      $primary-0 100%
     );
   }
   border: none;
@@ -25,11 +32,11 @@
 
   &.scrolled {
     box-shadow: $shadow-lg;
-    background-color: rgba(
-      red($primary-2),
-      green($primary-2),
-      blue($primary-2),
-      0.85
+    background: linear-gradient(
+      135deg,
+      $primary-2 0%,
+      $primary-1 50%,
+      $primary-0 100%
     );
     -webkit-backdrop-filter: blur(16px) saturate(180%);
     backdrop-filter: blur(16px) saturate(180%);
@@ -38,22 +45,22 @@
 
 // JavaScript polyfill fallback for older Safari versions
 body.no-backdrop-filter .layout-menubar {
-  background-color: rgba(
-    red($primary-2),
-    green($primary-2),
-    blue($primary-2),
-    0.92
+  background: linear-gradient(
+    135deg,
+    $primary-2 0%,
+    $primary-1 50%,
+    $primary-0 100%
   );
   // Remove backdrop-filter when not supported
   -webkit-backdrop-filter: none;
   backdrop-filter: none;
 
   &.scrolled {
-    background-color: rgba(
-      red($primary-2),
-      green($primary-2),
-      blue($primary-2),
-      0.95
+    background: linear-gradient(
+      135deg,
+      $primary-2 0%,
+      $primary-1 50%,
+      $primary-0 100%
     );
   }
 }

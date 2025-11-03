@@ -10,6 +10,7 @@ import Login from './pages/Login';
 import Profile from './pages/Profile';
 import About from './pages/About';
 import { NotificationProvider } from './contexts/NotificationContext';
+import { FavouritesProvider } from './contexts/FavouritesContext';
 import { useState } from 'react';
 
 function App() {
@@ -23,19 +24,21 @@ function App() {
   return (
     <I18nextProvider i18n={i18n}>
       <NotificationProvider>
-        <Router>
-          <Layout currentLanguage={language} onLanguageChange={handleLanguageChange}>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/companies" element={<Companies />} />
-              <Route path="/companies/:id" element={<CompanyDetails />} />
-              <Route path="/categories" element={<Categories />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/profile" element={<Profile />} />
-            </Routes>
-          </Layout>
-        </Router>
+        <FavouritesProvider>
+          <Router>
+            <Layout currentLanguage={language} onLanguageChange={handleLanguageChange}>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/companies" element={<Companies />} />
+                <Route path="/companies/:id" element={<CompanyDetails />} />
+                <Route path="/categories" element={<Categories />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/profile" element={<Profile />} />
+              </Routes>
+            </Layout>
+          </Router>
+        </FavouritesProvider>
       </NotificationProvider>
     </I18nextProvider>
   );

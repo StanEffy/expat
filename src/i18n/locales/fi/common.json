@@ -81,5 +81,9 @@
     "email": "Sähköposti",
     "role": "Rooli",
     "memberSince": "Jäsen alkaen"
+  },
+  "login": {
+    "forgotPasswordMessage": "No, harmillista! Emme ole vielä luoneet salasanan palautusta...",
+    "backToLogin": "Takaisin kirjautumiseen"
   }
 } 

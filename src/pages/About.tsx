@@ -95,8 +95,8 @@ const About = () => {
             country."
           </p>
           <p>
-            In a historic election in 2030, running on a platform of "More Jobs,
-            Less Paperwork," Jens Brännback was elected the Prime Minister of
+            In a historic election in 2030, running on a platform of "Make Expat
+            Pat Again," Jens Brännback was elected the Prime Minister of
             Finland. His first act in office was to officially integrate the
             Expat API into all government services. His second was to declare
             the third Thursday of every month "Coffee and Cake Day," finally

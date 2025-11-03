@@ -1,5 +1,7 @@
+@import "../styles/variables";
+
 .favouriteButton {
-  color: #6c757d; // grey
+  color: $complement-1;
   
   &:hover {
     color: #dc3545; // red on hover

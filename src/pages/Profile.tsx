@@ -5,9 +5,10 @@ import { Button } from 'primereact/button';
 import { Message } from 'primereact/message';
 import { Badge } from 'primereact/badge';
 import { ProgressSpinner } from 'primereact/progressspinner';
-import { FAVOURITES_ENDPOINTS, NOTIFICATIONS_ENDPOINTS } from '../constants/api';
+import { AUTH_ENDPOINTS, NOTIFICATIONS_ENDPOINTS } from '../constants/api';
 import { getAuthHeaders } from '../utils/auth';
 import { useNotification } from '../contexts/NotificationContext';
+import { useFavourites } from '../contexts/FavouritesContext';
 import { useTranslation } from 'react-i18next';
 import styles from './Profile.module.scss';
 
@@ -15,16 +16,6 @@ interface UserProfile {
   email: string;
   role: string;
   createdAt: string;
-}
-
-interface Favourite {
-  id: number;
-  company_id: number;
-  company?: {
-    id: number;
-    name: string;
-    mainbusinesslinename?: string | null;
-  };
 }
 
 interface Notification {
@@ -45,13 +36,12 @@ const Profile = () => {
   const navigate = useNavigate();
   const { showNotification } = useNotification();
   const { t } = useTranslation();
+  const { favourites, loading: favouritesLoading, toggleFavourite } = useFavourites();
   const [profile, setProfile] = useState<UserProfile | null>(null);
-  const [favourites, setFavourites] = useState<Favourite[]>([]);
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const [unreadCount, setUnreadCount] = useState(0);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
-  const [favouritesLoading, setFavouritesLoading] = useState(false);
   const [notificationsLoading, setNotificationsLoading] = useState(false);
 
   useEffect(() => {
@@ -63,7 +53,7 @@ const Profile = () => {
           return;
         }
 
-        const response = await fetch('/api/auth/profile', {
+        const response = await fetch(AUTH_ENDPOINTS.PROFILE, {
           headers,
         });
 
@@ -83,31 +73,9 @@ const Profile = () => {
     };
 
     fetchProfile();
-    fetchFavourites();
     fetchNotifications();
     fetchUnreadCount();
   }, [navigate]);
-
-  const fetchFavourites = async () => {
-    try {
-      setFavouritesLoading(true);
-      const headers = getAuthHeaders();
-      if (Object.keys(headers).length === 0) {
-        return;
-      }
-
-      const response = await fetch(FAVOURITES_ENDPOINTS.LIST, { headers });
-      
-      if (response.ok) {
-        const data = await response.json();
-        setFavourites(Array.isArray(data) ? data : []);
-      }
-    } catch {
-      // Silent fail
-    } finally {
-      setFavouritesLoading(false);
-    }
-  };
 
   const fetchNotifications = async () => {
     try {
@@ -197,19 +165,11 @@ const Profile = () => {
 
   const handleRemoveFavourite = async (companyId: number) => {
     try {
-      const headers = getAuthHeaders();
-      if (Object.keys(headers).length === 0) {
-        return;
-      }
-
-      const response = await fetch(FAVOURITES_ENDPOINTS.REMOVE(companyId), {
-        method: 'DELETE',
-        headers,
-      });
-
-      if (response.ok) {
-        setFavourites((prev) => prev.filter((fav) => fav.company_id !== companyId));
+      const success = await toggleFavourite(companyId);
+      if (success) {
         showNotification(t('favourites.removedFromFavourites'), 'success');
+      } else {
+        showNotification('Failed to remove favourite', 'error');
       }
     } catch {
       showNotification('Failed to remove favourite', 'error');

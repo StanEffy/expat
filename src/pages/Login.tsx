@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { InputText } from "primereact/inputtext";
 import { Password } from "primereact/password";
 import { Button } from "primereact/button";
@@ -13,6 +14,7 @@ import styles from "./Login.module.scss";
 const Login = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
+  const { t } = useTranslation();
   const [tabValue, setTabValue] = useState(0);
 
   // Read invite code from query parameter or use default
@@ -143,72 +145,22 @@ const Login = () => {
     }
   };
 
-  const handleForgotPassword = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError("");
-    setLoading(true);
-
-    try {
-      const response = await fetch(AUTH_ENDPOINTS.FORGOT_PASSWORD, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username: formData.username }),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to send reset password email");
-      }
-
-      setError("Password reset email sent. Please check your inbox.");
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "An error occurred");
-    } finally {
-      setLoading(false);
-    }
-  };
 
   if (forgotPasswordMode) {
     return (
       <div className={styles.container}>
         <div className={styles.wrapper}>
           <Card title="Reset Password">
-            {error && (
-              <Message
-                severity={error.includes("sent") ? "success" : "error"}
-                text={error}
-                className={styles.errorMessage}
+            <div className={styles.forgotPasswordMessage}>
+              <p>{t("login.forgotPasswordMessage")}</p>
+            </div>
+            <div className={styles.buttonGroup}>
+              <Button
+                label={t("login.backToLogin")}
+                onClick={() => setForgotPasswordMode(false)}
+                className={styles.buttonGroupButton}
               />
-            )}
-            <form onSubmit={handleForgotPassword} className={styles.form}>
-              <div className={`p-field ${styles.pField}`}>
-                <label htmlFor="username">Username</label>
-                <InputText
-                  id="username"
-                  name="username"
-                  value={formData.username}
-                  onChange={handleChange}
-                  required
-                  className={styles.input}
-                />
-              </div>
-              <div className={styles.buttonGroup}>
-                <Button
-                  label="Back to Login"
-                  outlined
-                  onClick={() => setForgotPasswordMode(false)}
-                  className={styles.buttonGroupButton}
-                />
-                <Button
-                  type="submit"
-                  label={loading ? "Sending..." : "Send Reset Link"}
-                  disabled={loading}
-                  loading={loading}
-                  className={styles.buttonGroupButton}
-                />
-              </div>
-            </form>
+            </div>
           </Card>
         </div>
       </div>

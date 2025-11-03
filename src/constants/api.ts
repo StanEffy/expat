@@ -15,13 +15,13 @@ function getApiBaseUrl(): string {
 
   // Default production behavior based on domain
   const domain = 'x-pat.duckdns.org';
-  const port = '8000';
   // In production, use HTTPS (port 443) or HTTP (port 80) based on current page protocol
   // This ensures API calls match the frontend's protocol to avoid mixed content issues
+  // Note: No port specified - uses default ports (443 for HTTPS, 80 for HTTP)
   const protocol = typeof window !== 'undefined' && window.location.protocol === 'https:' 
     ? 'https:' 
     : 'http:';
-  return `${protocol}//${domain}:${port}`;
+  return `${protocol}//${domain}`;
 }
 
 export const API_BASE_URL = getApiBaseUrl();

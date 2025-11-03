@@ -170,7 +170,8 @@ const Login = () => {
   if (forgotPasswordMode) {
     return (
       <div className={styles.container}>
-        <Card title="Reset Password">
+        <div className={styles.wrapper}>
+          <Card title="Reset Password">
           {error && (
             <Message 
               severity={error.includes('sent') ? 'success' : 'error'} 
@@ -207,13 +208,15 @@ const Login = () => {
             </div>
           </form>
         </Card>
+        </div>
       </div>
     );
   }
 
   return (
     <div className={styles.container}>
-      <Card>
+      <div className={styles.wrapper}>
+        <Card>
         <TabView activeIndex={tabValue} onTabChange={handleTabChange}>
           <TabPanel header="Sign In">
             <h2 className={styles.title}>Sign In</h2>
@@ -354,6 +357,7 @@ const Login = () => {
           </TabPanel>
         </TabView>
       </Card>
+      </div>
     </div>
   );
 };

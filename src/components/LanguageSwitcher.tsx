@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { Dropdown } from 'primereact/dropdown';
+import { useEffect, useState } from 'react';
 import styles from './LanguageSwitcher.module.scss';
 
 const languages = [
@@ -13,17 +14,30 @@ const languages = [
 const LanguageSwitcher = () => {
   const { i18n } = useTranslation();
 
-  const handleLanguageChange = (e: { value: { code: string; name: string } }) => {
-    i18n.changeLanguage(e.value.code);
+  // Keep just the language code in state to align with optionValue
+  const [selectedLanguageCode, setSelectedLanguageCode] = useState<string>(() => {
+    return i18n.language?.split('-')[0] || 'en';
+  });
+
+  // Sync with i18n when language changes (e.g., on reload or external change)
+  useEffect(() => {
+    const langCode = i18n.language?.split('-')[0] || 'en';
+    setSelectedLanguageCode(langCode);
+  }, [i18n.language]);
+
+  const handleLanguageChange = (e: { value: string }) => {
+    const newCode = e.value;
+    i18n.changeLanguage(newCode);
+    setSelectedLanguageCode(newCode);
+    // Ensure persistence for detectors that might not cache immediately
+    try {
+      localStorage.setItem('i18nextLng', newCode);
+    } catch {}
   };
-
-  const currentLanguageCode = i18n.language || 'en';
-
-  const selectedLanguage = languages.find(lang => lang.code === currentLanguageCode) || languages[0];
 
   return (
     <Dropdown
-      value={selectedLanguage}
+      value={selectedLanguageCode}
       options={languages}
       onChange={handleLanguageChange}
       optionLabel="name"

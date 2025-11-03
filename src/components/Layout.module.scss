@@ -12,7 +12,11 @@
 .end {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 4px;
+  
+  @media (min-width: 375px) {
+    gap: 8px;
+  }
 }
 
 @import "../styles/variables";

@@ -459,11 +459,15 @@ button {
     background-color: $primary-2;
     border-color: transparent;
     box-shadow: none;
+    outline: 2px solid $complement-3;
+    outline-offset: 2px;
   }
 
   &.p-focus {
     background-color: $primary-2;
     border-color: transparent;
+    outline: 2px solid $complement-3;
+    outline-offset: 2px;
   }
 }
 
@@ -472,7 +476,7 @@ button {
   background-color: $primary-2;
   border-radius: 12px;
   border: none;
-  box-shadow: $shadow-md;
+  box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.25) !important;
 
   .p-dropdown-items {
     padding: 0.5rem 0;
@@ -617,7 +621,8 @@ button {
     background-color: $primary-2;
     border-color: transparent;
     box-shadow: none;
-    outline: none;
+    outline: 2px solid $complement-3;
+    outline-offset: 2px;
   }
 
   &::placeholder {
@@ -670,7 +675,8 @@ button {
     background-color: $primary-2;
     border-color: transparent;
     box-shadow: none;
-    outline: none;
+    outline: 2px solid $complement-3;
+    outline-offset: 2px;
   }
 
   &::placeholder {
@@ -726,7 +732,8 @@ button {
       background-color: $primary-2;
       border-color: transparent;
       box-shadow: none;
-      outline: none;
+      outline: 2px solid $complement-3;
+      outline-offset: 2px;
     }
 
     &::placeholder {
@@ -791,7 +798,8 @@ button {
       background-color: $primary-2;
       border-color: transparent;
       box-shadow: none;
-      outline: none;
+      outline: 2px solid $complement-3;
+      outline-offset: 2px;
     }
 
     &::placeholder {
@@ -894,7 +902,8 @@ button {
     background-color: $primary-2;
     border-color: transparent;
     box-shadow: none;
-    outline: none;
+    outline: 2px solid $complement-3;
+    outline-offset: 2px;
   }
 
   &:enabled:active {
@@ -1022,6 +1031,15 @@ button {
 .p-dropdown-items-wrapper {
   max-width: 400px;
 }
+
+@media (max-width: 1023px) {
+  .p-dropdown-items-wrapper {
+    max-width: 100vw;
+    padding: 0 12px;
+    .p-dropdown-items {
+    }
+  }
+}
 .p-dropdown-panel
   .p-dropdown-items
   .p-dropdown-item:not(.p-highlight):not(.p-disabled).p-focus {
@@ -1080,4 +1098,11 @@ input {
   scrollbar-width: thin;
   scrollbar-color: $complement-4
     rgba(red($primary-2), green($primary-2), blue($primary-2), 0.1);
+}
+
+.p-autocomplete-token {
+  background-color: $complement-4;
+  border-radius: 12px;
+  padding: 0.2rem;
+  font-weight: bold;
 }

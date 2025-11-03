@@ -1,13 +1,26 @@
 .layout-menubar {
   position: fixed;
-  z-index: 1;
+  z-index: 10000; //to be on top of everything else
   top: 0;
   width: 100%;
-  background-color: $primary-2; // Using primary-2 color variable
+  // Dark glass effect with semi-transparent background
+  background-color: rgba(255, 255, 255, 0.2);
+  // Backdrop filter blur for glass effect with Safari support
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  backdrop-filter: blur(12px) saturate(180%);
+  // Fallback for browsers that don't support backdrop-filter (CSS @supports)
+  @supports not (backdrop-filter: blur(12px)) {
+    background-color: rgba(
+      red($primary-2),
+      green($primary-2),
+      blue($primary-2),
+      0.95
+    );
+  }
   border: none;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
-  box-shadow: none;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   transition: all 0.4s ease;
 
   &.scrolled {
@@ -16,9 +29,32 @@
       red($primary-2),
       green($primary-2),
       blue($primary-2),
-      0.8
+      0.85
     );
-    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    backdrop-filter: blur(16px) saturate(180%);
+  }
+}
+
+// JavaScript polyfill fallback for older Safari versions
+body.no-backdrop-filter .layout-menubar {
+  background-color: rgba(
+    red($primary-2),
+    green($primary-2),
+    blue($primary-2),
+    0.92
+  );
+  // Remove backdrop-filter when not supported
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+
+  &.scrolled {
+    background-color: rgba(
+      red($primary-2),
+      green($primary-2),
+      blue($primary-2),
+      0.95
+    );
   }
 }
 
@@ -30,7 +66,118 @@
   width: 100%;
   min-height: 100vh;
   height: 100%;
-  background-color: $primary-1;
+  position: relative;
+  overflow: hidden;
+
+  // Multi-gradient background with darker tones - applied to whole app
+  &::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    background: 
+      // Base dark gradient foundation - very dark purple/blue
+      linear-gradient(
+        135deg,
+        #0a0515 0%,
+        #120824 15%,
+        #1a0f2e 30%,
+        #2d1b4e 50%,
+        #3a2358 65%,
+        #2d1b4e 80%,
+        #1a0f2e 90%,
+        #120824 100%
+      ),
+      // Dark purple radial gradient (top-right corner) - deeper purple
+      radial-gradient(
+          ellipse 85% 65% at 90% 10%,
+          rgba(75, 35, 130, 0.95) 0%,
+          rgba(60, 30, 100, 0.6) 35%,
+          rgba(45, 22, 80, 0.3) 60%,
+          transparent 80%
+        ),
+      // Dark magenta radial gradient (middle-right) - deeper magenta
+      radial-gradient(
+          ellipse 75% 55% at 80% 50%,
+          rgba(130, 15, 75, 0.85) 0%,
+          rgba(100, 12, 55, 0.5) 45%,
+          rgba(70, 10, 40, 0.25) 70%,
+          transparent 85%
+        ),
+      // Darker cyan/blue radial gradient (bottom-left) - creates triangular feel
+      radial-gradient(
+          ellipse 65% 85% at 10% 90%,
+          rgba(15, 70, 110, 0.75) 0%,
+          rgba(12, 55, 90, 0.45) 40%,
+          rgba(8, 40, 70, 0.2) 65%,
+          transparent 85%
+        ),
+      // Additional dark purple overlay for blending (center-left)
+      radial-gradient(
+          ellipse 50% 60% at 25% 40%,
+          rgba(55, 25, 95, 0.4) 0%,
+          transparent 70%
+        );
+    background-size:
+      100% 100%,
+      100% 100%,
+      100% 100%,
+      100% 100%,
+      100% 100%;
+    background-attachment: fixed;
+  }
+
+  // Additional overlay for soft polygonal shapes and smooth transitions
+  &::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    background:
+      // Soft blue triangular effect from bottom-left (darker)
+      linear-gradient(
+        140deg,
+        transparent 0%,
+        transparent 35%,
+        rgba(10, 50, 85, 0.2) 55%,
+        rgba(15, 65, 105, 0.3) 75%,
+        rgba(20, 75, 115, 0.35) 100%
+      ),
+      // Dark magenta accent from top-right
+      linear-gradient(
+          220deg,
+          transparent 0%,
+          transparent 40%,
+          rgba(110, 12, 65, 0.15) 60%,
+          rgba(130, 18, 75, 0.25) 80%,
+          rgba(140, 20, 80, 0.3) 100%
+        ),
+      // Dark purple overlay for depth (center-right)
+      radial-gradient(
+          ellipse 55% 45% at 65% 25%,
+          rgba(70, 35, 120, 0.2) 0%,
+          transparent 65%
+        ),
+      // Additional subtle dark blue accent (bottom-right)
+      radial-gradient(
+          ellipse 40% 50% at 70% 85%,
+          rgba(18, 65, 100, 0.15) 0%,
+          transparent 60%
+        );
+    background-size:
+      100% 100%,
+      100% 100%,
+      100% 100%,
+      100% 100%;
+    background-attachment: fixed;
+    opacity: 0.92;
+  }
 }
 
 .main {

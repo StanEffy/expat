@@ -152,7 +152,7 @@ const AnimatedLogo = () => {
   };
 
   return (
-    <div className={styles.logoContainer}>
+    <div className={styles.logoContainer} translate="no" lang="en">
       <div className={styles.logoText}>{renderText()}</div>
     </div>
   );

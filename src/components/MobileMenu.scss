@@ -1,5 +1,10 @@
 .mobile-menu {
   min-width: 200px;
+  max-width: calc(100vw - 32px);
+  
+  @media (min-width: 375px) {
+    min-width: 240px;
+  }
 }
 
 @media (min-width: 769px) {

@@ -1,10 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { Card } from "primereact/card";
 import { Button } from "primereact/button";
 import { Dropdown } from "primereact/dropdown";
 import { ProgressSpinner } from "primereact/progressspinner";
-import { COMPANY_ENDPOINTS, CITY_ENDPOINTS, CATEGORY_ENDPOINTS, API_BASE_URL } from "../constants/api";
+import {
+  COMPANY_ENDPOINTS,
+  CITY_ENDPOINTS,
+  CATEGORY_ENDPOINTS,
+  API_BASE_URL,
+} from "../constants/api";
 import { getAuthHeaders } from "../utils/auth";
 import { useNotification } from "../contexts/NotificationContext";
 import { useTranslation } from "react-i18next";
@@ -48,8 +53,11 @@ const Companies = () => {
   const [selectedCities, setSelectedCities] = useState<string[]>([]);
 
   const [categories, setCategories] = useState<BackendCategoryItem[]>([]);
-  const [generalCategories, setGeneralCategories] = useState<GeneralCategoryItem[]>([]);
+  const [generalCategories, setGeneralCategories] = useState<
+    GeneralCategoryItem[]
+  >([]);
   const [selectedCategoryId, setSelectedCategoryId] = useState<string>("");
+  const previousCountRef = useRef(0);
 
   // Load initial params from URL
   useEffect(() => {
@@ -133,9 +141,13 @@ const Companies = () => {
       }
 
       let url: string;
-      if (mainbusinesslineid && mainbusinesslineid.startsWith('general:')) {
-        const generalCode = mainbusinesslineid.split(':')[1];
-        const queryParts: string[] = [`page=${pageNumber}`, `count=${limit}`, `generalcategory=${encodeURIComponent(generalCode)}`];
+      if (mainbusinesslineid && mainbusinesslineid.startsWith("general:")) {
+        const generalCode = mainbusinesslineid.split(":")[1];
+        const queryParts: string[] = [
+          `page=${pageNumber}`,
+          `count=${limit}`,
+          `generalcategory=${encodeURIComponent(generalCode)}`,
+        ];
         if (cities && cities.length > 0) {
           for (const city of cities) {
             queryParts.push(`cities=${encodeURIComponent(city)}`);
@@ -162,7 +174,8 @@ const Companies = () => {
 
       const json = await response.json();
       const data = Array.isArray(json?.data) ? json.data : [];
-      const totalCount: number | undefined = typeof json?.count === 'number' ? json.count : undefined;
+      const totalCount: number | undefined =
+        typeof json?.count === "number" ? json.count : undefined;
 
       // If backend returns null or non-array for data, treat as empty page
       if (!Array.isArray(json?.data)) {
@@ -172,14 +185,24 @@ const Companies = () => {
         }
       }
 
-      setCompanies((prev) => (append ? (data.length ? [...prev, ...data] : prev) : data));
+      if (append) {
+        if (data.length) {
+          setCompanies((prev) => {
+            previousCountRef.current = prev.length;
+            return [...prev, ...data];
+          });
+        }
+      } else {
+        previousCountRef.current = 0;
+        setCompanies(data);
+      }
 
       // Determine hasMore conservatively
       let nextHasMore = true;
       if (data.length < limit) {
         nextHasMore = false;
       }
-      if (typeof totalCount === 'number' && pageNumber * limit >= totalCount) {
+      if (typeof totalCount === "number" && pageNumber * limit >= totalCount) {
         nextHasMore = false;
       }
       setHasMore(nextHasMore);
@@ -272,7 +295,9 @@ const Companies = () => {
     navigate(`?${newSearchParams.toString()}`, { replace: true });
   };
 
-  const handleItemsPerPageChange = (e: { value: { label: string; value: number } }) => {
+  const handleItemsPerPageChange = (e: {
+    value: { label: string; value: number };
+  }) => {
     const newValue = e.value.value;
     setItemsPerPage(newValue);
 
@@ -291,7 +316,10 @@ const Companies = () => {
     setSelectedCategoryId(event.value);
   };
 
-  const itemsPerPageOptions = ITEMS_PER_PAGE_OPTIONS.map(opt => ({ label: opt.toString(), value: opt }));
+  const itemsPerPageOptions = ITEMS_PER_PAGE_OPTIONS.map((opt) => ({
+    label: opt.toString(),
+    value: opt,
+  }));
 
   if (loading) {
     return (
@@ -314,38 +342,56 @@ const Companies = () => {
   return (
     <div className={styles.container}>
       <div className={styles.filters}>
-        <div className={styles.filterItem}>
+        <div className={styles.filterCities}>
           <CompanyFilter
             cities={cities}
             selectedCities={selectedCities}
             onCityChange={handleCityChange}
           />
         </div>
-        <CategoryFilter
-          categories={categories}
-          generalCategories={generalCategories}
-          value={selectedCategoryId}
-          onChange={handleCategoryChange}
-        />
-        <Dropdown
-          value={itemsPerPageOptions.find(opt => opt.value === itemsPerPage) || itemsPerPageOptions[0]}
-          options={itemsPerPageOptions}
-          onChange={handleItemsPerPageChange}
-          optionLabel="label"
-          optionValue="value"
-          placeholder={t("common.itemsPerPage")}
-          className={styles.itemsPerPageDropdown}
-        />
+        <div className={styles.filterCategory}>
+          <CategoryFilter
+            categories={categories}
+            generalCategories={generalCategories}
+            value={selectedCategoryId}
+            onChange={handleCategoryChange}
+          />
+        </div>
+        <div className={styles.filterPerPage}>
+          <Dropdown
+            value={
+              itemsPerPageOptions.find((opt) => opt.value === itemsPerPage) ||
+              itemsPerPageOptions[0]
+            }
+            options={itemsPerPageOptions}
+            onChange={handleItemsPerPageChange}
+            optionLabel="label"
+            optionValue="value"
+            placeholder={t("common.itemsPerPage")}
+            className={styles.itemsPerPageDropdown}
+          />
+        </div>
       </div>
       <div className={styles.grid}>
-        {companies.map((company) => (
-          <Card key={company.id} className={styles.card}>
+        {companies.map((company, index) => {
+          // Calculate delay: for new cards (after append), use relative index
+          // For initial load, use absolute index
+          const delayIndex = index < previousCountRef.current ? index : index - previousCountRef.current;
+          return (
+          <Card 
+            key={company.id} 
+            className={styles.card}
+            style={{
+              animationDelay: `${delayIndex * 0.1}s`
+            }}
+          >
+            <FavouriteButton
+              companyId={company.id}
+              className={styles.favouriteButtonCard}
+            />
             <div className={styles.cardContent}>
               <div className={styles.cardHeader}>
-                <h3 className={styles.cardTitle}>
-                  {company.name}
-                </h3>
-                <FavouriteButton companyId={company.id} className={styles.favouriteButtonCard} />
+                <h3 className={styles.cardTitle}>{company.name}</h3>
               </div>
               <p className={styles.cardSubtitle}>
                 {company.mainbusinesslinename || ""}
@@ -359,7 +405,8 @@ const Companies = () => {
               />
             </div>
           </Card>
-        ))}
+          );
+        })}
       </div>
       {hasMore && (
         <div className={styles.loadMoreContainer}>

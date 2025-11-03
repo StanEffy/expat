@@ -7,6 +7,7 @@ import MobileMenu from "./MobileMenu";
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "./LanguageSwitcher";
 import GeometricBackground from "./GeometricBackground";
+import GlowingShapes from "./GlowingShapes";
 import "./Layout.scss";
 import styles from "./Layout.module.scss";
 import AnimatedLogo from "./AnimatedLogo.tsx";
@@ -24,6 +25,58 @@ const Layout = ({ children }: LayoutProps) => {
 
   useEffect(() => {
     setIsAuthenticated(isTokenValid());
+  }, []);
+
+  // Safari backdrop-filter polyfill detection
+  useEffect(() => {
+    const checkBackdropFilterSupport = () => {
+      // Create a test element with backdrop-filter
+      const testElement = document.createElement('div');
+      testElement.style.position = 'fixed';
+      testElement.style.top = '-9999px';
+      testElement.style.left = '-9999px';
+      testElement.style.width = '1px';
+      testElement.style.height = '1px';
+      testElement.style.webkitBackdropFilter = 'blur(1px)';
+      testElement.style.backdropFilter = 'blur(1px)';
+      document.body.appendChild(testElement);
+      
+      // Check if backdrop-filter is actually supported
+      const computedStyle = window.getComputedStyle(testElement);
+      const hasBackdropFilter = 
+        (computedStyle.backdropFilter !== 'none' && computedStyle.backdropFilter !== '') ||
+        (computedStyle.webkitBackdropFilter !== 'none' && computedStyle.webkitBackdropFilter !== '') ||
+        // Fallback check using CSS.supports if available
+        (window.CSS && window.CSS.supports && (
+          window.CSS.supports('-webkit-backdrop-filter', 'blur(1px)') ||
+          window.CSS.supports('backdrop-filter', 'blur(1px)')
+        ));
+      
+      document.body.removeChild(testElement);
+      
+      // Add class to body if backdrop-filter is not supported
+      if (!hasBackdropFilter) {
+        document.body.classList.add('no-backdrop-filter');
+      } else {
+        document.body.classList.remove('no-backdrop-filter');
+      }
+    };
+
+    // Small delay to ensure DOM is ready
+    const timeoutId = setTimeout(checkBackdropFilterSupport, 100);
+    
+    // Also check immediately and on events
+    checkBackdropFilterSupport();
+    
+    // Recheck on resize/orientation change (for iOS Safari)
+    window.addEventListener('resize', checkBackdropFilterSupport);
+    window.addEventListener('orientationchange', checkBackdropFilterSupport);
+    
+    return () => {
+      clearTimeout(timeoutId);
+      window.removeEventListener('resize', checkBackdropFilterSupport);
+      window.removeEventListener('orientationchange', checkBackdropFilterSupport);
+    };
   }, []);
 
   const start = (
@@ -61,7 +114,8 @@ const Layout = ({ children }: LayoutProps) => {
 
   return (
     <div className={"wrapper"}>
-      <GeometricBackground />
+      {/*<GeometricBackground />*/}
+      <GlowingShapes />
       <Menubar start={start} end={end} className="layout-menubar" />
       <main className={"main"}>{children}</main>
       <footer className={styles.footer}>

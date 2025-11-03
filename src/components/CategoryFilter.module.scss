@@ -1,4 +1,9 @@
 .dropdown {
   min-width: 280px;
 }
-
+@media (max-width: 1023px) {
+  .dropdown {
+    min-width: auto;
+    width: 100%;
+  }
+}

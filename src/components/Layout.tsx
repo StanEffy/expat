@@ -6,7 +6,6 @@ import { isTokenValid } from "../utils/auth";
 import MobileMenu from "./MobileMenu";
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "./LanguageSwitcher";
-import GeometricBackground from "./GeometricBackground";
 import GlowingShapes from "./GlowingShapes";
 import "./Layout.scss";
 import styles from "./Layout.module.scss";
@@ -37,21 +36,24 @@ const Layout = ({ children }: LayoutProps) => {
       testElement.style.left = '-9999px';
       testElement.style.width = '1px';
       testElement.style.height = '1px';
-      testElement.style.webkitBackdropFilter = 'blur(1px)';
       testElement.style.backdropFilter = 'blur(1px)';
+      // Set the prefixed property via setProperty to avoid TS errors
+      testElement.style.setProperty('-webkit-backdrop-filter', 'blur(1px)');
       document.body.appendChild(testElement);
-      
+
       // Check if backdrop-filter is actually supported
       const computedStyle = window.getComputedStyle(testElement);
-      const hasBackdropFilter = 
-        (computedStyle.backdropFilter !== 'none' && computedStyle.backdropFilter !== '') ||
-        (computedStyle.webkitBackdropFilter !== 'none' && computedStyle.webkitBackdropFilter !== '') ||
+      const webkitValue = computedStyle.getPropertyValue('-webkit-backdrop-filter');
+      const stdValue = (computedStyle as any).backdropFilter || computedStyle.getPropertyValue('backdrop-filter');
+      const hasBackdropFilter =
+        (typeof stdValue === 'string' && stdValue.trim() !== '' && stdValue.trim() !== 'none') ||
+        (typeof webkitValue === 'string' && webkitValue.trim() !== '' && webkitValue.trim() !== 'none') ||
         // Fallback check using CSS.supports if available
         (window.CSS && window.CSS.supports && (
           window.CSS.supports('-webkit-backdrop-filter', 'blur(1px)') ||
           window.CSS.supports('backdrop-filter', 'blur(1px)')
         ));
-      
+
       document.body.removeChild(testElement);
       
       // Add class to body if backdrop-filter is not supported

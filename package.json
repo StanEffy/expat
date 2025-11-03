@@ -5,9 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite --port 3000",
+    "dev:clean": "rm -rf node_modules/.vite && vite --port 3000 --force",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "clean:cache": "rm -rf node_modules/.vite"
   },
   "dependencies": {
     "i18next": "^25.0.0",

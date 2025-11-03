@@ -41,6 +41,11 @@
     -webkit-backdrop-filter: blur(16px) saturate(180%);
     backdrop-filter: blur(16px) saturate(180%);
   }
+
+  // Hide the built-in PrimeReact mobile menu button
+  .p-menubar-button {
+    display: none !important;
+  }
 }
 
 // JavaScript polyfill fallback for older Safari versions

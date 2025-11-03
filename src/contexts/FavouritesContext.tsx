@@ -62,8 +62,10 @@ export const FavouritesProvider: React.FC<FavouritesProviderProps> = ({ children
       const response = await fetch(FAVOURITES_ENDPOINTS.LIST, { headers });
 
       if (response.ok) {
-        const data = await response.json();
-        setFavourites(Array.isArray(data) ? data : []);
+        const json = await response.json();
+        // Handle both { data: [...] } and [...] response formats
+        const favouritesArray = Array.isArray(json?.data) ? json.data : (Array.isArray(json) ? json : []);
+        setFavourites(favouritesArray);
         setHasFetched(true);
       }
     } catch (err) {
@@ -79,14 +81,16 @@ export const FavouritesProvider: React.FC<FavouritesProviderProps> = ({ children
   }, [fetchFavourites]);
 
   const toggleFavourite = useCallback(async (companyId: number): Promise<boolean> => {
-    let wasFavourite: boolean;
+    // Check current state first
+    const currentFavIds = new Set(favourites.map(fav => fav.company_id));
+    const wasFavourite = currentFavIds.has(companyId);
     
-    // Optimistic update - check current state and update
+    // Optimistic update
     setFavourites(prev => {
-      const currentFavIds = new Set(prev.map(fav => fav.company_id));
-      wasFavourite = currentFavIds.has(companyId);
+      const prevFavIds = new Set(prev.map(fav => fav.company_id));
+      const isFav = prevFavIds.has(companyId);
       
-      if (wasFavourite) {
+      if (isFav) {
         return prev.filter(fav => fav.company_id !== companyId);
       } else {
         return [...prev, {
@@ -101,8 +105,8 @@ export const FavouritesProvider: React.FC<FavouritesProviderProps> = ({ children
       if (!headers) {
         // Revert optimistic update
         setFavourites(prev => {
-          const currentFavIds = new Set(prev.map(fav => fav.company_id));
-          const nowFavourite = currentFavIds.has(companyId);
+          const prevFavIds = new Set(prev.map(fav => fav.company_id));
+          const nowFavourite = prevFavIds.has(companyId);
           // If state changed (wasFavourite != nowFavourite), revert it
           if (wasFavourite && !nowFavourite) {
             return [...prev, { id: Date.now(), company_id: companyId }];
@@ -135,8 +139,8 @@ export const FavouritesProvider: React.FC<FavouritesProviderProps> = ({ children
         });
         // Revert optimistic update
         setFavourites(prev => {
-          const currentFavIds = new Set(prev.map(fav => fav.company_id));
-          const nowFavourite = currentFavIds.has(companyId);
+          const prevFavIds = new Set(prev.map(fav => fav.company_id));
+          const nowFavourite = prevFavIds.has(companyId);
           if (wasFavourite && !nowFavourite) {
             return [...prev, { id: Date.now(), company_id: companyId }];
           } else if (!wasFavourite && nowFavourite) {
@@ -152,8 +156,8 @@ export const FavouritesProvider: React.FC<FavouritesProviderProps> = ({ children
       console.error('[FavouritesContext] Request error:', err);
       // Revert optimistic update
       setFavourites(prev => {
-        const currentFavIds = new Set(prev.map(fav => fav.company_id));
-        const nowFavourite = currentFavIds.has(companyId);
+        const prevFavIds = new Set(prev.map(fav => fav.company_id));
+        const nowFavourite = prevFavIds.has(companyId);
         if (wasFavourite && !nowFavourite) {
           return [...prev, { id: Date.now(), company_id: companyId }];
         } else if (!wasFavourite && nowFavourite) {
@@ -163,7 +167,7 @@ export const FavouritesProvider: React.FC<FavouritesProviderProps> = ({ children
       });
       return false;
     }
-  }, []);
+  }, [favourites]);
 
   const isFavourite = useCallback((companyId: number): boolean => {
     return favouriteIds.has(companyId);

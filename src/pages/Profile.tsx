@@ -5,7 +5,7 @@ import { Button } from 'primereact/button';
 import { Message } from 'primereact/message';
 import { Badge } from 'primereact/badge';
 import { ProgressSpinner } from 'primereact/progressspinner';
-import { AUTH_ENDPOINTS, NOTIFICATIONS_ENDPOINTS } from '../constants/api';
+import { AUTH_ENDPOINTS, NOTIFICATIONS_ENDPOINTS, COMPANY_ENDPOINTS } from '../constants/api';
 import { getAuthHeaders } from '../utils/auth';
 import { useNotification } from '../contexts/NotificationContext';
 import { useFavourites } from '../contexts/FavouritesContext';
@@ -54,6 +54,8 @@ const Profile = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
   const [notificationsLoading, setNotificationsLoading] = useState(false);
+  const [favouritesWithCompanies, setFavouritesWithCompanies] = useState<Favourite[]>([]);
+  const [loadingCompanyDetails, setLoadingCompanyDetails] = useState(false);
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -92,6 +94,81 @@ const Profile = () => {
     fetchNotifications();
     fetchUnreadCount();
   }, [navigate, initializeFromProfile]);
+
+  // Fetch company details for favourites when favourites change
+  useEffect(() => {
+    const fetchCompanyDetailsForFavourites = async () => {
+      if (favourites.length === 0) {
+        setFavouritesWithCompanies([]);
+        return;
+      }
+
+      // Filter favourites that don't have company data
+      const favouritesNeedingData = favourites.filter(fav => !fav.company);
+      
+      if (favouritesNeedingData.length === 0) {
+        // All favourites already have company data
+        setFavouritesWithCompanies(favourites);
+        return;
+      }
+
+      setLoadingCompanyDetails(true);
+      try {
+        const headers = getAuthHeaders();
+        if (!headers) {
+          return;
+        }
+
+        // Fetch company details for each favourite that needs it
+        const companyPromises = favouritesNeedingData.map(async (favourite) => {
+          try {
+            const response = await fetch(COMPANY_ENDPOINTS.DETAILS(favourite.company_id.toString()), {
+              headers,
+            });
+
+            if (response.ok) {
+              const data = await response.json();
+              // Company endpoint returns array, get first item
+              const companyData = Array.isArray(data) ? data[0] : data;
+              
+              if (companyData) {
+                return {
+                  ...favourite,
+                  company: {
+                    id: companyData.id,
+                    name: companyData.name,
+                    mainbusinesslinename: companyData.mainbusinesslinename || null,
+                  },
+                };
+              }
+            }
+          } catch (err) {
+            console.error(`Failed to fetch company ${favourite.company_id}:`, err);
+          }
+          // Return favourite without company data if fetch failed
+          return favourite;
+        });
+
+        const favouritesWithCompanyData = await Promise.all(companyPromises);
+        
+        // Merge with favourites that already have company data
+        const allFavouritesWithCompanies = favourites.map(fav => {
+          const updated = favouritesWithCompanyData.find(f => f.id === fav.id);
+          return updated || fav;
+        });
+
+        setFavouritesWithCompanies(allFavouritesWithCompanies);
+      } catch (err) {
+        console.error('Error fetching company details for favourites:', err);
+        // Fallback to favourites without company data
+        setFavouritesWithCompanies(favourites);
+      } finally {
+        setLoadingCompanyDetails(false);
+      }
+    };
+
+    fetchCompanyDetailsForFavourites();
+  }, [favourites]);
 
   const fetchNotifications = async () => {
     try {
@@ -235,7 +312,7 @@ const Profile = () => {
       </Card>
 
       <Card title={t('favourites.title')} className={styles.card}>
-        {favouritesLoading ? (
+        {favouritesLoading || loadingCompanyDetails ? (
           <div className={styles.loadingContainer}>
             <ProgressSpinner />
           </div>
@@ -243,7 +320,7 @@ const Profile = () => {
           <p className={styles.emptyMessage}>{t('favourites.noFavourites')}</p>
         ) : (
           <div className={styles.favouritesList}>
-            {favourites.map((favourite) => (
+            {(favouritesWithCompanies.length > 0 ? favouritesWithCompanies : favourites).map((favourite) => (
               <div key={favourite.id} className={styles.favouriteItem}>
                 <div className={styles.favouriteInfo}>
                   <h4

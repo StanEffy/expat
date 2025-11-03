@@ -1,6 +1,6 @@
-import { createContext, useContext, useState, useEffect, ReactNode, useCallback } from 'react';
-import { FAVOURITES_ENDPOINTS } from '../constants/api';
-import { getAuthHeaders } from '../utils/auth';
+import { createContext, useContext, useState, useEffect, ReactNode, useCallback, useMemo } from 'react';
+import { FAVOURITES_ENDPOINTS, AUTH_ENDPOINTS } from '../constants/api';
+import { getAuthHeaders, isTokenValid } from '../utils/auth';
 
 interface Favourite {
   id: number;
@@ -17,6 +17,7 @@ interface FavouritesContextType {
   favouriteIds: Set<number>;
   loading: boolean;
   fetchFavourites: () => Promise<void>;
+  initializeFromProfile: (profileFavourites: Favourite[]) => void;
   toggleFavourite: (companyId: number) => Promise<boolean>;
   isFavourite: (companyId: number) => boolean;
   refreshFavourites: () => Promise<void>;
@@ -33,7 +34,16 @@ export const FavouritesProvider: React.FC<FavouritesProviderProps> = ({ children
   const [loading, setLoading] = useState(false);
   const [hasFetched, setHasFetched] = useState(false);
 
-  const favouriteIds = new Set(favourites.map(fav => fav.company_id));
+  // Create Set of favourite IDs for quick lookup - memoized for performance
+  const favouriteIds = useMemo(() => {
+    return new Set(favourites.map(fav => fav.company_id));
+  }, [favourites]);
+
+  const initializeFromProfile = useCallback((profileFavourites: Favourite[]) => {
+    // Initialize favourites from profile data
+    setFavourites(Array.isArray(profileFavourites) ? profileFavourites : []);
+    setHasFetched(true);
+  }, []);
 
   const fetchFavourites = useCallback(async () => {
     // Only fetch if we haven't already fetched
@@ -69,34 +79,46 @@ export const FavouritesProvider: React.FC<FavouritesProviderProps> = ({ children
   }, [fetchFavourites]);
 
   const toggleFavourite = useCallback(async (companyId: number): Promise<boolean> => {
-    const isFav = favouriteIds.has(companyId);
+    let wasFavourite: boolean;
     
-    // Optimistic update
-    if (isFav) {
-      setFavourites(prev => prev.filter(fav => fav.company_id !== companyId));
-    } else {
-      setFavourites(prev => [...prev, {
-        id: Date.now(), // Temporary ID
-        company_id: companyId,
-      }]);
-    }
+    // Optimistic update - check current state and update
+    setFavourites(prev => {
+      const currentFavIds = new Set(prev.map(fav => fav.company_id));
+      wasFavourite = currentFavIds.has(companyId);
+      
+      if (wasFavourite) {
+        return prev.filter(fav => fav.company_id !== companyId);
+      } else {
+        return [...prev, {
+          id: Date.now(), // Temporary ID
+          company_id: companyId,
+        }];
+      }
+    });
 
     try {
       const headers = getAuthHeaders();
       if (!headers) {
         // Revert optimistic update
-        setFavourites(prev => isFav 
-          ? [...prev, { id: Date.now(), company_id: companyId }]
-          : prev.filter(fav => fav.company_id !== companyId)
-        );
+        setFavourites(prev => {
+          const currentFavIds = new Set(prev.map(fav => fav.company_id));
+          const nowFavourite = currentFavIds.has(companyId);
+          // If state changed (wasFavourite != nowFavourite), revert it
+          if (wasFavourite && !nowFavourite) {
+            return [...prev, { id: Date.now(), company_id: companyId }];
+          } else if (!wasFavourite && nowFavourite) {
+            return prev.filter(fav => fav.company_id !== companyId);
+          }
+          return prev;
+        });
         return false;
       }
 
-      const endpoint = isFav
+      const endpoint = wasFavourite
         ? FAVOURITES_ENDPOINTS.REMOVE(companyId)
         : FAVOURITES_ENDPOINTS.ADD(companyId);
 
-      const method = isFav ? 'DELETE' : 'POST';
+      const method = wasFavourite ? 'DELETE' : 'POST';
 
       const response = await fetch(endpoint, {
         method,
@@ -112,10 +134,16 @@ export const FavouritesProvider: React.FC<FavouritesProviderProps> = ({ children
           error: errorText,
         });
         // Revert optimistic update
-        setFavourites(prev => isFav 
-          ? [...prev, { id: Date.now(), company_id: companyId }]
-          : prev.filter(fav => fav.company_id !== companyId)
-        );
+        setFavourites(prev => {
+          const currentFavIds = new Set(prev.map(fav => fav.company_id));
+          const nowFavourite = currentFavIds.has(companyId);
+          if (wasFavourite && !nowFavourite) {
+            return [...prev, { id: Date.now(), company_id: companyId }];
+          } else if (!wasFavourite && nowFavourite) {
+            return prev.filter(fav => fav.company_id !== companyId);
+          }
+          return prev;
+        });
         return false;
       }
 
@@ -123,28 +151,69 @@ export const FavouritesProvider: React.FC<FavouritesProviderProps> = ({ children
     } catch (err) {
       console.error('[FavouritesContext] Request error:', err);
       // Revert optimistic update
-      setFavourites(prev => isFav 
-        ? [...prev, { id: Date.now(), company_id: companyId }]
-        : prev.filter(fav => fav.company_id !== companyId)
-      );
+      setFavourites(prev => {
+        const currentFavIds = new Set(prev.map(fav => fav.company_id));
+        const nowFavourite = currentFavIds.has(companyId);
+        if (wasFavourite && !nowFavourite) {
+          return [...prev, { id: Date.now(), company_id: companyId }];
+        } else if (!wasFavourite && nowFavourite) {
+          return prev.filter(fav => fav.company_id !== companyId);
+        }
+        return prev;
+      });
       return false;
     }
-  }, [favouriteIds]);
+  }, []);
 
   const isFavourite = useCallback((companyId: number): boolean => {
     return favouriteIds.has(companyId);
   }, [favouriteIds]);
 
-  // Fetch favourites on mount
+  // Load favourites from profile on mount if authenticated
   useEffect(() => {
-    fetchFavourites();
-  }, [fetchFavourites]);
+    const loadFavouritesFromProfile = async () => {
+      // Only load if we haven't already fetched and user is authenticated
+      if (hasFetched || !isTokenValid()) {
+        return;
+      }
+
+      setLoading(true);
+      try {
+        const headers = getAuthHeaders();
+        if (!headers) {
+          setLoading(false);
+          return;
+        }
+
+        // Fetch profile which now includes favourites
+        const response = await fetch(AUTH_ENDPOINTS.PROFILE, { headers });
+
+        if (response.ok) {
+          const profileData = await response.json();
+          // Extract favourites from profile response
+          if (profileData.favourites && Array.isArray(profileData.favourites)) {
+            initializeFromProfile(profileData.favourites);
+          } else {
+            // If profile doesn't have favourites, set empty array
+            initializeFromProfile([]);
+          }
+        }
+      } catch (err) {
+        // Silent fail - user might not be logged in or profile endpoint might fail
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadFavouritesFromProfile();
+  }, [hasFetched, initializeFromProfile]);
 
   const value: FavouritesContextType = {
     favourites,
     favouriteIds,
     loading,
     fetchFavourites,
+    initializeFromProfile,
     toggleFavourite,
     isFavourite,
     refreshFavourites,

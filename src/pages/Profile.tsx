@@ -12,10 +12,21 @@ import { useFavourites } from '../contexts/FavouritesContext';
 import { useTranslation } from 'react-i18next';
 import styles from './Profile.module.scss';
 
+interface Favourite {
+  id: number;
+  company_id: number;
+  company?: {
+    id: number;
+    name: string;
+    mainbusinesslinename?: string | null;
+  };
+}
+
 interface UserProfile {
   email: string;
   role: string;
   createdAt: string;
+  favourites?: Favourite[];
 }
 
 interface Notification {
@@ -36,7 +47,7 @@ const Profile = () => {
   const navigate = useNavigate();
   const { showNotification } = useNotification();
   const { t } = useTranslation();
-  const { favourites, loading: favouritesLoading, toggleFavourite } = useFavourites();
+  const { favourites, loading: favouritesLoading, toggleFavourite, initializeFromProfile } = useFavourites();
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const [unreadCount, setUnreadCount] = useState(0);
@@ -63,6 +74,11 @@ const Profile = () => {
 
         const data = await response.json();
         setProfile(data);
+        
+        // Extract favourites from profile and initialize in context
+        if (data.favourites && Array.isArray(data.favourites)) {
+          initializeFromProfile(data.favourites);
+        }
       } catch (err) {
         setError(err instanceof Error ? err.message : 'An error occurred');
         localStorage.removeItem('token');
@@ -75,7 +91,7 @@ const Profile = () => {
     fetchProfile();
     fetchNotifications();
     fetchUnreadCount();
-  }, [navigate]);
+  }, [navigate, initializeFromProfile]);
 
   const fetchNotifications = async () => {
     try {

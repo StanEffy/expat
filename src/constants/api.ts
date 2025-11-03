@@ -2,10 +2,9 @@
 // In production, this will be set at build time via VITE_API_BASE_URL
 // In Kubernetes, it will be set in the deployment manifest or at build time
 function getApiBaseUrl(): string {
-  // In development mode, use relative URLs so Vite proxy can forward to localhost:8000
-  // This avoids CORS issues and uses the proxy we configured in vite.config.ts
+  // In development mode, use localhost:8000
   if (import.meta.env.DEV) {
-    return '';
+    return 'http://localhost:8000';
   }
 
   // In production, use build-time env var if explicitly set

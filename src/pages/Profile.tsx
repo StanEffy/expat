@@ -81,7 +81,7 @@ const Profile = () => {
     try {
       setNotificationsLoading(true);
       const headers = getAuthHeaders();
-      if (Object.keys(headers).length === 0) {
+      if (!headers) {
         return;
       }
 
@@ -101,7 +101,7 @@ const Profile = () => {
   const fetchUnreadCount = async () => {
     try {
       const headers = getAuthHeaders();
-      if (Object.keys(headers).length === 0) {
+      if (!headers) {
         return;
       }
 
@@ -119,7 +119,7 @@ const Profile = () => {
   const handleMarkAsRead = async (notificationId: number) => {
     try {
       const headers = getAuthHeaders();
-      if (Object.keys(headers).length === 0) {
+      if (!headers) {
         return;
       }
 
@@ -144,7 +144,7 @@ const Profile = () => {
   const handleMarkAllAsRead = async () => {
     try {
       const headers = getAuthHeaders();
-      if (Object.keys(headers).length === 0) {
+      if (!headers) {
         return;
       }
 

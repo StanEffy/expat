@@ -16,45 +16,47 @@
 
 .filters {
   margin-top: 16px;
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 2fr 1fr; // Default for small screens
   gap: 16px;
-
   align-items: end;
-  max-width: 100%;
+  width: 100%;
+  // Force gap to apply
+  grid-gap: 16px;
 }
 
 .filterCities {
-  width: 100%;
   > div {
     margin-bottom: 0 !important;
   }
 }
 .filterCategory {
-  width: calc(50% - 8px);
 }
 .filterPerPage {
-  width: calc(50% - 8px);
 }
 
 .itemsPerPageDropdown {
   min-width: 120px;
-  margin-left: auto;
+  width: 100%;
 }
 
 // Small screens up to 1024px
 @media (max-width: 1023px) {
   .filters {
+    grid-template-columns: 2fr 1fr;
+    gap: 16px !important;
   }
   .filterCities {
+    grid-column: 1 / -1; // Full row
   }
   .filterCategory {
+    grid-column: 1;
   }
   .filterPerPage {
+    grid-column: 2;
   }
   .itemsPerPageDropdown {
     min-width: auto;
-
     width: 100%;
   }
 }
@@ -62,10 +64,17 @@
 // From 1024px: proportions 2/5, 2/5, 1/5 in a single row
 @media (min-width: 1024px) {
   .filters {
+    grid-template-columns: 2fr 2fr 1fr;
+    gap: 16px !important;
   }
   .filterCities {
+    grid-column: 1;
   }
   .filterCategory {
+    grid-column: 2;
+  }
+  .filterPerPage {
+    grid-column: 3;
   }
 }
 

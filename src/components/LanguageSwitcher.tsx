@@ -4,11 +4,11 @@ import { useEffect, useState } from 'react';
 import styles from './LanguageSwitcher.module.scss';
 
 const languages = [
-  { code: 'en', name: 'English' },
-  { code: 'fi', name: 'Suomi' },
-  { code: 'sv', name: 'Svenska' },
-  { code: 'uk', name: 'Українська' },
-  { code: 'ru', name: 'Русский' },
+  { code: 'en', name: 'English', short: 'En' },
+  { code: 'fi', name: 'Suomi', short: 'Fi' },
+  { code: 'sv', name: 'Svenska', short: 'Sv' },
+  { code: 'uk', name: 'Українська', short: 'Uk' },
+  { code: 'ru', name: 'Русский', short: 'Ru' },
 ];
 
 const LanguageSwitcher = () => {
@@ -35,6 +35,10 @@ const LanguageSwitcher = () => {
     } catch {}
   };
 
+  // Get the short code for the selected language
+  const selectedLanguage = languages.find(l => l.code === selectedLanguageCode);
+  const displayShort = selectedLanguage?.short || 'En';
+
   return (
     <Dropdown
       value={selectedLanguageCode}
@@ -44,6 +48,9 @@ const LanguageSwitcher = () => {
       optionValue="code"
       placeholder="Language"
       className={styles.dropdown}
+      valueTemplate={() => {
+        return <span>{displayShort}</span>;
+      }}
     />
   );
 };

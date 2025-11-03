@@ -90,11 +90,16 @@ const Layout = ({ children }: LayoutProps) => {
   const end = (
     <div className={styles.end}>
       <LanguageSwitcher />
-      <div className={`hidden md:flex ${styles.desktopNavButtons}`}>
+      <div className={styles.desktopNavButtons}>
         <Button
           label={t("navigation.companies")}
           text
           onClick={() => navigate("/companies")}
+        />
+        <Button
+          label={t("navigation.about")}
+          text
+          onClick={() => navigate("/about")}
         />
         {isAuthenticated ? (
           <Button

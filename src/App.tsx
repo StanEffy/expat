@@ -8,6 +8,7 @@ import CompanyDetails from './pages/CompanyDetails';
 import Categories from './pages/Categories';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
+import About from './pages/About';
 import { NotificationProvider } from './contexts/NotificationContext';
 import { useState } from 'react';
 
@@ -29,6 +30,7 @@ function App() {
               <Route path="/companies" element={<Companies />} />
               <Route path="/companies/:id" element={<CompanyDetails />} />
               <Route path="/categories" element={<Categories />} />
+              <Route path="/about" element={<About />} />
               <Route path="/login" element={<Login />} />
               <Route path="/profile" element={<Profile />} />
             </Routes>

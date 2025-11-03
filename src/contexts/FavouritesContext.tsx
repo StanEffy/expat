@@ -195,12 +195,16 @@ export const FavouritesProvider: React.FC<FavouritesProviderProps> = ({ children
         if (response.ok) {
           const profileData = await response.json();
           // Extract favourites from profile response
-          if (profileData.favourites && Array.isArray(profileData.favourites)) {
-            initializeFromProfile(profileData.favourites);
-          } else {
-            // If profile doesn't have favourites, set empty array
-            initializeFromProfile([]);
+          // Handle both direct array and wrapped in data property
+          let favouritesArray: Favourite[] = [];
+          if (profileData.favourites) {
+            if (Array.isArray(profileData.favourites)) {
+              favouritesArray = profileData.favourites;
+            } else if (Array.isArray(profileData.favourites?.data)) {
+              favouritesArray = profileData.favourites.data;
+            }
           }
+          initializeFromProfile(favouritesArray);
         }
       } catch (err) {
         // Silent fail - user might not be logged in or profile endpoint might fail

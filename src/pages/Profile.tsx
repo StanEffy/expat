@@ -78,9 +78,16 @@ const Profile = () => {
         setProfile(data);
         
         // Extract favourites from profile and initialize in context
-        if (data.favourites && Array.isArray(data.favourites)) {
-          initializeFromProfile(data.favourites);
+        // Handle both direct array and wrapped in data property
+        let favouritesArray: Favourite[] = [];
+        if (data.favourites) {
+          if (Array.isArray(data.favourites)) {
+            favouritesArray = data.favourites;
+          } else if (Array.isArray(data.favourites?.data)) {
+            favouritesArray = data.favourites.data;
+          }
         }
+        initializeFromProfile(favouritesArray);
       } catch (err) {
         setError(err instanceof Error ? err.message : 'An error occurred');
         localStorage.removeItem('token');

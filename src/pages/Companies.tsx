@@ -16,6 +16,7 @@ import { useTranslation } from "react-i18next";
 import CompanyFilter from "../components/CompanyFilter";
 import CategoryFilter from "../components/CategoryFilter";
 import FavouriteButton from "../components/FavouriteButton";
+import SEO from "../components/SEO";
 import type { GeneralCategoryItem } from "../components/CategoryFilter";
 import styles from "./Companies.module.scss";
 
@@ -321,26 +322,58 @@ const Companies = () => {
     value: opt,
   }));
 
+  const currentUrl = typeof window !== 'undefined' ? window.location.href : '';
+
   if (loading) {
     return (
-      <div className={styles.container}>
-        <div className={styles.loadingContainer}>
-          <ProgressSpinner />
+      <>
+        <SEO
+          title={`${t('navigation.companies')} - ${t('app.title')}`}
+          description={`Browse and discover companies in Finland. Find job opportunities and connect with Finnish businesses.`}
+          keywords="Finnish companies, companies in Finland, job opportunities, business directory, Helsinki companies"
+          url={currentUrl}
+        />
+        <div className={styles.container}>
+          <div className={styles.loadingContainer}>
+            <ProgressSpinner />
+          </div>
         </div>
-      </div>
+      </>
     );
   }
 
   if (companies.length === 0) {
     return (
-      <div className={styles.container}>
-        <p className={styles.noCompanies}>{t("common.noCompanies")}</p>
-      </div>
+      <>
+        <SEO
+          title={`${t('navigation.companies')} - ${t('app.title')}`}
+          description={`Browse and discover companies in Finland. Find job opportunities and connect with Finnish businesses.`}
+          keywords="Finnish companies, companies in Finland, job opportunities, business directory, Helsinki companies"
+          url={currentUrl}
+        />
+        <div className={styles.container}>
+          <p className={styles.noCompanies}>{t("common.noCompanies")}</p>
+        </div>
+      </>
     );
   }
 
   return (
-    <div className={styles.container}>
+    <>
+      <SEO
+        title={`${t('navigation.companies')} - ${t('app.title')}`}
+        description={`Browse and discover companies in Finland. Find job opportunities and connect with Finnish businesses. View ${companies.length} companies and filter by location and category.`}
+        keywords="Finnish companies, companies in Finland, job opportunities, business directory, Helsinki companies"
+        url={currentUrl}
+        structuredData={{
+          '@context': 'https://schema.org',
+          '@type': 'CollectionPage',
+          name: `${t('navigation.companies')} - ${t('app.title')}`,
+          description: `Browse companies in Finland`,
+          url: currentUrl,
+        }}
+      />
+      <div className={styles.container}>
       <div className={styles.filters}>
         <div className={styles.filterCities}>
           <CompanyFilter
@@ -419,6 +452,7 @@ const Companies = () => {
         </div>
       )}
     </div>
+    </>
   );
 };
 

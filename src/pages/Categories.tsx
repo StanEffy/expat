@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { useNotification } from '../contexts/NotificationContext';
 import { getAuthHeaders } from '../utils/auth';
 import { CATEGORY_ENDPOINTS } from '../constants/api';
+import SEO from '../components/SEO';
 import styles from './Categories.module.scss';
 
 interface NaceCategory {
@@ -71,31 +72,55 @@ const Categories = () => {
     fetchCategories();
   }, [fetchCategories]);
 
+  const currentUrl = typeof window !== 'undefined' ? window.location.href : '';
+
   if (loading) {
     return (
-      <div className={styles.container}>
-        <div className={styles.loadingContainer}>
-          <ProgressSpinner />
+      <>
+        <SEO
+          title={`${t('categories.title')} - ${t('app.title')}`}
+          description="Browse business categories and industries in Finland. Find companies by category and explore opportunities."
+          keywords="business categories, industries, NACE categories, Finland business, company categories"
+          url={currentUrl}
+        />
+        <div className={styles.container}>
+          <div className={styles.loadingContainer}>
+            <ProgressSpinner />
+          </div>
         </div>
-      </div>
+      </>
     );
   }
 
   if (error) {
     return (
-      <div className={styles.container}>
-        <p className={styles.errorText}>{error}</p>
-        <Button 
-          label={t('common.tryAgain')}
-          onClick={() => window.location.reload()}
-          className={styles.retryButton}
+      <>
+        <SEO
+          title={`${t('categories.title')} - ${t('app.title')}`}
+          description="Browse business categories and industries in Finland."
+          url={currentUrl}
         />
-      </div>
+        <div className={styles.container}>
+          <p className={styles.errorText}>{error}</p>
+          <Button 
+            label={t('common.tryAgain')}
+            onClick={() => window.location.reload()}
+            className={styles.retryButton}
+          />
+        </div>
+      </>
     );
   }
 
   return (
-    <div className={styles.container}>
+    <>
+      <SEO
+        title={`${t('categories.title')} - ${t('app.title')}`}
+        description={`Browse business categories and industries in Finland. Explore ${generalCategories.length + naceCategories.length} categories including NACE classifications and general business categories.`}
+        keywords="business categories, industries, NACE categories, Finland business, company categories, industry classification"
+        url={currentUrl}
+      />
+      <div className={styles.container}>
       <h1 className={styles.title}>
         {t('categories.title')}
       </h1>
@@ -142,6 +167,7 @@ const Categories = () => {
         ))}
       </div>
     </div>
+    </>
   );
 };
 

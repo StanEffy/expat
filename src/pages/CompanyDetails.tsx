@@ -8,6 +8,7 @@ import { useNotification } from "../contexts/NotificationContext";
 import { useTranslation } from "react-i18next";
 import CompanyInfoEditor from "../components/CompanyInfoEditor";
 import FavouriteButton from "../components/FavouriteButton";
+import SEO from "../components/SEO";
 import mapBg from "../assets/map_bg.png";
 import styles from "./CompanyDetails.module.scss";
 
@@ -91,32 +92,88 @@ const CompanyDetails = () => {
     )}`;
   };
 
+  const currentUrl = typeof window !== 'undefined' ? window.location.href : '';
+
   if (loading) {
     return (
-      <div className={styles.loadingContainer}>
-        <p>Loading...</p>
-      </div>
+      <>
+        <SEO
+          title={`${t('company.information')} - ${t('app.title')}`}
+          description="Loading company information..."
+          url={currentUrl}
+        />
+        <div className={styles.loadingContainer}>
+          <p>Loading...</p>
+        </div>
+      </>
     );
   }
 
   if (error) {
     return (
-      <div className={styles.errorContainer}>
-        <p className={styles.errorText}>{error}</p>
-      </div>
+      <>
+        <SEO
+          title={`${t('company.information')} - ${t('app.title')}`}
+          description="Company information not available"
+          url={currentUrl}
+          noindex={true}
+        />
+        <div className={styles.errorContainer}>
+          <p className={styles.errorText}>{error}</p>
+        </div>
+      </>
     );
   }
 
   if (!company) {
     return (
-      <div className={styles.errorContainer}>
-        <p className={styles.notFoundText}>Company not found.</p>
-      </div>
+      <>
+        <SEO
+          title={`${t('company.information')} - ${t('app.title')}`}
+          description="Company not found"
+          url={currentUrl}
+          noindex={true}
+        />
+        <div className={styles.errorContainer}>
+          <p className={styles.notFoundText}>Company not found.</p>
+        </div>
+      </>
     );
   }
 
+  const companyDescription = company.company_description || 
+    `${company.name} is a ${company.mainbusinesslinename || 'company'} based in ${company.city || 'Finland'}. ${company.recruitment_page ? 'Visit our recruitment page for job opportunities.' : ''}`;
+
+  const companyAddress = company.street && company.city 
+    ? `${company.street} ${company.buildingnumber}${company.apartmentnumber ? `, ${company.apartmentnumber}` : ''}, ${company.postcode} ${company.city}`
+    : null;
+
   return (
-    <div className={styles.container}>
+    <>
+      <SEO
+        title={`${company.name} - ${t('app.title')}`}
+        description={companyDescription}
+        keywords={`${company.name}, ${company.mainbusinesslinename || ''}, Finland, ${company.city || ''}, company, business`}
+        url={currentUrl}
+        structuredData={{
+          '@context': 'https://schema.org',
+          '@type': 'Organization',
+          name: company.name,
+          description: companyDescription,
+          url: company.website ? `https://${company.website}` : undefined,
+          address: companyAddress ? {
+            '@type': 'PostalAddress',
+            streetAddress: `${company.street} ${company.buildingnumber}${company.apartmentnumber ? `, ${company.apartmentnumber}` : ''}`,
+            addressLocality: company.city,
+            postalCode: company.postcode,
+            addressCountry: company.country || 'FI',
+          } : undefined,
+          industry: company.mainbusinesslinename,
+          foundingDate: company.founded || undefined,
+          numberOfEmployees: company.size || undefined,
+        }}
+      />
+      <div className={styles.container}>
       <div className={styles.titleRow}>
         <h1 className={styles.title}>{company.name}</h1>
         <FavouriteButton companyId={company.id} className={styles.favouriteButtonDetails} />
@@ -225,6 +282,7 @@ const CompanyDetails = () => {
         />
       </div>
     </div>
+    </>
   );
 };
 

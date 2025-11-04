@@ -9,6 +9,7 @@ import { TabView, TabPanel } from "primereact/tabview";
 import { Message } from "primereact/message";
 import { AUTH_ENDPOINTS, DEFAULT_CONFIG } from "../constants/api";
 import { setToken } from "../utils/auth";
+import SEO from "../components/SEO";
 import styles from "./Login.module.scss";
 
 const Login = () => {
@@ -146,29 +147,47 @@ const Login = () => {
   };
 
 
+  const currentUrl = typeof window !== 'undefined' ? window.location.href : '';
+
   if (forgotPasswordMode) {
     return (
-      <div className={styles.container}>
-        <div className={styles.wrapper}>
-          <Card title="Reset Password">
-            <div className={styles.forgotPasswordMessage}>
-              <p>{t("login.forgotPasswordMessage")}</p>
-            </div>
-            <div className={styles.buttonGroup}>
-              <Button
-                label={t("login.backToLogin")}
-                onClick={() => setForgotPasswordMode(false)}
-                className={styles.buttonGroupButton}
-              />
-            </div>
-          </Card>
+      <>
+        <SEO
+          title={`${t('navigation.login')} - ${t('app.title')}`}
+          description="Reset your password for Expat App"
+          url={currentUrl}
+          noindex={true}
+        />
+        <div className={styles.container}>
+          <div className={styles.wrapper}>
+            <Card title="Reset Password">
+              <div className={styles.forgotPasswordMessage}>
+                <p>{t("login.forgotPasswordMessage")}</p>
+              </div>
+              <div className={styles.buttonGroup}>
+                <Button
+                  label={t("login.backToLogin")}
+                  onClick={() => setForgotPasswordMode(false)}
+                  className={styles.buttonGroupButton}
+                />
+              </div>
+            </Card>
+          </div>
         </div>
-      </div>
+      </>
     );
   }
 
   return (
-    <div className={styles.container}>
+    <>
+      <SEO
+        title={`${t('navigation.login')} - ${t('app.title')}`}
+        description="Sign in or sign up for Expat App to access company listings and job opportunities in Finland."
+        keywords="expat login, sign up, Finland jobs, expat account"
+        url={currentUrl}
+        noindex={true}
+      />
+      <div className={styles.container}>
       <div className={styles.wrapper}>
         <Card>
           <TabView activeIndex={tabValue} onTabChange={handleTabChange}>
@@ -328,6 +347,7 @@ const Login = () => {
         </Card>
       </div>
     </div>
+    </>
   );
 };
 

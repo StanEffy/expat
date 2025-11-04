@@ -10,6 +10,7 @@ import { getAuthHeaders } from '../utils/auth';
 import { useNotification } from '../contexts/NotificationContext';
 import { useFavourites } from '../contexts/FavouritesContext';
 import { useTranslation } from 'react-i18next';
+import SEO from '../components/SEO';
 import styles from './Profile.module.scss';
 
 interface Favourite {
@@ -281,24 +282,49 @@ const Profile = () => {
     navigate('/login');
   };
 
+  const currentUrl = typeof window !== 'undefined' ? window.location.href : '';
+
   if (loading) {
     return (
-      <div className={styles.container}>
-        <p>Loading...</p>
-      </div>
+      <>
+        <SEO
+          title={`${t('navigation.profile')} - ${t('app.title')}`}
+          description="View your profile, favourites, and notifications"
+          url={currentUrl}
+          noindex={true}
+        />
+        <div className={styles.container}>
+          <p>Loading...</p>
+        </div>
+      </>
     );
   }
 
   if (error) {
     return (
-      <div className={styles.container}>
-        <Message severity="error" text={error} />
-      </div>
+      <>
+        <SEO
+          title={`${t('navigation.profile')} - ${t('app.title')}`}
+          description="View your profile"
+          url={currentUrl}
+          noindex={true}
+        />
+        <div className={styles.container}>
+          <Message severity="error" text={error} />
+        </div>
+      </>
     );
   }
 
   return (
-    <div className={styles.container}>
+    <>
+      <SEO
+        title={`${t('navigation.profile')} - ${t('app.title')}`}
+        description="View your profile, manage your favourite companies, and check notifications"
+        url={currentUrl}
+        noindex={true}
+      />
+      <div className={styles.container}>
       <h1 className={styles.title}>{t('navigation.profile')}</h1>
       
       <Card title={t('profile.userInformation')} className={styles.card}>
@@ -433,6 +459,7 @@ const Profile = () => {
         className={styles.logoutButton}
       />
     </div>
+    </>
   );
 };
 

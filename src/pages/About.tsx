@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+import SEO from '../components/SEO';
 import styles from "./About.module.scss";
 import logo from "../assets/logo_expat.png";
 import img1 from "../assets/about/1.png";
@@ -6,8 +8,25 @@ import img3 from "../assets/about/3.png";
 import img4 from "../assets/about/4.png";
 
 const About = () => {
+  const { t } = useTranslation();
+  const currentUrl = typeof window !== 'undefined' ? window.location.href : '';
+
   return (
-    <div className={styles.aboutWrapper}>
+    <>
+      <SEO
+        title={`About - ${t('app.title')}`}
+        description="Learn about Expat App - connecting expats with companies and job opportunities in Finland. Discover our story and mission."
+        keywords="about expat app, expat Finland, job opportunities, expat services, Finland companies"
+        url={currentUrl}
+        structuredData={{
+          '@context': 'https://schema.org',
+          '@type': 'AboutPage',
+          name: `About - ${t('app.title')}`,
+          description: 'Learn about Expat App and our mission to connect expats with opportunities in Finland',
+          url: currentUrl,
+        }}
+      />
+      <div className={styles.aboutWrapper}>
       <section className={styles.hero}>
         <div className={styles.heroContent}>
           <h1>
@@ -142,6 +161,7 @@ const About = () => {
         </div>
       </section>
     </div>
+    </>
   );
 };
 

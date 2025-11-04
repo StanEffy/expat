@@ -1,0 +1,108 @@
+@import "./variables";
+
+// Toast positioning - below header menu
+.p-toast {
+  top: 70px !important; // Position below header (header is ~45px + padding)
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  z-index: 9999;
+}
+
+// Toast message card styling
+.p-toast-message {
+  background-color: rgba($primary-1, 0.95) !important;
+  border: 1px solid rgba($primary-3, 0.3) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
+  backdrop-filter: blur(12px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(12px) saturate(180%) !important;
+  color: $complement-3 !important;
+  
+  // Remove white background
+  &::before {
+    display: none !important;
+  }
+}
+
+// Toast content
+.p-toast-message-content {
+  background-color: transparent !important;
+  padding: 1rem 1.25rem !important;
+}
+
+// Toast summary (title)
+.p-toast-summary {
+  color: $complement-3 !important;
+  font-weight: 600 !important;
+  margin-bottom: 0.5rem !important;
+}
+
+// Toast detail (message)
+.p-toast-detail {
+  color: $complement-4 !important;
+  margin: 0 !important;
+}
+
+// Toast icon
+.p-toast-icon-close {
+  background-color: transparent !important;
+  color: $complement-3 !important;
+  border: none !important;
+  width: 2rem !important;
+  height: 2rem !important;
+  border-radius: 50% !important;
+  transition: all 0.2s ease !important;
+  
+  &:hover {
+    background-color: rgba($primary-3, 0.3) !important;
+    color: $complement-0 !important;
+  }
+  
+  &:focus {
+    outline: 2px solid $complement-3 !important;
+    outline-offset: 2px !important;
+    background-color: rgba($primary-3, 0.2) !important;
+  }
+}
+
+// Toast severity icons
+.p-toast-icon {
+  color: $complement-3 !important;
+}
+
+// Success toast
+.p-toast-message-success {
+  border-left: 4px solid $secondary-b-0 !important;
+  
+  .p-toast-icon {
+    color: $secondary-b-0 !important;
+  }
+}
+
+// Error toast
+.p-toast-message-error {
+  border-left: 4px solid $secondary-a-0 !important;
+  
+  .p-toast-icon {
+    color: $secondary-a-0 !important;
+  }
+}
+
+// Info toast
+.p-toast-message-info {
+  border-left: 4px solid $primary-3 !important;
+  
+  .p-toast-icon {
+    color: $primary-3 !important;
+  }
+}
+
+// Warning toast
+.p-toast-message-warn {
+  border-left: 4px solid $complement-0 !important;
+  
+  .p-toast-icon {
+    color: $complement-0 !important;
+  }
+}
+

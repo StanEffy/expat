@@ -45,8 +45,8 @@ const GlowingShapes = () => {
       let scrollSpeed = 0; // Default to fixed
       
       if (scrollBehavior > 0.5) {
-        // Scrolling shapes with varying speeds
-        scrollSpeed = random(0.3, 1.2); // Slow to fast scroll
+        // Scrolling shapes with varying speeds - slower parallax effect
+        scrollSpeed = random(0.1, 0.4); // Slow parallax scroll
       }
       // else scrollSpeed remains 0 (fixed)
       

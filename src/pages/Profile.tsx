@@ -372,10 +372,10 @@ const Profile = () => {
             maxFileSize={5000000}
             auto
             chooseLabel={t('profile.uploadResume')}
-            onUpload={(e) => {
+            onUpload={() => {
               showNotification(t('profile.resumeUploaded'), 'success');
             }}
-            onError={(e) => {
+            onError={() => {
               showNotification(t('profile.resumeUploadError'), 'error');
             }}
             className={styles.resumeUpload}

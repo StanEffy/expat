@@ -25,9 +25,13 @@ function getApiBaseUrl(): string {
 
 export const API_BASE_URL = getApiBaseUrl();
 
-// Log API URL for debugging (only in development)
+// Log API URL for debugging (only in development, and only once)
 if (typeof window !== 'undefined' && import.meta.env.DEV) {
-  console.log('[API Config] Using API Base URL:', API_BASE_URL);
+  // Only log once by checking if we've logged before
+  if (!(window as any).__API_CONFIG_LOGGED) {
+    console.log('[API Config] Using API Base URL:', API_BASE_URL);
+    (window as any).__API_CONFIG_LOGGED = true;
+  }
 }
 
 // Auth Endpoints

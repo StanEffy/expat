@@ -32,6 +32,18 @@ export default defineConfig({
         secure: false,
       },
     },
+    // Reduce HMR spam and improve stability
+    hmr: {
+      overlay: true,
+    },
+  },
+  // Cache configuration
+  cacheDir: 'node_modules/.vite',
+  optimizeDeps: {
+    // Force re-optimization if needed (set to false to disable caching)
+    force: false,
+    // Reduce cache-related issues
+    holdUntilCrawlEnd: false,
   },
   build: {
     outDir: 'dist',

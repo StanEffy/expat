@@ -488,33 +488,18 @@ button {
       margin: 0.125rem 0.5rem;
 
       &:hover {
-        background-color: rgba(
-          red($complement-3),
-          green($complement-3),
-          blue($complement-3),
-          0.1
-        );
-        color: $complement-3;
+        background-color: $primary-3;
+        color: $complement-0;
       }
 
       &.p-highlight {
-        background-color: rgba(
-          red($complement-3),
-          green($complement-3),
-          blue($complement-3),
-          0.2
-        );
-        color: $complement-3;
+        background-color: $primary-3;
+        color: $complement-0;
       }
 
       &:focus {
-        background-color: rgba(
-          red($complement-3),
-          green($complement-3),
-          blue($complement-3),
-          0.15
-        );
-        color: $complement-3;
+        background-color: $primary-3;
+        color: $complement-0;
       }
     }
 
@@ -854,23 +839,13 @@ button {
       margin: 0.125rem 0.5rem;
 
       &:hover {
-        background-color: rgba(
-          red($complement-3),
-          green($complement-3),
-          blue($complement-3),
-          0.1
-        );
-        color: $complement-3;
+        background-color: $primary-3;
+        color: $complement-0;
       }
 
       &.p-highlight {
-        background-color: rgba(
-          red($complement-3),
-          green($complement-3),
-          blue($complement-3),
-          0.2
-        );
-        color: $complement-3;
+        background-color: $primary-3;
+        color: $complement-0;
       }
     }
 
@@ -893,13 +868,14 @@ button {
   font-weight: 500;
 
   &:enabled:hover {
-    background-color: $primary-2;
+    background-color: $primary-3;
+    color: $complement-0;
     border-color: transparent;
-    opacity: 0.9;
   }
 
   &:enabled:focus {
-    background-color: $primary-2;
+    background-color: $primary-3;
+    color: $complement-0;
     border-color: transparent;
     box-shadow: none;
     outline: 2px solid $complement-3;
@@ -908,8 +884,8 @@ button {
 
   &:enabled:active {
     background-color: $primary-2;
+    color: $complement-0;
     border-color: transparent;
-    opacity: 0.8;
   }
 
   .p-button-label {
@@ -1001,21 +977,18 @@ button {
     color: $complement-3;
 
     &:enabled:hover {
-      background-color: rgba(
-        red($primary-2),
-        green($primary-2),
-        blue($primary-2),
-        0.1
-      );
+      background-color: $primary-3;
+      color: $complement-0;
     }
 
     &:enabled:focus {
-      background-color: rgba(
-        red($primary-2),
-        green($primary-2),
-        blue($primary-2),
-        0.1
-      );
+      background-color: $primary-3;
+      color: $complement-0;
+    }
+
+    &:enabled:active {
+      background-color: $primary-2;
+      color: $complement-0;
     }
 
     &.p-disabled {

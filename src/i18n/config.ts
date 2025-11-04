@@ -8,28 +8,31 @@ import svTranslations from './locales/sv/common.json';
 import ukTranslations from './locales/uk/common.json';
 import ruTranslations from './locales/ru/common.json';
 
-i18n
-  .use(LanguageDetector)
-  .use(initReactI18next)
-  .init({
-    fallbackLng: 'en',
-    debug: process.env.NODE_ENV === 'development',
-    resources: {
-      en: { common: enTranslations },
-      fi: { common: fiTranslations },
-      sv: { common: svTranslations },
-      uk: { common: ukTranslations },
-      ru: { common: ruTranslations },
-    },
-    ns: ['common'],
-    defaultNS: 'common',
-    interpolation: {
-      escapeValue: false,
-    },
-    detection: {
-      order: ['localStorage', 'navigator'],
-      caches: ['localStorage'],
-    },
-  });
+// Only initialize if not already initialized (prevents issues with HMR)
+if (!i18n.isInitialized) {
+  i18n
+    .use(LanguageDetector)
+    .use(initReactI18next)
+    .init({
+      fallbackLng: 'en',
+      debug: false, // Disable debug logging to reduce console spam
+      resources: {
+        en: { common: enTranslations },
+        fi: { common: fiTranslations },
+        sv: { common: svTranslations },
+        uk: { common: ukTranslations },
+        ru: { common: ruTranslations },
+      },
+      ns: ['common'],
+      defaultNS: 'common',
+      interpolation: {
+        escapeValue: false,
+      },
+      detection: {
+        order: ['localStorage', 'navigator'],
+        caches: ['localStorage'],
+      },
+    });
+}
 
 export default i18n; 

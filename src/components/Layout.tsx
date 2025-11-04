@@ -107,6 +107,11 @@ const Layout = ({ children }: LayoutProps) => {
           onClick={() => navigate("/companies")}
         />
         <Button
+          label={t("navigation.shop")}
+          text
+          onClick={() => navigate("/shop")}
+        />
+        <Button
           label={t("navigation.about")}
           text
           onClick={() => navigate("/about")}

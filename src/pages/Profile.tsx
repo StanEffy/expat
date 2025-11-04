@@ -5,6 +5,7 @@ import { Button } from 'primereact/button';
 import { Message } from 'primereact/message';
 import { Badge } from 'primereact/badge';
 import { ProgressSpinner } from 'primereact/progressspinner';
+import { FileUpload } from 'primereact/fileupload';
 import { AUTH_ENDPOINTS, NOTIFICATIONS_ENDPOINTS, COMPANY_ENDPOINTS } from '../constants/api';
 import { getAuthHeaders } from '../utils/auth';
 import { useNotification } from '../contexts/NotificationContext';
@@ -24,6 +25,9 @@ interface Favourite {
 }
 
 interface UserProfile {
+  id?: number;
+  user_id?: number;
+  name?: string;
   email: string;
   role: string;
   createdAt: string;
@@ -329,6 +333,21 @@ const Profile = () => {
       
       <Card title={t('profile.userInformation')} className={styles.card}>
         <div className={styles.profileInfo}>
+          {profile?.id && (
+            <p>
+              <strong>{t('profile.userId')}:</strong> {profile.id}
+            </p>
+          )}
+          {profile?.user_id && (
+            <p>
+              <strong>{t('profile.userId')}:</strong> {profile.user_id}
+            </p>
+          )}
+          {profile?.name && (
+            <p>
+              <strong>{t('profile.name')}:</strong> {profile.name}
+            </p>
+          )}
           <p>
             <strong>{t('profile.email')}:</strong> {profile?.email}
           </p>
@@ -341,6 +360,27 @@ const Profile = () => {
               ? new Date(profile.createdAt).toLocaleDateString()
               : 'N/A'}
           </p>
+        </div>
+      </Card>
+
+      <Card title={t('profile.resume')} className={styles.card}>
+        <div className={styles.resumeSection}>
+          <FileUpload
+            mode="basic"
+            name="resume"
+            accept=".pdf,.doc,.docx"
+            maxFileSize={5000000}
+            auto
+            chooseLabel={t('profile.uploadResume')}
+            onUpload={(e) => {
+              showNotification(t('profile.resumeUploaded'), 'success');
+            }}
+            onError={(e) => {
+              showNotification(t('profile.resumeUploadError'), 'error');
+            }}
+            className={styles.resumeUpload}
+          />
+          <p className={styles.resumeHint}>{t('profile.resumeHint')}</p>
         </div>
       </Card>
 

@@ -145,3 +145,20 @@
   margin-top: 24px;
 }
 
+.resumeSection {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.resumeUpload {
+  width: 100%;
+}
+
+.resumeHint {
+  margin: 0;
+  font-size: 0.9rem;
+  color: $complement-1;
+  font-style: italic;
+}
+

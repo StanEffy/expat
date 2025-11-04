@@ -6,6 +6,7 @@
     "home": "Home",
     "companies": "Companies",
     "about": "About",
+    "shop": "Shop",
     "login": "Login",
     "profile": "Profile",
     "signup": "Signup",
@@ -21,6 +22,7 @@
     "description": "Description",
     "complainToVero": "Complain to Vero",
     "complaintSent": "Your request has been sent.",
+    "complaintSentWithId": "Complaint registered with ID: {{id}}",
     "recruitment": "Recruitment",
     "visitRecruitmentPage": "Visit Recruitment Page",
     "editInformation": "Edit Company Information",
@@ -80,9 +82,23 @@
   },
   "profile": {
     "userInformation": "User Information",
+    "userId": "User ID",
+    "name": "Name",
     "email": "Email",
     "role": "Role",
-    "memberSince": "Member since"
+    "memberSince": "Member since",
+    "resume": "Resume",
+    "uploadResume": "Upload Resume",
+    "resumeUploaded": "Resume uploaded successfully",
+    "resumeUploadError": "Failed to upload resume",
+    "resumeHint": "Upload your resume (PDF, DOC, or DOCX format, max 5MB)"
+  },
+  "shop": {
+    "subtitle": "Get your Expat App merchandise and show your support!",
+    "tShirt": "Expat T-Shirt",
+    "merch": "Expat Merch",
+    "inStock": "In Stock",
+    "outOfStock": "Out of Stock"
   },
   "login": {
     "forgotPasswordMessage": "Well, bad for you! We haven't created password restoration yet...",

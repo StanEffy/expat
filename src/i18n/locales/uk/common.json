@@ -6,6 +6,7 @@
     "home": "Головна",
     "companies": "Компанії",
     "about": "Про нас",
+    "shop": "Магазин",
     "login": "Увійти",
     "profile": "Профіль",
     "signup": "Реєстрація",
@@ -21,6 +22,7 @@
     "description": "Опис",
     "complainToVero": "Скаржитися в Vero",
     "complaintSent": "Ваш запит надіслано.",
+    "complaintSentWithId": "Скаргу зареєстровано з ID: {{id}}",
     "recruitment": "Рекрутинг",
     "visitRecruitmentPage": "Відвідати сторінку рекрутингу",
     "editInformation": "Редагувати інформацію про компанію",
@@ -80,9 +82,23 @@
   },
   "profile": {
     "userInformation": "Інформація про користувача",
+    "userId": "ID користувача",
+    "name": "Ім'я",
     "email": "Електронна пошта",
     "role": "Роль",
-    "memberSince": "Учасник з"
+    "memberSince": "Учасник з",
+    "resume": "Резюме",
+    "uploadResume": "Завантажити резюме",
+    "resumeUploaded": "Резюме успішно завантажено",
+    "resumeUploadError": "Не вдалося завантажити резюме",
+    "resumeHint": "Завантажте ваше резюме (PDF, DOC або DOCX формат, макс. 5MB)"
+  },
+  "shop": {
+    "subtitle": "Отримайте мерч Expat App і покажіть свою підтримку!",
+    "tShirt": "Футболка Expat",
+    "merch": "Мерч Expat",
+    "inStock": "В наявності",
+    "outOfStock": "Немає в наявності"
   },
   "login": {
     "forgotPasswordMessage": "Ну що ж, не пощастило! Ми ще не створили відновлення пароля...",

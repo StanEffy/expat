@@ -6,6 +6,7 @@
     "home": "Главная",
     "companies": "Компании",
     "about": "О нас",
+    "shop": "Магазин",
     "login": "Вход",
     "profile": "Профиль",
     "signup": "Регистрация",
@@ -21,6 +22,7 @@
     "description": "Описание",
     "complainToVero": "Пожаловаться в Vero",
     "complaintSent": "Ваш запрос отправлен.",
+    "complaintSentWithId": "Жалоба зарегистрирована с ID: {{id}}",
     "recruitment": "Рекрутинг",
     "visitRecruitmentPage": "Посетить страницу рекрутинга",
     "editInformation": "Редактировать информацию о компании",
@@ -80,9 +82,23 @@
   },
   "profile": {
     "userInformation": "Информация о пользователе",
+    "userId": "ID пользователя",
+    "name": "Имя",
     "email": "Электронная почта",
     "role": "Роль",
-    "memberSince": "Участник с"
+    "memberSince": "Участник с",
+    "resume": "Резюме",
+    "uploadResume": "Загрузить резюме",
+    "resumeUploaded": "Резюме успешно загружено",
+    "resumeUploadError": "Не удалось загрузить резюме",
+    "resumeHint": "Загрузите ваше резюме (PDF, DOC или DOCX формат, макс. 5MB)"
+  },
+  "shop": {
+    "subtitle": "Получите мерч Expat App и покажите свою поддержку!",
+    "tShirt": "Футболка Expat",
+    "merch": "Мерч Expat",
+    "inStock": "В наличии",
+    "outOfStock": "Нет в наличии"
   },
   "login": {
     "forgotPasswordMessage": "Ну что ж, не повезло! Мы ещё не создали восстановление пароля...",

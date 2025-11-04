@@ -9,6 +9,7 @@ import Categories from './pages/Categories';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
 import About from './pages/About';
+import Shop from './pages/Shop';
 import { NotificationProvider } from './contexts/NotificationContext';
 import { FavouritesProvider } from './contexts/FavouritesContext';
 import { useState } from 'react';
@@ -33,6 +34,7 @@ function App() {
                 <Route path="/companies/:id" element={<CompanyDetails />} />
                 <Route path="/categories" element={<Categories />} />
                 <Route path="/about" element={<About />} />
+                <Route path="/shop" element={<Shop />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/profile" element={<Profile />} />
               </Routes>

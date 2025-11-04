@@ -82,7 +82,7 @@ const AnimatedLogo = () => {
 
         return newPositions;
       });
-    }, 150); // Stable 250ms interval
+    }, 100); // Stable 250ms interval
 
     return () => clearInterval(interval);
   }, [isAnimating, letterSequences]);
@@ -143,8 +143,7 @@ const AnimatedLogo = () => {
             className={styles.letterStack}
             style={{
               transform: translateY,
-              transition:
-                "transform 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+              transition: "transform 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
             }}
           >
             {seq.map((glyph, variationIndex) => (

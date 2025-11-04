@@ -241,7 +241,35 @@ const CompanyDetails = () => {
               <Button
                 label={t("company.complainToVero")}
                 onClick={() => {
-                  showNotification(t("company.complaintSent"), "success");
+                  // Generate random complaint ID
+                  const randomId = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+                  const complaintId = randomId.toUpperCase().substring(0, 12);
+                  showNotification(
+                    t("company.complaintSentWithId", { id: complaintId }),
+                    "success"
+                  );
+                }}
+                className={styles.complainButton}
+                icon="pi pi-send"
+                outlined
+              />
+            </div>
+          </Card>
+        )}
+        
+        {!company.company_description && (
+          <Card>
+            <div className={styles.complainButtonContainer}>
+              <Button
+                label={t("company.complainToVero")}
+                onClick={() => {
+                  // Generate random complaint ID
+                  const randomId = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+                  const complaintId = randomId.toUpperCase().substring(0, 12);
+                  showNotification(
+                    t("company.complaintSentWithId", { id: complaintId }),
+                    "success"
+                  );
                 }}
                 className={styles.complainButton}
                 icon="pi pi-send"

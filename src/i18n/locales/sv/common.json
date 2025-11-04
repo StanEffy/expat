@@ -6,6 +6,7 @@
     "home": "Hem",
     "companies": "Företag",
     "about": "Om oss",
+    "shop": "Butik",
     "login": "Logga in",
     "profile": "Profil",
     "signup": "Registrera",
@@ -21,6 +22,7 @@
     "description": "Beskrivning",
     "complainToVero": "Klaga till Vero",
     "complaintSent": "Din begäran har skickats.",
+    "complaintSentWithId": "Klagan registrerad med ID: {{id}}",
     "recruitment": "Rekrytering",
     "visitRecruitmentPage": "Besök rekryteringssidan",
     "editInformation": "Redigera företagsinformation",
@@ -80,9 +82,23 @@
   },
   "profile": {
     "userInformation": "Användarinformation",
+    "userId": "Användar-ID",
+    "name": "Namn",
     "email": "E-post",
     "role": "Roll",
-    "memberSince": "Medlem sedan"
+    "memberSince": "Medlem sedan",
+    "resume": "CV",
+    "uploadResume": "Ladda upp CV",
+    "resumeUploaded": "CV uppladdat framgångsrikt",
+    "resumeUploadError": "Misslyckades med att ladda upp CV",
+    "resumeHint": "Ladda upp ditt CV (PDF, DOC eller DOCX-format, max 5MB)"
+  },
+  "shop": {
+    "subtitle": "Skaffa dina Expat App-varor och visa ditt stöd!",
+    "tShirt": "Expat T-shirt",
+    "merch": "Expat Merch",
+    "inStock": "I lager",
+    "outOfStock": "Slut i lager"
   },
   "login": {
     "forgotPasswordMessage": "Oj, så synd! Vi har inte skapat återställning av lösenord ännu...",

@@ -92,13 +92,25 @@ const CompanyDetails = () => {
     )}`;
   };
 
-  const currentUrl = typeof window !== 'undefined' ? window.location.href : '';
+  const handleComplainToVero = () => {
+    // Generate random complaint ID
+    const randomId =
+      Math.random().toString(36).substring(2, 15) +
+      Math.random().toString(36).substring(2, 15);
+    const complaintId = randomId.toUpperCase().substring(0, 12);
+    showNotification(
+      t("company.complaintSentWithId", { id: complaintId }),
+      "success",
+    );
+  };
+
+  const currentUrl = typeof window !== "undefined" ? window.location.href : "";
 
   if (loading) {
     return (
       <>
         <SEO
-          title={`${t('company.information')} - ${t('app.title')}`}
+          title={`${t("company.information")} - ${t("app.title")}`}
           description="Loading company information..."
           url={currentUrl}
         />
@@ -113,7 +125,7 @@ const CompanyDetails = () => {
     return (
       <>
         <SEO
-          title={`${t('company.information')} - ${t('app.title')}`}
+          title={`${t("company.information")} - ${t("app.title")}`}
           description="Company information not available"
           url={currentUrl}
           noindex={true}
@@ -129,7 +141,7 @@ const CompanyDetails = () => {
     return (
       <>
         <SEO
-          title={`${t('company.information')} - ${t('app.title')}`}
+          title={`${t("company.information")} - ${t("app.title")}`}
           description="Company not found"
           url={currentUrl}
           noindex={true}
@@ -141,175 +153,155 @@ const CompanyDetails = () => {
     );
   }
 
-  const companyDescription = company.company_description || 
-    `${company.name} is a ${company.mainbusinesslinename || 'company'} based in ${company.city || 'Finland'}. ${company.recruitment_page ? 'Visit our recruitment page for job opportunities.' : ''}`;
+  const companyDescription =
+    company.company_description ||
+    `${company.name} is a ${company.mainbusinesslinename || "company"} based in ${company.city || "Finland"}. ${company.recruitment_page ? "Visit our recruitment page for job opportunities." : ""}`;
 
-  const companyAddress = company.street && company.city 
-    ? `${company.street} ${company.buildingnumber}${company.apartmentnumber ? `, ${company.apartmentnumber}` : ''}, ${company.postcode} ${company.city}`
-    : null;
+  const companyAddress =
+    company.street && company.city
+      ? `${company.street} ${company.buildingnumber}${company.apartmentnumber ? `, ${company.apartmentnumber}` : ""}, ${company.postcode} ${company.city}`
+      : null;
 
   return (
     <>
       <SEO
-        title={`${company.name} - ${t('app.title')}`}
+        title={`${company.name} - ${t("app.title")}`}
         description={companyDescription}
-        keywords={`${company.name}, ${company.mainbusinesslinename || ''}, Finland, ${company.city || ''}, company, business`}
+        keywords={`${company.name}, ${company.mainbusinesslinename || ""}, Finland, ${company.city || ""}, company, business`}
         url={currentUrl}
         structuredData={{
-          '@context': 'https://schema.org',
-          '@type': 'Organization',
+          "@context": "https://schema.org",
+          "@type": "Organization",
           name: company.name,
           description: companyDescription,
           url: company.website ? `https://${company.website}` : undefined,
-          address: companyAddress ? {
-            '@type': 'PostalAddress',
-            streetAddress: `${company.street} ${company.buildingnumber}${company.apartmentnumber ? `, ${company.apartmentnumber}` : ''}`,
-            addressLocality: company.city,
-            postalCode: company.postcode,
-            addressCountry: company.country || 'FI',
-          } : undefined,
+          address: companyAddress
+            ? {
+                "@type": "PostalAddress",
+                streetAddress: `${company.street} ${company.buildingnumber}${company.apartmentnumber ? `, ${company.apartmentnumber}` : ""}`,
+                addressLocality: company.city,
+                postalCode: company.postcode,
+                addressCountry: company.country || "FI",
+              }
+            : undefined,
           industry: company.mainbusinesslinename,
           foundingDate: company.founded || undefined,
           numberOfEmployees: company.size || undefined,
         }}
       />
       <div className={styles.container}>
-      <div className={styles.titleRow}>
-        <h1 className={styles.title}>{company.name}</h1>
-        <FavouriteButton companyId={company.id} className={styles.favouriteButtonDetails} />
-      </div>
-      <div className={styles.content}>
-        <Card className={styles.card} title={t("company.information")}>
-          <div className={styles.infoSection}>
-            <p>
-              <strong>{t("company.businessId")}:</strong> {company.businessid}
-            </p>
-            <p>
-              <strong>{t("company.mainBusinessLine")}:</strong>{" "}
-              {company.mainbusinesslinename}
-            </p>
-            {company.website && (
+        <div className={styles.titleRow}>
+          <h1 className={styles.title}>{company.name}</h1>
+          <FavouriteButton
+            companyId={company.id}
+            className={styles.favouriteButtonDetails}
+          />
+        </div>
+        <div className={styles.content}>
+          <Card className={styles.card} title={t("company.information")}>
+            <div className={styles.complainButtonContainer}>
+              <Button
+                label={t("company.complainToVero")}
+                onClick={handleComplainToVero}
+                className={styles.complainButton}
+                icon="pi pi-send"
+                outlined
+              />
+            </div>
+            <div className={styles.infoSection}>
               <p>
-                <strong>{t("company.website")}:</strong>{" "}
-                <a
-                  href={`https://${company.website}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {company.website}
-                </a>
+                <strong>{t("company.businessId")}:</strong> {company.businessid}
               </p>
-            )}
-          </div>
-        </Card>
-
-        {company.street && company.city && (
-          <a
-            href={getGoogleMapsUrl(company)}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.addressLink}
-          >
-            <Card className={styles.addressCard}>
-              <div
-                className={styles.addressCardBackground}
-                style={
-                  {
-                    "--map-bg-url": `url(${mapBg})`,
-                  } as React.CSSProperties
-                }
-              />
-              <div className={styles.addressCardOverlay} />
-              <div className={styles.addressCardContent}>
-                <h3 className={styles.addressTitle}>{t("company.address")}</h3>
+              <p>
+                <strong>{t("company.mainBusinessLine")}:</strong>{" "}
+                {company.mainbusinesslinename}
+              </p>
+              {company.website && (
                 <p>
-                  {company.street} {company.buildingnumber}
-                  {company.apartmentnumber && `, ${company.apartmentnumber}`}
+                  <strong>{t("company.website")}:</strong>{" "}
+                  <a
+                    href={`https://${company.website}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {company.website}
+                  </a>
                 </p>
-                <p>
-                  {company.postcode} {company.city}
-                </p>
-              </div>
-            </Card>
-          </a>
-        )}
-
-        {company.company_description && (
-          <Card title={t("company.description")}>
-            <p>{company.company_description}</p>
-            <div className={styles.complainButtonContainer}>
-              <Button
-                label={t("company.complainToVero")}
-                onClick={() => {
-                  // Generate random complaint ID
-                  const randomId = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-                  const complaintId = randomId.toUpperCase().substring(0, 12);
-                  showNotification(
-                    t("company.complaintSentWithId", { id: complaintId }),
-                    "success"
-                  );
-                }}
-                className={styles.complainButton}
-                icon="pi pi-send"
-                outlined
-              />
+              )}
             </div>
           </Card>
-        )}
-        
-        {!company.company_description && (
-          <Card>
-            <div className={styles.complainButtonContainer}>
-              <Button
-                label={t("company.complainToVero")}
-                onClick={() => {
-                  // Generate random complaint ID
-                  const randomId = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-                  const complaintId = randomId.toUpperCase().substring(0, 12);
-                  showNotification(
-                    t("company.complaintSentWithId", { id: complaintId }),
-                    "success"
-                  );
-                }}
-                className={styles.complainButton}
-                icon="pi pi-send"
-                outlined
-              />
-            </div>
-          </Card>
-        )}
 
-        {company.recruitment_page && (
-          <Card title={t("company.recruitment")}>
+          {company.street && company.city && (
             <a
-              href={company.recruitment_page}
+              href={getGoogleMapsUrl(company)}
               target="_blank"
               rel="noopener noreferrer"
+              className={styles.addressLink}
             >
-              {t("company.visitRecruitmentPage")}
-            </a>
-          </Card>
-        )}
-
-        <CompanyInfoEditor
-          companyId={id!}
-          initialData={{
-            company_description: company.company_description,
-            recruitment_page: company.recruitment_page,
-          }}
-          onUpdate={(updatedData) => {
-            setCompany((prev) =>
-              prev
-                ? {
-                    ...prev,
-                    ...updatedData,
+              <Card className={styles.addressCard}>
+                <div
+                  className={styles.addressCardBackground}
+                  style={
+                    {
+                      "--map-bg-url": `url(${mapBg})`,
+                    } as React.CSSProperties
                   }
-                : null,
-            );
-          }}
-        />
+                />
+                <div className={styles.addressCardOverlay} />
+                <div className={styles.addressCardContent}>
+                  <h3 className={styles.addressTitle}>
+                    {t("company.address")}
+                  </h3>
+                  <p>
+                    {company.street} {company.buildingnumber}
+                    {company.apartmentnumber && `, ${company.apartmentnumber}`}
+                  </p>
+                  <p>
+                    {company.postcode} {company.city}
+                  </p>
+                </div>
+              </Card>
+            </a>
+          )}
+
+          {company.company_description && (
+            <Card title={t("company.description")}>
+              <p>{company.company_description}</p>
+            </Card>
+          )}
+
+
+          {company.recruitment_page && (
+            <Card title={t("company.recruitment")}>
+              <a
+                href={company.recruitment_page}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {t("company.visitRecruitmentPage")}
+              </a>
+            </Card>
+          )}
+
+          <CompanyInfoEditor
+            companyId={id!}
+            initialData={{
+              company_description: company.company_description,
+              recruitment_page: company.recruitment_page,
+            }}
+            onUpdate={(updatedData) => {
+              setCompany((prev) =>
+                prev
+                  ? {
+                      ...prev,
+                      ...updatedData,
+                    }
+                  : null,
+              );
+            }}
+          />
+        </div>
       </div>
-    </div>
     </>
   );
 };

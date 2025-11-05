@@ -7,7 +7,7 @@ import { Button } from "primereact/button";
 import { Card } from "primereact/card";
 import { TabView, TabPanel } from "primereact/tabview";
 import { Message } from "primereact/message";
-import { AUTH_ENDPOINTS, DEFAULT_CONFIG } from "../constants/api";
+import { AUTH_ENDPOINTS, DEFAULT_CONFIG, ADMIN_PANEL_PATH } from "../constants/api";
 import { setToken, checkAdminRole } from "../utils/auth";
 import SEO from "../components/SEO";
 import styles from "./Login.module.scss";
@@ -81,7 +81,7 @@ const Login = () => {
       // Check if user is admin and redirect to admin panel
       const isAdmin = await checkAdminRole();
       if (isAdmin) {
-        window.location.href = "/management";
+        window.location.href = ADMIN_PANEL_PATH;
       } else {
         window.location.href = "/";
       }
@@ -141,7 +141,7 @@ const Login = () => {
           // Check if user is admin and redirect to admin panel
           const isAdmin = await checkAdminRole();
           if (isAdmin) {
-            window.location.href = "/management";
+            window.location.href = ADMIN_PANEL_PATH;
           } else {
             window.location.href = "/";
           }

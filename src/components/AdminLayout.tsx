@@ -4,6 +4,7 @@ import { Button } from 'primereact/button';
 import { Sidebar } from 'primereact/sidebar';
 import { Badge } from 'primereact/badge';
 import { removeToken, removeAdmin2FASession, getAdmin2FASession } from '../utils/auth';
+import { ADMIN_PANEL_PATH } from '../constants/api';
 import { useTranslation } from 'react-i18next';
 import styles from './AdminLayout.module.scss';
 
@@ -32,27 +33,27 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
     {
       label: t('admin.navigation.dashboard'),
       icon: 'pi pi-home',
-      path: '/management',
+      path: ADMIN_PANEL_PATH,
       command: () => {
-        navigate('/management');
+        navigate(ADMIN_PANEL_PATH);
         setSidebarVisible(false);
       },
     },
     {
       label: t('admin.navigation.users'),
       icon: 'pi pi-users',
-      path: '/management/users',
+      path: `${ADMIN_PANEL_PATH}/users`,
       command: () => {
-        navigate('/management/users');
+        navigate(`${ADMIN_PANEL_PATH}/users`);
         setSidebarVisible(false);
       },
     },
     {
       label: t('admin.navigation.companyUpdates'),
       icon: 'pi pi-building',
-      path: '/management/company-updates',
+      path: `${ADMIN_PANEL_PATH}/company-updates`,
       command: () => {
-        navigate('/management/company-updates');
+        navigate(`${ADMIN_PANEL_PATH}/company-updates`);
         setSidebarVisible(false);
       },
     },
@@ -120,4 +121,5 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
 };
 
 export default AdminLayout;
+
 

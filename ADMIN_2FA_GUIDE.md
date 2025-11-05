@@ -21,7 +21,7 @@ This guide explains how to activate Two-Factor Authentication (2FA) for the admi
 
 1. Go to `/login` on the frontend
 2. Sign in with your admin credentials
-3. After successful login, you'll be automatically redirected to `/management` (admin panel)
+3. After successful login, you'll be automatically redirected to the admin panel (default path: `/app-console`, configurable via `VITE_ADMIN_PANEL_PATH`)
 
 ### Step 2: Automatic 2FA Setup Prompt
 
@@ -58,7 +58,7 @@ When you first access the admin panel (or if 2FA is not enabled), you'll see a m
 After setting up 2FA, you'll need to verify your identity **each time** you access the admin panel:
 
 1. Log in normally at `/login`
-2. If you're an admin, you'll be redirected to `/management`
+2. If you're an admin, you'll be redirected to the admin panel (default: `/app-console`)
 3. A **"Verify Two-Factor Authentication"** modal will appear
 4. Open your authenticator app and get the current 6-digit code
 5. Enter the code in the modal
@@ -149,4 +149,5 @@ If you encounter issues:
 3. Ensure your device clock is synchronized
 4. Try using the backup secret for manual entry
 5. Contact your system administrator
+
 

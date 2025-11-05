@@ -19,6 +19,7 @@ import UsersManagement from './pages/admin/UsersManagement';
 import CompanyUpdates from './pages/admin/CompanyUpdates';
 import { NotificationProvider } from './contexts/NotificationContext';
 import { FavouritesProvider } from './contexts/FavouritesContext';
+import { ADMIN_PANEL_PATH } from './constants/api';
 import { useState } from 'react';
 
 function App() {
@@ -47,9 +48,9 @@ function App() {
               <Route path="/password-reset/request" element={<Layout currentLanguage={language} onLanguageChange={handleLanguageChange}><PasswordResetRequest /></Layout>} />
               <Route path="/password-reset" element={<Layout currentLanguage={language} onLanguageChange={handleLanguageChange}><PasswordReset /></Layout>} />
               
-              {/* Admin routes */}
+              {/* Admin routes - using discreet path */}
               <Route
-                path="/management"
+                path={ADMIN_PANEL_PATH}
                 element={
                   <AdminRouteGuard>
                     <AdminLayout>
@@ -59,7 +60,7 @@ function App() {
                 }
               />
               <Route
-                path="/management/users"
+                path={`${ADMIN_PANEL_PATH}/users`}
                 element={
                   <AdminRouteGuard>
                     <AdminLayout>
@@ -69,7 +70,7 @@ function App() {
                 }
               />
               <Route
-                path="/management/company-updates"
+                path={`${ADMIN_PANEL_PATH}/company-updates`}
                 element={
                   <AdminRouteGuard>
                     <AdminLayout>

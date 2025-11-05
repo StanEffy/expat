@@ -25,6 +25,10 @@ function getApiBaseUrl(): string {
 
 export const API_BASE_URL = getApiBaseUrl();
 
+// Admin Panel Path - can be customized via environment variable for discretion
+// Default to something less obvious than '/admin' or '/management'
+export const ADMIN_PANEL_PATH = import.meta.env.VITE_ADMIN_PANEL_PATH || '/app-console';
+
 // Log API URL for debugging (only in development, and only once)
 if (typeof window !== 'undefined' && import.meta.env.DEV) {
   // Only log once by checking if we've logged before
@@ -114,7 +118,7 @@ export const DEFAULT_CONFIG = {
   ITEMS_PER_PAGE: 10,
 };
 
-// Admin Endpoints
+// Admin Endpoints (backend API still uses /management, frontend uses ADMIN_PANEL_PATH)
 export const ADMIN_ENDPOINTS = {
   BASE: `${API_BASE_URL}/management`,
   '2FA_SETUP': `${API_BASE_URL}/management/2fa/setup`,

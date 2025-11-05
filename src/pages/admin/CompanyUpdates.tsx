@@ -391,3 +391,4 @@ const CompanyUpdates = () => {
 
 export default CompanyUpdates;
 
+

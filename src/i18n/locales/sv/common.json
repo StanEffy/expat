@@ -54,7 +54,9 @@
     "cancel": "Avbryt",
     "confirm": "Bekräfta",
     "updating": "Uppdaterar...",
-    "all": "Alla"
+    "all": "Alla",
+    "refresh": "Uppdatera",
+    "optional": "Valfritt"
   },
   "home": {
     "welcome": "Välkommen till Expat App",
@@ -103,5 +105,124 @@
   "login": {
     "forgotPasswordMessage": "Oj, så synd! Vi har inte skapat återställning av lösenord ännu...",
     "backToLogin": "Tillbaka till inloggning"
+  },
+  "admin": {
+    "title": "Adminpanel",
+    "logout": "Logga ut",
+    "navigation": {
+      "title": "Navigation",
+      "dashboard": "Instrumentbräda",
+      "users": "Användare",
+      "companyUpdates": "Företagsuppdateringar"
+    },
+    "dashboard": {
+      "totalUsers": "Totalt antal användare",
+      "pendingUpdates": "Väntande uppdateringar",
+      "approvedUpdates": "Godkända uppdateringar",
+      "rejectedUpdates": "Avvisade uppdateringar"
+    },
+    "2fa": {
+      "setupTitle": "Konfigurera tvåfaktorsautentisering",
+      "setupMessage": "Konfigurerar 2FA...",
+      "scanQR": "Skanna denna QR-kod med din autentiseringsapp (Google Authenticator, Authy, etc.)",
+      "backupSecret": "Säkerhetskopieringsnyckel (kopiera detta om du inte kan skanna QR-koden)",
+      "copySecret": "Kopiera nyckel",
+      "enterToken": "Ange 6-siffrig kod från din autentiseringsapp",
+      "enable": "Aktivera 2FA",
+      "verifyTitle": "Verifiera tvåfaktorsautentisering",
+      "verifyMessage": "Ange 6-siffrig kod från din autentiseringsapp för att fortsätta",
+      "verify": "Verifiera",
+      "sessionExpired": "2FA-sessionen har utgått",
+      "pleaseWait": "Vänta..."
+    },
+    "users": {
+      "id": "ID",
+      "name": "Namn",
+      "username": "Användarnamn",
+      "email": "E-post",
+      "roles": "Roller",
+      "actions": "Åtgärder",
+      "noUsers": "Inga användare hittades",
+      "noRoles": "Inga roller",
+      "assignRole": "Tilldela roll",
+      "removeRole": "Ta bort roll",
+      "assignRoleTitle": "Tilldela roll",
+      "assignRoleMessage": "Tilldela en roll till {{user}}",
+      "selectRole": "Välj roll",
+      "selectRolePlaceholder": "Välj en roll...",
+      "assign": "Tilldela",
+      "confirmRemoveRoleTitle": "Ta bort roll",
+      "confirmRemoveRole": "Är du säker på att du vill ta bort rollen '{{role}}' från {{user}}?",
+      "roleAssigned": "Roll tilldelad framgångsrikt",
+      "roleRemoved": "Roll borttagen framgångsrikt",
+      "roles": {
+        "user": "Användare",
+        "editor": "Redaktör",
+        "admin": "Administratör"
+      }
+    },
+    "companyUpdates": {
+      "id": "ID",
+      "company": "Företag",
+      "requester": "Begärare",
+      "description": "Beskrivning",
+      "recruitmentPage": "Rekryteringssida",
+      "status": "Status",
+      "createdAt": "Skapad",
+      "actions": "Åtgärder",
+      "noUpdates": "Inga uppdateringar hittades",
+      "pending": "Väntande",
+      "approved": "Godkänd",
+      "rejected": "Avvisad",
+      "approve": "Godkänn",
+      "reject": "Avvisa",
+      "confirmApproveTitle": "Godkänn uppdatering",
+      "confirmApprove": "Är du säker på att du vill godkänna denna uppdatering för {{company}}?",
+      "rejectTitle": "Avvisa uppdatering",
+      "rejectMessage": "Är du säker på att du vill avvisa denna uppdatering för {{company}}?",
+      "rejectionReason": "Avvisningsorsak",
+      "rejectionReasonPlaceholder": "Valfri orsak till avvisning...",
+      "updateApproved": "Uppdatering godkänd framgångsrikt",
+      "updateRejected": "Uppdatering avvisad framgångsrikt",
+      "status": {
+        "pending": "Väntande",
+        "approved": "Godkänd",
+        "rejected": "Avvisad"
+      }
+    },
+    "errors": {
+      "unauthorized": "Obehörig åtkomst",
+      "notAdmin": "Du har inte administratörsbehörighet",
+      "loadFailed": "Misslyckades med att ladda data",
+      "setupFailed": "Misslyckades med att konfigurera 2FA",
+      "enableFailed": "Misslyckades med att aktivera 2FA",
+      "verificationFailed": "2FA-verifiering misslyckades",
+      "noSessionToken": "Ingen sessionstoken mottagen",
+      "invalidToken": "Ogiltig token. Ange en 6-siffrig kod.",
+      "assignRoleFailed": "Misslyckades med att tilldela roll",
+      "removeRoleFailed": "Misslyckades med att ta bort roll",
+      "approveFailed": "Misslyckades med att godkänna uppdatering",
+      "rejectFailed": "Misslyckades med att avvisa uppdatering"
+    }
+  },
+  "passwordReset": {
+    "title": "Återställ lösenord",
+    "resetTitle": "Ange nytt lösenord",
+    "email": "E-post",
+    "emailPlaceholder": "Ange din e-postadress",
+    "submit": "Skicka",
+    "newPassword": "Nytt lösenord",
+    "confirmPassword": "Bekräfta lösenord",
+    "successMessage": "Om ett konto finns skickades en länk för återställning av lösenord till din e-post",
+    "resetSuccess": "Lösenord återställt framgångsrikt. Omdirigerar till inloggning...",
+    "redirecting": "Omdirigerar till inloggningssidan...",
+    "backToLogin": "Tillbaka till inloggning",
+    "errors": {
+      "requestFailed": "Misslyckades med att begära lösenordsåterställning",
+      "resetFailed": "Misslyckades med att återställa lösenord. Token kan vara ogiltig eller utgången.",
+      "noToken": "Ingen återställningstoken angiven",
+      "passwordTooShort": "Lösenordet måste vara minst 8 tecken långt",
+      "passwordsDontMatch": "Lösenorden matchar inte"
+    }
   }
 } 

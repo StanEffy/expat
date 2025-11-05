@@ -8,7 +8,7 @@ import { Card } from "primereact/card";
 import { TabView, TabPanel } from "primereact/tabview";
 import { Message } from "primereact/message";
 import { AUTH_ENDPOINTS, DEFAULT_CONFIG } from "../constants/api";
-import { setToken } from "../utils/auth";
+import { setToken, checkAdminRole } from "../utils/auth";
 import SEO from "../components/SEO";
 import styles from "./Login.module.scss";
 
@@ -77,7 +77,14 @@ const Login = () => {
 
       const data = await response.json();
       setToken(data.token);
-      window.location.href = "/";
+      
+      // Check if user is admin and redirect to admin panel
+      const isAdmin = await checkAdminRole();
+      if (isAdmin) {
+        window.location.href = "/management";
+      } else {
+        window.location.href = "/";
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : "An error occurred");
     } finally {
@@ -130,7 +137,14 @@ const Login = () => {
         if (loginResponse.ok) {
           const data = await loginResponse.json();
           setToken(data.token);
-          window.location.href = "/";
+          
+          // Check if user is admin and redirect to admin panel
+          const isAdmin = await checkAdminRole();
+          if (isAdmin) {
+            window.location.href = "/management";
+          } else {
+            window.location.href = "/";
+          }
           return;
         }
       } catch (loginErr) {

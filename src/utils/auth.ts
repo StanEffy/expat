@@ -1,4 +1,4 @@
-import { STORAGE_KEYS } from '../constants/api';
+import { STORAGE_KEYS, AUTH_ENDPOINTS } from '../constants/api';
 
 export interface TokenPayload {
   exp: number;
@@ -67,6 +67,57 @@ export const getAuthHeaders = (): HeadersInit | null => {
     'Content-Type': 'application/json',
     'Authorization': `Bearer ${token}`,
   };
+};
+
+// Admin 2FA Session Management (stored in sessionStorage, not localStorage)
+export const getAdmin2FASession = (): string | null => {
+  return sessionStorage.getItem(STORAGE_KEYS.ADMIN_2FA_SESSION);
+};
+
+export const setAdmin2FASession = (sessionToken: string): void => {
+  sessionStorage.setItem(STORAGE_KEYS.ADMIN_2FA_SESSION, sessionToken);
+};
+
+export const removeAdmin2FASession = (): void => {
+  sessionStorage.removeItem(STORAGE_KEYS.ADMIN_2FA_SESSION);
+};
+
+export const getAdminHeaders = (): HeadersInit | null => {
+  const authHeaders = getAuthHeaders();
+  if (!authHeaders) return null;
+
+  const sessionToken = getAdmin2FASession();
+  if (!sessionToken) return null;
+
+  return {
+    ...authHeaders,
+    'X-Admin-2FA-Session': sessionToken,
+  };
+};
+
+// Helper function to check if user has admin role
+export const checkAdminRole = async (): Promise<boolean> => {
+  const headers = getAuthHeaders();
+  if (!headers) return false;
+
+  try {
+    const response = await fetch(AUTH_ENDPOINTS.PROFILE, {
+      headers,
+    });
+
+    if (!response.ok) return false;
+
+    const data = await response.json();
+    // Check if user has admin role
+    // Role can be in data.role or data.roles array
+    if (data.role === 'admin') return true;
+    if (Array.isArray(data.roles)) {
+      return data.roles.some((r: any) => r.role_name === 'admin' || r === 'admin');
+    }
+    return false;
+  } catch {
+    return false;
+  }
 };
 
 // Helper function to check if we should redirect to login

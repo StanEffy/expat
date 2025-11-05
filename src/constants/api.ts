@@ -114,7 +114,37 @@ export const DEFAULT_CONFIG = {
   ITEMS_PER_PAGE: 10,
 };
 
+// Admin Endpoints
+export const ADMIN_ENDPOINTS = {
+  BASE: `${API_BASE_URL}/management`,
+  '2FA_SETUP': `${API_BASE_URL}/management/2fa/setup`,
+  '2FA_ENABLE': `${API_BASE_URL}/management/2fa/enable`,
+  '2FA_VERIFY': `${API_BASE_URL}/management/2fa/verify`,
+  USERS: `${API_BASE_URL}/management/users`,
+  ASSIGN_ROLE: `${API_BASE_URL}/management/users/assign-role`,
+  REMOVE_ROLE: `${API_BASE_URL}/management/users/remove-role`,
+  COMPANY_UPDATES: (status?: string) => {
+    const base = `${API_BASE_URL}/management/company-updates`;
+    return status ? `${base}?status=${status}` : base;
+  },
+  APPROVE_UPDATE: `${API_BASE_URL}/management/company-updates/approve`,
+  REJECT_UPDATE: `${API_BASE_URL}/management/company-updates/reject`,
+};
+
+// Password Reset Endpoints
+export const PASSWORD_RESET_ENDPOINTS = {
+  REQUEST: `${API_BASE_URL}/auth/password-reset/request`,
+  RESET: `${API_BASE_URL}/auth/password-reset/reset`,
+};
+
+// Google OAuth Endpoints
+export const GOOGLE_OAUTH_ENDPOINTS = {
+  URL: `${API_BASE_URL}/auth/google/url`,
+  CALLBACK: `${API_BASE_URL}/auth/google/callback`,
+};
+
 // Storage Keys
 export const STORAGE_KEYS = {
   AUTH_TOKEN: "token",
+  ADMIN_2FA_SESSION: "admin_2fa_session",
 };

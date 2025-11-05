@@ -1,0 +1,106 @@
+.dialog {
+  :global(.p-dialog-content) {
+    padding: 1.5rem;
+  }
+}
+
+.loading {
+  text-align: center;
+  padding: 2rem;
+}
+
+.setupStep {
+  text-align: center;
+  padding: 1rem;
+}
+
+.verifyStep {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.qrSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.instructions {
+  text-align: center;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.qrCode {
+  padding: 1rem;
+  background: white;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+
+  img {
+    display: block;
+    width: 200px;
+    height: 200px;
+  }
+}
+
+.secretSection {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.secretLabel {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 0.5rem;
+}
+
+.secretDisplay {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  background: #f5f5f5;
+  border-radius: 4px;
+}
+
+.secretCode {
+  flex: 1;
+  font-family: 'Courier New', monospace;
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  color: #333;
+}
+
+.verifySection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.tokenInput {
+  width: 100%;
+  text-align: center;
+  font-size: 1.5rem;
+  letter-spacing: 0.2em;
+  padding: 0.75rem;
+  font-family: 'Courier New', monospace;
+}
+
+.errorMessage {
+  margin-top: 0.5rem;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.button {
+  min-width: 100px;
+}
+

@@ -54,7 +54,9 @@
     "cancel": "Peruuta",
     "confirm": "Vahvista",
     "updating": "Päivitetään...",
-    "all": "Kaikki"
+    "all": "Kaikki",
+    "refresh": "Päivitä",
+    "optional": "Valinnainen"
   },
   "home": {
     "welcome": "Tervetuloa Expat Appille",
@@ -103,5 +105,124 @@
   "login": {
     "forgotPasswordMessage": "No, harmillista! Emme ole vielä luoneet salasanan palautusta...",
     "backToLogin": "Takaisin kirjautumiseen"
+  },
+  "admin": {
+    "title": "Hallintapaneeli",
+    "logout": "Kirjaudu ulos",
+    "navigation": {
+      "title": "Navigointi",
+      "dashboard": "Kontrolipaneeli",
+      "users": "Käyttäjät",
+      "companyUpdates": "Yrityspäivitykset"
+    },
+    "dashboard": {
+      "totalUsers": "Käyttäjät yhteensä",
+      "pendingUpdates": "Odottaa päivityksiä",
+      "approvedUpdates": "Hyväksytyt päivitykset",
+      "rejectedUpdates": "Hylätyt päivitykset"
+    },
+    "2fa": {
+      "setupTitle": "Aseta kaksivaiheinen tunnistus",
+      "setupMessage": "Asetetaan 2FA...",
+      "scanQR": "Skannaa tämä QR-koodi autentikointisovelluksellasi (Google Authenticator, Authy jne.)",
+      "backupSecret": "Varmuuskopio salaisuus (kopioi tämä jos et voi skannata QR-koodia)",
+      "copySecret": "Kopioi salaisuus",
+      "enterToken": "Syötä 6-numeroinen koodi autentikointisovelluksestasi",
+      "enable": "Ota 2FA käyttöön",
+      "verifyTitle": "Vahvista kaksivaiheinen tunnistus",
+      "verifyMessage": "Syötä 6-numeroinen koodi autentikointisovelluksestasi jatkaaksesi",
+      "verify": "Vahvista",
+      "sessionExpired": "2FA-istunto vanhentui",
+      "pleaseWait": "Odota hetki..."
+    },
+    "users": {
+      "id": "ID",
+      "name": "Nimi",
+      "username": "Käyttäjätunnus",
+      "email": "Sähköposti",
+      "roles": "Roolit",
+      "actions": "Toiminnot",
+      "noUsers": "Käyttäjiä ei löytynyt",
+      "noRoles": "Ei rooleja",
+      "assignRole": "Määritä rooli",
+      "removeRole": "Poista rooli",
+      "assignRoleTitle": "Määritä rooli",
+      "assignRoleMessage": "Määritä rooli käyttäjälle {{user}}",
+      "selectRole": "Valitse rooli",
+      "selectRolePlaceholder": "Valitse rooli...",
+      "assign": "Määritä",
+      "confirmRemoveRoleTitle": "Poista rooli",
+      "confirmRemoveRole": "Haluatko varmasti poistaa roolin '{{role}}' käyttäjältä {{user}}?",
+      "roleAssigned": "Rooli määritetty onnistuneesti",
+      "roleRemoved": "Rooli poistettu onnistuneesti",
+      "roles": {
+        "user": "Käyttäjä",
+        "editor": "Toimittaja",
+        "admin": "Ylläpitäjä"
+      }
+    },
+    "companyUpdates": {
+      "id": "ID",
+      "company": "Yritys",
+      "requester": "Pyytäjä",
+      "description": "Kuvaus",
+      "recruitmentPage": "Rekrytointisivu",
+      "status": "Tila",
+      "createdAt": "Luotu",
+      "actions": "Toiminnot",
+      "noUpdates": "Päivityksiä ei löytynyt",
+      "pending": "Odottaa",
+      "approved": "Hyväksytty",
+      "rejected": "Hylätty",
+      "approve": "Hyväksy",
+      "reject": "Hylkää",
+      "confirmApproveTitle": "Hyväksy päivitys",
+      "confirmApprove": "Haluatko varmasti hyväksyä tämän päivityksen yritykselle {{company}}?",
+      "rejectTitle": "Hylkää päivitys",
+      "rejectMessage": "Haluatko varmasti hylätä tämän päivityksen yritykselle {{company}}?",
+      "rejectionReason": "Hylkäyksen syy",
+      "rejectionReasonPlaceholder": "Valinnainen syy hylkäykselle...",
+      "updateApproved": "Päivitys hyväksytty onnistuneesti",
+      "updateRejected": "Päivitys hylätty onnistuneesti",
+      "status": {
+        "pending": "Odottaa",
+        "approved": "Hyväksytty",
+        "rejected": "Hylätty"
+      }
+    },
+    "errors": {
+      "unauthorized": "Luvaton pääsy",
+      "notAdmin": "Sinulla ei ole ylläpitäjän oikeuksia",
+      "loadFailed": "Tietojen lataaminen epäonnistui",
+      "setupFailed": "2FA:n asettaminen epäonnistui",
+      "enableFailed": "2FA:n ottaminen käyttöön epäonnistui",
+      "verificationFailed": "2FA-vahvistus epäonnistui",
+      "noSessionToken": "Istunnon tunnusta ei vastaanotettu",
+      "invalidToken": "Virheellinen tunnus. Syötä 6-numeroinen koodi.",
+      "assignRoleFailed": "Roolin määrittäminen epäonnistui",
+      "removeRoleFailed": "Roolin poistaminen epäonnistui",
+      "approveFailed": "Päivityksen hyväksyminen epäonnistui",
+      "rejectFailed": "Päivityksen hylkääminen epäonnistui"
+    }
+  },
+  "passwordReset": {
+    "title": "Palauta salasana",
+    "resetTitle": "Aseta uusi salasana",
+    "email": "Sähköposti",
+    "emailPlaceholder": "Syötä sähköpostiosoitteesi",
+    "submit": "Lähetä",
+    "newPassword": "Uusi salasana",
+    "confirmPassword": "Vahvista salasana",
+    "successMessage": "Jos tili on olemassa, salasanan palautuslinkki on lähetetty sähköpostiisi",
+    "resetSuccess": "Salasana palautettu onnistuneesti. Ohjataan kirjautumissivulle...",
+    "redirecting": "Ohjataan kirjautumissivulle...",
+    "backToLogin": "Takaisin kirjautumiseen",
+    "errors": {
+      "requestFailed": "Salasanan palautuspyyntö epäonnistui",
+      "resetFailed": "Salasanan palautus epäonnistui. Tunnus voi olla virheellinen tai vanhentunut.",
+      "noToken": "Palautustunnusta ei annettu",
+      "passwordTooShort": "Salasanan on oltava vähintään 8 merkkiä",
+      "passwordsDontMatch": "Salasanat eivät täsmää"
+    }
   }
 } 

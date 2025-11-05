@@ -54,7 +54,9 @@
     "cancel": "Cancel",
     "confirm": "Confirm",
     "updating": "Updating...",
-    "all": "All"
+    "all": "All",
+    "refresh": "Refresh",
+    "optional": "Optional"
   },
   "home": {
     "welcome": "Welcome to Expat App",
@@ -103,5 +105,124 @@
   "login": {
     "forgotPasswordMessage": "Well, bad for you! We haven't created password restoration yet...",
     "backToLogin": "Back to Login"
+  },
+  "admin": {
+    "title": "Admin Panel",
+    "logout": "Logout",
+    "navigation": {
+      "title": "Navigation",
+      "dashboard": "Dashboard",
+      "users": "Users",
+      "companyUpdates": "Company Updates"
+    },
+    "dashboard": {
+      "totalUsers": "Total Users",
+      "pendingUpdates": "Pending Updates",
+      "approvedUpdates": "Approved Updates",
+      "rejectedUpdates": "Rejected Updates"
+    },
+    "2fa": {
+      "setupTitle": "Set Up Two-Factor Authentication",
+      "setupMessage": "Setting up 2FA...",
+      "scanQR": "Scan this QR code with your authenticator app (Google Authenticator, Authy, etc.)",
+      "backupSecret": "Backup Secret (copy this if you can't scan the QR code)",
+      "copySecret": "Copy Secret",
+      "enterToken": "Enter the 6-digit code from your authenticator app",
+      "enable": "Enable 2FA",
+      "verifyTitle": "Verify Two-Factor Authentication",
+      "verifyMessage": "Enter the 6-digit code from your authenticator app to continue",
+      "verify": "Verify",
+      "sessionExpired": "2FA Session Expired",
+      "pleaseWait": "Please wait..."
+    },
+    "users": {
+      "id": "ID",
+      "name": "Name",
+      "username": "Username",
+      "email": "Email",
+      "roles": "Roles",
+      "actions": "Actions",
+      "noUsers": "No users found",
+      "noRoles": "No roles",
+      "assignRole": "Assign Role",
+      "removeRole": "Remove Role",
+      "assignRoleTitle": "Assign Role",
+      "assignRoleMessage": "Assign a role to {{user}}",
+      "selectRole": "Select Role",
+      "selectRolePlaceholder": "Choose a role...",
+      "assign": "Assign",
+      "confirmRemoveRoleTitle": "Remove Role",
+      "confirmRemoveRole": "Are you sure you want to remove the role '{{role}}' from {{user}}?",
+      "roleAssigned": "Role assigned successfully",
+      "roleRemoved": "Role removed successfully",
+      "roles": {
+        "user": "User",
+        "editor": "Editor",
+        "admin": "Admin"
+      }
+    },
+    "companyUpdates": {
+      "id": "ID",
+      "company": "Company",
+      "requester": "Requester",
+      "description": "Description",
+      "recruitmentPage": "Recruitment Page",
+      "status": "Status",
+      "createdAt": "Created At",
+      "actions": "Actions",
+      "noUpdates": "No updates found",
+      "pending": "Pending",
+      "approved": "Approved",
+      "rejected": "Rejected",
+      "approve": "Approve",
+      "reject": "Reject",
+      "confirmApproveTitle": "Approve Update",
+      "confirmApprove": "Are you sure you want to approve this update for {{company}}?",
+      "rejectTitle": "Reject Update",
+      "rejectMessage": "Are you sure you want to reject this update for {{company}}?",
+      "rejectionReason": "Rejection Reason",
+      "rejectionReasonPlaceholder": "Optional reason for rejection...",
+      "updateApproved": "Update approved successfully",
+      "updateRejected": "Update rejected successfully",
+      "status": {
+        "pending": "Pending",
+        "approved": "Approved",
+        "rejected": "Rejected"
+      }
+    },
+    "errors": {
+      "unauthorized": "Unauthorized access",
+      "notAdmin": "You do not have admin privileges",
+      "loadFailed": "Failed to load data",
+      "setupFailed": "Failed to set up 2FA",
+      "enableFailed": "Failed to enable 2FA",
+      "verificationFailed": "2FA verification failed",
+      "noSessionToken": "No session token received",
+      "invalidToken": "Invalid token. Please enter a 6-digit code.",
+      "assignRoleFailed": "Failed to assign role",
+      "removeRoleFailed": "Failed to remove role",
+      "approveFailed": "Failed to approve update",
+      "rejectFailed": "Failed to reject update"
+    }
+  },
+  "passwordReset": {
+    "title": "Reset Password",
+    "resetTitle": "Set New Password",
+    "email": "Email",
+    "emailPlaceholder": "Enter your email address",
+    "submit": "Submit",
+    "newPassword": "New Password",
+    "confirmPassword": "Confirm Password",
+    "successMessage": "If an account exists, a password reset link has been sent to your email",
+    "resetSuccess": "Password reset successfully. Redirecting to login...",
+    "redirecting": "Redirecting to login page...",
+    "backToLogin": "Back to Login",
+    "errors": {
+      "requestFailed": "Failed to request password reset",
+      "resetFailed": "Failed to reset password. Token may be invalid or expired.",
+      "noToken": "No reset token provided",
+      "passwordTooShort": "Password must be at least 8 characters long",
+      "passwordsDontMatch": "Passwords do not match"
+    }
   }
 } 

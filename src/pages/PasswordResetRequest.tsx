@@ -23,7 +23,7 @@ const PasswordResetRequest = () => {
     setLoading(true);
 
     try {
-      const response = await fetch(PASSWORD_RESET_ENDPOINTS.REQUEST, {
+      await fetch(PASSWORD_RESET_ENDPOINTS.REQUEST, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -137,7 +137,7 @@ const PasswordReset = () => {
                 <Password
                   id="password"
                   value={password}
-                  onChange={(e) => handlePasswordChange(e, 'password')}
+                  onChange={(e) => handlePasswordChange({ value: e.target.value }, 'password')}
                   required
                   autoComplete="new-password"
                   feedback={true}
@@ -151,7 +151,7 @@ const PasswordReset = () => {
                 <Password
                   id="confirmPassword"
                   value={confirmPassword}
-                  onChange={(e) => handlePasswordChange(e, 'confirmPassword')}
+                  onChange={(e) => handlePasswordChange({ value: e.target.value }, 'confirmPassword')}
                   required
                   autoComplete="new-password"
                   feedback={false}

@@ -120,7 +120,7 @@ const AdminRouteGuard = ({ children }: AdminRouteGuardProps) => {
     setShowVerifyModal(true);
   };
 
-  const handleVerifyComplete = (sessionToken: string) => {
+  const handleVerifyComplete = (_sessionToken: string) => {
     // Session token is already stored by TwoFAVerifyModal via setAdmin2FASession
     setShowVerifyModal(false);
     setTwoFAStatus({ enabled: true, verified: true });

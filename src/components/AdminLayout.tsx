@@ -73,6 +73,19 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
             className={styles.menuButton}
           />
           <h1 className={styles.title}>{t('admin.title')}</h1>
+          {/* Desktop navigation */}
+          <nav className={styles.desktopNav}>
+            {menuItems.map((item) => (
+              <button
+                key={item.path}
+                className={`${styles.navItem} ${isActive(item.path) ? styles.active : ''}`}
+                onClick={item.command}
+              >
+                <i className={item.icon}></i>
+                <span>{item.label}</span>
+              </button>
+            ))}
+          </nav>
         </div>
         <div className={styles.headerRight}>
           {!has2FASession && (

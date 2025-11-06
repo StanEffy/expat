@@ -19,6 +19,7 @@
   display: flex;
   align-items: center;
   gap: 1rem;
+  flex: 1;
 }
 
 .menuButton {
@@ -26,6 +27,17 @@
 
   @media (max-width: 768px) {
     display: block;
+  }
+}
+
+.desktopNav {
+  display: none;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: 2rem;
+
+  @media (min-width: 769px) {
+    display: flex;
   }
 }
 
@@ -82,10 +94,11 @@
   background: transparent;
   border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: all 0.2s;
   text-align: left;
   font-size: 1rem;
   color: #666;
+  white-space: nowrap;
 
   i {
     font-size: 1.1rem;
@@ -100,6 +113,12 @@
     color: #1976d2;
     font-weight: 500;
   }
+}
+
+// Desktop nav items are more compact
+.desktopNav .navItem {
+  padding: 0.5rem 1rem;
+  font-size: 0.95rem;
 }
 
 .main {

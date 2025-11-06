@@ -87,25 +87,60 @@ const AdminRouteGuard = ({ children }: AdminRouteGuardProps) => {
         }
       }
 
-      // Check 2FA status using the dedicated endpoint
-      const statusResponse = await fetch(ADMIN_ENDPOINTS['2FA_STATUS'], {
-        headers,
-      });
+      // Try to check 2FA status using the dedicated endpoint
+      let status: { enabled: boolean } | null = null;
+      try {
+        const statusResponse = await fetch(ADMIN_ENDPOINTS['2FA_STATUS'], {
+          headers,
+        });
 
-      if (!statusResponse.ok) {
-        throw new Error(`Failed to check 2FA status: ${statusResponse.status}`);
+        if (statusResponse.ok) {
+          status = await statusResponse.json();
+        }
+      } catch (statusErr) {
+        // Status endpoint might not exist or failed, fall back to checking protected endpoint
+        console.log('Status endpoint not available, checking protected endpoint');
       }
 
-      const status = await statusResponse.json();
+      // If status endpoint didn't work, check by trying to access a protected endpoint
+      if (!status) {
+        const response = await fetch(ADMIN_ENDPOINTS.USERS, {
+          headers,
+        });
 
-      if (!status.enabled) {
-        // 2FA not enabled, show setup modal
-        setTwoFAStatus({ enabled: false, verified: false });
-        setShowSetupModal(true);
+        if (response.ok) {
+          // No 2FA required, but this shouldn't happen for admin routes
+          setTwoFAStatus({ enabled: false, verified: false });
+          setShowSetupModal(true);
+          return;
+        }
+
+        // Parse error message to determine 2FA status
+        const errorData = await response.json().catch(() => ({}));
+        const errorMessage = errorData.message || '';
+
+        if (errorMessage.includes('2FA setup required') || errorMessage.includes('set up 2FA')) {
+          // 2FA not enabled, show setup modal
+          setTwoFAStatus({ enabled: false, verified: false });
+          setShowSetupModal(true);
+        } else if (response.status === 403) {
+          // 2FA is enabled but not verified
+          setTwoFAStatus({ enabled: true, verified: false });
+          setShowVerifyModal(true);
+        } else {
+          throw new Error(`Unexpected response: ${response.status}`);
+        }
       } else {
-        // 2FA is enabled, show verify modal
-        setTwoFAStatus({ enabled: true, verified: false });
-        setShowVerifyModal(true);
+        // Status endpoint worked, use its response
+        if (!status.enabled) {
+          // 2FA not enabled, show setup modal
+          setTwoFAStatus({ enabled: false, verified: false });
+          setShowSetupModal(true);
+        } else {
+          // 2FA is enabled, show verify modal
+          setTwoFAStatus({ enabled: true, verified: false });
+          setShowVerifyModal(true);
+        }
       }
     } catch (err) {
       console.error('Error checking 2FA status:', err);

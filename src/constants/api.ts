@@ -125,6 +125,7 @@ export const ADMIN_ENDPOINTS = {
   '2FA_SETUP': `${API_BASE_URL}/management/2fa/setup`,
   '2FA_ENABLE': `${API_BASE_URL}/management/2fa/enable`,
   '2FA_VERIFY': `${API_BASE_URL}/management/2fa/verify`,
+  '2FA_SESSION_VALIDATE': `${API_BASE_URL}/management/2fa/session/validate`,
   USERS: `${API_BASE_URL}/management/users`,
   ASSIGN_ROLE: `${API_BASE_URL}/management/users/assign-role`,
   REMOVE_ROLE: `${API_BASE_URL}/management/users/remove-role`,

@@ -121,6 +121,7 @@ export const DEFAULT_CONFIG = {
 // Admin Endpoints (backend API still uses /management, frontend uses ADMIN_PANEL_PATH)
 export const ADMIN_ENDPOINTS = {
   BASE: `${API_BASE_URL}/management`,
+  '2FA_STATUS': `${API_BASE_URL}/management/2fa/status`,
   '2FA_SETUP': `${API_BASE_URL}/management/2fa/setup`,
   '2FA_ENABLE': `${API_BASE_URL}/management/2fa/enable`,
   '2FA_VERIFY': `${API_BASE_URL}/management/2fa/verify`,

@@ -2,7 +2,7 @@ import { ReactNode, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ProgressSpinner } from 'primereact/progressspinner';
 import { Message } from 'primereact/message';
-import { checkAdminRole, isTokenValid, getAdmin2FASession } from '../utils/auth';
+import { checkAdminRole, isTokenValid, getAdmin2FASession, removeAdmin2FASession } from '../utils/auth';
 import TwoFASetupModal from './2FASetupModal';
 import TwoFAVerifyModal from './2FAVerifyModal';
 import { ADMIN_ENDPOINTS } from '../constants/api';
@@ -82,43 +82,35 @@ const AdminRouteGuard = ({ children }: AdminRouteGuardProps) => {
           setLoading(false);
           return;
         } else if (response.status === 403) {
-          // Session expired, need to re-verify
-          setTwoFAStatus({ enabled: true, verified: false });
-          setShowVerifyModal(true);
-          return;
+          // Session expired, clear it and check status
+          removeAdmin2FASession();
         }
       }
 
-      // No session token or session expired - check if 2FA is enabled
-      // Try to access protected endpoint without session
-      const response = await fetch(ADMIN_ENDPOINTS.USERS, {
+      // Check 2FA status using the dedicated endpoint
+      const statusResponse = await fetch(ADMIN_ENDPOINTS['2FA_STATUS'], {
         headers,
       });
 
-      if (response.status === 403) {
-        // 2FA is enabled but not verified
+      if (!statusResponse.ok) {
+        throw new Error(`Failed to check 2FA status: ${statusResponse.status}`);
+      }
+
+      const status = await statusResponse.json();
+
+      if (!status.enabled) {
+        // 2FA not enabled, show setup modal
+        setTwoFAStatus({ enabled: false, verified: false });
+        setShowSetupModal(true);
+      } else {
+        // 2FA is enabled, show verify modal
         setTwoFAStatus({ enabled: true, verified: false });
         setShowVerifyModal(true);
-      } else {
-        // 2FA might not be enabled, try setup endpoint
-        const setupResponse = await fetch(ADMIN_ENDPOINTS['2FA_SETUP'], {
-          headers,
-        });
-        if (setupResponse.ok) {
-          // 2FA not enabled, need setup
-          setTwoFAStatus({ enabled: false, verified: false });
-          setShowSetupModal(true);
-        } else {
-          // 2FA enabled but not verified
-          setTwoFAStatus({ enabled: true, verified: false });
-          setShowVerifyModal(true);
-        }
       }
     } catch (err) {
       console.error('Error checking 2FA status:', err);
-      // Assume 2FA not enabled if we can't check
-      setTwoFAStatus({ enabled: false, verified: false });
-      setShowSetupModal(true);
+      setError(t('admin.errors.statusCheckFailed'));
+      setLoading(false);
     }
   };
 

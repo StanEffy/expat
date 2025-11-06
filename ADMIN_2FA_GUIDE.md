@@ -6,6 +6,60 @@ This guide explains how to activate Two-Factor Authentication (2FA) for the admi
 
 2FA is **required** for all admin panel access. When you first log in as an admin, you'll be prompted to set up 2FA if it's not already enabled.
 
+There are two ways to set up 2FA:
+- **Option 1**: Frontend Setup (User-Friendly) - Use the web interface (see Step-by-Step Activation Process below)
+- **Option 2**: API Setup (Recommended for Production) - Use API calls directly (see below)
+
+## Option 2: Set up 2FA properly (recommended for production)
+
+To use 2FA, follow these steps:
+
+### Get 2FA Setup Info:
+
+```
+GET /management/2fa/setup
+Authorization: Bearer <your_access_token>
+```
+
+This returns a `secret` and `qr_url`.
+
+### Scan QR Code:
+
+- Use the `qr_url` or scan the QR code with Google Authenticator, Authy, or similar
+- Or manually enter the secret code
+
+### Enable 2FA:
+
+```
+POST /management/2fa/enable
+Authorization: Bearer <your_access_token>
+Content-Type: application/json
+
+{
+  "token": "123456"  // 6-digit code from your authenticator app
+}
+```
+
+### Get Admin Session (each time you log in):
+
+```
+POST /management/2fa/verify
+Authorization: Bearer <your_access_token>
+Content-Type: application/json
+
+{
+  "token": "123456"  // 6-digit code from your authenticator app
+}
+```
+
+This returns an `admin_session_token`.
+
+### Use Admin Routes:
+
+Include the `admin_session_token` in the `X-Admin-2FA-Session` header for all admin API calls.
+
+**Note**: For quick testing, use Option 1 (Frontend Setup). For production, use Option 2 (API Setup).
+
 ## Prerequisites
 
 1. **Admin Account**: You must have an account with the "admin" role
@@ -15,7 +69,7 @@ This guide explains how to activate Two-Factor Authentication (2FA) for the admi
    - Microsoft Authenticator (iOS/Android)
    - Any other TOTP-compatible authenticator app
 
-## Step-by-Step Activation Process
+## Option 1: Step-by-Step Activation Process (Frontend Setup)
 
 ### Step 1: Log In as Admin
 

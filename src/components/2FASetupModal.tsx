@@ -23,9 +23,13 @@ const TwoFASetupModal = ({ visible, onComplete, onCancel }: TwoFASetupModalProps
   const [loading, setLoading] = useState(false);
   const [setupLoading, setSetupLoading] = useState(false);
   const [step, setStep] = useState<'setup' | 'verify'>('setup');
+  const [qrError, setQrError] = useState(false);
 
   useEffect(() => {
     if (visible && step === 'setup') {
+      setQrError(false);
+      setQrUrl('');
+      setSecret('');
       fetchSetup();
     }
   }, [visible, step]);
@@ -37,6 +41,7 @@ const TwoFASetupModal = ({ visible, onComplete, onCancel }: TwoFASetupModalProps
       const headers = getAuthHeaders();
       if (!headers) {
         setError(t('admin.errors.unauthorized'));
+        setSetupLoading(false);
         return;
       }
 
@@ -45,14 +50,32 @@ const TwoFASetupModal = ({ visible, onComplete, onCancel }: TwoFASetupModalProps
       });
 
       if (!response.ok) {
-        throw new Error('Failed to fetch 2FA setup');
+        const errorText = await response.text();
+        console.error('2FA setup failed:', response.status, errorText);
+        throw new Error(`Failed to fetch 2FA setup: ${response.status} ${errorText}`);
       }
 
       const data = await response.json();
+      console.log('2FA setup response:', data);
+      
+      if (!data.secret) {
+        throw new Error('No secret returned from backend');
+      }
+      
       setSecret(data.secret);
-      setQrUrl(data.qr_url);
+      setQrError(false);
+      
+      // Handle qr_url - it might be a TOTP URI string or already a QR code image URL
+      if (data.qr_url) {
+        setQrUrl(data.qr_url);
+      } else {
+        console.warn('No qr_url in response, QR code will not be displayed');
+        setQrUrl('');
+      }
+      
       setStep('verify');
     } catch (err) {
+      console.error('Error fetching 2FA setup:', err);
       setError(err instanceof Error ? err.message : t('admin.errors.setupFailed'));
     } finally {
       setSetupLoading(false);
@@ -127,9 +150,37 @@ const TwoFASetupModal = ({ visible, onComplete, onCancel }: TwoFASetupModalProps
         <div className={styles.verifyStep}>
           <div className={styles.qrSection}>
             <p className={styles.instructions}>{t('admin.2fa.scanQR')}</p>
-            {qrUrl && (
+            {qrUrl && !qrError ? (
               <div className={styles.qrCode}>
-                <img src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(qrUrl)}`} alt="QR Code" />
+                {/* Check if qrUrl is already a data URL or image URL, otherwise generate QR code from TOTP URI */}
+                {qrUrl.startsWith('data:image') || qrUrl.startsWith('http://') || qrUrl.startsWith('https://') ? (
+                  <img 
+                    src={qrUrl} 
+                    alt="QR Code" 
+                    onError={() => {
+                      console.error('Failed to load QR code image:', qrUrl);
+                      setQrError(true);
+                    }} 
+                  />
+                ) : (
+                  <img 
+                    src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(qrUrl)}`} 
+                    alt="QR Code" 
+                    onError={() => {
+                      console.error('Failed to generate QR code from:', qrUrl);
+                      setQrError(true);
+                    }}
+                  />
+                )}
+              </div>
+            ) : (
+              <div className={styles.qrCode}>
+                <div style={{ padding: '2rem', textAlign: 'center', color: '#666' }}>
+                  <p>QR code not available.</p>
+                  <p style={{ fontSize: '0.9rem', marginTop: '0.5rem' }}>
+                    {secret ? 'Please use the secret below to manually set up 2FA.' : 'Please check your connection and try again.'}
+                  </p>
+                </div>
               </div>
             )}
             {secret && (

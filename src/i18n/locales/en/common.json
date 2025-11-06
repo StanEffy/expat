@@ -155,7 +155,7 @@
       "confirmRemoveRole": "Are you sure you want to remove the role '{{role}}' from {{user}}?",
       "roleAssigned": "Role assigned successfully",
       "roleRemoved": "Role removed successfully",
-      "roles": {
+      "roleValues": {
         "user": "User",
         "editor": "Editor",
         "admin": "Admin"
@@ -184,7 +184,7 @@
       "rejectionReasonPlaceholder": "Optional reason for rejection...",
       "updateApproved": "Update approved successfully",
       "updateRejected": "Update rejected successfully",
-      "status": {
+      "statusValues": {
         "pending": "Pending",
         "approved": "Approved",
         "rejected": "Rejected"

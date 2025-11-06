@@ -13,11 +13,22 @@ interface Shape {
   scrollSpeed: number; // 0 = fixed/static, 0.5 = slow scroll, 1 = normal scroll, 1.5 = fast scroll
   initialTop: number; // initial top position in viewport percentage
   key: string;
+  // Animation properties
+  rotationDirection: number; // 1 for clockwise, -1 for counter-clockwise
+  rotationSpeed: number; // degrees per second (slow: 5-15)
+  scaleMin: number; // minimum scale (0.8-0.95)
+  scaleMax: number; // maximum scale (1.05-1.2)
+  scaleDuration: number; // animation duration in seconds (8-20)
+  moveDirectionX: number; // horizontal movement direction (-1 to 1)
+  moveDirectionY: number; // vertical movement direction (-1 to 1)
+  moveSpeed: number; // movement speed multiplier (0.5-2)
+  moveDistance: number; // movement distance in percentage (5-15)
 }
 
 const GlowingShapes = () => {
   const [shapes, setShapes] = useState<Shape[]>([]);
   const [scrollY, setScrollY] = useState(0);
+  const [time, setTime] = useState(0);
 
   useEffect(() => {
     // Generate random seed for this page load
@@ -50,6 +61,21 @@ const GlowingShapes = () => {
       }
       // else scrollSpeed remains 0 (fixed)
       
+      // Random rotation direction and speed
+      const rotationDirection = random(0, 1) > 0.5 ? 1 : -1;
+      const rotationSpeed = random(5, 15); // Slow rotation: 5-15 degrees per second
+      
+      // Scale animation properties
+      const scaleMin = random(0.85, 0.95);
+      const scaleMax = random(1.05, 1.15);
+      const scaleDuration = random(8, 20); // 8-20 seconds per cycle
+      
+      // Movement direction (can be horizontal, vertical, or diagonal)
+      const moveDirectionX = random(-1, 1);
+      const moveDirectionY = random(-1, 1);
+      const moveSpeed = random(0.5, 1.5);
+      const moveDistance = random(5, 12); // percentage
+      
       generatedShapes.push({
         type,
         x: random(5, 95), // Random position (avoid edges)
@@ -59,6 +85,15 @@ const GlowingShapes = () => {
         opacity: random(0.08, 0.18), // Semi-transparent white
         scrollSpeed,
         initialTop: random(5, 95),
+        rotationDirection,
+        rotationSpeed,
+        scaleMin,
+        scaleMax,
+        scaleDuration,
+        moveDirectionX,
+        moveDirectionY,
+        moveSpeed,
+        moveDistance,
         key: `shape-${i}-${seed}-${seedCounter}`,
       });
     }
@@ -86,6 +121,25 @@ const GlowingShapes = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Animation loop for rotation, scale, and movement
+  useEffect(() => {
+    let animationFrameId: number;
+    let lastTime = performance.now();
+    
+    const animate = (currentTime: number) => {
+      const deltaTime = (currentTime - lastTime) / 1000; // Convert to seconds
+      lastTime = currentTime;
+      
+      setTime((prevTime) => prevTime + deltaTime);
+      
+      animationFrameId = requestAnimationFrame(animate);
+    };
+    
+    animationFrameId = requestAnimationFrame(animate);
+    
+    return () => cancelAnimationFrame(animationFrameId);
+  }, []);
+
   return (
     <div className={styles.container}>
       {shapes.map((shape) => {
@@ -99,6 +153,19 @@ const GlowingShapes = () => {
         const viewportHeight = typeof window !== 'undefined' ? window.innerHeight : 1000;
         const topOffsetPercent = (parallaxOffset / viewportHeight) * 100;
         
+        // Calculate rotation based on time and direction
+        const currentRotation = shape.rotation + (time * shape.rotationSpeed * shape.rotationDirection);
+        
+        // Calculate scale using sine wave for smooth pulsing
+        const scaleProgress = (time % shape.scaleDuration) / shape.scaleDuration;
+        const scaleFactor = shape.scaleMin + (shape.scaleMax - shape.scaleMin) * 
+          (Math.sin(scaleProgress * Math.PI * 2) * 0.5 + 0.5);
+        
+        // Calculate movement offset using sine wave for smooth back-and-forth motion
+        const moveProgress = (time * shape.moveSpeed) % (Math.PI * 2);
+        const moveOffsetX = Math.sin(moveProgress) * shape.moveDistance * shape.moveDirectionX;
+        const moveOffsetY = Math.cos(moveProgress) * shape.moveDistance * shape.moveDirectionY;
+        
         return (
           <div
             key={shape.key}
@@ -108,7 +175,7 @@ const GlowingShapes = () => {
               top: `${shape.initialTop}%`,
               width: `${shape.size}px`,
               height: `${shape.size}px`,
-              transform: `translate(-50%, calc(-50% + ${topOffsetPercent}vh)) rotate(${shape.rotation}deg)`,
+              transform: `translate(calc(-50% + ${moveOffsetX}%), calc(-50% + ${topOffsetPercent}vh + ${moveOffsetY}%)) rotate(${currentRotation}deg) scale(${scaleFactor})`,
               opacity: shape.opacity,
             }}
           >

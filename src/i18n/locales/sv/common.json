@@ -155,7 +155,7 @@
       "confirmRemoveRole": "Är du säker på att du vill ta bort rollen '{{role}}' från {{user}}?",
       "roleAssigned": "Roll tilldelad framgångsrikt",
       "roleRemoved": "Roll borttagen framgångsrikt",
-      "roles": {
+      "roleValues": {
         "user": "Användare",
         "editor": "Redaktör",
         "admin": "Administratör"
@@ -184,7 +184,7 @@
       "rejectionReasonPlaceholder": "Valfri orsak till avvisning...",
       "updateApproved": "Uppdatering godkänd framgångsrikt",
       "updateRejected": "Uppdatering avvisad framgångsrikt",
-      "status": {
+      "statusValues": {
         "pending": "Väntande",
         "approved": "Godkänd",
         "rejected": "Avvisad"

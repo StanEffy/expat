@@ -155,7 +155,7 @@
       "confirmRemoveRole": "Haluatko varmasti poistaa roolin '{{role}}' käyttäjältä {{user}}?",
       "roleAssigned": "Rooli määritetty onnistuneesti",
       "roleRemoved": "Rooli poistettu onnistuneesti",
-      "roles": {
+      "roleValues": {
         "user": "Käyttäjä",
         "editor": "Toimittaja",
         "admin": "Ylläpitäjä"
@@ -184,7 +184,7 @@
       "rejectionReasonPlaceholder": "Valinnainen syy hylkäykselle...",
       "updateApproved": "Päivitys hyväksytty onnistuneesti",
       "updateRejected": "Päivitys hylätty onnistuneesti",
-      "status": {
+      "statusValues": {
         "pending": "Odottaa",
         "approved": "Hyväksytty",
         "rejected": "Hylätty"

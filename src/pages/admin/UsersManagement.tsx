@@ -43,9 +43,9 @@ const UsersManagement = () => {
   const [assignLoading, setAssignLoading] = useState(false);
 
   const roles = [
-    { label: t('admin.users.roles.user'), value: 'user' },
-    { label: t('admin.users.roles.editor'), value: 'editor' },
-    { label: t('admin.users.roles.admin'), value: 'admin' },
+    { label: t('admin.users.roleValues.user'), value: 'user' },
+    { label: t('admin.users.roleValues.editor'), value: 'editor' },
+    { label: t('admin.users.roleValues.admin'), value: 'admin' },
   ];
 
   useEffect(() => {

@@ -14,7 +14,7 @@
   width: 100%;
   height: 100%;
   will-change: transform; // Optimize for animation
-  transition: transform 0.2s ease-out; // Smooth scrolling animation
+  // No CSS transition - animations handled by JavaScript for smoother performance
 }
 
 // Fixed shapes stay in place when scrolling (no parallax movement)

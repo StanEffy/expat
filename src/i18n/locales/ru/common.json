@@ -155,7 +155,7 @@
       "confirmRemoveRole": "Вы уверены, что хотите удалить роль '{{role}}' у пользователя {{user}}?",
       "roleAssigned": "Роль успешно назначена",
       "roleRemoved": "Роль успешно удалена",
-      "roles": {
+      "roleValues": {
         "user": "Пользователь",
         "editor": "Редактор",
         "admin": "Администратор"
@@ -184,7 +184,7 @@
       "rejectionReasonPlaceholder": "Необязательная причина отклонения...",
       "updateApproved": "Обновление успешно одобрено",
       "updateRejected": "Обновление успешно отклонено",
-      "status": {
+      "statusValues": {
         "pending": "Ожидает",
         "approved": "Одобрено",
         "rejected": "Отклонено"

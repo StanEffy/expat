@@ -155,7 +155,7 @@
       "confirmRemoveRole": "Ви впевнені, що хочете видалити роль '{{role}}' у користувача {{user}}?",
       "roleAssigned": "Роль успішно призначена",
       "roleRemoved": "Роль успішно видалена",
-      "roles": {
+      "roleValues": {
         "user": "Користувач",
         "editor": "Редактор",
         "admin": "Адміністратор"
@@ -184,7 +184,7 @@
       "rejectionReasonPlaceholder": "Необов'язкова причина відхилення...",
       "updateApproved": "Оновлення успішно схвалено",
       "updateRejected": "Оновлення успішно відхилено",
-      "status": {
+      "statusValues": {
         "pending": "Очікує",
         "approved": "Схвалено",
         "rejected": "Відхилено"

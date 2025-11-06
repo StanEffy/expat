@@ -174,7 +174,7 @@ const CompanyUpdates = () => {
         : rowData.status === 'rejected'
         ? 'danger'
         : 'warning';
-    return <Tag value={t(`admin.companyUpdates.status.${rowData.status}`)} severity={severity} />;
+    return <Tag value={t(`admin.companyUpdates.statusValues.${rowData.status}`)} severity={severity} />;
   };
 
   const companyBodyTemplate = (rowData: CompanyUpdate) => {

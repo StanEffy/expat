@@ -182,6 +182,16 @@ const UsersManagement = () => {
         ) : (
           <Tag value={t('admin.users.noRoles')} severity="secondary" />
         )}
+        <Button
+          icon="pi pi-plus-circle"
+          onClick={() => handleAssignRole(rowData)}
+          text
+          rounded
+          size="small"
+          severity="success"
+          className={styles.addRoleButton}
+          title={t('admin.users.assignRole')}
+        />
       </div>
     );
   };
@@ -190,11 +200,13 @@ const UsersManagement = () => {
     return (
       <div className={styles.actions}>
         <Button
-          icon="pi pi-plus"
+          icon="pi pi-user-plus"
           label={t('admin.users.assignRole')}
           onClick={() => handleAssignRole(rowData)}
           size="small"
+          severity="success"
           className={styles.actionButton}
+          title={t('admin.users.assignRole')}
         />
       </div>
     );

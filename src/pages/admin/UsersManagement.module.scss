@@ -51,6 +51,13 @@
   align-items: center;
 }
 
+.addRoleButton {
+  padding: 0.25rem;
+  width: 1.75rem;
+  height: 1.75rem;
+  margin-left: 0.25rem;
+}
+
 .roleItem {
   display: flex;
   align-items: center;
@@ -74,8 +81,8 @@
 }
 
 .actionButton {
-  flex: 1;
-  min-width: 120px;
+  min-width: 140px;
+  font-weight: 500;
 }
 
 .assignDialog {

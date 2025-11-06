@@ -109,7 +109,7 @@ const AdminRouteGuard = ({ children }: AdminRouteGuardProps) => {
       }
     } catch (err) {
       console.error('Error checking 2FA status:', err);
-      setError(t('admin.errors.statusCheckFailed'));
+      setError(t('admin.errors.loadFailed'));
       setLoading(false);
     }
   };
@@ -120,7 +120,8 @@ const AdminRouteGuard = ({ children }: AdminRouteGuardProps) => {
     setShowVerifyModal(true);
   };
 
-  const handleVerifyComplete = () => {
+  const handleVerifyComplete = (sessionToken: string) => {
+    // Session token is already stored by TwoFAVerifyModal via setAdmin2FASession
     setShowVerifyModal(false);
     setTwoFAStatus({ enabled: true, verified: true });
     setLoading(false);

@@ -5,6 +5,11 @@
   padding: 24px 16px;
   max-width: 1200px;
   margin: 0 auto;
+  background: radial-gradient(
+    circle,
+    rgba(63, 94, 251, 0.8) 0%,
+    rgba(252, 70, 107, 0.8) 100%
+  );
 }
 
 .hero {
@@ -43,7 +48,7 @@
   max-width: 260px;
   width: 100%;
   height: auto;
-  filter: drop-shadow(0 8px 24px rgba(0,0,0,0.2));
+  filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.2));
 }
 
 .section,
@@ -62,7 +67,7 @@
 }
 
 .sectionAlt {
-  background: rgba(255,255,255,0.04);
+  background: rgba(255, 255, 255, 0.04);
   border-radius: 16px;
   padding: 24px;
 }
@@ -86,28 +91,28 @@
   border-radius: 16px;
   background: repeating-linear-gradient(
     45deg,
-    rgba(255,255,255,0.08) 0,
-    rgba(255,255,255,0.08) 10px,
-    rgba(255,255,255,0.02) 10px,
-    rgba(255,255,255,0.02) 20px
+    rgba(255, 255, 255, 0.08) 0,
+    rgba(255, 255, 255, 0.08) 10px,
+    rgba(255, 255, 255, 0.02) 10px,
+    rgba(255, 255, 255, 0.02) 20px
   );
   display: flex;
   align-items: center;
   justify-content: center;
-  color: rgba(255,255,255,0.5);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.12) inset, 0 10px 30px rgba(0,0,0,0.12);
+  color: rgba(255, 255, 255, 0.5);
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.12) inset,
+    0 10px 30px rgba(0, 0, 0, 0.12);
 }
 
 .image {
   width: 100%;
   height: auto;
   border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
 }
 
 .signature {
   font-style: italic;
   opacity: 0.9;
 }
-
-

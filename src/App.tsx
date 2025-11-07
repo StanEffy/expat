@@ -41,20 +41,20 @@ function App() {
   };
 
   const renderWithLayout = (Page: LazyComponent) => (
-    <Layout currentLanguage={language} onLanguageChange={handleLanguageChange}>
-      <Suspense fallback={<LoadingScreen />}>
+    <Suspense fallback={<LoadingScreen />}>
+      <Layout currentLanguage={language} onLanguageChange={handleLanguageChange}>
         <Page />
-      </Suspense>
-    </Layout>
+      </Layout>
+    </Suspense>
   );
 
   const renderAdminRoute = (Page: LazyComponent) => (
     <AdminRouteGuard>
-      <AdminLayout>
-        <Suspense fallback={<LoadingScreen />}>
+      <Suspense fallback={<LoadingScreen />}>
+        <AdminLayout>
           <Page />
-        </Suspense>
-      </AdminLayout>
+        </AdminLayout>
+      </Suspense>
     </AdminRouteGuard>
   );
 

@@ -21,7 +21,7 @@ interface Shape {
   scaleDuration: number; // animation duration in seconds (8-20)
   moveDirectionX: number; // horizontal movement direction (-1 to 1)
   moveDirectionY: number; // vertical movement direction (-1 to 1)
-  moveSpeed: number; // movement speed multiplier (0.25-0.75) - slow movement
+  moveSpeed: number; // movement speed multiplier for scroll movement (0.25-0.75)
   moveDistance: number; // movement distance in percentage (5-15)
 }
 
@@ -73,7 +73,7 @@ const GlowingShapes = () => {
       // Movement direction (can be horizontal, vertical, or diagonal)
       const moveDirectionX = random(-1, 1);
       const moveDirectionY = random(-1, 1);
-      const moveSpeed = random(0.25, 0.75); // Half speed - twice as slow
+      const moveSpeed = random(0.25, 0.75); // Slow movement reacting to scroll distance
       const moveDistance = random(5, 12); // percentage
       
       generatedShapes.push({
@@ -161,10 +161,11 @@ const GlowingShapes = () => {
         const scaleFactor = shape.scaleMin + (shape.scaleMax - shape.scaleMin) * 
           (Math.sin(scaleProgress * Math.PI * 2) * 0.5 + 0.5);
         
-        // Calculate movement offset using sine wave for smooth back-and-forth motion
-        const moveProgress = (time * shape.moveSpeed) % (Math.PI * 2);
-        const moveOffsetX = Math.sin(moveProgress) * shape.moveDistance * shape.moveDirectionX;
-        const moveOffsetY = Math.cos(moveProgress) * shape.moveDistance * shape.moveDirectionY;
+        // Calculate movement offset based on scroll position (moves only when scrolling)
+        const safeViewportHeight = viewportHeight || 1;
+        const scrollRatio = scrollY / safeViewportHeight;
+        const moveOffsetX = scrollRatio * shape.moveDistance * shape.moveDirectionX * shape.moveSpeed;
+        const moveOffsetY = scrollRatio * shape.moveDistance * shape.moveDirectionY * shape.moveSpeed;
         
         return (
           <div

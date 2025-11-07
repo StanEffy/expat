@@ -1,5 +1,8 @@
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 
+@use "./styles/variables" as *;
+@use "./styles/toast" as *;
+
 /* Document
    ========================================================================== */
 
@@ -417,9 +420,6 @@ button {
   box-sizing: border-box;
 }
 
-@import "./styles/variables";
-@import "./styles/toast";
-
 // PrimeReact Dropdown Styles
 .p-dropdown {
   background-color: $primary-2;
@@ -427,6 +427,7 @@ button {
   border: none;
   height: 44px;
   min-height: 44px;
+  position: relative; // For scrollable dropdown panels when appendTo="self"
 
   .p-dropdown-label {
     color: $complement-3;
@@ -463,6 +464,13 @@ button {
   border-radius: 12px;
   border: none;
   box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.25) !important;
+  
+  // Override PrimeReact's fixed positioning when panel is appended to self
+  // Force absolute positioning so it scrolls with the page
+  &[style*="position: fixed"],
+  &[style*="position:fixed"] {
+    position: absolute !important;
+  }
 
   .p-dropdown-items {
     padding: 0.5rem 0;
@@ -505,40 +513,18 @@ button {
     padding: 0.5rem 1rem;
 
     .p-dropdown-filter {
-      background-color: rgba(
-        red($complement-3),
-        green($complement-3),
-        blue($complement-3),
-        0.1
-      );
+      background-color: rgba-color($complement-3, 0.1);
       color: $complement-3;
       border-radius: 8px;
-      border: 1px solid
-        rgba(red($complement-3), green($complement-3), blue($complement-3), 0.2);
+      border: 1px solid rgba-color($complement-3, 0.2);
 
       &:focus {
-        border-color: rgba(
-          red($complement-3),
-          green($complement-3),
-          blue($complement-3),
-          0.4
-        );
-        box-shadow: 0 0 0 0.2rem
-          rgba(
-            red($complement-3),
-            green($complement-3),
-            blue($complement-3),
-            0.1
-          );
+        border-color: rgba-color($complement-3, 0.4);
+        box-shadow: 0 0 0 0.2rem rgba-color($complement-3, 0.1);
       }
 
       &::placeholder {
-        color: rgba(
-          red($complement-3),
-          green($complement-3),
-          blue($complement-3),
-          0.6
-        );
+        color: rgba-color($complement-3, 0.6);
       }
     }
   }
@@ -555,21 +541,15 @@ button {
 
 // Disabled state
 .p-dropdown.p-disabled {
-  background-color: rgba(
-    red($primary-2),
-    green($primary-2),
-    blue($primary-2),
-    0.6
-  );
+  background-color: rgba-color($primary-2, 0.6);
   opacity: 0.6;
 
   .p-dropdown-label {
-    color: rgba(
-      red($complement-3),
-      green($complement-3),
-      blue($complement-3),
-      0.6
-    );
+    color: rgba-color($complement-3, 0.6);
+  }
+
+  .p-dropdown-trigger {
+    color: rgba-color($complement-3, 0.6);
   }
 }
 
@@ -597,12 +577,7 @@ button {
   }
 
   &::placeholder {
-    color: rgba(
-      red($complement-3),
-      green($complement-3),
-      blue($complement-3),
-      0.6
-    );
+    color: rgba-color($complement-3, 0.6);
   }
 }
 
@@ -612,18 +587,8 @@ button {
 }
 
 .p-inputtext.p-disabled {
-  background-color: rgba(
-    red($primary-2),
-    green($primary-2),
-    blue($primary-2),
-    0.6
-  );
-  color: rgba(
-    red($complement-3),
-    green($complement-3),
-    blue($complement-3),
-    0.6
-  );
+  background-color: rgba-color($primary-2, 0.6);
+  color: rgba-color($complement-3, 0.6);
   opacity: 0.6;
 }
 
@@ -651,12 +616,7 @@ button {
   }
 
   &::placeholder {
-    color: rgba(
-      red($complement-3),
-      green($complement-3),
-      blue($complement-3),
-      0.6
-    );
+    color: rgba-color($complement-3, 0.6);
   }
 }
 
@@ -666,18 +626,8 @@ button {
 }
 
 .p-inputtextarea.p-disabled {
-  background-color: rgba(
-    red($primary-2),
-    green($primary-2),
-    blue($primary-2),
-    0.6
-  );
-  color: rgba(
-    red($complement-3),
-    green($complement-3),
-    blue($complement-3),
-    0.6
-  );
+  background-color: rgba-color($primary-2, 0.6);
+  color: rgba-color($complement-3, 0.6);
   opacity: 0.6;
 }
 
@@ -708,12 +658,7 @@ button {
     }
 
     &::placeholder {
-      color: rgba(
-        red($complement-3),
-        green($complement-3),
-        blue($complement-3),
-        0.6
-      );
+      color: rgba-color($complement-3, 0.6);
     }
   }
 
@@ -730,18 +675,8 @@ button {
 
   &.p-inputwrapper-disabled {
     .p-password-input {
-      background-color: rgba(
-        red($primary-2),
-        green($primary-2),
-        blue($primary-2),
-        0.6
-      );
-      color: rgba(
-        red($complement-3),
-        green($complement-3),
-        blue($complement-3),
-        0.6
-      );
+      background-color: rgba-color($primary-2, 0.6);
+      color: rgba-color($complement-3, 0.6);
       opacity: 0.6;
     }
   }
@@ -750,6 +685,7 @@ button {
 // PrimeReact AutoComplete Styles
 .p-autocomplete {
   width: 100%;
+  position: relative; // For scrollable panels when appendTo="self"
 
   .p-autocomplete-input {
     background-color: $primary-2;
@@ -774,12 +710,7 @@ button {
     }
 
     &::placeholder {
-      color: rgba(
-        red($complement-3),
-        green($complement-3),
-        blue($complement-3),
-        0.6
-      );
+      color: rgba-color($complement-3, 0.6);
     }
   }
 
@@ -792,18 +723,8 @@ button {
 
   &.p-inputwrapper-disabled {
     .p-autocomplete-input {
-      background-color: rgba(
-        red($primary-2),
-        green($primary-2),
-        blue($primary-2),
-        0.6
-      );
-      color: rgba(
-        red($complement-3),
-        green($complement-3),
-        blue($complement-3),
-        0.6
-      );
+      background-color: rgba-color($primary-2, 0.6);
+      color: rgba-color($complement-3, 0.6);
       opacity: 0.6;
     }
   }
@@ -814,6 +735,13 @@ button {
   border-radius: 12px;
   border: none;
   box-shadow: $shadow-md;
+  
+  // Override PrimeReact's fixed positioning when panel is appended to self
+  // Force absolute positioning so it scrolls with the page
+  &[style*="position: fixed"],
+  &[style*="position:fixed"] {
+    position: absolute !important;
+  }
 
   .p-autocomplete-items {
     padding: 0.5rem 0;
@@ -883,36 +811,16 @@ button {
   }
 
   &.p-disabled {
-    background-color: rgba(
-      red($primary-2),
-      green($primary-2),
-      blue($primary-2),
-      0.6
-    );
-    color: rgba(
-      red($complement-3),
-      green($complement-3),
-      blue($complement-3),
-      0.6
-    );
+    background-color: rgba-color($primary-2, 0.6);
+    color: rgba-color($complement-3, 0.6);
     opacity: 0.6;
 
     .p-button-label {
-      color: rgba(
-        red($complement-3),
-        green($complement-3),
-        blue($complement-3),
-        0.6
-      );
+      color: rgba-color($complement-3, 0.6);
     }
 
     .p-button-icon {
-      color: rgba(
-        red($complement-3),
-        green($complement-3),
-        blue($complement-3),
-        0.6
-      );
+      color: rgba-color($complement-3, 0.6);
     }
   }
 
@@ -922,39 +830,19 @@ button {
     color: $complement-3;
 
     &:enabled:hover {
-      background-color: rgba(
-        red($primary-2),
-        green($primary-2),
-        blue($primary-2),
-        0.1
-      );
+      background-color: rgba-color($primary-2, 0.1);
       border-color: $primary-2;
     }
 
     &:enabled:focus {
-      background-color: rgba(
-        red($primary-2),
-        green($primary-2),
-        blue($primary-2),
-        0.1
-      );
+      background-color: rgba-color($primary-2, 0.1);
       border-color: $primary-2;
     }
 
     &.p-disabled {
       background-color: transparent;
-      border-color: rgba(
-        red($primary-2),
-        green($primary-2),
-        blue($primary-2),
-        0.6
-      );
-      color: rgba(
-        red($complement-3),
-        green($complement-3),
-        blue($complement-3),
-        0.6
-      );
+      border-color: rgba-color($primary-2, 0.6);
+      color: rgba-color($complement-3, 0.6);
     }
   }
 
@@ -963,27 +851,22 @@ button {
     color: $complement-3;
 
     &:enabled:hover {
-      background-color: $primary-3;
+      background-color: rgba-color($primary-2, 0.1);
       color: $complement-0;
     }
 
     &:enabled:focus {
-      background-color: $primary-3;
+      background-color: rgba-color($primary-2, 0.1);
       color: $complement-0;
     }
 
     &:enabled:active {
-      background-color: $primary-2;
+      background-color: rgba-color($primary-2, 0.2);
       color: $complement-0;
     }
 
     &.p-disabled {
-      color: rgba(
-        red($complement-3),
-        green($complement-3),
-        blue($complement-3),
-        0.6
-      );
+      color: rgba-color($complement-3, 0.6);
     }
   }
 }
@@ -1003,6 +886,23 @@ button {
   .p-dropdown-items
   .p-dropdown-item:not(.p-highlight):not(.p-disabled).p-focus {
   background-color: rgba(255, 255, 255, 0.1);
+}
+
+// Force dropdown panels to use absolute positioning when appended to self
+// This ensures they scroll with the page instead of staying fixed
+.p-dropdown-wrapper,
+.p-dropdown {
+  .p-dropdown-panel {
+    position: absolute !important;
+  }
+}
+
+// Force autocomplete panels to use absolute positioning when appended to self
+.p-autocomplete-wrapper,
+.p-autocomplete {
+  .p-autocomplete-panel {
+    position: absolute !important;
+  }
 }
 .p-autocomplete-multiple .p-inputtext {
   padding: 0.25rem 1rem;
@@ -1031,7 +931,7 @@ input {
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(red($primary-2), green($primary-2), blue($primary-2), 0.4);
+  background: rgba-color($primary-2, 0.4);
   border-radius: 6px;
 }
 
@@ -1055,8 +955,7 @@ input {
 // Firefox
 * {
   scrollbar-width: thin;
-  scrollbar-color: $complement-4
-    rgba(red($primary-2), green($primary-2), blue($primary-2), 0.1);
+  scrollbar-color: $complement-4 rgba-color($primary-2, 0.1);
 }
 
 .p-autocomplete-token {

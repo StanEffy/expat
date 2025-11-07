@@ -402,6 +402,7 @@ const Companies = () => {
             optionValue="value"
             placeholder={t("common.itemsPerPage")}
             className={styles.itemsPerPageDropdown}
+            appendTo="self"
           />
         </div>
       </div>

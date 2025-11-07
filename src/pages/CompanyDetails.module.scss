@@ -112,12 +112,7 @@
   margin-bottom: 8px;
 }
 .card {
-  background-color: rgba(
-    red($primary-2),
-    green($primary-2),
-    blue($primary-2),
-    0.3
-  );
+  background-color: rgba-color($primary-2, 0.3);
   color: $complement-3;
   backdrop-filter: blur(8px);
   border-radius: 16px;

@@ -1,3 +1,5 @@
+@use "./styles/variables" as *;
+
 #root {
   width: 100%;
   margin: 0 auto;
@@ -41,8 +43,6 @@ body {
 .card {
   padding: 2em;
 }
-
-@import "./styles/variables";
 
 .read-the-docs {
   color: $complement-1;

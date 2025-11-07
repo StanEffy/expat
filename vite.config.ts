@@ -48,6 +48,27 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            if (id.includes('primereact') || id.includes('primeicons')) {
+              return 'vendor_primereact';
+            }
+            if (id.includes('react-router')) {
+              return 'vendor_react-router';
+            }
+            if (id.includes('react-i18next') || id.includes('i18next')) {
+              return 'vendor_i18n';
+            }
+            if (id.includes('react') || id.includes('scheduler')) {
+              return 'vendor_react';
+            }
+          }
+        },
+      },
+    },
+    chunkSizeWarningLimit: 1200,
   },
   publicDir: 'public',
 })

@@ -35,6 +35,7 @@ const CompanyFilter: React.FC<CompanyFilterProps> = ({
         onChange={(e) => onCityChange(e.value)}
         placeholder={t('company.filter.selectCities')}
         className={styles.autocomplete}
+        appendTo="self"
       />
     </div>
   );

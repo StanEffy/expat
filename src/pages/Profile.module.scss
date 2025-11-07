@@ -1,4 +1,4 @@
-@import "../styles/variables";
+@use "../styles/variables" as *;
 
 .container {
   max-width: 1200px;
@@ -49,7 +49,7 @@
   transition: background-color 0.2s;
 
   &:hover {
-    background-color: rgba(red($complement-4), green($complement-4), blue($complement-4), 0.3);
+    background-color: rgba-color($complement-4, 0.3);
   }
 }
 
@@ -100,12 +100,12 @@
   transition: background-color 0.2s;
 
   &:hover {
-    background-color: rgba(red($complement-4), green($complement-4), blue($complement-4), 0.3);
+    background-color: rgba-color($complement-4, 0.3);
   }
 
   &.unread {
     border-left: 4px solid #007bff;
-    background-color: rgba(red($complement-4), green($complement-4), blue($complement-4), 0.2);
+    background-color: rgba-color($complement-4, 0.2);
   }
 }
 

@@ -288,6 +288,7 @@ const UsersManagement = () => {
                 onChange={(e) => setSelectedRole(e.value)}
                 placeholder={t('admin.users.selectRolePlaceholder')}
                 className={styles.dropdown}
+                appendTo="self"
               />
             </div>
             <div className={styles.dialogActions}>

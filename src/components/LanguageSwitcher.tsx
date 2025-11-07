@@ -48,6 +48,7 @@ const LanguageSwitcher = () => {
       optionValue="code"
       placeholder="Language"
       className={styles.dropdown}
+      appendTo="self"
       valueTemplate={() => {
         return <span>{displayShort}</span>;
       }}

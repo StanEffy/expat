@@ -1,4 +1,4 @@
-@import "../styles/variables";
+@use "../styles/variables" as *;
 
 .container {
   position: relative;
@@ -58,21 +58,11 @@
   }
 
   :global(.p-tabview-nav li .p-tabview-nav-link:not(.p-disabled):focus) {
-    background: rgba(
-      red($complement-4),
-      green($complement-4),
-      blue($complement-4),
-      0.3
-    );
+    background: rgba-color($complement-4, 0.3);
   }
 
   :global(.p-tabview-nav li.p-highlight .p-tabview-nav-link) {
-    background: rgba(
-      red($complement-4),
-      green($complement-4),
-      blue($complement-4),
-      0.5
-    );
+    background: rgba-color($complement-4, 0.5);
     color: $secondary-a-2;
     border-color: transparent;
     width: 100%;

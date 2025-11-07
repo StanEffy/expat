@@ -1,4 +1,4 @@
-import { ReactNode, useState, useEffect } from "react";
+import { ReactNode, useState, useEffect, lazy, Suspense } from "react";
 import { Button } from "primereact/button";
 import { Menubar } from "primereact/menubar";
 import { Link, useNavigate } from "react-router-dom";
@@ -6,10 +6,11 @@ import { isTokenValid } from "../utils/auth";
 import MobileMenu from "./MobileMenu";
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "./LanguageSwitcher";
-import GlowingShapes from "./GlowingShapes";
 import "./Layout.scss";
 import styles from "./Layout.module.scss";
 import AnimatedLogo from "./AnimatedLogo.tsx";
+
+const GlowingShapes = lazy(() => import("./GlowingShapes"));
 
 interface LayoutProps {
   children: ReactNode;
@@ -138,7 +139,9 @@ const Layout = ({ children }: LayoutProps) => {
   return (
     <div className={"wrapper"}>
       {/*<GeometricBackground />*/}
-      <GlowingShapes />
+      <Suspense fallback={null}>
+        <GlowingShapes />
+      </Suspense>
       <Menubar start={start} end={end} className="layout-menubar" />
       <main className={"main"}>{children}</main>
       <footer className={styles.footer}>

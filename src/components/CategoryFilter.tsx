@@ -72,6 +72,7 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({ categories, generalCate
       optionValue="id"
       placeholder={t('company.filter.workArea')}
       className={styles.dropdown}
+      appendTo="self"
       showClear
     />
   );

@@ -30,7 +30,7 @@ const SEO = ({
   // Get current URL if not provided
   const currentUrl = url || (typeof window !== 'undefined' ? window.location.href : '');
   const baseUrl = typeof window !== 'undefined' ? window.location.origin : '';
-  const ogImage = image || (baseUrl ? `${baseUrl}/logo_expat.png` : '/logo_expat.png');
+  const ogImage = image || (baseUrl ? `${baseUrl}/android-chrome-512x512.png` : '/android-chrome-512x512.png');
 
   useEffect(() => {
     // Set document title

@@ -21,7 +21,7 @@ interface Shape {
   scaleDuration: number; // animation duration in seconds (8-20)
   moveDirectionX: number; // horizontal movement direction (-1 to 1)
   moveDirectionY: number; // vertical movement direction (-1 to 1)
-  moveSpeed: number; // movement speed multiplier (0.5-2)
+  moveSpeed: number; // movement speed multiplier (0.25-0.75) - slow movement
   moveDistance: number; // movement distance in percentage (5-15)
 }
 
@@ -73,7 +73,7 @@ const GlowingShapes = () => {
       // Movement direction (can be horizontal, vertical, or diagonal)
       const moveDirectionX = random(-1, 1);
       const moveDirectionY = random(-1, 1);
-      const moveSpeed = random(0.5, 1.5);
+      const moveSpeed = random(0.25, 0.75); // Half speed - twice as slow
       const moveDistance = random(5, 12); // percentage
       
       generatedShapes.push({

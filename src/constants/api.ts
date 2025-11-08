@@ -149,6 +149,19 @@ export const GOOGLE_OAUTH_ENDPOINTS = {
   CALLBACK: `${API_BASE_URL}/auth/google/callback`,
 };
 
+// Poll Endpoints
+export const POLL_ENDPOINTS = {
+  LIST: `${API_BASE_URL}/api/polls`,
+  LIST_MINE: `${API_BASE_URL}/api/polls/mine`,
+  COMPANY_LIST: (companyId: number | string) => `${API_BASE_URL}/api/companies/${companyId}/polls`,
+  DETAIL: (pollId: number | string) => `${API_BASE_URL}/api/polls/${pollId}`,
+  PUBLIC_DETAIL: (pollId: number | string) => `${API_BASE_URL}/api/public/polls/${pollId}`,
+  CREATE: `${API_BASE_URL}/api/polls`,
+  CREATE_FOR_COMPANY: (companyId: number | string) => `${API_BASE_URL}/api/companies/${companyId}/polls`,
+  SUBMIT_RESPONSE: (pollId: number | string) => `${API_BASE_URL}/api/polls/${pollId}/responses`,
+  CLOSE: (pollId: number | string) => `${API_BASE_URL}/api/polls/${pollId}/close`,
+};
+
 // Storage Keys
 export const STORAGE_KEYS = {
   AUTH_TOKEN: "token",

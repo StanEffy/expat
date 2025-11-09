@@ -3,7 +3,7 @@ import { Button as PrimeButton } from 'primereact/button';
 import type { ButtonProps as PrimeButtonProps } from 'primereact/button';
 import styles from './Button.module.scss';
 
-export interface ButtonProps extends Omit<PrimeButtonProps, 'className'> {
+export interface ButtonProps extends Omit<PrimeButtonProps, 'className' | 'size'> {
   /**
    * Button style variant: 'filled' | 'outlined' | 'text'
    * Maps to PrimeReact's text/outlined props
@@ -40,12 +40,15 @@ const Button: React.FC<ButtonProps> = ({
   ...props
 }) => {
   // Determine variant from props (variant prop takes precedence over text/outlined)
-  let finalVariant = variant;
+  let finalVariant: 'filled' | 'outlined' | 'text' = variant || 'filled';
   if (!variant) {
     if (text) finalVariant = 'text';
     else if (outlined) finalVariant = 'outlined';
     else finalVariant = 'filled';
   }
+
+  // Map size to PrimeReact's size prop (PrimeReact only supports 'small' | 'large', not 'medium')
+  const primeSize: 'small' | 'large' | undefined = size === 'medium' ? undefined : size;
 
   // Build className with variant and size
   const classNames = [
@@ -59,6 +62,7 @@ const Button: React.FC<ButtonProps> = ({
   const primeProps: PrimeButtonProps = {
     ...props,
     className: classNames,
+    size: primeSize,
   };
 
   // Map variant to PrimeReact's text/outlined props

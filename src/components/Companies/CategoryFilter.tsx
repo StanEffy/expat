@@ -42,7 +42,7 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({
     }
     return name;
   };
-
+  console.log(categories);
   // Build NACE categories - show name based on current language preference
   const naceCategories = categories
     .map((c) => {

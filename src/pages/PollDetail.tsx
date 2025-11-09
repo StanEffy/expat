@@ -12,7 +12,7 @@ import { ProgressBar } from 'primereact/progressbar';
 import { ProgressSpinner } from 'primereact/progressspinner';
 import { Message } from 'primereact/message';
 import { useTranslation } from 'react-i18next';
-import { usePolls, PollSummary } from '../contexts/PollsContext';
+import { usePolls } from '../contexts/PollsContext';
 import { useNotification } from '../contexts/NotificationContext';
 import { useUserProfile } from '../hooks/useUserProfile';
 import SEO from '../components/SEO';
@@ -235,7 +235,7 @@ const PollDetailPage = () => {
         showNotification(t('polls.detail.alreadyResponded'), 'info');
       } else if (payloadMessage && payloadMessage.toLowerCase().includes('poll is closed')) {
         setSubmissionError(t('polls.detail.pollClosed'));
-        showNotification(t('polls.detail.pollClosed'), 'warn');
+        showNotification(t('polls.detail.pollClosed'), 'warning');
       } else {
         const message = err instanceof Error ? err.message : t('polls.detail.error');
         setSubmissionError(message);

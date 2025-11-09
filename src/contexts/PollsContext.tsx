@@ -139,7 +139,7 @@ const deriveStatus = (rawStatus: unknown, expiresAt?: string | null, closedAt?: 
 
 const normalizePoll = (poll: any): PollSummary => {
   const optionsArray = Array.isArray(poll?.options) ? poll.options : Array.isArray(poll?.poll_options) ? poll.poll_options : [];
-  const normalizedOptions = optionsArray.map((option: any, idx: number) => normalizeOption(option, idx));
+  const normalizedOptions: PollOption[] = optionsArray.map((option: any, idx: number) => normalizeOption(option, idx));
 
   const expiresAt = poll?.expires_at ?? poll?.expiry_date ?? null;
   const closedAt = poll?.closed_at ?? null;
@@ -153,13 +153,20 @@ const normalizePoll = (poll: any): PollSummary => {
     const optionCounts = stats.option_counts ?? stats.optionCounts ?? undefined;
     let optionPercentages: Record<number, number> | undefined;
     if (optionCounts) {
-      const total = Object.values(optionCounts).reduce((acc, value) => acc + (typeof value === 'number' ? value : 0), 0);
+      const optionCountValues = Object.values(optionCounts as Record<string, unknown>);
+      const total = optionCountValues.reduce<number>(
+        (acc, value) => acc + (typeof value === 'number' ? value : 0),
+        0,
+      );
       if (total > 0) {
-        optionPercentages = Object.entries(optionCounts).reduce<Record<number, number>>((acc, [key, value]) => {
-          const numericKey = Number(key);
-          acc[numericKey] = typeof value === 'number' ? Math.round((value / total) * 1000) / 10 : 0;
-          return acc;
-        }, {});
+        optionPercentages = Object.entries(optionCounts as Record<string, unknown>).reduce<Record<number, number>>(
+          (acc, [key, value]) => {
+            const numericKey = Number(key);
+            acc[numericKey] = typeof value === 'number' ? Math.round((value / total) * 1000) / 10 : 0;
+            return acc;
+          },
+          {},
+        );
       }
     }
 
@@ -272,7 +279,7 @@ const PollsContextProviderInternal = ({ children }: { children: ReactNode }) => 
     try {
       const data = await fetchJson(POLL_ENDPOINTS.LIST);
       const pollsArray = Array.isArray(data?.data) ? data.data : Array.isArray(data) ? data : [];
-      const normalized = pollsArray.map((poll: any) => normalizePoll(poll));
+      const normalized: PollSummary[] = pollsArray.map((poll: any) => normalizePoll(poll));
       upsertPolls(normalized);
       setActivePollIds(normalized.map((poll) => poll.id));
       return normalized;
@@ -286,7 +293,7 @@ const PollsContextProviderInternal = ({ children }: { children: ReactNode }) => 
     try {
       const data = await fetchJson(POLL_ENDPOINTS.LIST_MINE, undefined, true);
       const pollsArray = Array.isArray(data?.data) ? data.data : Array.isArray(data) ? data : [];
-      const normalized = pollsArray.map((poll: any) => normalizePoll(poll));
+      const normalized: PollSummary[] = pollsArray.map((poll: any) => normalizePoll(poll));
       upsertPolls(normalized);
       setMyPollIds(normalized.map((poll) => poll.id));
       return normalized;
@@ -304,7 +311,7 @@ const PollsContextProviderInternal = ({ children }: { children: ReactNode }) => 
       const endpoint = POLL_ENDPOINTS.COMPANY_LIST(companyId);
       const data = await fetchJson(endpoint, undefined, true);
       const pollsArray = Array.isArray(data?.data) ? data.data : Array.isArray(data) ? data : [];
-      const normalized = pollsArray.map((poll: any) => normalizePoll(poll));
+      const normalized: PollSummary[] = pollsArray.map((poll: any) => normalizePoll(poll));
       upsertPolls(normalized);
       setCompanyPollIds((prev) => ({
         ...prev,

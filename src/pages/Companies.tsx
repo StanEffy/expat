@@ -119,6 +119,8 @@ const Companies = () => {
 
         if (categoriesRes.ok) {
           const { data: categoriesData } = await categoriesRes.json();
+          console.log("Categories fetched:", categoriesData);
+          console.log("First category:", categoriesData?.[0]);
           setCategories(categoriesData as BackendCategoryItem[]);
         }
         if (generalRes.ok) {

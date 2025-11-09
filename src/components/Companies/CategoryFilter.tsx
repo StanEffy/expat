@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Dropdown } from "primereact/dropdown";
 import { useTranslation } from "react-i18next";
 import styles from "./CategoryFilter.module.scss";
@@ -32,6 +32,16 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({
 }) => {
   const { t, i18n } = useTranslation();
 
+  // Debug: Log categories when they change
+  useEffect(() => {
+    console.log("CategoryFilter - Categories received:", categories);
+    console.log("CategoryFilter - Categories count:", categories?.length);
+    if (categories && categories.length > 0) {
+      console.log("CategoryFilter - First category:", categories[0]);
+      console.log("CategoryFilter - Sample company_count:", categories[0]?.company_count);
+    }
+  }, [categories]);
+
   // Helper function to format label with count
   const formatLabelWithCount = (
     name: string,
@@ -42,7 +52,6 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({
     }
     return name;
   };
-  console.log(categories);
   // Build NACE categories - show name based on current language preference
   const naceCategories = categories
     .map((c) => {

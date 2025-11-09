@@ -14,7 +14,9 @@ import { getAuthHeaders } from "../utils/auth";
 import { useNotification } from "../contexts/NotificationContext";
 import { useTranslation } from "react-i18next";
 import CompanyFilter from "../components/Companies/CompanyFilter";
-import CategoryFilter, { type GeneralCategoryItem } from "../components/Companies/CategoryFilter";
+import CategoryFilter, {
+  type GeneralCategoryItem,
+} from "../components/Companies/CategoryFilter";
 import FavouriteButton from "../components/Common/FavouriteButton";
 import SEO from "../components/Common/SEO";
 import styles from "./Companies.module.scss";
@@ -75,6 +77,8 @@ const Companies = () => {
   useEffect(() => {
     const initialPage = parseInt(searchParams.get("page") || "1");
     const initialItemsPerPage = parseInt(searchParams.get("limit") || "10");
+
+    console.log("Initial load");
 
     const initialCategory = searchParams.get("mainbusinesslineid") || "";
     const urlCities = searchParams.getAll("cities");
@@ -335,13 +339,13 @@ const Companies = () => {
     value: opt,
   }));
 
-  const currentUrl = typeof window !== 'undefined' ? window.location.href : '';
+  const currentUrl = typeof window !== "undefined" ? window.location.href : "";
 
   if (loading) {
     return (
       <>
         <SEO
-          title={`${t('navigation.companies')} - ${t('app.title')}`}
+          title={`${t("navigation.companies")} - ${t("app.title")}`}
           description={`Browse and discover companies in Finland. Find job opportunities and connect with Finnish businesses.`}
           keywords="Finnish companies, companies in Finland, job opportunities, business directory, Helsinki companies"
           url={currentUrl}
@@ -359,7 +363,7 @@ const Companies = () => {
     return (
       <>
         <SEO
-          title={`${t('navigation.companies')} - ${t('app.title')}`}
+          title={`${t("navigation.companies")} - ${t("app.title")}`}
           description={`Browse and discover companies in Finland. Find job opportunities and connect with Finnish businesses.`}
           keywords="Finnish companies, companies in Finland, job opportunities, business directory, Helsinki companies"
           url={currentUrl}
@@ -374,103 +378,107 @@ const Companies = () => {
   return (
     <>
       <SEO
-        title={`${t('navigation.companies')} - ${t('app.title')}`}
+        title={`${t("navigation.companies")} - ${t("app.title")}`}
         description={`Browse and discover companies in Finland. Find job opportunities and connect with Finnish businesses. View ${companies.length} companies and filter by location and category.`}
         keywords="Finnish companies, companies in Finland, job opportunities, business directory, Helsinki companies"
         url={currentUrl}
         structuredData={{
-          '@context': 'https://schema.org',
-          '@type': 'CollectionPage',
-          name: `${t('navigation.companies')} - ${t('app.title')}`,
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          name: `${t("navigation.companies")} - ${t("app.title")}`,
           description: `Browse companies in Finland`,
           url: currentUrl,
         }}
       />
       <div className={styles.container}>
-      <div className={styles.filters}>
-        <div className={styles.filterCities}>
-          <CompanyFilter
-            cities={cities}
-            selectedCities={selectedCities}
-            onCityChange={handleCityChange}
-          />
-        </div>
-        <div className={styles.filterCategory}>
-          <CategoryFilter
-            categories={categories}
-            generalCategories={generalCategories}
-            value={selectedCategoryId}
-            onChange={handleCategoryChange}
-          />
-        </div>
-        <div className={styles.filterPerPage}>
-          <Dropdown
-            value={
-              itemsPerPageOptions.find((opt) => opt.value === itemsPerPage) ||
-              itemsPerPageOptions[0]
-            }
-            options={itemsPerPageOptions}
-            onChange={handleItemsPerPageChange}
-            optionLabel="label"
-            optionValue="value"
-            placeholder={t("common.itemsPerPage")}
-            className={styles.itemsPerPageDropdown}
-            appendTo="self"
-          />
-        </div>
-      </div>
-      <div className={styles.grid}>
-        {companies.map((company, index) => {
-          // Calculate delay: for new cards (after append), use relative index
-          // For initial load, use absolute index
-          const delayIndex = index < previousCountRef.current ? index : index - previousCountRef.current;
-          return (
-          <Card 
-            key={company.id} 
-            className={styles.card}
-            style={{
-              animationDelay: `${delayIndex * 0.1}s`
-            }}
-          >
-            <FavouriteButton
-              companyId={company.id}
-              className={styles.favouriteButtonCard}
+        <div className={styles.filters}>
+          <div className={styles.filterCities}>
+            <CompanyFilter
+              cities={cities}
+              selectedCities={selectedCities}
+              onCityChange={handleCityChange}
             />
-            <div className={styles.cardContent}>
-              <div className={styles.cardHeader}>
-                <h3 className={styles.cardTitle}>{company.name}</h3>
-              </div>
-              <p className={styles.cardSubtitle}>
-                {company.mainbusinesslinename || ""}
-              </p>
-              {company.updated_at && (
-                <p className={styles.cardUpdated}>
-                  {t("company.updatedAt")}: {formatDate(company.updated_at) || company.updated_at}
-                </p>
-              )}
-            </div>
-            <div className={styles.cardActions}>
-              <Button
-                label={t("common.viewDetails")}
-                onClick={() => navigate(`/companies/${company.id}`)}
-                className={styles.viewDetailsButton}
-              />
-            </div>
-          </Card>
-          );
-        })}
-      </div>
-      {hasMore && (
-        <div className={styles.loadMoreContainer}>
-          <Button
-            label={loadingMore ? t("common.loading") : t("common.showMore")}
-            onClick={handleLoadMore}
-            disabled={loadingMore}
-            loading={loadingMore}
-          />
+          </div>
+          <div className={styles.filterCategory}>
+            <CategoryFilter
+              categories={categories}
+              generalCategories={generalCategories}
+              value={selectedCategoryId}
+              onChange={handleCategoryChange}
+            />
+          </div>
+          <div className={styles.filterPerPage}>
+            <Dropdown
+              value={
+                itemsPerPageOptions.find((opt) => opt.value === itemsPerPage) ||
+                itemsPerPageOptions[0]
+              }
+              options={itemsPerPageOptions}
+              onChange={handleItemsPerPageChange}
+              optionLabel="label"
+              optionValue="value"
+              placeholder={t("common.itemsPerPage")}
+              className={styles.itemsPerPageDropdown}
+              appendTo="self"
+            />
+          </div>
         </div>
-      )}
-    </div>
+        <div className={styles.grid}>
+          {companies.map((company, index) => {
+            // Calculate delay: for new cards (after append), use relative index
+            // For initial load, use absolute index
+            const delayIndex =
+              index < previousCountRef.current
+                ? index
+                : index - previousCountRef.current;
+            return (
+              <Card
+                key={company.id}
+                className={styles.card}
+                style={{
+                  animationDelay: `${delayIndex * 0.1}s`,
+                }}
+              >
+                <FavouriteButton
+                  companyId={company.id}
+                  className={styles.favouriteButtonCard}
+                />
+                <div className={styles.cardContent}>
+                  <div className={styles.cardHeader}>
+                    <h3 className={styles.cardTitle}>{company.name}</h3>
+                  </div>
+                  <p className={styles.cardSubtitle}>
+                    {company.mainbusinesslinename || ""}
+                  </p>
+                  {company.updated_at && (
+                    <p className={styles.cardUpdated}>
+                      {t("company.updatedAt")}:{" "}
+                      {formatDate(company.updated_at) || company.updated_at}
+                    </p>
+                  )}
+                </div>
+                <div className={styles.cardActions}>
+                  <Button
+                    label={t("common.viewDetails")}
+                    onClick={() => navigate(`/companies/${company.id}`)}
+                    className={styles.viewDetailsButton}
+                  />
+                </div>
+              </Card>
+            );
+          })}
+        </div>
+        {hasMore && (
+          <div className={styles.loadMoreContainer}>
+            <Button
+              label={loadingMore ? t("common.loading") : t("common.showMore")}
+              onClick={handleLoadMore}
+              disabled={loadingMore}
+              loading={loadingMore}
+            />
+          </div>
+        )}
+      </div>
     </>
   );
 };

@@ -506,10 +506,6 @@ export const PollsProvider = ({ children }: { children: ReactNode }) => (
   <PollsContextProviderInternal>{children}</PollsContextProviderInternal>
 );
 
-export const PollsContextProvider = ({ children }: { children: ReactNode }) => (
-  <PollsContextProviderInternal>{children}</PollsContextProviderInternal>
-);
-
 export default PollsContext;
 
 

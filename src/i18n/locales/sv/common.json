@@ -7,6 +7,7 @@
     "companies": "Företag",
     "about": "Om oss",
     "shop": "Butik",
+    "polls": "Omröstningar",
     "login": "Logga in",
     "profile": "Profil",
     "signup": "Registrera",
@@ -101,6 +102,100 @@
     "merch": "Expat Merch",
     "inStock": "I lager",
     "outOfStock": "Slut i lager"
+  },
+  "polls": {
+    "pageTitle": "Gemenskapsomröstningar",
+    "pageDescription": "Delta i omröstningar och se vad andra tycker.",
+    "actions": {
+      "create": "Skapa omröstning",
+      "viewDetails": "Visa detaljer"
+    },
+    "tabs": {
+      "active": "Aktiva omröstningar",
+      "mine": "Mina omröstningar",
+      "company": "Företagsomröstningar"
+    },
+    "empty": {
+      "active": "Inga aktiva omröstningar just nu. Titta tillbaka senare!",
+      "mine": "Du har inte skapat några omröstningar ännu.",
+      "company": "Det finns inga omröstningar för detta företag ännu."
+    },
+    "status": {
+      "open": "Öppen",
+      "closed": "Stängd"
+    },
+    "labels": {
+      "company": "Företag: {{company}}",
+      "expires": "Upphör: {{date}}",
+      "closedAt": "Stängd: {{date}}",
+      "selectCompany": "Företag",
+      "selectCompanyPlaceholder": "Välj ett företag…"
+    },
+    "create": {
+      "title": "Skapa omröstning",
+      "success": "Omröstningen skapades.",
+      "error": "Misslyckades med att skapa omröstning.",
+      "optionRequired": "Lägg till minst ett alternativ eller tillåt text-svar.",
+      "titleRequired": "Titel för omröstningen krävs.",
+      "companySelectionRequired": "Välj ett företag för denna omröstning.",
+      "globalOption": "Global omröstning",
+      "companyPlaceholder": "Företag #{{id}}",
+      "submit": "Skapa omröstning",
+      "form": {
+        "title": "Titel",
+        "titlePlaceholder": "Vad vill du fråga?",
+        "description": "Beskrivning",
+        "descriptionPlaceholder": "Valfri bakgrundsinformation…",
+        "scope": "Kontext",
+        "scopePlaceholder": "Välj var omröstningen hör hemma",
+        "allowMultiple": "Tillåt flera val",
+        "allowText": "Tillåt text-svar",
+        "options": "Alternativ",
+        "optionPlaceholder": "Alternativ {{index}}",
+        "addOption": "Lägg till alternativ",
+        "expiresAt": "Utgångstid"
+      }
+    },
+    "errors": {
+      "loadFailed": "Kunde inte ladda omröstningar.",
+      "invalidPoll": "Ogiltig omröstning.",
+      "notAuthorized": "Du saknar behörighet för denna åtgärd.",
+      "notFound": "Omröstning hittades inte."
+    },
+    "detail": {
+      "titleFallback": "Omröstning",
+      "responseTitle": "Ditt svar",
+      "textResponse": "Text-svar",
+      "gender": "Kön",
+      "ageRange": "Åldersgrupp",
+      "nativeLanguage": "Modersmål",
+      "nativeLanguagePlaceholder": "t.ex. svenska",
+      "yearsExperience": "Års erfarenhet",
+      "selectPlaceholder": "Välj…",
+      "validation": {
+        "optionRequired": "Välj ett alternativ för att rösta.",
+        "optionOrText": "Välj ett alternativ eller skriv ett text-svar."
+      },
+      "success": "Tack för ditt svar!",
+      "alreadyResponded": "Du har redan svarat på denna omröstning.",
+      "pollClosed": "Denna omröstning är stängd.",
+      "error": "Misslyckades med att skicka svaret.",
+      "closeError": "Misslyckades med att stänga omröstningen.",
+      "closePoll": "Stäng omröstning",
+      "closed": "Omröstningen stängdes.",
+      "disabledButton": "Svar inaktiverade",
+      "submit": "Skicka svar",
+      "resultsTitle": "Resultat",
+      "totalResponses": "Totalt antal svar",
+      "textResponsesTitle": "Anonyma text-svar",
+      "demographicsTitle": "Demografi",
+      "demographic": {
+        "gender": "Kön",
+        "age_range": "Åldersgrupp",
+        "native_language": "Modersmål",
+        "years_experience": "Års erfarenhet"
+      }
+    }
   },
   "login": {
     "forgotPasswordMessage": "Oj, så synd! Vi har inte skapat återställning av lösenord ännu...",

@@ -38,6 +38,10 @@ const MobileMenu = () => {
       command: () => handleNavigation("/shop"),
     },
     {
+      label: t("navigation.polls"),
+      command: () => handleNavigation("/polls"),
+    },
+    {
       label: t("navigation.about"),
       command: () => handleNavigation("/about"),
     },

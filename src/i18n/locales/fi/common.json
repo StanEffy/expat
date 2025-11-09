@@ -7,6 +7,7 @@
     "companies": "Yritykset",
     "about": "Tietoa meistä",
     "shop": "Kauppa",
+    "polls": "Kyselyt",
     "login": "Kirjaudu sisään",
     "profile": "Profiili",
     "signup": "Rekisteröidy",
@@ -101,6 +102,100 @@
     "merch": "Expat Merch",
     "inStock": "Varastossa",
     "outOfStock": "Loppunut varastosta"
+  },
+  "polls": {
+    "pageTitle": "Yhteisön kyselyt",
+    "pageDescription": "Osallistu yhteisön kysymyksiin ja näe muiden mielipiteet.",
+    "actions": {
+      "create": "Luo kysely",
+      "viewDetails": "Näytä tiedot"
+    },
+    "tabs": {
+      "active": "Aktiiviset kyselyt",
+      "mine": "Kyselyni",
+      "company": "Yrityksen kyselyt"
+    },
+    "empty": {
+      "active": "Ei aktiivisia kyselyjä juuri nyt. Tarkista myöhemmin!",
+      "mine": "Et ole vielä luonut kyselyjä.",
+      "company": "Tälle yritykselle ei ole vielä kyselyjä."
+    },
+    "status": {
+      "open": "Avoin",
+      "closed": "Suljettu"
+    },
+    "labels": {
+      "company": "Yritys: {{company}}",
+      "expires": "Päättyy: {{date}}",
+      "closedAt": "Suljettu: {{date}}",
+      "selectCompany": "Yritys",
+      "selectCompanyPlaceholder": "Valitse yritys…"
+    },
+    "create": {
+      "title": "Luo kysely",
+      "success": "Kysely luotiin onnistuneesti.",
+      "error": "Kyselyn luominen epäonnistui.",
+      "optionRequired": "Lisää vähintään yksi vaihtoehto tai salli tekstivastaukset.",
+      "titleRequired": "Kyselyn otsikko on pakollinen.",
+      "companySelectionRequired": "Valitse yritys tälle kyselylle.",
+      "globalOption": "Julkinen kysely",
+      "companyPlaceholder": "Yritys #{{id}}",
+      "submit": "Luo kysely",
+      "form": {
+        "title": "Otsikko",
+        "titlePlaceholder": "Mitä haluat kysyä?",
+        "description": "Kuvaus",
+        "descriptionPlaceholder": "Lisätietoa äänestäjille…",
+        "scope": "Konteksti",
+        "scopePlaceholder": "Valitse mihin kysely kuuluu",
+        "allowMultiple": "Salli useampi valinta",
+        "allowText": "Salli tekstivastaukset",
+        "options": "Vaihtoehdot",
+        "optionPlaceholder": "Vaihtoehto {{index}}",
+        "addOption": "Lisää vaihtoehto",
+        "expiresAt": "Päättymisaika"
+      }
+    },
+    "errors": {
+      "loadFailed": "Kyselyjen lataus epäonnistui.",
+      "invalidPoll": "Virheellinen kysely.",
+      "notAuthorized": "Sinulla ei ole oikeutta tähän toimintoon.",
+      "notFound": "Kyselyä ei löytynyt."
+    },
+    "detail": {
+      "titleFallback": "Kysely",
+      "responseTitle": "Vastauksesi",
+      "textResponse": "Tekstivastaus",
+      "gender": "Sukupuoli",
+      "ageRange": "Ikähaarukka",
+      "nativeLanguage": "Äidinkieli",
+      "nativeLanguagePlaceholder": "esim. suomi",
+      "yearsExperience": "Kokemusvuodet",
+      "selectPlaceholder": "Valitse…",
+      "validation": {
+        "optionRequired": "Valitse vaihtoehto vastataksesi.",
+        "optionOrText": "Valitse vaihtoehto tai kirjoita tekstivastaus."
+      },
+      "success": "Kiitos vastauksestasi!",
+      "alreadyResponded": "Olet jo vastannut tähän kyselyyn.",
+      "pollClosed": "Tämä kysely on suljettu.",
+      "error": "Vastauksen lähetys epäonnistui.",
+      "closeError": "Kyselyn sulkeminen epäonnistui.",
+      "closePoll": "Sulje kysely",
+      "closed": "Kysely suljettiin.",
+      "disabledButton": "Vastaaminen estetty",
+      "submit": "Lähetä vastaus",
+      "resultsTitle": "Tulokset",
+      "totalResponses": "Vastauksia yhteensä",
+      "textResponsesTitle": "Anonyymit tekstivastaukset",
+      "demographicsTitle": "Demografia",
+      "demographic": {
+        "gender": "Sukupuoli",
+        "age_range": "Ikähaarukka",
+        "native_language": "Äidinkieli",
+        "years_experience": "Kokemusvuodet"
+      }
+    }
   },
   "login": {
     "forgotPasswordMessage": "No, harmillista! Emme ole vielä luoneet salasanan palautusta...",

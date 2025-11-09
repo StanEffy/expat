@@ -113,6 +113,11 @@ const Layout = ({ children }: LayoutProps) => {
           onClick={() => navigate("/shop")}
         />
         <Button
+          label={t("navigation.polls")}
+          text
+          onClick={() => navigate("/polls")}
+        />
+        <Button
           label={t("navigation.about")}
           text
           onClick={() => navigate("/about")}

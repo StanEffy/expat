@@ -7,6 +7,7 @@
     "companies": "Компании",
     "about": "О нас",
     "shop": "Магазин",
+    "polls": "Опросы",
     "login": "Вход",
     "profile": "Профиль",
     "signup": "Регистрация",
@@ -101,6 +102,100 @@
     "merch": "Мерч Expat",
     "inStock": "В наличии",
     "outOfStock": "Нет в наличии"
+  },
+  "polls": {
+    "pageTitle": "Опросы сообщества",
+    "pageDescription": "Участвуйте в опросах и узнавайте мнение других.",
+    "actions": {
+      "create": "Создать опрос",
+      "viewDetails": "Подробнее"
+    },
+    "tabs": {
+      "active": "Активные опросы",
+      "mine": "Мои опросы",
+      "company": "Опросы компании"
+    },
+    "empty": {
+      "active": "Сейчас нет активных опросов. Загляните позже!",
+      "mine": "Вы ещё не создали ни одного опроса.",
+      "company": "Для этой компании пока нет опросов."
+    },
+    "status": {
+      "open": "Открыт",
+      "closed": "Закрыт"
+    },
+    "labels": {
+      "company": "Компания: {{company}}",
+      "expires": "Завершается: {{date}}",
+      "closedAt": "Закрыт: {{date}}",
+      "selectCompany": "Компания",
+      "selectCompanyPlaceholder": "Выберите компанию…"
+    },
+    "create": {
+      "title": "Создать опрос",
+      "success": "Опрос успешно создан.",
+      "error": "Не удалось создать опрос.",
+      "optionRequired": "Добавьте как минимум один вариант или разрешите текстовые ответы.",
+      "titleRequired": "Требуется заголовок опроса.",
+      "companySelectionRequired": "Выберите компанию для этого опроса.",
+      "globalOption": "Глобальный опрос",
+      "companyPlaceholder": "Компания №{{id}}",
+      "submit": "Создать опрос",
+      "form": {
+        "title": "Заголовок",
+        "titlePlaceholder": "О чём вы хотите спросить?",
+        "description": "Описание",
+        "descriptionPlaceholder": "Дополнительный контекст для участников…",
+        "scope": "Контекст",
+        "scopePlaceholder": "Выберите где разместить опрос",
+        "allowMultiple": "Разрешить несколько вариантов",
+        "allowText": "Разрешить текстовые ответы",
+        "options": "Варианты",
+        "optionPlaceholder": "Вариант {{index}}",
+        "addOption": "Добавить вариант",
+        "expiresAt": "Дата окончания"
+      }
+    },
+    "errors": {
+      "loadFailed": "Не удалось загрузить опросы.",
+      "invalidPoll": "Некорректный опрос.",
+      "notAuthorized": "У вас нет прав для этого действия.",
+      "notFound": "Опрос не найден."
+    },
+    "detail": {
+      "titleFallback": "Опрос",
+      "responseTitle": "Ваш ответ",
+      "textResponse": "Текстовый ответ",
+      "gender": "Пол",
+      "ageRange": "Возрастная группа",
+      "nativeLanguage": "Родной язык",
+      "nativeLanguagePlaceholder": "например, русский",
+      "yearsExperience": "Опыт (годы)",
+      "selectPlaceholder": "Выберите…",
+      "validation": {
+        "optionRequired": "Выберите вариант, чтобы проголосовать.",
+        "optionOrText": "Выберите вариант или введите текстовый ответ."
+      },
+      "success": "Спасибо за ваш голос!",
+      "alreadyResponded": "Вы уже участвовали в этом опросе.",
+      "pollClosed": "Этот опрос закрыт.",
+      "error": "Не удалось отправить ответ.",
+      "closeError": "Не удалось закрыть опрос.",
+      "closePoll": "Закрыть опрос",
+      "closed": "Опрос закрыт.",
+      "disabledButton": "Ответы недоступны",
+      "submit": "Отправить ответ",
+      "resultsTitle": "Результаты",
+      "totalResponses": "Всего ответов",
+      "textResponsesTitle": "Анонимные текстовые ответы",
+      "demographicsTitle": "Демография",
+      "demographic": {
+        "gender": "Пол",
+        "age_range": "Возраст",
+        "native_language": "Родной язык",
+        "years_experience": "Опыт (годы)"
+      }
+    }
   },
   "login": {
     "forgotPasswordMessage": "Ну что ж, не повезло! Мы ещё не создали восстановление пароля...",

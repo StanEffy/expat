@@ -7,6 +7,7 @@
     "companies": "Companies",
     "about": "About",
     "shop": "Shop",
+    "polls": "Polls",
     "login": "Login",
     "profile": "Profile",
     "signup": "Signup",
@@ -101,6 +102,100 @@
     "merch": "Expat Merch",
     "inStock": "In Stock",
     "outOfStock": "Out of Stock"
+  },
+  "polls": {
+    "pageTitle": "Community Polls",
+    "pageDescription": "Take part in community questions and see what others think.",
+    "actions": {
+      "create": "Create Poll",
+      "viewDetails": "View Details"
+    },
+    "tabs": {
+      "active": "Active Polls",
+      "mine": "My Polls",
+      "company": "Company Polls"
+    },
+    "empty": {
+      "active": "No active polls right now. Check back soon!",
+      "mine": "You haven’t created any polls yet.",
+      "company": "No polls for this company yet."
+    },
+    "status": {
+      "open": "Open",
+      "closed": "Closed"
+    },
+    "labels": {
+      "company": "Company: {{company}}",
+      "expires": "Expires: {{date}}",
+      "closedAt": "Closed: {{date}}",
+      "selectCompany": "Company",
+      "selectCompanyPlaceholder": "Choose a company…"
+    },
+    "create": {
+      "title": "Create Poll",
+      "success": "Poll created successfully.",
+      "error": "Failed to create poll.",
+      "optionRequired": "Add at least one option or allow text responses.",
+      "titleRequired": "Poll title is required.",
+      "companySelectionRequired": "Select a company for this poll.",
+      "globalOption": "Global Poll",
+      "companyPlaceholder": "Company #{{id}}",
+      "submit": "Create Poll",
+      "form": {
+        "title": "Title",
+        "titlePlaceholder": "What would you like to ask?",
+        "description": "Description",
+        "descriptionPlaceholder": "Optional context for voters…",
+        "scope": "Context",
+        "scopePlaceholder": "Select where this poll belongs",
+        "allowMultiple": "Allow multiple choice",
+        "allowText": "Allow text responses",
+        "options": "Options",
+        "optionPlaceholder": "Option {{index}}",
+        "addOption": "Add option",
+        "expiresAt": "Expires At"
+      }
+    },
+    "errors": {
+      "loadFailed": "Failed to load polls.",
+      "invalidPoll": "Invalid poll.",
+      "notAuthorized": "You do not have permission to perform this action.",
+      "notFound": "Poll not found."
+    },
+    "detail": {
+      "titleFallback": "Poll",
+      "responseTitle": "Your Response",
+      "textResponse": "Text Response",
+      "gender": "Gender",
+      "ageRange": "Age Range",
+      "nativeLanguage": "Native Language",
+      "nativeLanguagePlaceholder": "e.g. English",
+      "yearsExperience": "Years of Experience",
+      "selectPlaceholder": "Select…",
+      "validation": {
+        "optionRequired": "Select an option to vote.",
+        "optionOrText": "Select an option or provide a text response."
+      },
+      "success": "Thanks for sharing your vote!",
+      "alreadyResponded": "You have already responded to this poll.",
+      "pollClosed": "This poll is closed.",
+      "error": "Failed to submit your response.",
+      "closeError": "Failed to close the poll.",
+      "closePoll": "Close Poll",
+      "closed": "Poll closed.",
+      "disabledButton": "Responses Disabled",
+      "submit": "Submit Response",
+      "resultsTitle": "Results",
+      "totalResponses": "Total responses",
+      "textResponsesTitle": "Anonymous text responses",
+      "demographicsTitle": "Demographics",
+      "demographic": {
+        "gender": "Gender",
+        "age_range": "Age range",
+        "native_language": "Native language",
+        "years_experience": "Years of experience"
+      }
+    }
   },
   "login": {
     "forgotPasswordMessage": "Well, bad for you! We haven't created password restoration yet...",

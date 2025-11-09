@@ -7,6 +7,7 @@
     "companies": "Компанії",
     "about": "Про нас",
     "shop": "Магазин",
+    "polls": "Опитування",
     "login": "Увійти",
     "profile": "Профіль",
     "signup": "Реєстрація",
@@ -101,6 +102,100 @@
     "merch": "Мерч Expat",
     "inStock": "В наявності",
     "outOfStock": "Немає в наявності"
+  },
+  "polls": {
+    "pageTitle": "Опитування спільноти",
+    "pageDescription": "Беріть участь в опитуваннях та дізнавайтесь думку інших.",
+    "actions": {
+      "create": "Створити опитування",
+      "viewDetails": "Переглянути деталі"
+    },
+    "tabs": {
+      "active": "Активні опитування",
+      "mine": "Мої опитування",
+      "company": "Опитування компанії"
+    },
+    "empty": {
+      "active": "Зараз немає активних опитувань. Завітайте пізніше!",
+      "mine": "Ви ще не створили жодного опитування.",
+      "company": "Для цієї компанії ще немає опитувань."
+    },
+    "status": {
+      "open": "Відкрите",
+      "closed": "Закрите"
+    },
+    "labels": {
+      "company": "Компанія: {{company}}",
+      "expires": "Завершується: {{date}}",
+      "closedAt": "Закрито: {{date}}",
+      "selectCompany": "Компанія",
+      "selectCompanyPlaceholder": "Виберіть компанію…"
+    },
+    "create": {
+      "title": "Створити опитування",
+      "success": "Опитування успішно створено.",
+      "error": "Не вдалося створити опитування.",
+      "optionRequired": "Додайте щонайменше один варіант або дозвольте текстові відповіді.",
+      "titleRequired": "Потрібна назва опитування.",
+      "companySelectionRequired": "Виберіть компанію для цього опитування.",
+      "globalOption": "Глобальне опитування",
+      "companyPlaceholder": "Компанія №{{id}}",
+      "submit": "Створити опитування",
+      "form": {
+        "title": "Назва",
+        "titlePlaceholder": "Що ви хочете запитати?",
+        "description": "Опис",
+        "descriptionPlaceholder": "Додатковий контекст для учасників…",
+        "scope": "Контекст",
+        "scopePlaceholder": "Оберіть, де розмістити опитування",
+        "allowMultiple": "Дозволити кілька варіантів",
+        "allowText": "Дозволити текстові відповіді",
+        "options": "Варіанти",
+        "optionPlaceholder": "Варіант {{index}}",
+        "addOption": "Додати варіант",
+        "expiresAt": "Дата завершення"
+      }
+    },
+    "errors": {
+      "loadFailed": "Не вдалося завантажити опитування.",
+      "invalidPoll": "Неправильне опитування.",
+      "notAuthorized": "У вас немає прав для цієї дії.",
+      "notFound": "Опитування не знайдено."
+    },
+    "detail": {
+      "titleFallback": "Опитування",
+      "responseTitle": "Ваша відповідь",
+      "textResponse": "Текстова відповідь",
+      "gender": "Стать",
+      "ageRange": "Вікова група",
+      "nativeLanguage": "Рідна мова",
+      "nativeLanguagePlaceholder": "наприклад, українська",
+      "yearsExperience": "Років досвіду",
+      "selectPlaceholder": "Виберіть…",
+      "validation": {
+        "optionRequired": "Виберіть варіант, щоб проголосувати.",
+        "optionOrText": "Виберіть варіант або додайте текстову відповідь."
+      },
+      "success": "Дякуємо за вашу відповідь!",
+      "alreadyResponded": "Ви вже відповідали на це опитування.",
+      "pollClosed": "Це опитування закрито.",
+      "error": "Не вдалося надіслати відповідь.",
+      "closeError": "Не вдалося закрити опитування.",
+      "closePoll": "Закрити опитування",
+      "closed": "Опитування закрито.",
+      "disabledButton": "Відповіді вимкнені",
+      "submit": "Надіслати відповідь",
+      "resultsTitle": "Результати",
+      "totalResponses": "Всього відповідей",
+      "textResponsesTitle": "Анонімні текстові відповіді",
+      "demographicsTitle": "Демографія",
+      "demographic": {
+        "gender": "Стать",
+        "age_range": "Вік",
+        "native_language": "Рідна мова",
+        "years_experience": "Роки досвіду"
+      }
+    }
   },
   "login": {
     "forgotPasswordMessage": "Ну що ж, не пощастило! Ми ще не створили відновлення пароля...",

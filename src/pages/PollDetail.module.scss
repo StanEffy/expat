@@ -1,0 +1,209 @@
+.container {
+  padding: 2rem 1rem 3rem;
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.backButton {
+  align-self: flex-start;
+}
+
+.titleGroup {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.title {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.5rem;
+  color: #65676c;
+  font-size: 0.95rem;
+}
+
+.descriptionCard p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.banner {
+  margin: 0.5rem 0;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.5rem;
+}
+
+.responseCard {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.optionRow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1rem;
+}
+
+.optionLabel {
+  flex: 1;
+}
+
+.formRow {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.metadataGrid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.optional {
+  color: #7a7d82;
+  font-weight: 400;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.statsCard {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.statSummary {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.optionStats {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.optionStat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.optionStatHeader {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.95rem;
+  color: #44464a;
+}
+
+.optionStatValue {
+  font-weight: 600;
+}
+
+.textResponses {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.textResponses ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.demographics {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.demographicSection {
+  background: rgba(59, 130, 246, 0.05);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+}
+
+.demographicTitle {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.demographicSection ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.demographicSection li {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.95rem;
+  color: #4d5055;
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1rem;
+}
+
+.errorMessage {
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 640px) {
+  .titleGroup {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+

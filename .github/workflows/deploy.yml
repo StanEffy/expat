@@ -17,6 +17,7 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
             cd /var/www/expat/
+            git config pull.rebase true
             git pull origin master
             npm ci --only=production
             npm install

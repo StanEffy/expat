@@ -56,7 +56,7 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({
 
       return {
         id: (c.mainbusinessline ?? "").toString(),
-        label: formatLabelWithCount(displayName, count) + " lol",
+        label: formatLabelWithCount(displayName, count),
       };
     })
     .filter(

@@ -29,28 +29,28 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({ categories, generalCate
 
   // Helper function to format label with count
   const formatLabelWithCount = (name: string, count?: number | null): string => {
-    if (count !== null && count !== undefined && count > 0) {
+    if (count !== null && count !== undefined) {
       return `${name} (${count})`;
     }
     return name;
   };
 
-  // Build NACE groups
-  const naceEnglish = categories
-    .filter((c) => (c.name_en ?? '').trim().length > 0)
-    .map((c) => ({ 
-      id: (c.mainbusinessline ?? '').toString(), 
-      label: formatLabelWithCount((c.name_en ?? '').trim(), c.company_count)
-    }))
-    .sort((a, b) => a.label.localeCompare(b.label));
-
-  const naceFinnish = categories
-    .filter((c) => !c.name_en || (c.name_en ?? '').trim().length === 0)
-    .map((c) => ({ 
-      id: (c.mainbusinessline ?? '').toString(), 
-      label: formatLabelWithCount((c.name ?? '').trim(), c.company_count)
-    }))
-    .filter((c) => c.label.length > 0)
+  // Build NACE categories - show name based on current language preference
+  const naceCategories = categories
+    .map((c) => {
+      // Choose name based on current language, fallback to available name
+      const displayName = i18n.language === 'fi' 
+        ? (c.name ?? c.name_en ?? '').trim()
+        : (c.name_en ?? c.name ?? '').trim();
+      
+      if (!displayName) return null;
+      
+      return {
+        id: (c.mainbusinessline ?? '').toString(),
+        label: formatLabelWithCount(displayName, c.company_count)
+      };
+    })
+    .filter((c): c is { id: string; label: string } => c !== null && c.label.length > 0)
     .sort((a, b) => a.label.localeCompare(b.label));
 
   const general = (generalCategories || [])
@@ -68,14 +68,9 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({ categories, generalCate
     allOptions.push(...general);
   }
 
-  // Add NACE English
-  if (naceEnglish.length > 0) {
-    allOptions.push(...naceEnglish);
-  }
-
-  // Add NACE Finnish
-  if (naceFinnish.length > 0) {
-    allOptions.push(...naceFinnish);
+  // Add NACE categories
+  if (naceCategories.length > 0) {
+    allOptions.push(...naceCategories);
   }
 
   return (

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Dropdown } from "primereact/dropdown";
 import { useTranslation } from "react-i18next";
 import styles from "./CategoryFilter.module.scss";
@@ -32,17 +32,6 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({
 }) => {
   const { t, i18n } = useTranslation();
 
-  // Debug: Log categories when they change
-  useEffect(() => {
-    console.log("CategoryFilter - Categories received:", categories);
-    console.log("CategoryFilter - Categories count:", categories?.length);
-    if (categories && categories.length > 0) {
-      console.log("CategoryFilter - First category:", categories[0]);
-      console.log("CategoryFilter - Sample company_count:", categories[0]?.company_count);
-    }
-  }, [categories]);
-
-  // Helper function to format label with count
   const formatLabelWithCount = (
     name: string,
     count?: number | null,
@@ -55,17 +44,19 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({
   // Build NACE categories - show name based on current language preference
   const naceCategories = categories
     .map((c) => {
-      // Choose name based on current language, fallback to available name
+      const count = c.company_count ?? 0;
+      if (count <= 0) return null;
+
       const displayName =
         i18n.language === "fi"
           ? (c.name ?? c.name_en ?? "").trim()
           : (c.name_en ?? c.name ?? "").trim();
 
       if (!displayName) return null;
-      console.log(c.company_count);
+
       return {
         id: (c.mainbusinessline ?? "").toString(),
-        label: formatLabelWithCount(displayName, c.company_count),
+        label: formatLabelWithCount(displayName, count) + " lol",
       };
     })
     .filter(

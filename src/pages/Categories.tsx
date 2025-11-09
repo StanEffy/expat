@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { useNotification } from '../contexts/NotificationContext';
 import { getAuthHeaders } from '../utils/auth';
 import { CATEGORY_ENDPOINTS } from '../constants/api';
-import SEO from '../components/SEO';
+import SEO from '../components/Common/SEO';
 import styles from './Categories.module.scss';
 
 interface NaceCategory {

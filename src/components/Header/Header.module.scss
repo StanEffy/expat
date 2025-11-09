@@ -1,0 +1,28 @@
+@use "../../styles/variables" as *;
+
+.startLink {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.end {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+
+  @media (min-width: 375px) {
+    gap: 8px;
+  }
+}
+
+.desktopNavButtons {
+  display: none;
+  gap: 8px;
+
+  @media (min-width: 769px) {
+    display: flex;
+  }
+}
+

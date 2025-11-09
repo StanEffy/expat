@@ -1,14 +1,14 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { I18nextProvider } from 'react-i18next';
 import i18n from './i18n/config';
-import Layout from './components/Layout';
-import AdminLayout from './components/AdminLayout';
-import AdminRouteGuard from './components/AdminRouteGuard';
+import Layout from './components/Layouts/Layout';
+import AdminLayout from './components/Admin/AdminLayout';
+import AdminRouteGuard from './components/Admin/AdminRouteGuard';
 import { NotificationProvider } from './contexts/NotificationContext';
 import { FavouritesProvider } from './contexts/FavouritesContext';
 import { PollsProvider } from './contexts/PollsContext';
 import { ADMIN_PANEL_PATH } from './constants/api';
-import { Suspense, lazy, useState } from 'react';
+import { Suspense, lazy } from 'react';
 import type { ComponentType, LazyExoticComponent } from 'react';
 
 const Home = lazy(() => import('./pages/Home'));
@@ -36,16 +36,9 @@ const LoadingScreen = () => (
 type LazyComponent = LazyExoticComponent<ComponentType<unknown>>;
 
 function App() {
-  const [language, setLanguage] = useState('en');
-
-  const handleLanguageChange = (newLanguage: string) => {
-    setLanguage(newLanguage);
-    i18n.changeLanguage(newLanguage);
-  };
-
   const renderWithLayout = (Page: LazyComponent) => (
     <Suspense fallback={<LoadingScreen />}>
-      <Layout currentLanguage={language} onLanguageChange={handleLanguageChange}>
+      <Layout>
         <Page />
       </Layout>
     </Suspense>

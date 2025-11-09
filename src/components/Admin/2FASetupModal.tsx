@@ -3,8 +3,8 @@ import { Dialog } from 'primereact/dialog';
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
 import { Message } from 'primereact/message';
-import { ADMIN_ENDPOINTS } from '../constants/api';
-import { getAuthHeaders } from '../utils/auth';
+import { ADMIN_ENDPOINTS } from '../../constants/api';
+import { getAuthHeaders } from '../../utils/auth';
 import { useTranslation } from 'react-i18next';
 import styles from './2FASetupModal.module.scss';
 

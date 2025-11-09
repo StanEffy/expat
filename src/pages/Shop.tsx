@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { Card } from 'primereact/card';
 import { Badge } from 'primereact/badge';
-import SEO from '../components/SEO';
+import SEO from '../components/Common/SEO';
 import styles from './Shop.module.scss';
 import tShirtImage from '../assets/shop/t-shirt.png';
 import merchImage from '../assets/shop/merch.png';

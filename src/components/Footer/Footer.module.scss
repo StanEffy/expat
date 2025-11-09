@@ -1,0 +1,21 @@
+@use "../../styles/variables" as *;
+
+.footer {
+  padding: 24px 16px;
+  margin-top: auto;
+  background-color: $primary-0;
+  width: 100%;
+}
+
+.footerContent {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footerText {
+  text-align: center;
+  color: $complement-4;
+  margin: 0;
+  font-size: 0.875rem;
+}
+

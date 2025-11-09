@@ -5,9 +5,9 @@ import { InputText } from "primereact/inputtext";
 import { InputTextarea } from "primereact/inputtextarea";
 import { Dialog } from "primereact/dialog";
 import { useTranslation } from "react-i18next";
-import { useNotification } from "../contexts/NotificationContext";
-import { getAuthHeaders } from "../utils/auth";
-import { COMPANY_ENDPOINTS } from "../constants/api";
+import { useNotification } from "../../contexts/NotificationContext";
+import { getAuthHeaders } from "../../utils/auth";
+import { COMPANY_ENDPOINTS } from "../../constants/api";
 import styles from "./CompanyInfoEditor.module.scss";
 
 interface CompanyInfoEditorProps {

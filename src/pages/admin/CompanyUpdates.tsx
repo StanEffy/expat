@@ -15,7 +15,7 @@ import { getAdminHeaders } from '../../utils/auth';
 import { useNotification } from '../../contexts/NotificationContext';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import SEO from '../../components/SEO';
+import SEO from '../../components/Common/SEO';
 import styles from './CompanyUpdates.module.scss';
 
 interface CompanyUpdate {

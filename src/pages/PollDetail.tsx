@@ -15,7 +15,7 @@ import { useTranslation } from 'react-i18next';
 import { usePolls } from '../contexts/PollsContext';
 import { useNotification } from '../contexts/NotificationContext';
 import { useUserProfile } from '../hooks/useUserProfile';
-import SEO from '../components/SEO';
+import SEO from '../components/Common/SEO';
 import styles from './PollDetail.module.scss';
 
 const genderOptions = [

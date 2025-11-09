@@ -6,9 +6,9 @@ import { COMPANY_ENDPOINTS } from "../constants/api";
 import { getAuthHeaders } from "../utils/auth";
 import { useNotification } from "../contexts/NotificationContext";
 import { useTranslation } from "react-i18next";
-import CompanyInfoEditor from "../components/CompanyInfoEditor";
-import FavouriteButton from "../components/FavouriteButton";
-import SEO from "../components/SEO";
+import CompanyInfoEditor from "../components/Companies/CompanyInfoEditor";
+import FavouriteButton from "../components/Common/FavouriteButton";
+import SEO from "../components/Common/SEO";
 import mapBg from "../assets/map_bg.png";
 import styles from "./CompanyDetails.module.scss";
 

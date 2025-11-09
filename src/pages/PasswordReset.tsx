@@ -6,7 +6,7 @@ import { Button } from 'primereact/button';
 import { Message } from 'primereact/message';
 import { PASSWORD_RESET_ENDPOINTS } from '../constants/api';
 import { useTranslation } from 'react-i18next';
-import SEO from '../components/SEO';
+import SEO from '../components/Common/SEO';
 import styles from './PasswordReset.module.scss';
 
 const PasswordReset = () => {

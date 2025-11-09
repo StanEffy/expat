@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { isTokenValid } from '../utils/auth';
 import { useNavigate } from 'react-router-dom';
-import SEO from '../components/SEO';
+import SEO from '../components/Common/SEO';
 import styles from './Home.module.scss';
 
 const Home = () => {

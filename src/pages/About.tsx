@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import SEO from '../components/SEO';
+import SEO from '../components/Common/SEO';
 import styles from "./About.module.scss";
 import logo from "../assets/logo_expat.png";
 import img1 from "../assets/about/1.png";

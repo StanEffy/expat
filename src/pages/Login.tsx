@@ -9,7 +9,7 @@ import { TabView, TabPanel } from "primereact/tabview";
 import { Message } from "primereact/message";
 import { AUTH_ENDPOINTS, DEFAULT_CONFIG, ADMIN_PANEL_PATH } from "../constants/api";
 import { setToken, checkAdminRole } from "../utils/auth";
-import SEO from "../components/SEO";
+import SEO from "../components/Common/SEO";
 import styles from "./Login.module.scss";
 
 const Login = () => {

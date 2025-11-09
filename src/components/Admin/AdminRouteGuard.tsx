@@ -2,11 +2,10 @@ import { ReactNode, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ProgressSpinner } from 'primereact/progressspinner';
 import { Message } from 'primereact/message';
-import { checkAdminRole, isTokenValid, getAdmin2FASession, removeAdmin2FASession } from '../utils/auth';
+import { checkAdminRole, isTokenValid, getAdmin2FASession, removeAdmin2FASession, getAuthHeaders } from '../../utils/auth';
 import TwoFASetupModal from './2FASetupModal';
 import TwoFAVerifyModal from './2FAVerifyModal';
-import { ADMIN_ENDPOINTS } from '../constants/api';
-import { getAuthHeaders } from '../utils/auth';
+import { ADMIN_ENDPOINTS } from '../../constants/api';
 import { useTranslation } from 'react-i18next';
 import styles from './AdminRouteGuard.module.scss';
 

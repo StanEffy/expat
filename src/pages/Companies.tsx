@@ -13,11 +13,10 @@ import {
 import { getAuthHeaders } from "../utils/auth";
 import { useNotification } from "../contexts/NotificationContext";
 import { useTranslation } from "react-i18next";
-import CompanyFilter from "../components/CompanyFilter";
-import CategoryFilter from "../components/CategoryFilter";
-import FavouriteButton from "../components/FavouriteButton";
-import SEO from "../components/SEO";
-import type { GeneralCategoryItem } from "../components/CategoryFilter";
+import CompanyFilter from "../components/Companies/CompanyFilter";
+import CategoryFilter, { type GeneralCategoryItem } from "../components/Companies/CategoryFilter";
+import FavouriteButton from "../components/Common/FavouriteButton";
+import SEO from "../components/Common/SEO";
 import styles from "./Companies.module.scss";
 
 interface Company {

@@ -11,7 +11,7 @@ import { getAuthHeaders } from '../utils/auth';
 import { useNotification } from '../contexts/NotificationContext';
 import { useFavourites } from '../contexts/FavouritesContext';
 import { useTranslation } from 'react-i18next';
-import SEO from '../components/SEO';
+import SEO from '../components/Common/SEO';
 import styles from './Profile.module.scss';
 
 interface Favourite {

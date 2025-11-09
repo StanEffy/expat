@@ -3,8 +3,8 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { Button } from 'primereact/button';
 import { Sidebar } from 'primereact/sidebar';
 import { Badge } from 'primereact/badge';
-import { removeToken, removeAdmin2FASession, getAdmin2FASession } from '../utils/auth';
-import { ADMIN_PANEL_PATH } from '../constants/api';
+import { removeToken, removeAdmin2FASession, getAdmin2FASession } from '../../utils/auth';
+import { ADMIN_PANEL_PATH } from '../../constants/api';
 import { useTranslation } from 'react-i18next';
 import styles from './AdminLayout.module.scss';
 

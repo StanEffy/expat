@@ -4,7 +4,7 @@ import { ProgressSpinner } from 'primereact/progressspinner';
 import { ADMIN_ENDPOINTS } from '../../constants/api';
 import { getAdminHeaders } from '../../utils/auth';
 import { useTranslation } from 'react-i18next';
-import SEO from '../../components/SEO';
+import SEO from '../../components/Common/SEO';
 import styles from './AdminDashboard.module.scss';
 
 interface DashboardStats {

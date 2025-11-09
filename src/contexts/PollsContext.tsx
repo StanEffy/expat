@@ -331,7 +331,7 @@ const PollsContextProviderInternal = ({ children }: { children: ReactNode }) => 
 
     setLoadingPollIds((prev) => new Set(prev).add(numericId));
     try {
-      const data = await fetchJson(POLL_ENDPOINTS.DETAIL(pollId));
+      const data = await fetchJson(POLL_ENDPOINTS.DETAIL(pollId), undefined, true);
       const normalized = normalizePoll(data);
       updatePollCache(normalized);
       return normalized;

@@ -1,0 +1,39 @@
+@use "../../styles/variables" as *;
+
+.button {
+  // Base button styles are handled by PrimeReact
+  // This file is for custom overrides and variants
+  
+  &.filled {
+    // Default filled style (handled by PrimeReact)
+  }
+  
+  &.outlined {
+    // Outlined style (handled by PrimeReact's outlined prop)
+  }
+  
+  &.text {
+    // Text style (handled by PrimeReact's text prop)
+  }
+  
+  &.small {
+    // Small size styles can be added here if needed
+    font-size: 0.875rem;
+    padding: 0.5rem 1rem;
+    height: auto;
+    min-height: auto;
+  }
+  
+  &.medium {
+    // Medium size (default)
+  }
+  
+  &.large {
+    // Large size styles can be added here if needed
+    font-size: 1.125rem;
+    padding: 0.875rem 1.75rem;
+    height: auto;
+    min-height: auto;
+  }
+}
+

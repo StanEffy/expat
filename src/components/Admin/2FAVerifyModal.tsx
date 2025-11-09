@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Dialog } from 'primereact/dialog';
 import { InputText } from 'primereact/inputtext';
-import { Button } from 'primereact/button';
+import Button from '../Common/Button';
 import { Message } from 'primereact/message';
 import { ADMIN_ENDPOINTS } from '../../constants/api';
 import { getAuthHeaders, setAdmin2FASession } from '../../utils/auth';

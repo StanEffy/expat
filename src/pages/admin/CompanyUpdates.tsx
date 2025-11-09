@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Card } from 'primereact/card';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { Button } from 'primereact/button';
+import Button from '../../components/Common/Button';
 import { Dialog } from 'primereact/dialog';
 import { InputTextarea } from 'primereact/inputtextarea';
 import { Tag } from 'primereact/tag';

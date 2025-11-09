@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Card } from 'primereact/card';
-import { Button } from 'primereact/button';
+import Button from '../components/Common/Button';
 import { Checkbox } from 'primereact/checkbox';
 import { RadioButton } from 'primereact/radiobutton';
 import { Dropdown } from 'primereact/dropdown';

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button } from "primereact/button";
+import Button from "../Common/Button";
 import { Menubar } from "primereact/menubar";
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";

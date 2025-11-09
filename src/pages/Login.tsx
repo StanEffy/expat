@@ -3,7 +3,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { InputText } from "primereact/inputtext";
 import { Password } from "primereact/password";
-import { Button } from "primereact/button";
+import Button from "../components/Common/Button";
 import { Card } from "primereact/card";
 import { TabView, TabPanel } from "primereact/tabview";
 import { Message } from "primereact/message";
@@ -247,16 +247,16 @@ const Login = () => {
                     inputStyle={{ width: "100%" }}
                   />
                 </div>
-                <button
+                <Button
                   type="button"
                   onClick={(e) => {
                     e.preventDefault();
                     setForgotPasswordMode(true);
                   }}
                   className={styles.forgotPasswordButton}
-                >
-                  Forgot password?
-                </button>
+                  variant="text"
+                  label="Forgot password?"
+                />
                 <Button
                   type="submit"
                   label={loading ? "Signing in..." : "Sign In"}

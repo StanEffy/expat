@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card } from 'primereact/card';
-import { Button } from 'primereact/button';
+import Button from '../components/Common/Button';
 import { Message } from 'primereact/message';
 import { Badge } from 'primereact/badge';
 import { ProgressSpinner } from 'primereact/progressspinner';

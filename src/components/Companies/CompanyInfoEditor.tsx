@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Accordion, AccordionTab } from "primereact/accordion";
-import { Button } from "primereact/button";
+import Button from "../Common/Button";
 import { InputText } from "primereact/inputtext";
 import { InputTextarea } from "primereact/inputtextarea";
 import { Dialog } from "primereact/dialog";

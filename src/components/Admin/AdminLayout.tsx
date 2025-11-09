@@ -1,6 +1,6 @@
 import { ReactNode, useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Button } from 'primereact/button';
+import Button from '../Common/Button';
 import { Sidebar } from 'primereact/sidebar';
 import { Badge } from 'primereact/badge';
 import { removeToken, removeAdmin2FASession, getAdmin2FASession } from '../../utils/auth';
@@ -76,14 +76,15 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
           {/* Desktop navigation */}
           <nav className={styles.desktopNav}>
             {menuItems.map((item) => (
-              <button
+              <Button
                 key={item.path}
                 className={`${styles.navItem} ${isActive(item.path) ? styles.active : ''}`}
                 onClick={item.command}
+                variant="text"
               >
                 <i className={item.icon}></i>
                 <span>{item.label}</span>
-              </button>
+              </Button>
             ))}
           </nav>
         </div>
@@ -115,14 +116,15 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
           <h2 className={styles.sidebarTitle}>{t('admin.navigation.title')}</h2>
           <nav className={styles.nav}>
             {menuItems.map((item) => (
-              <button
+              <Button
                 key={item.path}
                 className={`${styles.navItem} ${isActive(item.path) ? styles.active : ''}`}
                 onClick={item.command}
+                variant="text"
               >
                 <i className={item.icon}></i>
                 <span>{item.label}</span>
-              </button>
+              </Button>
             ))}
           </nav>
         </div>

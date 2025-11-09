@@ -1,7 +1,7 @@
 import { FormEvent, useEffect, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Card } from 'primereact/card';
-import { Button } from 'primereact/button';
+import Button from '../components/Common/Button';
 import { Dialog } from 'primereact/dialog';
 import { InputText } from 'primereact/inputtext';
 import { InputTextarea } from 'primereact/inputtextarea';

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card } from 'primereact/card';
 import { InputText } from 'primereact/inputtext';
-import { Button } from 'primereact/button';
+import Button from '../components/Common/Button';
 import { Message } from 'primereact/message';
 import { PASSWORD_RESET_ENDPOINTS } from '../constants/api';
 import { useTranslation } from 'react-i18next';

@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Card } from 'primereact/card';
-import { Button } from 'primereact/button';
+import Button from '../components/Common/Button';
 import { ProgressSpinner } from 'primereact/progressspinner';
 import { useTranslation } from 'react-i18next';
 import { useNotification } from '../contexts/NotificationContext';

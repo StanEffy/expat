@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Card } from "primereact/card";
-import { Button } from "primereact/button";
+import Button from "../components/Common/Button";
 import { COMPANY_ENDPOINTS } from "../constants/api";
 import { getAuthHeaders } from "../utils/auth";
 import { useNotification } from "../contexts/NotificationContext";

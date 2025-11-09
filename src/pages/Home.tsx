@@ -1,4 +1,4 @@
-import { Button } from 'primereact/button';
+import Button from '../components/Common/Button';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { isTokenValid } from '../utils/auth';

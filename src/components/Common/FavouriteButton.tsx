@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button } from "primereact/button";
+import Button from "./Button";
 import { useNotification } from "../../contexts/NotificationContext";
 import { useFavourites } from "../../contexts/FavouritesContext";
 import { useTranslation } from "react-i18next";

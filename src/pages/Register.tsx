@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { InputText } from 'primereact/inputtext';
 import { Password } from 'primereact/password';
-import { Button } from 'primereact/button';
+import Button from '../components/Common/Button';
 import { Card } from 'primereact/card';
 import { Message } from 'primereact/message';
 import styles from './Register.module.scss';

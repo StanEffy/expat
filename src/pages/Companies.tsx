@@ -34,6 +34,7 @@ interface BackendCategoryItem {
   mainbusinessline?: string | null; // id (code)
   name?: string | null; // FI
   name_en?: string | null; // EN
+  company_count?: number | null; // Company count for this category
 }
 
 const ITEMS_PER_PAGE_OPTIONS = [10, 25, 50];

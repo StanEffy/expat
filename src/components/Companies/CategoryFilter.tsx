@@ -7,6 +7,7 @@ export interface BackendCategoryItem {
   mainbusinessline?: string | null; // id/code
   name?: string | null; // FI
   name_en?: string | null; // EN
+  company_count?: number | null; // Company count for this category
 }
 
 export interface GeneralCategoryItem {
@@ -26,15 +27,29 @@ interface CategoryFilterProps {
 const CategoryFilter: React.FC<CategoryFilterProps> = ({ categories, generalCategories = [], value, onChange }) => {
   const { t, i18n } = useTranslation();
 
+  // Helper function to format label with count
+  const formatLabelWithCount = (name: string, count?: number | null): string => {
+    if (count !== null && count !== undefined && count > 0) {
+      return `${name} (${count})`;
+    }
+    return name;
+  };
+
   // Build NACE groups
   const naceEnglish = categories
     .filter((c) => (c.name_en ?? '').trim().length > 0)
-    .map((c) => ({ id: (c.mainbusinessline ?? '').toString(), label: (c.name_en ?? '').trim() }))
+    .map((c) => ({ 
+      id: (c.mainbusinessline ?? '').toString(), 
+      label: formatLabelWithCount((c.name_en ?? '').trim(), c.company_count)
+    }))
     .sort((a, b) => a.label.localeCompare(b.label));
 
   const naceFinnish = categories
     .filter((c) => !c.name_en || (c.name_en ?? '').trim().length === 0)
-    .map((c) => ({ id: (c.mainbusinessline ?? '').toString(), label: (c.name ?? '').trim() }))
+    .map((c) => ({ 
+      id: (c.mainbusinessline ?? '').toString(), 
+      label: formatLabelWithCount((c.name ?? '').trim(), c.company_count)
+    }))
     .filter((c) => c.label.length > 0)
     .sort((a, b) => a.label.localeCompare(b.label));
 

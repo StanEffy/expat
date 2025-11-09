@@ -229,12 +229,12 @@ const CompanyDetails = () => {
                   </a>
                 </p>
               )}
-              {company.updated_at && (
-                <p>
-                  <strong>{t("company.updatedAt")}:</strong>{" "}
-                  {new Date(company.updated_at).toLocaleString()}
-                </p>
-              )}
+              <p>
+                <strong>{t("company.updatedAt")}:</strong>{" "}
+                {company.updated_at 
+                  ? new Date(company.updated_at).toLocaleString()
+                  : "-"}
+              </p>
             </div>
           </Card>
 

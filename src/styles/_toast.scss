@@ -45,23 +45,54 @@
 
 // Toast icon
 .p-toast-icon-close {
-  background-color: transparent !important;
-  color: $complement-3 !important;
+  background-color: white !important;
+  color: #ffffff !important; // White for maximum visibility against dark background
   border: none !important;
   width: 2rem !important;
   height: 2rem !important;
-  border-radius: 50% !important;
+ 
   transition: all 0.2s ease !important;
+  opacity: 0.85 !important;
+  padding: 0;
+  
+  // Target any icon elements inside
+  i,
+  .p-icon,
+  {
+    color: red;
+     &::before {
+    color: #ffffff !important;
+  }
+  }
+ 
   
   &:hover {
-    background-color: rgba($primary-3, 0.3) !important;
-    color: $complement-0 !important;
+    background-color: rgba(255, 255, 255, 0.2) !important;
+    color: #ffffff !important;
+    opacity: 1 !important;
+    
+    i,
+    .p-icon,
+    &::before {
+      color: #ffffff !important;
+    }
   }
   
   &:focus {
-    outline: 2px solid $complement-3 !important;
+    outline: 2px solid #ffffff !important;
     outline-offset: 2px !important;
-    background-color: rgba($primary-3, 0.2) !important;
+    background-color: rgba(255, 255, 255, 0.15) !important;
+    color: #ffffff !important;
+    
+    i,
+    .p-icon,
+    &::before {
+      color: #ffffff !important;
+    }
+  }
+  
+  &:active {
+    background-color: rgba(255, 255, 255, 0.3) !important;
   }
 }
 

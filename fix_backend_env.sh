@@ -52,6 +52,7 @@ echo "Updating environment variables..."
 set_env_var "EXPAT_BACKEND_HOST" "0.0.0.0" "$ENV_FILE"
 
 # Update frontend origin to allow multiple origins
+# Replace YOUR_SERVER_IP with your actual server IP address
 set_env_var "EXPAT_FRONTEND_ORIGIN" "http://YOUR_SERVER_IP,http://localhost:3000,http://127.0.0.1:3000" "$ENV_FILE"
 
 # Ensure backend port is set

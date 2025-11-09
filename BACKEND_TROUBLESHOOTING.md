@@ -108,7 +108,7 @@ sudo ss -tlnp | grep python
 
 ## Quick Diagnostic Script
 
-Run this on your server (YOUR_SERVER_IP):
+Run this on your server:
 
 ```bash
 #!/bin/bash

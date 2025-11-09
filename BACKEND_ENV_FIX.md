@@ -33,6 +33,7 @@ EXPAT_JWT_SIGNING_KEY=1yktt<`!D?lJnHSi[!HJuXlwF>jQwT
 EXPAT_INVITE_CODE=9965
 
 # Frontend CORS origin - allow requests from these origins
+# Replace YOUR_SERVER_IP with your actual server IP address
 EXPAT_FRONTEND_ORIGIN=http://YOUR_SERVER_IP,http://localhost:3000,http://127.0.0.1:3000
 
 # Token expiry
@@ -129,6 +130,7 @@ if ! grep -q "EXPAT_BACKEND_HOST" .env; then
 fi
 
 # 2. Update frontend origin to include multiple origins
+# Replace YOUR_SERVER_IP with your actual server IP address
 sed -i 's|EXPAT_FRONTEND_ORIGIN=.*|EXPAT_FRONTEND_ORIGIN=http://YOUR_SERVER_IP,http://localhost:3000,http://127.0.0.1:3000|' .env
 
 # 3. Verify the .env file

@@ -29,6 +29,7 @@ interface CompanyDetails {
   size: string;
   founded: string;
   country: string;
+  updated_at?: string | null;
 }
 
 const CompanyDetails = () => {
@@ -226,6 +227,12 @@ const CompanyDetails = () => {
                   >
                     {company.website}
                   </a>
+                </p>
+              )}
+              {company.updated_at && (
+                <p>
+                  <strong>{t("company.updatedAt")}:</strong>{" "}
+                  {new Date(company.updated_at).toLocaleString()}
                 </p>
               )}
             </div>

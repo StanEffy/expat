@@ -23,6 +23,7 @@ interface Company {
   id: number;
   name: string;
   mainbusinesslinename?: string | null;
+  updated_at?: string | null;
 }
 
 interface BackendCityItem {
@@ -36,6 +37,16 @@ interface BackendCategoryItem {
 }
 
 const ITEMS_PER_PAGE_OPTIONS = [10, 25, 50];
+
+const formatDate = (value?: string | null): string | null => {
+  if (!value) return null;
+  try {
+    const date = new Date(value);
+    return date.toLocaleDateString();
+  } catch {
+    return null;
+  }
+};
 
 const Companies = () => {
   const navigate = useNavigate();
@@ -429,6 +440,11 @@ const Companies = () => {
               <p className={styles.cardSubtitle}>
                 {company.mainbusinesslinename || ""}
               </p>
+              {company.updated_at && (
+                <p className={styles.cardUpdated}>
+                  {t("company.updatedAt")}: {formatDate(company.updated_at) || company.updated_at}
+                </p>
+              )}
             </div>
             <div className={styles.cardActions}>
               <Button

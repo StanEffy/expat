@@ -36,6 +36,7 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({
     id: string;
     name: string;
     count?: number;
+    company_count?: number;
   }
 
   const options = useMemo<CategoryOption[]>(() => {
@@ -69,13 +70,17 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({
 
     const general = (generalCategories || [])
       .reduce<CategoryOption[]>((acc, g) => {
+        const count = g.company_count ?? 0;
+        if (count <= 0) {
+          return acc;
+        }
         const displayName =
           (i18n.language === "fi" ? g.name_fi : g.name_en) ?? "";
         const trimmed = displayName.trim();
         if (!trimmed) {
           return acc;
         }
-        const count = g.company_count ?? 0;
+
         acc.push({
           id: `general:${g.code}`,
           name: trimmed,

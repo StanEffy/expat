@@ -24,6 +24,7 @@ const PasswordReset = lazy(() => import('./pages/PasswordReset'));
 const AdminDashboard = lazy(() => import('./pages/admin/AdminDashboard'));
 const UsersManagement = lazy(() => import('./pages/admin/UsersManagement'));
 const CompanyUpdates = lazy(() => import('./pages/admin/CompanyUpdates'));
+const InviteCodes = lazy(() => import('./pages/admin/InviteCodes'));
 const Polls = lazy(() => import('./pages/Polls'));
 const PollDetail = lazy(() => import('./pages/PollDetail'));
 
@@ -87,6 +88,10 @@ function App() {
                 <Route
                   path={`${ADMIN_PANEL_PATH}/company-updates`}
                   element={renderAdminRoute(CompanyUpdates)}
+                />
+                <Route
+                  path={`${ADMIN_PANEL_PATH}/invite-codes`}
+                  element={renderAdminRoute(InviteCodes)}
                 />
               </Routes>
             </Router>

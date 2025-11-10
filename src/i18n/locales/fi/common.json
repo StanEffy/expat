@@ -209,13 +209,47 @@
       "title": "Navigointi",
       "dashboard": "Kontrolipaneeli",
       "users": "Käyttäjät",
-      "companyUpdates": "Yrityspäivitykset"
+      "companyUpdates": "Yrityspäivitykset",
+      "inviteCodes": "Kutsukoodit"
     },
     "dashboard": {
       "totalUsers": "Käyttäjät yhteensä",
       "pendingUpdates": "Odottaa päivityksiä",
       "approvedUpdates": "Hyväksytyt päivitykset",
       "rejectedUpdates": "Hylätyt päivitykset"
+    },
+    "inviteCodes": {
+      "title": "Toimittajakutsukoodit",
+      "generateButton": "Luo kutsukoodi",
+      "helperText": "Luo väliaikaisia kutsukoodeja toimittajaoikeuksia varten. Koodit ovat voimassa 72 tuntia ja niiden luominen edellyttää vahvistettua 2FA-hallintoistuntoa.",
+      "noCode": "Kutsukoodia ei ole vielä luotu. Luo uusi jakaaksesi toimittajaoikeudet.",
+      "latestCode": "Viimeisin kutsukoodi",
+      "expiresAtLabel": "Vanhenee",
+      "timeRemainingLabel": "Aikaa jäljellä: {{time}}",
+      "timeRemaining": {
+        "days_one": "{{count}} päivä",
+        "days_other": "{{count}} päivää",
+        "hours_one": "{{count}} tunti",
+        "hours_other": "{{count}} tuntia",
+        "minutes_one": "{{count}} minuutti",
+        "minutes_other": "{{count}} minuuttia"
+      },
+      "expiredMessage": "Tämä kutsukoodi on vanhentunut. Luo uusi jatkaaksesi.",
+      "expiringSoonMessage": "Tämä kutsukoodi vanhenee pian. Jaa se tiimiläiselle ennen vanhenemista.",
+      "validMessage": "Kutsukoodi on aktiivinen. Jaa se vain luotettaville yhteistyökumppaneille.",
+      "copyButton": "Kopioi koodi",
+      "shareButton": "Jaa koodi",
+      "copySuccess": "Kutsukoodi kopioitu leikepöydälle.",
+      "copyFailed": "Kutsukoodin kopiointi epäonnistui.",
+      "copyUnsupported": "Leikepöydän käyttö ei ole käytettävissä tässä selaimessa.",
+      "shareTitle": "Toimittajakutsukoodi",
+      "shareMessage": "Käytä tätä kutsukoodia liittyäksesi toimittajaksi: {{inviteCode}}",
+      "shareSuccess": "Kutsukoodi jaettu.",
+      "shareFailed": "Kutsukoodin jakaminen epäonnistui.",
+      "shareUnsupported": "Selaimesi ei tue jakamista.",
+      "generateSuccess": "Uusi kutsukoodi luotu onnistuneesti.",
+      "generateFailed": "Kutsukoodin luominen epäonnistui.",
+      "missingSession": "Kaksivaiheinen istunto puuttuu. Vahvista 2FA luodaksesi koodeja."
     },
     "2fa": {
       "setupTitle": "Aseta kaksivaiheinen tunnistus",

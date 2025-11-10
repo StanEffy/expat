@@ -209,13 +209,47 @@
       "title": "Navigation",
       "dashboard": "Dashboard",
       "users": "Users",
-      "companyUpdates": "Company Updates"
+      "companyUpdates": "Company Updates",
+      "inviteCodes": "Invite Codes"
     },
     "dashboard": {
       "totalUsers": "Total Users",
       "pendingUpdates": "Pending Updates",
       "approvedUpdates": "Approved Updates",
       "rejectedUpdates": "Rejected Updates"
+    },
+    "inviteCodes": {
+      "title": "Editor Invite Codes",
+      "generateButton": "Generate Invite Code",
+      "helperText": "Generate temporary invite codes for assigning editor access. Codes remain valid for 72 hours and require a confirmed 2FA admin session.",
+      "noCode": "No invite code generated yet. Create one to grant editor access.",
+      "latestCode": "Latest invite code",
+      "expiresAtLabel": "Expires on",
+      "timeRemainingLabel": "Time remaining: {{time}}",
+      "timeRemaining": {
+        "days_one": "{{count}} day",
+        "days_other": "{{count}} days",
+        "hours_one": "{{count}} hour",
+        "hours_other": "{{count}} hours",
+        "minutes_one": "{{count}} minute",
+        "minutes_other": "{{count}} minutes"
+      },
+      "expiredMessage": "This invite code has expired. Generate a new one to continue.",
+      "expiringSoonMessage": "This invite code expires soon. Share it with your teammate before it lapses.",
+      "validMessage": "Invite code is active. Share securely with trusted collaborators only.",
+      "copyButton": "Copy Code",
+      "shareButton": "Share Code",
+      "copySuccess": "Invite code copied to clipboard.",
+      "copyFailed": "Failed to copy invite code.",
+      "copyUnsupported": "Clipboard access is not available in this browser.",
+      "shareTitle": "Editor Invite Code",
+      "shareMessage": "Use this invite code to join as editor: {{inviteCode}}",
+      "shareSuccess": "Invite code share sent.",
+      "shareFailed": "Failed to share invite code.",
+      "shareUnsupported": "Sharing is not supported in this browser.",
+      "generateSuccess": "New invite code generated successfully.",
+      "generateFailed": "Failed to generate invite code.",
+      "missingSession": "Two-factor session missing. Verify 2FA to generate codes."
     },
     "2fa": {
       "setupTitle": "Set Up Two-Factor Authentication",

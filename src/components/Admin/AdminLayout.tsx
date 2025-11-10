@@ -57,6 +57,15 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
         setSidebarVisible(false);
       },
     },
+    {
+      label: t('admin.navigation.inviteCodes'),
+      icon: 'pi pi-key',
+      path: `${ADMIN_PANEL_PATH}/invite-codes`,
+      command: () => {
+        navigate(`${ADMIN_PANEL_PATH}/invite-codes`);
+        setSidebarVisible(false);
+      },
+    },
   ];
 
   const isActive = (path: string) => location.pathname === path;

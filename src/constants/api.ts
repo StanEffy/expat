@@ -32,9 +32,10 @@ export const ADMIN_PANEL_PATH = import.meta.env.VITE_ADMIN_PANEL_PATH || '/app-c
 // Log API URL for debugging (only in development, and only once)
 if (typeof window !== 'undefined' && import.meta.env.DEV) {
   // Only log once by checking if we've logged before
-  if (!(window as any).__API_CONFIG_LOGGED) {
+  const win = window as typeof window & { __API_CONFIG_LOGGED?: boolean };
+  if (!win.__API_CONFIG_LOGGED) {
     console.log('[API Config] Using API Base URL:', API_BASE_URL);
-    (window as any).__API_CONFIG_LOGGED = true;
+    win.__API_CONFIG_LOGGED = true;
   }
 }
 
@@ -129,6 +130,7 @@ export const ADMIN_ENDPOINTS = {
   USERS: `${API_BASE_URL}/management/users`,
   ASSIGN_ROLE: `${API_BASE_URL}/management/users/assign-role`,
   REMOVE_ROLE: `${API_BASE_URL}/management/users/remove-role`,
+  CREATE_EDITOR_INVITE_CODE: `${API_BASE_URL}/management/invite-codes/editor`,
   COMPANY_UPDATES: (status?: string) => {
     const base = `${API_BASE_URL}/management/company-updates`;
     return status ? `${base}?status=${status}` : base;

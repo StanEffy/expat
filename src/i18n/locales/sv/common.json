@@ -209,13 +209,47 @@
       "title": "Navigation",
       "dashboard": "Instrumentbräda",
       "users": "Användare",
-      "companyUpdates": "Företagsuppdateringar"
+      "companyUpdates": "Företagsuppdateringar",
+      "inviteCodes": "Inbjudningskoder"
     },
     "dashboard": {
       "totalUsers": "Totalt antal användare",
       "pendingUpdates": "Väntande uppdateringar",
       "approvedUpdates": "Godkända uppdateringar",
       "rejectedUpdates": "Avvisade uppdateringar"
+    },
+    "inviteCodes": {
+      "title": "Redaktörsinbjudningar",
+      "generateButton": "Skapa inbjudningskod",
+      "helperText": "Skapa tillfälliga inbjudningskoder för att ge redaktörsbehörighet. Koderna är giltiga i 72 timmar och kräver en bekräftad 2FA-adminsession.",
+      "noCode": "Ingen inbjudningskod har skapats ännu. Skapa en för att dela redaktörsbehörighet.",
+      "latestCode": "Senaste inbjudningskod",
+      "expiresAtLabel": "Giltig till",
+      "timeRemainingLabel": "Återstående tid: {{time}}",
+      "timeRemaining": {
+        "days_one": "{{count}} dag",
+        "days_other": "{{count}} dagar",
+        "hours_one": "{{count}} timme",
+        "hours_other": "{{count}} timmar",
+        "minutes_one": "{{count}} minut",
+        "minutes_other": "{{count}} minuter"
+      },
+      "expiredMessage": "Den här inbjudningskoden har upphört att gälla. Skapa en ny för att fortsätta.",
+      "expiringSoonMessage": "Den här koden går snart ut. Dela den med din kollega innan dess.",
+      "validMessage": "Koden är aktiv. Dela den endast med betrodda samarbetspartners.",
+      "copyButton": "Kopiera kod",
+      "shareButton": "Dela kod",
+      "copySuccess": "Inbjudningskoden kopierades till urklipp.",
+      "copyFailed": "Det gick inte att kopiera inbjudningskoden.",
+      "copyUnsupported": "Åtkomst till urklipp stöds inte i den här webbläsaren.",
+      "shareTitle": "Inbjudningskod för redaktör",
+      "shareMessage": "Använd den här koden för att gå med som redaktör: {{inviteCode}}",
+      "shareSuccess": "Inbjudningskoden delades.",
+      "shareFailed": "Det gick inte att dela inbjudningskoden.",
+      "shareUnsupported": "Delning stöds inte i den här webbläsaren.",
+      "generateSuccess": "Ny inbjudningskod skapades.",
+      "generateFailed": "Det gick inte att skapa inbjudningskoden.",
+      "missingSession": "Tvåfaktorssession saknas. Bekräfta 2FA för att skapa koder."
     },
     "2fa": {
       "setupTitle": "Konfigurera tvåfaktorsautentisering",

@@ -15,6 +15,7 @@ export interface GeneralCategoryItem {
   code: string;
   name_fi: string;
   name_en: string;
+  company_count?: number | null; // Company count for this category
 }
 
 interface CategoryFilterProps {

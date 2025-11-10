@@ -1,5 +1,5 @@
-import React from "react";
-import { Dropdown } from "primereact/dropdown";
+import React, { useMemo } from "react";
+import { Dropdown, type DropdownProps } from "primereact/dropdown";
 import { useTranslation } from "react-i18next";
 import styles from "./CategoryFilter.module.scss";
 
@@ -32,73 +32,112 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({
 }) => {
   const { t, i18n } = useTranslation();
 
-  const formatLabelWithCount = (
-    name: string,
-    count?: number | null,
-  ): string => {
-    if (count !== null && count !== undefined) {
-      return `${name} (${count})`;
+  interface CategoryOption {
+    id: string;
+    name: string;
+    count?: number;
+  }
+
+  const options = useMemo<CategoryOption[]>(() => {
+    const naceCategories = categories
+      .reduce<CategoryOption[]>((acc, c) => {
+        const count = c.company_count ?? 0;
+        if (count <= 0) {
+          return acc;
+        }
+
+        const displayName =
+          (i18n.language === "fi"
+            ? (c.name ?? c.name_en)
+            : (c.name_en ?? c.name)
+          )
+            ?.trim()
+            .replace(/\s+/g, " ") ?? "";
+
+        if (!displayName) {
+          return acc;
+        }
+
+        acc.push({
+          id: (c.mainbusinessline ?? "").toString(),
+          name: displayName,
+          count,
+        });
+        return acc;
+      }, [])
+      .sort((a, b) => a.name.localeCompare(b.name));
+
+    const general = (generalCategories || [])
+      .reduce<CategoryOption[]>((acc, g) => {
+        const displayName =
+          (i18n.language === "fi" ? g.name_fi : g.name_en) ?? "";
+        const trimmed = displayName.trim();
+        if (!trimmed) {
+          return acc;
+        }
+        const count = g.company_count ?? 0;
+        acc.push({
+          id: `general:${g.code}`,
+          name: trimmed,
+          count,
+        });
+        return acc;
+      }, [])
+      .sort((a, b) => a.name.localeCompare(b.name));
+
+    const allOption: CategoryOption = {
+      id: "",
+      name: t("common.all"),
+    };
+
+    return [allOption, ...general, ...naceCategories];
+  }, [categories, generalCategories, i18n.language, t]);
+
+  const renderOption = (option: CategoryOption) => {
+    if (!option) {
+      return null;
     }
-    return name;
+
+    return (
+      <div className={styles.optionContent}>
+        <div className={styles.optionNameContainer}>
+          <span className={styles.optionName}>{option.name}</span>
+        </div>
+        {option.count !== undefined && (
+          <span className={styles.optionCount}>({option.count})</span>
+        )}
+      </div>
+    );
   };
-  // Build NACE categories - show name based on current language preference
-  const naceCategories = categories
-    .map((c) => {
-      const count = c.company_count ?? 0;
-      if (count <= 0) return null;
 
-      const displayName =
-        i18n.language === "fi"
-          ? (c.name ?? c.name_en ?? "").trim()
-          : (c.name_en ?? c.name ?? "").trim();
+  const renderValue = (option: CategoryOption | null, props: DropdownProps) => {
+    if (!option || !option.name) {
+      return <span className={styles.placeholder}>{props.placeholder}</span>;
+    }
 
-      if (!displayName) return null;
-
-      return {
-        id: (c.mainbusinessline ?? "").toString(),
-        label: formatLabelWithCount(displayName, count),
-      };
-    })
-    .filter(
-      (c): c is { id: string; label: string } =>
-        c !== null && c.label.length > 0,
-    )
-    .sort((a, b) => a.label.localeCompare(b.label));
-
-  const general = (generalCategories || [])
-    .map((g) => ({
-      id: `general:${g.code}`,
-      label: i18n.language === "fi" ? g.name_fi : g.name_en,
-    }))
-    .sort((a, b) => a.label.localeCompare(b.label));
-
-  // Create option groups for PrimeReact Dropdown
-  const allOptions: { id: string; label: string }[] = [];
-
-  // Add "All" option
-  allOptions.push({ id: "", label: t("common.all") });
-
-  // Add general categories
-  if (general.length > 0) {
-    allOptions.push(...general);
-  }
-
-  // Add NACE categories
-  if (naceCategories.length > 0) {
-    allOptions.push(...naceCategories);
-  }
+    return (
+      <div className={styles.valueContent}>
+        <span className={styles.valueName}>{option.name}</span>
+        {option.count !== undefined && (
+          <span className={styles.optionCount}>({option.count})</span>
+        )}
+      </div>
+    );
+  };
 
   return (
     <Dropdown
       value={value}
-      options={allOptions}
+      options={options}
       onChange={(e) => onChange({ value: e.value || "" })}
-      optionLabel="label"
+      optionLabel="name"
       optionValue="id"
       placeholder={t("company.filter.workArea")}
       className={styles.dropdown}
       appendTo="self"
       showClear
+      itemTemplate={renderOption}
+      valueTemplate={renderValue}
     />
   );
 };

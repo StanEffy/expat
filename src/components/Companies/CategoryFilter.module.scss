@@ -1,9 +1,69 @@
 .dropdown {
   min-width: 280px;
 }
+
 @media (max-width: 1023px) {
   .dropdown {
     min-width: auto;
-    width: 100%;
+    width: calc(100% - 24px);
+    margin: 0 12px;
+  }
+}
+
+.optionContent {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.optionNameContainer {
+  flex: 1;
+  overflow: hidden;
+}
+
+.optionName {
+  display: inline-block;
+  min-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  animation: marquee 8s linear infinite;
+  animation-play-state: paused;
+}
+
+.optionContent:hover .optionName,
+.optionContent:focus-within .optionName {
+  animation-play-state: running;
+}
+
+.optionCount {
+  flex-shrink: 0;
+  font-weight: 600;
+  color: inherit;
+}
+
+.valueContent {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.valueName {
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.placeholder {
+  color: inherit;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
   }
 }

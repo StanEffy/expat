@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { Card } from 'primereact/card';
 import { Badge } from 'primereact/badge';
 import SEO from '../components/Common/SEO';
+import ImageMagnifier from '../components/Common/ImageMagnifier';
 import styles from './Shop.module.scss';
 import tShirtImage from '../assets/shop/t-shirt.png';
 import merchImage from '../assets/shop/merch.png';
@@ -61,7 +62,11 @@ const Shop = () => {
           {shopItems.map((item) => (
             <Card key={item.id} className={styles.itemCard}>
               <div className={styles.imageContainer}>
-                <img src={item.image} alt={t(item.nameKey)} className={styles.itemImage} />
+                <ImageMagnifier
+                  src={item.image}
+                  alt={t(item.nameKey)}
+                  imageClassName={styles.itemImage}
+                />
                 {!item.inStock && (
                   <div className={styles.outOfStockOverlay}>
                     <Badge value={t('shop.outOfStock')} severity="danger" />

@@ -46,11 +46,28 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  background-color: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(16px);
+  border-radius: 16px;
+  transition: box-shadow 0.3s ease, background-color 0.3s ease;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.26);
+    box-shadow: 0 2px 18px rgba(0, 0, 0, 0.25);
+  }
+
+  :global(.p-card-body) {
+    padding: 14px 16px 16px;
+  }
+
+  :global(.p-card-content) {
+    padding: 0;
+  }
 }
 
 .cardContent {
   flex-grow: 1;
-  padding: 16px;
+  padding: 12px;
 }
 
 .cardTitle {

@@ -73,3 +73,8 @@
     transform: translateX(-100%);
   }
 }
+.panel {
+  background-color: $primary-2;
+  left: 0;
+  max-width: calc(100vw - 48px);
+}

@@ -144,6 +144,7 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({
       showClear
       itemTemplate={renderOption}
       valueTemplate={renderValue}
+      panelClassName={styles.panel}
     />
   );
 };

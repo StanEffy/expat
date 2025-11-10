@@ -5,7 +5,7 @@
 @media (max-width: 1023px) {
   .dropdown {
     min-width: auto;
-  
+    width: 100%;
   }
 }
 
@@ -22,7 +22,7 @@
   align-content: center;
 
   @media (max-width: 1023px) {
-    max-width: calc(100vw - 64px);
+    max-width: calc(100vw - 32px);
   }
 }
 

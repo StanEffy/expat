@@ -552,6 +552,14 @@ const Profile = () => {
                     className={styles.resumeUpload}
                   />
                   <p className={styles.resumeHint}>{t('profile.resumeHint')}</p>
+                  <Button
+                    label={t('profile.launchResumeBuilder', {
+                      defaultValue: 'Launch STAR Resume Builder',
+                    })}
+                    variant="outlined"
+                    onClick={() => navigate('/profile/resume-builder')}
+                    icon="pi pi-external-link"
+                  />
                 </div>
               </Card>
             </div>

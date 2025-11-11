@@ -18,6 +18,7 @@ const CompanyDetails = lazy(() => import('./pages/CompanyDetails'));
 const Categories = lazy(() => import('./pages/Categories'));
 const Login = lazy(() => import('./pages/Login'));
 const Profile = lazy(() => import('./pages/Profile'));
+const ResumeBuilder = lazy(() => import('./pages/ResumeBuilder'));
 const About = lazy(() => import('./pages/About'));
 const Shop = lazy(() => import('./pages/Shop'));
 const PasswordResetRequest = lazy(() => import('./pages/PasswordResetRequest'));
@@ -75,6 +76,7 @@ function App() {
                 <Route path="/polls/:id" element={renderWithLayout(PollDetail)} />
                 <Route path="/login" element={renderWithLayout(Login)} />
                 <Route path="/profile" element={renderWithLayout(Profile)} />
+                <Route path="/profile/resume-builder" element={renderWithLayout(ResumeBuilder)} />
                 <Route path="/password-reset/request" element={renderWithLayout(PasswordResetRequest)} />
                 <Route path="/password-reset" element={renderWithLayout(PasswordReset)} />
 

@@ -44,25 +44,39 @@ const UserNotificationsContext = createContext<UserNotificationsContextValue | u
   undefined,
 );
 
-const extractList = (payload: unknown): Record<string, unknown>[] => {
+const extractList = (payload: unknown, visited = new WeakSet()): Record<string, unknown>[] => {
   if (Array.isArray(payload)) {
     return payload.filter((item): item is Record<string, unknown> => typeof item === 'object' && item !== null);
   }
 
   if (payload && typeof payload === 'object') {
-    const candidates = [
-      (payload as Record<string, unknown>).data,
-      (payload as Record<string, unknown>).notifications,
-      (payload as Record<string, unknown>).items,
-      (payload as Record<string, unknown>).results,
-    ];
+    if (visited.has(payload as Record<string, unknown>)) {
+      return [];
+    }
+    visited.add(payload as Record<string, unknown>);
 
-    for (const candidate of candidates) {
-      if (Array.isArray(candidate)) {
-        return candidate.filter(
-          (item): item is Record<string, unknown> => typeof item === 'object' && item !== null,
-        );
+    const record = payload as Record<string, unknown>;
+
+    const directKeys = ['data', 'notifications', 'items', 'results'];
+    for (const key of directKeys) {
+      const candidate = record[key];
+      const list = extractList(candidate, visited);
+      if (list.length > 0) {
+        return list;
       }
+    }
+
+    // Fall back to scanning every property for nested arrays
+    for (const value of Object.values(record)) {
+      const list = extractList(value, visited);
+      if (list.length > 0) {
+        return list;
+      }
+    }
+
+    // If object itself looks like a notification, wrap it
+    if ('id' in record || 'notification_type' in record || 'message' in record) {
+      return [record];
     }
   }
 

@@ -130,6 +130,12 @@
   }
 }
 
+.notificationTitle {
+  margin: 0 0 6px 0;
+  font-weight: 600;
+  color: $text-primary;
+}
+
 .notificationMessage {
   margin: 8px 0;
   color: $complement-2;

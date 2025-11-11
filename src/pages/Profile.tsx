@@ -401,6 +401,9 @@ const Profile = () => {
                       <Badge value={t('notifications.unread')} severity="info" />
                     )}
                   </div>
+                  {notification.title && notification.title !== notification.message && (
+                    <p className={styles.notificationTitle}>{notification.title}</p>
+                  )}
                   <p className={styles.notificationMessage}>{notification.message}</p>
                   <p className={styles.notificationTime}>
                     {new Date(notification.created_at).toLocaleString()}

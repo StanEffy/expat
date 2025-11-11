@@ -44,6 +44,31 @@ const UserNotificationsContext = createContext<UserNotificationsContextValue | u
   undefined,
 );
 
+const extractList = (payload: unknown): Record<string, unknown>[] => {
+  if (Array.isArray(payload)) {
+    return payload.filter((item): item is Record<string, unknown> => typeof item === 'object' && item !== null);
+  }
+
+  if (payload && typeof payload === 'object') {
+    const candidates = [
+      (payload as Record<string, unknown>).data,
+      (payload as Record<string, unknown>).notifications,
+      (payload as Record<string, unknown>).items,
+      (payload as Record<string, unknown>).results,
+    ];
+
+    for (const candidate of candidates) {
+      if (Array.isArray(candidate)) {
+        return candidate.filter(
+          (item): item is Record<string, unknown> => typeof item === 'object' && item !== null,
+        );
+      }
+    }
+  }
+
+  return [];
+};
+
 const mapNotification = (raw: Record<string, unknown>): UserNotification => {
   const readFlag =
     typeof raw.read === 'boolean'
@@ -52,13 +77,36 @@ const mapNotification = (raw: Record<string, unknown>): UserNotification => {
       ? raw.is_read
       : Boolean(raw.read_at);
 
+  const title =
+    typeof raw.title === 'string'
+      ? raw.title
+      : typeof raw.notification_title === 'string'
+      ? raw.notification_title
+      : typeof raw.name === 'string'
+      ? raw.name
+      : undefined;
+
+  const messageCandidate =
+    typeof raw.message === 'string'
+      ? raw.message
+      : typeof raw.description === 'string'
+      ? raw.description
+      : '';
+
+  const company =
+    typeof raw.company === 'object' && raw.company !== null
+      ? (raw.company as UserNotification['company'])
+      : typeof raw.company_name === 'string'
+      ? { name: raw.company_name }
+      : undefined;
+
   return {
     id: Number(raw.id),
     user_id: Number(raw.user_id),
     company_id: Number(raw.company_id),
     notification_type: String(raw.notification_type ?? ''),
-    title: typeof raw.title === 'string' ? raw.title : undefined,
-    message: typeof raw.message === 'string' ? raw.message : '',
+    title,
+    message: messageCandidate || title || '',
     read: readFlag,
     created_at:
       typeof raw.created_at === 'string'
@@ -66,10 +114,7 @@ const mapNotification = (raw: Record<string, unknown>): UserNotification => {
         : typeof raw.createdAt === 'string'
         ? raw.createdAt
         : '',
-    company:
-      typeof raw.company === 'object' && raw.company !== null
-        ? (raw.company as UserNotification['company'])
-        : undefined,
+    company,
   };
 };
 
@@ -107,7 +152,8 @@ export const UserNotificationsProvider = ({ children }: UserNotificationsProvide
         throw new Error('Failed to fetch notifications');
       }
       const payload = await response.json();
-      const list = Array.isArray(payload) ? payload.map(mapNotification) : [];
+      const rawList = extractList(payload);
+      const list = rawList.map(mapNotification).filter((item) => Number.isFinite(item.id));
       setNotifications(list);
     } catch (err) {
       console.error('[Notifications] Failed to fetch notifications', err);
@@ -135,7 +181,14 @@ export const UserNotificationsProvider = ({ children }: UserNotificationsProvide
         throw new Error('Failed to fetch unread count');
       }
       const data = await response.json();
-      const count = typeof data?.count === 'number' ? data.count : 0;
+      const count =
+        typeof data?.count === 'number'
+          ? data.count
+          : typeof data?.unread_count === 'number'
+          ? data.unread_count
+          : typeof data?.unreadCount === 'number'
+          ? data.unreadCount
+          : 0;
       setUnreadCount(count);
     } catch (err) {
       console.error('[Notifications] Failed to fetch unread count', err);

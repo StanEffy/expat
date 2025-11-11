@@ -49,26 +49,31 @@ const Header = () => {
         <Button
           label={t("navigation.companies")}
           text
+          icon="pi pi-building"
           onClick={() => navigate("/companies")}
         />
         <Button
           label={t("navigation.shop")}
           text
+          icon="pi pi-shopping-bag"
           onClick={() => navigate("/shop")}
         />
         <Button
           label={t("navigation.polls")}
           text
+          icon="pi pi-chart-bar"
           onClick={() => navigate("/polls")}
         />
         <Button
           label={t("navigation.about")}
           text
+          icon="pi pi-info-circle"
           onClick={() => navigate("/about")}
         />
         {isAuthenticated ? (
           <Button
             text
+            icon="pi pi-user"
             onClick={() => navigate("/profile")}
           >
             {profileButtonContent}
@@ -77,6 +82,7 @@ const Header = () => {
           <Button
             label={t("navigation.login")}
             text
+            icon="pi pi-sign-in"
             onClick={() => navigate("/login")}
           />
         )}

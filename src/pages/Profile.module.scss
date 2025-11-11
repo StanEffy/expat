@@ -21,6 +21,51 @@
   gap: 8px;
 }
 
+.profileHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.profileForm {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.profileTabs {
+  margin-bottom: 24px;
+
+  :global(.p-tabview-nav) {
+    background-color: transparent;
+    border: none;
+  }
+
+  :global(.p-tabview-panels) {
+    background-color: transparent;
+    padding: 0;
+  }
+}
+
+.tabContent {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.formRow {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.formActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
 .loadingContainer {
   display: flex;
   justify-content: center;

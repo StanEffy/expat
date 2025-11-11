@@ -27,22 +27,27 @@ const MobileMenu = () => {
   const items = [
     {
       label: t("navigation.home"),
+      icon: "pi pi-home",
       command: () => handleNavigation("/"),
     },
     {
       label: t("navigation.companies"),
+      icon: "pi pi-building",
       command: () => handleNavigation("/companies"),
     },
     {
       label: t("navigation.shop"),
+      icon: "pi pi-shopping-bag",
       command: () => handleNavigation("/shop"),
     },
     {
       label: t("navigation.polls"),
+      icon: "pi pi-chart-bar",
       command: () => handleNavigation("/polls"),
     },
     {
       label: t("navigation.about"),
+      icon: "pi pi-info-circle",
       command: () => handleNavigation("/about"),
     },
   ];

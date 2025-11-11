@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, ChangeEvent, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card } from 'primereact/card';
 import Button from '../components/Common/Button';
@@ -6,6 +6,8 @@ import { Message } from 'primereact/message';
 import { Badge } from 'primereact/badge';
 import { ProgressSpinner } from 'primereact/progressspinner';
 import { FileUpload } from 'primereact/fileupload';
+import { InputText } from 'primereact/inputtext';
+import { TabView, TabPanel } from 'primereact/tabview';
 import { AUTH_ENDPOINTS, COMPANY_ENDPOINTS } from '../constants/api';
 import { getAuthHeaders } from '../utils/auth';
 import { useNotification } from '../contexts/NotificationContext';
@@ -30,10 +32,26 @@ interface UserProfile {
   id?: number;
   user_id?: number;
   name?: string;
+  second_name?: string | null;
+  username?: string;
   email: string;
-  role: string;
-  createdAt: string;
+  email_verified_at?: string | null;
+  role?: string;
+  roles?: Array<{
+    user_id?: number;
+    role_id?: number;
+    role_name?: string;
+    assigned_at?: string;
+  }>;
+  createdAt?: string;
+  created_at?: string;
   favourites?: Favourite[];
+}
+
+interface ProfileFormValues {
+  name: string;
+  secondName: string;
+  email: string;
 }
 
 const Profile = () => {
@@ -54,6 +72,15 @@ const Profile = () => {
   const [loading, setLoading] = useState(true);
   const [favouritesWithCompanies, setFavouritesWithCompanies] = useState<Favourite[]>([]);
   const [loadingCompanyDetails, setLoadingCompanyDetails] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [formValues, setFormValues] = useState<ProfileFormValues>({
+    name: '',
+    secondName: '',
+    email: '',
+  });
+  const [formError, setFormError] = useState('');
+  const [savingProfile, setSavingProfile] = useState(false);
+  const [activeTab, setActiveTab] = useState(0);
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -74,6 +101,11 @@ const Profile = () => {
 
         const data = await response.json();
         setProfile(data);
+        setFormValues({
+          name: data?.name ?? '',
+          secondName: data?.second_name ?? '',
+          email: data?.email ?? '',
+        });
         
         // Extract favourites from profile and initialize in context
         // Handle both direct array and wrapped in data property
@@ -174,6 +206,93 @@ const Profile = () => {
     fetchCompanyDetailsForFavourites();
   }, [favourites]);
 
+  const handleEditToggle = () => {
+    if (!profile) return;
+    setFormValues({
+      name: profile.name ?? '',
+      secondName: profile.second_name ?? '',
+      email: profile.email ?? '',
+    });
+    setFormError('');
+    setIsEditing(true);
+  };
+
+  const handleFormChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setFormValues((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleCancelEdit = () => {
+    if (!profile) return;
+    setFormValues({
+      name: profile.name ?? '',
+      secondName: profile.second_name ?? '',
+      email: profile.email ?? '',
+    });
+    setFormError('');
+    setIsEditing(false);
+  };
+
+  const handleProfileSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (!profile) return;
+
+    const headers = getAuthHeaders();
+    if (!headers) {
+      navigate('/login');
+      return;
+    }
+
+    setSavingProfile(true);
+    setFormError('');
+
+    try {
+      const response = await fetch(AUTH_ENDPOINTS.PROFILE, {
+        method: 'PUT',
+        headers,
+        body: JSON.stringify({
+          name: formValues.name,
+          second_name: formValues.secondName,
+          email: formValues.email,
+        }),
+      });
+
+      if (!response.ok) {
+        const errorBody = await response.json().catch(() => null);
+        const message =
+          errorBody?.message ||
+          (Array.isArray(errorBody?.errors) ? errorBody.errors.join(', ') : null) ||
+          'Failed to update profile';
+        throw new Error(message);
+      }
+
+      const updatedProfile = await response.json();
+      setProfile(updatedProfile);
+      setFormValues({
+        name: updatedProfile?.name ?? '',
+        secondName: updatedProfile?.second_name ?? '',
+        email: updatedProfile?.email ?? '',
+      });
+      showNotification(
+        t('profile.profileUpdated', { defaultValue: 'Profile updated successfully' }),
+        'success',
+      );
+      setIsEditing(false);
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Failed to update profile';
+      setFormError(message);
+      showNotification(
+        t('profile.profileUpdateFailed', { defaultValue: 'Failed to update profile' }),
+        'error',
+      );
+    } finally {
+      setSavingProfile(false);
+    }
+  };
+
   const handleMarkAsRead = async (notificationId: number) => {
     try {
       const success = await markAsRead(notificationId);
@@ -259,178 +378,318 @@ const Profile = () => {
         noindex={true}
       />
       <div className={styles.container}>
-      <h1 className={styles.title}>{t('navigation.profile')}</h1>
-      
-      <Card title={t('profile.userInformation')} className={styles.card}>
-        <div className={styles.profileInfo}>
-          {profile?.id && (
-            <p>
-              <strong>{t('profile.userId')}:</strong> {profile.id}
-            </p>
-          )}
-          {profile?.user_id && (
-            <p>
-              <strong>{t('profile.userId')}:</strong> {profile.user_id}
-            </p>
-          )}
-          {profile?.name && (
-            <p>
-              <strong>{t('profile.name')}:</strong> {profile.name}
-            </p>
-          )}
-          <p>
-            <strong>{t('profile.email')}:</strong> {profile?.email}
-          </p>
-          <p>
-            <strong>{t('profile.role')}:</strong> {profile?.role}
-          </p>
-          <p>
-            <strong>{t('profile.memberSince')}:</strong>{' '}
-            {profile?.createdAt
-              ? new Date(profile.createdAt).toLocaleDateString()
-              : 'N/A'}
-          </p>
-        </div>
-      </Card>
+        <h1 className={styles.title}>{t('navigation.profile')}</h1>
 
-      <Card title={t('profile.resume')} className={styles.card}>
-        <div className={styles.resumeSection}>
-          <FileUpload
-            mode="basic"
-            name="resume"
-            accept=".pdf,.doc,.docx"
-            maxFileSize={5000000}
-            auto
-            chooseLabel={t('profile.uploadResume')}
-            onUpload={() => {
-              showNotification(t('profile.resumeUploaded'), 'success');
-            }}
-            onError={() => {
-              showNotification(t('profile.resumeUploadError'), 'error');
-            }}
-            className={styles.resumeUpload}
-          />
-          <p className={styles.resumeHint}>{t('profile.resumeHint')}</p>
-        </div>
-      </Card>
-
-      <Card title={t('favourites.title')} className={styles.card}>
-        {favouritesLoading || loadingCompanyDetails ? (
-          <div className={styles.loadingContainer}>
-            <ProgressSpinner />
-          </div>
-        ) : favourites.length === 0 ? (
-          <p className={styles.emptyMessage}>{t('favourites.noFavourites')}</p>
-        ) : (
-          <div className={styles.favouritesList}>
-            {(favouritesWithCompanies.length > 0 ? favouritesWithCompanies : favourites).map((favourite) => (
-              <div key={favourite.id} className={styles.favouriteItem}>
-                <div className={styles.favouriteInfo}>
-                  <h4
-                    className={styles.favouriteCompanyName}
-                    onClick={() => navigate(`/companies/${favourite.company_id}`)}
-                  >
-                    {favourite.company?.name || `Company ID: ${favourite.company_id}`}
-                  </h4>
-                  {favourite.company?.mainbusinesslinename && (
-                    <p className={styles.favouriteCategory}>
-                      {favourite.company.mainbusinesslinename}
-                    </p>
-                  )}
-                </div>
-                <Button
-                  icon="pi pi-times"
-                  onClick={() => handleRemoveFavourite(favourite.company_id)}
-                  severity="secondary"
-                  text
-                  rounded
-                  aria-label={t('favourites.removeFromFavourites')}
-                />
-              </div>
-            ))}
-          </div>
-        )}
-      </Card>
-
-      <Card 
-        title={
-          <div className={styles.notificationsHeader}>
-            <span>{t('notifications.title')}</span>
-            {unreadCount > 0 && (
-              <Badge value={unreadCount} severity="danger" />
-            )}
-          </div>
-        }
-        className={styles.card}
-      >
-        {unreadCount > 0 && (
-          <div className={styles.markAllContainer}>
-            <Button
-              label={t('notifications.markAllAsRead')}
-              onClick={handleMarkAllAsRead}
-              severity="secondary"
-              size="small"
-              text
-            />
-          </div>
-        )}
-        {notificationsLoading ? (
-          <div className={styles.loadingContainer}>
-            <ProgressSpinner />
-          </div>
-        ) : notifications.length === 0 ? (
-          <p className={styles.emptyMessage}>{t('notifications.noNotifications')}</p>
-        ) : (
-          <div className={styles.notificationsList}>
-            {notifications.map((notification: UserNotification) => (
-              <div
-                key={notification.id}
-                className={`${styles.notificationItem} ${
-                  !notification.read ? styles.unread : ''
-                }`}
-              >
-                <div className={styles.notificationContent}>
-                  <div className={styles.notificationHeader}>
-                    <h4
-                      className={styles.notificationCompany}
-                      onClick={() => navigate(`/companies/${notification.company_id}`)}
-                    >
-                      {notification.company?.name || `Company ID: ${notification.company_id}`}
-                    </h4>
-                    {!notification.read && (
-                      <Badge value={t('notifications.unread')} severity="info" />
+        <TabView
+          className={styles.profileTabs}
+          activeIndex={activeTab}
+          onTabChange={(e) => setActiveTab(e.index)}
+        >
+          <TabPanel
+            header={t('profile.tabs.overview', { defaultValue: 'Overview' })}
+            leftIcon="pi pi-user"
+          >
+            <div className={styles.tabContent}>
+              <Card
+                title={
+                  <div className={styles.profileHeader}>
+                    <span>{t('profile.userInformation')}</span>
+                    {!isEditing && (
+                      <Button
+                        label={t('profile.editProfile', { defaultValue: 'Edit profile' })}
+                        onClick={handleEditToggle}
+                        size="small"
+                        icon="pi pi-pencil"
+                      />
                     )}
                   </div>
-                  {notification.title && notification.title !== notification.message && (
-                    <p className={styles.notificationTitle}>{notification.title}</p>
+                }
+                className={styles.card}
+              >
+                <div className={styles.profileInfo}>
+                  {isEditing ? (
+                    <form className={styles.profileForm} onSubmit={handleProfileSubmit}>
+                      <div className={styles.formRow}>
+                        <label htmlFor="profile-username">
+                          <strong>{t('profile.username', { defaultValue: 'Username' })}</strong>
+                        </label>
+                        <InputText
+                          id="profile-username"
+                          value={profile?.username ?? ''}
+                          readOnly
+                          disabled
+                        />
+                      </div>
+                      <div className={styles.formRow}>
+                        <label htmlFor="profile-name">
+                          <strong>{t('profile.name')}:</strong>
+                        </label>
+                        <InputText
+                          id="profile-name"
+                          name="name"
+                          value={formValues.name}
+                          onChange={handleFormChange}
+                        />
+                      </div>
+                      <div className={styles.formRow}>
+                        <label htmlFor="profile-second-name">
+                          <strong>{t('profile.secondName', { defaultValue: 'Second name' })}:</strong>
+                        </label>
+                        <InputText
+                          id="profile-second-name"
+                          name="secondName"
+                          value={formValues.secondName}
+                          onChange={handleFormChange}
+                        />
+                      </div>
+                      <div className={styles.formRow}>
+                        <label htmlFor="profile-email">
+                          <strong>{t('profile.email')}:</strong>
+                        </label>
+                        <InputText
+                          id="profile-email"
+                          name="email"
+                          type="email"
+                          value={formValues.email}
+                          onChange={handleFormChange}
+                        />
+                      </div>
+                      {formError && <Message severity="error" text={formError} />}
+                      <div className={styles.formActions}>
+                        <Button
+                          type="button"
+                          label={t('common.cancel', { defaultValue: 'Cancel' })}
+                          variant="text"
+                          onClick={handleCancelEdit}
+                          disabled={savingProfile}
+                          icon="pi pi-times"
+                        />
+                        <Button
+                          type="submit"
+                          label={t('common.save', { defaultValue: 'Save' })}
+                          loading={savingProfile}
+                          disabled={savingProfile}
+                          icon="pi pi-check"
+                        />
+                      </div>
+                    </form>
+                  ) : (
+                    <>
+                      {profile?.id && (
+                        <p>
+                          <strong>{t('profile.userId')}:</strong> {profile.id}
+                        </p>
+                      )}
+                      {profile?.user_id && profile.user_id !== profile.id && (
+                        <p>
+                          <strong>{t('profile.userId')}:</strong> {profile.user_id}
+                        </p>
+                      )}
+                      {profile?.username && (
+                        <p>
+                          <strong>{t('profile.username', { defaultValue: 'Username' })}:</strong>{' '}
+                          {profile.username}
+                        </p>
+                      )}
+                      {profile?.name && (
+                        <p>
+                          <strong>{t('profile.name')}:</strong> {profile.name}
+                        </p>
+                      )}
+                      {profile?.second_name && (
+                        <p>
+                          <strong>{t('profile.secondName', { defaultValue: 'Second name' })}:</strong>{' '}
+                          {profile.second_name}
+                        </p>
+                      )}
+                      <p>
+                        <strong>{t('profile.email')}:</strong>{' '}
+                        {profile?.email ||
+                          t('profile.emailNotProvided', { defaultValue: 'Not provided' })}
+                      </p>
+                      <p>
+                        <strong>{t('profile.role')}:</strong>{' '}
+                        {profile?.role ||
+                          (Array.isArray(profile?.roles) && profile.roles.length > 0
+                            ? profile.roles
+                                .map((roleItem) => roleItem?.role_name ?? '')
+                                .filter(Boolean)
+                                .join(', ')
+                            : t('profile.roleUnknown', { defaultValue: 'Unknown' }))}
+                      </p>
+                      <p>
+                        <strong>{t('profile.memberSince')}:</strong>{' '}
+                        {profile?.createdAt || profile?.created_at
+                          ? new Date(profile.createdAt ?? profile.created_at ?? '').toLocaleDateString()
+                          : 'N/A'}
+                      </p>
+                      <p>
+                        <strong>{t('profile.emailVerified', { defaultValue: 'Email verified' })}:</strong>{' '}
+                        {profile?.email_verified_at
+                          ? new Date(profile.email_verified_at).toLocaleString()
+                          : t('profile.notVerified', { defaultValue: 'Not verified' })}
+                      </p>
+                    </>
                   )}
-                  <p className={styles.notificationMessage}>{notification.message}</p>
-                  <p className={styles.notificationTime}>
-                    {new Date(notification.created_at).toLocaleString()}
-                  </p>
                 </div>
-                {!notification.read && (
-                  <Button
-                    icon="pi pi-check"
-                    onClick={() => handleMarkAsRead(notification.id)}
-                    severity="success"
-                    text
-                    rounded
-                    aria-label={t('notifications.markAsRead')}
-                  />
-                )}
-              </div>
-            ))}
-          </div>
-        )}
-      </Card>
+              </Card>
 
-      <Button
-        label="Logout"
-        onClick={handleLogout}
-        severity="secondary"
-        className={styles.logoutButton}
-      />
+              <Card title={t('profile.resume')} className={styles.card}>
+                <div className={styles.resumeSection}>
+                  <FileUpload
+                    mode="basic"
+                    name="resume"
+                    accept=".pdf,.doc,.docx"
+                    maxFileSize={5000000}
+                    auto
+                    chooseLabel={t('profile.uploadResume')}
+                    onUpload={() => {
+                      showNotification(t('profile.resumeUploaded'), 'success');
+                    }}
+                    onError={() => {
+                      showNotification(t('profile.resumeUploadError'), 'error');
+                    }}
+                    className={styles.resumeUpload}
+                  />
+                  <p className={styles.resumeHint}>{t('profile.resumeHint')}</p>
+                </div>
+              </Card>
+            </div>
+          </TabPanel>
+
+          <TabPanel
+            header={t('profile.tabs.favourites', { defaultValue: 'Favourites' })}
+            leftIcon="pi pi-heart"
+          >
+            <div className={styles.tabContent}>
+              <Card title={t('favourites.title')} className={styles.card}>
+                {favouritesLoading || loadingCompanyDetails ? (
+                  <div className={styles.loadingContainer}>
+                    <ProgressSpinner />
+                  </div>
+                ) : favourites.length === 0 ? (
+                  <p className={styles.emptyMessage}>{t('favourites.noFavourites')}</p>
+                ) : (
+                  <div className={styles.favouritesList}>
+                    {(favouritesWithCompanies.length > 0 ? favouritesWithCompanies : favourites).map(
+                      (favourite) => (
+                        <div key={favourite.id} className={styles.favouriteItem}>
+                          <div className={styles.favouriteInfo}>
+                            <h4
+                              className={styles.favouriteCompanyName}
+                              onClick={() => navigate(`/companies/${favourite.company_id}`)}
+                            >
+                              {favourite.company?.name || `Company ID: ${favourite.company_id}`}
+                            </h4>
+                            {favourite.company?.mainbusinesslinename && (
+                              <p className={styles.favouriteCategory}>
+                                {favourite.company.mainbusinesslinename}
+                              </p>
+                            )}
+                          </div>
+                          <Button
+                            icon="pi pi-times"
+                            onClick={() => handleRemoveFavourite(favourite.company_id)}
+                            severity="secondary"
+                            text
+                            rounded
+                            aria-label={t('favourites.removeFromFavourites')}
+                          />
+                        </div>
+                      ),
+                    )}
+                  </div>
+                )}
+              </Card>
+            </div>
+          </TabPanel>
+
+          <TabPanel
+            header={t('profile.tabs.notifications', { defaultValue: 'Notifications' })}
+            leftIcon="pi pi-bell"
+          >
+            <div className={styles.tabContent}>
+              <Card
+                title={
+                  <div className={styles.notificationsHeader}>
+                    <span>{t('notifications.title')}</span>
+                    {unreadCount > 0 && <Badge value={unreadCount} severity="danger" />}
+                  </div>
+                }
+                className={styles.card}
+              >
+                {unreadCount > 0 && (
+                  <div className={styles.markAllContainer}>
+                    <Button
+                      label={t('notifications.markAllAsRead')}
+                      onClick={handleMarkAllAsRead}
+                      severity="secondary"
+                      size="small"
+                      text
+                      icon="pi pi-check"
+                    />
+                  </div>
+                )}
+                {notificationsLoading ? (
+                  <div className={styles.loadingContainer}>
+                    <ProgressSpinner />
+                  </div>
+                ) : notifications.length === 0 ? (
+                  <p className={styles.emptyMessage}>{t('notifications.noNotifications')}</p>
+                ) : (
+                  <div className={styles.notificationsList}>
+                    {notifications.map((notification: UserNotification) => (
+                      <div
+                        key={notification.id}
+                        className={`${styles.notificationItem} ${
+                          !notification.read ? styles.unread : ''
+                        }`}
+                      >
+                        <div className={styles.notificationContent}>
+                          <div className={styles.notificationHeader}>
+                            <h4
+                              className={styles.notificationCompany}
+                              onClick={() => navigate(`/companies/${notification.company_id}`)}
+                            >
+                              {notification.company?.name || `Company ID: ${notification.company_id}`}
+                            </h4>
+                            {!notification.read && (
+                              <Badge value={t('notifications.unread')} severity="info" />
+                            )}
+                          </div>
+                          {notification.title && notification.title !== notification.message && (
+                            <p className={styles.notificationTitle}>{notification.title}</p>
+                          )}
+                          <p className={styles.notificationMessage}>{notification.message}</p>
+                          <p className={styles.notificationTime}>
+                            {new Date(notification.created_at).toLocaleString()}
+                          </p>
+                        </div>
+                        {!notification.read && (
+                          <Button
+                            icon="pi pi-check"
+                            onClick={() => handleMarkAsRead(notification.id)}
+                            severity="success"
+                            text
+                            rounded
+                            aria-label={t('notifications.markAsRead')}
+                          />
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </Card>
+            </div>
+          </TabPanel>
+        </TabView>
+        <Button
+          label="Logout"
+          onClick={handleLogout}
+          severity="secondary"
+          className={styles.logoutButton}
+          icon="pi pi-sign-out"
+        />
     </div>
     </>
   );

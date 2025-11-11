@@ -11,12 +11,14 @@ import { AUTH_ENDPOINTS, DEFAULT_CONFIG, ADMIN_PANEL_PATH } from "../constants/a
 import { setToken, checkAdminRole } from "../utils/auth";
 import SEO from "../components/Common/SEO";
 import styles from "./Login.module.scss";
+import { useUserNotifications } from "../contexts/UserNotificationsContext";
 
 const Login = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const { t } = useTranslation();
   const [tabValue, setTabValue] = useState(0);
+  const { refreshNotifications } = useUserNotifications();
 
   // Read invite code from query parameter or use default
   const inviteCodeFromQuery =
@@ -77,6 +79,7 @@ const Login = () => {
 
       const data = await response.json();
       setToken(data.token);
+      await refreshNotifications();
       
       // Check if user is admin and redirect to admin panel
       const isAdmin = await checkAdminRole();
@@ -137,6 +140,7 @@ const Login = () => {
         if (loginResponse.ok) {
           const data = await loginResponse.json();
           setToken(data.token);
+          await refreshNotifications();
           
           // Check if user is admin and redirect to admin panel
           const isAdmin = await checkAdminRole();

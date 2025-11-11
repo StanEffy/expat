@@ -6,13 +6,15 @@ import { Message } from 'primereact/message';
 import { Badge } from 'primereact/badge';
 import { ProgressSpinner } from 'primereact/progressspinner';
 import { FileUpload } from 'primereact/fileupload';
-import { AUTH_ENDPOINTS, NOTIFICATIONS_ENDPOINTS, COMPANY_ENDPOINTS } from '../constants/api';
+import { AUTH_ENDPOINTS, COMPANY_ENDPOINTS } from '../constants/api';
 import { getAuthHeaders } from '../utils/auth';
 import { useNotification } from '../contexts/NotificationContext';
 import { useFavourites } from '../contexts/FavouritesContext';
 import { useTranslation } from 'react-i18next';
 import SEO from '../components/Common/SEO';
 import styles from './Profile.module.scss';
+import { useUserNotifications } from '../contexts/UserNotificationsContext';
+import type { UserNotification } from '../contexts/UserNotificationsContext';
 
 interface Favourite {
   id: number;
@@ -34,31 +36,22 @@ interface UserProfile {
   favourites?: Favourite[];
 }
 
-interface Notification {
-  id: number;
-  user_id: number;
-  company_id: number;
-  notification_type: string;
-  message: string;
-  read: boolean;
-  created_at: string;
-  company?: {
-    id: number;
-    name: string;
-  };
-}
-
 const Profile = () => {
   const navigate = useNavigate();
   const { showNotification } = useNotification();
   const { t } = useTranslation();
   const { favourites, loading: favouritesLoading, toggleFavourite, initializeFromProfile } = useFavourites();
+  const {
+    notifications,
+    unreadCount,
+    loading: notificationsLoading,
+    refreshNotifications,
+    markAsRead,
+    markAllAsRead,
+  } = useUserNotifications();
   const [profile, setProfile] = useState<UserProfile | null>(null);
-  const [notifications, setNotifications] = useState<Notification[]>([]);
-  const [unreadCount, setUnreadCount] = useState(0);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
-  const [notificationsLoading, setNotificationsLoading] = useState(false);
   const [favouritesWithCompanies, setFavouritesWithCompanies] = useState<Favourite[]>([]);
   const [loadingCompanyDetails, setLoadingCompanyDetails] = useState(false);
 
@@ -103,9 +96,8 @@ const Profile = () => {
     };
 
     fetchProfile();
-    fetchNotifications();
-    fetchUnreadCount();
-  }, [navigate, initializeFromProfile]);
+    refreshNotifications();
+  }, [navigate, initializeFromProfile, refreshNotifications]);
 
   // Fetch company details for favourites when favourites change
   useEffect(() => {
@@ -182,64 +174,11 @@ const Profile = () => {
     fetchCompanyDetailsForFavourites();
   }, [favourites]);
 
-  const fetchNotifications = async () => {
-    try {
-      setNotificationsLoading(true);
-      const headers = getAuthHeaders();
-      if (!headers) {
-        return;
-      }
-
-      const response = await fetch(NOTIFICATIONS_ENDPOINTS.LIST, { headers });
-      
-      if (response.ok) {
-        const data = await response.json();
-        setNotifications(Array.isArray(data) ? data : []);
-      }
-    } catch {
-      // Silent fail
-    } finally {
-      setNotificationsLoading(false);
-    }
-  };
-
-  const fetchUnreadCount = async () => {
-    try {
-      const headers = getAuthHeaders();
-      if (!headers) {
-        return;
-      }
-
-      const response = await fetch(NOTIFICATIONS_ENDPOINTS.UNREAD_COUNT, { headers });
-      
-      if (response.ok) {
-        const data = await response.json();
-        setUnreadCount(typeof data.count === 'number' ? data.count : 0);
-      }
-    } catch {
-      // Silent fail
-    }
-  };
-
   const handleMarkAsRead = async (notificationId: number) => {
     try {
-      const headers = getAuthHeaders();
-      if (!headers) {
-        return;
-      }
-
-      const response = await fetch(NOTIFICATIONS_ENDPOINTS.MARK_READ(notificationId), {
-        method: 'PUT',
-        headers,
-      });
-
-      if (response.ok) {
-        setNotifications((prev) =>
-          prev.map((notif) =>
-            notif.id === notificationId ? { ...notif, read: true } : notif
-          )
-        );
-        setUnreadCount((prev) => Math.max(0, prev - 1));
+      const success = await markAsRead(notificationId);
+      if (!success) {
+        showNotification('Failed to mark notification as read', 'error');
       }
     } catch {
       showNotification('Failed to mark notification as read', 'error');
@@ -248,20 +187,11 @@ const Profile = () => {
 
   const handleMarkAllAsRead = async () => {
     try {
-      const headers = getAuthHeaders();
-      if (!headers) {
-        return;
-      }
-
-      const response = await fetch(NOTIFICATIONS_ENDPOINTS.MARK_ALL_READ, {
-        method: 'PUT',
-        headers,
-      });
-
-      if (response.ok) {
-        setNotifications((prev) => prev.map((notif) => ({ ...notif, read: true })));
-        setUnreadCount(0);
+      const success = await markAllAsRead();
+      if (success) {
         showNotification('All notifications marked as read', 'success');
+      } else {
+        showNotification('Failed to mark all notifications as read', 'error');
       }
     } catch {
       showNotification('Failed to mark all notifications as read', 'error');
@@ -452,7 +382,7 @@ const Profile = () => {
           <p className={styles.emptyMessage}>{t('notifications.noNotifications')}</p>
         ) : (
           <div className={styles.notificationsList}>
-            {notifications.map((notification) => (
+            {notifications.map((notification: UserNotification) => (
               <div
                 key={notification.id}
                 className={`${styles.notificationItem} ${

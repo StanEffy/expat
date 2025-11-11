@@ -5,6 +5,7 @@ import Layout from './components/Layouts/Layout';
 import AdminLayout from './components/Admin/AdminLayout';
 import AdminRouteGuard from './components/Admin/AdminRouteGuard';
 import { NotificationProvider } from './contexts/NotificationContext';
+import { UserNotificationsProvider } from './contexts/UserNotificationsContext';
 import { FavouritesProvider } from './contexts/FavouritesContext';
 import { PollsProvider } from './contexts/PollsContext';
 import { ADMIN_PANEL_PATH } from './constants/api';
@@ -58,9 +59,10 @@ function App() {
   return (
     <I18nextProvider i18n={i18n}>
       <NotificationProvider>
-        <PollsProvider>
-          <FavouritesProvider>
-            <Router>
+        <UserNotificationsProvider>
+          <PollsProvider>
+            <FavouritesProvider>
+              <Router>
               <Routes>
                 {/* Public routes */}
                 <Route path="/" element={renderWithLayout(Home)} />
@@ -97,6 +99,7 @@ function App() {
             </Router>
           </FavouritesProvider>
         </PollsProvider>
+      </UserNotificationsProvider>
       </NotificationProvider>
     </I18nextProvider>
   );

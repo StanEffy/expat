@@ -1,22 +1,41 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Button from "../Common/Button";
 import { Menubar } from "primereact/menubar";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { isTokenValid } from "../../utils/auth";
 import LanguageSwitcher from "../Common/LanguageSwitcher";
 import MobileMenu from "../Navigation/MobileMenu";
 import AnimatedLogo from "./AnimatedLogo";
 import styles from "./Header.module.scss";
+import { Badge } from "primereact/badge";
+import { useUserNotifications } from "../../contexts/UserNotificationsContext";
 
 const Header = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const location = useLocation();
+  const { unreadCount } = useUserNotifications();
 
   useEffect(() => {
     setIsAuthenticated(isTokenValid());
-  }, []);
+  }, [location]);
+
+  const profileButtonContent = useMemo(() => {
+    if (!isAuthenticated) {
+      return t("navigation.profile");
+    }
+
+    return (
+      <span className={styles.profileButtonLabel}>
+        {t("navigation.profile")}
+        {unreadCount > 0 && (
+          <Badge value={unreadCount} severity="danger" />
+        )}
+      </span>
+    );
+  }, [isAuthenticated, t, unreadCount]);
 
   const start = (
     <Link to="/" className={styles.startLink}>
@@ -49,10 +68,11 @@ const Header = () => {
         />
         {isAuthenticated ? (
           <Button
-            label={t("navigation.profile")}
             text
             onClick={() => navigate("/profile")}
-          />
+          >
+            {profileButtonContent}
+          </Button>
         ) : (
           <Button
             label={t("navigation.login")}

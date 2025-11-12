@@ -95,7 +95,23 @@
     "uploadResume": "Lataa ansioluettelo",
     "resumeUploaded": "Ansioluettelo ladattu onnistuneesti",
     "resumeUploadError": "Ansioluettelon lataus epäonnistui",
-    "resumeHint": "Lataa ansioluettelosi (PDF, DOC tai DOCX-muoto, max 5MB)"
+    "resumeHint": "Lataa ansioluettelosi (PDF, DOC tai DOCX-muoto, max 5MB)",
+    "launchResumeBuilder": "Avaa STAR-ansioluettelotyökalu",
+    "skills": {
+      "title": "Skills",
+      "description": "Track your core skills and show your proficiency level.",
+      "edit": "Edit skills",
+      "save": "Save skills",
+      "add": "Add skill",
+      "addPlaceholder": "Start typing to search skills…",
+      "empty": "No skills yet. Add your first skill.",
+      "remove": "Remove skill",
+      "duplicateError": "You already added this skill",
+      "nameRequired": "Skill name is required",
+      "fetchError": "Failed to load available skills",
+      "saveSuccess": "Skills updated successfully",
+      "saveError": "Failed to update skills"
+    }
   },
   "shop": {
     "subtitle": "Hanki Expat App -merchandise ja osoita tukeasi!",

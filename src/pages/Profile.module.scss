@@ -213,3 +213,99 @@
   font-style: italic;
 }
 
+.skillsHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.skillActions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.skillsContent {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.skillsDescription {
+  margin: 0;
+  color: $complement-2;
+  font-size: 0.95rem;
+}
+
+.skillsEditor {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.skillList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.skillItem {
+  border: 1px solid $complement-4;
+  border-radius: 8px;
+  padding: 12px;
+  background-color: rgba-color($complement-4, 0.15);
+}
+
+.skillItemHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  gap: 12px;
+}
+
+.skillName {
+  font-weight: 600;
+  font-size: 1rem;
+  color: $primary-2;
+}
+
+.addSkillSection {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-top: 1px solid rgba-color($complement-4, 0.6);
+  padding-top: 12px;
+}
+
+.addSkillInputs {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  :global(.p-autocomplete),
+  :global(.p-inputtext) {
+    width: 100%;
+  }
+}
+
+.levelSelector {
+  width: 100%;
+}
+
+.skillsMessage {
+  margin: 0;
+}
+
+@media (min-width: 640px) {
+  .addSkillInputs {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .levelSelector {
+    max-width: 320px;
+  }
+}
+

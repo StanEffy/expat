@@ -1,0 +1,283 @@
+{
+  "title": "STAR-ohjattu ansioluettelon rakentaja",
+  "description": "Laadi saavutuksiin nojaava, yhden sivun mittainen ja silti persoonallinen ansioluettelo. Esikatselu päivittyy reaaliajassa – HR arvostaa ammattimaista huumoria.",
+  "stats": {
+    "summaryRemaining": "Yhteenvedon merkit jäljellä:",
+    "starCount": "Valmistellut STAR-saavutukset:"
+  },
+  "tooltips": {
+    "star": {
+      "title": "Kaipaatko STAR-kertausta?",
+      "items": {
+        "s": "Tilanne – Aseta tausta napakasti.",
+        "t": "Tehtävä – Kuvaile, mitä piti saada aikaan.",
+        "a": "Toiminta – Kerro, mitä teit vahvoilla verbeillä.",
+        "r": "Tulokset – Numerot ja vaikutus tekevät vaikutuksen."
+      },
+      "footer": "Lisävinkki: ripottele huumoria harkiten – mieleenpainuva ammattimaisuus palkitaan."
+    }
+  },
+  "actionVerbs": {
+    "label": "Toimintaverbiehdotukset",
+    "placeholder": "Valitse napakka verbi",
+    "insert": "Lisää verbi",
+    "helper": "Aloita toimintalauseesi näillä, jotta säilytät sähäkkyyden.",
+    "options": {
+      "led": "Johti",
+      "developed": "Kehitti",
+      "implemented": "Otti käyttöön",
+      "optimized": "Optimoi",
+      "spearheaded": "Johti aloitteen",
+      "accelerated": "Kiihdytti",
+      "transformed": "Muutti",
+      "orchestrated": "Koordinoi",
+      "delivered": "Toimitti",
+      "championed": "Ajoi",
+      "streamlined": "Tehosti",
+      "pioneered": "Aloitti uudistuksen",
+      "elevated": "Nosti tasoa",
+      "engineered": "Suunnitteli",
+      "negotiated": "Neuvotteli"
+    }
+  },
+  "sections": {
+    "personalInfo": {
+      "title": "Henkilötiedot",
+      "description": "Aloita olennaisesta, jotta rekrytoija saa yhteyden hetkessä.",
+      "fields": {
+        "name": {
+          "label": "Koko nimi",
+          "helper": "Nimeä itsesi rohkeasti – tämä sitoo STAR-tarinasi."
+        },
+        "email": {
+          "label": "Sähköposti"
+        },
+        "phone": {
+          "label": "Puhelin"
+        },
+        "linkedin": {
+          "label": "LinkedIn",
+          "placeholder": "https://linkedin.com/in/vaikuttava-osaaja"
+        }
+      }
+    },
+    "summary": {
+      "title": "Ammattiyhteenveto",
+      "description": "Kerro nopeasti kuka olet, mitä tuot pöytään ja miten parannat tiimejä.",
+      "fields": {
+        "summary": {
+          "label": "Yhteenveto",
+          "helper": "Aloita toimintaverbeillä ja konkretisoi vaikutus. Esim. “Otettiin käyttöön perehdytysmalli, joka lyhensi aloitusaikaa 30 %.”",
+          "placeholder": "Otettiin käyttöön..."
+        }
+      }
+    },
+    "experience": {
+      "title": "Työkokemus",
+      "description": "Kerro jokaisesta roolista STAR-rungolla, jotta viesti pysyy terävänä.",
+      "roleHeading": "Rooli #{{index}}",
+      "actions": {
+        "removeRole": "Poista rooli",
+        "addStar": "Lisää STAR-tarina",
+        "addRole": "Lisää rooli"
+      },
+      "fields": {
+        "company": {
+          "label": "Yritys"
+        },
+        "title": {
+          "label": "Tehtävänimike",
+          "helper": "Kuvaavat tittelit auttavat: “Senior Product Manager” voittaa “Business Personin”."
+        },
+        "startDate": {
+          "label": "Aloitusajankohta",
+          "placeholder": "Tammi 2022"
+        },
+        "endDate": {
+          "label": "Päättymisaika",
+          "placeholder": "Nykyinen"
+        }
+      },
+      "star": {
+        "heading": "STAR-saavutus #{{index}}",
+        "remove": "Poista STAR",
+        "fields": {
+          "situation": {
+            "label": "Tilanne",
+            "helper": "Kerro lähtötilanne yhdellä virkkeellä."
+          },
+          "task": {
+            "label": "Tehtävä",
+            "helper": "Määritä selkeästi, mitä piti tehdä."
+          },
+          "action": {
+            "label": "Toiminta",
+            "helper": "Aloita toimintaverbillä ja kuvaa miten veitsit tilanteen eteenpäin.",
+            "placeholder": "Johti poikkitiimistä..."
+          },
+          "result": {
+            "label": "Tulokset",
+            "helper": "Numeroi saavutus, kun mahdollista – vaikuttavuus myy.",
+            "placeholder": "Lisäsi asiakaspitoa 28 %."
+          }
+        }
+      }
+    },
+    "education": {
+      "title": "Koulutus",
+      "description": "Nosta esiin tutkinnot ja ohjelmat, jotka tukevat tarinaasi.",
+      "programHeading": "Ohjelma #{{index}}",
+      "actions": {
+        "remove": "Poista ohjelma",
+        "add": "Lisää koulutuskohde"
+      },
+      "fields": {
+        "school": {
+          "label": "Oppilaitos"
+        },
+        "degree": {
+          "label": "Tutkinto"
+        },
+        "year": {
+          "label": "Valmistumisvuosi"
+        }
+      }
+    },
+    "skills": {
+      "title": "Taidot ja sertifikaatit",
+      "description": "Ryhmittele taidot selkeästi ja pidä sertifikaatit osuvina.",
+      "fields": {
+        "technical": {
+          "label": "Tekniset taidot",
+          "helper": "Erottele pilkuilla, jotta lista pysyy luettavana.",
+          "placeholder": "TypeScript, React, GraphQL..."
+        },
+        "soft": {
+          "label": "Vuorovaikutustaidot",
+          "helper": "Muista johtaminen, viestintä ja yhteistyö.",
+          "placeholder": "Mentorointi, konfliktinratkaisu..."
+        }
+      },
+      "certifications": {
+        "title": "Sertifikaatit",
+        "placeholder": "esim. PMP, AWS Solutions Architect",
+        "remove": "Poista",
+        "add": "Lisää sertifikaatti"
+      }
+    },
+    "fun": {
+      "title": "Tyylikkään huumorin osio",
+      "description": "Näytä kulttuurisopivuus rennosti mutta ammattimaisesti."
+    }
+  },
+  "fun": {
+    "haiku": {
+      "title": "Uran haiku",
+      "helper": "5-7-5 onnistuu – tavupoliisi on lempeä.",
+      "placeholder": "Rivi {{index}}"
+    },
+    "spiritAnimal": {
+      "label": "Työpaikan voimaeläin",
+      "helper": "Esim. “Strateginen pöllö: näkee tiekartan ja tuo eväät.”"
+    },
+    "superpowers": {
+      "label": "Työtyylin supervoima",
+      "placeholder": "Valitse superpiirre",
+      "telepathicCommunicator": "Telepaattinen viestijä",
+      "deadlineVanisher": "Deadline-haihduttaja",
+      "coffeePoweredMachine": "Kahvilla käyvä kone",
+      "spreadsheetSorcerer": "Taulukkomagian taitaja",
+      "stakeholderWhisperer": "Sidosryhmäkuiskaaja"
+    },
+    "survivalSkills": {
+      "label": "Toimistosalainen taito",
+      "placeholder": "Valitse salainen vahvuus",
+      "microwaveTimingNinja": "Mikroaaltouuni-ninja",
+      "printerWhisperer": "Tulostinkuiskuttaja",
+      "conferenceCallEscapeArtist": "Etäpalaverien pakotaiteilija",
+      "snackStashCurator": "Välipalavaraston kuraattori",
+      "meetingAgendaConjurer": "Palaveriagendan taikuri"
+    },
+    "emojis": {
+      "label": "Kuvaile unelmatyöpäiväsi emojein",
+      "placeholder": "Valitse tai kirjoita emojit",
+      "addEmoji": "Lisää {{emoji}}"
+    },
+    "themeSong": {
+      "label": "Tuottavuusteemabiisi 🎵"
+    },
+    "workBff": {
+      "label": "Fiktiivinen työ-BFF"
+    },
+    "meetingTolerance": {
+      "label": "Palaverinsietokyky",
+      "optionAria": "Palaverinsietokyky {{emoji}}"
+    },
+    "snack": {
+      "label": "Kriittisten hetkien välipala"
+    },
+    "resumeScent": {
+      "label": "Jos ansioluettelolla olisi tuoksu...",
+      "placeholder": "Valitse tunnusomainen aromi"
+    },
+    "resumeScents": {
+      "freshlySignedContract": "Juuri allekirjoitettu sopimus",
+      "mondayMorningEspresso": "Maanantaiaamun espresso",
+      "polishedBoardroomOak": "Kiillotettu neuvotteluhuoneen tammi",
+      "startupWhiteboardMarker": "Startup-valkotaulutussi",
+      "deadlineAdrenaline": "Deadline-adrenaliini (erikoiserä)"
+    }
+  },
+  "actions": {
+    "downloadPdf": "Lataa PDF",
+    "reset": "Tyhjennä lomake"
+  },
+  "preview": {
+    "fallbacks": {
+      "name": "Nimesi, toimintaverbien mestari"
+    },
+    "sections": {
+      "summary": "Ammattiyhteenveto",
+      "experience": "Työkokemus",
+      "education": "Koulutus",
+      "skills": "Taidot",
+      "certifications": "Sertifikaatit",
+      "fun": "Ammatillinen persoona (tyylikkäästi humoristinen)"
+    },
+    "experience": {
+      "roleFallback": "Tehtävänimike",
+      "companyFallback": "Yrityksen nimi",
+      "datesFallback": "Ajanjakso tarkentuu"
+    },
+    "education": {
+      "schoolFallback": "Oppilaitos",
+      "degreeFallback": "Tutkinto ja pääaine",
+      "yearFallback": "Vuosi"
+    },
+    "skills": {
+      "technicalTitle": "Tekniset",
+      "softTitle": "Vuorovaikutus",
+      "technicalFallback": "API-integraatiot, TypeScript-taikuus, kojelautavelhoudet",
+      "softFallback": "Tiimidynamiikan rakentaja, konfliktien sovittelija, agenda-arkkitehti"
+    },
+    "fun": {
+      "haiku": "Uran haiku",
+      "spiritAnimal": "Voimaeläin töissä",
+      "superpower": "Työtyylin supervoima",
+      "survivalSkill": "Toimistosalainen taito",
+      "emojiDay": "Ihantyöpäivä (emoji-versio)",
+      "themeSong": "Tuottavuusanthem",
+      "workBff": "Fiktiivinen työystävä",
+      "meetingTolerance": "Palaverinsietokyky",
+      "snack": "Luottovälipala",
+      "resumeSmell": "Ansioluettelon tunnustuoksu"
+    },
+    "starBullet": {
+      "context": "Tilanne: {{value}}",
+      "task": "Tehtävä: {{value}}",
+      "action": "Toiminta: {{value}}",
+      "result": "Tulokset: {{value}}",
+      "separator": "•"
+    }
+  }
+}

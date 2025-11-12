@@ -95,7 +95,23 @@
     "uploadResume": "Завантажити резюме",
     "resumeUploaded": "Резюме успішно завантажено",
     "resumeUploadError": "Не вдалося завантажити резюме",
-    "resumeHint": "Завантажте ваше резюме (PDF, DOC або DOCX формат, макс. 5MB)"
+    "resumeHint": "Завантажте ваше резюме (PDF, DOC або DOCX, макс. 5MB)",
+    "launchResumeBuilder": "Відкрити STAR-конструктор резюме",
+    "skills": {
+      "title": "Skills",
+      "description": "Track your core skills and show your proficiency level.",
+      "edit": "Edit skills",
+      "save": "Save skills",
+      "add": "Add skill",
+      "addPlaceholder": "Start typing to search skills…",
+      "empty": "No skills yet. Add your first skill.",
+      "remove": "Remove skill",
+      "duplicateError": "You already added this skill",
+      "nameRequired": "Skill name is required",
+      "fetchError": "Failed to load available skills",
+      "saveSuccess": "Skills updated successfully",
+      "saveError": "Failed to update skills"
+    }
   },
   "shop": {
     "subtitle": "Отримайте мерч Expat App і покажіть свою підтримку!",

@@ -8,7 +8,13 @@ import { ProgressSpinner } from 'primereact/progressspinner';
 import { FileUpload } from 'primereact/fileupload';
 import { InputText } from 'primereact/inputtext';
 import { TabView, TabPanel } from 'primereact/tabview';
-import { AUTH_ENDPOINTS, COMPANY_ENDPOINTS } from '../constants/api';
+import {
+  AutoComplete,
+  AutoCompleteChangeEvent,
+  AutoCompleteCompleteEvent,
+  AutoCompleteSelectEvent,
+} from 'primereact/autocomplete';
+import { AUTH_ENDPOINTS, COMPANY_ENDPOINTS, SKILL_ENDPOINTS } from '../constants/api';
 import { getAuthHeaders } from '../utils/auth';
 import { useNotification } from '../contexts/NotificationContext';
 import { useFavourites } from '../contexts/FavouritesContext';
@@ -17,6 +23,7 @@ import SEO from '../components/Common/SEO';
 import styles from './Profile.module.scss';
 import { useUserNotifications } from '../contexts/UserNotificationsContext';
 import type { UserNotification } from '../contexts/UserNotificationsContext';
+import SkillLevelSelector, { SkillLevel, SKILL_LEVELS } from '../components/Profile/SkillLevelSelector';
 
 interface Favourite {
   id: number;
@@ -26,6 +33,12 @@ interface Favourite {
     name: string;
     mainbusinesslinename?: string | null;
   };
+}
+
+interface UserSkill {
+  id?: number;
+  name: string;
+  level: SkillLevel;
 }
 
 interface UserProfile {
@@ -46,7 +59,30 @@ interface UserProfile {
   createdAt?: string;
   created_at?: string;
   favourites?: Favourite[];
+  skills?: UserSkill[];
 }
+
+const isSkillLevel = (value: unknown): value is SkillLevel =>
+  typeof value === 'string' && SKILL_LEVELS.includes(value as SkillLevel);
+
+const sanitizeSkills = (input: unknown): UserSkill[] => {
+  if (!Array.isArray(input)) {
+    return [];
+  }
+  return input
+    .filter(
+      (item): item is { id?: number; name: string; level?: unknown } =>
+        typeof item === 'object' &&
+        item !== null &&
+        'name' in item &&
+        typeof (item as { name?: unknown }).name === 'string',
+    )
+    .map((item) => ({
+      id: typeof item.id === 'number' ? item.id : undefined,
+      name: (item as { name: string }).name,
+      level: isSkillLevel(item.level) ? item.level : ('A1' as SkillLevel),
+    }));
+};
 
 interface ProfileFormValues {
   name: string;
@@ -81,6 +117,17 @@ const Profile = () => {
   const [formError, setFormError] = useState('');
   const [savingProfile, setSavingProfile] = useState(false);
   const [activeTab, setActiveTab] = useState(0);
+  const [skills, setSkills] = useState<UserSkill[]>([]);
+  const [skillsDraft, setSkillsDraft] = useState<UserSkill[]>([]);
+  const [isEditingSkills, setIsEditingSkills] = useState(false);
+  const [availableSkills, setAvailableSkills] = useState<string[]>([]);
+  const [skillSuggestions, setSkillSuggestions] = useState<string[]>([]);
+  const [newSkillName, setNewSkillName] = useState('');
+  const [newSkillLevel, setNewSkillLevel] = useState<SkillLevel>('A1');
+  const [availableSkillsLoading, setAvailableSkillsLoading] = useState(false);
+  const [savingSkills, setSavingSkills] = useState(false);
+  const [skillsError, setSkillsError] = useState('');
+  const [skillsFetchError, setSkillsFetchError] = useState('');
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -106,6 +153,9 @@ const Profile = () => {
           secondName: data?.second_name ?? '',
           email: data?.email ?? '',
         });
+        const sanitizedSkills = sanitizeSkills(data?.skills);
+        setSkills(sanitizedSkills);
+        setSkillsDraft(sanitizedSkills);
         
         // Extract favourites from profile and initialize in context
         // Handle both direct array and wrapped in data property
@@ -130,6 +180,214 @@ const Profile = () => {
     fetchProfile();
     refreshNotifications();
   }, [navigate, initializeFromProfile, refreshNotifications]);
+
+  useEffect(() => {
+    const fetchAvailableSkills = async () => {
+      const headers = getAuthHeaders();
+      if (!headers) {
+        return;
+      }
+      setAvailableSkillsLoading(true);
+      setSkillsFetchError('');
+      try {
+        const response = await fetch(SKILL_ENDPOINTS.LIST, {
+          headers,
+        });
+        if (!response.ok) {
+          throw new Error('Failed to fetch skills');
+        }
+        const data = await response.json();
+        const extractNames = (items: unknown): string[] => {
+          if (!Array.isArray(items)) {
+            return [];
+          }
+          return items
+            .map((item) => {
+              if (typeof item === 'string') {
+                return item;
+              }
+              if (item && typeof item === 'object' && 'name' in item && typeof (item as { name?: unknown }).name === 'string') {
+                return (item as { name: string }).name;
+              }
+              return null;
+            })
+            .filter((name): name is string => !!name && name.trim().length > 0);
+        };
+        const namesFromRoot = extractNames(data);
+        const namesFromData = extractNames((data as { data?: unknown })?.data);
+        const combined = [...namesFromRoot, ...namesFromData];
+        const unique = Array.from(new Set(combined.map((name) => name.trim()))).filter((name) => name.length > 0);
+        setAvailableSkills(unique);
+      } catch (err) {
+        console.error('Failed to fetch available skills:', err);
+        setSkillsFetchError(
+          t('profile.skills.fetchError', { defaultValue: 'Failed to load available skills' }),
+        );
+      } finally {
+        setAvailableSkillsLoading(false);
+      }
+    };
+
+    fetchAvailableSkills();
+  }, [t]);
+
+  const normalizeSkillName = (name: string) => name.trim().toLowerCase();
+
+  const handleSkillSearch = (event: AutoCompleteCompleteEvent) => {
+    const query = event.query.trim().toLowerCase();
+    const filtered = availableSkills.filter((skillName) => {
+      const normalized = normalizeSkillName(skillName);
+      if (skillsDraft.some((skill) => normalizeSkillName(skill.name) === normalized)) {
+        return false;
+      }
+      return query.length === 0 || normalized.includes(query);
+    });
+    setSkillSuggestions(filtered.slice(0, 10));
+  };
+
+  const handleSkillInputChange = (event: AutoCompleteChangeEvent) => {
+    const value = typeof event.value === 'string' ? event.value : '';
+    setNewSkillName(value);
+  };
+
+  const handleSkillSelect = (event: AutoCompleteSelectEvent) => {
+    const value = typeof event.value === 'string' ? event.value : '';
+    setNewSkillName(value);
+  };
+
+  const handleAddSkill = () => {
+    if (savingSkills) {
+      return;
+    }
+    const trimmedName = newSkillName.trim();
+    if (!trimmedName) {
+      setSkillsError(t('profile.skills.nameRequired', { defaultValue: 'Skill name is required' }));
+      return;
+    }
+    const normalizedName = normalizeSkillName(trimmedName);
+    if (skillsDraft.some((skill) => normalizeSkillName(skill.name) === normalizedName)) {
+      setSkillsError(
+        t('profile.skills.duplicateError', { defaultValue: 'You already added this skill' }),
+      );
+      return;
+    }
+    const selectedLevel =
+      typeof newSkillLevel === 'string' && SKILL_LEVELS.includes(newSkillLevel)
+        ? newSkillLevel
+        : ('A1' as SkillLevel);
+    const nextSkills = [
+      ...skillsDraft,
+      {
+        name: trimmedName,
+        level: selectedLevel,
+      },
+    ];
+    setSkillsDraft(nextSkills);
+    setNewSkillName('');
+    setNewSkillLevel('A1');
+    setSkillSuggestions([]);
+    setSkillsError('');
+  };
+
+  const handleSkillLevelChange = (index: number, level: SkillLevel) => {
+    if (savingSkills) {
+      return;
+    }
+    setSkillsDraft((prev) =>
+      prev.map((skill, idx) => {
+        if (idx !== index) {
+          return skill;
+        }
+        return {
+          ...skill,
+          level,
+        };
+      }),
+    );
+  };
+
+  const handleSkillRemove = (index: number) => {
+    if (savingSkills) {
+      return;
+    }
+    setSkillsDraft((prev) => prev.filter((_, idx) => idx !== index));
+  };
+
+  const handleSkillsEditToggle = () => {
+    if (!profile) {
+      return;
+    }
+    setSkillsDraft(skills);
+    setIsEditingSkills(true);
+    setSkillsError('');
+  };
+
+  const handleSkillsCancel = () => {
+    setSkillsDraft(skills);
+    setIsEditingSkills(false);
+    setSkillsError('');
+    setNewSkillName('');
+    setNewSkillLevel('A1');
+  };
+
+  const handleSkillsSave = async () => {
+    if (!profile) {
+      return;
+    }
+    const headers = getAuthHeaders();
+    if (!headers) {
+      navigate('/login');
+      return;
+    }
+    setSavingSkills(true);
+    setSkillsError('');
+    try {
+      const response = await fetch(AUTH_ENDPOINTS.PROFILE, {
+        method: 'PUT',
+        headers,
+        body: JSON.stringify({
+          name: formValues.name,
+          second_name: formValues.secondName,
+          email: formValues.email,
+          skills: skillsDraft.map((skill) => ({
+            id: skill.id,
+            name: skill.name,
+            level: skill.level,
+          })),
+        }),
+      });
+      if (!response.ok) {
+        const errorBody = await response.json().catch(() => null);
+        const message =
+          errorBody?.message ||
+          (Array.isArray(errorBody?.errors) ? errorBody.errors.join(', ') : null) ||
+          t('profile.skills.saveError', { defaultValue: 'Failed to update skills' });
+        throw new Error(message);
+      }
+      const updatedProfile = await response.json();
+      setProfile(updatedProfile);
+      const sanitizedSkills = sanitizeSkills(updatedProfile?.skills);
+      setSkills(sanitizedSkills);
+      setSkillsDraft(sanitizedSkills);
+      showNotification(
+        t('profile.skills.saveSuccess', { defaultValue: 'Skills updated successfully' }),
+        'success',
+      );
+      setIsEditingSkills(false);
+    } catch (err) {
+      const message = err instanceof Error ? err.message : undefined;
+      setSkillsError(
+        message ||
+          t('profile.skills.saveError', { defaultValue: 'Failed to update skills' }),
+      );
+      showNotification(
+        t('profile.skills.saveError', { defaultValue: 'Failed to update skills' }),
+        'error',
+      );
+    } finally {
+      setSavingSkills(false);
+    }
+  };
 
   // Fetch company details for favourites when favourites change
   useEffect(() => {
@@ -257,6 +515,11 @@ const Profile = () => {
           name: formValues.name,
           second_name: formValues.secondName,
           email: formValues.email,
+          skills: skills.map((skill) => ({
+            id: skill.id,
+            name: skill.name,
+            level: skill.level,
+          })),
         }),
       });
 
@@ -276,6 +539,9 @@ const Profile = () => {
         secondName: updatedProfile?.second_name ?? '',
         email: updatedProfile?.email ?? '',
       });
+      const updatedSkills = sanitizeSkills(updatedProfile?.skills);
+      setSkills(updatedSkills);
+      setSkillsDraft(updatedSkills);
       showNotification(
         t('profile.profileUpdated', { defaultValue: 'Profile updated successfully' }),
         'success',
@@ -560,6 +826,140 @@ const Profile = () => {
                     onClick={() => navigate('/profile/resume-builder')}
                     icon="pi pi-external-link"
                   />
+                </div>
+              </Card>
+
+              <Card
+                title={
+                  <div className={styles.skillsHeader}>
+                    <span>{t('profile.skills.title', { defaultValue: 'Skills' })}</span>
+                    {!isEditingSkills ? (
+                      <Button
+                        label={t('profile.skills.edit', { defaultValue: 'Edit skills' })}
+                        icon="pi pi-pencil"
+                        size="small"
+                        onClick={handleSkillsEditToggle}
+                        disabled={savingSkills}
+                      />
+                    ) : (
+                      <div className={styles.skillActions}>
+                        <Button
+                          type="button"
+                          label={t('common.cancel', { defaultValue: 'Cancel' })}
+                          variant="text"
+                          onClick={handleSkillsCancel}
+                          disabled={savingSkills}
+                          icon="pi pi-times"
+                        />
+                        <Button
+                          type="button"
+                          label={t('profile.skills.save', { defaultValue: 'Save skills' })}
+                          onClick={handleSkillsSave}
+                          loading={savingSkills}
+                          disabled={savingSkills}
+                          icon="pi pi-check"
+                        />
+                      </div>
+                    )}
+                  </div>
+                }
+                className={styles.card}
+              >
+                <div className={styles.skillsContent}>
+                  <p className={styles.skillsDescription}>
+                    {t('profile.skills.description', {
+                      defaultValue: 'Track your core skills and show your proficiency level.',
+                    })}
+                  </p>
+                  {skillsFetchError && (
+                    <Message severity="warn" text={skillsFetchError} className={styles.skillsMessage} />
+                  )}
+                  {isEditingSkills ? (
+                    <div className={styles.skillsEditor}>
+                      <div className={styles.skillList}>
+                        {skillsDraft.length === 0 ? (
+                          <p className={styles.emptyMessage}>
+                            {t('profile.skills.empty', { defaultValue: 'No skills yet. Add your first skill.' })}
+                          </p>
+                        ) : (
+                          skillsDraft.map((skill, index) => (
+                            <div key={`${skill.name}-${index}`} className={styles.skillItem}>
+                              <div className={styles.skillItemHeader}>
+                                <span className={styles.skillName}>{skill.name}</span>
+                                <Button
+                                  icon="pi pi-times"
+                                  severity="secondary"
+                                  text
+                                  rounded
+                                  aria-label={t('profile.skills.remove', { defaultValue: 'Remove skill' })}
+                                  onClick={() => handleSkillRemove(index)}
+                                  disabled={savingSkills}
+                                />
+                              </div>
+                              <SkillLevelSelector
+                                value={skill.level}
+                                onChange={(level) => handleSkillLevelChange(index, level)}
+                              />
+                            </div>
+                          ))
+                        )}
+                      </div>
+
+                      <div className={styles.addSkillSection}>
+                        <div className={styles.addSkillInputs}>
+                          <AutoComplete
+                            value={newSkillName}
+                            suggestions={skillSuggestions}
+                            completeMethod={handleSkillSearch}
+                            onChange={handleSkillInputChange}
+                            onSelect={handleSkillSelect}
+                            placeholder={t('profile.skills.addPlaceholder', {
+                              defaultValue: 'Start typing to search skills…',
+                            })}
+                            dropdown
+                            disabled={savingSkills}
+                          />
+                          <SkillLevelSelector
+                            value={newSkillLevel}
+                            onChange={(level) => setNewSkillLevel(level)}
+                            className={styles.levelSelector}
+                          />
+                        </div>
+                        <Button
+                          type="button"
+                          label={t('profile.skills.add', { defaultValue: 'Add skill' })}
+                          icon="pi pi-plus"
+                          onClick={handleAddSkill}
+                          disabled={savingSkills}
+                        />
+                      </div>
+                      {skillsError && (
+                        <Message severity="error" text={skillsError} className={styles.skillsMessage} />
+                      )}
+                      {availableSkillsLoading && (
+                        <div className={styles.loadingContainer}>
+                          <ProgressSpinner />
+                        </div>
+                      )}
+                    </div>
+                  ) : (
+                    <div className={styles.skillList}>
+                      {skills.length === 0 ? (
+                        <p className={styles.emptyMessage}>
+                          {t('profile.skills.empty', { defaultValue: 'No skills yet. Add your first skill.' })}
+                        </p>
+                      ) : (
+                        skills.map((skill, index) => (
+                          <div key={`${skill.name}-${index}`} className={styles.skillItem}>
+                            <div className={styles.skillItemHeader}>
+                              <span className={styles.skillName}>{skill.name}</span>
+                            </div>
+                            <SkillLevelSelector value={skill.level} readOnly />
+                          </div>
+                        ))
+                      )}
+                    </div>
+                  )}
                 </div>
               </Card>
             </div>

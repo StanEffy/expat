@@ -1,0 +1,284 @@
+{
+  "title": "STAR-drivet CV-verktyg",
+  "description": "Skapa ett merithandlande CV som är professionellt, ryms på en sida och ändå visar din personlighet. Förhandsgranskningen uppdateras i realtid – HR uppskattar minnesvärt allvar.",
+  "stats": {
+    "summaryRemaining": "Tecken kvar i sammanfattningen:",
+    "starCount": "STAR-prestationer redo:"
+  },
+  "tooltips": {
+    "star": {
+      "title": "Behöver du friska upp STAR?",
+      "items": {
+        "s": "Situation – Sätt scenen med ett kort sammanhang.",
+        "t": "Uppgift – Förklara uppdraget eller utmaningen.",
+        "a": "Åtgärd – Beskriv vad du gjorde med handlingsverb.",
+        "r": "Resultat – Kvantifiera effekten du levererade."
+      },
+      "footer": "Bonus: dosera humorn lagom – professionell fyndighet fastnar."
+    }
+  },
+  "actionVerbs": {
+    "label": "Förslag på handlingsverb",
+    "placeholder": "Välj ett kraftfullt verb",
+    "insert": "Infoga verb",
+    "helper": "Inled dina resultatmeningar med dessa för att låta målmedveten.",
+    "options": {
+      "led": "Ledde",
+      "developed": "Utvecklade",
+      "implemented": "Implementerade",
+      "optimized": "Optimerade",
+      "spearheaded": "Drev",
+      "accelerated": "Accelererade",
+      "transformed": "Transformerade",
+      "orchestrated": "Orkestrerade",
+      "delivered": "Levererade",
+      "championed": "Främjade",
+      "streamlined": "Effektiviserade",
+      "pioneered": "Banade väg",
+      "elevated": "Höjde nivån",
+      "engineered": "Konstruerade",
+      "negotiated": "Förhandlade"
+    }
+  },
+  "sections": {
+    "personalInfo": {
+      "title": "Personuppgifter",
+      "description": "Börja med det viktigaste så att rekryteraren kan ringa direkt.",
+      "fields": {
+        "name": {
+          "label": "Fullständigt namn",
+          "helper": "Säg det självsäkert – namnet håller ihop dina STAR-historier."
+        },
+        "email": {
+          "label": "E-post"
+        },
+        "phone": {
+          "label": "Telefon"
+        },
+        "linkedin": {
+          "label": "LinkedIn",
+          "placeholder": "https://linkedin.com/in/hogpresterare"
+        }
+      }
+    },
+    "summary": {
+      "title": "Professionell sammanfattning",
+      "description": "Ge hisspitchen: vem du är, vad du levererar och hur du lyfter team.",
+      "fields": {
+        "summary": {
+          "label": "Sammanfattning",
+          "helper": "Inled med handlingsverb och visa effekt. Exempel: ”Implementerade onboarding som kortade ramp-up med 30 %.”",
+          "placeholder": "Implementerade..."
+        }
+      }
+    },
+    "experience": {
+      "title": "Arbetslivserfarenhet",
+      "description": "Berätta varje roll med STAR så att varje punkt träffar rätt.",
+      "roleHeading": "Roll #{{index}}",
+      "actions": {
+        "removeRole": "Ta bort roll",
+        "addStar": "Lägg till STAR-berättelse",
+        "addRole": "Lägg till roll"
+      },
+      "fields": {
+        "company": {
+          "label": "Företag"
+        },
+        "title": {
+          "label": "Befattning",
+          "helper": "Tydliga titlar hjälper: ”Senior Product Manager” slår ”Business Person”."
+        },
+        "startDate": {
+          "label": "Startdatum",
+          "placeholder": "Jan 2022"
+        },
+        "endDate": {
+          "label": "Slutdatum",
+          "placeholder": "Nuvarande"
+        }
+      },
+      "star": {
+        "heading": "STAR-prestation #{{index}}",
+        "remove": "Ta bort STAR",
+        "fields": {
+          "situation": {
+            "label": "Situation",
+            "helper": "Sätt scenen i en mening."
+          },
+          "task": {
+            "label": "Uppgift",
+            "helper": "Beskriv vad som behövde göras."
+          },
+          "action": {
+            "label": "Åtgärd",
+            "helper": "Börja med ett verb och visa hur du drev arbetet framåt.",
+            "placeholder": "Ledde tvärfunktionellt..."
+          },
+          "result": {
+            "label": "Resultat",
+            "helper": "Kvantifiera helst – siffror talar.",
+            "placeholder": "Ökade kundlojaliteten med 28 %."
+          }
+        }
+      }
+    },
+    "education": {
+      "title": "Utbildning",
+      "description": "Lyft fram examina, program och toppmeriter.",
+      "programHeading": "Program #{{index}}",
+      "actions": {
+        "remove": "Ta bort program",
+        "add": "Lägg till utbildning"
+      },
+      "fields": {
+        "school": {
+          "label": "Lärosäte"
+        },
+        "degree": {
+          "label": "Examen"
+        },
+        "year": {
+          "label": "År"
+        }
+      }
+    },
+    "skills": {
+      "title": "Färdigheter & certifikat",
+      "description": "Gruppera dina styrkor tydligt och håll certifikat relevanta.",
+      "fields": {
+        "technical": {
+          "label": "Tekniska färdigheter",
+          "helper": "Separera med kommatecken för enkel läsning.",
+          "placeholder": "TypeScript, React, GraphQL..."
+        },
+        "soft": {
+          "label": "Mjuka färdigheter",
+          "helper": "Tänk ledarskap, kommunikation och samarbete.",
+          "placeholder": "Mentorskap, konflikthantering..."
+        }
+      },
+      "certifications": {
+        "title": "Certifikat",
+        "placeholder": "t.ex. PMP, AWS Solutions Architect",
+        "remove": "Ta bort",
+        "add": "Lägg till certifikat"
+      }
+    },
+    "fun": {
+      "title": "Smakfull humorzon",
+      "description": "Visa kulturmatch med glimten i ögat och bibehållen proffsighet."
+    }
+  },
+  "fun": {
+    "haiku": {
+      "title": "Karriärhaiku",
+      "helper": "5-7-5 uppmuntras – stavelsesnuten är snäll.",
+      "placeholder": "Rad {{index}}"
+    },
+    "spiritAnimal": {
+      "label": "Ditt spirit animal på jobbet",
+      "helper": "Exempel: ”Strategisk uggla – ser vägen fram och tar med snacks.”"
+    },
+    "superpowers": {
+      "label": "Din superkraft på jobbet",
+      "placeholder": "Välj din superkraft",
+      "telepathicCommunicator": "Telepatisk kommunikatör",
+      "deadlineVanisher": "Deadline-förtrollare",
+      "coffeePoweredMachine": "Kaffedriven maskin",
+      "spreadsheetSorcerer": "Kalkylbladsmagiker",
+      "stakeholderWhisperer": "Intressentviskare"
+    },
+    "survivalSkills": {
+      "label": "Kontorsöverlevnadstalang",
+      "placeholder": "Välj din hemliga färdighet",
+      "microwaveTimingNinja": "Mikrovågsninja",
+      "printerWhisperer": "Skrivarkviskare",
+      "conferenceCallEscapeArtist": "Konferenssamtalets flyktkonstnär",
+      "snackStashCurator": "Snackslagerkurator",
+      "meetingAgendaConjurer": "Dagordnings-trollare"
+    },
+    "emojis": {
+      "label": "Beskriv din ideala arbetsdag med emojis",
+      "placeholder": "Välj eller skriv emojis",
+      "addEmoji": "Lägg till {{emoji}}"
+    },
+    "themeSong": {
+      "label": "Produktivitetslåt 🎵"
+    },
+    "workBff": {
+      "label": "Fiktiv jobb-BFF"
+    },
+    "meetingTolerance": {
+      "label": "Mötestolerans",
+      "optionAria": "Mötestolerans {{emoji}}"
+    },
+    "snack": {
+      "label": "Standardsnacks vid crunch"
+    },
+    "resumeScent": {
+      "label": "Om ditt CV hade en doft...",
+      "placeholder": "Välj en signaturdoft"
+    },
+    "resumeScents": {
+      "freshlySignedContract": "Nysignerat kontrakt",
+      "mondayMorningEspresso": "Måndagsmorgonens espresso",
+      "polishedBoardroomOak": "Polerad styrelserumsek",
+      "startupWhiteboardMarker": "Startup-whiteboardpenna",
+      "deadlineAdrenaline": "Deadline-adrenalin (limited edition)"
+    }
+  },
+  "actions": {
+    "downloadPdf": "Ladda ner som PDF",
+    "reset": "Återställ byggaren"
+  },
+  "preview": {
+    "fallbacks": {
+      "name": "Ditt namn, mästare av handlingsverb"
+    },
+    "sections": {
+      "summary": "Professionell sammanfattning",
+      "experience": "Arbetslivserfarenhet",
+      "education": "Utbildning",
+      "skills": "Färdigheter",
+      "certifications": "Certifikat",
+      "fun": "Professionell personlighet (med smakfull humor)"
+    },
+    "experience": {
+      "roleFallback": "Befattning",
+      "companyFallback": "Företagsnamn",
+      "datesFallback": "Datum meddelas"
+    },
+    "education": {
+      "schoolFallback": "Lärosäte",
+      "degreeFallback": "Examen och inriktning",
+      "yearFallback": "År"
+    },
+    "skills": {
+      "technicalTitle": "Tekniska",
+      "softTitle": "Mjuka",
+      "technicalFallback": "API-integrationer, TypeScript-magi, dashboard-trolleri",
+      "softFallback": "Teambyggare, konfliktlösare, agendaarkitekt"
+    },
+    "fun": {
+      "haiku": "Karriärhaiku",
+      "spiritAnimal": "Spirit animal på jobbet",
+      "superpower": "Superkraft på jobbet",
+      "survivalSkill": "Kontorsöverlevnadstalang",
+      "emojiDay": "Drömarbetsdag (emoji-version)",
+      "themeSong": "Produktivitetsanthem",
+      "workBff": "Fiktiv jobbbästis",
+      "meetingTolerance": "Mötestolerans",
+      "snack": "Go-to-snacks",
+      "resumeSmell": "CV:ets signaturdoft"
+    },
+    "starBullet": {
+      "context": "Sammanhang: {{value}}",
+      "task": "Uppdrag: {{value}}",
+      "action": "Åtgärd: {{value}}",
+      "result": "Resultat: {{value}}",
+      "separator": "•"
+    }
+  }
+}
+

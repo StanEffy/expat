@@ -95,7 +95,23 @@
     "uploadResume": "Ladda upp CV",
     "resumeUploaded": "CV uppladdat framgångsrikt",
     "resumeUploadError": "Misslyckades med att ladda upp CV",
-    "resumeHint": "Ladda upp ditt CV (PDF, DOC eller DOCX-format, max 5MB)"
+    "resumeHint": "Ladda upp ditt CV (PDF, DOC eller DOCX-format, max 5MB)",
+    "launchResumeBuilder": "Öppna STAR-CV-byggaren",
+    "skills": {
+      "title": "Skills",
+      "description": "Track your core skills and show your proficiency level.",
+      "edit": "Edit skills",
+      "save": "Save skills",
+      "add": "Add skill",
+      "addPlaceholder": "Start typing to search skills…",
+      "empty": "No skills yet. Add your first skill.",
+      "remove": "Remove skill",
+      "duplicateError": "You already added this skill",
+      "nameRequired": "Skill name is required",
+      "fetchError": "Failed to load available skills",
+      "saveSuccess": "Skills updated successfully",
+      "saveError": "Failed to update skills"
+    }
   },
   "shop": {
     "subtitle": "Skaffa dina Expat App-varor och visa ditt stöd!",

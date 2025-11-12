@@ -95,7 +95,24 @@
     "uploadResume": "Upload Resume",
     "resumeUploaded": "Resume uploaded successfully",
     "resumeUploadError": "Failed to upload resume",
-    "resumeHint": "Upload your resume (PDF, DOC, or DOCX format, max 5MB)"
+    "resumeHint": "Upload your resume (PDF, DOC, or DOCX format, max 5MB)",
+    "launchResumeBuilder": "Launch STAR Resume Builder"
+    ,
+    "skills": {
+      "title": "Skills",
+      "description": "Track your core skills and show your proficiency level.",
+      "edit": "Edit skills",
+      "save": "Save skills",
+      "add": "Add skill",
+      "addPlaceholder": "Start typing to search skills…",
+      "empty": "No skills yet. Add your first skill.",
+      "remove": "Remove skill",
+      "duplicateError": "You already added this skill",
+      "nameRequired": "Skill name is required",
+      "fetchError": "Failed to load available skills",
+      "saveSuccess": "Skills updated successfully",
+      "saveError": "Failed to update skills"
+    }
   },
   "shop": {
     "subtitle": "Get your Expat App merchandise and show your support!",

@@ -1,0 +1,284 @@
+{
+  "title": "STAR-Powered Resume Builder",
+  "description": "Craft an accomplishment-rich resume that stays professional, fits on a single page, and still lets your personality shine. Real-time preview included, compliments HR-approved.",
+  "stats": {
+    "summaryRemaining": "Summary characters remaining:",
+    "starCount": "STAR accomplishments prepped:"
+  },
+  "tooltips": {
+    "star": {
+      "title": "Need a STAR refresher?",
+      "items": {
+        "s": "ituation – Set the scene with concise context.",
+        "t": "ask – Clarify the mission or challenge.",
+        "a": "ction – Lead with action verbs to describe your moves.",
+        "r": "esult – Quantify the win or impact."
+      },
+      "footer": "Bonus: sprinkle humor responsibly—HR appreciates memorable professionalism."
+    }
+  },
+  "actionVerbs": {
+    "label": "Action Verb Suggestions",
+    "placeholder": "Select a powerful verb",
+    "insert": "Insert verb",
+    "helper": "Start your action statement with one of these to stay bold.",
+    "options": {
+      "led": "Led",
+      "developed": "Developed",
+      "implemented": "Implemented",
+      "optimized": "Optimized",
+      "spearheaded": "Spearheaded",
+      "accelerated": "Accelerated",
+      "transformed": "Transformed",
+      "orchestrated": "Orchestrated",
+      "delivered": "Delivered",
+      "championed": "Championed",
+      "streamlined": "Streamlined",
+      "pioneered": "Pioneered",
+      "elevated": "Elevated",
+      "engineered": "Engineered",
+      "negotiated": "Negotiated"
+    }
+  },
+  "sections": {
+    "personalInfo": {
+      "title": "Personal Info",
+      "description": "Start with the essentials so recruiters can call immediately.",
+      "fields": {
+        "name": {
+          "label": "Full Name",
+          "helper": "Name it and claim it. This anchors your STAR stories."
+        },
+        "email": {
+          "label": "Email"
+        },
+        "phone": {
+          "label": "Phone"
+        },
+        "linkedin": {
+          "label": "LinkedIn",
+          "placeholder": "https://linkedin.com/in/high-impact-pro"
+        }
+      }
+    },
+    "summary": {
+      "title": "Professional Summary",
+      "description": "Give the quick pitch—who you are, what you deliver, and how you make teams better.",
+      "fields": {
+        "summary": {
+          "label": "Summary",
+          "helper": "Lead with action verbs and quantify your impact. Example: “Implemented onboarding system that cut ramp-up time by 30%.”",
+          "placeholder": "Implemented..."
+        }
+      }
+    },
+    "experience": {
+      "title": "Work Experience",
+      "description": "Use STAR stories to keep every bullet focused and impactful.",
+      "roleHeading": "Role #{{index}}",
+      "actions": {
+        "removeRole": "Remove role",
+        "addStar": "Add another STAR story",
+        "addRole": "Add another role"
+      },
+      "fields": {
+        "company": {
+          "label": "Company"
+        },
+        "title": {
+          "label": "Title",
+          "helper": "Actionable titles help: “Senior Product Manager” beats “Business Person”."
+        },
+        "startDate": {
+          "label": "Start Date",
+          "placeholder": "Jan 2022"
+        },
+        "endDate": {
+          "label": "End Date",
+          "placeholder": "Present"
+        }
+      },
+      "star": {
+        "heading": "STAR Accomplishment #{{index}}",
+        "remove": "Remove STAR",
+        "fields": {
+          "situation": {
+            "label": "Situation",
+            "helper": "Set the stage in one sentence."
+          },
+          "task": {
+            "label": "Task",
+            "helper": "Keep it clear: what needed to happen?"
+          },
+          "action": {
+            "label": "Action",
+            "helper": "Begin with an action verb and show how you moved the mission forward.",
+            "placeholder": "Led cross-functional..."
+          },
+          "result": {
+            "label": "Result",
+            "helper": "Quantify it if possible. Employers love impressive numbers.",
+            "placeholder": "Increased customer retention by 28%."
+          }
+        }
+      }
+    },
+    "education": {
+      "title": "Education",
+      "description": "Only the highlight reel: degrees, certifications, standout programs.",
+      "programHeading": "Program #{{index}}",
+      "actions": {
+        "remove": "Remove program",
+        "add": "Add another education entry"
+      },
+      "fields": {
+        "school": {
+          "label": "School"
+        },
+        "degree": {
+          "label": "Degree"
+        },
+        "year": {
+          "label": "Graduation Year"
+        }
+      }
+    },
+    "skills": {
+      "title": "Skills & Certifications",
+      "description": "Group skills smartly and keep certifications relevant.",
+      "fields": {
+        "technical": {
+          "label": "Technical Skills",
+          "helper": "Separate with commas to keep it scannable.",
+          "placeholder": "TypeScript, React, GraphQL..."
+        },
+        "soft": {
+          "label": "Soft Skills",
+          "helper": "Think leadership, communication, collaboration.",
+          "placeholder": "Mentorship, conflict resolution..."
+        }
+      },
+      "certifications": {
+        "title": "Certifications",
+        "placeholder": "e.g. PMP, AWS Solutions Architect",
+        "remove": "Remove",
+        "add": "Add certification"
+      }
+    },
+    "fun": {
+      "title": "Tasteful Humor Zone",
+      "description": "Show culture fit without scaring anyone. Keep it clever, keep it classy."
+    }
+  },
+  "fun": {
+    "haiku": {
+      "title": "Career Haiku",
+      "helper": "5-7-5 structure encouraged. The syllable police are mostly friendly.",
+      "placeholder": "Line {{index}}"
+    },
+    "spiritAnimal": {
+      "label": "Workplace Spirit Animal",
+      "helper": "e.g. “Strategic Owl: sees the roadmap and brings snacks.”"
+    },
+    "superpowers": {
+      "label": "Work Style Superpower",
+      "placeholder": "Choose your mighty trait",
+      "telepathicCommunicator": "Telepathic Communicator",
+      "deadlineVanisher": "Deadline Vanisher",
+      "coffeePoweredMachine": "Coffee-powered Machine",
+      "spreadsheetSorcerer": "Spreadsheet Sorcerer",
+      "stakeholderWhisperer": "Stakeholder Whisperer"
+    },
+    "survivalSkills": {
+      "label": "Office Survival Skill",
+      "placeholder": "Select your secret talent",
+      "microwaveTimingNinja": "Microwave timing ninja",
+      "printerWhisperer": "Printer whisperer",
+      "conferenceCallEscapeArtist": "Conference call escape artist",
+      "snackStashCurator": "Snack stash curator",
+      "meetingAgendaConjurer": "Meeting agenda conjurer"
+    },
+    "emojis": {
+      "label": "Describe your ideal workday in emojis",
+      "placeholder": "Pick or type emojis",
+      "addEmoji": "Add {{emoji}}"
+    },
+    "themeSong": {
+      "label": "Productivity Theme Song 🎵"
+    },
+    "workBff": {
+      "label": "Fictional Work BFF"
+    },
+    "meetingTolerance": {
+      "label": "Meeting Tolerance",
+      "optionAria": "Meeting tolerance {{emoji}}"
+    },
+    "snack": {
+      "label": "Go-to Crunch Time Snack"
+    },
+    "resumeScent": {
+      "label": "If this resume had a scent...",
+      "placeholder": "Select a signature aroma"
+    },
+    "resumeScents": {
+      "freshlySignedContract": "Freshly signed contract",
+      "mondayMorningEspresso": "Monday morning espresso",
+      "polishedBoardroomOak": "Polished boardroom oak",
+      "startupWhiteboardMarker": "Startup whiteboard marker",
+      "deadlineAdrenaline": "Deadline adrenaline (limited edition)"
+    }
+  },
+  "actions": {
+    "downloadPdf": "Download as PDF",
+    "reset": "Reset builder"
+  },
+  "preview": {
+    "fallbacks": {
+      "name": "Your Name, Action Verb Extraordinaire"
+    },
+    "sections": {
+      "summary": "Professional Summary",
+      "experience": "Work Experience",
+      "education": "Education",
+      "skills": "Skills",
+      "certifications": "Certifications",
+      "fun": "Professional Personality (Tastefully Humorous)"
+    },
+    "experience": {
+      "roleFallback": "Role Title",
+      "companyFallback": "Company Name",
+      "datesFallback": "Dates TBD"
+    },
+    "education": {
+      "schoolFallback": "Institution",
+      "degreeFallback": "Degree & Discipline",
+      "yearFallback": "Year"
+    },
+    "skills": {
+      "technicalTitle": "Technical",
+      "softTitle": "Soft",
+      "technicalFallback": "API integration, TypeScript wizardry, dashboard conjuring",
+      "softFallback": "Team synergy sculptor, conflict diffuser, agenda architect"
+    },
+    "fun": {
+      "haiku": "Career Haiku",
+      "spiritAnimal": "Spirit Animal at Work",
+      "superpower": "Work Style Superpower",
+      "survivalSkill": "Office Survival Skill",
+      "emojiDay": "Ideal Workday (Emoji Edition)",
+      "themeSong": "Productivity Anthem",
+      "workBff": "Fictional Work BFF",
+      "meetingTolerance": "Meeting Tolerance",
+      "snack": "Go-to Crunch Time Snack",
+      "resumeSmell": "Signature Resume Scent"
+    },
+    "starBullet": {
+      "context": "Context: {{value}}",
+      "task": "Mission: {{value}}",
+      "action": "Action: {{value}}",
+      "result": "Result: {{value}}",
+      "separator": "•"
+    }
+  }
+}
+

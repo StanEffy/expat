@@ -164,6 +164,10 @@ export const POLL_ENDPOINTS = {
   CLOSE: (pollId: number | string) => `${API_BASE_URL}/api/polls/${pollId}/close`,
 };
 
+export const SKILL_ENDPOINTS = {
+  LIST: `${API_BASE_URL}/api/skills`,
+};
+
 // Storage Keys
 export const STORAGE_KEYS = {
   AUTH_TOKEN: "token",

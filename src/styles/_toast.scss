@@ -45,8 +45,8 @@
 
 // Toast icon
 .p-toast-icon-close {
-  background-color: white !important;
-  color: #ffffff !important; // White for maximum visibility against dark background
+  background-color: rgba($primary-2, 0.6) !important;
+  color: $complement-3 !important; // Light color for visibility against dark background
   border: none !important;
   width: 2rem !important;
   height: 2rem !important;

@@ -1,8 +1,10 @@
+@use "../styles/variables" as *;
+
 .resumeBuilderPage {
   padding: 2.5rem;
-  background: linear-gradient(135deg, rgba(98, 44, 144, 0.08), rgba(160, 41, 127, 0.08));
+  background: linear-gradient(135deg, rgba-color($primary-0, 0.15), rgba-color($secondary-a-0, 0.15));
   min-height: 100vh;
-  color: #1f1f2b;
+  color: $complement-3;
 }
 
 .layout {
@@ -24,24 +26,25 @@
 }
 
 .pageHeader {
-  background: #fff;
+  background: rgba-color($primary-1, 0.6);
   border-radius: 1rem;
   padding: 1.5rem;
   box-shadow: var(--shadow-md);
-  border: 1px solid rgba(82, 52, 108, 0.12);
+  border: 1px solid rgba-color($primary-3, 0.3);
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+  backdrop-filter: blur(8px);
 
   h1 {
     margin: 0;
-    color: var(--primary-1);
+    color: $complement-3;
     font-size: 1.75rem;
   }
 
   p {
     margin: 0;
-    color: rgba(31, 31, 43, 0.72);
+    color: $complement-4;
   }
 }
 
@@ -50,32 +53,33 @@
   gap: 1rem;
   flex-wrap: wrap;
   font-size: 0.9rem;
-  color: rgba(31, 31, 43, 0.8);
+  color: $complement-4;
 
   strong {
-    color: var(--secondary-b-2);
+    color: $secondary-b-3;
   }
 }
 
 .sectionCard {
-  background: #fff;
+  background: rgba-color($primary-1, 0.5);
   border-radius: 1rem;
   padding: 1.25rem 1.5rem;
   box-shadow: var(--shadow-sm);
-  border: 1px solid rgba(57, 14, 94, 0.12);
+  border: 1px solid rgba-color($primary-3, 0.3);
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  backdrop-filter: blur(8px);
 
   h2 {
     margin: 0;
     font-size: 1.25rem;
-    color: var(--primary-0);
+    color: $complement-3;
   }
 
   p {
     margin: 0;
-    color: rgba(31, 31, 43, 0.7);
+    color: $complement-4;
   }
 }
 
@@ -107,12 +111,12 @@
 
 .label {
   font-weight: 600;
-  color: var(--primary-1);
+  color: $complement-3;
 }
 
 .helperText {
   font-size: 0.85rem;
-  color: rgba(31, 31, 43, 0.65);
+  color: $complement-4;
   margin: 0;
 }
 
@@ -121,19 +125,20 @@
 .selectField select,
 .certRow input,
 .emojiPicker input {
-  border: 1px solid rgba(57, 14, 94, 0.2);
+  border: 1px solid rgba-color($primary-2, 0.4);
   border-radius: 0.75rem;
   padding: 0.75rem 1rem;
   font-size: 0.95rem;
   font-family: inherit;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
-  background: #faf9fc;
+  background: rgba-color($primary-2, 0.4);
+  color: $complement-3;
 
   &:focus {
     outline: none;
-    border-color: var(--secondary-b-2);
-    box-shadow: 0 0 0 3px rgba(164, 203, 51, 0.25);
-    background: #fff;
+    border-color: $secondary-b-3;
+    box-shadow: 0 0 0 3px rgba-color($secondary-b-2, 0.25);
+    background: rgba-color($primary-2, 0.6);
   }
 }
 
@@ -144,7 +149,7 @@
 
 .characterCount {
   font-size: 0.8rem;
-  color: rgba(31, 31, 43, 0.55);
+  color: $complement-4;
   text-align: right;
 }
 
@@ -157,11 +162,12 @@
 .groupCard {
   padding: 1rem;
   border-radius: 0.75rem;
-  border: 1px dashed rgba(57, 14, 94, 0.2);
+  border: 1px dashed rgba-color($primary-3, 0.4);
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  background: rgba(255, 255, 255, 0.65);
+  background: rgba-color($primary-2, 0.4);
+  backdrop-filter: blur(6px);
 }
 
 .sectionRow {
@@ -173,7 +179,7 @@
   h3,
   h4 {
     margin: 0;
-    color: var(--primary-1);
+    color: $complement-3;
   }
 }
 
@@ -193,7 +199,7 @@
 
   label {
     font-weight: 600;
-    color: var(--secondary-a-0);
+    color: $secondary-a-3;
   }
 }
 
@@ -205,15 +211,16 @@
   select {
     flex: 1;
     border-radius: 0.75rem;
-    border: 1px solid rgba(160, 41, 127, 0.24);
+    border: 1px solid rgba-color($secondary-a-0, 0.4);
     padding: 0.65rem 0.75rem;
-    background: #fff;
+    background: rgba-color($primary-2, 0.4);
+    color: $complement-3;
     font-size: 0.95rem;
 
     &:focus {
       outline: none;
-      border-color: var(--secondary-a-0);
-      box-shadow: 0 0 0 3px rgba(207, 91, 175, 0.25);
+      border-color: $secondary-a-3;
+      box-shadow: 0 0 0 3px rgba-color($secondary-a-3, 0.25);
     }
   }
 }
@@ -281,7 +288,7 @@
 
   label {
     font-weight: 600;
-    color: var(--primary-1);
+    color: $complement-3;
   }
 }
 
@@ -292,20 +299,21 @@
 
   h3 {
     margin: 0;
-    color: var(--secondary-a-0);
+    color: $secondary-a-3;
   }
 
   p {
     margin: 0;
     font-size: 0.85rem;
-    color: rgba(31, 31, 43, 0.65);
+    color: $complement-4;
   }
 
   input {
-    border: 1px solid rgba(57, 14, 94, 0.2);
+    border: 1px solid rgba-color($primary-2, 0.4);
     border-radius: 0.75rem;
     padding: 0.65rem 0.75rem;
-    background: #fff;
+    background: rgba-color($primary-2, 0.4);
+    color: $complement-3;
   }
 }
 
@@ -322,7 +330,7 @@
 
   label {
     font-weight: 600;
-    color: var(--primary-1);
+    color: $complement-3;
   }
 }
 
@@ -333,7 +341,7 @@
 
   h3 {
     margin: 0;
-    color: var(--primary-1);
+    color: $complement-3;
   }
 }
 
@@ -351,14 +359,15 @@
 }
 
 .preview {
-  background: #fff;
+  background: rgba-color($primary-1, 0.6);
   border-radius: 1rem;
   padding: 2rem;
   box-shadow: var(--shadow-lg);
-  border: 1px solid rgba(57, 14, 94, 0.18);
+  border: 1px solid rgba-color($primary-3, 0.3);
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  backdrop-filter: blur(8px);
 }
 
 .previewHeader {
@@ -369,7 +378,7 @@
   h1 {
     margin: 0;
     font-size: 2rem;
-    color: var(--primary-0);
+    color: $complement-3;
   }
 }
 
@@ -378,7 +387,7 @@
   flex-wrap: wrap;
   gap: 0.75rem;
   font-size: 0.95rem;
-  color: rgba(31, 31, 43, 0.75);
+  color: $complement-4;
 }
 
 .previewSection {
@@ -389,8 +398,8 @@
   h2 {
     margin: 0;
     font-size: 1.15rem;
-    color: var(--primary-1);
-    border-bottom: 1px solid rgba(57, 14, 94, 0.12);
+    color: $complement-3;
+    border-bottom: 1px solid rgba-color($primary-3, 0.3);
     padding-bottom: 0.3rem;
   }
 
@@ -418,12 +427,12 @@
   h3 {
     margin: 0;
     font-size: 1.05rem;
-    color: var(--secondary-a-0);
+    color: $secondary-a-3;
   }
 
   span {
     font-size: 0.9rem;
-    color: rgba(31, 31, 43, 0.7);
+    color: $complement-4;
   }
 }
 
@@ -439,12 +448,12 @@
 
   h4 {
     margin: 0;
-    color: var(--secondary-b-2);
+    color: $secondary-b-3;
   }
 
   p {
     margin: 0;
-    color: rgba(31, 31, 43, 0.75);
+    color: $complement-4;
   }
 }
 
@@ -460,12 +469,12 @@
 
   dt {
     font-weight: 600;
-    color: var(--primary-1);
+    color: $complement-3;
   }
 
   dd {
     margin: 0;
-    color: rgba(31, 31, 43, 0.75);
+    color: $complement-4;
     display: flex;
     flex-direction: column;
     gap: 0.15rem;
@@ -473,19 +482,19 @@
 }
 
 .starTooltip {
-  background: rgba(205, 229, 135, 0.28);
-  border: 1px solid rgba(164, 203, 51, 0.4);
+  background: rgba-color($secondary-b-4, 0.3);
+  border: 1px solid rgba-color($secondary-b-3, 0.5);
   border-radius: 0.75rem;
   padding: 0.75rem;
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
   font-size: 0.9rem;
-  color: rgba(31, 31, 43, 0.8);
+  color: $complement-3;
 
   .tooltipLabel {
     font-weight: 700;
-    color: var(--secondary-b-2);
+    color: $secondary-b-3;
   }
 
   ul {
@@ -497,7 +506,7 @@
   }
 
   li strong {
-    color: var(--primary-0);
+    color: $primary-3;
   }
 }
 

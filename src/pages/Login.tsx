@@ -30,6 +30,7 @@ const Login = () => {
     confirmPassword: "",
     inviteCode: inviteCodeFromQuery,
     name: "",
+    email: "",
   });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -117,6 +118,7 @@ const Login = () => {
           password: formData.password,
           inviteCode: formData.inviteCode,
           name: formData.name,
+          email: formData.email,
         }),
       });
 
@@ -289,6 +291,19 @@ const Login = () => {
                     value={formData.name}
                     onChange={handleChange}
                     required
+                    className={styles.input}
+                  />
+                </div>
+                <div className="p-field">
+                  <label htmlFor="register-email">Email</label>
+                  <InputText
+                    id="register-email"
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    autoComplete="email"
                     className={styles.input}
                   />
                 </div>

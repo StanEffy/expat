@@ -12,6 +12,8 @@
     "clean:cache": "rm -rf node_modules/.vite"
   },
   "dependencies": {
+    "@types/classnames": "^2.3.0",
+    "classnames": "^2.5.1",
     "i18next": "^25.0.0",
     "i18next-browser-languagedetector": "^8.0.4",
     "prettier": "^3.6.2",

@@ -12,10 +12,11 @@ import type {
   BackendCategoryItem,
   GeneralCategoryItem,
   BackendCityItem,
+  PaginatedCompanies,
 } from '@/types';
 
 export const companyService = {
-  getCompanies(params: CompanyFilterParams): Promise<Company[]> {
+  async getCompanies(params: CompanyFilterParams): Promise<PaginatedCompanies> {
     const { page = 1, count = 10, mainbusinesslineid, generalcategory, cities, name } = params;
 
     const queryParams: Record<string, string | number | string[] | undefined> = {
@@ -47,25 +48,51 @@ export const companyService = {
       queryParams.cities = cities.filter(Boolean);
     }
 
-    return apiClient.get<Company[]>(`${API_BASE_URL}/api/companies/`, {
-      params: queryParams,
-      requireAuth: true,
-    });
+    const res = await apiClient.get<{ data?: Company[]; count?: number } | Company[]>(
+      `${API_BASE_URL}/api/companies/`,
+      {
+        params: queryParams,
+        requireAuth: true,
+      },
+    );
+
+    if (Array.isArray(res)) {
+      return { data: res, count: res.length };
+    }
+
+    const data = Array.isArray(res?.data) ? res.data : [];
+    const totalCount = typeof res?.count === 'number' ? res.count : undefined;
+
+    return { data, count: totalCount };
   },
 
   async getCompanyDetails(id: string | number): Promise<CompanyDetails> {
-    const data = await apiClient.get<CompanyDetails[] | CompanyDetails>(COMPANY_ENDPOINTS.DETAILS(String(id)), {
-      requireAuth: true,
-    });
+    const res = await apiClient.get<CompanyDetails[] | CompanyDetails | { data?: CompanyDetails[] | CompanyDetails }>(
+      COMPANY_ENDPOINTS.DETAILS(String(id)),
+      { requireAuth: true },
+    );
 
-    if (Array.isArray(data)) {
-      if (data.length === 0) {
+    if (Array.isArray(res)) {
+      if (res.length === 0) {
         throw new Error('Company not found');
       }
-      return data[0];
+      return res[0];
     }
 
-    return data;
+    if (res && typeof res === 'object' && 'data' in res) {
+      const inner = (res as { data?: CompanyDetails[] | CompanyDetails }).data;
+      if (Array.isArray(inner)) {
+        if (inner.length === 0) {
+          throw new Error('Company not found');
+        }
+        return inner[0];
+      }
+      if (inner) {
+        return inner;
+      }
+    }
+
+    return res as CompanyDetails;
   },
 
   async getCities(): Promise<string[]> {

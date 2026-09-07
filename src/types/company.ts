@@ -34,6 +34,11 @@ export interface CompanyFilterParams {
   cities?: string[];
 }
 
+export interface PaginatedCompanies {
+  data: Company[];
+  count?: number;
+}
+
 export type CompanyUpdateStatus = 'pending' | 'approved' | 'rejected';
 
 export interface CompanyUpdate {

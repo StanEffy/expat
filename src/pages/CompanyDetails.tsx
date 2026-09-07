@@ -2,8 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Card } from "primereact/card";
 import Button from "../components/Common/Button";
-import { COMPANY_ENDPOINTS } from "../constants/api";
-import { getAuthHeaders } from "../utils/auth";
+import { companyService } from "@/services/companyService";
 import { useNotification } from "../contexts/NotificationContext";
 import { useTranslation } from "react-i18next";
 import CompanyInfoEditor from "../components/Companies/CompanyInfoEditor";
@@ -45,30 +44,8 @@ const CompanyDetails = () => {
       if (!id) return;
 
       try {
-        const headers = getAuthHeaders();
-        if (!headers) {
-          return;
-        }
-
-        const response = await fetch(COMPANY_ENDPOINTS.DETAILS(id), {
-          headers,
-        });
-
-        if (!response.ok) {
-          const errorData = await response.json();
-          throw new Error(
-            errorData.message || "Failed to fetch company details",
-          );
-        }
-
-        const data = await response.json();
-
-        if (data.length > 0) {
-          setCompany(data[0]);
-        } else {
-          setError("Company not found");
-          showNotification("Company not found", "error");
-        }
+        const data = await companyService.getCompanyDetails(id);
+        setCompany(data);
       } catch (err) {
         const errorMessage =
           err instanceof Error

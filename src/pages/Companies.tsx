@@ -61,7 +61,7 @@ const Companies = () => {
       cities?: string[];
     }) => {
       try {
-        const data = await companyService.getCompanies({
+        const { data, count: totalCount } = await companyService.getCompanies({
           page: pageNumber,
           count: limit,
           mainbusinesslineid,
@@ -80,7 +80,14 @@ const Companies = () => {
           setCompanies(data);
         }
 
-        setHasMore(data.length >= limit);
+        let nextHasMore = true;
+        if (data.length < limit) {
+          nextHasMore = false;
+        }
+        if (typeof totalCount === "number" && pageNumber * limit >= totalCount) {
+          nextHasMore = false;
+        }
+        setHasMore(nextHasMore);
       } catch (err) {
         const errorMessage =
           err instanceof Error
@@ -261,7 +268,7 @@ const Companies = () => {
     );
   }
 
-  if (companies.length === 0) {
+  if (!Array.isArray(companies) || companies.length === 0) {
     return (
       <>
         <SEO
@@ -326,7 +333,7 @@ const Companies = () => {
           </div>
         </div>
         <div className={styles.grid}>
-          {companies.map((company, index) => {
+          {Array.isArray(companies) && companies.map((company, index) => {
             // Calculate delay: for new cards (after append), use relative index
             // For initial load, use absolute index
             const delayIndex =

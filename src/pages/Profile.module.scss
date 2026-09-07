@@ -260,16 +260,16 @@
   height: 42px;
   padding: 0 18px;
   border-radius: 10px;
-  border: none;
+  border: 1px solid transparent;
   background: transparent;
   color: rgba(255, 255, 255, 0.68);
   font-family: inherit;
   font-size: 0.92rem;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
   white-space: nowrap;
   user-select: none;
-  transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
 
   i {
     font-size: 0.88rem;
@@ -281,7 +281,7 @@
     color: #ffffff;
 
     i {
-      transform: scale(1.1);
+      transform: scale(1.08);
     }
   }
 
@@ -290,12 +290,17 @@
     box-shadow: 0 0 0 2px rgba(207, 91, 175, 0.6);
   }
 
+  &:focus:not(:focus-visible) {
+    outline: none;
+  }
+
   &.navTabActive {
     background: linear-gradient(
       135deg,
       rgba(160, 41, 127, 0.85) 0%,
       rgba(98, 44, 144, 0.95) 100%
     );
+    border-color: rgba(255, 255, 255, 0.28);
     color: #ffffff;
     font-weight: 600;
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.25);

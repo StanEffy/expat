@@ -1,6 +1,10 @@
 @use "../../styles/variables" as *;
 
 .layout-menubar {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 0.5rem 1rem;
   position: fixed;
   z-index: 10000; //to be on top of everything else
   top: 0;

@@ -1,5 +1,7 @@
 import { useMemo, lazy, Suspense } from "react";
 import Button from "../Common/Button";
+import { Menubar } from "primereact/menubar";
+import { Badge } from "primereact/badge";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "@/hooks/useAuth";
@@ -33,7 +35,7 @@ const Header = () => {
       <span className={styles.profileButtonLabel}>
         {t("navigation.profile")}
         {unreadCount > 0 && (
-          <span className="p-badge p-badge-danger">{unreadCount}</span>
+          <Badge value={unreadCount} severity="danger" />
         )}
       </span>
     );
@@ -46,7 +48,7 @@ const Header = () => {
   );
 
   const end = (
-    <div className={`p-menubar-end ${styles.end}`}>
+    <div className={styles.end}>
       <div className={styles.desktopNavButtons}>
         <Button
           label={t("navigation.companies")}
@@ -102,12 +104,7 @@ const Header = () => {
     </div>
   );
 
-  return (
-    <header className="layout-menubar p-menubar p-component" role="banner">
-      <div className="p-menubar-start">{start}</div>
-      {end}
-    </header>
-  );
+  return <Menubar start={start} end={end} className="layout-menubar" />;
 };
 
 export default Header;

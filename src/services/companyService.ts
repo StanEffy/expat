@@ -49,13 +49,13 @@ export const companyService = {
 
     return apiClient.get<Company[]>(`${API_BASE_URL}/api/companies/`, {
       params: queryParams,
-      requireAuth: false,
+      requireAuth: true,
     });
   },
 
   async getCompanyDetails(id: string | number): Promise<CompanyDetails> {
     const data = await apiClient.get<CompanyDetails[] | CompanyDetails>(COMPANY_ENDPOINTS.DETAILS(String(id)), {
-      requireAuth: false,
+      requireAuth: true,
     });
 
     if (Array.isArray(data)) {
@@ -71,7 +71,7 @@ export const companyService = {
   async getCities(): Promise<string[]> {
     const res = await apiClient.get<{ data?: BackendCityItem[] } | BackendCityItem[]>(
       CITY_ENDPOINTS.LIST,
-      { requireAuth: false },
+      { requireAuth: true },
     );
     const list = Array.isArray(res) ? res : res?.data ?? [];
     return list
@@ -82,7 +82,7 @@ export const companyService = {
   async getCategories(): Promise<BackendCategoryItem[]> {
     const res = await apiClient.get<{ data?: BackendCategoryItem[] } | BackendCategoryItem[]>(
       CATEGORY_ENDPOINTS.LIST,
-      { requireAuth: false },
+      { requireAuth: true },
     );
     return Array.isArray(res) ? res : res?.data ?? [];
   },
@@ -90,7 +90,7 @@ export const companyService = {
   async getGeneralCategories(): Promise<GeneralCategoryItem[]> {
     const res = await apiClient.get<{ data?: GeneralCategoryItem[] } | GeneralCategoryItem[]>(
       CATEGORY_ENDPOINTS.GENERAL,
-      { requireAuth: false },
+      { requireAuth: true },
     );
     return Array.isArray(res) ? res : res?.data ?? [];
   },

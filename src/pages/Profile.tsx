@@ -1,13 +1,10 @@
 import { useState, useEffect, ChangeEvent, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Card } from 'primereact/card';
 import Button from '../components/Common/Button';
 import { Message } from 'primereact/message';
-import { Badge } from 'primereact/badge';
 import { ProgressSpinner } from 'primereact/progressspinner';
 import { FileUpload } from 'primereact/fileupload';
 import { InputText } from 'primereact/inputtext';
-import { TabView, TabPanel } from 'primereact/tabview';
 import {
   AutoComplete,
   AutoCompleteChangeEvent,
@@ -24,6 +21,7 @@ import styles from './Profile.module.scss';
 import { useUserNotifications } from '../contexts/UserNotificationsContext';
 import type { UserNotification } from '../contexts/UserNotificationsContext';
 import SkillLevelSelector, { SkillLevel, SKILL_LEVELS } from '../components/Profile/SkillLevelSelector';
+import { useAuth } from '@/hooks/useAuth';
 
 interface Favourite {
   id: number;
@@ -92,6 +90,7 @@ interface ProfileFormValues {
 
 const Profile = () => {
   const navigate = useNavigate();
+  const { logout } = useAuth();
   const { showNotification } = useNotification();
   const { t } = useTranslation();
   const { favourites, loading: favouritesLoading, toggleFavourite, initializeFromProfile } = useFavourites();
@@ -157,8 +156,6 @@ const Profile = () => {
         setSkills(sanitizedSkills);
         setSkillsDraft(sanitizedSkills);
         
-        // Extract favourites from profile and initialize in context
-        // Handle both direct array and wrapped in data property
         let favouritesArray: Favourite[] = [];
         if (data.favourites) {
           if (Array.isArray(data.favourites)) {
@@ -170,7 +167,7 @@ const Profile = () => {
         initializeFromProfile(favouritesArray);
       } catch (err) {
         setError(err instanceof Error ? err.message : 'An error occurred');
-        localStorage.removeItem('token');
+        logout();
         navigate('/login');
       } finally {
         setLoading(false);
@@ -179,7 +176,7 @@ const Profile = () => {
 
     fetchProfile();
     refreshNotifications();
-  }, [navigate, initializeFromProfile, refreshNotifications]);
+  }, [navigate, initializeFromProfile, refreshNotifications, logout]);
 
   useEffect(() => {
     const fetchAvailableSkills = async () => {
@@ -397,11 +394,9 @@ const Profile = () => {
         return;
       }
 
-      // Filter favourites that don't have company data
-      const favouritesNeedingData = favourites.filter(fav => !fav.company);
-      
+      const favouritesNeedingData = favourites.filter((fav) => !fav.company);
+
       if (favouritesNeedingData.length === 0) {
-        // All favourites already have company data
         setFavouritesWithCompanies(favourites);
         return;
       }
@@ -413,7 +408,6 @@ const Profile = () => {
           return;
         }
 
-        // Fetch company details for each favourite that needs it
         const companyPromises = favouritesNeedingData.map(async (favourite) => {
           try {
             const response = await fetch(COMPANY_ENDPOINTS.DETAILS(favourite.company_id.toString()), {
@@ -422,9 +416,8 @@ const Profile = () => {
 
             if (response.ok) {
               const data = await response.json();
-              // Company endpoint returns array, get first item
               const companyData = Array.isArray(data) ? data[0] : data;
-              
+
               if (companyData) {
                 return {
                   ...favourite,
@@ -439,23 +432,19 @@ const Profile = () => {
           } catch (err) {
             console.error(`Failed to fetch company ${favourite.company_id}:`, err);
           }
-          // Return favourite without company data if fetch failed
           return favourite;
         });
 
         const favouritesWithCompanyData = await Promise.all(companyPromises);
-        
-        // Merge with favourites that already have company data
-        const allFavouritesWithCompanies = favourites.map(fav => {
-          const updated = favouritesWithCompanyData.find(f => f.id === fav.id);
+
+        const allFavouritesWithCompanies = favourites.map((fav) => {
+          const updated = favouritesWithCompanyData.find((f) => f.id === fav.id);
           return updated || fav;
         });
 
         setFavouritesWithCompanies(allFavouritesWithCompanies);
       } catch (err) {
-        console.error('Error fetching company details for favourites:', err);
-        // Fallback to favourites without company data
-        setFavouritesWithCompanies(favourites);
+        console.error('Failed to fetch company details for favourites:', err);
       } finally {
         setLoadingCompanyDetails(false);
       }
@@ -466,37 +455,46 @@ const Profile = () => {
 
   const handleEditToggle = () => {
     if (!profile) return;
-    setFormValues({
-      name: profile.name ?? '',
-      secondName: profile.second_name ?? '',
-      email: profile.email ?? '',
-    });
-    setFormError('');
     setIsEditing(true);
+    setFormError('');
+    setFormValues({
+      name: profile?.name ?? '',
+      secondName: profile?.second_name ?? '',
+      email: profile?.email ?? '',
+    });
   };
 
-  const handleFormChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
+  const handleCancelEdit = () => {
+    if (!profile) return;
+    setIsEditing(false);
+    setFormError('');
+    setFormValues({
+      name: profile?.name ?? '',
+      secondName: profile?.second_name ?? '',
+      email: profile?.email ?? '',
+    });
+  };
+
+  const handleFormChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
     setFormValues((prev) => ({
       ...prev,
       [name]: value,
     }));
   };
 
-  const handleCancelEdit = () => {
-    if (!profile) return;
-    setFormValues({
-      name: profile.name ?? '',
-      secondName: profile.second_name ?? '',
-      email: profile.email ?? '',
-    });
-    setFormError('');
-    setIsEditing(false);
-  };
+  const handleProfileSubmit = async (e: FormEvent) => {
+    e.preventDefault();
 
-  const handleProfileSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    if (!profile) return;
+    if (!formValues.name.trim()) {
+      setFormError(t('profile.nameRequired', { defaultValue: 'Name is required' }));
+      return;
+    }
+
+    if (!formValues.email.trim()) {
+      setFormError(t('profile.emailRequired', { defaultValue: 'Email is required' }));
+      return;
+    }
 
     const headers = getAuthHeaders();
     if (!headers) {
@@ -597,11 +595,45 @@ const Profile = () => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
+    logout();
     navigate('/login');
   };
 
   const currentUrl = typeof window !== 'undefined' ? window.location.href : '';
+
+  const getInitials = (name?: string, secondName?: string | null, username?: string) => {
+    if (name && secondName) {
+      return `${name[0]}${secondName[0]}`.toUpperCase();
+    }
+    if (name && name.length >= 2) {
+      return name.slice(0, 2).toUpperCase();
+    }
+    if (username && username.length >= 2) {
+      return username.slice(0, 2).toUpperCase();
+    }
+    return (name?.[0] || username?.[0] || 'U').toUpperCase();
+  };
+
+  const userDisplayName =
+    profile?.name ? `${profile.name} ${profile.second_name || ''}`.trim() : (profile?.username || 'User');
+
+  const userRole =
+    profile?.role ||
+    (Array.isArray(profile?.roles) && profile.roles.length > 0
+      ? profile.roles
+          .map((r) => r?.role_name ?? '')
+          .filter(Boolean)
+          .join(', ')
+      : 'User');
+
+  const memberSinceFormatted =
+    profile?.createdAt || profile?.created_at
+      ? new Date(profile.createdAt ?? profile.created_at ?? '').toLocaleDateString(undefined, {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+        })
+      : 'Recently';
 
   if (loading) {
     return (
@@ -613,7 +645,10 @@ const Profile = () => {
           noindex={true}
         />
         <div className={styles.container}>
-          <p>Loading...</p>
+          <div className={styles.loadingWrapper}>
+            <ProgressSpinner strokeWidth="4" />
+            <p className={styles.loadingText}>{t('common.loading', { defaultValue: 'Loading your profile...' })}</p>
+          </div>
         </div>
       </>
     );
@@ -629,7 +664,16 @@ const Profile = () => {
           noindex={true}
         />
         <div className={styles.container}>
-          <Message severity="error" text={error} />
+          <div className={styles.errorCard}>
+            <i className={`pi pi-exclamation-triangle ${styles.errorIcon}`} />
+            <h2>{t('common.error', { defaultValue: 'Something went wrong' })}</h2>
+            <p>{error}</p>
+            <Button
+              label={t('navigation.login', { defaultValue: 'Go to Login' })}
+              onClick={() => navigate('/login')}
+              icon="pi pi-arrow-left"
+            />
+          </div>
         </div>
       </>
     );
@@ -644,83 +688,218 @@ const Profile = () => {
         noindex={true}
       />
       <div className={styles.container}>
-        <h1 className={styles.title}>{t('navigation.profile')}</h1>
-
-        <TabView
-          className={styles.profileTabs}
-          activeIndex={activeTab}
-          onTabChange={(e) => setActiveTab(e.index)}
-        >
-          <TabPanel
-            header={t('profile.tabs.overview', { defaultValue: 'Overview' })}
-            leftIcon="pi pi-user"
-          >
-            <div className={styles.tabContent}>
-              <Card
-                title={
-                  <div className={styles.profileHeader}>
-                    <span>{t('profile.userInformation')}</span>
-                    {!isEditing && (
-                      <Button
-                        label={t('profile.editProfile', { defaultValue: 'Edit profile' })}
-                        onClick={handleEditToggle}
-                        size="small"
-                        icon="pi pi-pencil"
-                      />
-                    )}
-                  </div>
+        {/* Hero Card */}
+        <section className={styles.heroCard}>
+          <div className={styles.heroMain}>
+            <div className={styles.avatar}>
+              <span>{getInitials(profile?.name, profile?.second_name, profile?.username)}</span>
+            </div>
+            <div className={styles.heroDetails}>
+              <div className={styles.heroNameRow}>
+                <h1 className={styles.heroName}>{userDisplayName}</h1>
+                <span className={styles.roleBadge}>{userRole}</span>
+              </div>
+              <div className={styles.heroMetaRow}>
+                {profile?.username && (
+                  <span className={styles.metaHandle}>@{profile.username}</span>
+                )}
+                <span className={styles.metaDot}>•</span>
+                <span className={styles.metaEmail}>
+                  <i className="pi pi-envelope" />
+                  {profile?.email}
+                </span>
+                <span className={styles.metaDot}>•</span>
+                <span className={styles.metaJoined}>
+                  <i className="pi pi-calendar" />
+                  {t('profile.memberSince', { defaultValue: 'Member since' })} {memberSinceFormatted}
+                </span>
+              </div>
+              <div className={styles.heroBadgesRow}>
+                {profile?.email_verified_at ? (
+                  <span className={`${styles.statusChip} ${styles.verified}`}>
+                    <i className="pi pi-verified" />
+                    {t('profile.emailVerified', { defaultValue: 'Email verified' })}
+                  </span>
+                ) : (
+                  <span className={`${styles.statusChip} ${styles.unverified}`}>
+                    <i className="pi pi-exclamation-circle" />
+                    {t('profile.notVerified', { defaultValue: 'Email not verified' })}
+                  </span>
+                )}
+                {profile?.id && (
+                  <span className={styles.idChip}>ID: #{profile.id}</span>
+                )}
+              </div>
+            </div>
+          </div>
+          <div className={styles.heroActions}>
+            <Button
+              label={isEditing ? t('common.cancel', { defaultValue: 'Cancel' }) : t('profile.editProfile', { defaultValue: 'Edit Profile' })}
+              onClick={() => {
+                if (isEditing) {
+                  handleCancelEdit();
+                } else {
+                  setActiveTab(0);
+                  handleEditToggle();
                 }
-                className={styles.card}
-              >
-                <div className={styles.profileInfo}>
+              }}
+              variant={isEditing ? 'outlined' : 'filled'}
+              icon={isEditing ? 'pi pi-times' : 'pi pi-pencil'}
+              className={styles.heroEditBtn}
+            />
+            <Button
+              label={t('navigation.logout', { defaultValue: 'Logout' })}
+              onClick={handleLogout}
+              variant="outlined"
+              icon="pi pi-sign-out"
+              className={styles.heroLogoutBtn}
+            />
+          </div>
+        </section>
+
+        {/* Tab Navigation */}
+        <nav className={styles.navTabs} role="tablist" aria-label="Profile Sections">
+          <button
+            type="button"
+            role="tab"
+            aria-selected={activeTab === 0}
+            className={`${styles.navTab} ${activeTab === 0 ? styles.navTabActive : ''}`}
+            onClick={() => setActiveTab(0)}
+          >
+            <i className="pi pi-user" />
+            <span>{t('profile.tabs.overview', { defaultValue: 'Overview' })}</span>
+          </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={activeTab === 1}
+            className={`${styles.navTab} ${activeTab === 1 ? styles.navTabActive : ''}`}
+            onClick={() => setActiveTab(1)}
+          >
+            <i className="pi pi-bolt" />
+            <span>{t('profile.skills.title', { defaultValue: 'Skills' })}</span>
+            {skills.length > 0 && <span className={styles.tabCounter}>{skills.length}</span>}
+          </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={activeTab === 2}
+            className={`${styles.navTab} ${activeTab === 2 ? styles.navTabActive : ''}`}
+            onClick={() => setActiveTab(2)}
+          >
+            <i className="pi pi-heart" />
+            <span>{t('profile.tabs.favourites', { defaultValue: 'Favourites' })}</span>
+            {favourites.length > 0 && <span className={styles.tabCounter}>{favourites.length}</span>}
+          </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={activeTab === 3}
+            className={`${styles.navTab} ${activeTab === 3 ? styles.navTabActive : ''}`}
+            onClick={() => setActiveTab(3)}
+          >
+            <i className="pi pi-bell" />
+            <span>{t('profile.tabs.notifications', { defaultValue: 'Notifications' })}</span>
+            {unreadCount > 0 && <span className={`${styles.tabCounter} ${styles.unreadCounter}`}>{unreadCount}</span>}
+          </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={activeTab === 4}
+            className={`${styles.navTab} ${activeTab === 4 ? styles.navTabActive : ''}`}
+            onClick={() => setActiveTab(4)}
+          >
+            <i className="pi pi-file" />
+            <span>{t('profile.resume', { defaultValue: 'Resume & CV' })}</span>
+          </button>
+        </nav>
+
+        {/* Tab Content Container */}
+        <div className={styles.tabPanels}>
+          {/* TAB 0: OVERVIEW */}
+          {activeTab === 0 && (
+            <div className={styles.panelAnimated}>
+              <div className={styles.card}>
+                <div className={styles.cardHeader}>
+                  <div className={styles.cardHeaderTitle}>
+                    <i className="pi pi-id-card" />
+                    <h3>{t('profile.userInformation', { defaultValue: 'Personal Information' })}</h3>
+                  </div>
+                  {!isEditing && (
+                    <Button
+                      label={t('profile.editProfile', { defaultValue: 'Edit' })}
+                      onClick={handleEditToggle}
+                      size="small"
+                      icon="pi pi-pencil"
+                      variant="outlined"
+                    />
+                  )}
+                </div>
+
+                <div className={styles.cardBody}>
                   {isEditing ? (
                     <form className={styles.profileForm} onSubmit={handleProfileSubmit}>
-                      <div className={styles.formRow}>
-                        <label htmlFor="profile-username">
-                          <strong>{t('profile.username', { defaultValue: 'Username' })}</strong>
-                        </label>
-                        <InputText
-                          id="profile-username"
-                          value={profile?.username ?? ''}
-                          readOnly
-                          disabled
-                        />
+                      <div className={styles.formGrid}>
+                        <div className={styles.formGroup}>
+                          <label htmlFor="profile-username">
+                            {t('profile.username', { defaultValue: 'Username' })}
+                          </label>
+                          <InputText
+                            id="profile-username"
+                            value={profile?.username ?? ''}
+                            readOnly
+                            disabled
+                            className={styles.inputDisabled}
+                          />
+                          <span className={styles.inputHelp}>
+                            {t('profile.usernameNotice', { defaultValue: 'Username cannot be changed' })}
+                          </span>
+                        </div>
+                        <div className={styles.formGroup}>
+                          <label htmlFor="profile-email">
+                            {t('profile.email', { defaultValue: 'Email address' })} *
+                          </label>
+                          <InputText
+                            id="profile-email"
+                            name="email"
+                            type="email"
+                            value={formValues.email}
+                            onChange={handleFormChange}
+                            required
+                            className={styles.input}
+                          />
+                        </div>
+                        <div className={styles.formGroup}>
+                          <label htmlFor="profile-name">
+                            {t('profile.name', { defaultValue: 'First name' })} *
+                          </label>
+                          <InputText
+                            id="profile-name"
+                            name="name"
+                            value={formValues.name}
+                            onChange={handleFormChange}
+                            required
+                            className={styles.input}
+                          />
+                        </div>
+                        <div className={styles.formGroup}>
+                          <label htmlFor="profile-second-name">
+                            {t('profile.secondName', { defaultValue: 'Last name' })}
+                          </label>
+                          <InputText
+                            id="profile-second-name"
+                            name="secondName"
+                            value={formValues.secondName}
+                            onChange={handleFormChange}
+                            className={styles.input}
+                          />
+                        </div>
                       </div>
-                      <div className={styles.formRow}>
-                        <label htmlFor="profile-name">
-                          <strong>{t('profile.name')}:</strong>
-                        </label>
-                        <InputText
-                          id="profile-name"
-                          name="name"
-                          value={formValues.name}
-                          onChange={handleFormChange}
-                        />
-                      </div>
-                      <div className={styles.formRow}>
-                        <label htmlFor="profile-second-name">
-                          <strong>{t('profile.secondName', { defaultValue: 'Second name' })}:</strong>
-                        </label>
-                        <InputText
-                          id="profile-second-name"
-                          name="secondName"
-                          value={formValues.secondName}
-                          onChange={handleFormChange}
-                        />
-                      </div>
-                      <div className={styles.formRow}>
-                        <label htmlFor="profile-email">
-                          <strong>{t('profile.email')}:</strong>
-                        </label>
-                        <InputText
-                          id="profile-email"
-                          name="email"
-                          type="email"
-                          value={formValues.email}
-                          onChange={handleFormChange}
-                        />
-                      </div>
-                      {formError && <Message severity="error" text={formError} />}
+
+                      {formError && (
+                        <Message severity="error" text={formError} className={styles.formErrorMsg} />
+                      )}
+
                       <div className={styles.formActions}>
                         <Button
                           type="button"
@@ -732,168 +911,209 @@ const Profile = () => {
                         />
                         <Button
                           type="submit"
-                          label={t('common.save', { defaultValue: 'Save' })}
+                          label={savingProfile ? t('common.saving', { defaultValue: 'Saving...' }) : t('common.save', { defaultValue: 'Save Changes' })}
                           loading={savingProfile}
                           disabled={savingProfile}
                           icon="pi pi-check"
+                          className={styles.saveBtn}
                         />
                       </div>
                     </form>
                   ) : (
-                    <>
-                      {profile?.id && (
-                        <p>
-                          <strong>{t('profile.userId')}:</strong> {profile.id}
-                        </p>
-                      )}
-                      {profile?.user_id && profile.user_id !== profile.id && (
-                        <p>
-                          <strong>{t('profile.userId')}:</strong> {profile.user_id}
-                        </p>
-                      )}
-                      {profile?.username && (
-                        <p>
-                          <strong>{t('profile.username', { defaultValue: 'Username' })}:</strong>{' '}
-                          {profile.username}
-                        </p>
-                      )}
-                      {profile?.name && (
-                        <p>
-                          <strong>{t('profile.name')}:</strong> {profile.name}
-                        </p>
-                      )}
-                      {profile?.second_name && (
-                        <p>
-                          <strong>{t('profile.secondName', { defaultValue: 'Second name' })}:</strong>{' '}
-                          {profile.second_name}
-                        </p>
-                      )}
-                      <p>
-                        <strong>{t('profile.email')}:</strong>{' '}
-                        {profile?.email ||
-                          t('profile.emailNotProvided', { defaultValue: 'Not provided' })}
-                      </p>
-                      <p>
-                        <strong>{t('profile.role')}:</strong>{' '}
-                        {profile?.role ||
-                          (Array.isArray(profile?.roles) && profile.roles.length > 0
-                            ? profile.roles
-                                .map((roleItem) => roleItem?.role_name ?? '')
-                                .filter(Boolean)
-                                .join(', ')
-                            : t('profile.roleUnknown', { defaultValue: 'Unknown' }))}
-                      </p>
-                      <p>
-                        <strong>{t('profile.memberSince')}:</strong>{' '}
-                        {profile?.createdAt || profile?.created_at
-                          ? new Date(profile.createdAt ?? profile.created_at ?? '').toLocaleDateString()
-                          : 'N/A'}
-                      </p>
-                      <p>
-                        <strong>{t('profile.emailVerified', { defaultValue: 'Email verified' })}:</strong>{' '}
-                        {profile?.email_verified_at
-                          ? new Date(profile.email_verified_at).toLocaleString()
-                          : t('profile.notVerified', { defaultValue: 'Not verified' })}
-                      </p>
-                    </>
+                    <div className={styles.infoGrid}>
+                      <div className={styles.infoTile}>
+                        <div className={styles.infoIconWrap}>
+                          <i className="pi pi-at" />
+                        </div>
+                        <div className={styles.infoTexts}>
+                          <span className={styles.infoLabel}>{t('profile.username', { defaultValue: 'Username' })}</span>
+                          <span className={styles.infoValue}>{profile?.username || '—'}</span>
+                        </div>
+                      </div>
+
+                      <div className={styles.infoTile}>
+                        <div className={styles.infoIconWrap}>
+                          <i className="pi pi-user" />
+                        </div>
+                        <div className={styles.infoTexts}>
+                          <span className={styles.infoLabel}>{t('profile.fullName', { defaultValue: 'Full Name' })}</span>
+                          <span className={styles.infoValue}>{userDisplayName}</span>
+                        </div>
+                      </div>
+
+                      <div className={styles.infoTile}>
+                        <div className={styles.infoIconWrap}>
+                          <i className="pi pi-envelope" />
+                        </div>
+                        <div className={styles.infoTexts}>
+                          <span className={styles.infoLabel}>{t('profile.email', { defaultValue: 'Email' })}</span>
+                          <span className={styles.infoValue}>{profile?.email || '—'}</span>
+                        </div>
+                      </div>
+
+                      <div className={styles.infoTile}>
+                        <div className={styles.infoIconWrap}>
+                          <i className="pi pi-shield" />
+                        </div>
+                        <div className={styles.infoTexts}>
+                          <span className={styles.infoLabel}>{t('profile.role', { defaultValue: 'Role' })}</span>
+                          <span className={styles.infoValue}>{userRole}</span>
+                        </div>
+                      </div>
+
+                      <div className={styles.infoTile}>
+                        <div className={styles.infoIconWrap}>
+                          <i className="pi pi-hashtag" />
+                        </div>
+                        <div className={styles.infoTexts}>
+                          <span className={styles.infoLabel}>{t('profile.userId', { defaultValue: 'Account ID' })}</span>
+                          <span className={styles.infoValue}>#{profile?.id || profile?.user_id || '—'}</span>
+                        </div>
+                      </div>
+
+                      <div className={styles.infoTile}>
+                        <div className={styles.infoIconWrap}>
+                          <i className="pi pi-calendar" />
+                        </div>
+                        <div className={styles.infoTexts}>
+                          <span className={styles.infoLabel}>{t('profile.memberSince', { defaultValue: 'Registration Date' })}</span>
+                          <span className={styles.infoValue}>{memberSinceFormatted}</span>
+                        </div>
+                      </div>
+                    </div>
                   )}
                 </div>
-              </Card>
+              </div>
+            </div>
+          )}
 
-              <Card title={t('profile.resume')} className={styles.card}>
-                <div className={styles.resumeSection}>
-                  <FileUpload
-                    mode="basic"
-                    name="resume"
-                    accept=".pdf,.doc,.docx"
-                    maxFileSize={5000000}
-                    auto
-                    chooseLabel={t('profile.uploadResume')}
-                    onUpload={() => {
-                      showNotification(t('profile.resumeUploaded'), 'success');
-                    }}
-                    onError={() => {
-                      showNotification(t('profile.resumeUploadError'), 'error');
-                    }}
-                    className={styles.resumeUpload}
-                  />
-                  <p className={styles.resumeHint}>{t('profile.resumeHint')}</p>
-                  <Button
-                    label={t('profile.launchResumeBuilder', {
-                      defaultValue: 'Launch STAR Resume Builder',
-                    })}
-                    variant="outlined"
-                    onClick={() => navigate('/profile/resume-builder')}
-                    icon="pi pi-external-link"
-                  />
-                </div>
-              </Card>
-
-              <Card
-                title={
-                  <div className={styles.skillsHeader}>
-                    <span>{t('profile.skills.title', { defaultValue: 'Skills' })}</span>
-                    {!isEditingSkills ? (
-                      <Button
-                        label={t('profile.skills.edit', { defaultValue: 'Edit skills' })}
-                        icon="pi pi-pencil"
-                        size="small"
-                        onClick={handleSkillsEditToggle}
-                        disabled={savingSkills}
-                      />
-                    ) : (
-                      <div className={styles.skillActions}>
-                        <Button
-                          type="button"
-                          label={t('common.cancel', { defaultValue: 'Cancel' })}
-                          variant="text"
-                          onClick={handleSkillsCancel}
-                          disabled={savingSkills}
-                          icon="pi pi-times"
-                        />
-                        <Button
-                          type="button"
-                          label={t('profile.skills.save', { defaultValue: 'Save skills' })}
-                          onClick={handleSkillsSave}
-                          loading={savingSkills}
-                          disabled={savingSkills}
-                          icon="pi pi-check"
-                        />
-                      </div>
-                    )}
+          {/* TAB 1: SKILLS */}
+          {activeTab === 1 && (
+            <div className={styles.panelAnimated}>
+              <div className={styles.card}>
+                <div className={styles.cardHeader}>
+                  <div className={styles.cardHeaderTitle}>
+                    <i className="pi pi-bolt" />
+                    <div>
+                      <h3>{t('profile.skills.title', { defaultValue: 'Skills & Competencies' })}</h3>
+                      <p className={styles.cardSubtitle}>
+                        {t('profile.skills.description', {
+                          defaultValue: 'Track your professional and language proficiencies on the CEFR scale.',
+                        })}
+                      </p>
+                    </div>
                   </div>
-                }
-                className={styles.card}
-              >
-                <div className={styles.skillsContent}>
-                  <p className={styles.skillsDescription}>
-                    {t('profile.skills.description', {
-                      defaultValue: 'Track your core skills and show your proficiency level.',
-                    })}
-                  </p>
+                  {!isEditingSkills ? (
+                    <Button
+                      label={t('profile.skills.edit', { defaultValue: 'Manage Skills' })}
+                      icon="pi pi-pencil"
+                      size="small"
+                      onClick={handleSkillsEditToggle}
+                      disabled={savingSkills}
+                      variant="outlined"
+                    />
+                  ) : (
+                    <div className={styles.headerBtnGroup}>
+                      <Button
+                        type="button"
+                        label={t('common.cancel', { defaultValue: 'Cancel' })}
+                        variant="text"
+                        onClick={handleSkillsCancel}
+                        disabled={savingSkills}
+                        icon="pi pi-times"
+                      />
+                      <Button
+                        type="button"
+                        label={t('profile.skills.save', { defaultValue: 'Save Changes' })}
+                        onClick={handleSkillsSave}
+                        loading={savingSkills}
+                        disabled={savingSkills}
+                        icon="pi pi-check"
+                        className={styles.saveBtn}
+                      />
+                    </div>
+                  )}
+                </div>
+
+                <div className={styles.cardBody}>
                   {skillsFetchError && (
                     <Message severity="warn" text={skillsFetchError} className={styles.skillsMessage} />
                   )}
+
                   {isEditingSkills ? (
                     <div className={styles.skillsEditor}>
-                      <div className={styles.skillList}>
+                      {/* Add new skill bar */}
+                      <div className={styles.addSkillCard}>
+                        <h4 className={styles.addSkillHeading}>
+                          <i className="pi pi-plus-circle" />
+                          {t('profile.skills.addNew', { defaultValue: 'Add a new skill' })}
+                        </h4>
+                        <div className={styles.addSkillForm}>
+                          <div className={styles.autocompleteWrapper}>
+                            <AutoComplete
+                              value={newSkillName}
+                              suggestions={skillSuggestions}
+                              completeMethod={handleSkillSearch}
+                              onChange={handleSkillInputChange}
+                              onSelect={handleSkillSelect}
+                              placeholder={t('profile.skills.addPlaceholder', {
+                                defaultValue: 'Search skill name (e.g. Finnish, React, Sales)...',
+                              })}
+                              dropdown
+                              disabled={savingSkills}
+                              className={styles.skillAutoComplete}
+                            />
+                          </div>
+                          <div className={styles.selectorWrapper}>
+                            <SkillLevelSelector
+                              value={newSkillLevel}
+                              onChange={(level) => setNewSkillLevel(level)}
+                            />
+                          </div>
+                          <Button
+                            type="button"
+                            label={t('profile.skills.add', { defaultValue: 'Add' })}
+                            icon="pi pi-plus"
+                            onClick={handleAddSkill}
+                            disabled={savingSkills}
+                            className={styles.addSkillButton}
+                          />
+                        </div>
+                        {skillsError && (
+                          <Message severity="error" text={skillsError} className={styles.skillsMessage} />
+                        )}
+                        {availableSkillsLoading && (
+                          <div className={styles.inlineLoading}>
+                            <ProgressSpinner strokeWidth="4" />
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Editing skill items */}
+                      <div className={styles.skillsList}>
                         {skillsDraft.length === 0 ? (
-                          <p className={styles.emptyMessage}>
-                            {t('profile.skills.empty', { defaultValue: 'No skills yet. Add your first skill.' })}
-                          </p>
+                          <div className={styles.emptyState}>
+                            <i className="pi pi-bolt" />
+                            <h4>{t('profile.skills.empty', { defaultValue: 'No skills added yet' })}</h4>
+                            <p>{t('profile.skills.emptyPrompt', { defaultValue: 'Use the form above to add your first skill.' })}</p>
+                          </div>
                         ) : (
                           skillsDraft.map((skill, index) => (
-                            <div key={`${skill.name}-${index}`} className={styles.skillItem}>
-                              <div className={styles.skillItemHeader}>
-                                <span className={styles.skillName}>{skill.name}</span>
+                            <div key={`${skill.name}-${index}`} className={styles.skillCard}>
+                              <div className={styles.skillCardHeader}>
+                                <div className={styles.skillNameGroup}>
+                                  <span className={styles.skillBadge}>{skill.level}</span>
+                                  <span className={styles.skillTitle}>{skill.name}</span>
+                                </div>
                                 <Button
-                                  icon="pi pi-times"
-                                  severity="secondary"
+                                  icon="pi pi-trash"
+                                  severity="danger"
                                   text
                                   rounded
                                   aria-label={t('profile.skills.remove', { defaultValue: 'Remove skill' })}
                                   onClick={() => handleSkillRemove(index)}
                                   disabled={savingSkills}
+                                  className={styles.removeSkillBtn}
                                 />
                               </div>
                               <SkillLevelSelector
@@ -904,203 +1124,306 @@ const Profile = () => {
                           ))
                         )}
                       </div>
-
-                      <div className={styles.addSkillSection}>
-                        <div className={styles.addSkillInputs}>
-                          <AutoComplete
-                            value={newSkillName}
-                            suggestions={skillSuggestions}
-                            completeMethod={handleSkillSearch}
-                            onChange={handleSkillInputChange}
-                            onSelect={handleSkillSelect}
-                            placeholder={t('profile.skills.addPlaceholder', {
-                              defaultValue: 'Start typing to search skills…',
-                            })}
-                            dropdown
-                            disabled={savingSkills}
-                          />
-                          <SkillLevelSelector
-                            value={newSkillLevel}
-                            onChange={(level) => setNewSkillLevel(level)}
-                            className={styles.levelSelector}
-                          />
-                        </div>
-                        <Button
-                          type="button"
-                          label={t('profile.skills.add', { defaultValue: 'Add skill' })}
-                          icon="pi pi-plus"
-                          onClick={handleAddSkill}
-                          disabled={savingSkills}
-                        />
-                      </div>
-                      {skillsError && (
-                        <Message severity="error" text={skillsError} className={styles.skillsMessage} />
-                      )}
-                      {availableSkillsLoading && (
-                        <div className={styles.loadingContainer}>
-                          <ProgressSpinner />
-                        </div>
-                      )}
                     </div>
                   ) : (
-                    <div className={styles.skillList}>
+                    /* Read-only skill view */
+                    <div className={styles.skillsGrid}>
                       {skills.length === 0 ? (
-                        <p className={styles.emptyMessage}>
-                          {t('profile.skills.empty', { defaultValue: 'No skills yet. Add your first skill.' })}
-                        </p>
+                        <div className={styles.emptyState}>
+                          <i className="pi pi-bolt" />
+                          <h4>{t('profile.skills.empty', { defaultValue: 'No skills added yet' })}</h4>
+                          <p>{t('profile.skills.emptyPrompt', { defaultValue: 'Click "Manage Skills" above to add your languages and expertise.' })}</p>
+                          <Button
+                            label={t('profile.skills.addFirst', { defaultValue: 'Add Your First Skill' })}
+                            icon="pi pi-plus"
+                            size="small"
+                            onClick={handleSkillsEditToggle}
+                            className={styles.emptyStateCta}
+                          />
+                        </div>
                       ) : (
                         skills.map((skill, index) => (
-                          <div key={`${skill.name}-${index}`} className={styles.skillItem}>
-                            <div className={styles.skillItemHeader}>
-                              <span className={styles.skillName}>{skill.name}</span>
+                          <div key={`${skill.name}-${index}`} className={styles.skillCardView}>
+                            <div className={styles.skillCardViewHeader}>
+                              <span className={styles.skillTitle}>{skill.name}</span>
+                              <span className={styles.levelPill}>{skill.level}</span>
                             </div>
-                            <SkillLevelSelector value={skill.level} readOnly />
+                            <SkillLevelSelector value={skill.level} readOnly size="sm" />
                           </div>
                         ))
                       )}
                     </div>
                   )}
                 </div>
-              </Card>
+              </div>
             </div>
-          </TabPanel>
+          )}
 
-          <TabPanel
-            header={t('profile.tabs.favourites', { defaultValue: 'Favourites' })}
-            leftIcon="pi pi-heart"
-          >
-            <div className={styles.tabContent}>
-              <Card title={t('favourites.title')} className={styles.card}>
-                {favouritesLoading || loadingCompanyDetails ? (
-                  <div className={styles.loadingContainer}>
-                    <ProgressSpinner />
+          {/* TAB 2: FAVOURITES */}
+          {activeTab === 2 && (
+            <div className={styles.panelAnimated}>
+              <div className={styles.card}>
+                <div className={styles.cardHeader}>
+                  <div className={styles.cardHeaderTitle}>
+                    <i className="pi pi-heart-fill" style={{ color: '#ef4444' }} />
+                    <div>
+                      <h3>{t('favourites.title', { defaultValue: 'Favourite Companies' })}</h3>
+                      <p className={styles.cardSubtitle}>
+                        {t('favourites.subtitle', { defaultValue: 'Companies you have bookmarked for quick access.' })}
+                      </p>
+                    </div>
                   </div>
-                ) : favourites.length === 0 ? (
-                  <p className={styles.emptyMessage}>{t('favourites.noFavourites')}</p>
-                ) : (
-                  <div className={styles.favouritesList}>
-                    {(favouritesWithCompanies.length > 0 ? favouritesWithCompanies : favourites).map(
-                      (favourite) => (
-                        <div key={favourite.id} className={styles.favouriteItem}>
-                          <div className={styles.favouriteInfo}>
-                            <h4
-                              className={styles.favouriteCompanyName}
-                              onClick={() => navigate(`/companies/${favourite.company_id}`)}
-                            >
-                              {favourite.company?.name || `Company ID: ${favourite.company_id}`}
-                            </h4>
-                            {favourite.company?.mainbusinesslinename && (
-                              <p className={styles.favouriteCategory}>
-                                {favourite.company.mainbusinesslinename}
-                              </p>
-                            )}
-                          </div>
-                          <Button
-                            icon="pi pi-times"
-                            onClick={() => handleRemoveFavourite(favourite.company_id)}
-                            severity="secondary"
-                            text
-                            rounded
-                            aria-label={t('favourites.removeFromFavourites')}
-                          />
-                        </div>
-                      ),
-                    )}
-                  </div>
-                )}
-              </Card>
-            </div>
-          </TabPanel>
+                </div>
 
-          <TabPanel
-            header={t('profile.tabs.notifications', { defaultValue: 'Notifications' })}
-            leftIcon="pi pi-bell"
-          >
-            <div className={styles.tabContent}>
-              <Card
-                title={
-                  <div className={styles.notificationsHeader}>
-                    <span>{t('notifications.title')}</span>
-                    {unreadCount > 0 && <Badge value={unreadCount} severity="danger" />}
-                  </div>
-                }
-                className={styles.card}
-              >
-                {unreadCount > 0 && (
-                  <div className={styles.markAllContainer}>
-                    <Button
-                      label={t('notifications.markAllAsRead')}
-                      onClick={handleMarkAllAsRead}
-                      severity="secondary"
-                      size="small"
-                      text
-                      icon="pi pi-check"
-                    />
-                  </div>
-                )}
-                {notificationsLoading ? (
-                  <div className={styles.loadingContainer}>
-                    <ProgressSpinner />
-                  </div>
-                ) : notifications.length === 0 ? (
-                  <p className={styles.emptyMessage}>{t('notifications.noNotifications')}</p>
-                ) : (
-                  <div className={styles.notificationsList}>
-                    {notifications.map((notification: UserNotification) => (
-                      <div
-                        key={notification.id}
-                        className={`${styles.notificationItem} ${
-                          !notification.read ? styles.unread : ''
-                        }`}
-                      >
-                        <div className={styles.notificationContent}>
-                          <div className={styles.notificationHeader}>
-                            <h4
-                              className={styles.notificationCompany}
-                              onClick={() => navigate(`/companies/${notification.company_id}`)}
-                            >
-                              {notification.company?.name || `Company ID: ${notification.company_id}`}
-                            </h4>
-                            {!notification.read && (
-                              <Badge value={t('notifications.unread')} severity="info" />
-                            )}
-                          </div>
-                          {notification.title && notification.title !== notification.message && (
-                            <p className={styles.notificationTitle}>{notification.title}</p>
-                          )}
-                          <p className={styles.notificationMessage}>{notification.message}</p>
-                          <p className={styles.notificationTime}>
-                            {new Date(notification.created_at).toLocaleString()}
-                          </p>
-                        </div>
-                        {!notification.read && (
-                          <Button
-                            icon="pi pi-check"
-                            onClick={() => handleMarkAsRead(notification.id)}
-                            severity="success"
-                            text
-                            rounded
-                            aria-label={t('notifications.markAsRead')}
-                          />
-                        )}
+                <div className={styles.cardBody}>
+                  {favouritesLoading || loadingCompanyDetails ? (
+                    <div className={styles.loadingWrapper}>
+                      <ProgressSpinner strokeWidth="4" />
+                      <p className={styles.loadingText}>{t('common.loading', { defaultValue: 'Loading saved companies...' })}</p>
+                    </div>
+                  ) : favourites.length === 0 ? (
+                    <div className={styles.emptyState}>
+                      <div className={styles.emptyIconCircle}>
+                        <i className="pi pi-heart" />
                       </div>
-                    ))}
-                  </div>
-                )}
-              </Card>
+                      <h4>{t('favourites.noFavourites', { defaultValue: 'No favourite companies yet' })}</h4>
+                      <p>{t('favourites.emptyHint', { defaultValue: 'Explore the catalog and bookmark companies to easily track updates and job openings.' })}</p>
+                      <Button
+                        label={t('navigation.companies', { defaultValue: 'Browse Companies' })}
+                        icon="pi pi-compass"
+                        onClick={() => navigate('/companies')}
+                        className={styles.emptyStateCta}
+                      />
+                    </div>
+                  ) : (
+                    <div className={styles.favouritesGrid}>
+                      {(favouritesWithCompanies.length > 0 ? favouritesWithCompanies : favourites).map(
+                        (favourite) => (
+                          <div key={favourite.id} className={styles.companyCard}>
+                            <div className={styles.companyIconBox}>
+                              <i className="pi pi-building" />
+                            </div>
+                            <div className={styles.companyMain}>
+                              <h4
+                                className={styles.companyName}
+                                onClick={() => navigate(`/companies/${favourite.company_id}`)}
+                              >
+                                {favourite.company?.name || `Company ID: ${favourite.company_id}`}
+                              </h4>
+                              {favourite.company?.mainbusinesslinename && (
+                                <span className={styles.categoryBadge}>
+                                  {favourite.company.mainbusinesslinename}
+                                </span>
+                              )}
+                            </div>
+                            <div className={styles.companyActions}>
+                              <Button
+                                icon="pi pi-external-link"
+                                text
+                                rounded
+                                onClick={() => navigate(`/companies/${favourite.company_id}`)}
+                                aria-label="View company"
+                                className={styles.companyViewBtn}
+                              />
+                              <Button
+                                icon="pi pi-heart-fill"
+                                onClick={() => handleRemoveFavourite(favourite.company_id)}
+                                severity="danger"
+                                text
+                                rounded
+                                aria-label={t('favourites.removeFromFavourites', { defaultValue: 'Remove from favourites' })}
+                                className={styles.unfavBtn}
+                              />
+                            </div>
+                          </div>
+                        ),
+                      )}
+                    </div>
+                  )}
+                </div>
+              </div>
             </div>
-          </TabPanel>
-        </TabView>
-        <Button
-          label="Logout"
-          onClick={handleLogout}
-          severity="secondary"
-          className={styles.logoutButton}
-          icon="pi pi-sign-out"
-        />
-    </div>
+          )}
+
+          {/* TAB 3: NOTIFICATIONS */}
+          {activeTab === 3 && (
+            <div className={styles.panelAnimated}>
+              <div className={styles.card}>
+                <div className={styles.cardHeader}>
+                  <div className={styles.cardHeaderTitle}>
+                    <i className="pi pi-bell" />
+                    <div>
+                      <h3>{t('notifications.title', { defaultValue: 'Notifications & Updates' })}</h3>
+                      <p className={styles.cardSubtitle}>
+                        {t('notifications.subtitle', { defaultValue: 'Stay updated with activities from companies you follow.' })}
+                      </p>
+                    </div>
+                  </div>
+                  {unreadCount > 0 && (
+                    <Button
+                      label={t('notifications.markAllAsRead', { defaultValue: 'Mark all as read' })}
+                      onClick={handleMarkAllAsRead}
+                      size="small"
+                      variant="outlined"
+                      icon="pi pi-check-circle"
+                      className={styles.markAllBtn}
+                    />
+                  )}
+                </div>
+
+                <div className={styles.cardBody}>
+                  {notificationsLoading ? (
+                    <div className={styles.loadingWrapper}>
+                      <ProgressSpinner strokeWidth="4" />
+                      <p className={styles.loadingText}>{t('common.loading', { defaultValue: 'Loading notifications...' })}</p>
+                    </div>
+                  ) : notifications.length === 0 ? (
+                    <div className={styles.emptyState}>
+                      <div className={styles.emptyIconCircle}>
+                        <i className="pi pi-bell" />
+                      </div>
+                      <h4>{t('notifications.noNotifications', { defaultValue: 'No notifications' })}</h4>
+                      <p>{t('notifications.allCaughtUp', { defaultValue: "You're all caught up! Updates about your bookmarked companies will appear here." })}</p>
+                    </div>
+                  ) : (
+                    <div className={styles.notificationsList}>
+                      {notifications.map((notification: UserNotification) => (
+                        <div
+                          key={notification.id}
+                          className={`${styles.notificationCard} ${
+                            !notification.read ? styles.notificationUnread : ''
+                          }`}
+                        >
+                          <div className={styles.notifIconSide}>
+                            <div className={styles.notifBellCircle}>
+                              <i className="pi pi-bell" />
+                            </div>
+                            {!notification.read && <span className={styles.unreadPulseDot} />}
+                          </div>
+
+                          <div className={styles.notifBody}>
+                            <div className={styles.notifHeaderRow}>
+                              <h4
+                                className={styles.notifCompanyLink}
+                                onClick={() => navigate(`/companies/${notification.company_id}`)}
+                              >
+                                {notification.company?.name || `Company ID: ${notification.company_id}`}
+                              </h4>
+                              <span className={styles.notifTime}>
+                                <i className="pi pi-clock" />
+                                {new Date(notification.created_at).toLocaleString(undefined, {
+                                  month: 'short',
+                                  day: 'numeric',
+                                  hour: '2-digit',
+                                  minute: '2-digit',
+                                })}
+                              </span>
+                            </div>
+
+                            {notification.title && notification.title !== notification.message && (
+                              <h5 className={styles.notifSubject}>{notification.title}</h5>
+                            )}
+                            <p className={styles.notifMessage}>{notification.message}</p>
+                          </div>
+
+                          {!notification.read && (
+                            <div className={styles.notifAction}>
+                              <Button
+                                icon="pi pi-check"
+                                onClick={() => handleMarkAsRead(notification.id)}
+                                severity="success"
+                                text
+                                rounded
+                                aria-label={t('notifications.markAsRead', { defaultValue: 'Mark as read' })}
+                                className={styles.markReadBtn}
+                              />
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* TAB 4: RESUME & CV */}
+          {activeTab === 4 && (
+            <div className={styles.panelAnimated}>
+              <div className={styles.card}>
+                <div className={styles.cardHeader}>
+                  <div className={styles.cardHeaderTitle}>
+                    <i className="pi pi-file" />
+                    <div>
+                      <h3>{t('profile.resume', { defaultValue: 'Resume & Documents' })}</h3>
+                      <p className={styles.cardSubtitle}>
+                        {t('profile.resumeSubtitle', { defaultValue: 'Upload your existing CV or create a structured resume with STAR methodology.' })}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className={styles.cardBody}>
+                  <div className={styles.resumeGrid}>
+                    {/* Upload Card */}
+                    <div className={styles.resumeUploadCard}>
+                      <div className={styles.resumeUploadHeader}>
+                        <i className="pi pi-cloud-upload" />
+                        <h4>{t('profile.uploadResume', { defaultValue: 'Upload CV Document' })}</h4>
+                        <p className={styles.resumeFormatNotice}>
+                          {t('profile.resumeHint', { defaultValue: 'Supported formats: PDF, DOC, DOCX. Max file size: 5 MB.' })}
+                        </p>
+                      </div>
+
+                      <div className={styles.fileUploadContainer}>
+                        <FileUpload
+                          mode="basic"
+                          name="resume"
+                          accept=".pdf,.doc,.docx"
+                          maxFileSize={5000000}
+                          auto
+                          chooseLabel={t('profile.chooseFile', { defaultValue: 'Select File from Computer' })}
+                          onUpload={() => {
+                            showNotification(t('profile.resumeUploaded', { defaultValue: 'Resume uploaded successfully' }), 'success');
+                          }}
+                          onError={() => {
+                            showNotification(t('profile.resumeUploadError', { defaultValue: 'Failed to upload resume' }), 'error');
+                          }}
+                          className={styles.customFileUpload}
+                        />
+                      </div>
+                    </div>
+
+                    {/* STAR Builder Promo Card */}
+                    <div className={styles.starPromoCard}>
+                      <div className={styles.starBadge}>
+                        <i className="pi pi-star-fill" />
+                        <span>Interactive Tool</span>
+                      </div>
+                      <h4 className={styles.starTitle}>
+                        {t('profile.launchResumeBuilder', { defaultValue: 'STAR Resume Builder' })}
+                      </h4>
+                      <p className={styles.starDescription}>
+                        Craft an ATS-optimized CV using the Situation, Task, Action, Result framework. Perfect for applications in Finland and the EU.
+                      </p>
+                      <Button
+                        label={t('profile.startBuilder', { defaultValue: 'Open Resume Builder' })}
+                        icon="pi pi-arrow-right"
+                        iconPos="right"
+                        onClick={() => navigate('/profile/resume-builder')}
+                        className={styles.starLaunchBtn}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
     </>
   );
 };
 
-export default Profile; 
+export default Profile;

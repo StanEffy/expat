@@ -1,132 +1,827 @@
 @use "../styles/variables" as *;
 
 .container {
-  max-width: 1200px;
+  max-width: 1100px;
   margin: 0 auto;
-  padding: 32px 16px;
+  padding: 32px 20px 64px;
+  min-height: calc(100vh - 45px);
 }
 
-.title {
-  margin-bottom: 32px;
+// -----------------------------------------------------------------------------
+// Loading & Error States
+// -----------------------------------------------------------------------------
+.loadingWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 380px;
+  gap: 18px;
 }
 
-.card {
-  max-width: 800px;
-  margin-bottom: 24px;
+.loadingText {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1rem;
 }
 
-.profileInfo {
+.errorCard {
+  background: rgba(26, 12, 45, 0.85);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  border-radius: 18px;
+  padding: 48px 32px;
+  text-align: center;
+  max-width: 500px;
+  margin: 60px auto;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+
+  .errorIcon {
+    font-size: 3rem;
+    color: #ef4444;
+    margin-bottom: 16px;
+  }
+
+  h2 {
+    color: #ffffff;
+    margin: 0 0 12px 0;
+    font-size: 1.5rem;
+  }
+
+  p {
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0 0 24px 0;
+    line-height: 1.5;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Hero Card
+// -----------------------------------------------------------------------------
+.heroCard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  padding: 28px 32px;
+  margin-bottom: 28px;
+  background: linear-gradient(
+    135deg,
+    rgba(57, 14, 94, 0.9) 0%,
+    rgba(98, 44, 144, 0.7) 50%,
+    rgba(160, 41, 127, 0.4) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 20px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+}
+
+.heroMain {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex: 1;
+}
+
+.avatar {
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, $secondary-a-0 0%, $primary-0 100%);
+  border: 3px solid rgba(255, 255, 255, 0.28);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 1px;
+  box-shadow: 0 8px 24px rgba(160, 41, 127, 0.45);
+  flex-shrink: 0;
+}
+
+.heroDetails {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-.profileHeader {
+.heroNameRow {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: 12px;
+  flex-wrap: wrap;
 }
 
-.profileForm {
+.heroName {
+  margin: 0;
+  color: #ffffff;
+  font-size: 1.65rem;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+}
+
+.roleBadge {
+  padding: 3px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  background: linear-gradient(135deg, rgba(160, 41, 127, 0.65), rgba(98, 44, 144, 0.85));
+  border: 1px solid rgba(207, 91, 175, 0.45);
+  color: #ffffff;
+}
+
+.heroMetaRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.metaHandle {
+  font-weight: 600;
+  color: $secondary-a-3;
+}
+
+.metaDot {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.metaEmail,
+.metaJoined {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  i {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.5);
+  }
+}
+
+.heroBadgesRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 2px;
+}
+
+.statusChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+
+  &.verified {
+    background: rgba(34, 197, 94, 0.15);
+    border: 1px solid rgba(34, 197, 94, 0.35);
+    color: #4ade80;
+  }
+
+  &.unverified {
+    background: rgba(234, 179, 8, 0.15);
+    border: 1px solid rgba(234, 179, 8, 0.35);
+    color: #fde047;
+  }
+
+  i {
+    font-size: 0.75rem;
+  }
+}
+
+.idChip {
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.heroActions {
   display: flex;
   flex-direction: column;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.heroEditBtn {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.heroLogoutBtn {
+  border-color: rgba(239, 68, 68, 0.4) !important;
+  color: rgba(255, 255, 255, 0.85) !important;
+  transition: all 0.2s ease !important;
+
+  &:hover {
+    background: rgba(239, 68, 68, 0.18) !important;
+    border-color: rgba(239, 68, 68, 0.8) !important;
+    color: #ffffff !important;
+    box-shadow: 0 0 12px rgba(239, 68, 68, 0.3) !important;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Navigation Tabs
+// -----------------------------------------------------------------------------
+.navTabs {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px;
+  border-radius: 14px;
+  background: rgba(0, 0, 0, 0.32);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  margin-bottom: 24px;
+  overflow-x: auto;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.navTab {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 42px;
+  padding: 0 18px;
+  border-radius: 10px;
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.68);
+  font-family: inherit;
+  font-size: 0.92rem;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  user-select: none;
+  transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+
+  i {
+    font-size: 0.88rem;
+    transition: transform 0.2s ease;
+  }
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+
+    i {
+      transform: scale(1.1);
+    }
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(207, 91, 175, 0.6);
+  }
+
+  &.navTabActive {
+    background: linear-gradient(
+      135deg,
+      rgba(160, 41, 127, 0.85) 0%,
+      rgba(98, 44, 144, 0.95) 100%
+    );
+    color: #ffffff;
+    font-weight: 600;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  }
+}
+
+.tabCounter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: 10px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.16);
+  color: #ffffff;
+}
+
+.unreadCounter {
+  background: #ef4444;
+  box-shadow: 0 0 8px rgba(239, 68, 68, 0.6);
+}
+
+// -----------------------------------------------------------------------------
+// Tab Panel Animations
+// -----------------------------------------------------------------------------
+.tabPanels {
+  position: relative;
+}
+
+.panelAnimated {
+  animation: panelFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes panelFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Unified Glassmorphic Card
+// -----------------------------------------------------------------------------
+.card {
+  background: rgba(26, 12, 45, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 18px;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 22px 28px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.cardHeaderTitle {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  > i {
+    font-size: 1.4rem;
+    color: $secondary-a-3;
+  }
+
+  h3 {
+    margin: 0;
+    color: #ffffff;
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+}
+
+.cardSubtitle {
+  margin: 4px 0 0 0;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.cardBody {
+  padding: 28px;
+}
+
+// -----------------------------------------------------------------------------
+// TAB 0: OVERVIEW INFO GRID
+// -----------------------------------------------------------------------------
+.infoGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 16px;
 }
 
-.profileTabs {
-  margin-bottom: 24px;
+.infoTile {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 18px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  transition: all 0.2s ease;
 
-  :global(.p-tabview-nav) {
-    background-color: transparent;
-    border: none;
-  }
-
-  :global(.p-tabview-panels) {
-    background-color: transparent;
-    padding: 0;
+  &:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
   }
 }
 
-.tabContent {
+.infoIconWrap {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(207, 91, 175, 0.16);
+  border: 1px solid rgba(207, 91, 175, 0.35);
   display: flex;
-  flex-direction: column;
-  gap: 24px;
+  align-items: center;
+  justify-content: center;
+  color: $secondary-a-3;
+  font-size: 1.15rem;
+  flex-shrink: 0;
 }
 
-.formRow {
+.infoTexts {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 3px;
+  overflow: hidden;
+}
+
+.infoLabel {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: rgba(255, 255, 255, 0.55);
+  font-weight: 600;
+}
+
+.infoValue {
+  font-size: 0.98rem;
+  color: #ffffff;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// Profile Edit Form
+.profileForm {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  label {
+    color: rgba(255, 255, 255, 0.88);
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+}
+
+.input {
+  width: 100% !important;
+  height: 44px !important;
+  padding-left: 16px !important;
+  padding-right: 16px !important;
+  border-radius: 10px !important;
+  background: rgba(255, 255, 255, 0.07) !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  color: #ffffff !important;
+  font-size: 0.95rem !important;
+  transition: all 0.25s ease !important;
+
+  &:hover {
+    border-color: rgba(255, 255, 255, 0.3) !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+  }
+
+  &:focus,
+  &:global(.p-focus) {
+    outline: none !important;
+    border-color: rgba(207, 91, 175, 0.75) !important;
+    background: rgba(255, 255, 255, 0.12) !important;
+    box-shadow: 0 0 0 3px rgba(207, 91, 175, 0.28) !important;
+  }
+}
+
+.inputDisabled {
+  composes: input;
+  opacity: 0.65;
+  cursor: not-allowed !important;
+}
+
+.inputHelp {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.formErrorMsg {
+  margin: 0;
 }
 
 .formActions {
   display: flex;
   justify-content: flex-end;
   gap: 12px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.loadingContainer {
+.saveBtn {
+  background: linear-gradient(
+    135deg,
+    rgba(160, 41, 127, 0.9) 0%,
+    rgba(98, 44, 144, 1) 100%
+  ) !important;
+  font-weight: 600;
+}
+
+// -----------------------------------------------------------------------------
+// TAB 1: SKILLS SECTION
+// -----------------------------------------------------------------------------
+.headerBtnGroup {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.skillsEditor {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.addSkillCard {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  padding: 20px;
+}
+
+.addSkillHeading {
+  margin: 0 0 16px 0;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  i {
+    color: $secondary-a-3;
+  }
+}
+
+.addSkillForm {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.autocompleteWrapper {
+  flex: 2;
+  min-width: 240px;
+
+  :global(.p-autocomplete),
+  :global(.p-inputtext) {
+    width: 100% !important;
+    height: 44px !important;
+    padding-left: 16px !important;
+    border-radius: 10px !important;
+    background: rgba(255, 255, 255, 0.07) !important;
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    color: #ffffff !important;
+  }
+}
+
+.selectorWrapper {
+  flex: 3;
+  min-width: 280px;
+}
+
+.addSkillButton {
+  height: 44px;
+  padding: 0 20px;
+  font-weight: 600;
+  border-radius: 10px;
+}
+
+.skillsMessage {
+  margin-top: 12px;
+}
+
+.inlineLoading {
   display: flex;
   justify-content: center;
-  padding: 16px;
+  padding: 12px;
 }
 
-.emptyMessage {
-  color: $complement-1;
-  padding: 16px;
-  text-align: center;
-}
-
-.favouritesList {
+.skillsList {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
-.favouriteItem {
+.skillCard {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+}
+
+.skillCardHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px;
-  border: 1px solid $complement-4;
-  border-radius: 8px;
-  transition: background-color 0.2s;
-
-  &:hover {
-    background-color: rgba-color($complement-4, 0.3);
-  }
 }
 
-.favouriteInfo {
-  flex: 1;
-}
-
-.favouriteCompanyName {
-  margin: 0 0 4px 0;
-  cursor: pointer;
-  color: #007bff;
-  
-  &:hover {
-    text-decoration: underline;
-  }
-}
-
-.favouriteCategory {
-  margin: 0;
-  color: $complement-1;
-  font-size: 0.9rem;
-}
-
-.notificationsHeader {
+.skillNameGroup {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
 
-.markAllContainer {
-  margin-bottom: 16px;
-  text-align: right;
+.skillBadge {
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: rgba(207, 91, 175, 0.2);
+  border: 1px solid rgba(207, 91, 175, 0.4);
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.skillTitle {
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.removeSkillBtn {
+  color: rgba(239, 68, 68, 0.8) !important;
+
+  &:hover {
+    background: rgba(239, 68, 68, 0.15) !important;
+    color: #ef4444 !important;
+  }
+}
+
+// Read-only skills view
+.skillsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 14px;
+}
+
+.skillCardView {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
+  }
+}
+
+.skillCardViewHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.levelPill {
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: linear-gradient(135deg, rgba(160, 41, 127, 0.8), rgba(98, 44, 144, 0.9));
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+// -----------------------------------------------------------------------------
+// TAB 2: FAVOURITES SECTION
+// -----------------------------------------------------------------------------
+.favouritesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 16px;
+}
+
+.companyCard {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  padding: 16px 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.22);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  }
+}
+
+.companyIconBox {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(207, 91, 175, 0.16);
+  border: 1px solid rgba(207, 91, 175, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $secondary-a-3;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.companyMain {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.companyName {
+  margin: 0;
+  color: #ffffff;
+  font-size: 1.05rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: $secondary-a-3;
+  }
+}
+
+.categoryBadge {
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.6);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.companyActions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.companyViewBtn {
+  color: rgba(255, 255, 255, 0.65) !important;
+
+  &:hover {
+    color: #ffffff !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+  }
+}
+
+.unfavBtn {
+  color: #ef4444 !important;
+
+  &:hover {
+    background: rgba(239, 68, 68, 0.15) !important;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// TAB 3: NOTIFICATIONS SECTION
+// -----------------------------------------------------------------------------
+.markAllBtn {
+  font-size: 0.85rem;
 }
 
 .notificationsList {
@@ -135,177 +830,341 @@
   gap: 12px;
 }
 
-.notificationItem {
+.notificationCard {
   display: flex;
-  justify-content: space-between;
   align-items: flex-start;
-  padding: 12px;
-  border: 1px solid $complement-4;
-  border-radius: 8px;
-  transition: background-color 0.2s;
+  gap: 16px;
+  padding: 16px 20px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  transition: all 0.2s ease;
 
   &:hover {
-    background-color: rgba-color($complement-4, 0.3);
+    background: rgba(255, 255, 255, 0.07);
+    border-color: rgba(255, 255, 255, 0.18);
   }
 
-  &.unread {
-    border-left: 4px solid #007bff;
-    background-color: rgba-color($complement-4, 0.2);
+  &.notificationUnread {
+    background: rgba(160, 41, 127, 0.12);
+    border-color: rgba(207, 91, 175, 0.35);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
   }
 }
 
-.notificationContent {
-  flex: 1;
+.notifIconSide {
+  position: relative;
+  flex-shrink: 0;
 }
 
-.notificationHeader {
+.notifBellCircle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 8px;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.95rem;
 }
 
-.notificationCompany {
+.unreadPulseDot {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #ef4444;
+  border: 2px solid rgba(26, 12, 45, 1);
+  box-shadow: 0 0 6px #ef4444;
+}
+
+.notifBody {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.notifHeaderRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.notifCompanyLink {
   margin: 0;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 600;
   cursor: pointer;
-  color: #007bff;
-  
+  transition: color 0.2s ease;
+
   &:hover {
+    color: $secondary-a-3;
     text-decoration: underline;
   }
 }
 
-.notificationTitle {
-  margin: 0 0 6px 0;
+.notifTime {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.5);
+
+  i {
+    font-size: 0.72rem;
+  }
+}
+
+.notifSubject {
+  margin: 4px 0 0 0;
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 0.92rem;
   font-weight: 600;
-  color: $primary-2;
 }
 
-.notificationMessage {
-  margin: 8px 0;
-  color: $complement-2;
+.notifMessage {
+  margin: 2px 0 0 0;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.88rem;
+  line-height: 1.5;
 }
 
-.notificationTime {
+.notifAction {
+  flex-shrink: 0;
+}
+
+.markReadBtn {
+  color: #22c55e !important;
+
+  &:hover {
+    background: rgba(34, 197, 94, 0.15) !important;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// TAB 4: RESUME SECTION
+// -----------------------------------------------------------------------------
+.resumeGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+.resumeUploadCard {
+  background: rgba(255, 255, 255, 0.04);
+  border: 2px dashed rgba(255, 255, 255, 0.18);
+  border-radius: 16px;
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: rgba(207, 91, 175, 0.5);
+    background: rgba(255, 255, 255, 0.06);
+  }
+}
+
+.resumeUploadHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+
+  i {
+    font-size: 2.5rem;
+    color: $secondary-a-3;
+    margin-bottom: 4px;
+  }
+
+  h4 {
+    margin: 0;
+    color: #ffffff;
+    font-size: 1.15rem;
+    font-weight: 600;
+  }
+}
+
+.resumeFormatNotice {
   margin: 0;
+  color: rgba(255, 255, 255, 0.55);
   font-size: 0.85rem;
-  color: $complement-1;
 }
 
-.logoutButton {
-  margin-top: 24px;
+.fileUploadContainer {
+  margin-top: 8px;
+
+  :global(.p-button) {
+    font-weight: 600;
+    border-radius: 10px;
+  }
 }
 
-.resumeSection {
+.starPromoCard {
+  background: linear-gradient(
+    135deg,
+    rgba(160, 41, 127, 0.25) 0%,
+    rgba(98, 44, 144, 0.35) 100%
+  );
+  border: 1px solid rgba(207, 91, 175, 0.35);
+  border-radius: 16px;
+  padding: 32px 28px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 14px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
 }
 
-.resumeUpload {
-  width: 100%;
+.starBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  background: rgba(234, 179, 8, 0.2);
+  border: 1px solid rgba(234, 179, 8, 0.4);
+  color: #fde047;
+  font-size: 0.75rem;
+  font-weight: 700;
+
+  i {
+    font-size: 0.72rem;
+  }
 }
 
-.resumeHint {
+.starTitle {
   margin: 0;
-  font-size: 0.9rem;
-  color: $complement-1;
-  font-style: italic;
+  color: #ffffff;
+  font-size: 1.35rem;
+  font-weight: 700;
 }
 
-.skillsHeader {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-}
-
-.skillActions {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-}
-
-.skillsContent {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.skillsDescription {
+.starDescription {
   margin: 0;
-  color: $complement-2;
-  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.92rem;
+  line-height: 1.6;
 }
 
-.skillsEditor {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.skillList {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.skillItem {
-  border: 1px solid $complement-4;
-  border-radius: 8px;
-  padding: 12px;
-  background-color: rgba-color($complement-4, 0.15);
-}
-
-.skillItemHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 12px;
-  gap: 12px;
-}
-
-.skillName {
+.starLaunchBtn {
+  margin-top: 8px;
+  background: linear-gradient(
+    135deg,
+    rgba(160, 41, 127, 0.9) 0%,
+    rgba(98, 44, 144, 1) 100%
+  ) !important;
   font-weight: 600;
-  font-size: 1rem;
-  color: $primary-2;
+  border: none !important;
 }
 
-.addSkillSection {
+// -----------------------------------------------------------------------------
+// Empty States
+// -----------------------------------------------------------------------------
+.emptyState {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 48px 24px;
   gap: 12px;
-  border-top: 1px solid rgba-color($complement-4, 0.6);
-  padding-top: 12px;
 }
 
-.addSkillInputs {
+.emptyIconCircle {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
   display: flex;
-  flex-direction: column;
-  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 6px;
 
-  :global(.p-autocomplete),
-  :global(.p-inputtext) {
-    width: 100%;
+  i {
+    font-size: 1.8rem;
+    color: rgba(255, 255, 255, 0.5);
   }
 }
 
-.levelSelector {
-  width: 100%;
+.emptyState {
+  h4 {
+    margin: 0;
+    color: #ffffff;
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+
+  p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.92rem;
+    max-width: 440px;
+    line-height: 1.5;
+  }
 }
 
-.skillsMessage {
-  margin: 0;
+.emptyStateCta {
+  margin-top: 8px;
+  font-weight: 600;
 }
 
-@media (min-width: 640px) {
-  .addSkillInputs {
+// -----------------------------------------------------------------------------
+// Responsive Media Queries
+// -----------------------------------------------------------------------------
+@media (max-width: 768px) {
+  .heroCard {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 24px 20px;
+    gap: 20px;
+  }
+
+  .heroMain {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .heroActions {
     flex-direction: row;
-    align-items: center;
+    width: 100%;
+
+    button {
+      flex: 1;
+    }
   }
 
-  .levelSelector {
-    max-width: 320px;
+  .cardHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 18px 20px;
+  }
+
+  .cardBody {
+    padding: 20px;
+  }
+
+  .addSkillForm {
+    flex-direction: column;
+    align-items: stretch;
+
+    .selectorWrapper,
+    .autocompleteWrapper,
+    .addSkillButton {
+      width: 100%;
+    }
   }
 }
-

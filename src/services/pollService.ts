@@ -160,7 +160,7 @@ export const normalizePoll = (raw: unknown): PollSummary => {
 
 export const pollService = {
   async getActivePolls(): Promise<PollSummary[]> {
-    const data = await apiClient.get<unknown>(POLL_ENDPOINTS.LIST);
+    const data = await apiClient.get<unknown>(POLL_ENDPOINTS.LIST, { requireAuth: true });
     const list = Array.isArray(data)
       ? data
       : Array.isArray((data as Record<string, unknown>)?.data)

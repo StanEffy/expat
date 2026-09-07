@@ -1,5 +1,5 @@
 import { API_BASE_URL } from '@/constants/api';
-import { getToken, getAdmin2FASession, removeToken } from '@/utils/auth';
+import { getToken, isTokenValid, getAdmin2FASession, removeToken } from '@/utils/auth';
 import type { HttpMethod, RequestOptions } from '@/types/api';
 
 export class ApiError extends Error {
@@ -66,12 +66,16 @@ export const apiClient = {
       headers['Content-Type'] = 'application/json';
     }
 
-    if (requireAuth || requireAdmin2FA) {
-      const token = getToken();
-      if (!token) {
-        throw new ApiError('Authentication required', 401);
-      }
+    const token = getToken();
+    const tokenValid = isTokenValid();
+
+    if (token && tokenValid) {
       headers.Authorization = `Bearer ${token}`;
+    } else if (requireAuth || requireAdmin2FA) {
+      if (token && !tokenValid) {
+        removeToken();
+      }
+      throw new ApiError('Authentication required', 401);
     }
 
     if (requireAdmin2FA) {
@@ -139,7 +143,7 @@ export const apiClient = {
         }
       }
 
-      if (response.status === 401 && requireAuth) {
+      if (response.status === 401 && (requireAuth || Boolean(token))) {
         removeToken();
       }
 

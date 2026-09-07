@@ -3,6 +3,15 @@
 .button {
   // Base button styles are handled by PrimeReact
   // This file is for custom overrides and variants
+
+  &:not(:global(.p-button-icon-only)) {
+    :global(.p-button-icon:not(.p-button-icon-right)) {
+      margin-right: 0.5rem;
+    }
+    :global(.p-button-icon-right) {
+      margin-left: 0.5rem;
+    }
+  }
   
   &.filled {
     // Default filled style (handled by PrimeReact)

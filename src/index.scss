@@ -443,6 +443,14 @@ button {
     color: rgba(255, 255, 255, 0.95);
     font-size: 0.9rem;
     font-weight: 500;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    padding: 0 0.85rem !important;
+    height: 100% !important;
+    display: flex;
+    align-items: center;
   }
 
   .p-dropdown-trigger {
@@ -549,104 +557,106 @@ button {
   }
 }
 
-// Filled state (when dropdown has a value)
+// Filled state (when dropdown has a value) - keep consistent dark glass styling
 .p-dropdown.p-filled {
-  background-color: $primary-2;
+  background-color: rgba(255, 255, 255, 0.08);
 
   .p-dropdown-label {
-    color: $complement-3;
+    color: #ffffff;
+    background: transparent !important;
   }
 }
 
 // Disabled state
 .p-dropdown.p-disabled {
-  background-color: rgba-color($primary-2, 0.6);
+  background-color: rgba(255, 255, 255, 0.04);
   opacity: 0.6;
 
   .p-dropdown-label {
-    color: rgba-color($complement-3, 0.6);
+    color: rgba(255, 255, 255, 0.45);
+    background: transparent !important;
   }
 
   .p-dropdown-trigger {
-    color: rgba-color($complement-3, 0.6);
+    color: rgba(255, 255, 255, 0.45);
   }
 }
 
 // PrimeReact Input Styles
 .p-inputtext {
-  background-color: $primary-2;
-  color: $complement-3;
+  background-color: rgba(255, 255, 255, 0.06);
+  color: #ffffff;
   border-radius: 12px;
-  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.16);
   height: 44px;
-  padding: 0.75rem 0.2rem;
+  padding: 0 14px;
   width: 100%;
+  transition: all 0.2s ease;
 
   &:enabled:hover {
-    background-color: $primary-2;
-    border-color: transparent;
+    background-color: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.28);
   }
 
   &:enabled:focus {
-    background-color: $primary-2;
-    border-color: transparent;
-    box-shadow: none;
-    outline: 2px solid $complement-3;
-    outline-offset: 2px;
+    background-color: rgba(255, 255, 255, 0.09);
+    border-color: rgba(207, 91, 175, 0.65);
+    box-shadow: 0 0 0 3px rgba(207, 91, 175, 0.25);
+    outline: none;
   }
 
   &::placeholder {
-    color: rgba-color($complement-3, 0.6);
+    color: rgba(255, 255, 255, 0.45);
   }
 }
 
 .p-inputtext.p-filled {
-  background-color: $primary-2;
-  color: $complement-3;
+  background-color: rgba(255, 255, 255, 0.06);
+  color: #ffffff;
 }
 
 .p-inputtext.p-disabled {
-  background-color: rgba-color($primary-2, 0.6);
-  color: rgba-color($complement-3, 0.6);
+  background-color: rgba(255, 255, 255, 0.03);
+  color: rgba(255, 255, 255, 0.4);
   opacity: 0.6;
 }
 
 // PrimeReact Textarea Styles
 .p-inputtextarea {
-  background-color: $primary-2;
-  color: $complement-3;
+  background-color: rgba(255, 255, 255, 0.06);
+  color: #ffffff;
   border-radius: 12px;
-  border: none;
-  padding: 0.75rem 0.2rem;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  padding: 0.75rem 1rem;
   width: 100%;
   min-height: 44px;
+  transition: all 0.2s ease;
 
   &:enabled:hover {
-    background-color: $primary-2;
-    border-color: transparent;
+    background-color: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.28);
   }
 
   &:enabled:focus {
-    background-color: $primary-2;
-    border-color: transparent;
-    box-shadow: none;
-    outline: 2px solid $complement-3;
-    outline-offset: 2px;
+    background-color: rgba(255, 255, 255, 0.09);
+    border-color: rgba(207, 91, 175, 0.65);
+    box-shadow: 0 0 0 3px rgba(207, 91, 175, 0.25);
+    outline: none;
   }
 
   &::placeholder {
-    color: rgba-color($complement-3, 0.6);
+    color: rgba(255, 255, 255, 0.45);
   }
 }
 
 .p-inputtextarea.p-filled {
-  background-color: $primary-2;
-  color: $complement-3;
+  background-color: rgba(255, 255, 255, 0.06);
+  color: #ffffff;
 }
 
 .p-inputtextarea.p-disabled {
-  background-color: rgba-color($primary-2, 0.6);
-  color: rgba-color($complement-3, 0.6);
+  background-color: rgba(255, 255, 255, 0.03);
+  color: rgba(255, 255, 255, 0.4);
   opacity: 0.6;
 }
 
@@ -655,47 +665,47 @@ button {
   width: 100%;
 
   .p-password-input {
-    background-color: $primary-2;
-    color: $complement-3;
+    background-color: rgba(255, 255, 255, 0.06);
+    color: #ffffff;
     border-radius: 12px;
-    border: none;
+    border: 1px solid rgba(255, 255, 255, 0.16);
     height: 44px;
-    padding: 0.75rem 0.2rem;
+    padding: 0 14px;
     width: 100%;
+    transition: all 0.2s ease;
 
     &:enabled:hover {
-      background-color: $primary-2;
-      border-color: transparent;
+      background-color: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.28);
     }
 
     &:enabled:focus {
-      background-color: $primary-2;
-      border-color: transparent;
-      box-shadow: none;
-      outline: 2px solid $complement-3;
-      outline-offset: 2px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-color: rgba(207, 91, 175, 0.65);
+      box-shadow: 0 0 0 3px rgba(207, 91, 175, 0.25);
+      outline: none;
     }
 
     &::placeholder {
-      color: rgba-color($complement-3, 0.6);
+      color: rgba(255, 255, 255, 0.45);
     }
   }
 
   .p-password-toggle {
-    color: $complement-3;
+    color: rgba(255, 255, 255, 0.65);
   }
 
   &.p-inputwrapper-filled {
     .p-password-input {
-      background-color: $primary-2;
-      color: $complement-3;
+      background-color: rgba(255, 255, 255, 0.06);
+      color: #ffffff;
     }
   }
 
   &.p-inputwrapper-disabled {
     .p-password-input {
-      background-color: rgba-color($primary-2, 0.6);
-      color: rgba-color($complement-3, 0.6);
+      background-color: rgba(255, 255, 255, 0.03);
+      color: rgba(255, 255, 255, 0.4);
       opacity: 0.6;
     }
   }
@@ -707,53 +717,54 @@ button {
   position: relative; // For scrollable panels when appendTo="self"
 
   .p-autocomplete-input {
-    background-color: $primary-2;
-    color: $complement-3;
+    background-color: rgba(255, 255, 255, 0.06);
+    color: #ffffff;
     border-radius: 12px;
-    border: none;
+    border: 1px solid rgba(255, 255, 255, 0.16);
     height: 44px;
-    padding: 0.75rem 0.2rem;
+    padding: 0 14px;
     width: 100%;
+    transition: all 0.2s ease;
 
     &:enabled:hover {
-      background-color: $primary-2;
-      border-color: transparent;
+      background-color: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.28);
     }
 
     &:enabled:focus {
-      background-color: $primary-2;
-      border-color: transparent;
-      box-shadow: none;
-      outline: 2px solid $complement-3;
-      outline-offset: 2px;
+      background-color: rgba(255, 255, 255, 0.09);
+      border-color: rgba(207, 91, 175, 0.65);
+      box-shadow: 0 0 0 3px rgba(207, 91, 175, 0.25);
+      outline: none;
     }
 
     &::placeholder {
-      color: rgba-color($complement-3, 0.6);
+      color: rgba(255, 255, 255, 0.45);
     }
   }
 
   &.p-inputwrapper-filled {
     .p-autocomplete-input {
-      background-color: $primary-2;
-      color: $complement-3;
+      background-color: rgba(255, 255, 255, 0.06);
+      color: #ffffff;
     }
   }
 
   &.p-inputwrapper-disabled {
     .p-autocomplete-input {
-      background-color: rgba-color($primary-2, 0.6);
-      color: rgba-color($complement-3, 0.6);
+      background-color: rgba(255, 255, 255, 0.03);
+      color: rgba(255, 255, 255, 0.4);
       opacity: 0.6;
     }
   }
 }
 
 .p-autocomplete-panel {
-  background-color: $primary-2;
+  background-color: rgba(26, 12, 38, 0.95);
+  backdrop-filter: blur(20px);
   border-radius: 12px;
-  border: none;
-  box-shadow: $shadow-md;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.55);
 
   // Override PrimeReact's fixed positioning when panel is appended to self
   // Force absolute positioning so it scrolls with the page
@@ -763,28 +774,25 @@ button {
   }
 
   .p-autocomplete-items {
-    padding: 0.5rem 0;
+    padding: 6px;
 
     .p-autocomplete-item {
-      color: $complement-3;
-      padding: 0.75rem 0.2rem;
+      color: rgba(255, 255, 255, 0.85);
+      padding: 8px 12px;
       border-radius: 8px;
-      margin: 0.125rem 0.5rem;
+      margin: 2px 0;
+      transition: all 0.15s ease;
 
-      &:hover {
-        background-color: $primary-3;
-        color: $complement-0;
-      }
-
+      &:hover,
       &.p-highlight {
-        background-color: $primary-3;
-        color: $complement-0;
+        background-color: rgba(207, 91, 175, 0.25);
+        color: #ffffff;
       }
     }
 
     .p-autocomplete-empty-message {
-      color: $complement-3;
-      padding: 0.75rem 0.2rem;
+      color: rgba(255, 255, 255, 0.55);
+      padding: 8px 12px;
     }
   }
 }
@@ -924,17 +932,15 @@ button {
   }
 }
 .p-autocomplete-multiple .p-inputtext {
-  padding: 0.25rem 1rem;
+  padding: 0.25rem 0.5rem;
 }
 .p-autocomplete-multiple-container.p-focus {
-  outline: 1px solid $complement-1 !important;
-  border: none;
+  outline: none !important;
+  border-color: rgba(207, 91, 175, 0.65) !important;
+  box-shadow: 0 0 0 3px rgba(207, 91, 175, 0.25) !important;
 }
 input {
-  color: $complement-1;
-  &:focus,
-  &:focus-visible {
-  }
+  color: inherit;
 }
 .p-accordion-header,
 .p-accordion-content {

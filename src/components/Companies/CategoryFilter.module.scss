@@ -1,10 +1,72 @@
 .dropdown {
-  min-width: 280px;
+  width: 100% !important;
+  height: 44px !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  border-radius: 12px !important;
+  display: flex !important;
+  align-items: center !important;
+  position: relative !important;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: rgba(255, 255, 255, 0.28) !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+  }
+
+  &:focus-within,
+  &.p-focus {
+    border-color: rgba(207, 91, 175, 0.65) !important;
+    box-shadow: 0 0 0 3px rgba(207, 91, 175, 0.25) !important;
+    background: rgba(255, 255, 255, 0.09) !important;
+  }
+
+  :global(.p-dropdown-label) {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+    border-radius: 0 !important;
+    padding: 0 38px 0 14px !important;
+    height: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    color: #ffffff !important;
+    font-size: 0.88rem;
+    flex: 1;
+    min-width: 0;
+  }
+
+  :global(.p-dropdown-trigger) {
+    width: 36px !important;
+    height: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    color: rgba(255, 255, 255, 0.6) !important;
+    background: transparent !important;
+    border: none !important;
+    flex-shrink: 0;
+  }
+
+  :global(.p-dropdown-clear-icon) {
+    position: absolute !important;
+    right: 36px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    color: rgba(255, 255, 255, 0.5) !important;
+    font-size: 0.82rem !important;
+    cursor: pointer;
+    z-index: 2;
+
+    &:hover {
+      color: #ffffff !important;
+    }
+  }
 }
 
 @media (max-width: 1023px) {
   .dropdown {
-    min-width: auto;
     width: 100%;
   }
 }
@@ -12,68 +74,88 @@
 .optionContent {
   display: flex;
   align-items: center;
-  gap: 8px;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  padding: 4px 0;
 }
 
 .optionNameContainer {
   flex: 1;
   overflow: hidden;
   display: flex;
-  align-content: center;
-
-  @media (max-width: 1023px) {
-    max-width: calc(100vw - 32px);
-  }
+  align-items: center;
 }
 
 .optionName {
   display: inline-block;
-  min-width: 100%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  animation: marquee 8s linear infinite;
-  animation-play-state: paused;
-}
-
-.optionContent:hover .optionName,
-.optionContent:focus-within .optionName {
-  animation-play-state: running;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.88rem;
 }
 
 .optionCount {
   flex-shrink: 0;
+  font-size: 0.76rem;
   font-weight: 600;
-  color: inherit;
+  color: rgba(255, 255, 255, 0.65);
+  background: rgba(255, 255, 255, 0.08);
+  padding: 2px 7px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .valueContent {
   display: flex;
   align-items: center;
   gap: 8px;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .valueName {
-  max-width: 100%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  color: #ffffff;
+  font-size: 0.88rem;
 }
 
 .placeholder {
-  color: inherit;
+  color: rgba(255, 255, 255, 0.48) !important;
+  font-size: 0.88rem;
 }
 
-@keyframes marquee {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-100%);
-  }
-}
 .panel {
-  background-color: $primary-2;
-  left: 0;
-  max-width: calc(100vw - 48px);
+  background: rgba(26, 12, 38, 0.95) !important;
+  backdrop-filter: blur(20px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.55) !important;
+  max-width: calc(100vw - 32px);
+  overflow: hidden;
+
+  :global(.p-dropdown-items) {
+    padding: 6px !important;
+
+    :global(.p-dropdown-item) {
+      color: rgba(255, 255, 255, 0.85) !important;
+      border-radius: 8px !important;
+      padding: 8px 12px !important;
+      transition: all 0.15s ease;
+
+      &:hover,
+      &.p-highlight {
+        background: rgba(207, 91, 175, 0.25) !important;
+        color: #ffffff !important;
+
+        .optionCount {
+          background: rgba(207, 91, 175, 0.4);
+          color: #ffffff;
+        }
+      }
+    }
+  }
 }

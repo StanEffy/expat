@@ -8,10 +8,10 @@ const AnimatedLogo = () => {
       ["𐌄", "𐋄", "𐌐", "𐌀", "𐌕"], // Old Italic
       ["𝖾", "𝗑", "𝗉", "𝖺", "𝗍"], // Sans-serif
       ["ₑ", "ₓ", "ₚ", "ₐ", "ₜ"], // Subscript
-      ["ε", "א", "ר", "א", "ƭ"], // Mix
+      ["ᴇ", "x", "ᴘ", "ᴀ", "ᴛ"], // Small Caps
       ["𝕖", "𝕩", "𝕡", "𝕒", "𝕥"], // Double-struck
-      ["乇", "}{", "卩", "卂", "ㄒ"], // CJK
-      ["ꍟ", "ꊼ", "ꉣ", "ꍏ", "꓄"], // Extended A
+      ["𝕰", "𝖃", "𝕻", "𝕬", "𝕿"], // Bold Fraktur
+      ["𝙴", "𝚇", "𝙿", "𝙰", "𝚃"], // Monospace
       ["Σ", "X", "P", "Λ", "Ƭ"], // Greek
       ["ê", "x", "þ", "å", "†"], // Accents
       ["Э", "x", "p", "ӓ", "ҭ"], // Cyrillic
@@ -158,7 +158,11 @@ const AnimatedLogo = () => {
   };
 
   return (
-    <div className={styles.logoContainer} translate="no" lang="en">
+    <div
+      className={`${styles.logoContainer} notranslate`}
+      translate="no"
+      lang="en"
+    >
       <div className={styles.logoText}>{renderText()}</div>
     </div>
   );

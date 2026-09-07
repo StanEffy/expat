@@ -6,7 +6,7 @@ import AdminRouteGuard from '@/components/Admin/AdminRouteGuard';
 import AppProviders from '@/providers/AppProviders';
 import { ADMIN_PANEL_PATH } from '@/constants/api';
 
-const Home = lazy(() => import('@/pages/Home'));
+import Home from '@/pages/Home';
 const Companies = lazy(() => import('@/pages/Companies'));
 const CompanyDetails = lazy(() => import('@/pages/CompanyDetails'));
 const Categories = lazy(() => import('@/pages/Categories'));
@@ -26,8 +26,8 @@ const PollDetail = lazy(() => import('@/pages/PollDetail'));
 const NotFound = lazy(() => import('@/pages/NotFound'));
 
 const LoadingScreen = () => (
-  <div style={{ padding: '4rem 1rem', textAlign: 'center' }}>
-    <span>Loading…</span>
+  <div style={{ minHeight: '60vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+    <span style={{ color: 'rgba(255, 255, 255, 0.7)' }}>Loading…</span>
   </div>
 );
 

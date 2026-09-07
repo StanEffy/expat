@@ -1,0 +1,9 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# Disallow administrative routes
+Disallow: /app-console/
+
+# Sitemaps
+Sitemap: https://x-pat.duckdns.org/sitemap.xml

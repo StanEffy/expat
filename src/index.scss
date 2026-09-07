@@ -353,9 +353,28 @@ template {
   display: none;
 }
 
+// Fallback font metric overrides to prevent Cumulative Layout Shift (CLS)
+@font-face {
+  font-family: 'Playfair Display Fallback';
+  src: local('Georgia'), local('Times New Roman'), local('serif');
+  ascent-override: 96%;
+  descent-override: 24%;
+  line-gap-override: 0%;
+  size-adjust: 104%;
+}
+
+@font-face {
+  font-family: 'Inter Fallback';
+  src: local('Arial'), local('Helvetica'), local('sans-serif');
+  ascent-override: 90%;
+  descent-override: 22%;
+  line-gap-override: 0%;
+  size-adjust: 100%;
+}
+
 :root {
   // Body text font - Inter for readability
-  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Inter', 'Inter Fallback', system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -371,7 +390,7 @@ template {
 
 // Heading font - Playfair Display for elegant headings
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Playfair Display', 'Playfair Display Fallback', Georgia, serif;
   font-weight: 600;
   line-height: 1.2;
 }

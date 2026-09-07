@@ -1,15 +1,14 @@
-import { useMemo } from "react";
+import { useMemo, lazy, Suspense } from "react";
 import Button from "../Common/Button";
-import { Menubar } from "primereact/menubar";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "@/hooks/useAuth";
 import LanguageSwitcher from "../Common/LanguageSwitcher";
-import MobileMenu from "../Navigation/MobileMenu";
 import AnimatedLogo from "./AnimatedLogo";
 import styles from "./Header.module.scss";
-import { Badge } from "primereact/badge";
 import { useUserNotifications } from "../../contexts/UserNotificationsContext";
+
+const MobileMenu = lazy(() => import("../Navigation/MobileMenu"));
 
 const Header = () => {
   const { isAuthenticated } = useAuth();
@@ -34,7 +33,7 @@ const Header = () => {
       <span className={styles.profileButtonLabel}>
         {t("navigation.profile")}
         {unreadCount > 0 && (
-          <Badge value={unreadCount} severity="danger" />
+          <span className="p-badge p-badge-danger">{unreadCount}</span>
         )}
       </span>
     );
@@ -47,7 +46,7 @@ const Header = () => {
   );
 
   const end = (
-    <div className={styles.end}>
+    <div className={`p-menubar-end ${styles.end}`}>
       <div className={styles.desktopNavButtons}>
         <Button
           label={t("navigation.companies")}
@@ -97,11 +96,18 @@ const Header = () => {
         )}
       </div>
       <LanguageSwitcher />
-      <MobileMenu />
+      <Suspense fallback={null}>
+        <MobileMenu />
+      </Suspense>
     </div>
   );
 
-  return <Menubar start={start} end={end} className="layout-menubar" />;
+  return (
+    <header className="layout-menubar p-menubar p-component" role="banner">
+      <div className="p-menubar-start">{start}</div>
+      {end}
+    </header>
+  );
 };
 
 export default Header;

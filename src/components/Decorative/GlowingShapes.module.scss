@@ -11,20 +11,22 @@
 
 .shapeWrapper {
   position: absolute;
-  width: 100%;
-  height: 100%;
-  will-change: transform; // Optimize for animation
-  // No CSS transition - animations handled by JavaScript for smoother performance
+  will-change: transform;
+  transform: translate(-50%, -50%) rotate(var(--init-rot, 0deg)) scale(var(--scale-min, 0.9));
+  animation: floatShape var(--duration, 16s) ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
 }
 
-// Fixed shapes stay in place when scrolling (no parallax movement)
-.fixed {
-  position: fixed;
-}
-
-// Scrolling shapes move with parallax effect
-.scrolling {
-  position: fixed; // Also fixed, but transform will move them
+@keyframes floatShape {
+  0% {
+    transform: translate(-50%, -50%) rotate(var(--init-rot, 0deg)) scale(var(--scale-min, 0.9));
+  }
+  50% {
+    transform: translate(calc(-50% + var(--move-x, 15px)), calc(-50% + var(--move-y, 15px))) rotate(calc(var(--init-rot, 0deg) + var(--rot-delta, 25deg))) scale(var(--scale-max, 1.1));
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(var(--init-rot, 0deg)) scale(var(--scale-min, 0.9));
+  }
 }
 
 // Apply blur to the wrapper for triangles so it works with clip-path

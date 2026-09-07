@@ -1,10 +1,57 @@
-import { defineConfig } from 'vite'
+import { defineConfig, Plugin } from 'vite'
 import react from '@vitejs/plugin-react'
 import path from 'path'
+import fs from 'fs'
+import zlib from 'zlib'
+
+function compressionPlugin(): Plugin {
+  return {
+    name: 'vite-plugin-compression',
+    apply: 'build',
+    closeBundle() {
+      const distDir = path.resolve(__dirname, 'dist');
+      if (!fs.existsSync(distDir)) return;
+
+      const compressFile = (filePath: string) => {
+        const ext = path.extname(filePath).toLowerCase();
+        if (!['.js', '.css', '.html', '.svg', '.json'].includes(ext)) return;
+
+        const content = fs.readFileSync(filePath);
+        if (content.length < 1024) return; // Skip files smaller than 1KB
+
+        // Pre-generate .gz with maximum compression
+        const gzipped = zlib.gzipSync(content, { level: 9 });
+        fs.writeFileSync(`${filePath}.gz`, gzipped);
+
+        // Pre-generate .br with maximum compression
+        const brotlied = zlib.brotliCompressSync(content, {
+          params: {
+            [zlib.constants.BROTLI_PARAM_QUALITY]: 11,
+          },
+        });
+        fs.writeFileSync(`${filePath}.br`, brotlied);
+      };
+
+      const walkDir = (dir: string) => {
+        const entries = fs.readdirSync(dir, { withFileTypes: true });
+        for (const entry of entries) {
+          const fullPath = path.join(dir, entry.name);
+          if (entry.isDirectory()) {
+            walkDir(fullPath);
+          } else if (entry.isFile()) {
+            compressFile(fullPath);
+          }
+        }
+      };
+
+      walkDir(distDir);
+    },
+  };
+}
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), compressionPlugin()],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
@@ -52,13 +99,18 @@ export default defineConfig({
       output: {
         manualChunks(id) {
           if (id.includes('node_modules')) {
-            if (id.includes('primereact') || id.includes('primeicons')) {
-              return 'vendor_primereact';
-            }
             if (id.includes('react-router')) {
               return 'vendor_react-router';
             }
-            if (id.includes('react-i18next') || id.includes('i18next') || id.includes('react') || id.includes('scheduler')) {
+            if (
+              id.includes('/react/') ||
+              id.includes('\\react\\') ||
+              id.includes('/react-dom/') ||
+              id.includes('\\react-dom\\') ||
+              id.includes('scheduler') ||
+              id.includes('i18next') ||
+              id.includes('react-i18next')
+            ) {
               return 'vendor_react';
             }
           }

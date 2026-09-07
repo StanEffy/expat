@@ -53,11 +53,16 @@
     position: absolute !important;
     right: 36px !important;
     top: 50% !important;
+    margin-top: 0 !important;
     transform: translateY(-50%) !important;
     color: rgba(255, 255, 255, 0.5) !important;
     font-size: 0.82rem !important;
     cursor: pointer;
     z-index: 2;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    line-height: 1 !important;
 
     &:hover {
       color: #ffffff !important;

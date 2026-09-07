@@ -141,7 +141,7 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({
       placeholder={t("company.filter.workArea")}
       className={styles.dropdown}
       appendTo="self"
-      showClear
+      showClear={Boolean(value)}
       itemTemplate={renderOption}
       valueTemplate={renderValue}
       panelClassName={styles.panel}

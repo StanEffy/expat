@@ -7,10 +7,9 @@ set -e
 
 echo "⚙️ Applying Nginx compression & performance config..."
 
-# 1. Add global gzip and gzip_static configuration
+# 1. Add global gzip_static and extended compression types (gzip on is already in Ubuntu's nginx.conf)
 cat << 'EOF' | sudo tee /etc/nginx/conf.d/expat-performance.conf > /dev/null
-# Gzip compression and pre-compressed static files
-gzip on;
+# Pre-compressed static files support (.gz) and enhanced MIME types
 gzip_static on;
 gzip_vary on;
 gzip_min_length 1024;

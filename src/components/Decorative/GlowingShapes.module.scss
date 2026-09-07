@@ -9,28 +9,95 @@
   overflow: hidden;
 }
 
-.shapeWrapper {
+// Parallax layer: moves with page scroll via GPU-accelerated translate3d
+.parallaxLayer {
   position: absolute;
   will-change: transform;
-  transform: translate(-50%, -50%) rotate(var(--init-rot, 0deg)) scale(var(--scale-min, 0.9));
-  animation: floatShape var(--duration, 16s) ease-in-out infinite;
-  animation-delay: var(--delay, 0s);
+  transform: translate3d(
+    calc(-50% + var(--scroll-y, 0px) * var(--scroll-fx, 0)),
+    calc(-50% + var(--scroll-y, 0px) * var(--scroll-fy, 0)),
+    0
+  );
 }
 
-@keyframes floatShape {
+// Organic 2D drift layer
+.driftLayer {
+  width: 100%;
+  height: 100%;
+  will-change: transform;
+  animation: floatDrift 16s ease-in-out infinite;
+}
+
+// Continuous 360-degree rotation layers
+.spinCW {
+  width: 100%;
+  height: 100%;
+  will-change: transform;
+  animation: spinClockwise 30s linear infinite;
+}
+
+.spinCCW {
+  width: 100%;
+  height: 100%;
+  will-change: transform;
+  animation: spinCounterClockwise 30s linear infinite;
+}
+
+// Breathing pulse scale layer
+.pulseLayer {
+  width: 100%;
+  height: 100%;
+  will-change: transform;
+  animation: pulseScale 9s ease-in-out infinite;
+}
+
+@keyframes floatDrift {
   0% {
-    transform: translate(-50%, -50%) rotate(var(--init-rot, 0deg)) scale(var(--scale-min, 0.9));
+    transform: translate3d(0, 0, 0);
   }
-  50% {
-    transform: translate(calc(-50% + var(--move-x, 15px)), calc(-50% + var(--move-y, 15px))) rotate(calc(var(--init-rot, 0deg) + var(--rot-delta, 25deg))) scale(var(--scale-max, 1.1));
+  33% {
+    transform: translate3d(var(--drift-x, 40px), calc(var(--drift-y, 35px) * -0.6), 0);
+  }
+  66% {
+    transform: translate3d(calc(var(--drift-x, 40px) * -0.7), var(--drift-y, 35px), 0);
   }
   100% {
-    transform: translate(-50%, -50%) rotate(var(--init-rot, 0deg)) scale(var(--scale-min, 0.9));
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes spinClockwise {
+  from {
+    transform: rotate(var(--init-rot, 0deg));
+  }
+  to {
+    transform: rotate(calc(var(--init-rot, 0deg) + 360deg));
+  }
+}
+
+@keyframes spinCounterClockwise {
+  from {
+    transform: rotate(var(--init-rot, 0deg));
+  }
+  to {
+    transform: rotate(calc(var(--init-rot, 0deg) - 360deg));
+  }
+}
+
+@keyframes pulseScale {
+  0% {
+    transform: scale(var(--scale-min, 0.88));
+  }
+  50% {
+    transform: scale(var(--scale-max, 1.14));
+  }
+  100% {
+    transform: scale(var(--scale-min, 0.88));
   }
 }
 
 // Apply blur to the wrapper for triangles so it works with clip-path
-.triangleWrapper {
+.triangleLayer {
   filter: blur(3px);
 }
 
@@ -79,7 +146,6 @@
   background-color: rgba(255, 255, 255, 0.85);
   clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
   border-radius: 0;
-  // Blur is applied to the wrapper, not the triangle itself
   box-shadow: 
     0 0 60px rgba(255, 255, 255, 0.5),
     0 0 120px rgba(255, 255, 255, 0.3),
@@ -123,4 +189,14 @@
     transform: translate(-50%, -50%);
   }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .driftLayer,
+  .spinCW,
+  .spinCCW,
+  .pulseLayer {
+    animation: none !important;
+  }
+}
+
 

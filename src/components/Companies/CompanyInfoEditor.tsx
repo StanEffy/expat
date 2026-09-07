@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Accordion, AccordionTab } from "primereact/accordion";
 import Button from "../Common/Button";
 import { InputText } from "primereact/inputtext";
@@ -34,6 +34,13 @@ const CompanyInfoEditor: React.FC<CompanyInfoEditorProps> = ({
   const [expanded, setExpanded] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
+  useEffect(() => {
+    setFormData({
+      company_description: initialData?.company_description || "",
+      recruitment_page: initialData?.recruitment_page || "",
+    });
+  }, [initialData?.company_description, initialData?.recruitment_page]);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -57,8 +64,8 @@ const CompanyInfoEditor: React.FC<CompanyInfoEditorProps> = ({
       }
 
       const updateData = {
-        company_description: formData.company_description || null,
-        recruitment_page: formData.recruitment_page || null,
+        company_description: formData.company_description.trim() || null,
+        recruitment_page: formData.recruitment_page.trim() || null,
       };
 
       const response = await fetch(COMPANY_ENDPOINTS.DETAILS(companyId), {
@@ -91,33 +98,57 @@ const CompanyInfoEditor: React.FC<CompanyInfoEditorProps> = ({
     setOpenDialog(false);
   };
 
-  // Check if both fields are empty
   const isFormEmpty = !formData.company_description.trim() && !formData.recruitment_page.trim();
 
   const footer = (
-    <div>
+    <div className={styles.dialogFooter}>
       <Button 
         label={t("common.cancel")} 
         onClick={handleCloseDialog} 
         disabled={loading}
-        text
+        variant="text"
+        icon="pi pi-times"
       />
       <Button 
         label={loading ? t("common.updating") : t("common.confirm")} 
         onClick={handleConfirmUpdate} 
         disabled={loading}
         loading={loading}
+        icon="pi pi-check"
       />
+    </div>
+  );
+
+  const tabHeader = (
+    <div className={styles.tabHeader}>
+      <div className={styles.tabHeaderLeft}>
+        <div className={styles.tabHeaderIcon}>
+          <i className="pi pi-file-edit" />
+        </div>
+        <div className={styles.tabHeaderText}>
+          <span className={styles.tabHeaderTitle}>{t("company.editInformation")}</span>
+          <span className={styles.tabHeaderSubtitle}>
+            {t("company.proposeChangesSubtitle", { defaultValue: "Suggest updates for description or careers link" })}
+          </span>
+        </div>
+      </div>
     </div>
   );
 
   return (
     <div className={styles.container}>
-      <Accordion activeIndex={expanded !== null ? 0 : null} onTabChange={(e) => setExpanded(e.index !== null ? '0' : null)}>
-        <AccordionTab header={t("company.editInformation")}>
+      <Accordion 
+        className={styles.accordion}
+        activeIndex={expanded !== null ? 0 : null} 
+        onTabChange={(e) => setExpanded(e.index !== null ? '0' : null)}
+      >
+        <AccordionTab header={tabHeader}>
           <form onSubmit={handleSubmit} className={styles.form}>
-            <div className="p-field">
-              <label htmlFor="company_description">{t("company.description")}</label>
+            <div className={styles.formGroup}>
+              <label htmlFor="company_description" className={styles.label}>
+                <i className="pi pi-align-left" />
+                <span>{t("company.description")}</span>
+              </label>
               <InputTextarea
                 id="company_description"
                 name="company_description"
@@ -125,10 +156,15 @@ const CompanyInfoEditor: React.FC<CompanyInfoEditorProps> = ({
                 onChange={handleChange}
                 rows={4}
                 className={styles.textarea}
+                placeholder={t("company.descriptionPlaceholder", { defaultValue: "Write a detailed description about the company..." })}
               />
             </div>
-            <div className="p-field">
-              <label htmlFor="recruitment_page">{t("company.recruitmentPageUrl")}</label>
+
+            <div className={styles.formGroup}>
+              <label htmlFor="recruitment_page" className={styles.label}>
+                <i className="pi pi-link" />
+                <span>{t("company.recruitmentPageUrl")}</span>
+              </label>
               <InputText
                 id="recruitment_page"
                 name="recruitment_page"
@@ -138,12 +174,15 @@ const CompanyInfoEditor: React.FC<CompanyInfoEditorProps> = ({
                 className={styles.input}
               />
             </div>
-            <div>
+
+            <div className={styles.actions}>
               <Button 
                 type="submit" 
                 label={loading ? t("common.updating") : t("company.updateInformation")}
                 disabled={isFormEmpty || loading}
                 loading={loading}
+                icon="pi pi-check"
+                className={styles.submitBtn}
               />
             </div>
           </form>
@@ -153,11 +192,17 @@ const CompanyInfoEditor: React.FC<CompanyInfoEditorProps> = ({
       <Dialog
         visible={openDialog}
         onHide={handleCloseDialog}
-        header={t("company.confirmUpdate")}
+        header={
+          <div className={styles.dialogHeader}>
+            <i className="pi pi-question-circle" />
+            <span>{t("company.confirmUpdate")}</span>
+          </div>
+        }
         footer={footer}
         modal
+        className={styles.confirmDialog}
       >
-        <p>{t("company.confirmUpdateMessage")}</p>
+        <p className={styles.dialogMessage}>{t("company.confirmUpdateMessage")}</p>
       </Dialog>
     </div>
   );

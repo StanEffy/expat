@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { Card } from "primereact/card";
+import { useParams, Link } from "react-router-dom";
+import { ProgressSpinner } from "primereact/progressspinner";
 import Button from "../components/Common/Button";
 import { companyService } from "@/services/companyService";
 import { useNotification } from "../contexts/NotificationContext";
@@ -37,6 +37,7 @@ const CompanyDetails = () => {
   const [company, setCompany] = useState<CompanyDetails | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [copiedId, setCopiedId] = useState(false);
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -70,8 +71,22 @@ const CompanyDetails = () => {
     )}`;
   };
 
+  const handleCopyBusinessId = async () => {
+    if (!company?.businessid) return;
+    try {
+      await navigator.clipboard.writeText(company.businessid);
+      setCopiedId(true);
+      showNotification(
+        t("company.copiedBusinessId", { defaultValue: "Business ID copied to clipboard" }),
+        "success"
+      );
+      setTimeout(() => setCopiedId(false), 2000);
+    } catch {
+      showNotification("Failed to copy", "error");
+    }
+  };
+
   const handleComplainToVero = () => {
-    // Generate random complaint ID
     const randomId =
       Math.random().toString(36).substring(2, 15) +
       Math.random().toString(36).substring(2, 15);
@@ -80,6 +95,14 @@ const CompanyDetails = () => {
       t("company.complaintSentWithId", { id: complaintId }),
       "success",
     );
+  };
+
+  const getCompanyInitials = (name: string) => {
+    const parts = name.trim().split(/\s+/);
+    if (parts.length >= 2 && parts[0][0] && parts[1][0]) {
+      return `${parts[0][0]}${parts[1][0]}`.toUpperCase();
+    }
+    return name.slice(0, 2).toUpperCase();
   };
 
   const currentUrl = typeof window !== "undefined" ? window.location.href : "";
@@ -92,14 +115,19 @@ const CompanyDetails = () => {
           description="Loading company information..."
           url={currentUrl}
         />
-        <div className={styles.loadingContainer}>
-          <p>Loading...</p>
+        <div className={styles.container}>
+          <div className={styles.loadingWrapper}>
+            <ProgressSpinner strokeWidth="4" />
+            <p className={styles.loadingText}>
+              {t("common.loading", { defaultValue: "Loading company details..." })}
+            </p>
+          </div>
         </div>
       </>
     );
   }
 
-  if (error) {
+  if (error || !company) {
     return (
       <>
         <SEO
@@ -108,24 +136,18 @@ const CompanyDetails = () => {
           url={currentUrl}
           noindex={true}
         />
-        <div className={styles.errorContainer}>
-          <p className={styles.errorText}>{error}</p>
-        </div>
-      </>
-    );
-  }
-
-  if (!company) {
-    return (
-      <>
-        <SEO
-          title={`${t("company.information")} - ${t("app.title")}`}
-          description="Company not found"
-          url={currentUrl}
-          noindex={true}
-        />
-        <div className={styles.errorContainer}>
-          <p className={styles.notFoundText}>Company not found.</p>
+        <div className={styles.container}>
+          <div className={styles.errorCard}>
+            <i className={`pi pi-exclamation-triangle ${styles.errorIcon}`} />
+            <h2>{t("common.error", { defaultValue: "Something went wrong" })}</h2>
+            <p className={styles.errorText}>
+              {error || t("common.notFound", { defaultValue: "Company not found." })}
+            </p>
+            <Link to="/companies" className={styles.backButton}>
+              <i className="pi pi-arrow-left" />
+              <span>{t("common.back", { defaultValue: "Back to Companies" })}</span>
+            </Link>
+          </div>
         </div>
       </>
     );
@@ -139,6 +161,12 @@ const CompanyDetails = () => {
     company.street && company.city
       ? `${company.street} ${company.buildingnumber}${company.apartmentnumber ? `, ${company.apartmentnumber}` : ""}, ${company.postcode} ${company.city}`
       : null;
+
+  const websiteUrl = company.website
+    ? company.website.startsWith("http")
+      ? company.website
+      : `https://${company.website}`
+    : null;
 
   return (
     <>
@@ -167,123 +195,292 @@ const CompanyDetails = () => {
           numberOfEmployees: company.size || undefined,
         }}
       />
+
       <div className={styles.container}>
-        <div className={styles.titleRow}>
-          <h1 className={styles.title}>{company.name}</h1>
-          <FavouriteButton
-            companyId={company.id}
-            className={styles.favouriteButtonDetails}
-          />
+        {/* Navigation Breadcrumb */}
+        <div className={styles.topNav}>
+          <Link to="/companies" className={styles.backLink}>
+            <i className="pi pi-arrow-left" />
+            <span>{t("common.back", { defaultValue: "Back to Companies" })}</span>
+          </Link>
         </div>
-        <div className={styles.content}>
-          <Card className={styles.card} title={t("company.information")}>
-            <div className={styles.complainButtonContainer}>
-              <Button
-                label={t("company.complainToVero")}
-                onClick={handleComplainToVero}
-                className={styles.complainButton}
-                icon="pi pi-send"
-                outlined
-              />
+
+        {/* Hero Header Card */}
+        <div className={styles.heroCard}>
+          <div className={styles.heroMain}>
+            <div className={styles.avatar}>
+              {getCompanyInitials(company.name)}
             </div>
-            <div className={styles.infoSection}>
-              <p>
-                <strong>{t("company.businessId")}:</strong> {company.businessid}
-              </p>
-              <p>
-                <strong>{t("company.mainBusinessLine")}:</strong>{" "}
-                {company.mainbusinesslinename}
-              </p>
-              {company.website && (
-                <p>
-                  <strong>{t("company.website")}:</strong>{" "}
-                  <a
-                    href={`https://${company.website}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
+            <div className={styles.heroDetails}>
+              <div className={styles.heroNameRow}>
+                <h1 className={styles.title}>{company.name}</h1>
+              </div>
+              <div className={styles.badgeRow}>
+                {company.city && (
+                  <span className={styles.badge}>
+                    <i className="pi pi-map-marker" />
+                    <span>{company.city}</span>
+                  </span>
+                )}
+                {company.mainbusinesslinename && (
+                  <span className={styles.badge}>
+                    <i className="pi pi-briefcase" />
+                    <span>{company.mainbusinesslinename}</span>
+                  </span>
+                )}
+                {company.businessid && (
+                  <button
+                    type="button"
+                    onClick={handleCopyBusinessId}
+                    className={`${styles.badge} ${styles.copyBadge}`}
+                    title="Click to copy Business ID"
                   >
-                    {company.website}
-                  </a>
-                </p>
-              )}
-              <p>
-                <strong>{t("company.updatedAt")}:</strong>{" "}
-                {company.updated_at 
-                  ? new Date(company.updated_at).toLocaleString()
-                  : "-"}
-              </p>
+                    <i className="pi pi-id-card" />
+                    <span>{company.businessid}</span>
+                    <i
+                      className={`pi ${copiedId ? "pi-check" : "pi-copy"} ${styles.copyIcon}`}
+                    />
+                  </button>
+                )}
+              </div>
             </div>
-          </Card>
+          </div>
 
-          {company.street && company.city && (
-            <a
-              href={getGoogleMapsUrl(company)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.addressLink}
-            >
-              <Card className={styles.addressCard}>
-                <div
-                  className={styles.addressCardBackground}
-                  style={
-                    {
-                      "--map-bg-url": `url(${mapBg})`,
-                    } as React.CSSProperties
-                  }
-                />
-                <div className={styles.addressCardOverlay} />
-                <div className={styles.addressCardContent}>
-                  <h3 className={styles.addressTitle}>
-                    {t("company.address")}
-                  </h3>
-                  <p>
-                    {company.street} {company.buildingnumber}
-                    {company.apartmentnumber && `, ${company.apartmentnumber}`}
-                  </p>
-                  <p>
-                    {company.postcode} {company.city}
-                  </p>
-                </div>
-              </Card>
-            </a>
-          )}
+          <div className={styles.heroActions}>
+            <FavouriteButton
+              companyId={company.id}
+              className={styles.favouriteButtonDetails}
+            />
 
-          {company.company_description && (
-            <Card title={t("company.description")}>
-              <p>{company.company_description}</p>
-            </Card>
-          )}
-
-
-          {company.recruitment_page && (
-            <Card title={t("company.recruitment")}>
+            {websiteUrl && (
               <a
-                href={company.recruitment_page}
+                href={websiteUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                className={styles.websiteBtn}
               >
-                {t("company.visitRecruitmentPage")}
+                <i className="pi pi-globe" />
+                <span>{t("company.website", { defaultValue: "Website" })}</span>
+                <i className="pi pi-external-link" />
               </a>
-            </Card>
-          )}
+            )}
 
-          <CompanyInfoEditor
-            companyId={id!}
-            initialData={{
-              company_description: company.company_description,
-              recruitment_page: company.recruitment_page,
-            }}
-            onUpdate={(updatedData) => {
-              setCompany((prev) =>
-                prev
-                  ? {
-                      ...prev,
-                      ...updatedData,
+            <Button
+              label={t("company.complainToVero")}
+              onClick={handleComplainToVero}
+              className={styles.complainButton}
+              icon="pi pi-flag"
+              outlined
+              size="small"
+            />
+          </div>
+        </div>
+
+        {/* Main Content Layout Grid */}
+        <div className={styles.layoutGrid}>
+          {/* Left Column: Description, Recruitment, Editor */}
+          <div className={styles.mainColumn}>
+            {/* Description Card */}
+            <div className={styles.glassCard}>
+              <div className={styles.cardHeader}>
+                <div className={styles.cardHeaderTitle}>
+                  <i className="pi pi-align-left" />
+                  <h2>{t("company.description")}</h2>
+                </div>
+              </div>
+              <div className={styles.cardBody}>
+                <p className={styles.descriptionText}>
+                  {company.company_description || (
+                    <span className={styles.emptyText}>
+                      {t("company.noDescriptionYet", {
+                        defaultValue: `${company.name} has not added an extended description yet. You can suggest an update below.`,
+                      })}
+                    </span>
+                  )}
+                </p>
+              </div>
+            </div>
+
+            {/* Recruitment Highlight Banner */}
+            {company.recruitment_page && (
+              <div className={styles.recruitmentCard}>
+                <div className={styles.recruitmentContent}>
+                  <div className={styles.recruitmentIconWrapper}>
+                    <i className="pi pi-briefcase" />
+                  </div>
+                  <div className={styles.recruitmentText}>
+                    <h3 className={styles.recruitmentTitle}>{t("company.recruitment")}</h3>
+                    <p className={styles.recruitmentDesc}>
+                      {t("company.recruitmentPrompt", {
+                        defaultValue: "This company is currently hiring. Explore career opportunities on their recruitment portal.",
+                      })}
+                    </p>
+                  </div>
+                </div>
+                <a
+                  href={company.recruitment_page}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.recruitmentButton}
+                >
+                  <span>{t("company.visitRecruitmentPage")}</span>
+                  <i className="pi pi-external-link" />
+                </a>
+              </div>
+            )}
+
+            {/* Edit Company Information Accordion */}
+            <CompanyInfoEditor
+              companyId={id!}
+              initialData={{
+                company_description: company.company_description,
+                recruitment_page: company.recruitment_page,
+              }}
+              onUpdate={(updatedData) => {
+                setCompany((prev) =>
+                  prev
+                    ? {
+                        ...prev,
+                        ...updatedData,
+                      }
+                    : null,
+                );
+              }}
+            />
+          </div>
+
+          {/* Right Column: Information Overview & Location */}
+          <div className={styles.sidebarColumn}>
+            {/* Information Overview */}
+            <div className={styles.glassCard}>
+              <div className={styles.cardHeader}>
+                <div className={styles.cardHeaderTitle}>
+                  <i className="pi pi-info-circle" />
+                  <h3>{t("company.information")}</h3>
+                </div>
+              </div>
+              <div className={styles.cardBody}>
+                <div className={styles.infoList}>
+                  <div className={styles.infoItem}>
+                    <span className={styles.infoLabel}>
+                      <i className="pi pi-id-card" />
+                      {t("company.businessId")}
+                    </span>
+                    <span className={styles.infoValue}>{company.businessid}</span>
+                  </div>
+
+                  {company.mainbusinesslinename && (
+                    <div className={styles.infoItem}>
+                      <span className={styles.infoLabel}>
+                        <i className="pi pi-briefcase" />
+                        {t("company.mainBusinessLine")}
+                      </span>
+                      <span className={styles.infoValue}>
+                        {company.mainbusinesslinename}
+                      </span>
+                    </div>
+                  )}
+
+                  {websiteUrl && (
+                    <div className={styles.infoItem}>
+                      <span className={styles.infoLabel}>
+                        <i className="pi pi-globe" />
+                        {t("company.website")}
+                      </span>
+                      <a
+                        href={websiteUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={styles.infoLink}
+                      >
+                        <span>{company.website.replace(/^https?:\/\//, "")}</span>
+                        <i className="pi pi-external-link" />
+                      </a>
+                    </div>
+                  )}
+
+                  {company.country && (
+                    <div className={styles.infoItem}>
+                      <span className={styles.infoLabel}>
+                        <i className="pi pi-flag" />
+                        {t("company.country", { defaultValue: "Country" })}
+                      </span>
+                      <span className={styles.infoValue}>{company.country}</span>
+                    </div>
+                  )}
+
+                  <div className={styles.infoItem}>
+                    <span className={styles.infoLabel}>
+                      <i className="pi pi-calendar" />
+                      {t("company.updatedAt")}
+                    </span>
+                    <span className={styles.infoValue}>
+                      {company.updated_at
+                        ? new Date(company.updated_at).toLocaleDateString()
+                        : "-"}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Address & Interactive Map Card */}
+            {company.street && company.city && (
+              <div className={styles.glassCard}>
+                <div className={styles.cardHeader}>
+                  <div className={styles.cardHeaderTitle}>
+                    <i className="pi pi-map-marker" />
+                    <h3>{t("company.address")}</h3>
+                  </div>
+                </div>
+                <div className={styles.addressBody}>
+                  <a
+                    href={getGoogleMapsUrl(company)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.mapBanner}
+                    style={
+                      {
+                        "--map-bg-url": `url(${mapBg})`,
+                      } as React.CSSProperties
                     }
-                  : null,
-              );
-            }}
-          />
+                  >
+                    <div className={styles.mapOverlay} />
+                    <div className={styles.mapPin}>
+                      <i className="pi pi-map-marker" />
+                    </div>
+                    <div className={styles.mapBadge}>
+                      <i className="pi pi-external-link" />
+                      <span>Google Maps</span>
+                    </div>
+                  </a>
+
+                  <div className={styles.addressDetails}>
+                    <p className={styles.addressStreet}>
+                      {company.street} {company.buildingnumber}
+                      {company.apartmentnumber && `, ${company.apartmentnumber}`}
+                    </p>
+                    <p className={styles.addressCity}>
+                      {company.postcode} {company.city}
+                    </p>
+                    <a
+                      href={getGoogleMapsUrl(company)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={styles.openMapBtn}
+                    >
+                      <i className="pi pi-directions" />
+                      <span>
+                        {t("company.openInMaps", {
+                          defaultValue: "Open in Google Maps",
+                        })}
+                      </span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </>

@@ -1,18 +1,260 @@
+@use "../../styles/variables" as *;
+
 .container {
   margin-top: 24px;
+  width: 100%;
+}
+
+.accordion {
+  :global(.p-accordion-header .p-accordion-header-link) {
+    background: linear-gradient(
+      165deg,
+      rgba(34, 16, 50, 0.88) 0%,
+      rgba(20, 10, 32, 0.94) 100%
+    ) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    border-radius: 18px !important;
+    backdrop-filter: blur(24px) !important;
+    -webkit-backdrop-filter: blur(24px) !important;
+    padding: 18px 24px !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35) !important;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+
+    &:hover {
+      background: linear-gradient(
+        165deg,
+        rgba(44, 20, 64, 0.92) 0%,
+        rgba(26, 13, 42, 0.97) 100%
+      ) !important;
+      border-color: rgba(207, 91, 175, 0.45) !important;
+      box-shadow: 0 12px 34px rgba(0, 0, 0, 0.45), 0 0 20px rgba(160, 41, 127, 0.15) !important;
+    }
+
+    :global(.p-accordion-toggle-icon) {
+      color: rgba(207, 91, 175, 0.9) !important;
+      font-size: 1.1rem !important;
+      margin-right: 14px !important;
+      transition: transform 0.2s ease !important;
+    }
+  }
+
+  :global(.p-accordion-header:not(.p-disabled).p-highlight .p-accordion-header-link) {
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    border-color: rgba(207, 91, 175, 0.4) !important;
+    box-shadow: none !important;
+  }
+
+  :global(.p-accordion-content) {
+    background: linear-gradient(
+      165deg,
+      rgba(26, 12, 38, 0.96) 0%,
+      rgba(16, 8, 26, 0.98) 100%
+    ) !important;
+    border: 1px solid rgba(207, 91, 175, 0.25) !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-bottom-left-radius: 18px !important;
+    border-bottom-right-radius: 18px !important;
+    backdrop-filter: blur(24px) !important;
+    -webkit-backdrop-filter: blur(24px) !important;
+    padding: 24px 28px 28px !important;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5) !important;
+  }
+}
+
+.tabHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.tabHeaderLeft {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.tabHeaderIcon {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(160, 41, 127, 0.35) 0%, rgba(98, 44, 144, 0.2) 100%);
+  border: 1px solid rgba(207, 91, 175, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 1.15rem;
+  flex-shrink: 0;
+  box-shadow: 0 4px 14px rgba(160, 41, 127, 0.25);
+}
+
+.tabHeaderText {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.tabHeaderTitle {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.2px;
+}
+
+.tabHeaderSubtitle {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.65);
+  font-weight: 400;
 }
 
 .form {
   display: flex;
   flex-direction: column;
+  gap: 20px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
   gap: 8px;
 }
 
+.label {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.92);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  i {
+    color: rgba(207, 91, 175, 0.9);
+    font-size: 0.9rem;
+  }
+}
+
 .textarea {
-  width: 100%;
+  width: 100% !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  border-radius: 12px !important;
+  color: #ffffff !important;
+  padding: 14px 16px !important;
+  font-size: 0.95rem !important;
+  line-height: 1.6 !important;
+  transition: all 0.2s ease !important;
+  resize: vertical;
+  min-height: 110px;
+
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.35) !important;
+  }
+
+  &:hover {
+    border-color: rgba(255, 255, 255, 0.28) !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+  }
+
+  &:focus {
+    border-color: rgba(207, 91, 175, 0.7) !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 0 0 0 3px rgba(207, 91, 175, 0.25) !important;
+    outline: none !important;
+  }
 }
 
 .input {
+  width: 100% !important;
+  height: 44px !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  border-radius: 12px !important;
+  color: #ffffff !important;
+  padding: 0 16px !important;
+  font-size: 0.95rem !important;
+  transition: all 0.2s ease !important;
+
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.35) !important;
+  }
+
+  &:hover {
+    border-color: rgba(255, 255, 255, 0.28) !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+  }
+
+  &:focus {
+    border-color: rgba(207, 91, 175, 0.7) !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 0 0 0 3px rgba(207, 91, 175, 0.25) !important;
+    outline: none !important;
+  }
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 8px;
+}
+
+.submitBtn {
+  background: linear-gradient(
+    135deg,
+    rgba(160, 41, 127, 0.9) 0%,
+    rgba(98, 44, 144, 0.95) 100%
+  ) !important;
+  border: 1px solid rgba(207, 91, 175, 0.55) !important;
+  color: #ffffff !important;
+  border-radius: 12px !important;
+  padding: 0 24px !important;
+  height: 44px !important;
+  font-weight: 600 !important;
+  box-shadow: 0 4px 16px rgba(160, 41, 127, 0.35) !important;
+  transition: all 0.2s ease !important;
+
+  &:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(160, 41, 127, 0.5) !important;
+    border-color: rgba(207, 91, 175, 0.8) !important;
+  }
+
+  &:disabled {
+    opacity: 0.5 !important;
+    cursor: not-allowed !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+    box-shadow: none !important;
+  }
+}
+
+.dialogHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 1.15rem;
+
+  i {
+    color: rgba(207, 91, 175, 0.95);
+    font-size: 1.25rem;
+  }
+}
+
+.dialogMessage {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.dialogFooter {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
   width: 100%;
 }
 

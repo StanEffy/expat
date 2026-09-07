@@ -1,0 +1,39 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 80px 24px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+}
+
+.errorCode {
+  font-size: 6rem;
+  font-weight: 800;
+  color: $primary-3;
+  margin: 0;
+  line-height: 1;
+  letter-spacing: -2px;
+}
+
+.title {
+  font-size: 2rem;
+  margin-top: 16px;
+  margin-bottom: 12px;
+  color: #ffffff;
+}
+
+.description {
+  font-size: 1.15rem;
+  color: rgba(255, 255, 255, 0.8);
+  max-width: 480px;
+  margin: 0 auto 32px;
+  line-height: 1.6;
+}
+
+.button {
+  min-width: 180px;
+}

@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useState } from 'react';
+import { ReactNode, useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ProgressSpinner } from 'primereact/progressspinner';
 import { Message } from 'primereact/message';
@@ -28,11 +28,7 @@ const AdminRouteGuard = ({ children }: AdminRouteGuardProps) => {
   const [showSetupModal, setShowSetupModal] = useState(false);
   const [showVerifyModal, setShowVerifyModal] = useState(false);
 
-  useEffect(() => {
-    checkAccess();
-  }, []);
-
-  const checkAccess = async () => {
+  const checkAccess = useCallback(async () => {
     setLoading(true);
     setError('');
 
@@ -52,11 +48,6 @@ const AdminRouteGuard = ({ children }: AdminRouteGuardProps) => {
 
     setIsAdmin(true);
 
-    // Check 2FA status
-    await check2FAStatus();
-  };
-
-  const check2FAStatus = async () => {
     try {
       const headers = getAuthHeaders();
       if (!headers) {
@@ -85,17 +76,12 @@ const AdminRouteGuard = ({ children }: AdminRouteGuardProps) => {
               setLoading(false);
               return;
             } else {
-              // Session expired or invalid - clear it
-              console.log('Session invalid:', validation.reason);
               removeAdmin2FASession();
             }
           } else {
-            // Validation endpoint failed, assume session is invalid
             removeAdmin2FASession();
           }
-        } catch (validationErr) {
-          // Validation endpoint might not exist, fall back to old method
-          console.log('Session validation endpoint not available, using fallback');
+        } catch {
           removeAdmin2FASession();
         }
       }
@@ -156,7 +142,11 @@ const AdminRouteGuard = ({ children }: AdminRouteGuardProps) => {
       setError(t('admin.errors.loadFailed'));
       setLoading(false);
     }
-  };
+  }, [navigate, t]);
+
+  useEffect(() => {
+    checkAccess();
+  }, [checkAccess]);
 
   const handleSetupComplete = () => {
     setShowSetupModal(false);
@@ -164,7 +154,7 @@ const AdminRouteGuard = ({ children }: AdminRouteGuardProps) => {
     setShowVerifyModal(true);
   };
 
-  const handleVerifyComplete = (_sessionToken: string) => {
+  const handleVerifyComplete = () => {
     // Session token is already stored by TwoFAVerifyModal via setAdmin2FASession
     setShowVerifyModal(false);
     setTwoFAStatus({ enabled: true, verified: true });

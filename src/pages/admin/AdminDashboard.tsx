@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { Card } from 'primereact/card';
 import { ProgressSpinner } from 'primereact/progressspinner';
-import { ADMIN_ENDPOINTS } from '../../constants/api';
-import { getAdminHeaders } from '../../utils/auth';
+import { adminService } from '@/services/adminService';
 import { useTranslation } from 'react-i18next';
 import SEO from '../../components/Common/SEO';
 import styles from './AdminDashboard.module.scss';
@@ -20,49 +19,34 @@ const AdminDashboard = () => {
   const [stats, setStats] = useState<DashboardStats | null>(null);
   const [error, setError] = useState<string>('');
 
-  useEffect(() => {
-    fetchStats();
-  }, []);
-
-  const fetchStats = async () => {
+  const fetchStats = useCallback(async () => {
     setLoading(true);
     setError('');
 
     try {
-      const headers = getAdminHeaders();
-      if (!headers) {
-        setError(t('admin.errors.unauthorized'));
-        return;
-      }
-
-      // Fetch users count
-      const usersResponse = await fetch(ADMIN_ENDPOINTS.USERS, { headers });
-      const usersData = usersResponse.ok ? await usersResponse.json() : { data: [] };
-
-      // Fetch pending updates
-      const pendingResponse = await fetch(ADMIN_ENDPOINTS.COMPANY_UPDATES('pending'), { headers });
-      const pendingData = pendingResponse.ok ? await pendingResponse.json() : { data: [] };
-
-      // Fetch approved updates
-      const approvedResponse = await fetch(ADMIN_ENDPOINTS.COMPANY_UPDATES('approved'), { headers });
-      const approvedData = approvedResponse.ok ? await approvedResponse.json() : { data: [] };
-
-      // Fetch rejected updates
-      const rejectedResponse = await fetch(ADMIN_ENDPOINTS.COMPANY_UPDATES('rejected'), { headers });
-      const rejectedData = rejectedResponse.ok ? await rejectedResponse.json() : { data: [] };
+      const [users, pendingUpdates, approvedUpdates, rejectedUpdates] = await Promise.all([
+        adminService.getUsers().catch(() => []),
+        adminService.getCompanyUpdates('pending').catch(() => []),
+        adminService.getCompanyUpdates('approved').catch(() => []),
+        adminService.getCompanyUpdates('rejected').catch(() => []),
+      ]);
 
       setStats({
-        totalUsers: Array.isArray(usersData.data) ? usersData.data.length : 0,
-        pendingUpdates: Array.isArray(pendingData.data) ? pendingData.data.length : 0,
-        approvedUpdates: Array.isArray(approvedData.data) ? approvedData.data.length : 0,
-        rejectedUpdates: Array.isArray(rejectedData.data) ? rejectedData.data.length : 0,
+        totalUsers: users.length,
+        pendingUpdates: pendingUpdates.length,
+        approvedUpdates: approvedUpdates.length,
+        rejectedUpdates: rejectedUpdates.length,
       });
     } catch (err) {
       setError(err instanceof Error ? err.message : t('admin.errors.loadFailed'));
     } finally {
       setLoading(false);
     }
-  };
+  }, [t]);
+
+  useEffect(() => {
+    fetchStats();
+  }, [fetchStats]);
 
   const currentUrl = typeof window !== 'undefined' ? window.location.href : '';
 

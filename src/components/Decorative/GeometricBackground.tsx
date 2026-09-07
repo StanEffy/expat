@@ -60,40 +60,40 @@ interface PatternElement {
   key: string;
 }
 
+// Load SVG content and replace fill color
+const loadAndColorizeSVG = async (svgUrl: string, color: string): Promise<string> => {
+  try {
+    const response = await fetch(svgUrl);
+    const svgText = await response.text();
+    // Replace fill attributes with our color
+    const coloredSVG = svgText
+      .replace(/fill=['"](#808|#[0-9a-fA-F]{3,6}|rgb\([^)]+\)|rgba\([^)]+\))['"]/g, `fill="${color}"`)
+      .replace(/<svg/, `<svg style="width: 100%; height: 100%;"`);
+    return coloredSVG;
+  } catch (error) {
+    console.error('Failed to load SVG:', error);
+    return '';
+  }
+};
+
+// Theme colors - extract RGB values from theme variables
+const themeColors = [
+  { r: 151, g: 96, b: 200 },   // primary-3
+  { r: 164, g: 123, b: 200 },  // primary-4
+  { r: 207, g: 91, b: 175 },   // secondary-a-3
+  { r: 196, g: 229, b: 101 },  // secondary-b-3
+  { r: 234, g: 229, b: 103 },  // complement-3
+  { r: 98, g: 44, b: 144 },    // primary-0
+  { r: 160, g: 41, b: 127 },   // secondary-a-0
+  { r: 214, g: 207, b: 54 },   // complement-0
+];
+
 const GeometricBackground = () => {
   const [patterns, setPatterns] = useState<PatternElement[]>([]);
   const [cursorPattern, setCursorPattern] = useState<PatternElement | null>(null);
   const [cursorPosition, setCursorPosition] = useState({ x: 50, y: 50 });
   const containerRef = useRef<HTMLDivElement>(null);
   const lastPositionRef = useRef({ x: 50, y: 50 });
-
-  // Load SVG content and replace fill color
-  const loadAndColorizeSVG = async (svgUrl: string, color: string): Promise<string> => {
-    try {
-      const response = await fetch(svgUrl);
-      const svgText = await response.text();
-      // Replace fill attributes with our color
-      const coloredSVG = svgText
-        .replace(/fill=['"](#808|#[0-9a-fA-F]{3,6}|rgb\([^)]+\)|rgba\([^)]+\))['"]/g, `fill="${color}"`)
-        .replace(/<svg/, `<svg style="width: 100%; height: 100%;"`);
-      return coloredSVG;
-    } catch (error) {
-      console.error('Failed to load SVG:', error);
-      return '';
-    }
-  };
-
-  // Theme colors - extract RGB values from theme variables
-  const themeColors = [
-    { r: 151, g: 96, b: 200 },   // primary-3
-    { r: 164, g: 123, b: 200 },  // primary-4
-    { r: 207, g: 91, b: 175 },   // secondary-a-3
-    { r: 196, g: 229, b: 101 },  // secondary-b-3
-    { r: 234, g: 229, b: 103 },  // complement-3
-    { r: 98, g: 44, b: 144 },    // primary-0
-    { r: 160, g: 41, b: 127 },   // secondary-a-0
-    { r: 214, g: 207, b: 54 },   // complement-0
-  ];
 
   useEffect(() => {
     // Generate random seed for this page load

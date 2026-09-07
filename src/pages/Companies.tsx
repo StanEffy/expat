@@ -1,43 +1,18 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { Card } from "primereact/card";
 import Button from "../components/Common/Button";
 import { Dropdown } from "primereact/dropdown";
 import { ProgressSpinner } from "primereact/progressspinner";
-import {
-  COMPANY_ENDPOINTS,
-  CITY_ENDPOINTS,
-  CATEGORY_ENDPOINTS,
-  API_BASE_URL,
-} from "../constants/api";
-import { getAuthHeaders } from "../utils/auth";
+import { companyService } from "@/services/companyService";
 import { useNotification } from "../contexts/NotificationContext";
 import { useTranslation } from "react-i18next";
 import CompanyFilter from "../components/Companies/CompanyFilter";
-import CategoryFilter, {
-  type GeneralCategoryItem,
-} from "../components/Companies/CategoryFilter";
+import CategoryFilter from "../components/Companies/CategoryFilter";
 import FavouriteButton from "../components/Common/FavouriteButton";
 import SEO from "../components/Common/SEO";
+import type { Company, BackendCategoryItem, GeneralCategoryItem } from "@/types";
 import styles from "./Companies.module.scss";
-
-interface Company {
-  id: number;
-  name: string;
-  mainbusinesslinename?: string | null;
-  updated_at?: string | null;
-}
-
-interface BackendCityItem {
-  city?: string | null;
-}
-
-interface BackendCategoryItem {
-  mainbusinessline?: string | null; // id (code)
-  name?: string | null; // FI
-  name_en?: string | null; // EN
-  company_count?: number | null; // Company count for this category
-}
 
 const ITEMS_PER_PAGE_OPTIONS = [10, 25, 50];
 
@@ -67,18 +42,63 @@ const Companies = () => {
   const [selectedCities, setSelectedCities] = useState<string[]>([]);
 
   const [categories, setCategories] = useState<BackendCategoryItem[]>([]);
-  const [generalCategories, setGeneralCategories] = useState<
-    GeneralCategoryItem[]
-  >([]);
+  const [generalCategories, setGeneralCategories] = useState<GeneralCategoryItem[]>([]);
   const [selectedCategoryId, setSelectedCategoryId] = useState<string>("");
   const previousCountRef = useRef(0);
 
+  const fetchCompanies = useCallback(
+    async ({
+      pageNumber,
+      limit,
+      append = false,
+      mainbusinesslineid,
+      cities: filterCities,
+    }: {
+      pageNumber: number;
+      limit: number;
+      append?: boolean;
+      mainbusinesslineid?: string;
+      cities?: string[];
+    }) => {
+      try {
+        const data = await companyService.getCompanies({
+          page: pageNumber,
+          count: limit,
+          mainbusinesslineid,
+          cities: filterCities,
+        });
+
+        if (append) {
+          if (data.length) {
+            setCompanies((prev) => {
+              previousCountRef.current = prev.length;
+              return [...prev, ...data];
+            });
+          }
+        } else {
+          previousCountRef.current = 0;
+          setCompanies(data);
+        }
+
+        setHasMore(data.length >= limit);
+      } catch (err) {
+        const errorMessage =
+          err instanceof Error
+            ? err.message
+            : "An error occurred while fetching companies";
+        showNotification(errorMessage, "error");
+      } finally {
+        setLoading(false);
+        setLoadingMore(false);
+      }
+    },
+    [showNotification],
+  );
+
   // Load initial params from URL
   useEffect(() => {
-    const initialPage = parseInt(searchParams.get("page") || "1");
-    const initialItemsPerPage = parseInt(searchParams.get("limit") || "10");
-
-    console.log("Initial load");
+    const initialPage = parseInt(searchParams.get("page") || "1", 10);
+    const initialItemsPerPage = parseInt(searchParams.get("limit") || "10", 10);
 
     const initialCategory = searchParams.get("mainbusinesslineid") || "";
     const urlCities = searchParams.getAll("cities");
@@ -95,42 +115,21 @@ const Companies = () => {
       mainbusinesslineid: initialCategory || undefined,
       cities: urlCities.length ? urlCities : undefined,
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Fetch filter options (cities and categories)
   useEffect(() => {
     const loadOptions = async () => {
       try {
-        const headers = getAuthHeaders();
-        if (!headers) {
-          return;
-        }
-
-        const [citiesRes, categoriesRes] = await Promise.all([
-          fetch(CITY_ENDPOINTS.LIST, { headers }),
-          fetch(CATEGORY_ENDPOINTS.LIST, { headers }),
+        const [citiesData, categoriesData, generalData] = await Promise.all([
+          companyService.getCities(),
+          companyService.getCategories(),
+          companyService.getGeneralCategories(),
         ]);
-
-        const generalRes = await fetch(CATEGORY_ENDPOINTS.GENERAL, { headers });
-
-        if (citiesRes.ok) {
-          const { data: citiesData } = await citiesRes.json();
-          const options = (citiesData as BackendCityItem[])
-            .map((c) => (c.city ?? "").toString())
-            .filter((c) => c && c.length > 0);
-          setCities(options);
-        }
-
-        if (categoriesRes.ok) {
-          const { data: categoriesData } = await categoriesRes.json();
-          console.log("Categories fetched:", categoriesData);
-          console.log("First category:", categoriesData?.[0]);
-          setCategories(categoriesData as BackendCategoryItem[]);
-        }
-        if (generalRes.ok) {
-          const { data: generalData } = await generalRes.json();
-          setGeneralCategories(generalData as GeneralCategoryItem[]);
-        }
+        setCities(citiesData);
+        setCategories(categoriesData);
+        setGeneralCategories(generalData);
       } catch {
         // Non-fatal; filters just won't load
       }
@@ -138,104 +137,6 @@ const Companies = () => {
 
     loadOptions();
   }, []);
-
-  const fetchCompanies = async ({
-    pageNumber,
-    limit,
-    append = false,
-    mainbusinesslineid,
-    cities,
-  }: {
-    pageNumber: number;
-    limit: number;
-    append?: boolean;
-    mainbusinesslineid?: string;
-    cities?: string[];
-  }) => {
-    try {
-      const headers = getAuthHeaders();
-      if (!headers) {
-        return;
-      }
-
-      let url: string;
-      if (mainbusinesslineid && mainbusinesslineid.startsWith("general:")) {
-        const generalCode = mainbusinesslineid.split(":")[1];
-        const queryParts: string[] = [
-          `page=${pageNumber}`,
-          `count=${limit}`,
-          `generalcategory=${encodeURIComponent(generalCode)}`,
-        ];
-        if (cities && cities.length > 0) {
-          for (const city of cities) {
-            queryParts.push(`cities=${encodeURIComponent(city)}`);
-          }
-        }
-        url = `${API_BASE_URL}/api/companies/?${queryParts.join("&")}`;
-      } else {
-        url = COMPANY_ENDPOINTS.FILTERED({
-          page: pageNumber,
-          count: limit,
-          mainbusinesslineid,
-          cities,
-        });
-      }
-
-      const response = await fetch(url, {
-        headers,
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || "Failed to fetch companies");
-      }
-
-      const json = await response.json();
-      const data = Array.isArray(json?.data) ? json.data : [];
-      const totalCount: number | undefined =
-        typeof json?.count === "number" ? json.count : undefined;
-
-      // If backend returns null or non-array for data, treat as empty page
-      if (!Array.isArray(json?.data)) {
-        // Show a gentle info when we attempted to load more but there's nothing
-        if (append) {
-          showNotification("No more companies", "info");
-        }
-      }
-
-      if (append) {
-        if (data.length) {
-          setCompanies((prev) => {
-            previousCountRef.current = prev.length;
-            return [...prev, ...data];
-          });
-        }
-      } else {
-        previousCountRef.current = 0;
-        setCompanies(data);
-      }
-
-      // Determine hasMore conservatively
-      let nextHasMore = true;
-      if (data.length < limit) {
-        nextHasMore = false;
-      }
-      if (typeof totalCount === "number" && pageNumber * limit >= totalCount) {
-        nextHasMore = false;
-      }
-      setHasMore(nextHasMore);
-    } catch (err) {
-      const errorMessage =
-        err instanceof Error
-          ? err.message
-          : "An error occurred while fetching companies";
-      // Keep existing list; just notify the user
-      showNotification(errorMessage, "error");
-    } finally {
-      setLoading(false);
-      setLoadingMore(false);
-    }
-  };
 
   // Refetch when itemsPerPage changes
   useEffect(() => {
@@ -250,6 +151,7 @@ const Companies = () => {
       cities: selectedCities.length ? selectedCities : undefined,
     });
     setPage(1);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [itemsPerPage]);
 
   // Refetch on filter changes

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Card } from 'primereact/card';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
@@ -48,11 +48,7 @@ const UsersManagement = () => {
     { label: t('admin.users.roleValues.admin'), value: 'admin' },
   ];
 
-  useEffect(() => {
-    fetchUsers();
-  }, []);
-
-  const fetchUsers = async () => {
+  const fetchUsers = useCallback(async () => {
     setLoading(true);
     setError('');
 
@@ -77,7 +73,11 @@ const UsersManagement = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [showNotification, t]);
+
+  useEffect(() => {
+    fetchUsers();
+  }, [fetchUsers]);
 
   const handleAssignRole = (user: User) => {
     setSelectedUser(user);

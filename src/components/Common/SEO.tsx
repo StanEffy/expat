@@ -122,17 +122,18 @@ const SEO = ({
       }
 
       // Remove undefined values from structured data
-      const cleanStructuredData = (obj: any): any => {
+      const cleanStructuredData = (obj: unknown): unknown => {
         if (obj === null || obj === undefined) {
           return undefined;
         }
         if (Array.isArray(obj)) {
-          return obj.map(cleanStructuredData).filter(item => item !== undefined);
+          return obj.map(cleanStructuredData).filter((item) => item !== undefined);
         }
         if (typeof obj === 'object') {
-          const cleaned: any = {};
-          for (const key in obj) {
-            const cleanedValue = cleanStructuredData(obj[key]);
+          const record = obj as Record<string, unknown>;
+          const cleaned: Record<string, unknown> = {};
+          for (const key of Object.keys(record)) {
+            const cleanedValue = cleanStructuredData(record[key]);
             if (cleanedValue !== undefined) {
               cleaned[key] = cleanedValue;
             }
@@ -142,7 +143,7 @@ const SEO = ({
         return obj;
       };
 
-      const cleanedData = cleanStructuredData(structuredData);
+      const cleanedData = cleanStructuredData(structuredData) as Record<string, unknown> | undefined;
       if (cleanedData && Object.keys(cleanedData).length > 0) {
         const script = document.createElement('script');
         script.type = 'application/ld+json';

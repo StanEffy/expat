@@ -431,48 +431,49 @@ button {
 
 // PrimeReact Dropdown Styles
 .p-dropdown {
-  background-color: $primary-2;
-  border-radius: 12px;
-  border: none;
-  height: 44px;
-  min-height: 44px;
+  background-color: rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  height: 40px;
+  min-height: 40px;
   position: relative; // For scrollable dropdown panels when appendTo="self"
+  transition: all 0.2s ease;
 
   .p-dropdown-label {
-    color: $complement-3;
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 0.9rem;
+    font-weight: 500;
   }
 
   .p-dropdown-trigger {
-    color: $complement-3;
+    color: rgba(255, 255, 255, 0.75);
+    width: 2rem;
   }
 
   &:not(.p-disabled):hover {
-    background-color: $primary-2;
-    border-color: transparent;
+    background-color: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.28);
   }
 
-  &:not(.p-disabled).p-focus {
-    background-color: $primary-2;
-    border-color: transparent;
-    box-shadow: none;
-    outline: 2px solid $complement-3;
-    outline-offset: 2px;
-  }
-
+  &:not(.p-disabled).p-focus,
   &.p-focus {
-    background-color: $primary-2;
-    border-color: transparent;
-    outline: 2px solid $complement-3;
-    outline-offset: 2px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(207, 91, 175, 0.6);
+    box-shadow: 
+      0 0 0 2px rgba(255, 255, 255, 0.25),
+      0 0 0 4px rgba(207, 91, 175, 0.45);
+    outline: none;
   }
 }
 
 // Dropdown panel/list
 .p-dropdown-panel {
-  background-color: $primary-2;
+  background-color: rgba(26, 12, 45, 0.96);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
   border-radius: 12px;
-  border: none;
-  box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.25) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0px 14px 36px rgba(0, 0, 0, 0.5), 0 4px 12px rgba(0, 0, 0, 0.25) !important;
 
   // Override PrimeReact's fixed positioning when panel is appended to self
   // Force absolute positioning so it scrolls with the page
@@ -482,39 +483,48 @@ button {
   }
 
   .p-dropdown-items {
-    padding: 0.5rem 0;
+    padding: 0.4rem;
 
     .p-dropdown-item {
-      color: $complement-3;
-      padding: 0.75rem 0.2rem;
+      color: rgba(255, 255, 255, 0.88);
+      padding: 0.55rem 0.85rem;
       border-radius: 8px;
-      margin: 0;
+      margin: 2px 0;
+      font-size: 0.875rem;
+      transition: all 0.15s ease;
 
       &:hover {
-        background-color: $primary-3;
-        color: $complement-0;
+        background-color: rgba(255, 255, 255, 0.12);
+        color: #ffffff;
       }
 
       &.p-highlight {
-        background-color: $primary-3;
-        color: $complement-0;
+        background: linear-gradient(
+          135deg,
+          rgba(160, 41, 127, 0.45) 0%,
+          rgba(98, 44, 144, 0.6) 100%
+        );
+        color: #ffffff;
+        font-weight: 600;
+        border: 1px solid rgba(207, 91, 175, 0.35);
       }
 
       &:focus {
-        background-color: $primary-3;
-        color: $complement-0;
+        background-color: rgba(255, 255, 255, 0.1);
+        color: #ffffff;
+        outline: none;
       }
     }
 
     .p-dropdown-item-group {
-      color: $complement-3;
+      color: rgba(255, 255, 255, 0.6);
       font-weight: 600;
-      padding: 0.75rem 0.2rem;
+      padding: 0.5rem 0.85rem;
     }
 
     .p-dropdown-empty-message {
-      color: $complement-3;
-      padding: 0.75rem 0.2rem;
+      color: rgba(255, 255, 255, 0.6);
+      padding: 0.5rem 0.85rem;
     }
   }
 
@@ -976,8 +986,4 @@ input {
 .p-icon-field {
   width: 100%;
 }
-.p-dropdown .p-dropdown-trigger {
-  width: 1rem;
-  position: relative;
-  left: -10px;
-}
+

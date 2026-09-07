@@ -112,7 +112,14 @@ export const checkAdminRole = async (): Promise<boolean> => {
     // Role can be in data.role or data.roles array
     if (data.role === 'admin') return true;
     if (Array.isArray(data.roles)) {
-      return data.roles.some((r: any) => r.role_name === 'admin' || r === 'admin');
+      return data.roles.some((r: unknown) => {
+        if (typeof r === 'string') return r === 'admin';
+        if (r && typeof r === 'object') {
+          const roleObj = r as { role_name?: string; role?: string };
+          return roleObj.role_name === 'admin' || roleObj.role === 'admin';
+        }
+        return false;
+      });
     }
     return false;
   } catch {

@@ -1,5 +1,5 @@
 import { ReactNode, useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, Outlet } from 'react-router-dom';
 import Button from '../Common/Button';
 import { Sidebar } from 'primereact/sidebar';
 import { Badge } from 'primereact/badge';
@@ -9,7 +9,7 @@ import { useTranslation } from 'react-i18next';
 import styles from './AdminLayout.module.scss';
 
 interface AdminLayoutProps {
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 const AdminLayout = ({ children }: AdminLayoutProps) => {
@@ -139,7 +139,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
         </div>
       </Sidebar>
 
-      <main className={styles.main}>{children}</main>
+      <main className={styles.main}>{children ?? <Outlet />}</main>
     </div>
   );
 };

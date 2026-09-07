@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Dialog } from 'primereact/dialog';
 import { InputText } from 'primereact/inputtext';
 import Button from '../Common/Button';
@@ -25,16 +25,7 @@ const TwoFASetupModal = ({ visible, onComplete, onCancel }: TwoFASetupModalProps
   const [step, setStep] = useState<'setup' | 'verify'>('setup');
   const [qrError, setQrError] = useState(false);
 
-  useEffect(() => {
-    if (visible && step === 'setup') {
-      setQrError(false);
-      setQrUrl('');
-      setSecret('');
-      fetchSetup();
-    }
-  }, [visible, step]);
-
-  const fetchSetup = async () => {
+  const fetchSetup = useCallback(async () => {
     setSetupLoading(true);
     setError('');
     try {
@@ -80,7 +71,16 @@ const TwoFASetupModal = ({ visible, onComplete, onCancel }: TwoFASetupModalProps
     } finally {
       setSetupLoading(false);
     }
-  };
+  }, [t]);
+
+  useEffect(() => {
+    if (visible && step === 'setup') {
+      setQrError(false);
+      setQrUrl('');
+      setSecret('');
+      fetchSetup();
+    }
+  }, [visible, step, fetchSetup]);
 
   const handleEnable = async () => {
     if (!token || token.length !== 6) {

@@ -4,10 +4,10 @@ React + Vite frontend application for the Expat company register.
 
 ## 🌟 Features
 
-- 🎨 Modern UI with Material-UI
+- 🎨 Modern UI with PrimeReact
 - 🌍 Multi-language support (English, Finnish, Swedish, Russian, Ukrainian)
 - 📱 Responsive design
-- 🔐 JWT authentication
+- 🔐 JWT authentication & 2FA Admin Guard
 - 🔍 Company search and filtering
 - ⚡ Fast build with Vite
 
@@ -15,7 +15,7 @@ React + Vite frontend application for the Expat company register.
 
 - **Framework**: React 19
 - **Build Tool**: Vite 6
-- **UI Library**: Material-UI 7
+- **UI Library**: PrimeReact 10
 - **Language**: TypeScript
 - **Routing**: React Router 7
 - **i18n**: i18next
@@ -156,31 +156,39 @@ env:
 ```
 
 ## 📁 Project Structure
-
+ 
 ```
 expat-app/
 ├── src/
-│   ├── components/       # Reusable components
-│   │   ├── CompanyFilter.tsx
-│   │   ├── LanguageSwitcher.tsx
-│   │   └── Layout.tsx
-│   ├── pages/           # Page components
+│   ├── types/          # Centralized TypeScript domain interfaces & models
+│   ├── services/       # Unified API client & domain service layer
+│   ├── providers/      # Application-level providers composition (AppProviders)
+│   ├── contexts/       # React Contexts (Auth, Favourites, Polls, Notifications)
+│   ├── hooks/          # Custom reusable hooks (useAuth, useFavourites, etc.)
+│   ├── components/     # Reusable UI components & layouts
+│   │   ├── Common/     # Buttons, Cards, SEO, Inputs, LanguageSwitcher
+│   │   ├── Companies/  # Company filter, search, editors
+│   │   ├── Admin/      # 2FA modals, Admin guards, Admin layouts
+│   │   └── Layouts/    # Root Layout with nested <Outlet />
+│   ├── pages/          # Application routes (Lazy-loaded)
 │   │   ├── Home.tsx
 │   │   ├── Companies.tsx
 │   │   ├── CompanyDetails.tsx
+│   │   ├── Polls.tsx, PollDetail.tsx
+│   │   ├── Profile.tsx
 │   │   ├── Login.tsx
-│   │   └── Register.tsx
-│   ├── contexts/        # React contexts
-│   ├── constants/       # Constants and configs
-│   │   └── api.ts      # API endpoints (uses VITE_API_BASE_URL)
-│   ├── utils/          # Utility functions
-│   ├── i18n/           # Internationalization
-│   └── assets/         # Images, fonts, etc.
-├── public/             # Static assets
+│   │   ├── NotFound.tsx (404)
+│   │   └── admin/      # Admin dashboard, user management, audit logs
+│   ├── constants/      # App constants & API endpoints
+│   ├── utils/          # Token management, 2FA validation, formatting
+│   ├── i18n/           # Internationalization config & translations
+│   ├── styles/         # Global SCSS variables, mixins, animations
+│   └── assets/         # Images, fonts, SVG icons
+├── public/             # Static public assets
 ├── Dockerfile          # Production Docker build
 ├── nginx.conf          # Nginx configuration for production
-├── vite.config.ts      # Vite configuration
-└── package.json        # Dependencies
+├── vite.config.ts      # Vite configuration with chunk splitting & path aliases
+└── package.json        # Dependencies & scripts
 ```
 
 ## 📜 Available Scripts

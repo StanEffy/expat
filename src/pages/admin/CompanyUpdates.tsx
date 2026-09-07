@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Card } from 'primereact/card';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
@@ -51,11 +51,7 @@ const CompanyUpdates = () => {
   const [rejectionReason, setRejectionReason] = useState('');
   const [actionLoading, setActionLoading] = useState(false);
 
-  useEffect(() => {
-    fetchAllUpdates();
-  }, []);
-
-  const fetchAllUpdates = async () => {
+  const fetchAllUpdates = useCallback(async () => {
     setLoading(true);
     setError('');
 
@@ -87,7 +83,11 @@ const CompanyUpdates = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [showNotification, t]);
+
+  useEffect(() => {
+    fetchAllUpdates();
+  }, [fetchAllUpdates]);
 
   const handleApprove = (update: CompanyUpdate) => {
     confirmDialog({

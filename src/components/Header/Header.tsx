@@ -1,9 +1,9 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 import Button from "../Common/Button";
 import { Menubar } from "primereact/menubar";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { isTokenValid } from "../../utils/auth";
+import { useAuth } from "@/hooks/useAuth";
 import LanguageSwitcher from "../Common/LanguageSwitcher";
 import MobileMenu from "../Navigation/MobileMenu";
 import AnimatedLogo from "./AnimatedLogo";
@@ -12,15 +12,18 @@ import { Badge } from "primereact/badge";
 import { useUserNotifications } from "../../contexts/UserNotificationsContext";
 
 const Header = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const { isAuthenticated } = useAuth();
   const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
   const { unreadCount } = useUserNotifications();
 
-  useEffect(() => {
-    setIsAuthenticated(isTokenValid());
-  }, [location]);
+  const isCompaniesActive = location.pathname.startsWith("/companies") || location.pathname === "/categories";
+  const isShopActive = location.pathname.startsWith("/shop");
+  const isPollsActive = location.pathname.startsWith("/polls");
+  const isAboutActive = location.pathname === "/about";
+  const isProfileActive = location.pathname.startsWith("/profile") || location.pathname.startsWith("/admin");
+  const isLoginActive = location.pathname === "/login" || location.pathname.startsWith("/password-reset");
 
   const profileButtonContent = useMemo(() => {
     if (!isAuthenticated) {
@@ -38,7 +41,7 @@ const Header = () => {
   }, [isAuthenticated, t, unreadCount]);
 
   const start = (
-    <Link to="/" className={styles.startLink}>
+    <Link to="/" className={styles.startLink} aria-label="Home">
       <AnimatedLogo />
     </Link>
   );
@@ -51,30 +54,35 @@ const Header = () => {
           text
           icon="pi pi-building"
           onClick={() => navigate("/companies")}
+          className={`${styles.navButton} ${isCompaniesActive ? styles.active : ''}`}
         />
         <Button
           label={t("navigation.shop")}
           text
           icon="pi pi-shopping-bag"
           onClick={() => navigate("/shop")}
+          className={`${styles.navButton} ${isShopActive ? styles.active : ''}`}
         />
         <Button
           label={t("navigation.polls")}
           text
           icon="pi pi-chart-bar"
           onClick={() => navigate("/polls")}
+          className={`${styles.navButton} ${isPollsActive ? styles.active : ''}`}
         />
         <Button
           label={t("navigation.about")}
           text
           icon="pi pi-info-circle"
           onClick={() => navigate("/about")}
+          className={`${styles.navButton} ${isAboutActive ? styles.active : ''}`}
         />
         {isAuthenticated ? (
           <Button
             text
             icon="pi pi-user"
             onClick={() => navigate("/profile")}
+            className={`${styles.navButton} ${isProfileActive ? styles.active : ''}`}
           >
             {profileButtonContent}
           </Button>
@@ -84,6 +92,7 @@ const Header = () => {
             text
             icon="pi pi-sign-in"
             onClick={() => navigate("/login")}
+            className={`${styles.navButton} ${isLoginActive ? styles.active : ''}`}
           />
         )}
       </div>

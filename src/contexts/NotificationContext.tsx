@@ -1,19 +1,12 @@
 import { createContext, useContext, useRef, ReactNode } from 'react';
 import { Toast } from 'primereact/toast';
+import type { NotificationSeverity } from '@/types/notification';
 
-interface NotificationContextType {
-  showNotification: (message: string, severity: 'success' | 'error' | 'info' | 'warning') => void;
+export interface NotificationContextType {
+  showNotification: (message: string, severity: NotificationSeverity) => void;
 }
 
-const NotificationContext = createContext<NotificationContextType | undefined>(undefined);
-
-export const useNotification = () => {
-  const context = useContext(NotificationContext);
-  if (!context) {
-    throw new Error('useNotification must be used within a NotificationProvider');
-  }
-  return context;
-};
+export const NotificationContext = createContext<NotificationContextType | undefined>(undefined);
 
 interface NotificationProviderProps {
   children: ReactNode;
@@ -22,7 +15,7 @@ interface NotificationProviderProps {
 export const NotificationProvider = ({ children }: NotificationProviderProps) => {
   const toast = useRef<Toast>(null);
 
-  const showNotification = (message: string, severity: 'success' | 'error' | 'info' | 'warning') => {
+  const showNotification = (message: string, severity: NotificationSeverity) => {
     const primeSeverity = severity === 'warning' ? 'warn' : severity;
     toast.current?.show({
       severity: primeSeverity as 'success' | 'error' | 'info' | 'warn',
@@ -38,4 +31,14 @@ export const NotificationProvider = ({ children }: NotificationProviderProps) =>
       <Toast ref={toast} position="top-center" />
     </NotificationContext.Provider>
   );
-}; 
+};
+
+export const useNotification = (): NotificationContextType => {
+  const context = useContext(NotificationContext);
+  if (!context) {
+    throw new Error('useNotification must be used within a NotificationProvider');
+  }
+  return context;
+};
+
+export default NotificationContext;

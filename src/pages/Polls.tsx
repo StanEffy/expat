@@ -15,6 +15,7 @@ import { useTranslation } from 'react-i18next';
 import { usePolls, PollSummary } from '../contexts/PollsContext';
 import { useNotification } from '../contexts/NotificationContext';
 import { useUserProfile } from '../hooks/useUserProfile';
+import { ApiError } from '@/services/apiClient';
 import SEO from '../components/Common/SEO';
 import styles from './Polls.module.scss';
 
@@ -114,19 +115,19 @@ const PollsPage = () => {
   }, [canCreateGlobalPoll, managedCompanies, t]);
 
   const activePolls = useMemo<PollSummary[]>(
-    () => activePollIds.map((id) => pollsById[id]).filter(Boolean),
+    () => activePollIds.map((id: number) => pollsById[id]).filter(Boolean),
     [activePollIds, pollsById],
   );
 
   const myPolls = useMemo<PollSummary[]>(
-    () => myPollIds.map((id) => pollsById[id]).filter(Boolean),
+    () => myPollIds.map((id: number) => pollsById[id]).filter(Boolean),
     [myPollIds, pollsById],
   );
 
   const companyPolls = useMemo<PollSummary[]>(() => {
     if (selectedCompanyId == null) return [];
     const ids = companyPollIds[selectedCompanyId] ?? [];
-    return ids.map((id) => pollsById[id]).filter(Boolean);
+    return ids.map((id: number) => pollsById[id]).filter(Boolean);
   }, [companyPollIds, pollsById, selectedCompanyId]);
 
   useEffect(() => {
@@ -163,7 +164,7 @@ const PollsPage = () => {
         }
       } catch (err) {
         if (!isMounted) return;
-        const status = (err as any)?.status;
+        const status = err instanceof ApiError ? err.status : undefined;
         if (status === 403) {
           setMyPollsError(t('polls.errors.notAuthorized'));
           return;
@@ -210,7 +211,7 @@ const PollsPage = () => {
         }
       } catch (err) {
         if (!isMounted) return;
-        const status = (err as any)?.status;
+        const status = err instanceof ApiError ? err.status : undefined;
         if (status === 403) {
           setCompanyPollsError(t('polls.errors.notAuthorized'));
           return;
@@ -346,8 +347,15 @@ const PollsPage = () => {
         await fetchCompanyPolls(companyId);
       }
     } catch (err) {
+      let payloadMsg: string | undefined;
+      if (err instanceof ApiError && err.payload && typeof err.payload === 'object') {
+        const payloadObj = err.payload as Record<string, unknown>;
+        if (typeof payloadObj.message === 'string') {
+          payloadMsg = payloadObj.message;
+        }
+      }
       const message =
-        (err as any)?.payload?.message ??
+        payloadMsg ??
         (err instanceof Error ? err.message : t('polls.create.error'));
       showNotification(message, 'error');
     } finally {
@@ -390,7 +398,7 @@ const PollsPage = () => {
 
   const renderPollCard = (poll: PollSummary) => {
     const expiresLabel = formatDateTime(poll.expires_at);
-    const severity = poll.status === 'closed' ? 'danger' : 'success';
+    const severity: 'danger' | 'success' = poll.status === 'closed' ? 'danger' : 'success';
     return (
       <Card key={poll.id} className={styles.pollCard}>
         <div className={styles.cardHeader}>
@@ -398,7 +406,7 @@ const PollsPage = () => {
             <h3 className={styles.cardTitle}>{poll.title}</h3>
             {poll.description && <p className={styles.cardDescription}>{poll.description}</p>}
           </div>
-          <Tag value={t(`polls.status.${poll.status}`)} severity={severity as any} />
+          <Tag value={t(`polls.status.${poll.status}`)} severity={severity} />
         </div>
         <div className={styles.cardMeta}>
           {poll.company_name && (

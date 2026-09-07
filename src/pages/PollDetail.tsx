@@ -15,6 +15,8 @@ import { useTranslation } from 'react-i18next';
 import { usePolls } from '../contexts/PollsContext';
 import { useNotification } from '../contexts/NotificationContext';
 import { useUserProfile } from '../hooks/useUserProfile';
+import { ApiError } from '@/services/apiClient';
+import type { PollOption } from '@/types/poll';
 import SEO from '../components/Common/SEO';
 import styles from './PollDetail.module.scss';
 
@@ -153,7 +155,7 @@ const PollDetailPage = () => {
   const optionStats = useMemo(() => {
     if (!poll) return [];
     const optionCounts = poll.statistics?.option_counts ?? {};
-    return poll.options.map((option) => {
+    return poll.options.map((option: PollOption) => {
       const responses = option.responsesCount ?? optionCounts[option.id] ?? 0;
       const percentage =
         poll.statistics?.optionPercentages?.[option.id] ??
@@ -228,7 +230,13 @@ const PollDetailPage = () => {
       await fetchPollById(pollId, { forceRefresh: true });
       await fetchPublicPollById(pollId);
     } catch (err) {
-      const payloadMessage = (err as any)?.payload?.message;
+      let payloadMessage: string | undefined;
+      if (err instanceof ApiError && err.payload && typeof err.payload === 'object') {
+        const payloadObj = err.payload as Record<string, unknown>;
+        if (typeof payloadObj.message === 'string') {
+          payloadMessage = payloadObj.message;
+        }
+      }
       if (payloadMessage && payloadMessage.toLowerCase().includes('already responded')) {
         setAlreadyResponded(true);
         setSubmissionError(t('polls.detail.alreadyResponded'));
@@ -396,7 +404,7 @@ const PollDetailPage = () => {
         <div className={styles.content}>
           <Card className={styles.responseCard} title={t('polls.detail.responseTitle')}>
             <div className={styles.options}>
-              {poll.options.map((option) => (
+              {poll.options.map((option: PollOption) => (
                 <label key={option.id} className={styles.optionRow}>
                   {poll.allow_multiple_choice ? (
                     <Checkbox
@@ -516,7 +524,7 @@ const PollDetailPage = () => {
                 {poll.statistics?.total_responses}
               </div>
               <div className={styles.optionStats}>
-                {optionStats.map((option) => (
+                {optionStats.map((option: { id: number; text: string; responses: number; percentage: number }) => (
                   <div key={option.id} className={styles.optionStat}>
                     <div className={styles.optionStatHeader}>
                       <span>{option.text}</span>
@@ -533,7 +541,7 @@ const PollDetailPage = () => {
                 <div className={styles.textResponses}>
                   <h3>{t('polls.detail.textResponsesTitle')}</h3>
                   <ul>
-                    {textResponses.map((response, index) => (
+                    {textResponses.map((response: string, index: number) => (
                       <li key={`${response}-${index}`}>{response}</li>
                     ))}
                   </ul>

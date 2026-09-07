@@ -11,83 +11,209 @@
 
 .wrapper {
   position: relative;
-  max-width: 500px;
+  max-width: 480px;
   width: 100%;
   z-index: 1;
+}
 
-  // Ensure Card has proper styling
-  :global(.p-card) {
+.card {
+  background: linear-gradient(
+    135deg,
+    $primary-2 0%,
+    $primary-1 50%,
+    $primary-0 60%,
+    $primary-2 100%
+  );
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 16px;
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  overflow: hidden; // Strictly clips tabs to rounded top corners
+}
+
+.tabHeader {
+  display: flex;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background: rgba(0, 0, 0, 0.28);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 15px 15px 0 0;
+}
+
+.tabButton {
+  position: relative;
+  flex: 1 1 50%;
+  width: 50%;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  color: rgba(255, 255, 255, 0.65);
+  font-family: inherit;
+  font-size: 1.05rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  padding: 0 16px;
+  user-select: none;
+  overflow: hidden;
+  transition: color 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+
+  // Smooth hover overlay for gentle gradient/lighting
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.08);
+    opacity: 0;
+    transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+  }
+
+  // Smooth active gradient overlay
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
     background: linear-gradient(
       135deg,
-      $primary-2 0%,
-      $primary-1 50%,
-      $primary-0 60%,
-      $primary-2 100%
+      rgba(160, 41, 127, 0.88) 0%,
+      rgba(98, 44, 144, 0.98) 100%
     );
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-    border-radius: 12px;
-    backdrop-filter: blur(10px);
+    opacity: 0;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22);
+    transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
   }
 
-  :global(.p-card .p-card-title) {
-    color: $complement-4;
-  }
+  &:first-child {
+    border-radius: 15px 0 0 0;
+    border-right: 1px solid rgba(255, 255, 255, 0.12);
 
-  // Make TabView transparent
-  :global(.p-tabview) {
-    background: transparent;
-  }
-
-  :global(.p-tabview-nav) {
-    background: transparent;
-    border: none;
-    width: 100%;
-    li {
-      width: 100%;
-      text-align: center;
-      font-weight: bold !important;
-      font-size: 20px;
+    &::before,
+    &::after {
+      border-radius: 15px 0 0 0;
     }
   }
 
-  :global(.p-tabview-nav-link) {
-    background: transparent;
-    border: none;
-    width: 100%;
-    display: block;
+  &:last-child {
+    border-radius: 0 15px 0 0;
+
+    &::before,
+    &::after {
+      border-radius: 0 15px 0 0;
+    }
   }
 
-  :global(.p-tabview-nav li .p-tabview-nav-link:not(.p-disabled):focus) {
-    background: rgba-color($complement-4, 0.3);
+  &:hover {
+    color: #ffffff;
+
+    &::before {
+      opacity: 1;
+    }
   }
 
-  :global(.p-tabview-nav li.p-highlight .p-tabview-nav-link) {
-    background: rgba-color($complement-4, 0.3);
-    color: $complement-4;
-    border-color: transparent;
-    width: 100%;
+  &:focus-visible {
+    outline: none;
+    box-shadow: 
+      inset 0 0 0 2px rgba(255, 255, 255, 0.35),
+      inset 0 0 0 4px rgba(207, 91, 175, 0.6);
   }
 
-  :global(
-    .p-tabview-nav
-      li:not(.p-highlight):not(.p-disabled):hover
-      .p-tabview-nav-link
-  ) {
-    background: rgba(255, 255, 255, 0.05);
+  &:focus:not(:focus-visible) {
+    outline: none;
+    box-shadow: none;
   }
 
-  :global(.p-tabview-panels) {
-    background: transparent;
-    border: none;
-    padding: 0;
+  &.tabActive {
+    color: #ffffff;
+    font-weight: 600;
+
+    &::after {
+      opacity: 1;
+    }
+
+    &:hover::after {
+      background: linear-gradient(
+        135deg,
+        rgba(175, 48, 140, 0.92) 0%,
+        rgba(110, 50, 160, 1) 100%
+      );
+    }
+  }
+}
+
+.tabButtonText {
+  position: relative;
+  z-index: 1;
+}
+
+.forgotHeader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 54px;
+  margin: 0;
+  padding: 0 16px;
+  background: rgba(0, 0, 0, 0.28);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 15px 15px 0 0;
+}
+
+.forgotHeaderTitle {
+  color: #ffffff;
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+// Smooth height transition for modal expansion/contraction
+.cardBodyWrapper {
+  position: relative;
+  width: 100%;
+  min-height: 200px;
+  overflow: hidden;
+  transition: height 0.38s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.cardBody {
+  padding: 28px 28px 32px;
+}
+
+// Smooth entrance animation for form content
+.panelAnimated {
+  animation: tabSlideFade 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+@keyframes tabSlideFade {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
 .title {
   text-align: center;
   margin-bottom: 24px;
-  color: $complement-4;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 1.5rem;
 }
+
 .errorMessage {
   margin-bottom: 16px;
 }
@@ -98,33 +224,170 @@
   gap: 16px;
   background: transparent;
 }
+
 :global(label) {
-  color: $complement-4;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+  font-size: 0.9rem;
+  margin-bottom: 6px;
+  display: inline-block;
 }
-.pField {
-  width: 100%;
-}
-.input {
+
+.pField,
+:global(.p-field) {
   width: 100%;
 }
 
+// Generous left padding for text inputs
+.input {
+  width: 100% !important;
+  height: 44px !important;
+  padding-left: 16px !important;
+  padding-right: 16px !important;
+  border-radius: 10px !important;
+  background: rgba(255, 255, 255, 0.07) !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  color: #ffffff !important;
+  font-size: 0.95rem !important;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.4) !important;
+  }
+
+  &:hover {
+    border-color: rgba(255, 255, 255, 0.3) !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+  }
+
+  &:focus,
+  &:global(.p-focus) {
+    outline: none !important;
+    border-color: rgba(207, 91, 175, 0.75) !important;
+    background: rgba(255, 255, 255, 0.12) !important;
+    box-shadow: 0 0 0 3px rgba(207, 91, 175, 0.28) !important;
+  }
+}
+
+// Generous left padding for password inputs
 .passwordInput {
-  width: 100%;
+  width: 100% !important;
+
+  :global(.p-inputtext) {
+    width: 100% !important;
+    height: 44px !important;
+    padding-left: 16px !important;
+    padding-right: 42px !important; // Room for toggle eye icon
+    border-radius: 10px !important;
+    background: rgba(255, 255, 255, 0.07) !important;
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    color: #ffffff !important;
+    font-size: 0.95rem !important;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.4) !important;
+    }
+
+    &:hover {
+      border-color: rgba(255, 255, 255, 0.3) !important;
+      background: rgba(255, 255, 255, 0.1) !important;
+    }
+
+    &:focus,
+    &:global(.p-focus) {
+      outline: none !important;
+      border-color: rgba(207, 91, 175, 0.75) !important;
+      background: rgba(255, 255, 255, 0.12) !important;
+      box-shadow: 0 0 0 3px rgba(207, 91, 175, 0.28) !important;
+    }
+  }
+
+  :global(.p-password-show-icon),
+  :global(.p-password-hide-icon) {
+    color: rgba(255, 255, 255, 0.65) !important;
+    right: 14px !important;
+    cursor: pointer;
+    transition: color 0.2s ease, transform 0.15s ease;
+
+    &:hover {
+      color: #ffffff !important;
+      transform: scale(1.1);
+    }
+  }
 }
 
 .forgotPasswordButton {
   background: none;
   border: none;
-  color: $secondary-b-0;
+  color: $secondary-a-3;
   text-decoration: underline;
   cursor: pointer;
   text-align: left;
   padding: 0;
+  font-size: 0.875rem;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.8;
+  }
 }
 
+// Submit button with smooth gradient hover
 .submitButton {
+  position: relative;
   width: 100%;
+  height: 46px;
   margin-top: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  border-radius: 10px;
+  border: none !important;
+  color: #ffffff !important;
+  background: linear-gradient(
+    135deg,
+    rgba(160, 41, 127, 0.9) 0%,
+    rgba(98, 44, 144, 1) 100%
+  ) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+
+  // Soft hover gradient overlay for non-jarring transition
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(195, 52, 156, 1) 0%,
+      rgba(120, 55, 175, 1) 100%
+    );
+    opacity: 0;
+    transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+  }
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(160, 41, 127, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.35) !important;
+
+    &::before {
+      opacity: 1;
+    }
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+  }
+
+  :global(.p-button-label) {
+    position: relative;
+    z-index: 1;
+  }
 }
 
 .buttonGroup {
@@ -142,7 +405,7 @@
   padding: 24px 16px;
   font-size: 1.1em;
   line-height: 1.6;
-  color: $complement-4;
+  color: rgba(255, 255, 255, 0.9);
 
   p {
     margin: 0;

@@ -99,19 +99,24 @@
     "launchResumeBuilder": "Launch STAR Resume Builder"
     ,
     "skills": {
-      "title": "Skills",
-      "description": "Track your core skills and show your proficiency level.",
+      "title": "Skills & Qualifications",
+      "description": "Track your core skills, trade grades, and language proficiency.",
       "edit": "Edit skills",
       "save": "Save skills",
       "add": "Add skill",
-      "addPlaceholder": "Start typing to search skills…",
-      "empty": "No skills yet. Add your first skill.",
+      "nameLabel": "Skill or Profession",
+      "addPlaceholder": "Start typing (e.g. Welding, React, English)...",
+      "empty": "No skills added yet.",
+      "emptyPrompt": "Use the form above to add your first skill.",
+      "addFirst": "Add Your First Skill",
       "remove": "Remove skill",
       "duplicateError": "You already added this skill",
       "nameRequired": "Skill name is required",
       "fetchError": "Failed to load available skills",
       "saveSuccess": "Skills updated successfully",
-      "saveError": "Failed to update skills"
+      "saveError": "Failed to update skills",
+      "levelFormat": "Level {{level}}",
+      "scaleLabel": "Scale:"
     }
   },
   "shop": {

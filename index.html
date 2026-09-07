@@ -44,9 +44,50 @@
     
     <!-- Theme Color -->
     <meta name="theme-color" content="#7c3aed" />
+
+    <style>
+      body {
+        margin: 0;
+        background: #0c0814;
+        color: #ffffff;
+        font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+      .initial-hero {
+        min-height: 80vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 64px 16px;
+        box-sizing: border-box;
+      }
+      .initial-hero h1 {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-size: clamp(2.5rem, 6vw, 4.2rem);
+        font-weight: 700;
+        margin: 0 0 16px 0;
+        line-height: 1.25;
+        color: #ffffff;
+        letter-spacing: -0.02em;
+      }
+      .initial-hero p {
+        font-size: 1.25rem;
+        color: rgba(255, 255, 255, 0.75);
+        max-width: 680px;
+        margin: 0 auto 32px auto;
+        line-height: 1.6;
+      }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <div class="initial-hero">
+        <h1>Welcome to Expat App</h1>
+        <p>Find companies and job opportunities in Finland. Connect with Finnish businesses and explore career opportunities for expats.</p>
+      </div>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

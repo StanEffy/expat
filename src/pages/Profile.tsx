@@ -1,4 +1,4 @@
-import { useState, useEffect, ChangeEvent, FormEvent } from 'react';
+import { useState, useEffect, useMemo, ChangeEvent, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../components/Common/Button';
 import { Message } from 'primereact/message';
@@ -20,7 +20,16 @@ import SEO from '../components/Common/SEO';
 import styles from './Profile.module.scss';
 import { useUserNotifications } from '../contexts/UserNotificationsContext';
 import type { UserNotification } from '../contexts/UserNotificationsContext';
-import SkillLevelSelector, { SkillLevel, SKILL_LEVELS } from '../components/Profile/SkillLevelSelector';
+import SkillLevelSelector from '../components/Profile/SkillLevelSelector';
+import SkillScaleTabs from '../components/Profile/SkillScaleTabs';
+import {
+  SkillLevel,
+  SkillScaleType,
+  SKILL_LEVELS,
+  SKILL_SCALES,
+  detectScaleFromLevel,
+  getSkillLevelHint,
+} from '../components/Profile/skillConstants';
 import { useAuth } from '@/hooks/useAuth';
 
 interface Favourite {
@@ -61,7 +70,7 @@ interface UserProfile {
 }
 
 const isSkillLevel = (value: unknown): value is SkillLevel =>
-  typeof value === 'string' && SKILL_LEVELS.includes(value as SkillLevel);
+  typeof value === 'string' && (SKILL_LEVELS as readonly string[]).includes(value);
 
 const sanitizeSkills = (input: unknown): UserSkill[] => {
   if (!Array.isArray(input)) {
@@ -78,7 +87,7 @@ const sanitizeSkills = (input: unknown): UserSkill[] => {
     .map((item) => ({
       id: typeof item.id === 'number' ? item.id : undefined,
       name: (item as { name: string }).name,
-      level: isSkillLevel(item.level) ? item.level : ('A1' as SkillLevel),
+      level: isSkillLevel(item.level) ? item.level : ('3' as SkillLevel),
     }));
 };
 
@@ -122,7 +131,7 @@ const Profile = () => {
   const [availableSkills, setAvailableSkills] = useState<string[]>([]);
   const [skillSuggestions, setSkillSuggestions] = useState<string[]>([]);
   const [newSkillName, setNewSkillName] = useState('');
-  const [newSkillLevel, setNewSkillLevel] = useState<SkillLevel>('A1');
+  const [newSkillLevel, setNewSkillLevel] = useState<SkillLevel>('3');
   const [availableSkillsLoading, setAvailableSkillsLoading] = useState(false);
   const [savingSkills, setSavingSkills] = useState(false);
   const [skillsError, setSkillsError] = useState('');
@@ -245,11 +254,34 @@ const Profile = () => {
   const handleSkillInputChange = (event: AutoCompleteChangeEvent) => {
     const value = typeof event.value === 'string' ? event.value : '';
     setNewSkillName(value);
+    if (value) {
+      const lower = value.trim().toLowerCase();
+      const isLanguage = /^(english|английский|suomi|финский|swedish|шведский|russian|русский|german|немецкий|french|французский|spanish|испанский|ukrainian|украинский|язык|language|kieli|språk)/i.test(lower);
+      if (isLanguage && !['A1', 'A2', 'B1', 'B2', 'C1', 'C2'].includes(newSkillLevel)) {
+        setNewSkillLevel('B1');
+      }
+    }
   };
 
   const handleSkillSelect = (event: AutoCompleteSelectEvent) => {
     const value = typeof event.value === 'string' ? event.value : '';
     setNewSkillName(value);
+    if (value) {
+      const lower = value.trim().toLowerCase();
+      const isLanguage = /^(english|английский|suomi|финский|swedish|шведский|russian|русский|german|немецкий|french|французский|spanish|испанский|ukrainian|украинский|язык|language|kieli|språk)/i.test(lower);
+      if (isLanguage && !['A1', 'A2', 'B1', 'B2', 'C1', 'C2'].includes(newSkillLevel)) {
+        setNewSkillLevel('B1');
+      }
+    }
+  };
+
+  const activeScale = useMemo(() => detectScaleFromLevel(newSkillLevel), [newSkillLevel]);
+  const currentSkillHint = useMemo(() => getSkillLevelHint(newSkillLevel), [newSkillLevel]);
+
+  const handleScaleTabChange = (scale: SkillScaleType) => {
+    const options = SKILL_SCALES[scale].options;
+    const defaultIdx = Math.floor(options.length / 2);
+    setNewSkillLevel(options[defaultIdx].value);
   };
 
   const handleAddSkill = () => {
@@ -268,10 +300,9 @@ const Profile = () => {
       );
       return;
     }
-    const selectedLevel =
-      typeof newSkillLevel === 'string' && SKILL_LEVELS.includes(newSkillLevel)
-        ? newSkillLevel
-        : ('A1' as SkillLevel);
+    const selectedLevel = isSkillLevel(newSkillLevel)
+      ? newSkillLevel
+      : ('3' as SkillLevel);
     const nextSkills = [
       ...skillsDraft,
       {
@@ -281,7 +312,7 @@ const Profile = () => {
     ];
     setSkillsDraft(nextSkills);
     setNewSkillName('');
-    setNewSkillLevel('A1');
+    setNewSkillLevel('3');
     setSkillSuggestions([]);
     setSkillsError('');
   };
@@ -324,7 +355,7 @@ const Profile = () => {
     setIsEditingSkills(false);
     setSkillsError('');
     setNewSkillName('');
-    setNewSkillLevel('A1');
+    setNewSkillLevel('3');
   };
 
   const handleSkillsSave = async () => {
@@ -625,6 +656,13 @@ const Profile = () => {
           .filter(Boolean)
           .join(', ')
       : 'User');
+
+  const formatSkillBadge = (level: string) => {
+    if (['1', '2', '3', '4', '5'].includes(level)) {
+      return t('profile.skills.levelFormat', { level, defaultValue: `Уровень ${level}` });
+    }
+    return level;
+  };
 
   const memberSinceFormatted =
     profile?.createdAt || profile?.created_at
@@ -1049,35 +1087,64 @@ const Profile = () => {
                           {t('profile.skills.addNew', { defaultValue: 'Add a new skill' })}
                         </h4>
                         <div className={styles.addSkillForm}>
-                          <div className={styles.autocompleteWrapper}>
-                            <AutoComplete
-                              value={newSkillName}
-                              suggestions={skillSuggestions}
-                              completeMethod={handleSkillSearch}
-                              onChange={handleSkillInputChange}
-                              onSelect={handleSkillSelect}
-                              placeholder={t('profile.skills.addPlaceholder', {
-                                defaultValue: 'Search skill name (e.g. Finnish, React, Sales)...',
-                              })}
-                              dropdown
+                          <div className={styles.addSkillFormTop}>
+                            <label className={styles.inputFieldLabel}>
+                              <i className="pi pi-tag" />
+                              {t('profile.skills.nameLabel', { defaultValue: 'Skill or Profession' })}
+                            </label>
+                            <div className={styles.scaleTabsWrapper}>
+                              <span className={styles.scaleTabsLabel}>
+                                {t('profile.skills.scaleLabel', { defaultValue: 'Scale:' })}
+                              </span>
+                              <SkillScaleTabs
+                                activeScale={activeScale}
+                                onChange={handleScaleTabChange}
+                              />
+                            </div>
+                          </div>
+
+                          <div className={styles.addSkillFormMain}>
+                            <div className={styles.autocompleteWrapper}>
+                              <AutoComplete
+                                value={newSkillName}
+                                suggestions={skillSuggestions}
+                                completeMethod={handleSkillSearch}
+                                onChange={handleSkillInputChange}
+                                onSelect={handleSkillSelect}
+                                placeholder={t('profile.skills.addPlaceholder', {
+                                  defaultValue: 'Search or enter skill (e.g. Welding, React, English)...',
+                                })}
+                                dropdown
+                                disabled={savingSkills}
+                                className={styles.skillAutoComplete}
+                              />
+                            </div>
+                            <div className={styles.selectorWrapper}>
+                              <SkillLevelSelector
+                                value={newSkillLevel}
+                                onChange={(level) => setNewSkillLevel(level)}
+                                hideScaleTabs
+                                hideHint
+                              />
+                            </div>
+                            <Button
+                              type="button"
+                              label={t('profile.skills.add', { defaultValue: 'Add' })}
+                              icon="pi pi-plus"
+                              onClick={handleAddSkill}
                               disabled={savingSkills}
-                              className={styles.skillAutoComplete}
+                              className={styles.addSkillButton}
                             />
                           </div>
-                          <div className={styles.selectorWrapper}>
-                            <SkillLevelSelector
-                              value={newSkillLevel}
-                              onChange={(level) => setNewSkillLevel(level)}
-                            />
-                          </div>
-                          <Button
-                            type="button"
-                            label={t('profile.skills.add', { defaultValue: 'Add' })}
-                            icon="pi pi-plus"
-                            onClick={handleAddSkill}
-                            disabled={savingSkills}
-                            className={styles.addSkillButton}
-                          />
+
+                          {currentSkillHint && (
+                            <div className={styles.addSkillFormBottom}>
+                              <div className={styles.levelHint}>
+                                <i className="pi pi-info-circle" />
+                                <span>{currentSkillHint}</span>
+                              </div>
+                            </div>
+                          )}
                         </div>
                         {skillsError && (
                           <Message severity="error" text={skillsError} className={styles.skillsMessage} />
@@ -1102,7 +1169,7 @@ const Profile = () => {
                             <div key={`${skill.name}-${index}`} className={styles.skillCard}>
                               <div className={styles.skillCardHeader}>
                                 <div className={styles.skillNameGroup}>
-                                  <span className={styles.skillBadge}>{skill.level}</span>
+                                  <span className={styles.skillBadge}>{formatSkillBadge(skill.level)}</span>
                                   <span className={styles.skillTitle}>{skill.name}</span>
                                 </div>
                                 <Button
@@ -1146,7 +1213,7 @@ const Profile = () => {
                           <div key={`${skill.name}-${index}`} className={styles.skillCardView}>
                             <div className={styles.skillCardViewHeader}>
                               <span className={styles.skillTitle}>{skill.name}</span>
-                              <span className={styles.levelPill}>{skill.level}</span>
+                              <span className={styles.levelPill}>{formatSkillBadge(skill.level)}</span>
                             </div>
                             <SkillLevelSelector value={skill.level} readOnly size="sm" />
                           </div>

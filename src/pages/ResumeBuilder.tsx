@@ -3,6 +3,20 @@ import type { TFunction } from 'i18next';
 import { useTranslation } from 'react-i18next';
 import Button from '../components/Common/Button';
 import styles from './ResumeBuilder.module.scss';
+import i18n from '@/i18n/config';
+import enResume from '@/i18n/locales/en/resume.json';
+import fiResume from '@/i18n/locales/fi/resume.json';
+import svResume from '@/i18n/locales/sv/resume.json';
+import ukResume from '@/i18n/locales/uk/resume.json';
+import ruResume from '@/i18n/locales/ru/resume.json';
+
+if (!i18n.hasResourceBundle('en', 'resume')) {
+  i18n.addResourceBundle('en', 'resume', enResume, true, true);
+  i18n.addResourceBundle('fi', 'resume', fiResume, true, true);
+  i18n.addResourceBundle('sv', 'resume', svResume, true, true);
+  i18n.addResourceBundle('uk', 'resume', ukResume, true, true);
+  i18n.addResourceBundle('ru', 'resume', ruResume, true, true);
+}
 
 type PersonalInfo = {
   name: string;

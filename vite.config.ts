@@ -107,11 +107,15 @@ export default defineConfig({
               id.includes('\\react\\') ||
               id.includes('/react-dom/') ||
               id.includes('\\react-dom\\') ||
-              id.includes('scheduler') ||
-              id.includes('i18next') ||
-              id.includes('react-i18next')
+              id.includes('scheduler')
             ) {
               return 'vendor_react';
+            }
+            if (id.includes('i18next')) {
+              return 'vendor_i18n';
+            }
+            if (id.includes('primereact')) {
+              return 'vendor_primereact';
             }
           }
         },

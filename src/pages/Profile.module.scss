@@ -585,37 +585,189 @@
 
 .addSkillForm {
   display: flex;
+  flex-direction: column;
   gap: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 16px 20px;
+  margin-bottom: 24px;
+}
+
+.addSkillFormTop {
+  display: flex;
   align-items: center;
+  justify-content: space-between;
   flex-wrap: wrap;
+  gap: 12px;
+}
+
+.inputFieldLabel {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.75);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  i {
+    color: $secondary-a-3;
+    font-size: 0.82rem;
+  }
+}
+
+.scaleTabsWrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.scaleTabsLabel {
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 500;
+}
+
+.addSkillFormMain {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
 }
 
 .autocompleteWrapper {
-  flex: 2;
+  flex: 5;
   min-width: 240px;
 
-  :global(.p-autocomplete),
-  :global(.p-inputtext) {
+  :global(.p-autocomplete) {
+    display: flex !important;
     width: 100% !important;
     height: 44px !important;
-    padding-left: 16px !important;
+    position: relative !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+  }
+
+  :global(.p-autocomplete.p-inputwrapper-focus) {
+    box-shadow: none !important;
+    border: none !important;
+    outline: none !important;
+  }
+
+  :global(.p-autocomplete-input),
+  :global(.p-inputtext) {
+    flex: 1 !important;
+    width: 100% !important;
+    height: 44px !important;
+    padding: 0 16px !important;
     border-radius: 10px !important;
-    background: rgba(255, 255, 255, 0.07) !important;
-    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    background: rgba(255, 255, 255, 0.06) !important;
+    border: 1px solid rgba(255, 255, 255, 0.14) !important;
     color: #ffffff !important;
+    font-size: 0.92rem !important;
+    font-family: inherit !important;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.45) !important;
+      font-size: 0.9rem !important;
+    }
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.09) !important;
+      border-color: rgba(255, 255, 255, 0.25) !important;
+    }
+
+    &:focus {
+      background: rgba(255, 255, 255, 0.1) !important;
+      border-color: rgba(207, 91, 175, 0.6) !important;
+      box-shadow: 0 0 0 2px rgba(207, 91, 175, 0.25) !important;
+      outline: none !important;
+    }
+  }
+
+  :global(.p-autocomplete-dd) {
+    :global(.p-autocomplete-input) {
+      border-top-right-radius: 0 !important;
+      border-bottom-right-radius: 0 !important;
+      border-right: none !important;
+    }
+
+    :global(.p-autocomplete-dropdown) {
+      height: 44px !important;
+      width: 42px !important;
+      border-top-left-radius: 0 !important;
+      border-bottom-left-radius: 0 !important;
+      border-top-right-radius: 10px !important;
+      border-bottom-right-radius: 10px !important;
+      background: rgba(255, 255, 255, 0.06) !important;
+      border: 1px solid rgba(255, 255, 255, 0.14) !important;
+      border-left: none !important;
+      color: rgba(255, 255, 255, 0.7) !important;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.12) !important;
+        border-color: rgba(255, 255, 255, 0.25) !important;
+        color: #ffffff !important;
+      }
+
+      &:focus {
+        border-color: rgba(207, 91, 175, 0.6) !important;
+        box-shadow: 0 0 0 2px rgba(207, 91, 175, 0.25) !important;
+        outline: none !important;
+      }
+    }
   }
 }
 
 .selectorWrapper {
-  flex: 3;
-  min-width: 280px;
+  flex: 6;
+  min-width: 270px;
 }
 
 .addSkillButton {
-  height: 44px;
-  padding: 0 20px;
-  font-weight: 600;
-  border-radius: 10px;
+  height: 44px !important;
+  padding: 0 22px !important;
+  font-weight: 600 !important;
+  border-radius: 10px !important;
+  white-space: nowrap !important;
+  background: linear-gradient(
+    135deg,
+    rgba(175, 48, 140, 0.95) 0%,
+    rgba(110, 50, 160, 1) 100%
+  ) !important;
+  border: 1px solid rgba(207, 91, 175, 0.5) !important;
+  box-shadow: 0 2px 10px rgba(160, 41, 127, 0.25) !important;
+  transition: all 0.2s ease !important;
+  flex-shrink: 0;
+
+  &:hover {
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 16px rgba(160, 41, 127, 0.4) !important;
+  }
+}
+
+.addSkillFormBottom {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 4px;
+}
+
+.levelHint {
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.65);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  i {
+    font-size: 0.76rem;
+    color: $secondary-a-3;
+  }
 }
 
 .skillsMessage {
@@ -1163,13 +1315,28 @@
   }
 
   .addSkillForm {
-    flex-direction: column;
-    align-items: stretch;
+    .addSkillFormTop {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+    }
 
-    .selectorWrapper,
+    .addSkillFormMain {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 12px;
+    }
+
     .autocompleteWrapper,
+    .selectorWrapper,
     .addSkillButton {
       width: 100%;
+      min-width: 0;
+      flex: unset;
+    }
+
+    .addSkillFormBottom {
+      justify-content: flex-start;
     }
   }
 }

@@ -799,55 +799,54 @@ button {
 
 // PrimeReact Button Styles
 .p-button {
-  background-color: $primary-2;
-  color: $complement-3;
+  background-color: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
   border-radius: 12px;
-  border: none;
-  height: 44px;
-  min-height: 44px;
-  padding: 0.75rem 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.16);
   font-weight: 500;
+  transition: all 0.2s ease;
+
+  &:not(.p-button-icon-only) {
+    height: 44px;
+    min-height: 44px;
+    padding: 0.75rem 1.5rem;
+  }
+
+  &.p-button-icon-only {
+    padding: 0;
+  }
 
   &:enabled:hover {
-    background-color: $primary-3;
-    color: $complement-0;
-    border-color: transparent;
+    background-color: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.28);
+    color: #ffffff;
   }
 
   &:enabled:focus {
-    background-color: $primary-3;
-    color: $complement-0;
-    border-color: transparent;
-    box-shadow: none;
-    outline: 2px solid $complement-3;
-    outline-offset: 2px;
-  }
-
-  &:enabled:active {
-    background-color: $primary-2;
-    color: $complement-0;
-    border-color: transparent;
+    border-color: rgba(207, 91, 175, 0.65);
+    box-shadow: 0 0 0 3px rgba(207, 91, 175, 0.25);
+    outline: none;
   }
 
   .p-button-label {
-    color: $complement-3;
+    color: inherit;
   }
 
   .p-button-icon {
-    color: $complement-3;
+    color: inherit;
   }
 
   &.p-disabled {
-    background-color: rgba-color($primary-2, 0.6);
-    color: rgba-color($complement-3, 0.6);
-    opacity: 0.6;
+    background-color: rgba(255, 255, 255, 0.04);
+    color: rgba(255, 255, 255, 0.35);
+    opacity: 0.5;
 
     .p-button-label {
-      color: rgba-color($complement-3, 0.6);
+      color: inherit;
     }
 
     .p-button-icon {
-      color: rgba-color($complement-3, 0.6);
+      color: inherit;
     }
   }
 

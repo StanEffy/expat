@@ -9,6 +9,12 @@
   -webkit-backdrop-filter: blur(20px);
   margin-bottom: 2rem;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.36);
+  box-sizing: border-box;
+
+  @media (max-width: 640px) {
+    padding: 1.25rem 1rem;
+    border-radius: 1rem;
+  }
 }
 
 .header {
@@ -33,9 +39,15 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1.5rem;
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+  }
 }
 
 .section {
+  min-width: 0;
+  box-sizing: border-box;
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 0.875rem;

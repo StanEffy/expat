@@ -3,6 +3,7 @@
 .container {
   max-width: 950px;
   margin: 0 auto;
+  box-sizing: border-box;
 }
 
 .topBar {
@@ -14,6 +15,12 @@
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.36);
+  box-sizing: border-box;
+
+  @media (max-width: 640px) {
+    padding: 1.1rem 1rem;
+    border-radius: 1rem;
+  }
 }
 
 .topRow {
@@ -56,6 +63,15 @@
   display: flex;
   gap: 0.6rem;
   flex-wrap: wrap;
+
+  @media (max-width: 480px) {
+    width: 100%;
+
+    .actionBtn {
+      flex: 1 1 auto;
+      justify-content: center;
+    }
+  }
 }
 
 .actionBtn {
@@ -136,6 +152,12 @@
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.36);
+  box-sizing: border-box;
+
+  @media (max-width: 640px) {
+    padding: 1.1rem 1rem;
+    border-radius: 1rem;
+  }
 }
 
 .filterGroup {
@@ -143,6 +165,16 @@
   align-items: center;
   gap: 0.6rem;
   flex-wrap: wrap;
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
+
+    .filterLabel {
+      min-width: unset;
+    }
+  }
 
   .filterLabel {
     font-size: 0.8rem;

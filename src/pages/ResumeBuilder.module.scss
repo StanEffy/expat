@@ -5,6 +5,11 @@
   background: linear-gradient(135deg, rgba-color($primary-0, 0.15), rgba-color($secondary-a-0, 0.15));
   min-height: 100vh;
   color: $complement-3;
+  box-sizing: border-box;
+
+  @media (max-width: 900px) {
+    padding: 1.25rem 1rem;
+  }
 }
 
 .layout {
@@ -12,17 +17,28 @@
   grid-template-columns: minmax(320px, 520px) minmax(360px, 1fr);
   gap: 2rem;
   align-items: flex-start;
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
 }
 
 .formColumn {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  min-width: 0;
 }
 
 .previewColumn {
   position: sticky;
   top: 2rem;
+  min-width: 0;
+
+  @media (max-width: 900px) {
+    position: static;
+  }
 }
 
 .pageHeader {

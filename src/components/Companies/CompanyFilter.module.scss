@@ -98,7 +98,7 @@
     border: 1px solid rgba(255, 255, 255, 0.15) !important;
     border-radius: 12px !important;
     box-shadow: 0 12px 36px rgba(0, 0, 0, 0.55) !important;
-    max-width: calc(100vw - 32px);
+    max-width: calc(100dvw - 32px);
     overflow: hidden;
 
     :global(.p-autocomplete-items) {

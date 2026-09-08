@@ -11,6 +11,12 @@
   -webkit-backdrop-filter: blur(20px);
   position: relative;
   overflow: hidden;
+  box-sizing: border-box;
+
+  @media (max-width: 640px) {
+    padding: 1.25rem 1rem;
+    border-radius: 1rem;
+  }
 
   &::before {
     content: '';
@@ -84,6 +90,10 @@
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 0.85rem;
   margin-bottom: 1.5rem;
+
+  @media (max-width: 520px) {
+    grid-template-columns: 1fr;
+  }
 }
 
 .detailItem {

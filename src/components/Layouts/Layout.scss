@@ -9,6 +9,12 @@
   z-index: 10000; //to be on top of everything else
   top: 0;
   width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+
+  @media (max-width: 480px) {
+    padding: 0.5rem 0.75rem !important;
+  }
   // Linear gradient using primary colors (mostly dark)
   background: linear-gradient(
     135deg,
@@ -80,10 +86,12 @@ body.no-backdrop-filter .layout-menubar {
 
 .wrapper {
   width: 100%;
+  max-width: 100%;
   min-height: 100vh;
   height: 100%;
   position: relative;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: visible;
 
   // Multi-gradient background with darker tones - applied to whole app
   &::before {
@@ -197,6 +205,10 @@ body.no-backdrop-filter .layout-menubar {
 }
 
 .main {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
   height: 100%;
   min-height: 100vh;
   padding-top: 45px;

@@ -2,6 +2,11 @@
   padding: 2rem 1rem 3rem;
   max-width: 1100px;
   margin: 0 auto;
+  box-sizing: border-box;
+
+  @media (max-width: 640px) {
+    padding: 1.25rem 0.75rem 2rem;
+  }
 }
 
 .header {
@@ -29,6 +34,10 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1.25rem;
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+  }
 }
 
 .pollCard {
@@ -36,6 +45,8 @@
   flex-direction: column;
   gap: 0.75rem;
   height: 100%;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .cardHeader {
@@ -148,12 +159,23 @@
   display: flex;
   gap: 2rem;
   flex-wrap: wrap;
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
 }
 
 .toggleItem {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
+  user-select: none;
+  cursor: pointer;
+
+  label {
+    cursor: pointer;
+  }
 }
 
 .optionList {

@@ -1,0 +1,63 @@
+{
+  "title": "Kommunala serviceärenden & förfrågningar",
+  "subtitle": "Skicka förfrågningar direkt till kommunala förvaltningar och följ handläggningsstatus i realtid",
+  "new_ticket_btn": "Nytt serviceärende",
+  "search_placeholder": "Sök ärenden efter rubrik, referensnummer eller nyckelord...",
+  "filters": {
+    "city_all": "Alla städer",
+    "status_all": "Alla statusar",
+    "category_all": "Alla kategorier",
+    "statuses": {
+      "submitted": "Inlämnad",
+      "under_review": "Under handläggning",
+      "in_progress": "Åtgärd pågår",
+      "resolved": "Slutförd"
+    },
+    "categories": {
+      "daycare_school": "Småbarnspedagogik och skola",
+      "housing_permits": "Boende och tillstånd",
+      "social_integration": "Integration och socialservice",
+      "waste_environment": "Miljö och avfallshantering",
+      "tax_business": "Skatt och företagstjänster",
+      "general_inquiry": "Allmän rådgivning"
+    },
+    "priorities": {
+      "low": "Standard",
+      "medium": "Normal",
+      "high": "Brådskande"
+    }
+  },
+  "ticket": {
+    "ref": "Ref",
+    "submitted_on": "Inlämnad",
+    "updated": "Uppdaterad",
+    "dept": "Avdelning",
+    "est_time": "Beräknad handläggningstid",
+    "days": "vardagar",
+    "official_response": "Stadens officiella svar",
+    "timeline": {
+      "submitted": "Mottagen av kommunens registratorskontor",
+      "under_review": "Överlämnad till ansvarig handläggare",
+      "in_progress": "Utredning eller åtgärd pågår",
+      "resolved": "Ärendet har behandlats och besvarats"
+    }
+  },
+  "dialog": {
+    "title": "Lämna in ett nytt kommunalt ärende",
+    "city_label": "Kommun / Stad",
+    "category_label": "Tjänsteområde",
+    "priority_label": "Prioritet / Brådska",
+    "ticket_title_label": "Ärende / Rubrik",
+    "ticket_title_placeholder": "Kort sammanfattning av ditt ärende...",
+    "ticket_desc_label": "Detaljer och bakgrund",
+    "ticket_desc_placeholder": "Beskriv vad du behöver hjälp med, eventuella tidigare kontakter eller viktiga datum...",
+    "email_label": "Kontakt-e-post",
+    "email_placeholder": "din.adress@example.com",
+    "cancel": "Avbryt",
+    "submit": "Skicka ärende"
+  },
+  "empty": {
+    "title": "Inga serviceärenden hittades",
+    "desc": "Justera dina filter eller skicka in en ny förfrågan med knappen ovan."
+  }
+}

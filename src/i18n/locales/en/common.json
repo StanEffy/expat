@@ -11,7 +11,12 @@
     "login": "Login",
     "profile": "Profile",
     "signup": "Signup",
-    "categories": "Categories"
+    "categories": "Categories",
+    "onboarding": "Relocation Guide",
+    "municipalAnalytics": "City Analytics",
+    "participatoryBudget": "City Budget Voting",
+    "serviceRequests": "Service Requests",
+    "community": "Community Hub"
   },
   "company": {
     "information": "Company Information",

@@ -1,0 +1,68 @@
+{
+  "title": "Osallistuva budjetointi ja asukasäänestys",
+  "subtitle": "Päätä yhdessä, mihin kunnan verovaroja kohdennetaan: kotoutumiseen, lähiluontoon ja asukastoimintaan",
+  "wallet": {
+    "title": "Kunta-asukkaan äänestystokenit",
+    "remaining": "Tokeneita jäljellä",
+    "allocated": "Ääniä annettu",
+    "budget_rule": "Jokainen rekisteröity asukas saa 5 äänestystokenia jaettavaksi mieleisilleen asukashankkeille.",
+    "reset_btn": "Nollaa ääneni"
+  },
+  "filters": {
+    "city_all": "Kaikki kunnat",
+    "category_all": "Kaikki teemat",
+    "categories": {
+      "environment_parks": "Puistot ja lähiluonto",
+      "culture_events": "Kulttuuri ja tapahtumat",
+      "integration_language": "Kielikoulutus ja kotoutuminen",
+      "sports_outdoor": "Liikunta ja saunat",
+      "children_youth": "Lapset ja nuoret",
+      "cycling_transit": "Pyöräily ja liikkuminen"
+    }
+  },
+  "proposal": {
+    "budget_needed": "Tarvittava budjetti",
+    "votes": "Ääntä",
+    "funded_badge": "Rahoitettu! 🎉",
+    "active_badge": "Äänestys käynnissä",
+    "cast_vote": "Äänestä hanketta",
+    "withdraw_vote": "Peruuta ääni",
+    "submitted_by": "Ehdotuksen tekijä",
+    "district": "Kaupunginosa",
+    "your_votes": "Antamasi äänet:"
+  },
+  "proposals": {
+    "hel_library_hub": {
+      "title": "Monikielinen lukutila ja yhteisötyötila keskustakirjasto Oodiin",
+      "description": "Kansainvälisen yhteisön kohtauspaikka Oodiin: kirjallisuutta yli 15 kielellä, kokoontumistiloja ja viikoittaisia kielikahviloita."
+    },
+    "hel_language_cafes": {
+      "title": "Maksuttomat pop-up -suomenkielikahvilat kaupunkipuistoissa",
+      "description": "Kesäisiä ulkoilmakielikahviloita natiiviohjaajien vetämänä Kalliossa, Pasilassa ja Töölönlahdella."
+    },
+    "tam_winter_sauna": {
+      "title": "Yleisen talvisaunan ja avantouintilaiturin parannustyöt Näsijärvellä",
+      "description": "Yhteisösaunan ja lämmitettyjen pukuhuoneiden laajennus kansainvälisten asukkaiden saunakulttuuriin tutustuttamiseksi."
+    },
+    "tam_esports_academy": {
+      "title": "Nuorten e-urheilu- ja koodausakatemia Hervantaan",
+      "description": "Monikielisiä pelinkehitys- ja ohjelmointityöpajoja maahanmuuttajataustaisille ja kantasuomalaisille nuorille."
+    },
+    "esp_nature_trails": {
+      "title": "Monikieliset luontopolkujen opasteet ja ääniopastus Nuuksioon",
+      "description": "Opetukselliset luontokyltit ja QR-äänioppaat suomeksi, ruotsiksi, englanniksi ja ukrainaksi luontoreiteille."
+    },
+    "oul_bike_stations": {
+      "title": "Säänkestävät pyöränhuolto- ja pumppauspisteet pyöräteiden varsille",
+      "description": "10 katettua maksutonta tee-se-itse-pyörähuoltopistettä työkaluineen Oulun keskeisille pyöräväylille."
+    },
+    "tur_river_festival": {
+      "title": "Aurajoen kansainvälinen ruoka- ja kulttuurifestivaali",
+      "description": "Kolmipäiväinen monikulttuurinen jokirantatapahtuma: perinneruokia, musiikkiesityksiä ja kotoutumistyöpajoja."
+    },
+    "van_community_garden": {
+      "title": "Yhteisöllinen kaupunkiviljelypuutarha ja kasvihuone Tikkurilaan",
+      "description": "60 viljelypalstaa ja jaettu kasvihuone Tikkurilaan, jossa paikalliset ja uudet asukkaat viljelevät satoa yhdessä."
+    }
+  }
+}

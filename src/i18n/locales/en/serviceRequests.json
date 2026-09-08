@@ -1,0 +1,63 @@
+{
+  "title": "Municipal Service Request Tracker",
+  "subtitle": "Submit inquiries directly to city departments and track resolution status in real time",
+  "new_ticket_btn": "Submit Service Request",
+  "search_placeholder": "Search tickets by title, reference ID, or keyword...",
+  "filters": {
+    "city_all": "All Cities",
+    "status_all": "All Statuses",
+    "category_all": "All Categories",
+    "statuses": {
+      "submitted": "Submitted",
+      "under_review": "Under Review",
+      "in_progress": "In Progress",
+      "resolved": "Resolved"
+    },
+    "categories": {
+      "daycare_school": "Daycare & Schools",
+      "housing_permits": "Housing & Permits",
+      "social_integration": "Integration & Social Services",
+      "waste_environment": "Environment & Waste",
+      "tax_business": "Tax & Business Services",
+      "general_inquiry": "General Inquiry"
+    },
+    "priorities": {
+      "low": "Standard",
+      "medium": "Normal",
+      "high": "Urgent"
+    }
+  },
+  "ticket": {
+    "ref": "Ref",
+    "submitted_on": "Submitted",
+    "updated": "Updated",
+    "dept": "Department",
+    "est_time": "Est. resolution",
+    "days": "days",
+    "official_response": "Official Municipal Response",
+    "timeline": {
+      "submitted": "Received by municipality",
+      "under_review": "Assigned to department coordinator",
+      "in_progress": "Action underway",
+      "resolved": "Matter resolved and answered"
+    }
+  },
+  "dialog": {
+    "title": "Submit New Municipal Request",
+    "city_label": "Target Municipality",
+    "category_label": "Service Category",
+    "priority_label": "Urgency / Priority",
+    "ticket_title_label": "Request Subject",
+    "ticket_title_placeholder": "Brief title summarizing your inquiry...",
+    "ticket_desc_label": "Details & Background",
+    "ticket_desc_placeholder": "Describe what you need help with, any previous interactions, or relevant dates...",
+    "email_label": "Contact Email",
+    "email_placeholder": "your.email@example.com",
+    "cancel": "Cancel",
+    "submit": "Send Request"
+  },
+  "empty": {
+    "title": "No service requests found",
+    "desc": "Adjust your filters or submit a new inquiry using the button above."
+  }
+}

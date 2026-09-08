@@ -1,0 +1,68 @@
+{
+  "title": "Participatory Budgeting & Citizen Voting",
+  "subtitle": "Decide how municipal tax funds are invested in expat integration, green spaces, and community culture",
+  "wallet": {
+    "title": "Your Resident Voting Tokens",
+    "remaining": "Tokens Remaining",
+    "allocated": "Votes Cast",
+    "budget_rule": "Each registered resident receives 5 voting tokens to allocate toward community proposals.",
+    "reset_btn": "Reset My Votes"
+  },
+  "filters": {
+    "city_all": "All Cities",
+    "category_all": "All Categories",
+    "categories": {
+      "environment_parks": "Parks & Nature",
+      "culture_events": "Culture & Festivals",
+      "integration_language": "Language & Integration",
+      "sports_outdoor": "Sports & Saunas",
+      "children_youth": "Children & Youth",
+      "cycling_transit": "Cycling & Transit"
+    }
+  },
+  "proposal": {
+    "budget_needed": "Required Budget",
+    "votes": "Votes",
+    "funded_badge": "Funded! 🎉",
+    "active_badge": "Voting Open",
+    "cast_vote": "Vote for Project",
+    "withdraw_vote": "Withdraw Vote",
+    "submitted_by": "Proposed by",
+    "district": "District",
+    "your_votes": "Your votes given:"
+  },
+  "proposals": {
+    "hel_library_hub": {
+      "title": "Multilingual Reading & Co-working Hub at Central Library",
+      "description": "Establish a designated international community zone at Oodi Library with literature in 15+ languages, meeting spaces, and weekly language exchanges."
+    },
+    "hel_language_cafes": {
+      "title": "Free Pop-up Finnish Language Cafes in Local Parks",
+      "description": "Weekly summer open-air conversational language cafes led by native teachers across Kallio, Pasila, and Töölönlahti."
+    },
+    "tam_winter_sauna": {
+      "title": "Winter Community Sauna & Ice Swimming Pier Enhancement",
+      "description": "Expand community-run public sauna facilities and heated changing rooms on Lake Näsijärvi to welcome international residents into sauna culture."
+    },
+    "tam_esports_academy": {
+      "title": "Youth Esports & Coding Academy After-School Club",
+      "description": "Multilingual gaming and programming workshops for immigrant children and Finnish youth in Hervanta to build friendships through technology."
+    },
+    "esp_nature_trails": {
+      "title": "Multilingual Nature Trail Wayfinding & Audio Guides",
+      "description": "Install educational nature signs and QR-audio guides in Finnish, Swedish, English, and Ukrainian along Nuuksio and coastal paths."
+    },
+    "oul_bike_stations": {
+      "title": "All-Weather Bicycle Repair & Pump Stations Across City",
+      "description": "Set up 10 free, covered self-service bike repair stations with pumps and tools along major cycling expressways."
+    },
+    "tur_river_festival": {
+      "title": "Riverfront International Food & Culture Summer Festival",
+      "description": "A 3-day multicultural open-air weekend on Aurajoki riverbanks featuring traditional foods, music performances, and integration workshops."
+    },
+    "van_community_garden": {
+      "title": "Community Urban Garden & Greenhouse for Immigrant Families",
+      "description": "Create 60 allotment garden plots and a shared greenhouse in Tikkurila where locals and newcomers can grow vegetables together."
+    }
+  }
+}

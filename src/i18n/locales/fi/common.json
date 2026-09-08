@@ -11,7 +11,12 @@
     "login": "Kirjaudu sisään",
     "profile": "Profiili",
     "signup": "Rekisteröidy",
-    "categories": "Kategoriat"
+    "categories": "Kategoriat",
+    "onboarding": "Kuntaopas",
+    "municipalAnalytics": "Kunta-analytiikka",
+    "participatoryBudget": "Osallistuva budjetointi",
+    "serviceRequests": "Palvelupyynnöt",
+    "community": "Yhteisökeskus"
   },
   "company": {
     "information": "Yrityksen tiedot",

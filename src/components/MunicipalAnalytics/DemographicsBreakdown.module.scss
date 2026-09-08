@@ -1,0 +1,218 @@
+.container {
+  background: rgba(30, 41, 59, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  backdrop-filter: blur(10px);
+  margin-bottom: 2rem;
+}
+
+.header {
+  margin-bottom: 1.5rem;
+
+  h2 {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #f8fafc;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+
+    i {
+      color: #38bdf8;
+    }
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.section {
+  background: rgba(15, 23, 42, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+
+  h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #cbd5e1;
+    margin: 0 0 1rem 0;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    i {
+      font-size: 0.9rem;
+      color: #38bdf8;
+    }
+  }
+}
+
+.citizenshipStackedBar {
+  display: flex;
+  height: 12px;
+  border-radius: 9999px;
+  overflow: hidden;
+  margin-bottom: 0.85rem;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.stackedSegment {
+  height: 100%;
+  transition: width 0.3s ease;
+
+  &.eu {
+    background: #3b82f6;
+  }
+  &.nordic {
+    background: #10b981;
+  }
+  &.nonEu {
+    background: #f59e0b;
+  }
+}
+
+.legendList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.legendItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  color: #94a3b8;
+
+  .dotLabel {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+
+      &.eu {
+        background: #3b82f6;
+      }
+      &.nordic {
+        background: #10b981;
+      }
+      &.nonEu {
+        background: #f59e0b;
+      }
+    }
+  }
+
+  strong {
+    color: #f8fafc;
+  }
+}
+
+.nationalitiesList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.nationalityItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.88rem;
+  color: #cbd5e1;
+  padding: 0.35rem 0.5rem;
+  border-radius: 0.4rem;
+  background: rgba(255, 255, 255, 0.02);
+
+  .country {
+    font-weight: 500;
+  }
+
+  .numbers {
+    display: flex;
+    gap: 0.5rem;
+    font-size: 0.82rem;
+
+    .count {
+      color: #94a3b8;
+    }
+
+    .percentage {
+      color: #38bdf8;
+      font-weight: 700;
+    }
+  }
+}
+
+.chipsCloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.languageChip {
+  background: rgba(56, 189, 248, 0.1);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  color: #e2e8f0;
+  font-size: 0.82rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+
+  strong {
+    color: #38bdf8;
+  }
+}
+
+.ageBarsList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.ageBarRow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.82rem;
+
+  .rangeLabel {
+    width: 45px;
+    color: #94a3b8;
+    font-weight: 500;
+  }
+
+  .track {
+    flex: 1;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 9999px;
+    overflow: hidden;
+  }
+
+  .fill {
+    height: 100%;
+    background: linear-gradient(90deg, #38bdf8, #818cf8);
+    border-radius: 9999px;
+  }
+
+  .percentLabel {
+    width: 35px;
+    text-align: right;
+    color: #f1f5f9;
+    font-weight: 700;
+  }
+}

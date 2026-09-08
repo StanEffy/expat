@@ -66,6 +66,15 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
         setSidebarVisible(false);
       },
     },
+    {
+      label: t('navigation.municipalAnalytics'),
+      icon: 'pi pi-chart-line',
+      path: `${ADMIN_PANEL_PATH}/municipal-analytics`,
+      command: () => {
+        navigate(`${ADMIN_PANEL_PATH}/municipal-analytics`);
+        setSidebarVisible(false);
+      },
+    },
   ];
 
   const isActive = (path: string) => location.pathname === path;

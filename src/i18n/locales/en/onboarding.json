@@ -1,0 +1,171 @@
+{
+  "title": "Municipal Onboarding Wizard",
+  "subtitle": "Your step-by-step personalized relocation roadmap for Finland",
+  "wizard": {
+    "step1_title": "Choose Municipality",
+    "step1_desc": "Where are you moving or currently living?",
+    "step2_title": "Citizenship & Origin",
+    "step2_desc": "Select your citizenship category",
+    "step3_title": "Relocation Reason",
+    "step3_desc": "What is the primary reason for your stay?",
+    "step4_title": "Family Situation",
+    "step4_desc": "Are you relocating alone or with family?",
+    "prev_btn": "Previous Step",
+    "next_btn": "Next Step",
+    "generate_btn": "Generate My Personalized Checklist",
+    "municipalities": {
+      "helsinki": "Helsinki",
+      "espoo": "Espoo",
+      "vantaa": "Vantaa",
+      "tampere": "Tampere",
+      "turku": "Turku",
+      "oulu": "Oulu",
+      "other": "Other Municipality"
+    },
+    "citizenships": {
+      "eu_eea": "EU / EEA Citizen",
+      "nordic": "Nordic Country Citizen",
+      "non_eu": "Non-EU / Third-Country Citizen"
+    },
+    "reasons": {
+      "employed": "Employed (Work Contract)",
+      "specialist": "Fast-Track Specialist / Expert",
+      "entrepreneur": "Entrepreneur / Startup Founder",
+      "student": "Higher Education Student",
+      "family": "Family Ties / Marriage",
+      "jobseeker": "Looking for Work / Recent Arrival"
+    },
+    "family": {
+      "solo": "Relocating Alone",
+      "couple": "With Partner / Spouse",
+      "children_preschool": "With Daycare / Preschool Children (<7 yrs)",
+      "children_school": "With School-Age Children (7-17 yrs)"
+    }
+  },
+  "checklist": {
+    "title": "Your Municipal Action Plan",
+    "progress_label": "Completed Steps",
+    "reset_btn": "Reconfigure Wizard",
+    "export_btn": "Export / Print Plan",
+    "filter_all": "All Tasks",
+    "filter_pending": "To Do",
+    "filter_completed": "Completed",
+    "view_hub_info": "Municipal Hub & Contact Info",
+    "estimated_time": "Est. processing time:",
+    "required_documents": "Key documents to prepare:",
+    "official_portal": "Official Portal / Service",
+    "local_tip": "Municipal Note for",
+    "all_done_title": "Congratulations! 🎉",
+    "all_done_desc": "You have completed all key onboarding tasks for your municipality!"
+  },
+  "phases": {
+    "all": "All Phases",
+    "before_arrival": "1. Before Arrival",
+    "first_days": "2. First Days",
+    "first_month": "3. First Month",
+    "settled": "4. Settled & Integration"
+  },
+  "categories": {
+    "all": "All Categories",
+    "legal": "Legal & Residence",
+    "tax_finance": "Tax & Banking",
+    "healthcare": "Healthcare & Kela",
+    "family_education": "Schools & Daycare",
+    "housing": "Housing & Utilities",
+    "integration_language": "Language & Integration",
+    "daily_life": "Daily Life & Transit"
+  },
+  "priorities": {
+    "critical": "Critical",
+    "high": "High",
+    "medium": "Medium",
+    "optional": "Recommended"
+  },
+  "hubs": {
+    "helsinki_desc": "International House Helsinki provides comprehensive official registration and relocation services under one roof (DVV, Vero, Kela, City guidance).",
+    "espoo_desc": "Hello Espoo Hub helps you navigate municipal daycare, schooling, Finnish courses, and integration services in Western Uusimaa.",
+    "vantaa_desc": "International Vantaa Info offers multilingual assistance with day-to-day public services, housing, and social integration.",
+    "tampere_desc": "International House Tampere brings together municipal employment, residence services, and international community activities.",
+    "turku_desc": "International House Turku assists international talents, students, and their family members with settling in Southwest Finland.",
+    "oulu_desc": "International House Oulu supports newcomers with job search, municipal registrations, and northern lifestyle integration.",
+    "other_desc": "Consult your local municipal service point (kuntatoimisto) and the national InfoFinland guide for your specific region."
+  },
+  "tasks": {
+    "residence_permit_migri": {
+      "title": "Apply for Residence Permit (Migri / Enter Finland)",
+      "description": "Submit your first residence permit application online before arriving in Finland. Verify your identity at a Finnish mission abroad."
+    },
+    "apostille_documents": {
+      "title": "Legalize & Apostille Personal Certificates",
+      "description": "Ensure marriage certificates, birth certificates of children, and official translations have Apostille stamps from your country of origin."
+    },
+    "temporary_housing": {
+      "title": "Secure Initial / Rental Housing",
+      "description": "Arrange temporary or permanent rental accommodation. You will need a signed rental lease (vuokrasopimus) to register your address."
+    },
+    "migri_eu_registration": {
+      "title": "Register EU Right of Residence (Migri)",
+      "description": "EU citizens staying in Finland for more than 3 months must register their right of residence with the Finnish Immigration Service."
+    },
+    "dvv_registration": {
+      "title": "Register at DVV: Finnish ID Code & Municipality of Residence",
+      "description": "Book an in-person visit to DVV (or your local International House). Receive your Finnish Personal Identity Code (henkilötunnus) and register your official municipality (kotikunta)."
+    },
+    "vero_tax_card": {
+      "title": "Order Finnish Tax Card (Verokortti)",
+      "description": "Contact the Finnish Tax Administration (Vero) to calculate your progressive withholding tax percentage and deliver your tax card to your employer."
+    },
+    "local_sim_card": {
+      "title": "Get a Finnish Phone Number",
+      "description": "Purchase a prepaid SIM card (DNA, Elisa, or Telia) at R-Kioski for fast mobile connectivity until you can open a contract line."
+    },
+    "public_transport_app": {
+      "title": "Set Up Regional Transit App",
+      "description": "Download your municipal transport app. Once your DVV permanent municipality is approved, activate subsidized resident season ticket pricing."
+    },
+    "bank_account_strong_id": {
+      "title": "Open Bank Account & Activate Strong e-ID (Pankkitunnukset)",
+      "description": "Book a bank meeting with your ID code and passport. Finnish bank credentials are required for Suomi.fi online authentication across all state services."
+    },
+    "kela_social_security": {
+      "title": "Apply for Social Security & Kela Card",
+      "description": "Submit form Y77 or apply through OmaKela to receive access to national health insurance, medicine reimbursements, and child benefits."
+    },
+    "home_insurance_contract": {
+      "title": "Purchase Home Insurance (Kotivakuutus)",
+      "description": "In Finland, nearly all landlords legally require a comprehensive home insurance policy including personal liability coverage."
+    },
+    "electricity_contract": {
+      "title": "Sign Electricity Contract (Sähkösopimus)",
+      "description": "Tenants must establish their own electricity supply contract before moving in. Compare fixed vs. spot-price tariffs online."
+    },
+    "healthcare_center_registration": {
+      "title": "Connect with Municipal Health Station (Terveysasema)",
+      "description": "Identify your designated local health station. Set up access to your regional health portal (e.g. Maisa or OmaPirha) and note Medical Helpline 116 117."
+    },
+    "daycare_application": {
+      "title": "Apply for Municipal Early Childhood Education (Varhaiskasvatus)",
+      "description": "Submit your municipal daycare application 4 months before your child needs to start, or as soon as you have a signed work contract."
+    },
+    "school_registration": {
+      "title": "Enroll in Comprehensive School Preparatory Teaching",
+      "description": "Register children ages 7-17 with the municipal education department for preparatory education (valmistava opetus) focusing on Finnish/Swedish and curriculum integration."
+    },
+    "integration_plan_te": {
+      "title": "Draw Up Municipal Integration Plan (Kotoutumissuunnitelma)",
+      "description": "Register with municipal employment services for an initial assessment and personalized integration roadmap, including subsidized language training."
+    },
+    "finnish_language_course": {
+      "title": "Enroll in Finnish or Swedish Language Course",
+      "description": "Find evening or intensive language courses through Finnishcourses.fi, adult education centres (Työväenopisto), or community colleges."
+    },
+    "library_card": {
+      "title": "Get a Free Municipal Library Card",
+      "description": "Finnish public libraries offer free access to books, digital journals, 3D printers, sewing machines, co-working desks, and cultural events."
+    },
+    "driver_license_exchange": {
+      "title": "Exchange or Verify Foreign Driver's License",
+      "description": "Check with Ajovarma / Traficom regarding the validity of your home country driver's license and deadlines for exchanging it without a driving test."
+    }
+  }
+}

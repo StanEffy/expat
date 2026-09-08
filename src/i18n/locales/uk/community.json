@@ -1,0 +1,72 @@
+{
+  "title": "Муніципальний центр спільноти експатів",
+  "subtitle": "Знаходьте місцеві події, дошку оголошень та досвідчених експат-менторів по всій Фінляндії",
+  "tabs": {
+    "events": "Події та зустрічі",
+    "notices": "Дошка оголошень",
+    "mentors": "Ментори спільноти"
+  },
+  "search_placeholder": "Пошук зустрічей, оголошень або менторів...",
+  "filters": {
+    "city_all": "Усі міста",
+    "category_all": "Усі категорії",
+    "event_categories": {
+      "language_exchange": "Мовні кафе",
+      "cultural": "Культура та традиції",
+      "sports_outdoor": "Природа та сауни",
+      "family": "Сім'я та діти",
+      "networking": "IT та кар'єра"
+    },
+    "notice_categories": {
+      "housing_sharing": "Житло та сусіди",
+      "goods_giveaway": "Безкоштовно та речі",
+      "study_buddy": "Навчання та мовна практика",
+      "advice": "Поради та взаємодопомога"
+    }
+  },
+  "event": {
+    "rsvp_btn": "Зареєструватися / Піду",
+    "attending_badge": "Ви йдете! ✓",
+    "cancel_rsvp": "Скасувати запис",
+    "attendees": "учасників",
+    "organizer": "Організатор",
+    "location": "Місце проведення",
+    "languages": "Мови зустрічі",
+    "price": "Вартість"
+  },
+  "notice": {
+    "post_btn": "Створити оголошення",
+    "posted_by": "Автор",
+    "contact_btn": "Зв'язатися з автором",
+    "dialog": {
+      "title": "Нове оголошення на дошці спільноти",
+      "city_label": "Місто",
+      "category_label": "Категорія",
+      "author_label": "Ваше ім'я / Псевдонім",
+      "author_placeholder": "наприклад, Алекс К.",
+      "post_title_label": "Заголовок оголошення",
+      "post_title_placeholder": "Короткий зрозумілий заголовок...",
+      "content_label": "Текст оголошення",
+      "content_placeholder": "Опишіть деталі, умови, дати чи район...",
+      "contact_label": "Контакт (email, телефон або Telegram)",
+      "contact_placeholder": "alex@example.com або @alex_tg",
+      "cancel": "Скасувати",
+      "submit": "Опублікувати"
+    }
+  },
+  "mentor": {
+    "in_finland": "років у Фінляндії",
+    "origin": "Звідки",
+    "profession": "Професія",
+    "specialties": "Допоможе з питаннями",
+    "contact_btn": "Зв'язатися з ментором"
+  },
+  "empty": {
+    "events_title": "Майбутніх подій не знайдено",
+    "events_desc": "Завітайте пізніше або змініть фільтр міста.",
+    "notices_title": "Оголошень за заданими критеріями немає",
+    "notices_desc": "Будьте першим, хто розмістить оголошення у цій категорії!",
+    "mentors_title": "Менторів не знайдено",
+    "mentors_desc": "Спробуйте обрати інше місто або очистити пошуковий запит."
+  }
+}

@@ -22,6 +22,11 @@ const Header = () => {
   const isCompaniesActive = location.pathname.startsWith("/companies") || location.pathname === "/categories";
   const isShopActive = location.pathname.startsWith("/shop");
   const isPollsActive = location.pathname.startsWith("/polls");
+  const isOnboardingActive = location.pathname.startsWith("/onboarding");
+  const isBudgetingActive = location.pathname.startsWith("/participatory-budget");
+  const isServiceRequestsActive = location.pathname.startsWith("/service-requests");
+  const isCommunityActive = location.pathname.startsWith("/community");
+  const isMunicipalAnalyticsActive = location.pathname.startsWith("/municipal-dashboard");
   const isAboutActive = location.pathname === "/about";
   const isProfileActive = location.pathname.startsWith("/profile") || location.pathname.startsWith("/admin");
   const isLoginActive = location.pathname === "/login" || location.pathname.startsWith("/password-reset");
@@ -58,6 +63,34 @@ const Header = () => {
           className={`${styles.navButton} ${isCompaniesActive ? styles.active : ''}`}
         />
         <Button
+          label={t("navigation.onboarding")}
+          text
+          icon="pi pi-compass"
+          onClick={() => navigate("/onboarding")}
+          className={`${styles.navButton} ${isOnboardingActive ? styles.active : ''}`}
+        />
+        <Button
+          label={t("navigation.participatoryBudget")}
+          text
+          icon="pi pi-wallet"
+          onClick={() => navigate("/participatory-budget")}
+          className={`${styles.navButton} ${isBudgetingActive ? styles.active : ''}`}
+        />
+        <Button
+          label={t("navigation.serviceRequests")}
+          text
+          icon="pi pi-inbox"
+          onClick={() => navigate("/service-requests")}
+          className={`${styles.navButton} ${isServiceRequestsActive ? styles.active : ''}`}
+        />
+        <Button
+          label={t("navigation.community")}
+          text
+          icon="pi pi-users"
+          onClick={() => navigate("/community")}
+          className={`${styles.navButton} ${isCommunityActive ? styles.active : ''}`}
+        />
+        <Button
           label={t("navigation.shop")}
           text
           icon="pi pi-shopping-bag"
@@ -70,6 +103,13 @@ const Header = () => {
           icon="pi pi-chart-bar"
           onClick={() => navigate("/polls")}
           className={`${styles.navButton} ${isPollsActive ? styles.active : ''}`}
+        />
+        <Button
+          label={t("navigation.municipalAnalytics")}
+          text
+          icon="pi pi-chart-line"
+          onClick={() => navigate("/municipal-dashboard")}
+          className={`${styles.navButton} ${isMunicipalAnalyticsActive ? styles.active : ''}`}
         />
         <Button
           label={t("navigation.about")}

@@ -1,0 +1,68 @@
+{
+  "title": "Deltagande budgetering och medborgaromröstning",
+  "subtitle": "Var med och besluta om kommunala skattemedel till integration, grönområden och gemenskap",
+  "wallet": {
+    "title": "Invånarens röstpolletter",
+    "remaining": "Polletter kvar",
+    "allocated": "Lagda röster",
+    "budget_rule": "Varje registrerad invånare får 5 röstpolletter att fördela mellan kommunala förslag.",
+    "reset_btn": "Återställ mina röster"
+  },
+  "filters": {
+    "city_all": "Alla kommuner",
+    "category_all": "Alla kategorier",
+    "categories": {
+      "environment_parks": "Parker och natur",
+      "culture_events": "Kultur och festivaler",
+      "integration_language": "Språk och integration",
+      "sports_outdoor": "Idrott och bastu",
+      "children_youth": "Barn och unga",
+      "cycling_transit": "Cykling och trafik"
+    }
+  },
+  "proposal": {
+    "budget_needed": "Nödvändig budget",
+    "votes": "Röster",
+    "funded_badge": "Finansierat! 🎉",
+    "active_badge": "Omröstning pågår",
+    "cast_vote": "Rösta på projektet",
+    "withdraw_vote": "Dra tillbaka röst",
+    "submitted_by": "Förslagsställare",
+    "district": "Stadsdel",
+    "your_votes": "Dina givna röster:"
+  },
+  "proposals": {
+    "hel_library_hub": {
+      "title": "Flerspråkigt läs- och coworkingrum på centrumbiblioteket Ode",
+      "description": "En internationell mötesplats på Ode med litteratur på över 15 språk, möteslokaler och språkcaféer."
+    },
+    "hel_language_cafes": {
+      "title": "Avgiftsfria pop-up-språkcaféer i stadens parker",
+      "description": "Somriga språkcaféer utomhus med infödda ledare i Berghäll, Böle och Tölöviken."
+    },
+    "tam_winter_sauna": {
+      "title": "Förbättring av allmän vinterbastu och vinterbadbrygga vid Näsijärvi",
+      "description": "Utbyggnad av bastuanläggning och uppvärmda omklädningsrum för att välkomna internationella invånare till finsk bastukultur."
+    },
+    "tam_esports_academy": {
+      "title": "E-sport- och kodningsakademi för unga i Hervanta",
+      "description": "Flerspråkiga programmerings- och spelworkshops för invandrarungdomar och finländska ungdomar."
+    },
+    "esp_nature_trails": {
+      "title": "Flerspråkig skyltning och ljudguider längs naturstigar i Noux",
+      "description": "Skyltar och QR-ljudguider på finska, svenska, engelska och ukrainska längs vandringsleder."
+    },
+    "oul_bike_stations": {
+      "title": "Väderskyddade cykelservicestationer längs cykelstråk",
+      "description": "10 kostnadsfria gör-det-själv-stationer med verktyg och pumpar längs Uleåborgs cykelvägar."
+    },
+    "tur_river_festival": {
+      "title": "Internationell mat- och kulturfestival vid Aura å",
+      "description": "Ett mångkulturellt helgevenemang längs åstranden med traditionell mat, musik och integrationsworkshops."
+    },
+    "van_community_garden": {
+      "title": "Gemensam stadsodling och växthus för familjer i Dickursby",
+      "description": "60 odlingslotter och ett gemensamt växthus där lokala och nyinflyttade familjer odlar tillsammans."
+    }
+  }
+}

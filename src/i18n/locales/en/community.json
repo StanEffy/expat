@@ -1,0 +1,72 @@
+{
+  "title": "Municipal Expat Community Hub",
+  "subtitle": "Connect with local events, peer notice board, and experienced expat mentors across Finland",
+  "tabs": {
+    "events": "Events & Meetups",
+    "notices": "Notice Board",
+    "mentors": "Expat Mentors"
+  },
+  "search_placeholder": "Search events, notices, or mentors by keyword...",
+  "filters": {
+    "city_all": "All Cities",
+    "category_all": "All Categories",
+    "event_categories": {
+      "language_exchange": "Language & Cafe",
+      "cultural": "Culture & Heritage",
+      "sports_outdoor": "Outdoors & Saunas",
+      "family": "Family & Kids",
+      "networking": "Tech & Careers"
+    },
+    "notice_categories": {
+      "housing_sharing": "Housing & Flatmates",
+      "goods_giveaway": "Free & Secondhand",
+      "study_buddy": "Study & Language",
+      "advice": "General Advice"
+    }
+  },
+  "event": {
+    "rsvp_btn": "RSVP / Join",
+    "attending_badge": "You're Going! ✓",
+    "cancel_rsvp": "Cancel RSVP",
+    "attendees": "attending",
+    "organizer": "Organized by",
+    "location": "Location",
+    "languages": "Languages",
+    "price": "Admission"
+  },
+  "notice": {
+    "post_btn": "Post a Notice",
+    "posted_by": "Posted by",
+    "contact_btn": "Contact Author",
+    "dialog": {
+      "title": "Post on Community Notice Board",
+      "city_label": "City",
+      "category_label": "Category",
+      "author_label": "Your Name / Nickname",
+      "author_placeholder": "e.g., Alex K.",
+      "post_title_label": "Notice Title",
+      "post_title_placeholder": "Clear and concise title...",
+      "content_label": "Notice Content",
+      "content_placeholder": "Provide details, conditions, timing, location...",
+      "contact_label": "Contact Info (Email or Telegram/Phone)",
+      "contact_placeholder": "alex@example.com or @alex_tg",
+      "cancel": "Cancel",
+      "submit": "Post Notice"
+    }
+  },
+  "mentor": {
+    "in_finland": "years in Finland",
+    "origin": "From",
+    "profession": "Role",
+    "specialties": "Can advise on",
+    "contact_btn": "Contact Mentor"
+  },
+  "empty": {
+    "events_title": "No upcoming events found",
+    "events_desc": "Check back later or change your municipality filter.",
+    "notices_title": "No notices match your criteria",
+    "notices_desc": "Be the first to post a notice in this category!",
+    "mentors_title": "No mentors found",
+    "mentors_desc": "Try selecting another municipality or clearing search terms."
+  }
+}

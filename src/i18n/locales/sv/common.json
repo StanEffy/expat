@@ -11,7 +11,12 @@
     "login": "Logga in",
     "profile": "Profil",
     "signup": "Registrera",
-    "categories": "Kategorier"
+    "categories": "Kategorier",
+    "onboarding": "Flyttguide",
+    "municipalAnalytics": "Kommunanalys",
+    "participatoryBudget": "Deltagande budgetering",
+    "serviceRequests": "Serviceärenden",
+    "community": "Gemenskapscenter"
   },
   "company": {
     "information": "Företagsinformation",

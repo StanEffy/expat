@@ -1,0 +1,63 @@
+{
+  "title": "Kunnallisten palvelupyyntöjen seuranta",
+  "subtitle": "Lähetä kysymyksiä ja hakemuksia suoraan kaupungin virastoille ja seuraa käsittelyn etenemistä",
+  "new_ticket_btn": "Uusi palvelupyyntö",
+  "search_placeholder": "Hae asioita otsikon, viitenumeron tai asiasanan mukaan...",
+  "filters": {
+    "city_all": "Kaikki kaupungit",
+    "status_all": "Kaikki tilat",
+    "category_all": "Kaikki aiheet",
+    "statuses": {
+      "submitted": "Vastaanotettu",
+      "under_review": "Käsittelyssä",
+      "in_progress": "Toimenpiteitä suoritetaan",
+      "resolved": "Ratkaistu"
+    },
+    "categories": {
+      "daycare_school": "Varhaiskasvatus ja koulut",
+      "housing_permits": "Asuminen ja luvat",
+      "social_integration": "Kotoutumis- ja sosiaalipalvelut",
+      "waste_environment": "Ympäristö ja jätehuolto",
+      "tax_business": "Vero- ja yrityspalvelut",
+      "general_inquiry": "Yleinen neuvonta"
+    },
+    "priorities": {
+      "low": "Perus",
+      "medium": "Normaali",
+      "high": "Kiireellinen"
+    }
+  },
+  "ticket": {
+    "ref": "Viite",
+    "submitted_on": "Lähetetty",
+    "updated": "Päivitetty",
+    "dept": "Toimiala",
+    "est_time": "Arvioitu käsittelyaika",
+    "days": "arkipäivää",
+    "official_response": "Kaupungin virallinen vastaus",
+    "timeline": {
+      "submitted": "Pyyntö vastaanotettu kaupungin kirjaamossa",
+      "under_review": "Siirretty toimialan vastuuhenkilölle",
+      "in_progress": "Selvitystyö tai toimenpide käynnissä",
+      "resolved": "Asia käsitelty ja vastattu"
+    }
+  },
+  "dialog": {
+    "title": "Lähetä uusi kunnallinen palvelupyyntö",
+    "city_label": "Kunta / Kaupunki",
+    "category_label": "Palvelualue",
+    "priority_label": "Kiireellisyys",
+    "ticket_title_label": "Aihe / Otsikko",
+    "ticket_title_placeholder": "Lyhyt kuvaus asiastasi...",
+    "ticket_desc_label": "Tiedot ja tausta",
+    "ticket_desc_placeholder": "Kuvaile tarpeesi yksityiskohtaisesti, aiempi asiointi tai tärkeät päivämäärät...",
+    "email_label": "Yhteyssähköposti",
+    "email_placeholder": "oma.osoite@example.com",
+    "cancel": "Peruuta",
+    "submit": "Lähetä pyyntö"
+  },
+  "empty": {
+    "title": "Palvelupyyntöjä ei löytynyt",
+    "desc": "Kokeile muuttaa suodattimia tai lähetä uusi tiedustelu yllä olevalla painikkeella."
+  }
+}

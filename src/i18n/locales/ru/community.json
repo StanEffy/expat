@@ -1,0 +1,72 @@
+{
+  "title": "Муниципальный центр сообщества экспатов",
+  "subtitle": "Знакомьтесь с местными событиями, доской объявлений и опытными экспат-наставниками по всей Финляндии",
+  "tabs": {
+    "events": "События и встречи",
+    "notices": "Доска объявлений",
+    "mentors": "Наставники экспатов"
+  },
+  "search_placeholder": "Поиск встреч, объявлений или наставников...",
+  "filters": {
+    "city_all": "Все города",
+    "category_all": "Все категории",
+    "event_categories": {
+      "language_exchange": "Языковые кафе",
+      "cultural": "Культура и традиции",
+      "sports_outdoor": "Природа и сауны",
+      "family": "Семья и дети",
+      "networking": "IT и карьера"
+    },
+    "notice_categories": {
+      "housing_sharing": "Жилье и соседи",
+      "goods_giveaway": "Даром и барахолка",
+      "study_buddy": "Учеба и языковые пары",
+      "advice": "Советы и взаимопомощь"
+    }
+  },
+  "event": {
+    "rsvp_btn": "Записаться / Пойду",
+    "attending_badge": "Вы идете! ✓",
+    "cancel_rsvp": "Отменить запись",
+    "attendees": "участников",
+    "organizer": "Организатор",
+    "location": "Место проведения",
+    "languages": "Языки встречи",
+    "price": "Стоимость"
+  },
+  "notice": {
+    "post_btn": "Опубликовать объявление",
+    "posted_by": "Автор",
+    "contact_btn": "Связаться с автором",
+    "dialog": {
+      "title": "Новое объявление на доске сообщества",
+      "city_label": "Город",
+      "category_label": "Категория",
+      "author_label": "Ваше имя / Никнейм",
+      "author_placeholder": "например, Алекс К.",
+      "post_title_label": "Заголовок объявления",
+      "post_title_placeholder": "Короткий понятный заголовок...",
+      "content_label": "Текст объявления",
+      "content_placeholder": "Опишите подробности, условия, даты или район...",
+      "contact_label": "Контакт (email, телефон или Telegram)",
+      "contact_placeholder": "alex@example.com или @alex_tg",
+      "cancel": "Отмена",
+      "submit": "Опубликовать"
+    }
+  },
+  "mentor": {
+    "in_finland": "лет в Финляндии",
+    "origin": "Родом из",
+    "profession": "Профессия",
+    "specialties": "Поможет с вопросами",
+    "contact_btn": "Связаться с наставником"
+  },
+  "empty": {
+    "events_title": "Предстоящих событий не найдено",
+    "events_desc": "Загляните позже или смените фильтр города.",
+    "notices_title": "Объявлений по заданным критериям нет",
+    "notices_desc": "Станьте первым, кто разместит объявление в этой категории!",
+    "mentors_title": "Наставники не найдены",
+    "mentors_desc": "Попробуйте выбрать другой город или очистить строку поиска."
+  }
+}

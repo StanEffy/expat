@@ -1,0 +1,171 @@
+{
+  "title": "Kunta-asettumisen opas",
+  "subtitle": "Henkilökohtainen vaiheittainen muuttosuunnitelmasi Suomeen ja kotikuntaasi",
+  "wizard": {
+    "step1_title": "Valitse kunta",
+    "step1_desc": "Mihin kuntaan olet muuttamassa tai missä asut?",
+    "step2_title": "Kansalaisuus ja tausta",
+    "step2_desc": "Valitse kansalaisuuskategoriasi",
+    "step3_title": "Muuton syy",
+    "step3_desc": "Mikä on pääasiallinen syy Suomessa oleskeluun?",
+    "step4_title": "Perhetilanne",
+    "step4_desc": "Muutatko yksin vai perheen kanssa?",
+    "prev_btn": "Edellinen vaihe",
+    "next_btn": "Seuraava vaihe",
+    "generate_btn": "Luo henkilökohtainen tarkistuslista",
+    "municipalities": {
+      "helsinki": "Helsinki",
+      "espoo": "Espoo",
+      "vantaa": "Vantaa",
+      "tampere": "Tampere",
+      "turku": "Turku",
+      "oulu": "Oulu",
+      "other": "Muu kunta"
+    },
+    "citizenships": {
+      "eu_eea": "EU- / ETA-kansalainen",
+      "nordic": "Pohjoismaan kansalainen",
+      "non_eu": "EU:n ulkopuolisen maan kansalainen"
+    },
+    "reasons": {
+      "employed": "Työsuhde (työsopimus)",
+      "specialist": "Erityisasiantuntija (Fast Track)",
+      "entrepreneur": "Yrittäjä / startup-perustaja",
+      "student": "Korkeakouluopiskelija",
+      "family": "Perheside / avioliitto",
+      "jobseeker": "Työnhakija / uusi asukas"
+    },
+    "family": {
+      "solo": "Muutan yksin",
+      "couple": "Puolison / kumppanin kanssa",
+      "children_preschool": "Päiväkoti-ikäisten lasten kanssa (<7 v)",
+      "children_school": "Kouluikäisten lasten kanssa (7–17 v)"
+    }
+  },
+  "checklist": {
+    "title": "Henkilökohtainen kuntakohtainen toimintasuunnitelmasi",
+    "progress_label": "Suoritetut tehtävät",
+    "reset_btn": "Aloita kysely alusta",
+    "export_btn": "Tulosta / vie suunnitelma",
+    "filter_all": "Kaikki tehtävät",
+    "filter_pending": "Tekemättä",
+    "filter_completed": "Suoritettu",
+    "view_hub_info": "Kunnan palvelupiste ja yhteystiedot",
+    "estimated_time": "Arvioitu käsittelyaika:",
+    "required_documents": "Tarvittavat asiakirjat:",
+    "official_portal": "Virallinen palvelu / portaali",
+    "local_tip": "Kuntakohtainen huomio:",
+    "all_done_title": "Onnittelut! 🎉",
+    "all_done_desc": "Olet suorittanut kaikki keskeiset asettumistehtävät kunnassasi!"
+  },
+  "phases": {
+    "all": "Kaikki vaiheet",
+    "before_arrival": "1. Ennen saapumista",
+    "first_days": "2. Ensimmäiset päivät",
+    "first_month": "3. Ensimmäinen kuukausi",
+    "settled": "4. Kotoutuminen ja arki"
+  },
+  "categories": {
+    "all": "Kaikki kategoriat",
+    "legal": "Oleskelu ja rekisteröinti",
+    "tax_finance": "Verotus ja pankkipalvelut",
+    "healthcare": "Terveydenhuolto ja Kela",
+    "family_education": "Koulu ja varhaiskasvatus",
+    "housing": "Asuminen ja sopimukset",
+    "integration_language": "Kielikurssit ja kotoutuminen",
+    "daily_life": "Arki ja joukkoliikenne"
+  },
+  "priorities": {
+    "critical": "Kriittinen",
+    "high": "Tärkeä",
+    "medium": "Normaali",
+    "optional": "Suositeltava"
+  },
+  "hubs": {
+    "helsinki_desc": "International House Helsinki kokoaa yhteen DVV:n, Verohallinnon, Kelan ja kaupungin neuvontapalvelut saman katon alle.",
+    "espoo_desc": "Hello Espoo Hub auttaa Espoon asukkaita varhaiskasvatukseen, koulutukseen ja Länsi-Uudenmaan palveluihin liittyvissä kysymyksissä.",
+    "vantaa_desc": "International Vantaa Info tarjoaa monikielistä neuvontaa Vantaan kunnallisista palveluista, asumisesta ja kotoutumisesta.",
+    "tampere_desc": "International House Tampere yhdistää työllisyyspalvelut, asettumisneuvonnan ja kansainvälisen yhteisötoiminnan.",
+    "turku_desc": "International House Turku tukee kansainvälisiä osaajia, opiskelijoita ja heidän perheitään Varsinais-Suomeen asettumisessa.",
+    "oulu_desc": "International House Oulu opastaa työnhaussa, viranomaisasioinnissa ja pohjoiseen elämäntapaan kotiutumisessa.",
+    "other_desc": "Ota yhteyttä paikalliseen kunnantoimistoon ja tutustu kansalliseen InfoFinland-oppaaseen."
+  },
+  "tasks": {
+    "residence_permit_migri": {
+      "title": "Hae ensimmäistä oleskelulupaa (Migri / Enter Finland)",
+      "description": "Tee hakemus verkossa ennen Suomeen saapumista. Tunnistaudu Suomen edustustossa ulkomailla."
+    },
+    "apostille_documents": {
+      "title": "Laillista ja apostilloi viralliset todistukset",
+      "description": "Varmista, että avioliitto- ja syntymätodistuksissa sekä käännöksissä on Apostille-leimat lähtömaasta."
+    },
+    "temporary_housing": {
+      "title": "Järjestä alustava tai pysyvä vuokra-asunto",
+      "description": "Hanki vuokra-asunto hyvissä ajoin. Tarvitset allekirjoitetun vuokrasopimuksen osoitteen ja kotikunnan rekisteröintiin."
+    },
+    "migri_eu_registration": {
+      "title": "Rekisteröi EU-kansalaisen oleskeluoikeus (Migri)",
+      "description": "Yli 3 kuukautta Suomessa oleskelevan EU-kansalaisen on rekisteröitävä oleskeluoikeutensa Maahanmuuttovirastossa."
+    },
+    "dvv_registration": {
+      "title": "DVV-rekisteröinti: henkilötunnus ja kotikunta",
+      "description": "Varaa aika Digi- ja väestötietovirastoon tai International Houseen. Saat suomalaisen henkilötunnuksen ja virallisen kotikunnan."
+    },
+    "vero_tax_card": {
+      "title": "Tilaa verokortti (Verohallinto)",
+      "description": "Ota yhteys Verohallintoon ennakonpidätysprosentin laskemiseksi ja toimita verokortti työnantajallesi."
+    },
+    "local_sim_card": {
+      "title": "Hanki suomalainen puhelinliittymä",
+      "description": "Osta prepaid-SIM-kortti (DNA, Elisa, Telia) R-Kioskilta nopeaan yhteydenpitoon ennen laskutusliittymän avaamista."
+    },
+    "public_transport_app": {
+      "title": "Ota käyttöön alueellinen joukkoliikennesovellus",
+      "description": "Lataa joukkoliikennesovellus (HSL, Nysse, Föli). Kotikunnan vahvistamisen jälkeen saat asukasalennuksen kausilipuista."
+    },
+    "bank_account_strong_id": {
+      "title": "Avaa pankkitili ja aktivoi vahva tunnistautuminen (pankkitunnukset)",
+      "description": "Varaa aika pankkiin henkilötunnuksen ja passin kera. Pankkitunnukset ovat välttämättömät Suomi.fi-asioinnissa."
+    },
+    "kela_social_security": {
+      "title": "Hae Kelan sosiaaliturvaoikeutta ja Kela-korttia",
+      "description": "Tee hakemus OmaKelassa saadaksesi sairausvakuutuksen, lääkekorvaukset ja mahdolliset lapsilisät."
+    },
+    "home_insurance_contract": {
+      "title": "Ota kotivakuutus",
+      "description": "Suomessa vuokranantajat vaativat lähes poikkeuksetta laajan kotivakuutuksen vastuuvakuutuksella."
+    },
+    "electricity_contract": {
+      "title": "Tee sähkösopimus asuntoon",
+      "description": "Vuokralaisen on tehtävä oma sähkösopimus ennen muuttoa. Vertaile toistaiseksi voimassa olevia ja määräaikaisia sopimuksia."
+    },
+    "healthcare_center_registration": {
+      "title": "Selvitä oma terveysasema ja hoitokanavat",
+      "description": "Tarkista asuinalueesi terveysasema ja hyvinvointialueen asiointikanava (esim. Maisa tai OmaPirha). Tallenna Päivystysapu 116 117."
+    },
+    "daycare_application": {
+      "title": "Hae kunnallista varhaiskasvatuspaikkaa (päiväkoti)",
+      "description": "Jätä hakemus kunnan varhaiskasvatukseen 4 kuukautta ennen toivottua aloitusajankohtaa tai heti työsopimuksen vahvistuttua."
+    },
+    "school_registration": {
+      "title": "Ilmoita lapset perusopetuksen valmistavaan opetukseen",
+      "description": "Ilmoita 7–17-vuotiaat lapset kunnan koulutoimeen valmistavaan opetukseen suomen/ruotsin kielen ja koulujärjestelmän oppimiseksi."
+    },
+    "integration_plan_te": {
+      "title": "Laadi kunnallinen kotoutumissuunnitelma",
+      "description": "Ilmoittaudu työllisyyspalveluihin alkukartoitusta ja henkilökohtaista kotoutumissuunnitelmaa varten."
+    },
+    "finnish_language_course": {
+      "title": "Ilmoittaudu suomen tai ruotsin kielen kurssille",
+      "description": "Etsi sopiva kielikurssi Finnishcourses.fi-palvelusta, työväenopistosta tai kansalaisopistosta."
+    },
+    "library_card": {
+      "title": "Hanki ilmainen kaupunginkirjaston kirjastokortti",
+      "description": "Kirjastokortilla lainaat kirjoja, käytät ilmaisia työtiloja, 3D-tulostimia ja osallistut kulttuuritapahtumiin."
+    },
+    "driver_license_exchange": {
+      "title": "Vaihda tai tarkista ulkomainen ajokortti (Ajovarma / Traficom)",
+      "description": "Selvitä kotimaasi ajokortin kelpoisuus Suomessa ja vaihda se määräaikaan mennessä suomalaiseen korttiin."
+    }
+  }
+}

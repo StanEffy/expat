@@ -1,0 +1,171 @@
+{
+  "title": "Kommunal etableringsguide",
+  "subtitle": "Din personliga steg-för-steg-plan för flytt och integration i Finland",
+  "wizard": {
+    "step1_title": "Välj kommun",
+    "step1_desc": "Till vilken kommun flyttar du eller bor du i?",
+    "step2_title": "Medborgarskap",
+    "step2_desc": "Välj din medborgarskapskategori",
+    "step3_title": "Orsak till flytt",
+    "step3_desc": "Vad är den främsta orsaken till din vistelse i Finland?",
+    "step4_title": "Familjesituation",
+    "step4_desc": "Flyttar du ensam eller med familj?",
+    "prev_btn": "Föregående",
+    "next_btn": "Nästa",
+    "generate_btn": "Skapa min personliga checklista",
+    "municipalities": {
+      "helsinki": "Helsingfors",
+      "espoo": "Esbo",
+      "vantaa": "Vanda",
+      "tampere": "Tammerfors",
+      "turku": "Åbo",
+      "oulu": "Uleåborg",
+      "other": "Annan kommun"
+    },
+    "citizenships": {
+      "eu_eea": "EU- / EES-medborgare",
+      "nordic": "Nordisk medborgare",
+      "non_eu": "Medborgare utanför EU"
+    },
+    "reasons": {
+      "employed": "Anställning (arbetsavtal)",
+      "specialist": "Specialist (Fast Track)",
+      "entrepreneur": "Företagare / startup",
+      "student": "Högskolestudent",
+      "family": "Familjeband / äktenskap",
+      "jobseeker": "Arbetssökande / nyinflyttad"
+    },
+    "family": {
+      "solo": "Flyttar ensam",
+      "couple": "Med partner / make",
+      "children_preschool": "Med barn i daghemsålder (<7 år)",
+      "children_school": "Med barn i skolålder (7–17 år)"
+    }
+  },
+  "checklist": {
+    "title": "Din kommunala handlingsplan",
+    "progress_label": "Slutförda uppgifter",
+    "reset_btn": "Börja om",
+    "export_btn": "Skriv ut / exportera plan",
+    "filter_all": "Alla uppgifter",
+    "filter_pending": "Att göra",
+    "filter_completed": "Slutförda",
+    "view_hub_info": "Kommunal servicepunkt och kontakt",
+    "estimated_time": "Uppskattad handläggningstid:",
+    "required_documents": "Viktiga dokument:",
+    "official_portal": "Officiell e-tjänst",
+    "local_tip": "Kommunal notering för:",
+    "all_done_title": "Grattis! 🎉",
+    "all_done_desc": "Du har slutfört alla viktiga etableringssteg i din kommun!"
+  },
+  "phases": {
+    "all": "Alla faser",
+    "before_arrival": "1. Före ankomst",
+    "first_days": "2. Första dagarna",
+    "first_month": "3. Första månaden",
+    "settled": "4. Etablering och vardag"
+  },
+  "categories": {
+    "all": "Alla kategorier",
+    "legal": "Uppehåll och registrering",
+    "tax_finance": "Skatt och banktjänster",
+    "healthcare": "Hälsovård och FPA",
+    "family_education": "Skola och småbarnspedagogik",
+    "housing": "Boende och avtal",
+    "integration_language": "Språkkurser och integration",
+    "daily_life": "Vardag och kollektivtrafik"
+  },
+  "priorities": {
+    "critical": "Kritisk",
+    "high": "Viktig",
+    "medium": "Normal",
+    "optional": "Rekommenderad"
+  },
+  "hubs": {
+    "helsinki_desc": "International House Helsinki samlar DVV, Skatteförvaltningen, FPA och stadens rådgivning under ett och samma tak.",
+    "espoo_desc": "Hello Espoo Hub stöder Esboinvånare med småbarnspedagogik, skolor, språkkurser och tjänster i Västra Nyland.",
+    "vantaa_desc": "International Vantaa Info erbjuder flerspråkig rådgivning om Vandas kommunala service, boende och integration.",
+    "tampere_desc": "International House Tampere samordnar sysselsättningstjänster, etablering och internationell gemenskap.",
+    "turku_desc": "International House Turku stöder internationella talanger, studerande och familjer i Egentliga Finland.",
+    "oulu_desc": "International House Oulu hjälper med jobbsökning, myndighetsärenden och etablering i norr.",
+    "other_desc": "Kontakta din lokala kommunkansli och bekanta dig med den nationella InfoFinland-guiden."
+  },
+  "tasks": {
+    "residence_permit_migri": {
+      "title": "Ansök om uppehållstillstånd (Migri / Enter Finland)",
+      "description": "Lämna in din ansökan online via Enter Finland före ankomst och styrk din identitet vid en finsk beskickning utomlands."
+    },
+    "apostille_documents": {
+      "title": "Legalisera och förse officiella intyg med apostille",
+      "description": "Se till att vigsel- och födelsebevis samt officiella översättningar är försedda med Apostille-stämpel i ursprungslandet."
+    },
+    "temporary_housing": {
+      "title": "Ordna hyresbostad i god tid",
+      "description": "Hyr en bostad. Du behöver ett undertecknat hyresavtal (hyreskontrakt) för att registrera din adress och hemkommun."
+    },
+    "migri_eu_registration": {
+      "title": "Registrera EU-medborgares uppehållsrätt (Migri)",
+      "description": "EU-medborgare som vistas i Finland i mer än 3 månader måste registrera sin uppehållsrätt hos Migrationsverket."
+    },
+    "dvv_registration": {
+      "title": "DVV-registrering: personbeteckning och hemkommun",
+      "description": "Boka tid hos Myndigheten för digitalisering och befolkningsdata (DVV) för att få en finsk personbeteckning och officiell hemkommun."
+    },
+    "vero_tax_card": {
+      "title": "Beställ skattekort (Skatteförvaltningen)",
+      "description": "Kontakta Skatteförvaltningen för att beräkna skattesatsen och leverera skattekortet till din arbetsgivare."
+    },
+    "local_sim_card": {
+      "title": "Skaffa ett finländskt telefonabonnemang",
+      "description": "Köp ett prepaid-SIM-kort (DNA, Elisa, Telia) på R-Kioski för snabb kommunikation innan du öppnar ett faktureringsabonnemang."
+    },
+    "public_transport_app": {
+      "title": "Ladda ner regional kollektivtrafikapp",
+      "description": "Ladda ner kollektivtrafikappen (HRT, Nysse, Föli). När din hemkommun är godkänd kan du köpa subventionerad periodbiljett."
+    },
+    "bank_account_strong_id": {
+      "title": "Öppna bankkonto och aktivera nätbankskoder (stark identifiering)",
+      "description": "Boka tid på en bank med pass och personbeteckning. Bankkoder är nödvändiga för Suomi.fi-inloggning hos myndigheter."
+    },
+    "kela_social_security": {
+      "title": "Ansök om rätt till social trygghet och FPA-kort",
+      "description": "Ansök via MittFPA om sjukförsäkring, läkemedelsersättning och eventuella barnbidrag."
+    },
+    "home_insurance_contract": {
+      "title": "Teckna hemförsäkring",
+      "description": "I Finland kräver hyresvärdar i regel en omfattande hemförsäkring med ansvarsförsäkring."
+    },
+    "electricity_contract": {
+      "title": "Teckna elavtal för bostaden",
+      "description": "Hyresgästen måste teckna ett eget elavtal före inflyttning. Jämför fasta och rörliga elavtal."
+    },
+    "healthcare_center_registration": {
+      "title": "Ta reda på din hälsostation och vårdkanaler",
+      "description": "Kontrollera din lokala hälsostation och välfärdsområdets e-tjänst (t.ex. Maisa eller OmaPirha). Spara Jourhjälpen 116 117."
+    },
+    "daycare_application": {
+      "title": "Ansök om plats inom småbarnspedagogik (daghem)",
+      "description": "Lämna in ansökan 4 månader innan barnet behöver platsen eller så snart arbetsavtalet är klart."
+    },
+    "school_registration": {
+      "title": "Anmäl barn till förberedande undervisning för grundläggande utbildning",
+      "description": "Anmäl 7–17-åriga barn till kommunens utbildningsväsende för förberedande undervisning i svenska eller finska."
+    },
+    "integration_plan_te": {
+      "title": "Upprätta en kommunal integrationsplan",
+      "description": "Anmäl dig till sysselsättningstjänsterna för en inledande kartläggning och personlig integrationsplan."
+    },
+    "finnish_language_course": {
+      "title": "Anmäl dig till språkkurs i finska eller svenska",
+      "description": "Hitta språkkurser via Finnishcourses.fi, arbetarinstitutet (arbis) eller medborgarinstitutet."
+    },
+    "library_card": {
+      "title": "Skaffa ett gratis bibliotekskort",
+      "description": "Bibliotekskortet ger gratis tillgång till böcker, arbetsplatser, 3D-skrivare och kulturevenemang."
+    },
+    "driver_license_exchange": {
+      "title": "Kontrollera och byt ut utländskt körkort (Ajovarma / Traficom)",
+      "description": "Kontrollera giltigheten för ditt hemlands körkort och byt ut det mot ett finskt körkort inom utsatt tid."
+    }
+  }
+}

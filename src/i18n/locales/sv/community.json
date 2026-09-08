@@ -1,0 +1,72 @@
+{
+  "title": "Kommunalt gemenskapscenter för inflyttade",
+  "subtitle": "Upptäck lokala evenemang, anslagstavla för gemenskapen och erfarna mentorer i Finland",
+  "tabs": {
+    "events": "Evenemang & träffar",
+    "notices": "Anslagstavla",
+    "mentors": "Mentorer"
+  },
+  "search_placeholder": "Sök evenemang, anslag eller mentorer med sökord...",
+  "filters": {
+    "city_all": "Alla städer",
+    "category_all": "Alla kategorier",
+    "event_categories": {
+      "language_exchange": "Språkkaféer",
+      "cultural": "Kultur & tradition",
+      "sports_outdoor": "Friluftsliv & bastu",
+      "family": "Familj & barn",
+      "networking": "Teknik & karriär"
+    },
+    "notice_categories": {
+      "housing_sharing": "Boende & rumskompisar",
+      "goods_giveaway": "Gratissaker & återbruk",
+      "study_buddy": "Studier & språkkompisar",
+      "advice": "Allmänna råd"
+    }
+  },
+  "event": {
+    "rsvp_btn": "Anmäl dig / Delta",
+    "attending_badge": "Du deltar! ✓",
+    "cancel_rsvp": "Avboka",
+    "attendees": "deltagare",
+    "organizer": "Arrangör",
+    "location": "Plats",
+    "languages": "Språk",
+    "price": "Pris"
+  },
+  "notice": {
+    "post_btn": "Lämna ett anslag",
+    "posted_by": "Upplagt av",
+    "contact_btn": "Kontakta författaren",
+    "dialog": {
+      "title": "Sätt upp ett anslag på anslagstavlan",
+      "city_label": "Stad",
+      "category_label": "Kategori",
+      "author_label": "Ditt namn / Signatur",
+      "author_placeholder": "t.ex. Alex K.",
+      "post_title_label": "Rubrik",
+      "post_title_placeholder": "Tydlig och koncis rubrik...",
+      "content_label": "Innehåll",
+      "content_placeholder": "Beskriv detaljer, villkor, tid eller plats...",
+      "contact_label": "Kontaktuppgift (e-post eller telefon)",
+      "contact_placeholder": "alex@example.com eller @alex_tg",
+      "cancel": "Avbryt",
+      "submit": "Publicera anslag"
+    }
+  },
+  "mentor": {
+    "in_finland": "år i Finland",
+    "origin": "Ursprung",
+    "profession": "Yrke",
+    "specialties": "Kan ge råd om",
+    "contact_btn": "Kontakta mentor"
+  },
+  "empty": {
+    "events_title": "Inga kommande evenemang hittades",
+    "events_desc": "Återkom senare eller ändra ditt kommunfilter.",
+    "notices_title": "Inga anslag matchar dina sökkriterier",
+    "notices_desc": "Var den första att publicera ett anslag i denna kategori!",
+    "mentors_title": "Inga mentorer hittades",
+    "mentors_desc": "Prova att välja en annan kommun eller rensa sökord."
+  }
+}

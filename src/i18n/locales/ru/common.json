@@ -11,7 +11,12 @@
     "login": "Вход",
     "profile": "Профиль",
     "signup": "Регистрация",
-    "categories": "Категории"
+    "categories": "Категории",
+    "onboarding": "Адаптация в городе",
+    "municipalAnalytics": "Аналитика города",
+    "participatoryBudget": "Бюджет участия",
+    "serviceRequests": "Городские заявки",
+    "community": "Сообщество"
   },
   "company": {
     "information": "Информация о компании",

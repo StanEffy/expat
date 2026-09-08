@@ -23,6 +23,11 @@ const CompanyUpdates = lazy(() => import('@/pages/admin/CompanyUpdates'));
 const InviteCodes = lazy(() => import('@/pages/admin/InviteCodes'));
 const Polls = lazy(() => import('@/pages/Polls'));
 const PollDetail = lazy(() => import('@/pages/PollDetail'));
+const Onboarding = lazy(() => import('@/pages/Onboarding'));
+const MunicipalDashboard = lazy(() => import('@/pages/MunicipalDashboard'));
+const ParticipatoryBudget = lazy(() => import('@/pages/ParticipatoryBudget'));
+const ServiceRequests = lazy(() => import('@/pages/ServiceRequests'));
+const Community = lazy(() => import('@/pages/Community'));
 const NotFound = lazy(() => import('@/pages/NotFound'));
 
 const LoadingScreen = () => (
@@ -44,6 +49,11 @@ function App() {
               <Route path="companies/:id" element={<CompanyDetails />} />
               <Route path="categories" element={<Categories />} />
               <Route path="about" element={<About />} />
+              <Route path="onboarding" element={<Onboarding />} />
+              <Route path="participatory-budget" element={<ParticipatoryBudget />} />
+              <Route path="service-requests" element={<ServiceRequests />} />
+              <Route path="community" element={<Community />} />
+              <Route path="municipal-dashboard" element={<MunicipalDashboard />} />
               <Route path="shop" element={<Shop />} />
               <Route path="polls" element={<Polls />} />
               <Route path="polls/:id" element={<PollDetail />} />
@@ -68,6 +78,7 @@ function App() {
               <Route path="users" element={<UsersManagement />} />
               <Route path="company-updates" element={<CompanyUpdates />} />
               <Route path="invite-codes" element={<InviteCodes />} />
+              <Route path="municipal-analytics" element={<MunicipalDashboard />} />
             </Route>
           </Routes>
         </Suspense>

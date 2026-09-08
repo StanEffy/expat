@@ -45,6 +45,12 @@ const Home = () => {
         {t('home.description')}
       </p>
       <div className={styles.buttons}>
+        <Button
+          label={t('navigation.onboarding')}
+          icon="pi pi-compass"
+          onClick={() => navigate('/onboarding')}
+          className={styles.button}
+        />
         {isAuthenticated ? (
           <Button label={t('navigation.companies')} onClick={() => navigate('/companies')} className={styles.button} />
         ) : (

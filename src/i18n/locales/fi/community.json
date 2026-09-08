@@ -1,0 +1,72 @@
+{
+  "title": "Kunnallinen maahanmuuttajien yhteisökeskus",
+  "subtitle": "Löydä paikallisia tapahtumia, vertaisilmoitustaulu ja kokeneita expat-mentoreita ympäri Suomea",
+  "tabs": {
+    "events": "Tapahtumat & tapaamiset",
+    "notices": "Ilmoitustaulu",
+    "mentors": "Kuntamentorit"
+  },
+  "search_placeholder": "Hae tapahtumia, ilmoituksia tai mentoreita avainsanalla...",
+  "filters": {
+    "city_all": "Kaikki kaupungit",
+    "category_all": "Kaikki kategoriat",
+    "event_categories": {
+      "language_exchange": "Kielikahvilat",
+      "cultural": "Kulttuuri & perinteet",
+      "sports_outdoor": "Ulkoilu & saunat",
+      "family": "Perheet & lapset",
+      "networking": "Teknologia & ura"
+    },
+    "notice_categories": {
+      "housing_sharing": "Asuminen & kämppikset",
+      "goods_giveaway": "Ilmaiset tavarat & kierrätys",
+      "study_buddy": "Opiskelu & kielikaverit",
+      "advice": "Yleinen neuvonta"
+    }
+  },
+  "event": {
+    "rsvp_btn": "Ilmoittaudu mukaan",
+    "attending_badge": "Osallistut! ✓",
+    "cancel_rsvp": "Peru osallistuminen",
+    "attendees": "osallistujaa",
+    "organizer": "Järjestäjä",
+    "location": "Paikka",
+    "languages": "Kielet",
+    "price": "Hinta"
+  },
+  "notice": {
+    "post_btn": "Jätä ilmoitus",
+    "posted_by": "Ilmoittaja",
+    "contact_btn": "Ota yhteyttä",
+    "dialog": {
+      "title": "Jätä ilmoitus yhteisötaululle",
+      "city_label": "Kaupunki",
+      "category_label": "Kategoria",
+      "author_label": "Nimesi / Nimimerkki",
+      "author_placeholder": "esim. Alex K.",
+      "post_title_label": "Ilmoituksen otsikko",
+      "post_title_placeholder": "Selkeä ja ytimekäs otsikko...",
+      "content_label": "Sisältö",
+      "content_placeholder": "Kerro tarkemmin tiedoista, ehdoista, ajankohdasta tai paikasta...",
+      "contact_label": "Yhteystieto (sähköposti tai puhelin)",
+      "contact_placeholder": "alex@example.com tai @alex_tg",
+      "cancel": "Peruuta",
+      "submit": "Julkaise ilmoitus"
+    }
+  },
+  "mentor": {
+    "in_finland": "vuotta Suomessa",
+    "origin": "Kotimaa",
+    "profession": "Ammatti",
+    "specialties": "Osaa neuvoa asioissa",
+    "contact_btn": "Ota yhteys mentoriin"
+  },
+  "empty": {
+    "events_title": "Tulevia tapahtumia ei löytynyt",
+    "events_desc": "Tarkista tilanne myöhemmin tai valitse toinen kunta.",
+    "notices_title": "Ilmoituksia ei löytynyt valituilla ehdoilla",
+    "notices_desc": "Ole ensimmäinen ja jätä ilmoitus tähän kategoriaan!",
+    "mentors_title": "Mentoreita ei löytynyt",
+    "mentors_desc": "Kokeile valita toinen kunta tai tyhjentää hakusanat."
+  }
+}

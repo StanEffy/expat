@@ -3,9 +3,15 @@
 .container {
   margin-top: 24px;
   width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .accordion {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+
   :global(.p-accordion-header .p-accordion-header-link) {
     background: linear-gradient(
       165deg,
@@ -19,6 +25,14 @@
     padding: 18px 24px !important;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35) !important;
     transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    box-sizing: border-box !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+
+    @media (max-width: 600px) {
+      padding: 14px 16px !important;
+      border-radius: 14px !important;
+    }
 
     &:hover {
       background: linear-gradient(
@@ -35,6 +49,11 @@
       font-size: 1.1rem !important;
       margin-right: 14px !important;
       transition: transform 0.2s ease !important;
+      flex-shrink: 0 !important;
+
+      @media (max-width: 600px) {
+        margin-right: 8px !important;
+      }
     }
   }
 
@@ -59,6 +78,14 @@
     -webkit-backdrop-filter: blur(24px) !important;
     padding: 24px 28px 28px !important;
     box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5) !important;
+    box-sizing: border-box !important;
+    max-width: 100% !important;
+
+    @media (max-width: 600px) {
+      padding: 16px !important;
+      border-bottom-left-radius: 14px !important;
+      border-bottom-right-radius: 14px !important;
+    }
   }
 }
 
@@ -67,12 +94,19 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  min-width: 0;
 }
 
 .tabHeaderLeft {
   display: flex;
   align-items: center;
   gap: 16px;
+  min-width: 0;
+  width: 100%;
+
+  @media (max-width: 600px) {
+    gap: 12px;
+  }
 }
 
 .tabHeaderIcon {
@@ -88,12 +122,21 @@
   font-size: 1.15rem;
   flex-shrink: 0;
   box-shadow: 0 4px 14px rgba(160, 41, 127, 0.25);
+
+  @media (max-width: 480px) {
+    width: 36px;
+    height: 36px;
+    font-size: 1rem;
+    border-radius: 10px;
+  }
 }
 
 .tabHeaderText {
   display: flex;
   flex-direction: column;
   gap: 4px;
+  min-width: 0;
+  flex: 1;
 }
 
 .tabHeaderTitle {
@@ -101,24 +144,42 @@
   font-weight: 700;
   color: #ffffff;
   letter-spacing: -0.2px;
+  overflow-wrap: break-word;
+  word-break: break-word;
+
+  @media (max-width: 480px) {
+    font-size: 0.98rem;
+  }
 }
 
 .tabHeaderSubtitle {
   font-size: 0.85rem;
   color: rgba(255, 255, 255, 0.65);
   font-weight: 400;
+  overflow-wrap: break-word;
+  word-break: break-word;
+
+  @media (max-width: 480px) {
+    font-size: 0.78rem;
+  }
 }
 
 .form {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .formGroup {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .label {
@@ -128,15 +189,19 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  flex-wrap: wrap;
 
   i {
     color: rgba(207, 91, 175, 0.9);
     font-size: 0.9rem;
+    flex-shrink: 0;
   }
 }
 
 .textarea {
   width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
   background: rgba(255, 255, 255, 0.06) !important;
   border: 1px solid rgba(255, 255, 255, 0.16) !important;
   border-radius: 12px !important;
@@ -167,6 +232,8 @@
 
 .input {
   width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
   height: 44px !important;
   background: rgba(255, 255, 255, 0.06) !important;
   border: 1px solid rgba(255, 255, 255, 0.16) !important;
@@ -197,6 +264,7 @@
   display: flex;
   justify-content: flex-end;
   margin-top: 8px;
+  width: 100%;
 }
 
 .submitBtn {
@@ -213,6 +281,13 @@
   font-weight: 600 !important;
   box-shadow: 0 4px 16px rgba(160, 41, 127, 0.35) !important;
   transition: all 0.2s ease !important;
+  box-sizing: border-box !important;
+  max-width: 100% !important;
+
+  @media (max-width: 600px) {
+    width: 100% !important;
+    justify-content: center !important;
+  }
 
   &:hover:not(:disabled) {
     transform: translateY(-1px);
@@ -256,5 +331,11 @@
   justify-content: flex-end;
   gap: 12px;
   width: 100%;
+}
+
+.confirmDialog {
+  max-width: 92vw !important;
+  width: 460px !important;
+  box-sizing: border-box !important;
 }
 

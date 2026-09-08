@@ -2,8 +2,14 @@
 
 .container {
   max-width: 1200px;
+  width: 100%;
   margin: 0 auto;
   padding: 28px 20px 64px;
+  box-sizing: border-box;
+
+  @media (max-width: 640px) {
+    padding: 16px 12px 48px;
+  }
 }
 
 // -----------------------------------------------------------------------------
@@ -129,6 +135,9 @@
   gap: 24px;
   padding: 28px 32px;
   margin-bottom: 28px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
   background: linear-gradient(
     135deg,
     rgba(57, 14, 94, 0.9) 0%,
@@ -146,7 +155,14 @@
   @media (max-width: 900px) {
     flex-direction: column;
     align-items: flex-start;
-    padding: 24px;
+    padding: 20px;
+    gap: 18px;
+    margin-bottom: 20px;
+  }
+
+  @media (max-width: 600px) {
+    padding: 16px;
+    border-radius: 16px;
   }
 }
 
@@ -155,6 +171,9 @@
   align-items: center;
   gap: 22px;
   flex: 1;
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
 
   @media (max-width: 600px) {
     flex-direction: column;
@@ -178,12 +197,22 @@
   letter-spacing: 0.5px;
   box-shadow: 0 8px 24px rgba(160, 41, 127, 0.4);
   flex-shrink: 0;
+
+  @media (max-width: 600px) {
+    width: 60px;
+    height: 60px;
+    font-size: 1.4rem;
+    border-radius: 16px;
+  }
 }
 
 .heroDetails {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .heroNameRow {
@@ -191,6 +220,8 @@
   align-items: center;
   gap: 12px;
   flex-wrap: wrap;
+  min-width: 0;
+  width: 100%;
 }
 
 .title {
@@ -200,9 +231,12 @@
   font-weight: 700;
   letter-spacing: -0.4px;
   line-height: 1.25;
+  min-width: 0;
+  overflow-wrap: break-word;
+  word-break: break-word;
 
   @media (max-width: 600px) {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
   }
 }
 
@@ -211,6 +245,8 @@
   align-items: center;
   gap: 10px;
   flex-wrap: wrap;
+  min-width: 0;
+  width: 100%;
 }
 
 .badge {
@@ -224,10 +260,16 @@
   color: rgba(255, 255, 255, 0.88);
   font-size: 0.84rem;
   font-weight: 500;
+  max-width: 100%;
+  box-sizing: border-box;
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: break-word;
 
   i {
     color: rgba(207, 91, 175, 0.95);
     font-size: 0.8rem;
+    flex-shrink: 0;
   }
 }
 
@@ -247,6 +289,7 @@
     margin-left: 4px;
     font-size: 0.75rem;
     color: rgba(255, 255, 255, 0.6);
+    flex-shrink: 0;
   }
 }
 
@@ -256,12 +299,25 @@
   gap: 12px;
   flex-shrink: 0;
   flex-wrap: wrap;
+  max-width: 100%;
+  box-sizing: border-box;
 
   @media (max-width: 900px) {
     width: 100%;
     justify-content: flex-start;
     padding-top: 14px;
     border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  @media (max-width: 500px) {
+    gap: 8px;
+
+    .websiteBtn,
+    .complainButton {
+      flex: 1 1 auto;
+      justify-content: center;
+      text-align: center;
+    }
   }
 }
 
@@ -289,10 +345,14 @@
   font-size: 0.88rem;
   font-weight: 600;
   transition: all 0.2s ease;
+  box-sizing: border-box;
+  max-width: 100%;
+  white-space: nowrap;
 
   i {
     font-size: 0.85rem;
     color: rgba(255, 255, 255, 0.8);
+    flex-shrink: 0;
   }
 
   &:hover {
@@ -316,10 +376,14 @@
   border: 1px solid rgba(255, 255, 255, 0.16) !important;
   color: rgba(255, 255, 255, 0.85) !important;
   transition: all 0.2s ease !important;
+  box-sizing: border-box !important;
+  max-width: 100% !important;
+  white-space: nowrap !important;
 
   :global(.p-button-icon) {
     color: #ef4444 !important;
     font-size: 0.85rem !important;
+    flex-shrink: 0 !important;
   }
 
   &:hover {
@@ -335,12 +399,16 @@
 // -----------------------------------------------------------------------------
 .layoutGrid {
   display: grid;
-  grid-template-columns: 1fr 380px;
+  grid-template-columns: minmax(0, 1fr) 380px;
   gap: 24px;
   align-items: start;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 
   @media (max-width: 980px) {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
   }
 }
 
@@ -348,12 +416,28 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
+  min-width: 0;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+
+  @media (max-width: 600px) {
+    gap: 16px;
+  }
 }
 
 .sidebarColumn {
   display: flex;
   flex-direction: column;
   gap: 24px;
+  min-width: 0;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+
+  @media (max-width: 600px) {
+    gap: 16px;
+  }
 }
 
 // -----------------------------------------------------------------------------
@@ -374,6 +458,14 @@
     0 10px 30px rgba(0, 0, 0, 0.4),
     inset 0 1px 0 rgba(255, 255, 255, 0.08);
   transition: all 0.2s ease;
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+
+  @media (max-width: 600px) {
+    padding: 18px 16px;
+    border-radius: 14px;
+  }
 
   &:hover {
     border-color: rgba(207, 91, 175, 0.35);
@@ -387,16 +479,22 @@
   padding-bottom: 16px;
   margin-bottom: 18px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .cardHeaderTitle {
   display: flex;
   align-items: center;
   gap: 10px;
+  min-width: 0;
+  max-width: 100%;
 
   i {
     color: rgba(207, 91, 175, 0.95);
     font-size: 1.15rem;
+    flex-shrink: 0;
   }
 
   h2, h3 {
@@ -405,11 +503,16 @@
     font-size: 1.2rem;
     font-weight: 700;
     letter-spacing: -0.2px;
+    word-break: break-word;
+    overflow-wrap: break-word;
   }
 }
 
 .cardBody {
   color: rgba(255, 255, 255, 0.88);
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .descriptionText {
@@ -418,6 +521,8 @@
   line-height: 1.7;
   color: rgba(255, 255, 255, 0.9);
   white-space: pre-line;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .emptyText {
@@ -448,10 +553,16 @@
   align-items: center;
   justify-content: space-between;
   gap: 20px;
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
 
   @media (max-width: 680px) {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
+    padding: 18px 16px;
+    gap: 16px;
+    border-radius: 14px;
   }
 }
 
@@ -459,6 +570,13 @@
   display: flex;
   align-items: center;
   gap: 16px;
+  min-width: 0;
+  max-width: 100%;
+
+  @media (max-width: 480px) {
+    align-items: flex-start;
+    gap: 12px;
+  }
 }
 
 .recruitmentIconWrapper {
@@ -480,6 +598,8 @@
   display: flex;
   flex-direction: column;
   gap: 4px;
+  min-width: 0;
+  flex: 1;
 }
 
 .recruitmentTitle {
@@ -487,6 +607,8 @@
   font-size: 1.15rem;
   font-weight: 700;
   color: #ffffff;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .recruitmentDesc {
@@ -494,11 +616,14 @@
   font-size: 0.88rem;
   color: rgba(255, 255, 255, 0.72);
   line-height: 1.4;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .recruitmentButton {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   padding: 0 20px;
   height: 42px;
@@ -513,10 +638,13 @@
   box-shadow: 0 4px 16px rgba(160, 41, 127, 0.4);
   transition: all 0.2s ease;
   flex-shrink: 0;
+  box-sizing: border-box;
+  max-width: 100%;
 
   i {
     font-size: 0.85rem;
     transition: transform 0.2s ease;
+    flex-shrink: 0;
   }
 
   &:hover {
@@ -532,6 +660,11 @@
   @media (max-width: 680px) {
     width: 100%;
     justify-content: center;
+    white-space: normal;
+    text-align: center;
+    height: auto;
+    min-height: 42px;
+    padding: 10px 16px;
   }
 }
 
@@ -542,6 +675,8 @@
   display: flex;
   flex-direction: column;
   gap: 14px;
+  min-width: 0;
+  width: 100%;
 }
 
 .infoItem {
@@ -551,10 +686,25 @@
   gap: 12px;
   padding-bottom: 12px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
 
   &:last-child {
     padding-bottom: 0;
     border-bottom: none;
+  }
+
+  @media (max-width: 540px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+
+    .infoValue,
+    .infoLink {
+      text-align: left;
+      width: 100%;
+    }
   }
 }
 
@@ -565,10 +715,12 @@
   font-size: 0.88rem;
   color: rgba(255, 255, 255, 0.65);
   font-weight: 500;
+  flex-shrink: 0;
 
   i {
     color: rgba(207, 91, 175, 0.85);
     font-size: 0.85rem;
+    flex-shrink: 0;
   }
 }
 
@@ -577,6 +729,10 @@
   font-weight: 600;
   color: #ffffff;
   text-align: right;
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .infoLink {
@@ -588,9 +744,27 @@
   color: rgba(207, 91, 175, 0.95);
   text-decoration: none;
   transition: all 0.2s ease;
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-break: break-word;
+
+  span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 220px;
+
+    @media (max-width: 540px) {
+      max-width: 100%;
+      white-space: normal;
+      word-break: break-all;
+    }
+  }
 
   i {
     font-size: 0.75rem;
+    flex-shrink: 0;
   }
 
   &:hover {
@@ -606,11 +780,16 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .mapBanner {
   position: relative;
   width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
   height: 140px;
   border-radius: 14px;
   overflow: hidden;
@@ -686,6 +865,7 @@
 
   i {
     font-size: 0.7rem;
+    flex-shrink: 0;
   }
 }
 
@@ -693,6 +873,9 @@
   display: flex;
   flex-direction: column;
   gap: 6px;
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .addressStreet {
@@ -700,12 +883,16 @@
   color: #ffffff;
   font-weight: 600;
   font-size: 1rem;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .addressCity {
   margin: 0;
   color: rgba(255, 255, 255, 0.7);
   font-size: 0.9rem;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .openMapBtn {
@@ -716,6 +903,8 @@
   margin-top: 10px;
   padding: 0 16px;
   height: 38px;
+  width: 100%;
+  box-sizing: border-box;
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 10px;
@@ -728,6 +917,7 @@
   i {
     color: rgba(207, 91, 175, 0.95);
     font-size: 0.95rem;
+    flex-shrink: 0;
   }
 
   &:hover {

@@ -1,7 +1,6 @@
-import { useMemo, useRef, lazy, Suspense } from "react";
+import { useState, useMemo, useRef, useEffect, lazy, Suspense } from "react";
 import Button from "../Common/Button";
 import { Menubar } from "primereact/menubar";
-import { Menu } from "primereact/menu";
 import { Badge } from "primereact/badge";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -19,7 +18,8 @@ const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { unreadCount } = useUserNotifications();
-  const cityServicesMenu = useRef<Menu>(null);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const isCompaniesActive = location.pathname.startsWith("/companies") || location.pathname === "/categories";
   const isShopActive = location.pathname.startsWith("/shop");
@@ -84,6 +84,36 @@ const Header = () => {
     ]
   );
 
+  useEffect(() => {
+    if (!isDropdownOpen) return;
+
+    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("touchstart", handleClickOutside);
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchstart", handleClickOutside);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isDropdownOpen]);
+
+  useEffect(() => {
+    setIsDropdownOpen(false);
+  }, [location.pathname]);
+
   const profileButtonContent = useMemo(() => {
     if (!isAuthenticated) {
       return t("navigation.profile");
@@ -115,26 +145,49 @@ const Header = () => {
           onClick={() => navigate("/companies")}
           className={`${styles.navButton} ${isCompaniesActive ? styles.active : ''}`}
         />
-        <Button
-          text
-          icon="pi pi-building-columns"
-          onClick={(e) => cityServicesMenu.current?.toggle(e)}
-          className={`${styles.navButton} ${styles.dropdownButton} ${isCityServicesActive ? styles.active : ''}`}
-          aria-haspopup="true"
-          aria-controls="city_services_menu"
-        >
-          <span className={styles.dropdownButtonLabel}>
-            {t("navigation.cityServices")}
-            <i className={`pi pi-chevron-down ${styles.dropdownChevron}`} />
-          </span>
-        </Button>
-        <Menu
-          id="city_services_menu"
-          ref={cityServicesMenu}
-          model={cityServicesItems}
-          popup
-          className="city-services-menu"
-        />
+        <div className={styles.dropdownWrapper} ref={dropdownRef}>
+          <Button
+            text
+            icon="pi pi-building-columns"
+            onClick={() => setIsDropdownOpen((prev) => !prev)}
+            className={`${styles.navButton} ${styles.dropdownButton} ${isCityServicesActive ? styles.active : ''} ${isDropdownOpen ? styles.dropdownOpen : ''}`}
+            aria-haspopup="true"
+            aria-expanded={isDropdownOpen}
+            aria-controls="city_services_menu"
+          >
+            <span className={styles.dropdownButtonLabel}>
+              {t("navigation.cityServices")}
+              <i className={`pi pi-chevron-down ${styles.dropdownChevron} ${isDropdownOpen ? styles.chevronRotated : ''}`} />
+            </span>
+          </Button>
+          {isDropdownOpen && (
+            <div
+              id="city_services_menu"
+              className={styles.dropdownMenu}
+              role="menu"
+              aria-label={t("navigation.cityServices")}
+            >
+              <ul className={styles.dropdownList} role="none">
+                {cityServicesItems.map((item) => (
+                  <li key={item.label} role="none" className={styles.dropdownListItem}>
+                    <button
+                      type="button"
+                      className={`${styles.dropdownMenuItem} ${item.className === 'active-menuitem' ? styles.activeMenuItem : ''}`}
+                      onClick={() => {
+                        item.command();
+                        setIsDropdownOpen(false);
+                      }}
+                      role="menuitem"
+                    >
+                      <i className={`${item.icon} ${styles.menuItemIcon}`} />
+                      <span className={styles.menuItemText}>{item.label}</span>
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
         <Button
           label={t("navigation.shop")}
           text

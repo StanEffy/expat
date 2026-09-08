@@ -38,26 +38,36 @@
 
 .desktopNavButtons {
   display: none;
-  gap: 6px;
+  gap: 4px;
   align-items: center;
 
-  @media (min-width: 769px) {
+  @media (min-width: 1024px) {
     display: flex;
+  }
+
+  @media (min-width: 1280px) {
+    gap: 6px;
   }
 }
 
 .navButton {
   position: relative;
   height: 38px;
-  padding: 0 14px !important;
+  padding: 0 10px !important;
   border-radius: 10px !important;
-  font-size: 0.9rem !important;
+  font-size: 0.88rem !important;
   font-weight: 600 !important;
   color: rgba(255, 255, 255, 0.85) !important;
   background: transparent !important;
   border: 1px solid transparent !important;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
   cursor: pointer;
+  white-space: nowrap;
+
+  @media (min-width: 1280px) {
+    padding: 0 14px !important;
+    font-size: 0.9rem !important;
+  }
 
   :global(.p-button-icon) {
     font-size: 0.95rem !important;
@@ -165,5 +175,112 @@
   align-items: center;
   gap: 6px;
 }
+
+.dropdownButtonLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dropdownChevron {
+  font-size: 0.7rem !important;
+  opacity: 0.75;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  margin-left: 2px;
+}
+
+.dropdownButton:hover .dropdownChevron {
+  opacity: 1;
+  transform: translateY(1px);
+}
+
+:global(.city-services-menu) {
+  min-width: 230px;
+  background-color: rgba(26, 12, 45, 0.97) !important;
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border-radius: 14px !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  box-shadow: 0px 16px 40px rgba(0, 0, 0, 0.55), 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+  padding: 6px !important;
+  margin-top: 6px !important;
+  z-index: 10001 !important;
+
+  .p-menu-list {
+    padding: 0;
+  }
+
+  .p-menuitem {
+    margin: 2px 0;
+
+    .p-menuitem-link {
+      padding: 0.65rem 0.85rem;
+      border-radius: 8px;
+      margin: 0;
+      transition: all 0.15s ease;
+      color: rgba(255, 255, 255, 0.88) !important;
+
+      .p-menuitem-text {
+        color: rgba(255, 255, 255, 0.88);
+        font-weight: 500;
+        font-size: 0.9rem;
+      }
+
+      .p-menuitem-icon {
+        color: rgba(255, 255, 255, 0.75);
+        font-size: 1rem;
+        margin-right: 0.5rem;
+      }
+
+      &:hover,
+      &:active {
+        background-color: rgba(255, 255, 255, 0.12) !important;
+        transform: translateX(2px);
+
+        .p-menuitem-text {
+          color: #ffffff;
+        }
+
+        .p-menuitem-icon {
+          color: #ffffff;
+        }
+      }
+
+      &:focus {
+        outline: none !important;
+        box-shadow: none !important;
+      }
+    }
+
+    &.active-menuitem {
+      .p-menuitem-link {
+        background: linear-gradient(
+          135deg,
+          rgba(160, 41, 127, 0.45) 0%,
+          rgba(98, 44, 144, 0.6) 100%
+        ) !important;
+        border: 1px solid rgba(207, 91, 175, 0.4) !important;
+
+        .p-menuitem-text {
+          color: #ffffff !important;
+          font-weight: 600;
+        }
+
+        .p-menuitem-icon {
+          color: $secondary-a-3 !important;
+        }
+      }
+    }
+
+    &.p-focus {
+      .p-menuitem-link {
+        background-color: rgba(255, 255, 255, 0.1) !important;
+        outline: none !important;
+        box-shadow: none !important;
+      }
+    }
+  }
+}
+
 
 

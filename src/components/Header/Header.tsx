@@ -1,6 +1,7 @@
-import { useMemo, lazy, Suspense } from "react";
+import { useMemo, useRef, lazy, Suspense } from "react";
 import Button from "../Common/Button";
 import { Menubar } from "primereact/menubar";
+import { Menu } from "primereact/menu";
 import { Badge } from "primereact/badge";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -18,6 +19,7 @@ const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { unreadCount } = useUserNotifications();
+  const cityServicesMenu = useRef<Menu>(null);
 
   const isCompaniesActive = location.pathname.startsWith("/companies") || location.pathname === "/categories";
   const isShopActive = location.pathname.startsWith("/shop");
@@ -30,6 +32,57 @@ const Header = () => {
   const isAboutActive = location.pathname === "/about";
   const isProfileActive = location.pathname.startsWith("/profile") || location.pathname.startsWith("/admin");
   const isLoginActive = location.pathname === "/login" || location.pathname.startsWith("/password-reset");
+
+  const isCityServicesActive =
+    isOnboardingActive ||
+    isBudgetingActive ||
+    isServiceRequestsActive ||
+    isCommunityActive ||
+    isMunicipalAnalyticsActive;
+
+  const cityServicesItems = useMemo(
+    () => [
+      {
+        label: t("navigation.onboarding"),
+        icon: "pi pi-compass",
+        className: isOnboardingActive ? "active-menuitem" : "",
+        command: () => navigate("/onboarding"),
+      },
+      {
+        label: t("navigation.participatoryBudget"),
+        icon: "pi pi-wallet",
+        className: isBudgetingActive ? "active-menuitem" : "",
+        command: () => navigate("/participatory-budget"),
+      },
+      {
+        label: t("navigation.serviceRequests"),
+        icon: "pi pi-inbox",
+        className: isServiceRequestsActive ? "active-menuitem" : "",
+        command: () => navigate("/service-requests"),
+      },
+      {
+        label: t("navigation.community"),
+        icon: "pi pi-users",
+        className: isCommunityActive ? "active-menuitem" : "",
+        command: () => navigate("/community"),
+      },
+      {
+        label: t("navigation.municipalAnalytics"),
+        icon: "pi pi-chart-line",
+        className: isMunicipalAnalyticsActive ? "active-menuitem" : "",
+        command: () => navigate("/municipal-dashboard"),
+      },
+    ],
+    [
+      t,
+      navigate,
+      isOnboardingActive,
+      isBudgetingActive,
+      isServiceRequestsActive,
+      isCommunityActive,
+      isMunicipalAnalyticsActive,
+    ]
+  );
 
   const profileButtonContent = useMemo(() => {
     if (!isAuthenticated) {
@@ -63,32 +116,24 @@ const Header = () => {
           className={`${styles.navButton} ${isCompaniesActive ? styles.active : ''}`}
         />
         <Button
-          label={t("navigation.onboarding")}
           text
-          icon="pi pi-compass"
-          onClick={() => navigate("/onboarding")}
-          className={`${styles.navButton} ${isOnboardingActive ? styles.active : ''}`}
-        />
-        <Button
-          label={t("navigation.participatoryBudget")}
-          text
-          icon="pi pi-wallet"
-          onClick={() => navigate("/participatory-budget")}
-          className={`${styles.navButton} ${isBudgetingActive ? styles.active : ''}`}
-        />
-        <Button
-          label={t("navigation.serviceRequests")}
-          text
-          icon="pi pi-inbox"
-          onClick={() => navigate("/service-requests")}
-          className={`${styles.navButton} ${isServiceRequestsActive ? styles.active : ''}`}
-        />
-        <Button
-          label={t("navigation.community")}
-          text
-          icon="pi pi-users"
-          onClick={() => navigate("/community")}
-          className={`${styles.navButton} ${isCommunityActive ? styles.active : ''}`}
+          icon="pi pi-building-columns"
+          onClick={(e) => cityServicesMenu.current?.toggle(e)}
+          className={`${styles.navButton} ${styles.dropdownButton} ${isCityServicesActive ? styles.active : ''}`}
+          aria-haspopup="true"
+          aria-controls="city_services_menu"
+        >
+          <span className={styles.dropdownButtonLabel}>
+            {t("navigation.cityServices")}
+            <i className={`pi pi-chevron-down ${styles.dropdownChevron}`} />
+          </span>
+        </Button>
+        <Menu
+          id="city_services_menu"
+          ref={cityServicesMenu}
+          model={cityServicesItems}
+          popup
+          className="city-services-menu"
         />
         <Button
           label={t("navigation.shop")}
@@ -103,13 +148,6 @@ const Header = () => {
           icon="pi pi-chart-bar"
           onClick={() => navigate("/polls")}
           className={`${styles.navButton} ${isPollsActive ? styles.active : ''}`}
-        />
-        <Button
-          label={t("navigation.municipalAnalytics")}
-          text
-          icon="pi pi-chart-line"
-          onClick={() => navigate("/municipal-dashboard")}
-          className={`${styles.navButton} ${isMunicipalAnalyticsActive ? styles.active : ''}`}
         />
         <Button
           label={t("navigation.about")}

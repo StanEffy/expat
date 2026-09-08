@@ -1,8 +1,11 @@
 import { useState, useRef, useEffect } from "react";
 import Button from "../Common/Button";
 import { Menu } from "primereact/menu";
+import { MenuItem } from "primereact/menuitem";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
+import { useAuth } from "@/hooks/useAuth";
+import { useUserNotifications } from "../../contexts/UserNotificationsContext";
 import "./MobileMenu.scss";
 
 const MobileMenu = () => {
@@ -10,11 +13,13 @@ const MobileMenu = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const { isAuthenticated } = useAuth();
+  const { unreadCount } = useUserNotifications();
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 1024);
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
+      setIsMobile(window.innerWidth < 1024);
     };
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
@@ -22,7 +27,6 @@ const MobileMenu = () => {
 
   const handleNavigation = (path: string) => {
     navigate(path);
-    // Menu will auto-close on navigation
   };
 
   const isHomeActive = location.pathname === "/";
@@ -35,8 +39,10 @@ const MobileMenu = () => {
   const isPollsActive = location.pathname.startsWith("/polls");
   const isMunicipalAnalyticsActive = location.pathname.startsWith("/municipal-dashboard");
   const isAboutActive = location.pathname === "/about";
+  const isProfileActive = location.pathname.startsWith("/profile") || location.pathname.startsWith("/admin");
+  const isLoginActive = location.pathname === "/login" || location.pathname.startsWith("/password-reset");
 
-  const items = [
+  const items: MenuItem[] = [
     {
       label: t("navigation.home"),
       icon: "pi pi-home",
@@ -49,6 +55,7 @@ const MobileMenu = () => {
       className: isCompaniesActive ? "active-menuitem" : "",
       command: () => handleNavigation("/companies"),
     },
+    { separator: true },
     {
       label: t("navigation.onboarding"),
       icon: "pi pi-compass",
@@ -74,6 +81,13 @@ const MobileMenu = () => {
       command: () => handleNavigation("/community"),
     },
     {
+      label: t("navigation.municipalAnalytics"),
+      icon: "pi pi-chart-line",
+      className: isMunicipalAnalyticsActive ? "active-menuitem" : "",
+      command: () => handleNavigation("/municipal-dashboard"),
+    },
+    { separator: true },
+    {
       label: t("navigation.shop"),
       icon: "pi pi-shopping-bag",
       className: isShopActive ? "active-menuitem" : "",
@@ -86,17 +100,25 @@ const MobileMenu = () => {
       command: () => handleNavigation("/polls"),
     },
     {
-      label: t("navigation.municipalAnalytics"),
-      icon: "pi pi-chart-line",
-      className: isMunicipalAnalyticsActive ? "active-menuitem" : "",
-      command: () => handleNavigation("/municipal-dashboard"),
-    },
-    {
       label: t("navigation.about"),
       icon: "pi pi-info-circle",
       className: isAboutActive ? "active-menuitem" : "",
       command: () => handleNavigation("/about"),
     },
+    { separator: true },
+    isAuthenticated
+      ? {
+          label: unreadCount > 0 ? `${t("navigation.profile")} (${unreadCount})` : t("navigation.profile"),
+          icon: "pi pi-user",
+          className: isProfileActive ? "active-menuitem" : "",
+          command: () => handleNavigation("/profile"),
+        }
+      : {
+          label: t("navigation.login"),
+          icon: "pi pi-sign-in",
+          className: isLoginActive ? "active-menuitem" : "",
+          command: () => handleNavigation("/login"),
+        },
   ];
 
   if (!isMobile) {

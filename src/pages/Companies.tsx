@@ -369,20 +369,6 @@ const Companies = () => {
                 onChange={(e) => setSelectedCategoryId(e.value)}
               />
             </div>
-
-            <div className={styles.filterPerPage}>
-              <Dropdown
-                value={itemsPerPage}
-                options={itemsPerPageOptions}
-                onChange={handleItemsPerPageChange}
-                optionLabel="label"
-                optionValue="value"
-                placeholder={t("common.itemsPerPage")}
-                className={styles.itemsPerPageDropdown}
-                appendTo="self"
-                aria-label={t("common.itemsPerPage")}
-              />
-            </div>
           </div>
 
           {hasActiveFilters && (
@@ -521,15 +507,33 @@ const Companies = () => {
               })}
             </div>
 
-            {hasMore && (
+            {companies.length > 0 && (
               <div className={styles.loadMoreContainer}>
-                <Button
-                  label={loadingMore ? t("common.loading") : t("common.showMore")}
-                  onClick={handleLoadMore}
-                  disabled={loadingMore}
-                  loading={loadingMore}
-                  className={styles.loadMoreBtn}
-                />
+                {hasMore && (
+                  <Button
+                    label={loadingMore ? t("common.loading") : t("common.showMore")}
+                    onClick={handleLoadMore}
+                    disabled={loadingMore}
+                    loading={loadingMore}
+                    className={styles.loadMoreBtn}
+                  />
+                )}
+                <div className={styles.perPageWrapper}>
+                  <label htmlFor="items-per-page" className={styles.perPageLabel}>
+                    {t("common.itemsPerPage")}:
+                  </label>
+                  <Dropdown
+                    inputId="items-per-page"
+                    value={itemsPerPage}
+                    options={itemsPerPageOptions}
+                    onChange={handleItemsPerPageChange}
+                    optionLabel="label"
+                    optionValue="value"
+                    className={styles.itemsPerPageDropdown}
+                    appendTo="self"
+                    aria-label={t("common.itemsPerPage")}
+                  />
+                </div>
               </div>
             )}
           </>

@@ -84,19 +84,27 @@
 
 .filtersGrid {
   display: grid;
-  grid-template-columns: 2fr 1.6fr 1.6fr 130px;
+  grid-template-columns: 1.8fr 1.1fr 1.1fr;
   gap: 14px;
   align-items: center;
   position: relative;
   z-index: 101;
   overflow: visible;
 
-  @media (max-width: 1100px) {
+  @media (max-width: 900px) {
     grid-template-columns: 1fr 1fr;
+
+    .searchWrapper {
+      grid-column: 1 / -1;
+    }
   }
 
   @media (max-width: 640px) {
     grid-template-columns: 1fr;
+
+    .searchWrapper {
+      grid-column: auto;
+    }
   }
 }
 
@@ -148,61 +156,6 @@
   width: 100%;
 }
 
-.filterPerPage {
-  width: 100%;
-}
-
-.itemsPerPageDropdown {
-  width: 100% !important;
-  height: 44px !important;
-  background: rgba(255, 255, 255, 0.06) !important;
-  border: 1px solid rgba(255, 255, 255, 0.16) !important;
-  border-radius: 12px !important;
-  display: flex !important;
-  align-items: center !important;
-  position: relative !important;
-  transition: all 0.2s ease !important;
-
-  &:hover {
-    border-color: rgba(255, 255, 255, 0.28) !important;
-    background: rgba(255, 255, 255, 0.08) !important;
-  }
-
-  &:focus-within,
-  &.p-focus {
-    border-color: rgba(207, 91, 175, 0.65) !important;
-    box-shadow: 0 0 0 3px rgba(207, 91, 175, 0.25) !important;
-    background: rgba(255, 255, 255, 0.09) !important;
-  }
-
-  :global(.p-dropdown-label) {
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-    outline: none !important;
-    border-radius: 0 !important;
-    display: flex !important;
-    align-items: center !important;
-    padding: 0 14px !important;
-    color: #ffffff !important;
-    font-size: 0.88rem;
-    height: 100% !important;
-    flex: 1;
-    min-width: 0;
-  }
-
-  :global(.p-dropdown-trigger) {
-    color: rgba(255, 255, 255, 0.6) !important;
-    width: 36px !important;
-    height: 100% !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    background: transparent !important;
-    border: none !important;
-    flex-shrink: 0;
-  }
-}
 
 .filterActionsBar {
   display: flex;
@@ -523,8 +476,16 @@
 
 .loadMoreContainer {
   display: flex;
+  align-items: center;
   justify-content: center;
+  gap: 16px;
   margin-top: 36px;
+  flex-wrap: wrap;
+
+  @media (max-width: 640px) {
+    flex-direction: column;
+    gap: 12px;
+  }
 }
 
 .loadMoreBtn {
@@ -545,6 +506,76 @@
     ) !important;
     border-color: rgba(207, 91, 175, 0.55) !important;
     box-shadow: 0 6px 20px rgba(160, 41, 127, 0.3) !important;
+  }
+
+  @media (max-width: 640px) {
+    width: 100%;
+  }
+}
+
+.perPageWrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.perPageLabel {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.88rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.itemsPerPageDropdown {
+  width: 88px !important;
+  height: 44px !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  border-radius: 12px !important;
+  display: flex !important;
+  align-items: center !important;
+  position: relative !important;
+  transition: all 0.2s ease !important;
+
+  &:hover {
+    border-color: rgba(255, 255, 255, 0.28) !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+  }
+
+  &:focus-within,
+  &.p-focus {
+    border-color: rgba(207, 91, 175, 0.65) !important;
+    box-shadow: 0 0 0 3px rgba(207, 91, 175, 0.25) !important;
+    background: rgba(255, 255, 255, 0.09) !important;
+  }
+
+  :global(.p-dropdown-label) {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+    border-radius: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    padding: 0 0 0 14px !important;
+    color: #ffffff !important;
+    font-size: 0.88rem;
+    font-weight: 500;
+    height: 100% !important;
+    flex: 1;
+    min-width: 0;
+  }
+
+  :global(.p-dropdown-trigger) {
+    color: rgba(255, 255, 255, 0.6) !important;
+    width: 32px !important;
+    height: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: transparent !important;
+    border: none !important;
+    flex-shrink: 0;
   }
 }
 

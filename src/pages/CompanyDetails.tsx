@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate, useLocation } from "react-router-dom";
 import { ProgressSpinner } from "primereact/progressspinner";
 import Button from "../components/Common/Button";
 import { companyService } from "@/services/companyService";
+import { ApiError } from "@/services/apiClient";
 import { useNotification } from "../contexts/NotificationContext";
 import { useTranslation } from "react-i18next";
 import CompanyInfoEditor from "../components/Companies/CompanyInfoEditor";
@@ -33,6 +34,8 @@ interface CompanyDetails {
 
 const CompanyDetails = () => {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
+  const location = useLocation();
   const { showNotification } = useNotification();
   const [company, setCompany] = useState<CompanyDetails | null>(null);
   const [loading, setLoading] = useState(true);
@@ -48,6 +51,10 @@ const CompanyDetails = () => {
         const data = await companyService.getCompanyDetails(id);
         setCompany(data);
       } catch (err) {
+        if ((err instanceof ApiError && err.status === 401) || (err instanceof Error && err.message === 'Authentication required')) {
+          navigate('/login', { state: { from: location }, replace: true });
+          return;
+        }
         const errorMessage =
           err instanceof Error
             ? err.message
@@ -60,7 +67,7 @@ const CompanyDetails = () => {
     };
 
     fetchCompanyDetails();
-  }, [id, showNotification]);
+  }, [id, showNotification, navigate, location]);
 
   const getGoogleMapsUrl = (company: CompanyDetails) => {
     const address = `${company.street} ${company.buildingnumber}${

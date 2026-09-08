@@ -1,13 +1,23 @@
+@use "../../styles/variables" as *;
+
 .walletCard {
-  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
+  background: linear-gradient(
+    165deg,
+    rgba(34, 16, 50, 0.92) 0%,
+    rgba(20, 10, 32, 0.96) 100%
+  );
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 18px;
   padding: 1.5rem 1.75rem;
-  color: #f8fafc;
+  color: #ffffff;
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
   margin-bottom: 2rem;
 
   @media (min-width: 768px) {
@@ -27,14 +37,15 @@
   width: 56px;
   height: 56px;
   border-radius: 16px;
-  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  background: linear-gradient(135deg, $secondary-a-0 0%, $secondary-a-3 100%);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.75rem;
-  color: #fff;
-  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+  color: #ffffff;
+  box-shadow: 0 4px 16px rgba(160, 41, 127, 0.45);
   flex-shrink: 0;
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .titleArea {
@@ -42,12 +53,13 @@
     font-size: 1.25rem;
     font-weight: 700;
     margin: 0 0 0.25rem 0;
-    color: #fff;
+    color: #ffffff;
+    letter-spacing: -0.01em;
   }
 
   p {
     font-size: 0.875rem;
-    color: #94a3b8;
+    color: rgba(255, 255, 255, 0.65);
     margin: 0;
     line-height: 1.4;
     max-width: 480px;
@@ -73,14 +85,15 @@
   transition: all 0.2s ease;
 
   &.active {
-    background: #f59e0b;
-    color: #1e293b;
-    box-shadow: 0 0 8px rgba(245, 158, 11, 0.6);
+    background: linear-gradient(135deg, $secondary-a-0 0%, $secondary-a-3 100%);
+    color: #ffffff;
+    box-shadow: 0 0 10px rgba(207, 91, 175, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.3);
   }
 
   &.spent {
-    background: rgba(255, 255, 255, 0.1);
-    color: #64748b;
+    background: rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.35);
     border: 1px dashed rgba(255, 255, 255, 0.2);
   }
 }
@@ -99,14 +112,15 @@
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: #94a3b8;
+    color: rgba(255, 255, 255, 0.5);
     margin-bottom: 0.15rem;
+    font-weight: 600;
   }
 
   .statValue {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     font-weight: 800;
-    color: #38bdf8;
+    color: $secondary-a-3;
     line-height: 1;
 
     &.gold {

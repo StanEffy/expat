@@ -51,7 +51,7 @@ export const SentimentInsights: React.FC<Props> = ({ sentiment }) => {
           <div className={styles.itemsList}>
             {sentiment.topPainPoints.map((item) => (
               <div key={item.issueKey} className={styles.itemCard}>
-                <p>{t(item.issueKey)}</p>
+                <p>{t(item.issueKey.replace(/^analytics\./, ''))}</p>
                 <span className={`${styles.voteCount} ${styles[item.severity]}`}>
                   {item.count} mentions
                 </span>
@@ -69,7 +69,7 @@ export const SentimentInsights: React.FC<Props> = ({ sentiment }) => {
           <div className={styles.itemsList}>
             {sentiment.topAttractions.map((item) => (
               <div key={item.factorKey} className={styles.itemCard}>
-                <p>{t(item.factorKey)}</p>
+                <p>{t(item.factorKey.replace(/^analytics\./, ''))}</p>
                 <span className={`${styles.voteCount} ${styles.positive}`}>
                   +{item.count} votes
                 </span>

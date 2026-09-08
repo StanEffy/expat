@@ -1,3 +1,5 @@
+@use "@/styles/variables" as *;
+
 .container {
   padding: 2.5rem 1.5rem 4rem 1.5rem;
   max-width: 1200px;
@@ -14,26 +16,26 @@
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
-  background: rgba(168, 85, 247, 0.12);
-  color: #c084fc;
-  border: 1px solid rgba(168, 85, 247, 0.3);
-  padding: 0.35rem 0.9rem;
+  background: rgba(207, 91, 175, 0.18);
+  color: #f5bde6;
+  border: 1px solid rgba(207, 91, 175, 0.4);
+  padding: 0.35rem 0.95rem;
   border-radius: 9999px;
   font-size: 0.85rem;
-  font-weight: 600;
+  font-weight: 700;
   margin-bottom: 1rem;
-  box-shadow: 0 0 15px rgba(168, 85, 247, 0.15);
+  box-shadow: 0 0 15px rgba(207, 91, 175, 0.25);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .title {
   font-size: 2.5rem;
   font-weight: 800;
-  color: #f8fafc;
+  color: #ffffff;
   margin: 0 0 0.75rem 0;
   letter-spacing: -0.02em;
-  background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 
   @media (max-width: 768px) {
     font-size: 2rem;
@@ -42,7 +44,7 @@
 
 .subtitle {
   font-size: 1.15rem;
-  color: #94a3b8;
+  color: rgba(255, 255, 255, 0.75);
   max-width: 700px;
   margin: 0 auto;
   line-height: 1.6;
@@ -53,9 +55,9 @@
 }
 
 .toolbarCard {
-  background: rgba(30, 41, 59, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 1rem;
+  background: linear-gradient(165deg, rgba(34, 16, 50, 0.88) 0%, rgba(22, 10, 34, 0.94) 100%);
+  border: 1px solid rgba(207, 91, 175, 0.2);
+  border-radius: 1.25rem;
   padding: 1.25rem 1.5rem;
   margin-bottom: 2rem;
   display: flex;
@@ -63,7 +65,9 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 1rem;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.36);
 }
 
 .selectorsGroup {
@@ -81,57 +85,60 @@
 }
 
 .cityBtn {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #94a3b8;
-  padding: 0.45rem 0.85rem;
-  border-radius: 0.5rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.75);
+  padding: 0.45rem 0.9rem;
+  border-radius: 8px;
   font-size: 0.85rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
 
   &:hover {
-    color: #f1f5f9;
-    border-color: rgba(56, 189, 248, 0.4);
+    color: #ffffff;
+    border-color: rgba(207, 91, 175, 0.5);
+    background: rgba(255, 255, 255, 0.1);
   }
 
   &.active {
-    background: #0284c7;
+    background: linear-gradient(135deg, $secondary-a-0 0%, $secondary-a-3 100%);
     color: #ffffff;
-    border-color: #0284c7;
-    box-shadow: 0 0 12px rgba(2, 132, 199, 0.35);
+    border-color: $secondary-a-3;
+    font-weight: 700;
+    box-shadow: 0 4px 14px rgba(160, 41, 127, 0.4);
   }
 }
 
 .timeframeGroup {
   display: flex;
   gap: 0.3rem;
-  background: rgba(15, 23, 42, 0.6);
+  background: rgba(255, 255, 255, 0.05);
   padding: 0.25rem;
-  border-radius: 0.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .timeframeBtn {
   background: transparent;
   border: none;
-  color: #94a3b8;
-  padding: 0.3rem 0.65rem;
-  border-radius: 0.35rem;
+  color: rgba(255, 255, 255, 0.7);
+  padding: 0.35rem 0.75rem;
+  border-radius: 6px;
   font-size: 0.8rem;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
 
   &:hover {
-    color: #f1f5f9;
+    color: #ffffff;
   }
 
   &.active {
-    background: rgba(255, 255, 255, 0.1);
-    color: #38bdf8;
-    font-weight: 600;
+    background: rgba(207, 91, 175, 0.25);
+    color: #ffffff;
+    border: 1px solid rgba(207, 91, 175, 0.45);
+    font-weight: 700;
   }
 }
 
@@ -145,28 +152,31 @@
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
-  padding: 0.5rem 0.9rem;
-  border-radius: 0.5rem;
+  padding: 0.5rem 0.95rem;
+  border-radius: 8px;
   font-size: 0.85rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
   border: 1px solid rgba(255, 255, 255, 0.15);
   background: rgba(255, 255, 255, 0.06);
-  color: #e2e8f0;
+  color: rgba(255, 255, 255, 0.85);
 
   &:hover {
     background: rgba(255, 255, 255, 0.12);
-    border-color: rgba(255, 255, 255, 0.25);
+    border-color: rgba(207, 91, 175, 0.5);
+    color: #ffffff;
   }
 
   &.primary {
-    background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
-    border-color: #0284c7;
+    background: linear-gradient(135deg, $secondary-a-0 0%, $secondary-a-3 100%);
+    border-color: $secondary-a-3;
     color: #ffffff;
+    box-shadow: 0 4px 14px rgba(160, 41, 127, 0.4);
 
     &:hover {
-      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.35);
+      box-shadow: 0 6px 20px rgba(160, 41, 127, 0.55);
+      transform: translateY(-1px);
     }
   }
 }
@@ -183,5 +193,5 @@
   justify-content: center;
   align-items: center;
   min-height: 400px;
-  color: #94a3b8;
+  color: rgba(255, 255, 255, 0.7);
 }

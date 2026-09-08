@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import { Card } from 'primereact/card';
 import Button from '../components/Common/Button';
 import { Checkbox } from 'primereact/checkbox';
@@ -65,6 +65,7 @@ const PollDetailPage = () => {
   const { t } = useTranslation();
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const location = useLocation();
   const {
     pollsById,
     loadingPollIds,
@@ -116,6 +117,10 @@ const PollDetailPage = () => {
           await fetchPublicPollById(pollId);
         }
       } catch (err) {
+        if ((err instanceof ApiError && err.status === 401) || (err instanceof Error && err.message === 'Authentication required')) {
+          navigate('/login', { state: { from: location }, replace: true });
+          return;
+        }
         if (!isMounted) return;
         const message = err instanceof Error ? err.message : t('polls.errors.loadFailed');
         setError(message);
@@ -127,7 +132,7 @@ const PollDetailPage = () => {
     return () => {
       isMounted = false;
     };
-  }, [pollId, fetchPollById, fetchPublicPollById, showNotification, t]);
+  }, [pollId, fetchPollById, fetchPublicPollById, showNotification, t, navigate, location]);
 
   useEffect(() => {
     if (poll) {

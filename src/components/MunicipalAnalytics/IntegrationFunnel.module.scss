@@ -1,32 +1,36 @@
+@use "@/styles/variables" as *;
+
 .funnelContainer {
-  background: rgba(30, 41, 59, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 1rem;
-  padding: 1.5rem;
-  backdrop-filter: blur(10px);
+  background: linear-gradient(165deg, rgba(34, 16, 50, 0.88) 0%, rgba(22, 10, 34, 0.94) 100%);
+  border: 1px solid rgba(207, 91, 175, 0.2);
+  border-radius: 1.25rem;
+  padding: 1.75rem;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   margin-bottom: 2rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.36);
 }
 
 .header {
   margin-bottom: 1.5rem;
 
   h2 {
-    font-size: 1.35rem;
+    font-size: 1.4rem;
     font-weight: 700;
-    color: #f8fafc;
+    color: #ffffff;
     margin: 0 0 0.35rem 0;
     display: flex;
     align-items: center;
     gap: 0.6rem;
 
     i {
-      color: #38bdf8;
+      color: $secondary-a-3;
     }
   }
 
   p {
-    font-size: 0.9rem;
-    color: #94a3b8;
+    font-size: 0.92rem;
+    color: rgba(255, 255, 255, 0.7);
     margin: 0;
   }
 }
@@ -38,27 +42,28 @@
 }
 
 .stepItem {
-  background: rgba(15, 23, 42, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 0.75rem;
-  padding: 1rem 1.25rem;
-  transition: all 0.2s ease;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0.875rem;
+  padding: 1.15rem 1.35rem;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 
   &:hover {
-    border-color: rgba(56, 189, 248, 0.3);
-    background: rgba(15, 23, 42, 0.7);
+    border-color: rgba(207, 91, 175, 0.55);
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25);
   }
 
   &.critical {
-    border-left: 4px solid #ef4444;
+    border-left: 4px solid #f87171;
   }
 
   &.warning {
-    border-left: 4px solid #f59e0b;
+    border-left: 4px solid #fbbf24;
   }
 
   &.normal {
-    border-left: 4px solid #22c55e;
+    border-left: 4px solid #34d399;
   }
 }
 
@@ -73,17 +78,17 @@
 
 .stepTitleGroup {
   h3 {
-    font-size: 1.05rem;
-    font-weight: 600;
-    color: #f1f5f9;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #ffffff;
     margin: 0 0 0.25rem 0;
   }
 
   .department {
     font-size: 0.8rem;
-    color: #94a3b8;
-    background: rgba(255, 255, 255, 0.06);
-    padding: 0.15rem 0.5rem;
+    color: rgba(255, 255, 255, 0.65);
+    background: rgba(255, 255, 255, 0.08);
+    padding: 0.15rem 0.55rem;
     border-radius: 0.3rem;
   }
 }
@@ -97,52 +102,54 @@
 
 .durationBadge {
   font-size: 0.82rem;
-  color: #cbd5e1;
-  background: rgba(255, 255, 255, 0.05);
-  padding: 0.3rem 0.7rem;
-  border-radius: 0.4rem;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.06);
+  padding: 0.35rem 0.75rem;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 
   strong {
-    color: #f8fafc;
+    color: #ffffff;
   }
 
   .benchmark {
-    color: #64748b;
+    color: rgba(255, 255, 255, 0.5);
     font-size: 0.75rem;
     margin-left: 0.4rem;
   }
 }
 
 .severityBadge {
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  padding: 0.25rem 0.6rem;
+  padding: 0.25rem 0.65rem;
   border-radius: 9999px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 
   &.critical {
     background: rgba(239, 68, 68, 0.15);
     color: #f87171;
-    border: 1px solid rgba(239, 68, 68, 0.3);
+    border: 1px solid rgba(239, 68, 68, 0.35);
   }
 
   &.warning {
     background: rgba(245, 158, 11, 0.15);
     color: #fbbf24;
-    border: 1px solid rgba(245, 158, 11, 0.3);
+    border: 1px solid rgba(245, 158, 11, 0.35);
   }
 
   &.normal {
-    background: rgba(34, 197, 94, 0.15);
-    color: #4ade80;
-    border: 1px solid rgba(34, 197, 94, 0.3);
+    background: rgba(16, 185, 129, 0.15);
+    color: #34d399;
+    border: 1px solid rgba(16, 185, 129, 0.35);
   }
 }
 
 .progressArea {
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.65rem;
 }
 
 .progressTrack {
@@ -150,40 +157,43 @@
   background: rgba(255, 255, 255, 0.08);
   border-radius: 9999px;
   overflow: hidden;
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.35rem;
 }
 
 .progressBar {
   height: 100%;
   border-radius: 9999px;
-  transition: width 0.4s ease;
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 
   &.critical {
     background: linear-gradient(90deg, #ef4444, #f97316);
+    box-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
   }
 
   &.warning {
     background: linear-gradient(90deg, #f59e0b, #eab308);
+    box-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
   }
 
   &.normal {
-    background: linear-gradient(90deg, #38bdf8, #22c55e);
+    background: linear-gradient(90deg, $secondary-a-0 0%, $secondary-a-3 100%);
+    box-shadow: 0 0 10px rgba(207, 91, 175, 0.5);
   }
 }
 
 .completionLabel {
   font-size: 0.78rem;
-  color: #94a3b8;
+  color: rgba(255, 255, 255, 0.65);
   display: flex;
   justify-content: space-between;
 }
 
 .insightText {
-  font-size: 0.82rem;
-  color: #cbd5e1;
-  background: rgba(255, 255, 255, 0.03);
-  padding: 0.45rem 0.75rem;
-  border-radius: 0.4rem;
-  border-left: 2px solid rgba(56, 189, 248, 0.5);
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.85);
+  background: rgba(207, 91, 175, 0.08);
+  padding: 0.55rem 0.85rem;
+  border-radius: 6px;
+  border-left: 3px solid $secondary-a-3;
   margin: 0;
 }

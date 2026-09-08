@@ -1,10 +1,11 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams, useLocation } from "react-router-dom";
 import { InputText } from "primereact/inputtext";
 import { Dropdown } from "primereact/dropdown";
 import { ProgressSpinner } from "primereact/progressspinner";
 import Button from "../components/Common/Button";
 import { companyService } from "@/services/companyService";
+import { ApiError } from "@/services/apiClient";
 import { useNotification } from "../contexts/NotificationContext";
 import { useTranslation } from "react-i18next";
 import CompanyFilter from "../components/Companies/CompanyFilter";
@@ -34,6 +35,7 @@ const getCompanyInitial = (name?: string | null): string => {
 
 const Companies = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [searchParams] = useSearchParams();
   const { showNotification } = useNotification();
   const { t } = useTranslation();
@@ -112,6 +114,10 @@ const Companies = () => {
         }
         setHasMore(nextHasMore);
       } catch (err) {
+        if ((err instanceof ApiError && err.status === 401) || (err instanceof Error && err.message === 'Authentication required')) {
+          navigate('/login', { state: { from: location }, replace: true });
+          return;
+        }
         const errorMessage =
           err instanceof Error
             ? err.message
@@ -122,7 +128,7 @@ const Companies = () => {
         setLoadingMore(false);
       }
     },
-    [showNotification]
+    [showNotification, navigate, location]
   );
 
   // Debounce search query

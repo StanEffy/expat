@@ -3,6 +3,7 @@ import { Suspense, lazy } from 'react';
 import Layout from '@/components/Layouts/Layout';
 import AdminLayout from '@/components/Admin/AdminLayout';
 import AdminRouteGuard from '@/components/Admin/AdminRouteGuard';
+import ProtectedRoute from '@/components/Common/ProtectedRoute';
 import AppProviders from '@/providers/AppProviders';
 import { ADMIN_PANEL_PATH } from '@/constants/api';
 
@@ -45,8 +46,6 @@ function App() {
             {/* Public routes with persistent Layout */}
             <Route element={<Layout />}>
               <Route index element={<Home />} />
-              <Route path="companies" element={<Companies />} />
-              <Route path="companies/:id" element={<CompanyDetails />} />
               <Route path="categories" element={<Categories />} />
               <Route path="about" element={<About />} />
               <Route path="onboarding" element={<Onboarding />} />
@@ -55,13 +54,20 @@ function App() {
               <Route path="community" element={<Community />} />
               <Route path="municipal-dashboard" element={<MunicipalDashboard />} />
               <Route path="shop" element={<Shop />} />
-              <Route path="polls" element={<Polls />} />
-              <Route path="polls/:id" element={<PollDetail />} />
               <Route path="login" element={<Login />} />
-              <Route path="profile" element={<Profile />} />
-              <Route path="profile/resume-builder" element={<ResumeBuilder />} />
               <Route path="password-reset/request" element={<PasswordResetRequest />} />
               <Route path="password-reset" element={<PasswordReset />} />
+
+              {/* Protected user routes (require authentication) */}
+              <Route element={<ProtectedRoute />}>
+                <Route path="companies" element={<Companies />} />
+                <Route path="companies/:id" element={<CompanyDetails />} />
+                <Route path="polls" element={<Polls />} />
+                <Route path="polls/:id" element={<PollDetail />} />
+                <Route path="profile" element={<Profile />} />
+                <Route path="profile/resume-builder" element={<ResumeBuilder />} />
+              </Route>
+
               <Route path="*" element={<NotFound />} />
             </Route>
 

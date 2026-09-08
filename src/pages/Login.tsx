@@ -1,23 +1,43 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { InputText } from "primereact/inputtext";
 import { Password } from "primereact/password";
 import Button from "../components/Common/Button";
 import { Message } from "primereact/message";
 import { AUTH_ENDPOINTS, DEFAULT_CONFIG, ADMIN_PANEL_PATH } from "../constants/api";
-import { setToken, checkAdminRole } from "../utils/auth";
+import { setToken, checkAdminRole, isTokenValid } from "../utils/auth";
 import SEO from "../components/Common/SEO";
 import styles from "./Login.module.scss";
 import { useUserNotifications } from "../contexts/UserNotificationsContext";
 
 const Login = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [searchParams] = useSearchParams();
   const { t } = useTranslation();
   const [tabValue, setTabValue] = useState(0);
   const { refreshNotifications } = useUserNotifications();
   const [forgotPasswordMode, setForgotPasswordMode] = useState(false);
+
+  const getRedirectTarget = useCallback((): string | null => {
+    const from = (location.state as { from?: { pathname?: string; search?: string; hash?: string } | string })?.from;
+    if (typeof from === "string" && from && from !== "/login") {
+      return from;
+    }
+    if (from && typeof from === "object" && from.pathname && from.pathname !== "/login") {
+      return `${from.pathname}${from.search || ""}${from.hash || ""}`;
+    }
+    return null;
+  }, [location.state]);
+
+  // If already authenticated, redirect to destination or home
+  useEffect(() => {
+    if (isTokenValid()) {
+      const target = getRedirectTarget() || "/";
+      navigate(target, { replace: true });
+    }
+  }, [navigate, getRedirectTarget]);
   
   const observerRef = useRef<ResizeObserver | null>(null);
   const [contentHeight, setContentHeight] = useState<number | undefined>(undefined);
@@ -110,12 +130,12 @@ const Login = () => {
       setToken(data.token);
       await refreshNotifications();
       
-      // Check if user is admin and redirect to admin panel
+      const target = getRedirectTarget();
       const isAdmin = await checkAdminRole();
-      if (isAdmin) {
+      if (isAdmin && !target) {
         window.location.href = ADMIN_PANEL_PATH;
       } else {
-        window.location.href = "/";
+        window.location.href = target || "/";
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : "An error occurred");
@@ -173,12 +193,12 @@ const Login = () => {
           setToken(data.token);
           await refreshNotifications();
           
-          // Check if user is admin and redirect to admin panel
+          const target = getRedirectTarget();
           const isAdmin = await checkAdminRole();
-          if (isAdmin) {
+          if (isAdmin && !target) {
             window.location.href = ADMIN_PANEL_PATH;
           } else {
-            window.location.href = "/";
+            window.location.href = target || "/";
           }
           return;
         }

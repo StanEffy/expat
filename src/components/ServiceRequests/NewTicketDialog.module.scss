@@ -23,7 +23,25 @@
   label {
     font-size: 0.875rem;
     font-weight: 600;
-    color: var(--text-color, #1e293b);
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  :global(.p-inputtext),
+  :global(.p-dropdown),
+  :global(.p-inputtextarea) {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    border-radius: 8px;
+
+    &:hover {
+      border-color: rgba(207, 91, 175, 0.5);
+    }
+
+    &:focus {
+      border-color: rgba(207, 91, 175, 0.8);
+      box-shadow: 0 0 0 2px rgba(207, 91, 175, 0.25);
+    }
   }
 }
 

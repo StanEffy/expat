@@ -1,19 +1,22 @@
+@use "@/styles/variables" as *;
+
 .card {
-  background: rgba(30, 41, 59, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 1rem;
-  padding: 1.25rem 1.5rem;
-  backdrop-filter: blur(10px);
+  background: linear-gradient(165deg, rgba(34, 16, 50, 0.88) 0%, rgba(22, 10, 34, 0.94) 100%);
+  border: 1px solid rgba(207, 91, 175, 0.2);
+  border-radius: 1.25rem;
+  padding: 1.35rem 1.5rem;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   display: flex;
   align-items: center;
   gap: 1.25rem;
-  transition: all 0.25s ease;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.36);
 
   &:hover {
-    border-color: rgba(56, 189, 248, 0.35);
+    border-color: rgba(207, 91, 175, 0.55);
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45), 0 0 16px rgba(160, 41, 127, 0.25);
   }
 }
 
@@ -28,33 +31,33 @@
   font-size: 1.5rem;
 
   &.cyan {
-    background: rgba(6, 182, 212, 0.15);
-    color: #06b6d4;
-    border: 1px solid rgba(6, 182, 212, 0.3);
+    background: rgba(56, 189, 248, 0.15);
+    color: #38bdf8;
+    border: 1px solid rgba(56, 189, 248, 0.35);
   }
 
   &.blue {
-    background: rgba(59, 130, 246, 0.15);
-    color: #3b82f6;
-    border: 1px solid rgba(59, 130, 246, 0.3);
+    background: rgba(207, 91, 175, 0.18);
+    color: #f5bde6;
+    border: 1px solid rgba(207, 91, 175, 0.4);
   }
 
   &.green {
-    background: rgba(34, 197, 94, 0.15);
-    color: #22c55e;
-    border: 1px solid rgba(34, 197, 94, 0.3);
+    background: rgba(16, 185, 129, 0.15);
+    color: #34d399;
+    border: 1px solid rgba(16, 185, 129, 0.35);
   }
 
   &.purple {
-    background: rgba(168, 85, 247, 0.15);
-    color: #a855f7;
-    border: 1px solid rgba(168, 85, 247, 0.3);
+    background: linear-gradient(135deg, rgba(160, 41, 127, 0.3) 0%, rgba(207, 91, 175, 0.2) 100%);
+    color: $secondary-a-3;
+    border: 1px solid rgba(207, 91, 175, 0.45);
   }
 
   &.amber {
     background: rgba(245, 158, 11, 0.15);
-    color: #f59e0b;
-    border: 1px solid rgba(245, 158, 11, 0.3);
+    color: #fbbf24;
+    border: 1px solid rgba(245, 158, 11, 0.35);
   }
 }
 
@@ -64,8 +67,8 @@
 
 .label {
   font-size: 0.82rem;
-  font-weight: 500;
-  color: #94a3b8;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.65);
   margin: 0 0 0.35rem 0;
   text-transform: uppercase;
   letter-spacing: 0.04em;
@@ -78,9 +81,9 @@
 }
 
 .value {
-  font-size: 1.75rem;
+  font-size: 1.85rem;
   font-weight: 800;
-  color: #f8fafc;
+  color: #ffffff;
   margin: 0;
   line-height: 1.1;
 }
@@ -91,23 +94,23 @@
   gap: 0.25rem;
   font-size: 0.75rem;
   font-weight: 700;
-  padding: 0.15rem 0.45rem;
+  padding: 0.18rem 0.5rem;
   border-radius: 9999px;
 
   &.positive {
-    background: rgba(34, 197, 94, 0.15);
-    color: #4ade80;
-    border: 1px solid rgba(34, 197, 94, 0.3);
+    background: rgba(16, 185, 129, 0.15);
+    color: #34d399;
+    border: 1px solid rgba(16, 185, 129, 0.35);
   }
 
   &.neutral {
-    background: rgba(148, 163, 184, 0.15);
-    color: #cbd5e1;
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.85);
   }
 }
 
 .subtext {
   font-size: 0.75rem;
-  color: #64748b;
+  color: rgba(255, 255, 255, 0.55);
   margin: 0.25rem 0 0 0;
 }

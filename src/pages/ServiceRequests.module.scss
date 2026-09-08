@@ -1,3 +1,5 @@
+@use "../styles/variables" as *;
+
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -21,17 +23,17 @@
   h1 {
     font-size: 2.25rem;
     font-weight: 800;
-    color: var(--text-color, #1e293b);
+    color: #ffffff;
     margin: 0 0 0.5rem 0;
     letter-spacing: -0.02em;
   }
 
   p {
-    font-size: 1.1rem;
-    color: var(--text-color-secondary, #64748b);
+    font-size: 1.05rem;
+    color: rgba(255, 255, 255, 0.72);
     margin: 0;
     max-width: 650px;
-    line-height: 1.4;
+    line-height: 1.45;
   }
 }
 
@@ -43,14 +45,23 @@
 }
 
 .filterCard {
-  background: var(--surface-card, #ffffff);
-  border: 1px solid var(--surface-border, #e2e8f0);
-  border-radius: 16px;
+  background: linear-gradient(
+    165deg,
+    rgba(30, 14, 44, 0.88) 0%,
+    rgba(18, 9, 28, 0.94) 100%
+  );
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 18px;
   padding: 1.25rem 1.5rem;
   margin-bottom: 2rem;
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
+  box-shadow: 
+    0 10px 32px rgba(0, 0, 0, 0.38),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 .searchRow {
@@ -80,7 +91,7 @@
   label {
     font-size: 0.85rem;
     font-weight: 600;
-    color: var(--text-color-secondary, #64748b);
+    color: rgba(255, 255, 255, 0.75);
   }
 }
 
@@ -89,18 +100,18 @@
   align-items: center;
   gap: 0.5rem;
   flex-wrap: wrap;
-  border-top: 1px solid var(--surface-border, #f1f5f9);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
   padding-top: 1rem;
 }
 
 .statusTab {
-  background: transparent;
-  border: 1px solid var(--surface-border, #e2e8f0);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 8px;
   padding: 0.4rem 0.85rem;
   font-size: 0.85rem;
   font-weight: 600;
-  color: var(--text-color-secondary, #64748b);
+  color: rgba(255, 255, 255, 0.75);
   cursor: pointer;
   display: inline-flex;
   align-items: center;
@@ -108,14 +119,16 @@
   transition: all 0.2s ease;
 
   &:hover {
-    border-color: var(--primary-color, #3b82f6);
-    color: var(--primary-color, #3b82f6);
+    border-color: rgba(207, 91, 175, 0.5);
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.08);
   }
 
   &.active {
-    background: var(--primary-color, #3b82f6);
-    border-color: var(--primary-color, #3b82f6);
+    background: linear-gradient(135deg, rgba(160, 41, 127, 0.5) 0%, rgba(98, 44, 144, 0.65) 100%);
+    border-color: $secondary-a-3;
     color: #ffffff;
+    box-shadow: 0 0 10px rgba(207, 91, 175, 0.35);
 
     .countBadge {
       background: rgba(255, 255, 255, 0.25);
@@ -124,8 +137,8 @@
   }
 
   .countBadge {
-    background: var(--surface-ground, #f1f5f9);
-    color: var(--text-color, #1e293b);
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
     font-size: 0.75rem;
     padding: 0.1rem 0.45rem;
     border-radius: 10px;
@@ -142,24 +155,28 @@
 .emptyState {
   text-align: center;
   padding: 4rem 1rem;
-  background: var(--surface-card, #ffffff);
-  border-radius: 16px;
-  border: 1px dashed var(--surface-border, #cbd5e1);
+  background: linear-gradient(
+    165deg,
+    rgba(34, 16, 50, 0.88) 0%,
+    rgba(20, 10, 32, 0.94) 100%
+  );
+  border-radius: 18px;
+  border: 1px dashed rgba(255, 255, 255, 0.16);
 
   i {
     font-size: 3rem;
-    color: #94a3b8;
+    color: rgba(255, 255, 255, 0.4);
     margin-bottom: 1rem;
   }
 
   h3 {
     font-size: 1.25rem;
-    color: var(--text-color, #1e293b);
+    color: #ffffff;
     margin: 0 0 0.5rem 0;
   }
 
   p {
-    color: var(--text-color-secondary, #64748b);
+    color: rgba(255, 255, 255, 0.65);
     margin: 0;
   }
 }

@@ -18,6 +18,16 @@ export const OnboardingTaskCard: React.FC<Props> = ({
 }) => {
   const { t } = useTranslation('onboarding');
 
+  const cleanTitleKey = task.titleKey?.replace(/^onboarding\./, '') || `tasks.${task.id}.title`;
+  const cleanDescKey = task.descriptionKey?.replace(/^onboarding\./, '') || `tasks.${task.id}.description`;
+  const fallbackTitle = 'title' in task && typeof (task as Record<string, unknown>).title === 'string'
+    ? (task as Record<string, unknown>).title as string
+    : task.id;
+  const fallbackDesc = 'description' in task && typeof (task as Record<string, unknown>).description === 'string'
+    ? (task as Record<string, unknown>).description as string
+    : '';
+  const title = t(cleanTitleKey, { defaultValue: fallbackTitle });
+  const description = t(cleanDescKey, { defaultValue: fallbackDesc });
   const municipalNote = task.municipalNotes?.[municipalityId];
 
   return (
@@ -35,13 +45,13 @@ export const OnboardingTaskCard: React.FC<Props> = ({
         <div className={styles.mainContent}>
           <div className={styles.badgesRow}>
             <span className={`${styles.badge} ${styles[task.priority]}`}>
-              {t(`priorities.${task.priority}`)}
+              {t(`priorities.${task.priority}`, task.priority)}
             </span>
             <span className={`${styles.badge} ${styles.phase}`}>
-              {t(`phases.${task.phase}`)}
+              {t(`phases.${task.phase}`, task.phase)}
             </span>
             <span className={`${styles.badge} ${styles.category}`}>
-              {t(`categories.${task.category}`)}
+              {t(`categories.${task.category}`, task.category)}
             </span>
 
             {task.estimatedDays && (
@@ -52,8 +62,8 @@ export const OnboardingTaskCard: React.FC<Props> = ({
             )}
           </div>
 
-          <h3 className={styles.taskTitle}>{t(task.titleKey)}</h3>
-          <p className={styles.taskDescription}>{t(task.descriptionKey)}</p>
+          <h3 className={styles.taskTitle}>{title}</h3>
+          <p className={styles.taskDescription}>{description}</p>
 
           {municipalNote && (
             <div className={styles.municipalNote}>

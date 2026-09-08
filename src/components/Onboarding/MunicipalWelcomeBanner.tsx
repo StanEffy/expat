@@ -12,6 +12,9 @@ export const MunicipalWelcomeBanner: React.FC<Props> = ({ municipalityId }) => {
   const { t } = useTranslation('onboarding');
   const hub = MUNICIPAL_HUBS[municipalityId] || MUNICIPAL_HUBS.other;
 
+  const cleanDescKey = hub.descriptionKey?.replace(/^onboarding\./, '') || `hubs.${hub.id}_desc`;
+  const description = t(cleanDescKey, { defaultValue: hub.hubName });
+
   return (
     <div className={styles.banner}>
       <div className={styles.header}>
@@ -28,7 +31,7 @@ export const MunicipalWelcomeBanner: React.FC<Props> = ({ municipalityId }) => {
         </span>
       </div>
 
-      <p className={styles.description}>{t(hub.descriptionKey)}</p>
+      <p className={styles.description}>{description}</p>
 
       {(hub.address || hub.email || hub.phone) && (
         <div className={styles.detailsGrid}>

@@ -1,32 +1,36 @@
+@use "@/styles/variables" as *;
+
 .container {
-  background: rgba(30, 41, 59, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 1rem;
-  padding: 1.5rem;
-  backdrop-filter: blur(10px);
+  background: linear-gradient(165deg, rgba(34, 16, 50, 0.88) 0%, rgba(22, 10, 34, 0.94) 100%);
+  border: 1px solid rgba(207, 91, 175, 0.2);
+  border-radius: 1.25rem;
+  padding: 1.75rem;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   margin-bottom: 2rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.36);
 }
 
 .header {
   margin-bottom: 1.5rem;
 
   h2 {
-    font-size: 1.35rem;
+    font-size: 1.4rem;
     font-weight: 700;
-    color: #f8fafc;
+    color: #ffffff;
     margin: 0 0 0.35rem 0;
     display: flex;
     align-items: center;
     gap: 0.6rem;
 
     i {
-      color: #22c55e;
+      color: $secondary-a-3;
     }
   }
 
   p {
-    font-size: 0.9rem;
-    color: #94a3b8;
+    font-size: 0.92rem;
+    color: rgba(255, 255, 255, 0.7);
     margin: 0;
   }
 }
@@ -42,21 +46,22 @@
 }
 
 .scoreCard {
-  background: rgba(15, 23, 42, 0.6);
-  border: 1px solid rgba(34, 197, 94, 0.25);
-  border-radius: 0.875rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(207, 91, 175, 0.3);
+  border-radius: 1rem;
   padding: 1.5rem;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
 .scoreLabel {
   font-size: 0.8rem;
-  font-weight: 600;
-  color: #94a3b8;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.7);
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin-bottom: 0.5rem;
@@ -65,7 +70,7 @@
 .bigScore {
   font-size: 3.25rem;
   font-weight: 900;
-  color: #4ade80;
+  color: #34d399;
   line-height: 1;
   margin-bottom: 0.5rem;
 }
@@ -73,30 +78,29 @@
 .starsRow {
   display: flex;
   gap: 0.25rem;
-  color: #facc15;
+  color: #fbbf24;
   margin-bottom: 0.75rem;
   font-size: 1.1rem;
 }
 
 .responsesCount {
   font-size: 0.78rem;
-  color: #64748b;
+  color: rgba(255, 255, 255, 0.55);
   margin: 0;
 }
 
 .section {
-  background: rgba(15, 23, 42, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 0.75rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1rem;
   padding: 1.25rem;
 
   h3 {
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: #cbd5e1;
+    font-size: 0.92rem;
+    font-weight: 700;
     margin: 0 0 1rem 0;
     text-transform: uppercase;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.05em;
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -109,9 +113,9 @@
     }
 
     &.attract {
-      color: #4ade80;
+      color: #34d399;
       i {
-        color: #22c55e;
+        color: #10b981;
       }
     }
   }
@@ -124,46 +128,52 @@
 }
 
 .itemCard {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 0.5rem;
-  padding: 0.75rem 0.85rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0.6rem;
+  padding: 0.85rem 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 0.75rem;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: rgba(207, 91, 175, 0.4);
+    background: rgba(255, 255, 255, 0.06);
+  }
 
   p {
     margin: 0;
     font-size: 0.88rem;
-    color: #e2e8f0;
-    line-height: 1.4;
+    color: #ffffff;
+    line-height: 1.45;
     flex: 1;
   }
 
   .voteCount {
-    font-size: 0.78rem;
+    font-size: 0.75rem;
     font-weight: 700;
-    padding: 0.2rem 0.5rem;
-    border-radius: 0.35rem;
+    padding: 0.2rem 0.55rem;
+    border-radius: 9999px;
     white-space: nowrap;
 
     &.high {
       background: rgba(239, 68, 68, 0.15);
       color: #f87171;
-      border: 1px solid rgba(239, 68, 68, 0.3);
+      border: 1px solid rgba(239, 68, 68, 0.35);
     }
 
     &.medium {
       background: rgba(245, 158, 11, 0.15);
       color: #fbbf24;
-      border: 1px solid rgba(245, 158, 11, 0.3);
+      border: 1px solid rgba(245, 158, 11, 0.35);
     }
 
     &.positive {
-      background: rgba(34, 197, 94, 0.15);
-      color: #4ade80;
-      border: 1px solid rgba(34, 197, 94, 0.3);
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.35);
     }
   }
 }

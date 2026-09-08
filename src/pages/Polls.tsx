@@ -1,5 +1,5 @@
 import { FormEvent, useEffect, useMemo, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Card } from 'primereact/card';
 import Button from '../components/Common/Button';
 import { Dialog } from 'primereact/dialog';
@@ -52,6 +52,8 @@ const PRIVILEGED_ROLES = ['admin', 'editor', 'company_rep', 'company_manager', '
 
 const PollsPage = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const location = useLocation();
   const {
     pollsById,
     activePollIds,
@@ -139,6 +141,10 @@ const PollsPage = () => {
           setDashboardError(null);
         }
       } catch (err) {
+        if ((err instanceof ApiError && err.status === 401) || (err instanceof Error && err.message === 'Authentication required')) {
+          navigate('/login', { state: { from: location }, replace: true });
+          return;
+        }
         if (!isMounted) return;
         const message = err instanceof Error ? err.message : t('polls.errors.loadFailed');
         setDashboardError(message);
@@ -149,7 +155,7 @@ const PollsPage = () => {
     return () => {
       isMounted = false;
     };
-  }, [fetchActivePolls, showNotification, t]);
+  }, [fetchActivePolls, showNotification, t, navigate, location]);
 
   useEffect(() => {
     if (profileLoading) return;
@@ -163,6 +169,10 @@ const PollsPage = () => {
           setMyPollsError(null);
         }
       } catch (err) {
+        if ((err instanceof ApiError && err.status === 401) || (err instanceof Error && err.message === 'Authentication required')) {
+          navigate('/login', { state: { from: location }, replace: true });
+          return;
+        }
         if (!isMounted) return;
         const status = err instanceof ApiError ? err.status : undefined;
         if (status === 403) {
@@ -179,7 +189,7 @@ const PollsPage = () => {
     return () => {
       isMounted = false;
     };
-  }, [profileLoading, profile, canManagePolls, fetchMyPolls, showNotification, t]);
+  }, [profileLoading, profile, canManagePolls, fetchMyPolls, showNotification, t, navigate, location]);
 
   useEffect(() => {
     if (managedCompanies.length === 0) {
@@ -210,6 +220,10 @@ const PollsPage = () => {
           setCompanyPollsError(null);
         }
       } catch (err) {
+        if ((err instanceof ApiError && err.status === 401) || (err instanceof Error && err.message === 'Authentication required')) {
+          navigate('/login', { state: { from: location }, replace: true });
+          return;
+        }
         if (!isMounted) return;
         const status = err instanceof ApiError ? err.status : undefined;
         if (status === 403) {
@@ -226,7 +240,7 @@ const PollsPage = () => {
     return () => {
       isMounted = false;
     };
-  }, [selectedCompanyId, fetchCompanyPolls, showNotification, t]);
+  }, [selectedCompanyId, fetchCompanyPolls, showNotification, t, navigate, location]);
 
   const handleOptionChange = (id: string, value: string) => {
     setOptionFields((prev) =>

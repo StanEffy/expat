@@ -23,8 +23,29 @@ export const ProposalCard: React.FC<Props> = ({
 }) => {
   const { t } = useTranslation('budgeting');
 
-  const title = t(`proposals.${proposal.id}.title`, proposal.titleKey);
-  const description = t(`proposals.${proposal.id}.description`, proposal.descriptionKey);
+  const normalizedId = (proposal.id || '').replace(/-/g, '_');
+  const cleanTitleKey = proposal.titleKey?.replace(/^budgeting\./, '') || `proposals.${normalizedId}.title`;
+  const cleanDescKey = proposal.descriptionKey?.replace(/^budgeting\./, '') || `proposals.${normalizedId}.description`;
+
+  const fallbackTitle = 'title' in proposal && typeof (proposal as Record<string, unknown>).title === 'string'
+    ? (proposal as Record<string, unknown>).title as string
+    : proposal.id;
+  const fallbackDesc = 'description' in proposal && typeof (proposal as Record<string, unknown>).description === 'string'
+    ? (proposal as Record<string, unknown>).description as string
+    : '';
+
+  const title = t(`proposals.${normalizedId}.title`, {
+    defaultValue: t(cleanTitleKey, {
+      defaultValue: fallbackTitle,
+    }),
+  });
+
+  const description = t(`proposals.${normalizedId}.description`, {
+    defaultValue: t(cleanDescKey, {
+      defaultValue: fallbackDesc,
+    }),
+  });
+
   const categoryLabel = t(`filters.categories.${proposal.category}`, proposal.category);
 
   const progressPercent = Math.min(100, Math.round((proposal.votesCount / proposal.targetVotes) * 100));
@@ -71,7 +92,7 @@ export const ProposalCard: React.FC<Props> = ({
           <div className={styles.detailItem}>
             <span className={styles.label}>{t('proposal.votes', 'Votes')}</span>
             <span className={styles.value}>
-              {proposal.votesCount} <span style={{ fontSize: '0.8rem', fontWeight: 'normal', color: '#94a3b8' }}>/ {proposal.targetVotes}</span>
+              {proposal.votesCount} <span style={{ fontSize: '0.8rem', fontWeight: 'normal', color: 'rgba(255, 255, 255, 0.5)' }}>/ {proposal.targetVotes}</span>
             </span>
           </div>
         </div>
@@ -84,7 +105,7 @@ export const ProposalCard: React.FC<Props> = ({
           <ProgressBar
             value={progressPercent}
             showValue={false}
-            color={isFunded ? '#22c55e' : '#3b82f6'}
+            className={styles.proposalProgressBar}
             style={{ height: '8px' }}
           />
         </div>

@@ -28,7 +28,7 @@ export const IntegrationFunnel: React.FC<Props> = ({ funnelSteps }) => {
           >
             <div className={styles.stepTopRow}>
               <div className={styles.stepTitleGroup}>
-                <h3>{t(step.titleKey)}</h3>
+                <h3>{t(step.titleKey.replace(/^analytics\./, ''))}</h3>
                 <span className={styles.department}>{step.department}</span>
               </div>
 
@@ -57,7 +57,7 @@ export const IntegrationFunnel: React.FC<Props> = ({ funnelSteps }) => {
               </div>
             </div>
 
-            <p className={styles.insightText}>{t(step.insightKey)}</p>
+            <p className={styles.insightText}>{t(step.insightKey.replace(/^analytics\./, ''))}</p>
           </div>
         ))}
       </div>

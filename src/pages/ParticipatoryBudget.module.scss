@@ -1,3 +1,5 @@
+@use "../styles/variables" as *;
+
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -5,37 +7,46 @@
 }
 
 .headerSection {
-  margin-bottom: 2rem;
+  margin-bottom: 2.25rem;
   text-align: center;
 
   h1 {
     font-size: 2.25rem;
     font-weight: 800;
-    color: var(--text-color, #1e293b);
+    color: #ffffff;
     margin: 0 0 0.75rem 0;
     letter-spacing: -0.02em;
   }
 
   p {
-    font-size: 1.1rem;
-    color: var(--text-color-secondary, #64748b);
+    font-size: 1.05rem;
+    color: rgba(255, 255, 255, 0.72);
     max-width: 700px;
     margin: 0 auto;
-    line-height: 1.5;
+    line-height: 1.55;
   }
 }
 
 .filterBar {
-  background: var(--surface-card, #ffffff);
-  border: 1px solid var(--surface-border, #e2e8f0);
-  border-radius: 12px;
-  padding: 1.25rem;
+  background: linear-gradient(
+    165deg,
+    rgba(30, 14, 44, 0.88) 0%,
+    rgba(18, 9, 28, 0.94) 100%
+  );
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 18px;
+  padding: 1.25rem 1.5rem;
   margin-bottom: 2rem;
   display: flex;
   flex-wrap: wrap;
   gap: 1.25rem;
   align-items: center;
   justify-content: space-between;
+  box-shadow: 
+    0 10px 32px rgba(0, 0, 0, 0.38),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 .filterGroup {
@@ -47,7 +58,7 @@
   label {
     font-size: 0.875rem;
     font-weight: 600;
-    color: var(--text-color-secondary, #64748b);
+    color: rgba(255, 255, 255, 0.8);
   }
 }
 
@@ -68,24 +79,28 @@
 .emptyState {
   text-align: center;
   padding: 4rem 1rem;
-  background: var(--surface-card, #ffffff);
-  border-radius: 16px;
-  border: 1px dashed var(--surface-border, #cbd5e1);
+  background: linear-gradient(
+    165deg,
+    rgba(34, 16, 50, 0.88) 0%,
+    rgba(20, 10, 32, 0.94) 100%
+  );
+  border-radius: 18px;
+  border: 1px dashed rgba(255, 255, 255, 0.16);
 
   i {
     font-size: 3rem;
-    color: #94a3b8;
+    color: rgba(255, 255, 255, 0.4);
     margin-bottom: 1rem;
   }
 
   h3 {
     font-size: 1.25rem;
-    color: var(--text-color, #1e293b);
+    color: #ffffff;
     margin: 0 0 0.5rem 0;
   }
 
   p {
-    color: var(--text-color-secondary, #64748b);
+    color: rgba(255, 255, 255, 0.65);
     margin: 0;
   }
 }

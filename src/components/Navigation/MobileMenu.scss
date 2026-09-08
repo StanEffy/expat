@@ -36,97 +36,160 @@
 }
 
 .mobile-menu {
-  min-width: 210px;
+  min-width: 220px;
   max-width: calc(100vw - 32px);
-  background-color: rgba(26, 12, 45, 0.97) !important;
+  background: rgba(22, 10, 34, 0.97) !important;
   -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
   border-radius: 14px !important;
-  border: 1px solid rgba(255, 255, 255, 0.15) !important;
-  box-shadow: 0px 16px 40px rgba(0, 0, 0, 0.55), 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+  border: 1px solid rgba(207, 91, 175, 0.3) !important;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.65), 0 0 20px rgba(160, 41, 127, 0.15) !important;
   padding: 6px !important;
   z-index: 10001 !important;
+  -webkit-tap-highlight-color: transparent;
 
   @media (min-width: 375px) {
-    min-width: 240px;
+    min-width: 250px;
   }
 
   .p-menu-list {
-    padding: 0;
+    padding: 0 !important;
+    margin: 0 !important;
+    list-style: none !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 3px !important;
   }
 
   .p-menu-separator {
-    border-top: 1px solid rgba(255, 255, 255, 0.12) !important;
-    margin: 4px 0 !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+    margin: 6px 4px !important;
   }
 
   .p-menuitem {
-    margin: 2px 0;
+    margin: 0 !important;
+    border-radius: 8px !important;
 
-    .p-menuitem-link {
-      padding: 0.65rem 0.85rem;
-      border-radius: 8px;
-      margin: 0;
-      transition: all 0.15s ease;
+    /* Override PrimeReact's light-theme container element */
+    > .p-menuitem-content {
+      background: transparent !important;
       color: rgba(255, 255, 255, 0.88) !important;
+      border-radius: 8px !important;
+      transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1) !important;
 
-      .p-menuitem-text {
-        color: rgba(255, 255, 255, 0.88);
-        font-weight: 500;
-        font-size: 0.9rem;
-      }
-
-      .p-menuitem-icon {
-        color: rgba(255, 255, 255, 0.75);
-        font-size: 1rem;
-      }
-
-      &:hover,
-      &:active {
-        background-color: rgba(255, 255, 255, 0.12) !important;
-        transform: translateX(2px);
+      .p-menuitem-link {
+        padding: 0.72rem 0.95rem !important;
+        border-radius: 8px !important;
+        background: transparent !important;
+        color: rgba(255, 255, 255, 0.88) !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 0.75rem !important;
+        text-decoration: none !important;
+        transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        user-select: none !important;
+        -webkit-tap-highlight-color: transparent;
 
         .p-menuitem-text {
-          color: #ffffff;
+          color: rgba(255, 255, 255, 0.88) !important;
+          font-weight: 500 !important;
+          font-size: 0.92rem !important;
+          transition: color 0.15s ease !important;
         }
 
         .p-menuitem-icon {
-          color: #ffffff;
+          color: rgba(207, 91, 175, 0.85) !important;
+          font-size: 1.05rem !important;
+          margin-right: 0 !important;
+          transition: all 0.15s ease, transform 0.15s ease !important;
+        }
+
+        &:focus {
+          outline: none !important;
+          box-shadow: none !important;
         }
       }
 
-      &:focus {
-        outline: none !important;
-        box-shadow: none !important;
+      &:hover {
+        background: rgba(207, 91, 175, 0.18) !important;
+        color: #ffffff !important;
+
+        .p-menuitem-link {
+          .p-menuitem-text {
+            color: #ffffff !important;
+          }
+          .p-menuitem-icon {
+            color: #ff8adc !important;
+            transform: scale(1.08);
+          }
+        }
       }
     }
 
-    &.active-menuitem {
-      .p-menuitem-link {
-        background: linear-gradient(
-          135deg,
-          rgba(160, 41, 127, 0.45) 0%,
-          rgba(98, 44, 144, 0.6) 100%
-        ) !important;
-        border: 1px solid rgba(207, 91, 175, 0.4) !important;
+    /* Override PrimeReact hover and focus states */
+    &:not(.p-highlight):not(.p-disabled).p-focus > .p-menuitem-content,
+    &:not(.p-highlight):not(.p-disabled) > .p-menuitem-content:hover {
+      background: rgba(207, 91, 175, 0.18) !important;
+      color: #ffffff !important;
 
+      .p-menuitem-link {
         .p-menuitem-text {
           color: #ffffff !important;
-          font-weight: 600;
         }
-
         .p-menuitem-icon {
-          color: $secondary-a-3 !important;
+          color: #ff8adc !important;
         }
       }
     }
 
-    &.p-focus {
-      .p-menuitem-link {
-        background-color: rgba(255, 255, 255, 0.1) !important;
-        outline: none !important;
-        box-shadow: none !important;
+    /* Active / Current Page */
+    &.active-menuitem,
+    &.p-highlight {
+      > .p-menuitem-content {
+        background: linear-gradient(
+          135deg,
+          rgba(160, 41, 127, 0.55) 0%,
+          rgba(98, 44, 144, 0.7) 100%
+        ) !important;
+        border: 1px solid rgba(207, 91, 175, 0.5) !important;
+        box-shadow: 0 4px 14px rgba(160, 41, 127, 0.3) !important;
+
+        .p-menuitem-link {
+          .p-menuitem-text {
+            color: #ffffff !important;
+            font-weight: 600 !important;
+          }
+          .p-menuitem-icon {
+            color: #ffffff !important;
+          }
+        }
+
+        &:hover {
+          background: linear-gradient(
+            135deg,
+            rgba(160, 41, 127, 0.7) 0%,
+            rgba(98, 44, 144, 0.85) 100%
+          ) !important;
+          border-color: rgba(207, 91, 175, 0.75) !important;
+          box-shadow: 0 4px 18px rgba(160, 41, 127, 0.45) !important;
+        }
       }
+    }
+
+    /* Mobile press feedback */
+    &:active > .p-menuitem-content {
+      transform: scale(0.97);
+      background: rgba(207, 91, 175, 0.28) !important;
+    }
+
+    &.active-menuitem:active > .p-menuitem-content,
+    &.p-highlight:active > .p-menuitem-content {
+      transform: scale(0.97);
+      background: linear-gradient(
+        135deg,
+        rgba(160, 41, 127, 0.75) 0%,
+        rgba(98, 44, 144, 0.9) 100%
+      ) !important;
     }
   }
 }

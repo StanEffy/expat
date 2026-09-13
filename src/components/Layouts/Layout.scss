@@ -6,15 +6,11 @@
   justify-content: space-between !important;
   padding: 0.5rem 1rem;
   position: fixed;
-  z-index: 10000; //to be on top of everything else
+  z-index: 10000;
   top: 0;
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;
-
-  @media (max-width: 480px) {
-    padding: 0.5rem 0.75rem !important;
-  }
   // Linear gradient using primary colors (mostly dark)
   background: linear-gradient(
     135deg,

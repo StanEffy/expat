@@ -3,7 +3,12 @@
 .shopContainer {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 32px 16px;
+  padding: 2rem 1.5rem 3rem;
+  box-sizing: border-box;
+
+  @media (max-width: 640px) {
+    padding: 1.25rem 1rem 2rem;
+  }
 }
 
 .title {

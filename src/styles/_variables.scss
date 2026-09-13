@@ -80,7 +80,17 @@ $footer-bg: rgba(224, 224, 224, 1);
 
   // Footer
   --footer-bg: #{$footer-bg};
+
+  // Container Spacing
+  --page-gutter-desktop: 1.5rem;
+  --page-gutter-mobile: 1rem;
 }
+
+// Layout & Container Spacing Variables
+$page-container-max-width: 1200px;
+$page-container-max-width-wide: 1360px;
+$page-gutter-desktop: 1.5rem; // 24px
+$page-gutter-mobile: 1rem;    // 16px
 
 // Utility classes for colors
 .primary-0 {

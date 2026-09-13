@@ -3,8 +3,13 @@
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 64px 16px;
+  padding: 64px 1.5rem;
+  box-sizing: border-box;
   text-align: center;
+
+  @media (max-width: 640px) {
+    padding: 40px 1rem;
+  }
 }
 
 .title {

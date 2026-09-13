@@ -1,35 +1,37 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Suspense, lazy } from 'react';
+import { Suspense } from 'react';
 import Layout from '@/components/Layouts/Layout';
 import AdminLayout from '@/components/Admin/AdminLayout';
 import AdminRouteGuard from '@/components/Admin/AdminRouteGuard';
 import ProtectedRoute from '@/components/Common/ProtectedRoute';
+import ErrorBoundary from '@/components/Common/ErrorBoundary';
 import AppProviders from '@/providers/AppProviders';
 import { ADMIN_PANEL_PATH } from '@/constants/api';
+import { lazyWithRetry } from '@/utils/lazyWithRetry';
 
 import Home from '@/pages/Home';
-const Companies = lazy(() => import('@/pages/Companies'));
-const CompanyDetails = lazy(() => import('@/pages/CompanyDetails'));
-const Categories = lazy(() => import('@/pages/Categories'));
-const Login = lazy(() => import('@/pages/Login'));
-const Profile = lazy(() => import('@/pages/Profile'));
-const ResumeBuilder = lazy(() => import('@/pages/ResumeBuilder'));
-const About = lazy(() => import('@/pages/About'));
-const Shop = lazy(() => import('@/pages/Shop'));
-const PasswordResetRequest = lazy(() => import('@/pages/PasswordResetRequest'));
-const PasswordReset = lazy(() => import('@/pages/PasswordReset'));
-const AdminDashboard = lazy(() => import('@/pages/admin/AdminDashboard'));
-const UsersManagement = lazy(() => import('@/pages/admin/UsersManagement'));
-const CompanyUpdates = lazy(() => import('@/pages/admin/CompanyUpdates'));
-const InviteCodes = lazy(() => import('@/pages/admin/InviteCodes'));
-const Polls = lazy(() => import('@/pages/Polls'));
-const PollDetail = lazy(() => import('@/pages/PollDetail'));
-const Onboarding = lazy(() => import('@/pages/Onboarding'));
-const MunicipalDashboard = lazy(() => import('@/pages/MunicipalDashboard'));
-const ParticipatoryBudget = lazy(() => import('@/pages/ParticipatoryBudget'));
-const ServiceRequests = lazy(() => import('@/pages/ServiceRequests'));
-const Community = lazy(() => import('@/pages/Community'));
-const NotFound = lazy(() => import('@/pages/NotFound'));
+const Companies = lazyWithRetry(() => import('@/pages/Companies'));
+const CompanyDetails = lazyWithRetry(() => import('@/pages/CompanyDetails'));
+const Categories = lazyWithRetry(() => import('@/pages/Categories'));
+const Login = lazyWithRetry(() => import('@/pages/Login'));
+const Profile = lazyWithRetry(() => import('@/pages/Profile'));
+const ResumeBuilder = lazyWithRetry(() => import('@/pages/ResumeBuilder'));
+const About = lazyWithRetry(() => import('@/pages/About'));
+const Shop = lazyWithRetry(() => import('@/pages/Shop'));
+const PasswordResetRequest = lazyWithRetry(() => import('@/pages/PasswordResetRequest'));
+const PasswordReset = lazyWithRetry(() => import('@/pages/PasswordReset'));
+const AdminDashboard = lazyWithRetry(() => import('@/pages/admin/AdminDashboard'));
+const UsersManagement = lazyWithRetry(() => import('@/pages/admin/UsersManagement'));
+const CompanyUpdates = lazyWithRetry(() => import('@/pages/admin/CompanyUpdates'));
+const InviteCodes = lazyWithRetry(() => import('@/pages/admin/InviteCodes'));
+const Polls = lazyWithRetry(() => import('@/pages/Polls'));
+const PollDetail = lazyWithRetry(() => import('@/pages/PollDetail'));
+const Onboarding = lazyWithRetry(() => import('@/pages/Onboarding'));
+const MunicipalDashboard = lazyWithRetry(() => import('@/pages/MunicipalDashboard'));
+const ParticipatoryBudget = lazyWithRetry(() => import('@/pages/ParticipatoryBudget'));
+const ServiceRequests = lazyWithRetry(() => import('@/pages/ServiceRequests'));
+const Community = lazyWithRetry(() => import('@/pages/Community'));
+const NotFound = lazyWithRetry(() => import('@/pages/NotFound'));
 
 const LoadingScreen = () => (
   <div style={{ minHeight: '60vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -41,7 +43,8 @@ function App() {
   return (
     <AppProviders>
       <Router>
-        <Suspense fallback={<LoadingScreen />}>
+        <ErrorBoundary>
+          <Suspense fallback={<LoadingScreen />}>
           <Routes>
             {/* Public routes with persistent Layout */}
             <Route element={<Layout />}>
@@ -88,7 +91,8 @@ function App() {
             </Route>
           </Routes>
         </Suspense>
-      </Router>
+      </ErrorBoundary>
+    </Router>
     </AppProviders>
   );
 }

@@ -6,6 +6,12 @@ import "primeicons/primeicons.css";
 import "./index.scss";
 import App from "./App.tsx";
 
+// Auto-reload when Vite fails to fetch a stale dynamic chunk after a new deployment
+window.addEventListener("vite:preloadError", (event) => {
+  event.preventDefault();
+  window.location.reload();
+});
+
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <App />

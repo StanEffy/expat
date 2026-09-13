@@ -1,0 +1,31 @@
+.resetBtn {
+  width: 44px !important;
+  height: 44px !important;
+  min-width: 44px !important;
+  border-radius: 12px !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  color: rgba(255, 255, 255, 0.75) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+  cursor: pointer !important;
+  transition: all 0.25s ease !important;
+  box-sizing: border-box !important;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-color: rgba(255, 255, 255, 0.3) !important;
+    color: #ffffff !important;
+    transform: rotate(30deg);
+  }
+
+  &:active {
+    transform: rotate(180deg);
+  }
+
+  :global(.pi) {
+    font-size: 1rem !important;
+  }
+}

@@ -4,6 +4,10 @@
   "new_ticket_btn": "Подати звернення",
   "search_placeholder": "Пошук за темою, номером звернення або ключовими словами...",
   "filters": {
+    "search_label": "Пошук",
+    "city_label": "Місто",
+    "category_label": "Категорія",
+    "reset_tooltip": "Скинути демо-запити",
     "city_all": "Усі міста",
     "status_all": "Усі статуси",
     "category_all": "Усі категорії",

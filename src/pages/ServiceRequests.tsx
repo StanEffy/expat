@@ -1,14 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { InputText } from 'primereact/inputtext';
-import { Dropdown } from 'primereact/dropdown';
-import { Button } from 'primereact/button';
 import { registerServiceRequestsTranslations } from '@/i18n/registerServiceRequests';
 import { useServiceRequests } from '@/hooks/useServiceRequests';
 import { TicketCard } from '@/components/ServiceRequests/TicketCard';
 import { NewTicketDialog } from '@/components/ServiceRequests/NewTicketDialog';
+import {
+  SearchInput,
+  FilterDropdown,
+  SegmentedControl,
+  FilterCard,
+  FilterRow,
+  ResetButton,
+  PrimaryActionButton,
+} from '@/components/UI';
 import type { MunicipalityId } from '@/types/onboarding';
-import type { ServiceTicketStatus, ServiceTicketCategory } from '@/types/serviceRequest';
+import type { ServiceTicketCategory, ServiceTicketStatus } from '@/types/serviceRequest';
 import styles from './ServiceRequests.module.scss';
 
 registerServiceRequestsTranslations();
@@ -23,15 +29,15 @@ export const ServiceRequests: React.FC = () => {
 
   const {
     isLoaded,
+    selectedCity,
+    selectedCategory,
+    selectedStatus,
+    searchQuery,
     tickets,
     counts,
-    selectedCity,
-    selectedStatus,
-    selectedCategory,
-    searchQuery,
     setCity,
-    setStatus,
     setCategory,
+    setStatus,
     setSearchQuery,
     createTicket,
     resetTickets,
@@ -57,12 +63,12 @@ export const ServiceRequests: React.FC = () => {
     { label: t('filters.categories.general_inquiry', 'General Inquiry'), value: 'general_inquiry' },
   ];
 
-  const statusList: { key: ServiceTicketStatus | 'all'; label: string; count: number }[] = [
-    { key: 'all', label: t('filters.status_all', 'All Statuses'), count: counts.all },
-    { key: 'submitted', label: t('filters.statuses.submitted', 'Submitted'), count: counts.submitted },
-    { key: 'under_review', label: t('filters.statuses.under_review', 'Under Review'), count: counts.under_review },
-    { key: 'in_progress', label: t('filters.statuses.in_progress', 'In Progress'), count: counts.in_progress },
-    { key: 'resolved', label: t('filters.statuses.resolved', 'Resolved'), count: counts.resolved },
+  const statusList: { id: ServiceTicketStatus | 'all'; label: string; count: number }[] = [
+    { id: 'all', label: t('filters.status_all', 'All Statuses'), count: counts.all },
+    { id: 'submitted', label: t('filters.statuses.submitted', 'Submitted'), count: counts.submitted },
+    { id: 'under_review', label: t('filters.statuses.under_review', 'Under Review'), count: counts.under_review },
+    { id: 'in_progress', label: t('filters.statuses.in_progress', 'In Progress'), count: counts.in_progress },
+    { id: 'resolved', label: t('filters.statuses.resolved', 'Resolved'), count: counts.resolved },
   ];
 
   if (!isLoaded) {
@@ -77,75 +83,63 @@ export const ServiceRequests: React.FC = () => {
           <p>{t('subtitle', 'Submit inquiries directly to city departments and track resolution status in real time')}</p>
         </div>
         <div className={styles.actionBtnArea}>
-          <Button
+          <PrimaryActionButton
             label={t('new_ticket_btn', 'Submit Service Request')}
             icon="pi pi-plus"
             onClick={() => setDialogVisible(true)}
           />
-          <Button
-            icon="pi pi-refresh"
-            severity="secondary"
-            outlined
-            tooltip="Reset sample tickets"
+          <ResetButton
+            tooltip={t('filters.reset_tooltip', 'Reset sample tickets')}
             onClick={resetTickets}
           />
         </div>
       </div>
 
-      <div className={styles.filterCard}>
-        <div className={styles.searchRow}>
-          <div className={styles.searchInput}>
-            <span className="p-input-icon-left" style={{ width: '100%' }}>
-              <i className="pi pi-search" />
-              <InputText
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder={t('search_placeholder', 'Search tickets by title, reference ID, or keyword...')}
-                style={{ width: '100%' }}
-              />
-            </span>
+      <FilterCard ariaLabel="Service request filters">
+        <FilterRow>
+          <div className={styles.searchField}>
+            <SearchInput
+              id="service-request-search"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder={t('search_placeholder', 'Search tickets by title, reference ID, or keyword...')}
+              label={t('filters.search_label', 'Search')}
+            />
           </div>
 
-          <div className={styles.filterControls}>
-            <div className={styles.filterField}>
-              <label htmlFor="city-filter">City:</label>
-              <Dropdown
-                id="city-filter"
-                value={selectedCity}
-                options={cityOptions}
-                onChange={(e) => setCity(e.value)}
-              />
-            </div>
-
-            <div className={styles.filterField}>
-              <label htmlFor="cat-filter">Category:</label>
-              <Dropdown
-                id="cat-filter"
-                value={selectedCategory}
-                options={categoryOptions}
-                onChange={(e) => setCategory(e.value)}
-              />
-            </div>
+          <div className={styles.filterField}>
+            <FilterDropdown
+              id="city-filter"
+              value={selectedCity}
+              options={cityOptions}
+              onChange={(e) => setCity(e.value)}
+              label={t('filters.city_label', 'City')}
+              labelIcon="pi pi-map-marker"
+            />
           </div>
-        </div>
 
-        <div className={styles.statusTabs}>
-          {statusList.map((st) => {
-            const isActive = selectedStatus === st.key;
-            return (
-              <button
-                type="button"
-                key={st.key}
-                className={`${styles.statusTab} ${isActive ? styles.active : ''}`}
-                onClick={() => setStatus(st.key)}
-              >
-                <span>{st.label}</span>
-                <span className={styles.countBadge}>{st.count}</span>
-              </button>
-            );
-          })}
+          <div className={styles.filterField}>
+            <FilterDropdown
+              id="cat-filter"
+              value={selectedCategory}
+              options={categoryOptions}
+              onChange={(e) => setCategory(e.value)}
+              label={t('filters.category_label', 'Category')}
+              labelIcon="pi pi-tag"
+            />
+          </div>
+        </FilterRow>
+
+        <div className={styles.statusTabsWrapper}>
+          <SegmentedControl
+            items={statusList}
+            value={selectedStatus}
+            onChange={(id) => setStatus(id)}
+            mobileLayout="stack"
+            ariaLabel="Status filter"
+          />
         </div>
-      </div>
+      </FilterCard>
 
       {tickets.length === 0 ? (
         <div className={styles.emptyState}>

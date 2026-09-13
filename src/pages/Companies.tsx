@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useNavigate, useSearchParams, useLocation } from "react-router-dom";
-import { InputText } from "primereact/inputtext";
 import { Dropdown } from "primereact/dropdown";
 import { ProgressSpinner } from "primereact/progressspinner";
 import Button from "../components/Common/Button";
+import { SearchInput } from "@/components/UI";
 import { companyService } from "@/services/companyService";
 import { ApiError } from "@/services/apiClient";
 import { useNotification } from "../contexts/NotificationContext";
@@ -344,20 +344,17 @@ const Companies = () => {
         {/* Filter Controls Card */}
         <section className={styles.filterCard} aria-label="Search and filter options">
           <div className={styles.filtersGrid}>
-            <div className={styles.searchWrapper}>
-              <i className="pi pi-search" aria-hidden="true" />
-              <InputText
-                value={searchName}
-                onChange={(e) => setSearchName(e.target.value)}
-                placeholder={t("company.searchPlaceholder", {
-                  defaultValue: "Search companies by name...",
-                })}
-                className={styles.searchInput}
-                aria-label={t("company.searchPlaceholder", {
-                  defaultValue: "Search companies by name",
-                })}
-              />
-            </div>
+            <SearchInput
+              value={searchName}
+              onChange={(e) => setSearchName(e.target.value)}
+              placeholder={t("company.searchPlaceholder", {
+                defaultValue: "Search companies by name...",
+              })}
+              ariaLabel={t("company.searchPlaceholder", {
+                defaultValue: "Search companies by name",
+              })}
+              className={styles.searchWrapper}
+            />
 
             <div className={styles.filterCol}>
               <CompanyFilter

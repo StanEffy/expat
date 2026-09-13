@@ -4,6 +4,10 @@
   "new_ticket_btn": "Nytt serviceärende",
   "search_placeholder": "Sök ärenden efter rubrik, referensnummer eller nyckelord...",
   "filters": {
+    "search_label": "Sök",
+    "city_label": "Stad",
+    "category_label": "Kategori",
+    "reset_tooltip": "Återställ demoärenden",
     "city_all": "Alla städer",
     "status_all": "Alla statusar",
     "category_all": "Alla kategorier",

@@ -1,14 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { InputText } from 'primereact/inputtext';
-import { Dropdown } from 'primereact/dropdown';
-import { Button } from 'primereact/button';
 import { registerCommunityTranslations } from '@/i18n/registerCommunity';
-import { useCommunity } from '@/hooks/useCommunity';
+import { useCommunity, type CommunityTab } from '@/hooks/useCommunity';
 import { EventCard } from '@/components/Community/EventCard';
 import { NoticeCard } from '@/components/Community/NoticeCard';
 import { MentorCard } from '@/components/Community/MentorCard';
 import { NewNoticeDialog } from '@/components/Community/NewNoticeDialog';
+import {
+  SearchInput,
+  FilterDropdown,
+  SegmentedControl,
+  FilterCard,
+  FilterRow,
+  FilterActions,
+  ResetButton,
+  PrimaryActionButton,
+} from '@/components/UI';
 import type { MunicipalityId } from '@/types/onboarding';
 import type { EventCategory, NoticeCategory } from '@/types/community';
 import styles from './Community.module.scss';
@@ -71,6 +78,27 @@ export const Community: React.FC = () => {
     { label: t('filters.notice_categories.advice', 'General Advice'), value: 'advice' },
   ];
 
+  const tabItems: { id: CommunityTab; label: string; icon: string; count: number }[] = [
+    {
+      id: 'events',
+      label: t('tabs.events', 'Events & Meetups'),
+      icon: 'pi pi-calendar',
+      count: rawCounts.events,
+    },
+    {
+      id: 'notices',
+      label: t('tabs.notices', 'Notice Board'),
+      icon: 'pi pi-comments',
+      count: rawCounts.notices,
+    },
+    {
+      id: 'mentors',
+      label: t('tabs.mentors', 'Expat Mentors'),
+      icon: 'pi pi-users',
+      count: rawCounts.mentors,
+    },
+  ];
+
   if (!isLoaded) {
     return null;
   }
@@ -83,146 +111,79 @@ export const Community: React.FC = () => {
       </div>
 
       <div className={styles.tabNavigationWrapper}>
-        <div className={styles.tabNavigation} role="tablist" aria-label="Community sections">
-          <button
-            type="button"
-            role="tab"
-            aria-selected={activeTab === 'events'}
-            className={`${styles.tabBtn} ${activeTab === 'events' ? styles.active : ''}`}
-            onClick={() => setActiveTab('events')}
-          >
-            <span className={styles.tabBtnContent}>
-              <i className="pi pi-calendar" />
-              <span>{t('tabs.events', 'Events & Meetups')}</span>
-            </span>
-            <span className={styles.tabCount}>{rawCounts.events}</span>
-          </button>
-
-          <button
-            type="button"
-            role="tab"
-            aria-selected={activeTab === 'notices'}
-            className={`${styles.tabBtn} ${activeTab === 'notices' ? styles.active : ''}`}
-            onClick={() => setActiveTab('notices')}
-          >
-            <span className={styles.tabBtnContent}>
-              <i className="pi pi-comments" />
-              <span>{t('tabs.notices', 'Notice Board')}</span>
-            </span>
-            <span className={styles.tabCount}>{rawCounts.notices}</span>
-          </button>
-
-          <button
-            type="button"
-            role="tab"
-            aria-selected={activeTab === 'mentors'}
-            className={`${styles.tabBtn} ${activeTab === 'mentors' ? styles.active : ''}`}
-            onClick={() => setActiveTab('mentors')}
-          >
-            <span className={styles.tabBtnContent}>
-              <i className="pi pi-users" />
-              <span>{t('tabs.mentors', 'Expat Mentors')}</span>
-            </span>
-            <span className={styles.tabCount}>{rawCounts.mentors}</span>
-          </button>
-        </div>
+        <SegmentedControl
+          items={tabItems}
+          value={activeTab}
+          onChange={(id) => setActiveTab(id)}
+          mobileLayout="stack"
+          ariaLabel="Community sections"
+        />
       </div>
 
-      <div className={styles.filterCard}>
-        <div className={styles.filtersRow}>
+      <FilterCard ariaLabel="Community filters">
+        <FilterRow>
           <div className={styles.searchField}>
-            <label htmlFor="comm-search" className={styles.filterLabel}>
-              <i className="pi pi-search" />
-              <span>{t('filters.search_label', 'Search')}</span>
-            </label>
-            <div className={styles.searchWrapper}>
-              <i className={`pi pi-search ${styles.searchIcon}`} />
-              <InputText
-                id="comm-search"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder={t('search_placeholder', 'Search events, notices, or mentors by keyword...')}
-                className={styles.searchInput}
-              />
-              {searchQuery && (
-                <button
-                  type="button"
-                  className={styles.clearSearchBtn}
-                  onClick={() => setSearchQuery('')}
-                  aria-label="Clear search"
-                >
-                  <i className="pi pi-times" />
-                </button>
-              )}
-            </div>
+            <SearchInput
+              id="comm-search"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder={t('search_placeholder', 'Search events, notices, or mentors by keyword...')}
+              label={t('filters.search_label', 'Search')}
+            />
           </div>
 
           <div className={styles.filterField}>
-            <label htmlFor="comm-city" className={styles.filterLabel}>
-              <i className="pi pi-map-marker" />
-              <span>{t('filters.city_label', 'City')}</span>
-            </label>
-            <Dropdown
+            <FilterDropdown
               id="comm-city"
               value={selectedCity}
               options={cityOptions}
               onChange={(e) => setCity(e.value)}
-              className={styles.filterDropdown}
+              label={t('filters.city_label', 'City')}
+              labelIcon="pi pi-map-marker"
             />
           </div>
 
           {activeTab === 'events' && (
             <div className={styles.filterField}>
-              <label htmlFor="comm-event-cat" className={styles.filterLabel}>
-                <i className="pi pi-tag" />
-                <span>{t('filters.category_label', 'Category')}</span>
-              </label>
-              <Dropdown
+              <FilterDropdown
                 id="comm-event-cat"
                 value={selectedEventCategory}
                 options={eventCategoryOptions}
                 onChange={(e) => setEventCategory(e.value)}
-                className={styles.filterDropdown}
+                label={t('filters.category_label', 'Category')}
+                labelIcon="pi pi-tag"
               />
             </div>
           )}
 
           {activeTab === 'notices' && (
             <div className={styles.filterField}>
-              <label htmlFor="comm-notice-cat" className={styles.filterLabel}>
-                <i className="pi pi-tag" />
-                <span>{t('filters.category_label', 'Category')}</span>
-              </label>
-              <Dropdown
+              <FilterDropdown
                 id="comm-notice-cat"
                 value={selectedNoticeCategory}
                 options={noticeCategoryOptions}
                 onChange={(e) => setNoticeCategory(e.value)}
-                className={styles.filterDropdown}
+                label={t('filters.category_label', 'Category')}
+                labelIcon="pi pi-tag"
               />
             </div>
           )}
 
-          <div className={styles.actionsGroup}>
+          <FilterActions>
             {activeTab === 'notices' && (
-              <Button
+              <PrimaryActionButton
                 label={t('notice.post_btn', 'Post a Notice')}
                 icon="pi pi-plus"
-                className={styles.postNoticeBtn}
                 onClick={() => setNoticeDialogVisible(true)}
               />
             )}
-            <Button
-              icon="pi pi-refresh"
-              className={styles.resetBtn}
+            <ResetButton
               tooltip={t('filters.reset_tooltip', 'Reset demo data')}
-              tooltipOptions={{ position: 'top' }}
               onClick={resetData}
-              aria-label={t('filters.reset_tooltip', 'Reset demo data')}
             />
-          </div>
-        </div>
-      </div>
+          </FilterActions>
+        </FilterRow>
+      </FilterCard>
 
       {activeTab === 'events' && (
         events.length === 0 ? (

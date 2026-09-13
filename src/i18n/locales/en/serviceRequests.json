@@ -4,6 +4,10 @@
   "new_ticket_btn": "Submit Service Request",
   "search_placeholder": "Search tickets by title, reference ID, or keyword...",
   "filters": {
+    "search_label": "Search",
+    "city_label": "City",
+    "category_label": "Category",
+    "reset_tooltip": "Reset sample tickets",
     "city_all": "All Cities",
     "status_all": "All Statuses",
     "category_all": "All Categories",

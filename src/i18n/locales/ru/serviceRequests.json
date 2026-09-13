@@ -4,6 +4,10 @@
   "new_ticket_btn": "Подать заявку",
   "search_placeholder": "Поиск по теме, номеру обращения или ключевому слову...",
   "filters": {
+    "search_label": "Поиск",
+    "city_label": "Город",
+    "category_label": "Тема",
+    "reset_tooltip": "Сбросить демо-заявки",
     "city_all": "Все города",
     "status_all": "Все статусы",
     "category_all": "Все темы",

@@ -4,6 +4,10 @@
   "new_ticket_btn": "Uusi palvelupyyntö",
   "search_placeholder": "Hae asioita otsikon, viitenumeron tai asiasanan mukaan...",
   "filters": {
+    "search_label": "Haku",
+    "city_label": "Kaupunki",
+    "category_label": "Aihe",
+    "reset_tooltip": "Palauta esittelypyynnöt",
     "city_all": "Kaikki kaupungit",
     "status_all": "Kaikki tilat",
     "category_all": "Kaikki aiheet",

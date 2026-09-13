@@ -49,111 +49,32 @@
   flex-shrink: 0;
 }
 
-.filterCard {
-  background: linear-gradient(
-    165deg,
-    rgba(30, 14, 44, 0.88) 0%,
-    rgba(18, 9, 28, 0.94) 100%
-  );
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 18px;
-  padding: 1.25rem 1.5rem;
-  margin-bottom: 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-  box-shadow: 
-    0 10px 32px rgba(0, 0, 0, 0.38),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08);
-}
+.searchField {
+  flex: 1.8;
+  min-width: 240px;
 
-.searchRow {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  flex-wrap: wrap;
-
-  .searchInput {
-    flex: 1;
-    min-width: 260px;
-
-    @media (max-width: 480px) {
-      min-width: 0;
-      width: 100%;
-    }
+  @media (max-width: 768px) {
+    flex: 1 1 100%;
+    min-width: 100%;
   }
-}
-
-.filterControls {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  flex-wrap: wrap;
 }
 
 .filterField {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  flex: 1;
+  min-width: 170px;
 
-  label {
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.75);
+  @media (max-width: 480px) {
+    flex: 1 1 100%;
+    min-width: 100%;
   }
 }
 
-.statusTabs {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  flex-wrap: wrap;
+.statusTabsWrapper {
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   padding-top: 1rem;
-}
-
-.statusTab {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 8px;
-  padding: 0.4rem 0.85rem;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.75);
-  cursor: pointer;
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 0.4rem;
-  transition: all 0.2s ease;
-
-  &:hover {
-    border-color: rgba(207, 91, 175, 0.5);
-    color: #ffffff;
-    background: rgba(255, 255, 255, 0.08);
-  }
-
-  &.active {
-    background: linear-gradient(135deg, rgba(160, 41, 127, 0.5) 0%, rgba(98, 44, 144, 0.65) 100%);
-    border-color: $secondary-a-3;
-    color: #ffffff;
-    box-shadow: 0 0 10px rgba(207, 91, 175, 0.35);
-
-    .countBadge {
-      background: rgba(255, 255, 255, 0.25);
-      color: #ffffff;
-    }
-  }
-
-  .countBadge {
-    background: rgba(255, 255, 255, 0.1);
-    color: #ffffff;
-    font-size: 0.75rem;
-    padding: 0.1rem 0.45rem;
-    border-radius: 10px;
-    font-weight: 700;
-  }
+  width: 100%;
 }
 
 .ticketList {

@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import type { MunicipalityId } from '@/types/onboarding';
 import type {
   MunicipalCityDataset,
@@ -9,8 +9,20 @@ import { municipalAnalyticsService } from '@/services/municipalAnalyticsService'
 export function useMunicipalAnalytics(initialCity: MunicipalityId = 'helsinki') {
   const [selectedCity, setSelectedCity] = useState<MunicipalityId>(initialCity);
   const [timeframe, setTimeframe] = useState<AnalyticsTimeframe>('month');
-  const [dataset, setDataset] = useState<MunicipalCityDataset | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [dataset, setDataset] = useState<MunicipalCityDataset>(() =>
+    municipalAnalyticsService.getCityAnalyticsSync(initialCity, 'month')
+  );
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const setCity = useCallback((newCity: MunicipalityId) => {
+    setSelectedCity(newCity);
+    setDataset(municipalAnalyticsService.getCityAnalyticsSync(newCity, timeframe));
+  }, [timeframe]);
+
+  const setTimeframeHandler = useCallback((newTimeframe: AnalyticsTimeframe) => {
+    setTimeframe(newTimeframe);
+    setDataset(municipalAnalyticsService.getCityAnalyticsSync(selectedCity, newTimeframe));
+  }, [selectedCity]);
 
   const loadData = useCallback(async () => {
     setLoading(true);
@@ -23,10 +35,6 @@ export function useMunicipalAnalytics(initialCity: MunicipalityId = 'helsinki') 
       setLoading(false);
     }
   }, [selectedCity, timeframe]);
-
-  useEffect(() => {
-    loadData();
-  }, [loadData]);
 
   const exportCSV = useCallback(() => {
     if (!dataset) return;
@@ -51,8 +59,8 @@ export function useMunicipalAnalytics(initialCity: MunicipalityId = 'helsinki') 
     timeframe,
     dataset,
     loading,
-    setCity: setSelectedCity,
-    setTimeframe,
+    setCity,
+    setTimeframe: setTimeframeHandler,
     exportCSV,
     exportPrint,
     refresh: loadData,

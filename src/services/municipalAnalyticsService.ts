@@ -6,11 +6,10 @@ import type {
 import { MUNICIPAL_DATASETS } from '@/constants/municipalAnalyticsData';
 
 export const municipalAnalyticsService = {
-  async getCityAnalytics(
+  getCityAnalyticsSync(
     municipalityId: MunicipalityId,
     timeframe: AnalyticsTimeframe = 'all',
-  ): Promise<MunicipalCityDataset> {
-    // In production, this can call `/api/municipal/analytics/${municipalityId}?timeframe=${timeframe}`
+  ): MunicipalCityDataset {
     const dataset = MUNICIPAL_DATASETS[municipalityId] || MUNICIPAL_DATASETS.helsinki;
 
     // Apply multiplier if timeframe is filtered
@@ -26,6 +25,14 @@ export const municipalAnalyticsService = {
         monthlyGrowthPercent: Math.round(dataset.kpi.monthlyGrowthPercent * growthMultiplier * 10) / 10,
       },
     };
+  },
+
+  async getCityAnalytics(
+    municipalityId: MunicipalityId,
+    timeframe: AnalyticsTimeframe = 'all',
+  ): Promise<MunicipalCityDataset> {
+    // In production, this can call `/api/municipal/analytics/${municipalityId}?timeframe=${timeframe}`
+    return this.getCityAnalyticsSync(municipalityId, timeframe);
   },
 
   getAllCitiesSummaries(): Array<{

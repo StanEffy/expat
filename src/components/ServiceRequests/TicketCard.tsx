@@ -71,6 +71,7 @@ export const TicketCard: React.FC<Props> = ({ ticket }) => {
           const isPassed = idx < currentIdx;
           const isCurrent = idx === currentIdx;
           const isFinal = stage === 'resolved' && currentIdx === 3;
+          const isTicketResolved = ticket.status === 'resolved';
 
           let stepClass = '';
           if (isFinal) {
@@ -81,14 +82,38 @@ export const TicketCard: React.FC<Props> = ({ ticket }) => {
             stepClass = styles.completed;
           }
 
+          const isLeftActive = idx <= currentIdx;
+          const isRightActive = idx < currentIdx;
+          const activeTrackClass = isTicketResolved ? styles.trackResolved : styles.trackActive;
+
           return (
-            <div key={stage} className={`${styles.timelineStep} ${stepClass}`}>
-              <div className={styles.dot}>
-                {isPassed || isFinal ? (
-                  <i className="pi pi-check" style={{ fontSize: '0.65rem' }} />
-                ) : (
-                  <span>{idx + 1}</span>
+            <div
+              key={stage}
+              className={`${styles.timelineStep} ${stepClass}`}
+              title={t(`ticket.timeline.${stage}`, stage)}
+            >
+              <div className={styles.trackWrapper}>
+                {idx > 0 && (
+                  <div
+                    className={`${styles.trackLine} ${styles.trackLeft} ${
+                      isLeftActive ? activeTrackClass : ''
+                    }`}
+                  />
                 )}
+                {idx < STATUS_ORDER.length - 1 && (
+                  <div
+                    className={`${styles.trackLine} ${styles.trackRight} ${
+                      isRightActive ? activeTrackClass : ''
+                    }`}
+                  />
+                )}
+                <div className={styles.dot}>
+                  {isPassed || isFinal ? (
+                    <i className="pi pi-check" style={{ fontSize: '0.65rem' }} />
+                  ) : (
+                    <span>{idx + 1}</span>
+                  )}
+                </div>
               </div>
               <span className={styles.stepLabel}>
                 {t(`filters.statuses.${stage}`, stage)}

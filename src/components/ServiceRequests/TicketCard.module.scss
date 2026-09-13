@@ -36,6 +36,13 @@
 
   &.resolved {
     border-left: 4px solid #10b981;
+
+    .timelineStep.completed .dot {
+      background: rgba(16, 185, 129, 0.25);
+      border-color: #10b981;
+      color: #6ee7b7;
+      box-shadow: 0 0 8px rgba(16, 185, 129, 0.35);
+    }
   }
 }
 
@@ -115,62 +122,32 @@
 
 .timeline {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
+  width: 100%;
   position: relative;
-  margin: 0.5rem 0;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 14px;
-    left: 14px;
-    right: 14px;
-    height: 2px;
-    background: rgba(255, 255, 255, 0.12);
-    z-index: 1;
-  }
+  margin: 0.75rem 0 0.5rem;
 }
 
 .timelineStep {
   position: relative;
-  z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 0.4rem;
   flex: 1;
-
-  .dot {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    background: rgba(26, 12, 45, 0.95);
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.75rem;
-    color: rgba(255, 255, 255, 0.5);
-    transition: all 0.2s ease;
-  }
-
-  .stepLabel {
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.5);
-  }
+  min-width: 0;
 
   &.completed {
     .dot {
       background: linear-gradient(135deg, $primary-0 0%, $secondary-a-0 100%);
       border-color: $secondary-a-3;
       color: #ffffff;
-      box-shadow: 0 0 8px rgba(207, 91, 175, 0.5);
+      box-shadow: 0 0 10px rgba(207, 91, 175, 0.45);
     }
     .stepLabel {
-      color: #ffffff;
+      color: rgba(255, 255, 255, 0.88);
+      font-weight: 600;
     }
   }
 
@@ -179,24 +156,120 @@
       background: linear-gradient(135deg, $secondary-a-0 0%, $secondary-a-3 100%);
       border-color: #ffffff;
       color: #ffffff;
-      box-shadow: 0 0 12px rgba(207, 91, 175, 0.7);
+      box-shadow: 
+        0 0 14px rgba(207, 91, 175, 0.75),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
     }
     .stepLabel {
       color: $secondary-a-3;
       font-weight: 700;
+      text-shadow: 0 0 12px rgba(207, 91, 175, 0.35);
     }
   }
 
   &.resolved {
     .dot {
-      background: #10b981;
-      border-color: #34d399;
+      background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+      border-color: #6ee7b7;
       color: #ffffff;
-      box-shadow: 0 0 10px rgba(16, 185, 129, 0.6);
+      box-shadow: 0 0 12px rgba(16, 185, 129, 0.6);
     }
     .stepLabel {
       color: #34d399;
+      font-weight: 700;
     }
+  }
+}
+
+.trackWrapper {
+  position: relative;
+  width: 100%;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.trackLine {
+  position: absolute;
+  top: 50%;
+  height: 2px;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.14);
+  z-index: 1;
+  transition: background 0.25s ease, box-shadow 0.25s ease;
+
+  &.trackLeft {
+    left: -1px;
+    right: 50%;
+  }
+
+  &.trackRight {
+    left: 50%;
+    right: -1px;
+  }
+
+  &.trackActive {
+    background: $secondary-a-3;
+    box-shadow: 0 0 6px rgba(207, 91, 175, 0.5);
+  }
+
+  &.trackResolved {
+    background: #10b981;
+    box-shadow: 0 0 6px rgba(16, 185, 129, 0.5);
+  }
+}
+
+.dot {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  background: rgba(24, 12, 38, 0.95);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.45);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.stepLabel {
+  font-size: 0.775rem;
+  font-weight: 500;
+  line-height: 1.25;
+  color: rgba(255, 255, 255, 0.45);
+  text-align: center;
+  margin-top: 0.5rem;
+  padding: 0 0.25rem;
+  min-height: 2.5em;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  word-break: normal;
+  overflow-wrap: break-word;
+  text-wrap: balance;
+  transition: color 0.2s ease;
+}
+
+@media (max-width: 480px) {
+  .trackWrapper {
+    height: 26px;
+  }
+
+  .dot {
+    width: 24px;
+    height: 24px;
+    font-size: 0.7rem;
+  }
+
+  .stepLabel {
+    font-size: 0.68rem;
+    min-height: 2.6em;
+    padding: 0 0.15rem;
   }
 }
 

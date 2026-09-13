@@ -82,36 +82,50 @@ export const Community: React.FC = () => {
         <p>{t('subtitle', 'Connect with local events, peer notice board, and experienced expat mentors across Finland')}</p>
       </div>
 
-      <div className={styles.tabNavigation}>
-        <button
-          type="button"
-          className={`${styles.tabBtn} ${activeTab === 'events' ? styles.active : ''}`}
-          onClick={() => setActiveTab('events')}
-        >
-          <i className="pi pi-calendar" />
-          <span>{t('tabs.events', 'Events & Meetups')}</span>
-          <span className={styles.tabCount}>{rawCounts.events}</span>
-        </button>
+      <div className={styles.tabNavigationWrapper}>
+        <div className={styles.tabNavigation} role="tablist" aria-label="Community sections">
+          <button
+            type="button"
+            role="tab"
+            aria-selected={activeTab === 'events'}
+            className={`${styles.tabBtn} ${activeTab === 'events' ? styles.active : ''}`}
+            onClick={() => setActiveTab('events')}
+          >
+            <span className={styles.tabBtnContent}>
+              <i className="pi pi-calendar" />
+              <span>{t('tabs.events', 'Events & Meetups')}</span>
+            </span>
+            <span className={styles.tabCount}>{rawCounts.events}</span>
+          </button>
 
-        <button
-          type="button"
-          className={`${styles.tabBtn} ${activeTab === 'notices' ? styles.active : ''}`}
-          onClick={() => setActiveTab('notices')}
-        >
-          <i className="pi pi-comments" />
-          <span>{t('tabs.notices', 'Notice Board')}</span>
-          <span className={styles.tabCount}>{rawCounts.notices}</span>
-        </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={activeTab === 'notices'}
+            className={`${styles.tabBtn} ${activeTab === 'notices' ? styles.active : ''}`}
+            onClick={() => setActiveTab('notices')}
+          >
+            <span className={styles.tabBtnContent}>
+              <i className="pi pi-comments" />
+              <span>{t('tabs.notices', 'Notice Board')}</span>
+            </span>
+            <span className={styles.tabCount}>{rawCounts.notices}</span>
+          </button>
 
-        <button
-          type="button"
-          className={`${styles.tabBtn} ${activeTab === 'mentors' ? styles.active : ''}`}
-          onClick={() => setActiveTab('mentors')}
-        >
-          <i className="pi pi-users" />
-          <span>{t('tabs.mentors', 'Expat Mentors')}</span>
-          <span className={styles.tabCount}>{rawCounts.mentors}</span>
-        </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={activeTab === 'mentors'}
+            className={`${styles.tabBtn} ${activeTab === 'mentors' ? styles.active : ''}`}
+            onClick={() => setActiveTab('mentors')}
+          >
+            <span className={styles.tabBtnContent}>
+              <i className="pi pi-users" />
+              <span>{t('tabs.mentors', 'Expat Mentors')}</span>
+            </span>
+            <span className={styles.tabCount}>{rawCounts.mentors}</span>
+          </button>
+        </div>
       </div>
 
       <div className={styles.filterCard}>

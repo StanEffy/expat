@@ -73,6 +73,18 @@
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.36);
+
+  @media (max-width: 960px) {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.25rem;
+    padding: 1.25rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 1rem;
+    border-radius: 1rem;
+  }
 }
 
 .selectorsGroup {
@@ -80,6 +92,13 @@
   align-items: center;
   gap: 1.25rem;
   flex-wrap: wrap;
+
+  @media (max-width: 960px) {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    gap: 1rem;
+  }
 }
 
 .cityButtonGroup {
@@ -87,6 +106,17 @@
   align-items: center;
   gap: 0.35rem;
   flex-wrap: wrap;
+
+  @media (max-width: 960px) {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 100%;
+    gap: 0.4rem;
+  }
+
+  @media (max-width: 440px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 .cityBtn {
@@ -99,6 +129,15 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+
+  @media (max-width: 960px) {
+    width: 100%;
+    padding: 0.5rem 0.6rem;
+  }
 
   &:hover {
     color: #ffffff;
@@ -122,18 +161,41 @@
   padding: 0.25rem;
   border-radius: 8px;
   border: 1px solid rgba(255, 255, 255, 0.1);
+
+  @media (max-width: 960px) {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    width: 100%;
+    gap: 0.25rem;
+  }
+
+  @media (max-width: 580px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.35rem;
+    padding: 0.35rem;
+  }
 }
 
 .timeframeBtn {
   background: transparent;
   border: none;
   color: rgba(255, 255, 255, 0.7);
-  padding: 0.35rem 0.75rem;
+  padding: 0.45rem 0.75rem;
   border-radius: 6px;
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  @media (max-width: 960px) {
+    width: 100%;
+    padding: 0.5rem 0.5rem;
+  }
 
   &:hover {
     color: #ffffff;
@@ -151,13 +213,25 @@
   display: flex;
   gap: 0.6rem;
   flex-wrap: wrap;
+
+  @media (max-width: 960px) {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.6rem;
+  }
+
+  @media (max-width: 580px) {
+    grid-template-columns: 1fr;
+  }
 }
 
 .actionBtn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.45rem;
-  padding: 0.5rem 0.95rem;
+  padding: 0.55rem 1rem;
   border-radius: 8px;
   font-size: 0.85rem;
   font-weight: 600;
@@ -166,6 +240,12 @@
   border: 1px solid rgba(255, 255, 255, 0.15);
   background: rgba(255, 255, 255, 0.06);
   color: rgba(255, 255, 255, 0.85);
+  white-space: nowrap;
+
+  @media (max-width: 960px) {
+    width: 100%;
+    padding: 0.65rem 1rem;
+  }
 
   &:hover {
     background: rgba(255, 255, 255, 0.12);

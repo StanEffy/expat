@@ -10,24 +10,77 @@ import "./MobileMenu.scss";
 
 const MobileMenu = () => {
   const menu = useRef<Menu>(null);
+  const triggerRef = useRef<HTMLDivElement>(null);
   const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
   const { isAuthenticated } = useAuth();
   const { unreadCount } = useUserNotifications();
   const [isMobile, setIsMobile] = useState(window.innerWidth < 1024);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const closeMenu = (event?: React.SyntheticEvent | Event) => {
+    if (menu.current) {
+      menu.current.hide(event as unknown as React.SyntheticEvent);
+    }
+    setIsOpen(false);
+  };
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 1024);
+      const mobile = window.innerWidth < 1024;
+      setIsMobile(mobile);
+      if (!mobile && isOpen) {
+        closeMenu();
+      }
     };
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  }, [isOpen]);
 
   const handleNavigation = (path: string) => {
+    closeMenu();
     navigate(path);
   };
+
+  useEffect(() => {
+    closeMenu();
+  }, [location.pathname]);
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleOutsideClick = (event: MouseEvent | TouchEvent) => {
+      const target = event.target as Node;
+      const menuEl = menu.current?.getElement();
+      const triggerEl = triggerRef.current;
+
+      if (triggerEl && (triggerEl === target || triggerEl.contains(target))) {
+        return;
+      }
+      if (menuEl && (menuEl === target || menuEl.contains(target))) {
+        return;
+      }
+
+      closeMenu();
+    };
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        closeMenu();
+      }
+    };
+
+    document.addEventListener("mousedown", handleOutsideClick, true);
+    document.addEventListener("touchstart", handleOutsideClick, true);
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick, true);
+      document.removeEventListener("touchstart", handleOutsideClick, true);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isOpen]);
 
   const isHomeActive = location.pathname === "/";
   const isCompaniesActive = location.pathname.startsWith("/companies") || location.pathname === "/categories";
@@ -127,15 +180,46 @@ const MobileMenu = () => {
 
   return (
     <>
-      <Button
-        icon="pi pi-bars"
-        text
-        rounded
-        aria-label="menu"
-        className="mobile-menu-trigger"
-        onClick={(e) => menu.current?.toggle(e)}
+      {isOpen && (
+        <div
+          className="mobile-menu-backdrop"
+          onClick={(e) => {
+            e.stopPropagation();
+            closeMenu();
+          }}
+          onTouchStart={(e) => {
+            e.stopPropagation();
+            closeMenu();
+          }}
+          aria-hidden="true"
+        />
+      )}
+      <div ref={triggerRef} className="mobile-menu-trigger-wrapper">
+        <Button
+          icon="pi pi-bars"
+          text
+          rounded
+          aria-label="menu"
+          aria-expanded={isOpen}
+          className={`mobile-menu-trigger ${isOpen ? "mobile-menu-trigger-active" : ""}`}
+          onClick={(e) => {
+            if (isOpen) {
+              closeMenu();
+            } else {
+              menu.current?.show(e);
+              setIsOpen(true);
+            }
+          }}
+        />
+      </div>
+      <Menu
+        ref={menu}
+        model={items}
+        popup
+        className="mobile-menu"
+        onShow={() => setIsOpen(true)}
+        onHide={() => setIsOpen(false)}
       />
-      <Menu ref={menu} model={items} popup className="mobile-menu" />
     </>
   );
 };

@@ -30,7 +30,7 @@ export interface ButtonProps extends Omit<PrimeButtonProps, 'className' | 'size'
  * Universal Button component that wraps PrimeReact Button
  * Provides consistent styling and API across the application
  */
-const Button: React.FC<ButtonProps> = ({
+const Button = React.forwardRef<PrimeButton, ButtonProps>(({
   variant,
   size = 'medium',
   className = '',
@@ -38,7 +38,7 @@ const Button: React.FC<ButtonProps> = ({
   text,
   outlined,
   ...props
-}) => {
+}, ref) => {
   // Determine variant from props (variant prop takes precedence over text/outlined)
   let finalVariant: 'filled' | 'outlined' | 'text' = variant || 'filled';
   if (!variant) {
@@ -81,11 +81,13 @@ const Button: React.FC<ButtonProps> = ({
 
   // Use children if provided, otherwise use label
   if (children) {
-    return <PrimeButton {...primeProps}>{children}</PrimeButton>;
+    return <PrimeButton ref={ref} {...primeProps}>{children}</PrimeButton>;
   }
 
-  return <PrimeButton {...primeProps} />;
-};
+  return <PrimeButton ref={ref} {...primeProps} />;
+});
+
+Button.displayName = 'Button';
 
 export default Button;
 

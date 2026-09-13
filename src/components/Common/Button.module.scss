@@ -1,6 +1,7 @@
 @use "../../styles/variables" as *;
 
 .button {
+  white-space: nowrap;
   // Base button styles are handled by PrimeReact
   // This file is for custom overrides and variants
 

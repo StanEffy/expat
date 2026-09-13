@@ -1,5 +1,38 @@
 @use "../../styles/variables" as *;
 
+.mobile-menu-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100dvh;
+  z-index: 10001;
+  background: rgba(10, 4, 18, 0.45);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  animation: mobileBackdropFadeIn 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes mobileBackdropFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.mobile-menu-trigger-wrapper {
+  position: relative;
+  z-index: 10002;
+  display: flex;
+  align-items: center;
+}
+
 .mobile-menu-trigger {
   width: 38px !important;
   height: 38px !important;
@@ -15,6 +48,12 @@
     color: #ffffff !important;
     transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+  }
+
+  &.mobile-menu-trigger-active {
+    background: rgba(207, 91, 175, 0.25) !important;
+    border-color: rgba(207, 91, 175, 0.6) !important;
+    color: #ffffff !important;
   }
 
   &:focus-visible {
@@ -36,8 +75,15 @@
 }
 
 .mobile-menu {
+  position: fixed !important;
+  top: 54px !important;
+  right: 12px !important;
+  left: auto !important;
   min-width: 220px;
-  max-width: calc(100dvw - 32px);
+  max-width: calc(100dvw - 24px);
+  max-height: calc(100dvh - 66px) !important;
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch;
   background: rgba(22, 10, 34, 0.97) !important;
   -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
@@ -45,8 +91,20 @@
   border: 1px solid rgba(207, 91, 175, 0.3) !important;
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.65), 0 0 20px rgba(160, 41, 127, 0.15) !important;
   padding: 6px !important;
-  z-index: 10001 !important;
+  z-index: 10002 !important;
   -webkit-tap-highlight-color: transparent;
+
+  /* Custom scrollbar for long menu list */
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgba(207, 91, 175, 0.4);
+    border-radius: 4px;
+  }
 
   @media (min-width: 375px) {
     min-width: 250px;

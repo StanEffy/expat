@@ -53,11 +53,14 @@ const MobileMenu = () => {
     navigate(path);
   };
 
+  const prevPathname = useRef(location.pathname);
+
   useEffect(() => {
-    if (isOpen) {
+    if (prevPathname.current !== location.pathname) {
+      prevPathname.current = location.pathname;
       closeMenu();
     }
-  }, [location.pathname, isOpen, closeMenu]);
+  }, [location.pathname, closeMenu]);
 
   useEffect(() => {
     if (!isOpen) return;

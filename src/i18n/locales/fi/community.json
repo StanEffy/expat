@@ -8,6 +8,10 @@
   },
   "search_placeholder": "Hae tapahtumia, ilmoituksia tai mentoreita avainsanalla...",
   "filters": {
+    "search_label": "Haku",
+    "city_label": "Kaupunki",
+    "category_label": "Kategoria",
+    "reset_tooltip": "Palauta esittelytiedot",
     "city_all": "Kaikki kaupungit",
     "category_all": "Kaikki kategoriat",
     "event_categories": {

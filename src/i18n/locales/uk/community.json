@@ -8,6 +8,10 @@
   },
   "search_placeholder": "Пошук зустрічей, оголошень або менторів...",
   "filters": {
+    "search_label": "Пошук",
+    "city_label": "Місто",
+    "category_label": "Категорія",
+    "reset_tooltip": "Скинути демо-дані",
     "city_all": "Усі міста",
     "category_all": "Усі категорії",
     "event_categories": {

@@ -8,6 +8,10 @@
   },
   "search_placeholder": "Поиск встреч, объявлений или наставников...",
   "filters": {
+    "search_label": "Поиск",
+    "city_label": "Город",
+    "category_label": "Категория",
+    "reset_tooltip": "Сбросить демо-данные",
     "city_all": "Все города",
     "category_all": "Все категории",
     "event_categories": {

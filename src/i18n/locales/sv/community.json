@@ -8,6 +8,10 @@
   },
   "search_placeholder": "Sök evenemang, anslag eller mentorer med sökord...",
   "filters": {
+    "search_label": "Sök",
+    "city_label": "Stad",
+    "category_label": "Kategori",
+    "reset_tooltip": "Återställ demodata",
     "city_all": "Alla städer",
     "category_all": "Alla kategorier",
     "event_categories": {

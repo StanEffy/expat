@@ -115,69 +115,98 @@ export const Community: React.FC = () => {
       </div>
 
       <div className={styles.filterCard}>
-        <div className={styles.searchAndFilters}>
-          <div className={styles.searchInput}>
-            <span className="p-input-icon-left" style={{ width: '100%' }}>
+        <div className={styles.filtersRow}>
+          <div className={styles.searchField}>
+            <label htmlFor="comm-search" className={styles.filterLabel}>
               <i className="pi pi-search" />
+              <span>{t('filters.search_label', 'Search')}</span>
+            </label>
+            <div className={styles.searchWrapper}>
+              <i className={`pi pi-search ${styles.searchIcon}`} />
               <InputText
+                id="comm-search"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder={t('search_placeholder', 'Search events, notices, or mentors by keyword...')}
-                style={{ width: '100%' }}
+                className={styles.searchInput}
               />
-            </span>
+              {searchQuery && (
+                <button
+                  type="button"
+                  className={styles.clearSearchBtn}
+                  onClick={() => setSearchQuery('')}
+                  aria-label="Clear search"
+                >
+                  <i className="pi pi-times" />
+                </button>
+              )}
+            </div>
           </div>
 
           <div className={styles.filterField}>
-            <label htmlFor="comm-city">City:</label>
+            <label htmlFor="comm-city" className={styles.filterLabel}>
+              <i className="pi pi-map-marker" />
+              <span>{t('filters.city_label', 'City')}</span>
+            </label>
             <Dropdown
               id="comm-city"
               value={selectedCity}
               options={cityOptions}
               onChange={(e) => setCity(e.value)}
+              className={styles.filterDropdown}
             />
           </div>
 
           {activeTab === 'events' && (
             <div className={styles.filterField}>
-              <label htmlFor="comm-event-cat">Category:</label>
+              <label htmlFor="comm-event-cat" className={styles.filterLabel}>
+                <i className="pi pi-tag" />
+                <span>{t('filters.category_label', 'Category')}</span>
+              </label>
               <Dropdown
                 id="comm-event-cat"
                 value={selectedEventCategory}
                 options={eventCategoryOptions}
                 onChange={(e) => setEventCategory(e.value)}
+                className={styles.filterDropdown}
               />
             </div>
           )}
 
           {activeTab === 'notices' && (
             <div className={styles.filterField}>
-              <label htmlFor="comm-notice-cat">Category:</label>
+              <label htmlFor="comm-notice-cat" className={styles.filterLabel}>
+                <i className="pi pi-tag" />
+                <span>{t('filters.category_label', 'Category')}</span>
+              </label>
               <Dropdown
                 id="comm-notice-cat"
                 value={selectedNoticeCategory}
                 options={noticeCategoryOptions}
                 onChange={(e) => setNoticeCategory(e.value)}
+                className={styles.filterDropdown}
               />
             </div>
           )}
-        </div>
 
-        <div className={styles.extraActions}>
-          {activeTab === 'notices' && (
+          <div className={styles.actionsGroup}>
+            {activeTab === 'notices' && (
+              <Button
+                label={t('notice.post_btn', 'Post a Notice')}
+                icon="pi pi-plus"
+                className={styles.postNoticeBtn}
+                onClick={() => setNoticeDialogVisible(true)}
+              />
+            )}
             <Button
-              label={t('notice.post_btn', 'Post a Notice')}
-              icon="pi pi-plus"
-              onClick={() => setNoticeDialogVisible(true)}
+              icon="pi pi-refresh"
+              className={styles.resetBtn}
+              tooltip={t('filters.reset_tooltip', 'Reset demo data')}
+              tooltipOptions={{ position: 'top' }}
+              onClick={resetData}
+              aria-label={t('filters.reset_tooltip', 'Reset demo data')}
             />
-          )}
-          <Button
-            icon="pi pi-refresh"
-            severity="secondary"
-            outlined
-            tooltip="Reset demo data"
-            onClick={resetData}
-          />
+          </div>
         </div>
       </div>
 

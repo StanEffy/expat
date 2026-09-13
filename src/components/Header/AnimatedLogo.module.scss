@@ -1,166 +1,198 @@
+@use "../../styles/variables" as *;
+
 .logoContainer {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   height: 40px;
-  perspective: 1000px;
-  --letter-h: 32px;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  padding: 2px 4px;
+  border-radius: 8px;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  &:hover {
+    transform: scale(1.04);
+  }
+
+  @media (max-width: 640px) {
+    height: 34px;
+    padding: 2px 0;
+  }
 }
 
-.logoText {
-  display: inline-flex;
-  align-items: center;
-  font-size: 24px;
-  font-weight: bold;
-  color: inherit;
-  line-height: 1;
-  gap: 1px;
-}
-
-.letterSlot {
-  display: inline-block;
-  position: relative;
-  height: var(--letter-h);
+.logoSvg {
+  height: 30px;
   width: auto;
-  min-width: 0.65em;
-  vertical-align: top;
-  overflow: hidden; // Critical for hiding letters that scroll out
+  overflow: visible;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.4));
+  transition: filter 0.3s ease;
+
+  @media (max-width: 640px) {
+    height: 26px;
+  }
 }
 
-.letterStack {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  will-change: transform;
-}
-
-.letter {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: var(--letter-h);
-  white-space: nowrap;
-  min-width: 0.65em;
-  flex-shrink: 0;
-}
-
-.letterStatic {
-  display: inline-block;
-  font-size: inherit;
-  font-weight: inherit;
-  white-space: nowrap;
-  min-width: 0.65em;
-}
-@keyframes relaxLogo {
+// -----------------------------------------------------------------------------
+// INTRO KEYFRAMES
+// -----------------------------------------------------------------------------
+@keyframes slideInLeft {
   0% {
-    width: 127px;
-    letter-spacing: 8px;
+    opacity: 0;
+    transform: translateX(-16px);
   }
   100% {
-    width: fit-content;
-    letter-spacing: normal;
+    opacity: 1;
+    transform: translateX(0);
   }
 }
 
-.fullLogo {
-  width: 127px;
-  letter-spacing: 8px;
-}
-
-.fullLogoRelaxed {
-  animation: relaxLogo 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-}
-
-.xContainer {
-  display: inline-flex;
-  position: relative;
-  perspective: 300px;
-  gap: 0;
-  align-items: center;
-  transform-style: preserve-3d;
-}
-
-.xLetter {
-  display: inline-block;
-  position: relative;
-  font-size: inherit;
-  font-weight: inherit;
-  transition:
-    transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-    opacity 0.3s ease;
-  transform-style: preserve-3d;
-  opacity: 1;
-
-  &:first-child {
-    opacity: 0.5;
-    filter: blur(1px);
+@keyframes popRotateX {
+  0% {
+    opacity: 0;
+    transform: translate(43px, 18px) scale(0.2) rotate(-60deg);
   }
-
-  &:last-child {
-    opacity: 0.5;
-    filter: blur(1px);
+  65% {
+    transform: translate(43px, 18px) scale(1.15) rotate(8deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(43px, 18px) scale(1) rotate(0deg);
   }
 }
 
-/* Final-state triple X styling */
-.xTriple {
-  --x-accent: #ffd54f; /* warm yellow accent; adjust to theme as needed */
-  position: relative;
+@keyframes growUp {
+  0% {
+    opacity: 0;
+    transform: scaleY(0);
+    transform-origin: bottom;
+  }
+  100% {
+    opacity: 1;
+    transform: scaleY(1);
+    transform-origin: bottom;
+  }
 }
 
-.xBack {
-  color: var(--x-accent);
-  transform: translateX(-8px) translateZ(-10px) scale(0.82);
-  opacity: 0.85;
-  z-index: 0;
-  position: absolute;
+@keyframes popScaleCircle {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+    transform-origin: 75.5px 12px;
+  }
+  70% {
+    transform: scale(1.18);
+    transform-origin: 75.5px 12px;
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    transform-origin: 75.5px 12px;
+  }
 }
 
-.xMid {
-  color: var(--x-accent);
-  transform: translateZ(0) scale(1);
-  z-index: 1;
+@keyframes glideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.xFront {
-  color: var(--x-accent);
-  transform: translateX(3px) translateZ(-10px) scale(1.28);
-  opacity: 0.9;
-  z-index: 2;
-  position: absolute;
+@keyframes dropDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-14px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.logoContainer:hover .xBack,
-.logoContainer:hover .xFront {
-  transform: translateX(0) translateZ(0) scale(1);
-  opacity: 0; /* visually merge to a single X */
+// -----------------------------------------------------------------------------
+// LETTER ANIMATION APPLICATION
+// -----------------------------------------------------------------------------
+.eTop {
+  transform-box: fill-box;
+  animation: slideInLeft 0.5s cubic-bezier(0.34, 1.4, 0.64, 1) 0.05s backwards;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-@media (max-width: 768px) {
-  .logoContainer {
-    --letter-h: 26px;
-  }
-  .logoText {
-    font-size: 18px;
+.eBottom {
+  transform-box: fill-box;
+  animation: slideInLeft 0.5s cubic-bezier(0.34, 1.4, 0.64, 1) 0.12s backwards;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.letterX {
+  animation: popRotateX 0.65s cubic-bezier(0.34, 1.56, 0.64, 1) 0.18s backwards;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.3s ease;
+  filter: drop-shadow(0 0 6px rgba(251, 191, 36, 0.45));
+}
+
+.pStem {
+  transform-box: fill-box;
+  animation: growUp 0.5s cubic-bezier(0.34, 1.3, 0.64, 1) 0.26s backwards;
+}
+
+.pCircle {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: popScaleCircle 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) 0.32s backwards;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.aTriangle {
+  transform-box: fill-box;
+  animation: glideUp 0.55s cubic-bezier(0.34, 1.4, 0.64, 1) 0.38s backwards;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.tBar {
+  transform-box: fill-box;
+  animation: dropDown 0.45s cubic-bezier(0.34, 1.4, 0.64, 1) 0.44s backwards;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.tStem {
+  transform-box: fill-box;
+  animation: growUp 0.45s cubic-bezier(0.34, 1.3, 0.64, 1) 0.48s backwards;
+}
+
+// -----------------------------------------------------------------------------
+// HOVER INTERACTIONS
+// -----------------------------------------------------------------------------
+.logoContainer:hover {
+  .logoSvg {
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.5));
   }
 
-  .letterSlot {
-    height: var(--letter-h);
-  }
-  .letter {
-    height: var(--letter-h);
+  .letterX {
+    transform: translate(43px, 18px) rotate(14deg) scale(1.1);
+    filter: drop-shadow(0 0 12px rgba(251, 191, 36, 0.9)) drop-shadow(0 0 20px rgba(245, 158, 11, 0.55));
   }
 
-  .xContainer {
-    min-width: 1em;
+  .eTop {
+    transform: translateX(-2.5px);
   }
 
-  .xLetter {
-    &:first-child {
-      transform: translateX(-4px) translateZ(-18px) !important;
-    }
+  .eBottom {
+    transform: translateX(-1px);
+  }
 
-    &:last-child {
-      transform: translateX(4px) translateZ(18px) !important;
-    }
+  .pCircle {
+    transform: scale(1.08);
+  }
+
+  .aTriangle {
+    transform: translateY(-2px);
+  }
+
+  .tBar {
+    transform: translateY(-2px);
   }
 }

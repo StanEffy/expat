@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import Button from "../Common/Button";
 import { Menu } from "primereact/menu";
 import { MenuItem } from "primereact/menuitem";
@@ -19,24 +19,34 @@ const MobileMenu = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 1024);
   const [isOpen, setIsOpen] = useState(false);
 
-  const closeMenu = (event?: React.SyntheticEvent | Event) => {
+  const closeMenu = useCallback((event?: React.SyntheticEvent | Event) => {
     if (menu.current) {
-      menu.current.hide(event as unknown as React.SyntheticEvent);
+      const fallback = triggerRef.current ?? (typeof document !== "undefined" ? document.body : null);
+      const safeEvent = {
+        currentTarget: (event && "currentTarget" in event && event.currentTarget) ? event.currentTarget : fallback,
+        target: (event && "target" in event && event.target) ? event.target : fallback,
+      } as unknown as React.SyntheticEvent;
+
+      try {
+        menu.current.hide(safeEvent);
+      } catch {
+        // Gracefully ignore if already hidden or unmounted
+      }
     }
     setIsOpen(false);
-  };
+  }, []);
 
   useEffect(() => {
     const handleResize = () => {
       const mobile = window.innerWidth < 1024;
       setIsMobile(mobile);
-      if (!mobile && isOpen) {
+      if (!mobile) {
         closeMenu();
       }
     };
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, [isOpen]);
+  }, [closeMenu]);
 
   const handleNavigation = (path: string) => {
     closeMenu();
@@ -44,8 +54,10 @@ const MobileMenu = () => {
   };
 
   useEffect(() => {
-    closeMenu();
-  }, [location.pathname]);
+    if (isOpen) {
+      closeMenu();
+    }
+  }, [location.pathname, isOpen, closeMenu]);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -62,12 +74,12 @@ const MobileMenu = () => {
         return;
       }
 
-      closeMenu();
+      closeMenu(event);
     };
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
-        closeMenu();
+        closeMenu(event);
       }
     };
 
@@ -80,7 +92,7 @@ const MobileMenu = () => {
       document.removeEventListener("touchstart", handleOutsideClick, true);
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [isOpen]);
+  }, [isOpen, closeMenu]);
 
   const isHomeActive = location.pathname === "/";
   const isCompaniesActive = location.pathname.startsWith("/companies") || location.pathname === "/categories";

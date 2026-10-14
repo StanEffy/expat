@@ -382,5 +382,126 @@
       "passwordTooShort": "Password must be at least 8 characters long",
       "passwordsDontMatch": "Passwords do not match"
     }
+  },
+  "aboutPage": {
+    "badge": "Civic-Tech Infrastructure • Finland First",
+    "hero": {
+      "title": "About Expat Platform",
+      "subtitle": "The comprehensive civic-tech platform connecting international talent, innovative employers, and Finnish municipalities to accelerate integration, eliminate bureaucracy, and foster economic growth."
+    },
+    "metrics": {
+      "talentDeficit": "20,000+",
+      "talentDeficitLabel": "Annual ICT & Tech Specialist Shortage in Finland",
+      "gdpPotential": "€3.2B",
+      "gdpPotentialLabel": "Unrealized GDP Unlocked via Talent Retention",
+      "onboardingSpeed": "14 Days",
+      "onboardingSpeedLabel": "Target Settling & Relocation Time (vs. 6 Mo Baseline)",
+      "taxContribution": "€25k – €35k",
+      "taxContributionLabel": "Annual Municipal Tax Yield per Retained Specialist"
+    },
+    "mission": {
+      "badge": "Our Mission",
+      "title": "What Expat Platform Does",
+      "description": "Finland offers world-class innovation, safety, and quality of life, yet international professionals face fragmented bureaucratic silos across registration, taxation, and housing. At the same time, Finnish tech leaders face an acute specialist shortage. Expat Platform eliminates friction by connecting talent, employers, and municipal governments into one seamless digital ecosystem.",
+      "talentCard": {
+        "title": "For International Specialists",
+        "description": "A single digital gateway for moving, settling, finding career opportunities, navigating public institutions (DVV, Vero, Kela), and actively participating in municipal democracy."
+      },
+      "companyCard": {
+        "title": "For Finnish Employers",
+        "description": "Direct connection to verified international specialists, culturally calibrated Nordic STAR resumes, and structured tools to reduce relocation friction and employee turnover."
+      },
+      "municipalityCard": {
+        "title": "For Municipalities & Government",
+        "description": "Data-driven integration funnels, talent demographic intelligence, and automated public service request routing for forward-looking Finnish cities."
+      }
+    },
+    "offerings": {
+      "badge": "Current Platform Capabilities",
+      "title": "What We Offer Today",
+      "subtitle": "A fully functional civic-tech ecosystem with live production modules already serving the Finnish landscape.",
+      "onboarding": {
+        "title": "Civic Onboarding & Relocation Guide",
+        "description": "Dynamic, city-tailored relocation checklists spanning 4 essential phases: from pre-arrival planning to long-term integration. Step-by-step guidance for DVV, Vero tax cards, Kela social insurance, bank accounts, healthcare, and schooling."
+      },
+      "careers": {
+        "title": "Career & Talent Matching",
+        "description": "Curated directory of expat-friendly employers, tech stack filtering, English-speaking workplace cultures, and our Nordic STAR Resume Builder calibrated specifically to Nordic hiring standards."
+      },
+      "civic": {
+        "title": "Civic Engagement & Participatory Budgeting",
+        "description": "Direct democratic inclusion via participatory budgeting (Osallistuva budjetointi) with virtual token voting, municipal sentiment polls, language exchange cafes, and mentorship."
+      },
+      "analytics": {
+        "title": "Municipal Requests & B2G Analytics",
+        "description": "A direct ticketing channel for citizens to contact municipal departments, combined with high-level analytics dashboards for city councils to monitor integration velocity and talent sentiment."
+      }
+    },
+    "roadmap": {
+      "badge": "Product Roadmap",
+      "title": "What We Will Do Next",
+      "subtitle": "Our strategic expansion plan: securing the Finnish ecosystem before scaling internationally.",
+      "phase1": {
+        "phase": "Phase 1 • Q1-Q2 2026",
+        "title": "Suomi.fi & Public Register Deep Sync",
+        "description": "Direct integration with Suomi.fi-tunnistus (Finnish Bank ID / Mobile ID) for automated digital identity verification, plus automated Vero tax card calculation and DVV address sync."
+      },
+      "phase2": {
+        "phase": "Phase 2 • Q2-Q3 2026",
+        "title": "AI Legal & Integration Copilot",
+        "description": "A specialized RAG-powered AI advisor trained on Finnish labor laws, collective agreements (TES), and tenancy regulations to provide 24/7 legal guidance in expats' native languages."
+      },
+      "phase3": {
+        "phase": "Phase 3 • Q3-Q4 2026",
+        "title": "Nationwide B2B Employer Portal",
+        "description": "A complete enterprise dashboard for Finnish companies to manage international relocations, track visa progress, and collaborate seamlessly with municipal integration houses."
+      },
+      "phase4": {
+        "phase": "Phase 4 • 2027+",
+        "title": "Pan-European Civic Export",
+        "description": "Adapting and scaling our proven Finnish civic-tech blueprint to Sweden, Germany, Estonia, and across the EU under European interoperability and digital governance standards."
+      }
+    },
+    "vision": {
+      "badge": "Strategic Perspectives",
+      "title": "Long-Term Vision & Impact",
+      "subtitle": "Solving structural challenges today to build resilient, innovative societies for tomorrow.",
+      "point1": {
+        "title": "Closing the National Talent Deficit",
+        "description": "Ensuring Finland's economic vitality and tech leadership by transforming talent attraction from an administrative hurdle into a competitive national advantage."
+      },
+      "point2": {
+        "title": "Sustainable Integration & High-Trust Inclusion",
+        "description": "Lowering expat turnover, accelerating social belonging, and ensuring international specialists build fulfilling, long-term lives in Finnish communities."
+      },
+      "point3": {
+        "title": "A Prime European Civic-Tech Standard",
+        "description": "Proving our model in Europe's most digitally mature public sector to create an exportable standard for municipal digital integration across the continent."
+      }
+    },
+    "team": {
+      "badge": "Leadership & Foundations",
+      "title": "Built with Vision & Technical Rigor",
+      "description": "Expat was created by engineers and civic-tech leaders dedicated to making Finland the world's most accessible, welcoming, and productive destination for global talent.",
+      "stan": {
+        "name": "Stan Efimov",
+        "role": "Co-Founder & Engineering Lead"
+      },
+      "vitaly": {
+        "name": "Vitaly Brazhnikov",
+        "role": "Co-Founder & System Architect"
+      },
+      "jens": {
+        "name": "Jens Brännback",
+        "role": "Chief Executive Officer"
+      }
+    },
+    "cta": {
+      "title": "Ready to Explore the Platform?",
+      "subtitle": "Discover our active modules, explore relocation guides, and connect with expat-friendly employers across Finland.",
+      "guideBtn": "Relocation Guide",
+      "companiesBtn": "Explore Companies",
+      "communityBtn": "Join Community"
+    }
   }
 } 

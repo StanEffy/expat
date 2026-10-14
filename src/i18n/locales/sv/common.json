@@ -376,5 +376,126 @@
       "passwordTooShort": "Lösenordet måste vara minst 8 tecken långt",
       "passwordsDontMatch": "Lösenorden matchar inte"
     }
+  },
+  "aboutPage": {
+    "badge": "Civic-Tech-infrastruktur • Finland First-strategi",
+    "hero": {
+      "title": "Om Expat-plattformen",
+      "subtitle": "Den heltäckande civic-tech-plattformen som förenar internationella talanger, innovativa arbetsgivare och finländska kommuner för att påskynda integration, avskaffa byråkrati och främja tillväxt."
+    },
+    "metrics": {
+      "talentDeficit": "20 000+",
+      "talentDeficitLabel": "Årlig brist på IKT- och teknikspecialister i Finland",
+      "gdpPotential": "€3,2 mdr",
+      "gdpPotentialLabel": "Orealiserad BNP-potential som frigörs genom talangretention",
+      "onboardingSpeed": "14 dagar",
+      "onboardingSpeedLabel": "Måltid för etablering och inflyttning (vs. 6 månader normalt)",
+      "taxContribution": "€25k – €35k",
+      "taxContributionLabel": "Årlig kommunal skatteintäkt per behållen specialist"
+    },
+    "mission": {
+      "badge": "Vårt uppdrag",
+      "title": "Vad Expat-plattformen gör",
+      "description": "Finland erbjuder innovation i världsklass, trygghet och hög livskvalitet, men internationella specialister möter splittrad byråkrati kring registrering, skatter och boende. Samtidigt råder akut brist på specialistkompetens bland finska företag. Expat minskar friktionen genom att koppla samman talang, näringsliv och kommuner i ett integrerat digitalt ekosystem.",
+      "talentCard": {
+        "title": "För internationella specialister",
+        "description": "En enhetlig digital guide för flytt, etablering, karriärmöjligheter, kontakt med myndigheter (DVV, Skatt, FPA) och deltagande i lokalsamhället."
+      },
+      "companyCard": {
+        "title": "För finska arbetsgivare",
+        "description": "Direkt tillgång till verifierade internationella kandidater, CV-profiler enligt nordisk STAR-modell och smidiga relokeringsverktyg."
+      },
+      "municipalityCard": {
+        "title": "För kommuner och offentlig sektor",
+        "description": "Realtidsdata över integrationsprocesser, demografiska insikter och automatiserad hantering av invånarnas serviceförfrågningar."
+      }
+    },
+    "offerings": {
+      "badge": "Aktuella funktioner",
+      "title": "Vad vi erbjuder idag",
+      "subtitle": "Ett fullt fungerande civic-tech-ekosystem med aktiva produktionsmoduler i Finlands ledande städer.",
+      "onboarding": {
+        "title": "Relokerings- och etableringsguide",
+        "description": "Stadsspecifika checklistor i fyra steg: från planering före ankomst till långsiktig integration. Vägledning för DVV, skattekort, FPA, bank och skolor."
+      },
+      "careers": {
+        "title": "Karriär och talangmatchning",
+        "description": "Register över expatvänliga företag med filtrering på tech-stack och engelskspråkig arbetskultur, samt Nordic STAR CV-byggare anpassad för Norden."
+      },
+      "civic": {
+        "title": "Medborgardeltagande och medborgarbudget",
+        "description": "Direkt deltagande i stadsutveckling genom medborgarbudgetering (Osallistuva budjetointi) med virtuella röstningstokens, enkäter och mentorskap."
+      },
+      "analytics": {
+        "title": "Kommunala förfrågningar och B2G-analys",
+        "description": "Direkt ärendehantering för kontakt med kommunala enheter och analyspanel för beslutsfattare rörande integrationstakt och servicebehov."
+      }
+    },
+    "roadmap": {
+      "badge": "Utvecklingsplan",
+      "title": "Vad vi gör härnäst",
+      "subtitle": "Strategisk expansionsplan: befästa ledarskapet i Finland före internationell expansion.",
+      "phase1": {
+        "phase": "Fas 1 • Q1-Q2 2026",
+        "title": "Djupintegration med Suomi.fi, Skatt och DVV",
+        "description": "Stöd för Suomi.fi-identifikation (bank-ID och mobilcertifikat) för verifierad inloggning samt automatiserat skattekort och adressynkronisering via API."
+      },
+      "phase2": {
+        "phase": "Fas 2 • Q2-Q3 2026",
+        "title": "AI-assistent för juridik och integration",
+        "description": "Specialiserad RAG-baserad AI-rådgivare tränad på finsk arbetsrätt, kollektivavtal (TES) och hyresregler med flerspråkig support dygnet runt."
+      },
+      "phase3": {
+        "phase": "Fas 3 • Q3-Q4 2026",
+        "title": "Nationell B2B-arbetsgivarportal",
+        "description": "En helhetsplattform för finska företag att hantera internationell rekrytering, visumprocesser och samarbete med International House."
+      },
+      "phase4": {
+        "phase": "Fas 4 • 2027+",
+        "title": "Paneuropeisk export av Civic-Tech",
+        "description": "Skalning av den beprövade finländska modellen till Sverige, Tyskland, Estland och övriga EU enligt europeiska samverkansstandarder."
+      }
+    },
+    "vision": {
+      "badge": "Strategiska perspektiv",
+      "title": "Långsiktig vision och påverkan",
+      "subtitle": "Vi löser strukturella utmaningar idag för att bygga ett motståndskraftigt och innovativt samhälle imorgon.",
+      "point1": {
+        "title": "Överbrygga det nationella talangunderskottet",
+        "description": "Säkra Finlands ekonomiska konkurrenskraft och innovationsförmåga genom att göra talangattraktion till en nationell fördel."
+      },
+      "point2": {
+        "title": "Hållbar integration och starkt förtroende",
+        "description": "Minska omsättningen av specialister, stärka social sammanhållning och främja långsiktig trivsel för internationella familjer."
+      },
+      "point3": {
+        "title": "En ledande europeisk Civic-Tech-standard",
+        "description": "Validering i Europas mest digitalt mogna offentliga sektor för att skapa en exportfärdig standard för hela Europeiska unionen."
+      }
+    },
+    "team": {
+      "badge": "Ledning och grundare",
+      "title": "Skapad med vision och teknisk precision",
+      "description": "Expat grundades av ingenjörer och civic-tech-ledare med målet att göra Finland till världens mest välkomnande och smidiga destination för globala talanger.",
+      "stan": {
+        "name": "Stan Efimov",
+        "role": "Co-Founder & Engineering Lead"
+      },
+      "vitaly": {
+        "name": "Vitaly Brazhnikov",
+        "role": "Co-Founder & System Architect"
+      },
+      "jens": {
+        "name": "Jens Brännback",
+        "role": "Chief Executive Officer"
+      }
+    },
+    "cta": {
+      "title": "Redo att upptäcka ekosystemet?",
+      "subtitle": "Utforska våra moduler, ta del av relokeringsguider och hitta karriärmöjligheter i finska toppföretag.",
+      "guideBtn": "Relokeringsguide",
+      "companiesBtn": "Utforska företag",
+      "communityBtn": "Gemenskap"
+    }
   }
 } 

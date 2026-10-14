@@ -376,5 +376,126 @@
       "passwordTooShort": "Salasanan on oltava vähintään 8 merkkiä",
       "passwordsDontMatch": "Salasanat eivät täsmää"
     }
+  },
+  "aboutPage": {
+    "badge": "Civic-Tech-infrastruktuuri • Finland First -strategia",
+    "hero": {
+      "title": "Tietoa Expat-alustasta",
+      "subtitle": "Kokonaisvaltainen civic-tech-alusta, joka yhdistää kansainväliset osaajat, työnantajat ja Suomen kunnat nopeuttaakseen kotoutumista, poistaakseen byrokratiaa ja edistääkseen talouskasvua."
+    },
+    "metrics": {
+      "talentDeficit": "20 000+",
+      "talentDeficitLabel": "Vuotuinen ICT- ja teknologiaosaajien vaje Suomessa",
+      "gdpPotential": "€3,2 mrd",
+      "gdpPotentialLabel": "Toteutumaton BKT-potentiaali, joka vapautuu osaajien pidon myötä",
+      "onboardingSpeed": "14 päivää",
+      "onboardingSpeedLabel": "Tavoiteaika asettautumiselle ja kotoutumiselle (vs. 6 kk nykytila)",
+      "taxContribution": "€25k – €35k",
+      "taxContributionLabel": "Vuotuinen kunnallisverokertymä per säilytetty asiantuntija"
+    },
+    "mission": {
+      "badge": "Missiomme",
+      "title": "Mitä Expat-alusta tekee",
+      "description": "Suomi tarjoaa maailmanluokan innovaatioita, turvallisuutta ja korkeaa elämänlaatua, mutta maahan muuttavat kansainväliset osaajat kohtaavat hajanaista byrokratiaa rekisteröinnissä, verotuksessa ja asumisessa. Samalla suomalaiset yritykset kärsivät osaajapulasta. Expat-alusta poistaa kitkaa yhdistämällä osaajat, työnantajat ja kunnat saumattomaksi digitaaliseksi ekosysteemiksi.",
+      "talentCard": {
+        "title": "Kansainvälisille osaajille",
+        "description": "Yhtenäinen digitaalinen opas muuttoon, asettautumiseen, työnhakuun, viranomaisasiointiin (DVV, Vero, Kela) ja kunnalliseen osallistumiseen."
+      },
+      "companyCard": {
+        "title": "Suomalaisille työnantajille",
+        "description": "Suora yhteys vahvistettuihin kansainvälisiin asiantuntijoihin, pohjoismaisen STAR-mallin mukaiset ansioluettelot ja sujuvat relokaatiotyökalut."
+      },
+      "municipalityCard": {
+        "title": "Kunnille ja julkishallinnolle",
+        "description": "Reaaliaikaiset kotoutumisen mittarit, osaajien demografiatiedot ja automatisoitu palvelupyyntöjen reititys kaupungeille."
+      }
+    },
+    "offerings": {
+      "badge": "Nykyinen toiminnallisuus",
+      "title": "Mitä tarjoamme tänään",
+      "subtitle": "Täysin toiminnallinen civic-tech-ekosysteemi, jonka aktiiviset tuotantomoduulit palvelevat Suomen keskeisiä kaupunkeja.",
+      "onboarding": {
+        "title": "Relokaatio- ja asettautumisopas",
+        "description": "Kaupungeittain räätälöidyt muuttomuistilistat neljässä vaiheessa: valmistautumisesta pitkäaikaiseen kotoutumiseen. Ohjeet DVV:hen, verokorttiin, Kelaan, pankkipalveluihin ja kouluihin."
+      },
+      "careers": {
+        "title": "Ura ja työnantajamatchaus",
+        "description": "Kansainvälisille osaajille soveltuvien työnantajien hakemisto teknologiapinon ja englanninkielisen työkulttuurin mukaan suodatettuna sekä Nordic STAR -ansioluettelotyökalu."
+      },
+      "civic": {
+        "title": "Kansalaisosallistuminen ja osallistuva budjetointi",
+        "description": "Suoraa demokratiaa osallistuvan budjetoinnin kautta virtuaalitokeneilla, asukaskyselyt, kielikahvilat, kulttuuritapahtumat ja mentoriverkosto."
+      },
+      "analytics": {
+        "title": "Kuntien palvelupyynnöt ja B2G-analytiikka",
+        "description": "Suora yhteydenottokanava kaupunkien palveluihin tilaseurannalla sekä kaupunginjohdon analytiikkanäkymä kotoutumisen nopeudesta ja palvelutarpeista."
+      }
+    },
+    "roadmap": {
+      "badge": "Kehityspolku",
+      "title": "Mitä teemme seuraavaksi",
+      "subtitle": "Strateginen etenemissuunnitelma: Suomen ekosysteemin vakiinnuttaminen ennen kansainvälistä laajentumista.",
+      "phase1": {
+        "phase": "Vaihe 1 • Q1-Q2 2026",
+        "title": "Suomi.fi-, Vero- ja DVV-syväintegraatio",
+        "description": "Suomi.fi-tunnistuksen (pankkitunnukset ja mobiilivarmenne) integrointi digitaaliseen tunnistautumiseen sekä Verohallinnon ja DVV:n rajapintojen automaattisynkronointi."
+      },
+      "phase2": {
+        "phase": "Vaihe 2 • Q2-Q3 2026",
+        "title": "Tekoälypohjainen laki- ja kotoutumisapuri",
+        "description": "RAG-arkkitehtuuriin perustuva tekoälyneuvoja, joka tuntee Suomen työlainsäädännön, työehtosopimukset (TES) ja vuokralainsäädännön, tarjoten tukea 24/7 omalla kielellä."
+      },
+      "phase3": {
+        "phase": "Vaihe 3 • Q3-Q4 2026",
+        "title": "Valtakunnallinen B2B-rekrytointiportaali",
+        "description": "Kokonaisvaltainen yritysnäkymä kansainvälisten rekrytointien, relokaatioprosessien ja viisumivaiheiden hallintaan yhteistyössä International House -verkoston kanssa."
+      },
+      "phase4": {
+        "phase": "Vaihe 4 • 2027+",
+        "title": "Civic-tech-mallin eurooppalainen vienti",
+        "description": "Suomessa testatun civic-tech-mallin laajentaminen Ruotsiin, Saksaan, Viroon ja muualle EU:hun eurooppalaisten yhteentoimivuusstandardien mukaisesti."
+      }
+    },
+    "vision": {
+      "badge": "Strategiset näkymät",
+      "title": "Pitkän aikavälin visio ja vaikuttavuus",
+      "subtitle": "Ratkaisemme rakenteellisia haasteita tänään rakentaaksemme kestävää ja innovatiivista huomista.",
+      "point1": {
+        "title": "Kansallisen osaajavajeen ratkaiseminen",
+        "description": "Suomen taloudellisen elinvoiman ja teknologiajohtajuuden turvaaminen muuttamalla osaajahaku hallinnollisesta esteestä kansalliseksi kilpailueduksi."
+      },
+      "point2": {
+        "title": "Kestävä kotoutuminen ja korkea luottamus",
+        "description": "Osaajien vaihtuvuuden vähentäminen, sosiaalisen yhteenkuuluvuuden vahvistaminen ja asiantuntijoiden pysyvän asettautumisen tukeminen."
+      },
+      "point3": {
+        "title": "Eurooppalainen Civic-Tech-huippustandardi",
+        "description": "Mallin todentaminen Euroopan digitaalisesti edistyneimmässä julkishallinnossa vientikelpoisen ratkaisun luomiseksi koko EU-alueelle."
+      }
+    },
+    "team": {
+      "badge": "Tiimi ja perustajat",
+      "title": "Rakennettu näkemyksellä ja teknisellä tarkkuudella",
+      "description": "Expatin perustivat insinöörit ja civic-tech-vaikuttajat, joiden tavoitteena on tehdä Suomesta maailman vastaanottavaisin ja toimivin kohde kansainvälisille osaajille.",
+      "stan": {
+        "name": "Stan Efimov",
+        "role": "Co-Founder & Engineering Lead"
+      },
+      "vitaly": {
+        "name": "Vitaly Brazhnikov",
+        "role": "Co-Founder & System Architect"
+      },
+      "jens": {
+        "name": "Jens Brännback",
+        "role": "Chief Executive Officer"
+      }
+    },
+    "cta": {
+      "title": "Valmis tutustumaan alustaan?",
+      "subtitle": "Kokeile aktiivisia moduulejamme, tutustu relokaatio-oppaisiin ja löydä työpaikkoja Suomen huippuyrityksistä.",
+      "guideBtn": "Relokaatio-opas",
+      "companiesBtn": "Selaa yrityksiä",
+      "communityBtn": "Yhteisö"
+    }
   }
 } 

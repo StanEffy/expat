@@ -1,0 +1,67 @@
+{
+  "title": "Team Up",
+  "subtitle": "Find people to build something with: a café, a studio, a service or a startup. Start by answering a few questions about how you like to work.",
+  "hint": "There are no right answers. Partners who see money, time and risk the same way argue less.",
+  "tabs": {
+    "questions": "Questions",
+    "matches": "Matches"
+  },
+  "progress": "{{answered}} of {{total}} answered",
+  "categories": {
+    "commitment": "Commitment",
+    "growth": "Ambition",
+    "money": "Money",
+    "risk": "Risk",
+    "decisions": "Decisions",
+    "work_style": "Work style",
+    "values": "Values"
+  },
+  "question": {
+    "yourAnswer": "Your answer",
+    "acceptable": "Answers you accept from a partner",
+    "acceptableHint": "Pick everything that works for you",
+    "importance": "How important is this to you?",
+    "save": "Save",
+    "skip": "Skip",
+    "edit": "Change",
+    "clear": "Remove answer",
+    "cancel": "Cancel"
+  },
+  "importance": {
+    "0": "Irrelevant",
+    "1": "A little",
+    "2": "Somewhat",
+    "3": "Very",
+    "4": "Must-have"
+  },
+  "done": {
+    "title": "All questions answered!",
+    "text": "Check your matches. You can change any answer below at any time."
+  },
+  "answered": {
+    "title": "Your answers"
+  },
+  "matching": {
+    "title": "Matching",
+    "description": "When matching is on, others who also turned it on see your name and how well you match. Your individual answers are never shown to anyone.",
+    "enable": "Turn on matching",
+    "disable": "Turn off matching",
+    "on": "Matching is on"
+  },
+  "matches": {
+    "empty": "No matches yet. You need at least 3 answered questions in common with someone, so answer a few more.",
+    "disabledTitle": "Matching is off",
+    "disabledText": "Turn on matching to see who you could build something with.",
+    "common": "{{count}} questions in common",
+    "agree": "You agree on",
+    "differ": "Worth talking about",
+    "dealbreaker": "Has a must-have mismatch",
+    "refresh": "Refresh",
+    "loading": "Looking for your people..."
+  },
+  "errors": {
+    "load": "Could not load questions. Please try again later.",
+    "save": "Could not save the answer",
+    "matching": "Could not update matching settings"
+  }
+}

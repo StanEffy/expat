@@ -24,6 +24,7 @@ const Header = () => {
   const isCompaniesActive = location.pathname.startsWith("/companies") || location.pathname === "/categories";
   const isShopActive = location.pathname.startsWith("/shop");
   const isPollsActive = location.pathname.startsWith("/polls");
+  const isCooperateActive = location.pathname.startsWith("/cooperate");
   const isOnboardingActive = location.pathname.startsWith("/onboarding");
   const isBudgetingActive = location.pathname.startsWith("/participatory-budget");
   const isServiceRequestsActive = location.pathname.startsWith("/service-requests");
@@ -194,6 +195,13 @@ const Header = () => {
           icon="pi pi-shopping-bag"
           onClick={() => navigate("/shop")}
           className={`${styles.navButton} ${isShopActive ? styles.active : ''}`}
+        />
+        <Button
+          label={t("navigation.cooperate")}
+          text
+          icon="pi pi-sparkles"
+          onClick={() => navigate("/cooperate")}
+          className={`${styles.navButton} ${isCooperateActive ? styles.active : ''}`}
         />
         <Button
           label={t("navigation.polls")}

@@ -5,3 +5,4 @@ export * from './favouriteService';
 export * from './notificationService';
 export * from './pollService';
 export * from './adminService';
+export * from './coopService';

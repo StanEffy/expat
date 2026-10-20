@@ -31,6 +31,7 @@ const MunicipalDashboard = lazyWithRetry(() => import('@/pages/MunicipalDashboar
 const ParticipatoryBudget = lazyWithRetry(() => import('@/pages/ParticipatoryBudget'));
 const ServiceRequests = lazyWithRetry(() => import('@/pages/ServiceRequests'));
 const Community = lazyWithRetry(() => import('@/pages/Community'));
+const Cooperate = lazyWithRetry(() => import('@/pages/Cooperate'));
 const NotFound = lazyWithRetry(() => import('@/pages/NotFound'));
 
 const LoadingScreen = () => (
@@ -67,6 +68,7 @@ function App() {
                 <Route path="companies/:id" element={<CompanyDetails />} />
                 <Route path="polls" element={<Polls />} />
                 <Route path="polls/:id" element={<PollDetail />} />
+                <Route path="cooperate" element={<Cooperate />} />
                 <Route path="profile" element={<Profile />} />
                 <Route path="profile/resume-builder" element={<ResumeBuilder />} />
               </Route>

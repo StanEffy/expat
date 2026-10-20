@@ -168,6 +168,13 @@ export const SKILL_ENDPOINTS = {
   LIST: `${API_BASE_URL}/api/skills`,
 };
 
+export const COOP_ENDPOINTS = {
+  QUESTIONS: `${API_BASE_URL}/api/coop/questions`,
+  ANSWER: (questionId: number | string) => `${API_BASE_URL}/api/coop/questions/${questionId}/answer`,
+  PROFILE: `${API_BASE_URL}/api/coop/profile`,
+  MATCHES: `${API_BASE_URL}/api/coop/matches`,
+};
+
 // Storage Keys
 export const STORAGE_KEYS = {
   AUTH_TOKEN: "token",

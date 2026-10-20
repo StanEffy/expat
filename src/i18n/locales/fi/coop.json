@@ -1,0 +1,67 @@
+{
+  "title": "Yhteistyö",
+  "subtitle": "Löydä ihmisiä, joiden kanssa rakentaa jotain: kahvila, studio, palvelu tai startup. Aloita vastaamalla muutamaan kysymykseen siitä, miten tykkäät tehdä töitä.",
+  "hint": "Oikeita vastauksia ei ole. Kumppanit, jotka näkevät rahan, ajan ja riskin samalla tavalla, riitelevät vähemmän.",
+  "tabs": {
+    "questions": "Kysymykset",
+    "matches": "Osumat"
+  },
+  "progress": "{{answered}}/{{total}} vastattu",
+  "categories": {
+    "commitment": "Sitoutuminen",
+    "growth": "Kunnianhimo",
+    "money": "Raha",
+    "risk": "Riski",
+    "decisions": "Päätökset",
+    "work_style": "Työtapa",
+    "values": "Arvot"
+  },
+  "question": {
+    "yourAnswer": "Sinun vastauksesi",
+    "acceptable": "Kumppanin vastaukset, jotka hyväksyt",
+    "acceptableHint": "Valitse kaikki, jotka sopivat sinulle",
+    "importance": "Kuinka tärkeää tämä on sinulle?",
+    "save": "Tallenna",
+    "skip": "Ohita",
+    "edit": "Muuta",
+    "clear": "Poista vastaus",
+    "cancel": "Peruuta"
+  },
+  "importance": {
+    "0": "Ei merkitystä",
+    "1": "Vähän",
+    "2": "Jonkin verran",
+    "3": "Hyvin",
+    "4": "Ehdoton"
+  },
+  "done": {
+    "title": "Kaikkiin kysymyksiin vastattu!",
+    "text": "Katso osumasi. Voit muuttaa mitä tahansa vastausta alla milloin vain."
+  },
+  "answered": {
+    "title": "Vastauksesi"
+  },
+  "matching": {
+    "title": "Kumppanihaku",
+    "description": "Kun haku on päällä, muut sen päälle kytkeneet näkevät nimesi ja yhteensopivuutenne. Yksittäisiä vastauksiasi ei näytetä kenellekään.",
+    "enable": "Kytke haku päälle",
+    "disable": "Kytke haku pois",
+    "on": "Haku on päällä"
+  },
+  "matches": {
+    "empty": "Ei vielä osumia. Tarvitset vähintään 3 yhteistä vastattua kysymystä jonkun kanssa, joten vastaa vielä muutamaan.",
+    "disabledTitle": "Haku on pois päältä",
+    "disabledText": "Kytke haku päälle nähdäksesi, kenen kanssa voisit rakentaa jotain.",
+    "common": "{{count}} yhteistä kysymystä",
+    "agree": "Olette samaa mieltä",
+    "differ": "Kannattaa keskustella",
+    "dealbreaker": "Ehdoton ristiriita",
+    "refresh": "Päivitä",
+    "loading": "Etsitään sinun ihmisiäsi..."
+  },
+  "errors": {
+    "load": "Kysymysten lataus epäonnistui. Yritä myöhemmin uudelleen.",
+    "save": "Vastauksen tallennus epäonnistui",
+    "matching": "Hakuasetusten muuttaminen epäonnistui"
+  }
+}

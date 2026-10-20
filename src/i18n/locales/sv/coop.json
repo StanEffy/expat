@@ -1,0 +1,67 @@
+{
+  "title": "Samarbete",
+  "subtitle": "Hitta människor att bygga något med: ett kafé, en studio, en tjänst eller en startup. Börja med att svara på några frågor om hur du gillar att jobba.",
+  "hint": "Det finns inga rätta svar. Partner som ser likadant på pengar, tid och risk bråkar mindre.",
+  "tabs": {
+    "questions": "Frågor",
+    "matches": "Matchningar"
+  },
+  "progress": "{{answered}} av {{total}} besvarade",
+  "categories": {
+    "commitment": "Engagemang",
+    "growth": "Ambition",
+    "money": "Pengar",
+    "risk": "Risk",
+    "decisions": "Beslut",
+    "work_style": "Arbetssätt",
+    "values": "Värderingar"
+  },
+  "question": {
+    "yourAnswer": "Ditt svar",
+    "acceptable": "Svar du accepterar från en partner",
+    "acceptableHint": "Välj allt som fungerar för dig",
+    "importance": "Hur viktigt är det här för dig?",
+    "save": "Spara",
+    "skip": "Hoppa över",
+    "edit": "Ändra",
+    "clear": "Ta bort svar",
+    "cancel": "Avbryt"
+  },
+  "importance": {
+    "0": "Oviktigt",
+    "1": "Lite",
+    "2": "Ganska",
+    "3": "Mycket",
+    "4": "Ett måste"
+  },
+  "done": {
+    "title": "Alla frågor besvarade!",
+    "text": "Kolla dina matchningar. Du kan ändra vilket svar som helst nedan när du vill."
+  },
+  "answered": {
+    "title": "Dina svar"
+  },
+  "matching": {
+    "title": "Matchning",
+    "description": "När matchning är på ser andra som också har slagit på den ditt namn och hur väl ni matchar. Dina enskilda svar visas aldrig för någon.",
+    "enable": "Slå på matchning",
+    "disable": "Slå av matchning",
+    "on": "Matchning är på"
+  },
+  "matches": {
+    "empty": "Inga matchningar än. Du behöver minst 3 besvarade frågor gemensamt med någon, så svara på några till.",
+    "disabledTitle": "Matchning är av",
+    "disabledText": "Slå på matchning för att se vem du kan bygga något med.",
+    "common": "{{count}} gemensamma frågor",
+    "agree": "Ni är överens om",
+    "differ": "Värt att prata om",
+    "dealbreaker": "Krock i ett måste",
+    "refresh": "Uppdatera",
+    "loading": "Letar efter dina människor..."
+  },
+  "errors": {
+    "load": "Kunde inte ladda frågorna. Försök igen senare.",
+    "save": "Kunde inte spara svaret",
+    "matching": "Kunde inte ändra matchningsinställningarna"
+  }
+}

@@ -1,0 +1,110 @@
+@use "../../styles/variables" as *;
+
+.card {
+  background: linear-gradient(165deg, rgba(34, 16, 50, 0.88) 0%, rgba(20, 10, 32, 0.94) 100%);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 18px;
+  padding: 1.5rem;
+  color: #ffffff;
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover {
+    border-color: rgba(207, 91, 175, 0.55);
+    transform: translateY(-2px);
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.score {
+  --score: 0%;
+  flex-shrink: 0;
+  width: 4.5rem;
+  height: 4.5rem;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: conic-gradient(#cf5baf var(--score), rgba(255, 255, 255, 0.1) 0);
+
+  span {
+    width: 3.7rem;
+    height: 3.7rem;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-weight: 800;
+    font-size: 1.05rem;
+    background: rgb(26, 12, 40);
+  }
+}
+
+.identity {
+  min-width: 0;
+}
+
+.name {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.meta {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0.2rem 0 0;
+}
+
+.dealbreaker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-top: 0.4rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #fdc08f;
+}
+
+.reasons {
+  margin-top: 0.85rem;
+
+  ul {
+    margin: 0;
+    padding-left: 1.1rem;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.82);
+    line-height: 1.45;
+  }
+
+  li + li {
+    margin-top: 0.25rem;
+  }
+}
+
+.reasonsTitle {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #8ff0c8;
+  margin: 0 0 0.4rem;
+}
+
+.conflicts .reasonsTitle {
+  color: #fdc08f;
+}

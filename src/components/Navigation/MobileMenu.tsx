@@ -105,6 +105,7 @@ const MobileMenu = () => {
   const isCommunityActive = location.pathname.startsWith("/community");
   const isShopActive = location.pathname.startsWith("/shop");
   const isPollsActive = location.pathname.startsWith("/polls");
+  const isCooperateActive = location.pathname.startsWith("/cooperate");
   const isMunicipalAnalyticsActive = location.pathname.startsWith("/municipal-dashboard");
   const isAboutActive = location.pathname === "/about";
   const isProfileActive = location.pathname.startsWith("/profile") || location.pathname.startsWith("/admin");
@@ -160,6 +161,12 @@ const MobileMenu = () => {
       icon: "pi pi-shopping-bag",
       className: isShopActive ? "active-menuitem" : "",
       command: () => handleNavigation("/shop"),
+    },
+    {
+      label: t("navigation.cooperate"),
+      icon: "pi pi-sparkles",
+      className: isCooperateActive ? "active-menuitem" : "",
+      command: () => handleNavigation("/cooperate"),
     },
     {
       label: t("navigation.polls"),

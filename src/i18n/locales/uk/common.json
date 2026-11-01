@@ -29,8 +29,10 @@
       "integration": "Мапа освоєння",
       "ventures": "Мої компанії",
       "passport": "Паспорт навичок",
-      "impact": "Вимірюваний ефект"
-    }
+      "impact": "Вимірюваний ефект",
+      "meetups": "Відкриті зустрічі"
+    },
+    "logout": "Вийти"
   },
   "company": {
     "information": "Інформація про компанію",
@@ -77,7 +79,11 @@
     "updating": "Оновлення...",
     "all": "Всі",
     "refresh": "Оновити",
-    "optional": "Необов'язково"
+    "optional": "Необов'язково",
+    "save": "Зберегти",
+    "saving": "Зберігаємо…",
+    "notFoundTitle": "Сторінку не знайдено",
+    "notFoundDescription": "Можливо, сторінку видалили, перейменували або вона тимчасово недоступна."
   },
   "home": {
     "welcome": "Ласкаво просимо в Expat App",
@@ -119,7 +125,9 @@
     "addToFavourites": "Додати до обраного",
     "removeFromFavourites": "Видалити з обраного",
     "addedToFavourites": "Додано до обраного",
-    "removedFromFavourites": "Видалено з обраного"
+    "removedFromFavourites": "Видалено з обраного",
+    "subtitle": "Компанії, які ти додав у закладки.",
+    "emptyHint": "Переглянь каталог і додай компанії в закладки, щоб стежити за новинами та вакансіями."
   },
   "notifications": {
     "title": "Сповіщення",
@@ -131,7 +139,9 @@
     "read": "Прочитано",
     "unread": "Не прочитано",
     "descriptionUpdated": "Опис компанії було оновлено",
-    "recruitmentPageUpdated": "Сторінку рекрутингу було оновлено"
+    "recruitmentPageUpdated": "Сторінку рекрутингу було оновлено",
+    "subtitle": "Новини компаній, за якими ти стежиш.",
+    "allCaughtUp": "Нових сповіщень немає. Тут з'являться новини компаній із закладок."
   },
   "profile": {
     "userInformation": "Інформація про користувача",
@@ -159,7 +169,32 @@
       "nameRequired": "Skill name is required",
       "fetchError": "Failed to load available skills",
       "saveSuccess": "Skills updated successfully",
-      "saveError": "Failed to update skills"
+      "saveError": "Failed to update skills",
+      "addNew": "Додати навичку",
+      "addFirst": "Додати першу навичку",
+      "emptyPrompt": "Скористайтеся формою вище, щоб додати першу навичку.",
+      "levelFormat": "Рівень {{level}}",
+      "nameLabel": "Навичка або професія",
+      "scaleLabel": "Шкала:"
+    },
+    "editProfile": "Редагувати профіль",
+    "emailRequired": "Вкажи email",
+    "nameRequired": "Вкажи ім'я",
+    "emailVerified": "Email підтверджено",
+    "notVerified": "Email не підтверджено",
+    "fullName": "Повне ім'я",
+    "secondName": "Прізвище",
+    "username": "Ім'я користувача",
+    "usernameNotice": "Ім'я користувача змінити не можна",
+    "profileUpdated": "Профіль оновлено",
+    "profileUpdateFailed": "Не вдалося оновити профіль",
+    "resumeSubtitle": "Завантаж своє резюме або створи нове за методом STAR.",
+    "chooseFile": "Вибрати файл",
+    "startBuilder": "Відкрити конструктор резюме",
+    "tabs": {
+      "overview": "Огляд",
+      "favourites": "Обране",
+      "notifications": "Сповіщення"
     }
   },
   "shop": {
@@ -546,5 +581,11 @@
       "companiesBtn": "Каталог компаній",
       "communityBtn": "Спільнота"
     }
+  },
+  "notificationTitles": {
+    "success": "Готово",
+    "error": "Помилка",
+    "warning": "Увага",
+    "info": "До відома"
   }
 }

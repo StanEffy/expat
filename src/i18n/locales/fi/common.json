@@ -29,8 +29,10 @@
       "integration": "Kotoutumiskartta",
       "ventures": "Yritykseni",
       "passport": "Taitopassi",
-      "impact": "Mitattu vaikutus"
-    }
+      "impact": "Mitattu vaikutus",
+      "meetups": "Avoimet tapaamiset"
+    },
+    "logout": "Kirjaudu ulos"
   },
   "company": {
     "information": "Yrityksen tiedot",
@@ -77,7 +79,11 @@
     "updating": "Päivitetään...",
     "all": "Kaikki",
     "refresh": "Päivitä",
-    "optional": "Valinnainen"
+    "optional": "Valinnainen",
+    "save": "Tallenna",
+    "saving": "Tallennetaan…",
+    "notFoundTitle": "Sivua ei löytynyt",
+    "notFoundDescription": "Hakemasi sivu on ehkä poistettu, nimetty uudelleen tai tilapäisesti poissa käytöstä."
   },
   "home": {
     "welcome": "Tervetuloa Expat Appille",
@@ -119,7 +125,9 @@
     "addToFavourites": "Lisää suosikkeihin",
     "removeFromFavourites": "Poista suosikeista",
     "addedToFavourites": "Lisätty suosikkeihin",
-    "removedFromFavourites": "Poistettu suosikeista"
+    "removedFromFavourites": "Poistettu suosikeista",
+    "subtitle": "Kirjanmerkkeihin lisäämäsi yritykset.",
+    "emptyHint": "Selaa luetteloa ja lisää yrityksiä kirjanmerkkeihin seurataksesi niiden uutisia ja avoimia työpaikkoja."
   },
   "notifications": {
     "title": "Ilmoitukset",
@@ -131,7 +139,9 @@
     "read": "Luettu",
     "unread": "Lukematon",
     "descriptionUpdated": "Yrityksen kuvaus päivitettiin",
-    "recruitmentPageUpdated": "Rekrytointisivu päivitettiin"
+    "recruitmentPageUpdated": "Rekrytointisivu päivitettiin",
+    "subtitle": "Seuraamiesi yritysten päivitykset.",
+    "allCaughtUp": "Ei uusia ilmoituksia. Kirjanmerkkiyritysten päivitykset näkyvät täällä."
   },
   "profile": {
     "userInformation": "Käyttäjätiedot",
@@ -159,7 +169,32 @@
       "nameRequired": "Skill name is required",
       "fetchError": "Failed to load available skills",
       "saveSuccess": "Skills updated successfully",
-      "saveError": "Failed to update skills"
+      "saveError": "Failed to update skills",
+      "addNew": "Lisää uusi taito",
+      "addFirst": "Lisää ensimmäinen taitosi",
+      "emptyPrompt": "Lisää ensimmäinen taitosi yllä olevalla lomakkeella.",
+      "levelFormat": "Taso {{level}}",
+      "nameLabel": "Taito tai ammatti",
+      "scaleLabel": "Asteikko:"
+    },
+    "editProfile": "Muokkaa profiilia",
+    "emailRequired": "Sähköposti on pakollinen",
+    "nameRequired": "Nimi on pakollinen",
+    "emailVerified": "Sähköposti vahvistettu",
+    "notVerified": "Sähköpostia ei ole vahvistettu",
+    "fullName": "Koko nimi",
+    "secondName": "Sukunimi",
+    "username": "Käyttäjätunnus",
+    "usernameNotice": "Käyttäjätunnusta ei voi muuttaa",
+    "profileUpdated": "Profiili päivitetty",
+    "profileUpdateFailed": "Profiilin päivitys epäonnistui",
+    "resumeSubtitle": "Lataa nykyinen CV:si tai tee uusi STAR-menetelmällä.",
+    "chooseFile": "Valitse tiedosto",
+    "startBuilder": "Avaa CV-työkalu",
+    "tabs": {
+      "overview": "Yleiskatsaus",
+      "favourites": "Suosikit",
+      "notifications": "Ilmoitukset"
     }
   },
   "shop": {
@@ -540,5 +575,11 @@
       "companiesBtn": "Selaa yrityksiä",
       "communityBtn": "Yhteisö"
     }
+  },
+  "notificationTitles": {
+    "success": "Valmis",
+    "error": "Virhe",
+    "warning": "Huomio",
+    "info": "Tiedoksi"
   }
 }

@@ -1,5 +1,6 @@
 import { createContext, useContext, useRef, ReactNode } from 'react';
 import { Toast } from 'primereact/toast';
+import { useTranslation } from 'react-i18next';
 import type { NotificationSeverity } from '@/types/notification';
 
 export interface NotificationContextType {
@@ -14,12 +15,13 @@ interface NotificationProviderProps {
 
 export const NotificationProvider = ({ children }: NotificationProviderProps) => {
   const toast = useRef<Toast>(null);
+  const { t } = useTranslation();
 
   const showNotification = (message: string, severity: NotificationSeverity) => {
     const primeSeverity = severity === 'warning' ? 'warn' : severity;
     toast.current?.show({
       severity: primeSeverity as 'success' | 'error' | 'info' | 'warn',
-      summary: severity === 'error' ? 'Error' : severity === 'warning' ? 'Warning' : severity.charAt(0).toUpperCase() + severity.slice(1),
+      summary: t(`notificationTitles.${severity}`, { defaultValue: severity.charAt(0).toUpperCase() + severity.slice(1) }),
       detail: message,
       life: 6000,
     });

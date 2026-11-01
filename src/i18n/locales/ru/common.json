@@ -29,8 +29,10 @@
       "integration": "Карта освоения",
       "ventures": "Мои компании",
       "passport": "Паспорт навыков",
-      "impact": "Измеримый эффект"
-    }
+      "impact": "Измеримый эффект",
+      "meetups": "Открытые встречи"
+    },
+    "logout": "Выйти"
   },
   "company": {
     "information": "Информация о компании",
@@ -77,7 +79,11 @@
     "updating": "Обновление...",
     "all": "Все",
     "refresh": "Обновить",
-    "optional": "Необязательно"
+    "optional": "Необязательно",
+    "save": "Сохранить",
+    "saving": "Сохраняем…",
+    "notFoundTitle": "Страница не найдена",
+    "notFoundDescription": "Возможно, страницу удалили, переименовали или она временно недоступна."
   },
   "home": {
     "welcome": "Добро пожаловать в Expat App",
@@ -119,7 +125,9 @@
     "addToFavourites": "Добавить в избранное",
     "removeFromFavourites": "Удалить из избранного",
     "addedToFavourites": "Добавлено в избранное",
-    "removedFromFavourites": "Удалено из избранного"
+    "removedFromFavourites": "Удалено из избранного",
+    "subtitle": "Компании, которые ты добавил в закладки.",
+    "emptyHint": "Загляни в каталог и добавь компании в закладки, чтобы следить за новостями и вакансиями."
   },
   "notifications": {
     "title": "Уведомления",
@@ -131,7 +139,9 @@
     "read": "Прочитано",
     "unread": "Непрочитано",
     "descriptionUpdated": "Описание компании было обновлено",
-    "recruitmentPageUpdated": "Страница рекрутинга была обновлена"
+    "recruitmentPageUpdated": "Страница рекрутинга была обновлена",
+    "subtitle": "Новости компаний, за которыми ты следишь.",
+    "allCaughtUp": "Новых уведомлений нет. Здесь появятся новости компаний из закладок."
   },
   "profile": {
     "userInformation": "Информация о пользователе",
@@ -164,7 +174,27 @@
       "saveSuccess": "Навыки успешно обновлены",
       "saveError": "Не удалось обновить навыки",
       "levelFormat": "Уровень {{level}}",
-      "scaleLabel": "Шкала:"
+      "scaleLabel": "Шкала:",
+      "addNew": "Добавить навык"
+    },
+    "editProfile": "Редактировать профиль",
+    "emailRequired": "Укажи email",
+    "nameRequired": "Укажи имя",
+    "emailVerified": "Email подтверждён",
+    "notVerified": "Email не подтверждён",
+    "fullName": "Полное имя",
+    "secondName": "Фамилия",
+    "username": "Имя пользователя",
+    "usernameNotice": "Имя пользователя изменить нельзя",
+    "profileUpdated": "Профиль обновлён",
+    "profileUpdateFailed": "Не удалось обновить профиль",
+    "resumeSubtitle": "Загрузи своё резюме или собери новое по методу STAR.",
+    "chooseFile": "Выбрать файл",
+    "startBuilder": "Открыть конструктор резюме",
+    "tabs": {
+      "overview": "Обзор",
+      "favourites": "Избранное",
+      "notifications": "Уведомления"
     }
   },
   "shop": {
@@ -551,5 +581,11 @@
       "companiesBtn": "Каталог компаний",
       "communityBtn": "Сообщество"
     }
+  },
+  "notificationTitles": {
+    "success": "Готово",
+    "error": "Ошибка",
+    "warning": "Внимание",
+    "info": "К сведению"
   }
 }

@@ -101,7 +101,7 @@ const Profile = () => {
   const navigate = useNavigate();
   const { logout } = useAuth();
   const { showNotification } = useNotification();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { favourites, loading: favouritesLoading, toggleFavourite, initializeFromProfile } = useFavourites();
   const {
     notifications,
@@ -664,14 +664,15 @@ const Profile = () => {
     return level;
   };
 
+  // Empty when the backend has no registration date; the "Member since" lines are hidden then
   const memberSinceFormatted =
     profile?.createdAt || profile?.created_at
-      ? new Date(profile.createdAt ?? profile.created_at ?? '').toLocaleDateString(undefined, {
+      ? new Date(profile.createdAt ?? profile.created_at ?? '').toLocaleDateString(i18n.language, {
           year: 'numeric',
           month: 'long',
           day: 'numeric',
         })
-      : 'Recently';
+      : '';
 
   if (loading) {
     return (
@@ -746,11 +747,15 @@ const Profile = () => {
                   <i className="pi pi-envelope" />
                   {profile?.email}
                 </span>
-                <span className={styles.metaDot}>•</span>
-                <span className={styles.metaJoined}>
-                  <i className="pi pi-calendar" />
-                  {t('profile.memberSince', { defaultValue: 'Member since' })} {memberSinceFormatted}
-                </span>
+                {memberSinceFormatted && (
+                  <>
+                    <span className={styles.metaDot}>•</span>
+                    <span className={styles.metaJoined}>
+                      <i className="pi pi-calendar" />
+                      {t('profile.memberSince', { defaultValue: 'Member since' })} {memberSinceFormatted}
+                    </span>
+                  </>
+                )}
               </div>
               <div className={styles.heroBadgesRow}>
                 {profile?.email_verified_at ? (
@@ -1009,15 +1014,17 @@ const Profile = () => {
                         </div>
                       </div>
 
-                      <div className={styles.infoTile}>
-                        <div className={styles.infoIconWrap}>
-                          <i className="pi pi-calendar" />
+                      {memberSinceFormatted && (
+                        <div className={styles.infoTile}>
+                          <div className={styles.infoIconWrap}>
+                            <i className="pi pi-calendar" />
+                          </div>
+                          <div className={styles.infoTexts}>
+                            <span className={styles.infoLabel}>{t('profile.memberSince', { defaultValue: 'Registration Date' })}</span>
+                            <span className={styles.infoValue}>{memberSinceFormatted}</span>
+                          </div>
                         </div>
-                        <div className={styles.infoTexts}>
-                          <span className={styles.infoLabel}>{t('profile.memberSince', { defaultValue: 'Registration Date' })}</span>
-                          <span className={styles.infoValue}>{memberSinceFormatted}</span>
-                        </div>
-                      </div>
+                      )}
                     </div>
                   )}
                 </div>

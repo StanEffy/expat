@@ -29,8 +29,10 @@
       "integration": "Settling-in map",
       "ventures": "My ventures",
       "passport": "Skills passport",
-      "impact": "Measured impact"
-    }
+      "impact": "Measured impact",
+      "meetups": "Open meetups"
+    },
+    "logout": "Log out"
   },
   "company": {
     "information": "Company Information",
@@ -77,7 +79,11 @@
     "updating": "Updating...",
     "all": "All",
     "refresh": "Refresh",
-    "optional": "Optional"
+    "optional": "Optional",
+    "save": "Save changes",
+    "saving": "Saving…",
+    "notFoundTitle": "Page not found",
+    "notFoundDescription": "The page you are looking for might have been removed, renamed, or is temporarily unavailable."
   },
   "home": {
     "welcome": "Welcome to Expat App",
@@ -119,7 +125,9 @@
     "addToFavourites": "Add to favourites",
     "removeFromFavourites": "Remove from favourites",
     "addedToFavourites": "Added to favourites",
-    "removedFromFavourites": "Removed from favourites"
+    "removedFromFavourites": "Removed from favourites",
+    "subtitle": "Companies you have bookmarked for quick access.",
+    "emptyHint": "Explore the catalog and bookmark companies to follow their updates and job openings."
   },
   "notifications": {
     "title": "Notifications",
@@ -131,7 +139,9 @@
     "read": "Read",
     "unread": "Unread",
     "descriptionUpdated": "Company description was updated",
-    "recruitmentPageUpdated": "Recruitment page was updated"
+    "recruitmentPageUpdated": "Recruitment page was updated",
+    "subtitle": "Updates from companies you follow.",
+    "allCaughtUp": "You're all caught up. Updates about your bookmarked companies will appear here."
   },
   "profile": {
     "userInformation": "User Information",
@@ -164,7 +174,27 @@
       "saveSuccess": "Skills updated successfully",
       "saveError": "Failed to update skills",
       "levelFormat": "Level {{level}}",
-      "scaleLabel": "Scale:"
+      "scaleLabel": "Scale:",
+      "addNew": "Add a new skill"
+    },
+    "editProfile": "Edit profile",
+    "emailRequired": "Email is required",
+    "nameRequired": "Name is required",
+    "emailVerified": "Email verified",
+    "notVerified": "Email not verified",
+    "fullName": "Full name",
+    "secondName": "Last name",
+    "username": "Username",
+    "usernameNotice": "Username cannot be changed",
+    "profileUpdated": "Profile updated",
+    "profileUpdateFailed": "Failed to update profile",
+    "resumeSubtitle": "Upload your existing CV or build a structured one with the STAR method.",
+    "chooseFile": "Choose a file",
+    "startBuilder": "Open resume builder",
+    "tabs": {
+      "overview": "Overview",
+      "favourites": "Favourites",
+      "notifications": "Notifications"
     }
   },
   "shop": {
@@ -545,5 +575,11 @@
       "companiesBtn": "Explore Companies",
       "communityBtn": "Join Community"
     }
+  },
+  "notificationTitles": {
+    "success": "Done",
+    "error": "Error",
+    "warning": "Warning",
+    "info": "Note"
   }
 }

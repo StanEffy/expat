@@ -1,39 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
-  <defs>
-    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#622C90;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#9739C8;stop-opacity:1" />
-    </linearGradient>
-  </defs>
-  
-  <!-- Background circle -->
-  <circle cx="32" cy="32" r="30" fill="url(#gradient)" stroke="#39145E" stroke-width="2"/>
-  
-  <!-- Stylized "E" shape -->
-  <path d="M 20 18 L 20 46 L 38 46 L 38 38 L 28 38 L 28 32 L 38 32 L 38 26 L 28 26 L 28 26 L 20 26 Z" 
-        fill="white" 
-        fill-rule="evenodd"/>
-  
-  <!-- Accent line -->
-  <line x1="42" y1="18" x2="44" y2="46" 
-        stroke="#A4CB33" 
-        stroke-width="3" 
-        stroke-linecap="round"/>
+  <!-- EXPAT sign plate: the signal-yellow X from the logo on ink -->
+  <rect width="64" height="64" fill="#121417"/>
+  <g transform="translate(32 32)" fill="#FFD23F">
+    <rect x="-21" y="-4.5" width="42" height="9" transform="rotate(45)"/>
+    <rect x="-21" y="-4.5" width="42" height="9" transform="rotate(-45)"/>
+  </g>
 </svg>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

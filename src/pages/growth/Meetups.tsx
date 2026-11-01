@@ -117,7 +117,7 @@ export const Meetups: React.FC = () => {
   const visible = (meetups ?? []).filter((m) => !onlyMine || m.joined || m.is_organizer);
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} data-reveal-children>
       <div className={styles.header}>
         <h1>{t('meetups.title', 'Open meetups')}</h1>
         <p>{t('meetups.subtitle', 'Meetups that members run themselves: a Saturday speaking club, a call every other week, a walk. Start your own or just show up.')}</p>
@@ -261,7 +261,7 @@ export const Meetups: React.FC = () => {
             {t('meetups.empty', 'No meetups here yet. Start one: a regular slot is often all it takes.')}
           </div>
         ) : (
-          <ul className={styles.list}>
+          <ul className={styles.list} data-reveal-children>
             {visible.map((m) => {
               const full = m.capacity !== undefined && m.capacity !== null && m.member_count >= m.capacity;
               return (

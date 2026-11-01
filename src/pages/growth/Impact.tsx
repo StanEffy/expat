@@ -17,7 +17,7 @@ export const Impact: React.FC = () => {
   }, []);
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} data-reveal-children>
       <div className={styles.header}>
         <h1>{t('impact.title', 'Measured impact')}</h1>
         <p>{t('impact.subtitle', 'What changes for people who use EXPAT — integration, real-world ties, companies founded and mutual help. Anonymous and live.')}</p>

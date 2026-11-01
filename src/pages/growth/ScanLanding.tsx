@@ -36,7 +36,7 @@ export const ScanLanding: React.FC<Props> = ({ mode }) => {
   }, [code, mode, t]);
 
   return (
-    <div className={styles.container} style={{ maxWidth: 620 }}>
+    <div className={styles.container} data-reveal-children style={{ maxWidth: 620 }}>
       <div className={styles.card}>
         {error ? (
           <div className={styles.emptyState}>

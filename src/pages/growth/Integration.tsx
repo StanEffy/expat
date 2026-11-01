@@ -133,7 +133,7 @@ export const Integration: React.FC = () => {
 
   if (loadError) {
     return (
-      <div className={styles.container}>
+      <div className={styles.container} data-reveal-children>
         <div className={`${styles.card} ${styles.emptyState}`}>
           <i className="pi pi-exclamation-circle" />
           {t('common.loadError', 'Could not load this page. Please try again later.')}
@@ -144,7 +144,7 @@ export const Integration: React.FC = () => {
   if (!status) return null;
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} data-reveal-children>
       <div className={styles.header}>
         <h1>{t('integration.title', 'Your settling-in map')}</h1>
         <p>{t('integration.subtitle', 'Twelve short questions, once in a while. You see how you are finding your feet in Finland, branch by branch.')}</p>
@@ -277,7 +277,7 @@ export const Integration: React.FC = () => {
           {history.length > 1 && (
             <div className={styles.card}>
               <h2 className={styles.cardTitle}><i className="pi pi-history" /> {t('integration.history', 'Earlier check-ins')}</h2>
-              <ul className={styles.list}>
+              <ul className={styles.list} data-reveal-children>
                 {history.map((p: IntegrationPulse) => (
                   <li key={p.id} className={styles.listItem}>
                     <span className={styles.grow}>{formatDate(p.created_at, i18n.language)}</span>

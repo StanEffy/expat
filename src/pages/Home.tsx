@@ -1,8 +1,9 @@
-import { useEffect, useState, type ReactNode } from 'react';
+import { useEffect, useState, type CSSProperties, type ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { isTokenValid } from '../utils/auth';
 import SEO from '../components/Common/SEO';
+import FlapText from '../components/Decorative/FlapText';
 import styles from './Home.module.scss';
 
 const Arrow = ({ size = 22 }: { size?: number }) => (
@@ -47,6 +48,23 @@ const SECTIONS: { key: 'work' | 'city' | 'together'; to: string; icon: ReactNode
   { key: 'together', to: '/together', icon: <BirchIcon />, isNew: true },
 ];
 
+// Headline words rise one by one out of their own line
+const Headline = ({ text }: { text: string }) => {
+  const words = text.split(' ');
+  return (
+    <h1 className={styles.title}>
+      {words.map((word, i) => (
+        <span key={i}>
+          <span className={styles.word}>
+            <span className={styles.wordInner} style={{ '--w': i } as CSSProperties}>{word}</span>
+          </span>
+          {i < words.length - 1 && ' '}
+        </span>
+      ))}
+    </h1>
+  );
+};
+
 const Home = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const { t } = useTranslation();
@@ -82,10 +100,10 @@ const Home = () => {
       <div className={styles.container}>
         <div className={styles.hero}>
           <section className={styles.intro}>
-            <p className="mono-label">{t('home.eyebrow')}</p>
-            <h1 className={styles.title}>{t('home.headline')}</h1>
-            <p className={styles.lead}>{t('home.lead')}</p>
-            <div className={styles.buttons}>
+            <p className="mono-label" data-reveal>{t('home.eyebrow')}</p>
+            <Headline text={t('home.headline')} />
+            <p className={styles.lead} data-reveal>{t('home.lead')}</p>
+            <div className={styles.buttons} data-reveal>
               <Link to="/onboarding" className={styles.cta}>
                 {t('home.ctaPlan')}
                 <Arrow />
@@ -98,19 +116,22 @@ const Home = () => {
             </div>
           </section>
 
-          <aside className={styles.board} aria-label={t('home.boardLabel')}>
+          <aside className={styles.board} aria-label={t('home.boardLabel')} data-reveal>
             <svg className={styles.map} viewBox="0 0 400 150" aria-hidden="true">
-              <g fill="none" stroke="#4A5058" strokeWidth="1.5">
-                <path d="M60 80 C60 40 130 25 190 35 C250 45 330 30 350 70 C370 110 300 130 230 120 C170 112 110 135 80 115 C65 105 60 95 60 80 Z" />
-                <path d="M95 80 C95 55 140 48 190 55 C240 62 305 52 318 75 C330 98 280 108 230 102 C180 96 130 112 108 98 C99 92 95 87 95 80 Z" />
+              <g fill="none" stroke="#4A5058" strokeWidth="1.5" className={styles.contours}>
+                <path pathLength={1} d="M60 80 C60 40 130 25 190 35 C250 45 330 30 350 70 C370 110 300 130 230 120 C170 112 110 135 80 115 C65 105 60 95 60 80 Z" />
+                <path pathLength={1} d="M95 80 C95 55 140 48 190 55 C240 62 305 52 318 75 C330 98 280 108 230 102 C180 96 130 112 108 98 C99 92 95 87 95 80 Z" />
               </g>
               <path
+                pathLength={1}
+                className={styles.shore}
                 d="M130 80 C130 68 160 64 192 70 C226 76 282 70 288 82 C294 94 258 92 228 90 C196 88 160 96 142 90 C134 87 130 84 130 80 Z"
                 fill="none"
                 stroke="var(--accent)"
                 strokeWidth="2"
               />
               <path d="M248 78 C254 72 266 74 268 80 C270 86 258 89 250 87 C245 86 244 82 248 78 Z" fill="#4A5058" />
+              <circle cx="40" cy="36" r="6" className={styles.pulse} />
               <circle cx="40" cy="36" r="6" fill="var(--accent)" />
               <text x="54" y="40" className={styles.mapText}>{t('home.youAreHere')}</text>
               <text x="300" y="140" className={`${styles.mapText} notranslate`}>JÄRVI</text>
@@ -123,7 +144,7 @@ const Home = () => {
               {BOARD_STEPS.map((step, i) => (
                 <li key={step.key} className={styles.boardRow}>
                   <span>
-                    <span className={styles.code} translate="no">{step.code}</span>
+                    <FlapText text={step.code} delay={500 + i * 220} className={styles.code} />
                     {t(`home.steps.${step.key}`)}
                   </span>
                   <span className={styles.stepNo}>{String(i + 1).padStart(2, '0')}</span>
@@ -135,7 +156,7 @@ const Home = () => {
 
         <nav className={styles.sections} aria-label={t('home.sectionsLabel')}>
           {SECTIONS.map((section, i) => (
-            <Link key={section.key} to={section.to} className={styles.sectionRow}>
+            <Link key={section.key} to={section.to} className={styles.sectionRow} data-reveal="wipe">
               <span className={styles.sectionNo}>
                 {section.icon}
                 {String(i + 2).padStart(2, '0')}

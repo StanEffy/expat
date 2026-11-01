@@ -76,7 +76,7 @@ export const Challenges: React.FC = () => {
   if (selected) {
     const c = selected.challenge;
     return (
-      <div className={styles.container}>
+      <div className={styles.container} data-reveal-children>
         <button type="button" className={styles.secondaryButton} onClick={() => setSelected(null)} style={{ marginBottom: '1rem' }}>
           <i className="pi pi-arrow-left" /> {t('challenges.back', 'All challenges')}
         </button>
@@ -187,7 +187,7 @@ export const Challenges: React.FC = () => {
   }
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} data-reveal-children>
       <div className={styles.header}>
         <h1>{t('challenges.title', 'City challenges')}</h1>
         <p>{t('challenges.subtitle', 'Your city shares a real problem. Team up with other residents, propose a solution — the best ideas go to participatory budgeting.')}</p>

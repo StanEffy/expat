@@ -76,7 +76,7 @@ export const Tandems: React.FC = () => {
   const pending = requests.filter((r) => r.status === 'pending' && r.to_user_id === me);
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} data-reveal-children>
       <div className={styles.header}>
         <h1>{t('tandems.title', 'Language tandems')}</h1>
         <p>{t('tandems.subtitle', 'Practise Finnish or Swedish with someone who speaks it — and help them with your language in return. Coffee, a walk, a call: you decide.')}</p>
@@ -86,7 +86,7 @@ export const Tandems: React.FC = () => {
         <div className={styles.card}>
           <h2 className={styles.cardTitle}><i className="pi pi-language" /> {t('tandems.myLanguages', 'My languages')}</h2>
           <p className={styles.cardSubtitle}>{t('tandems.levelsHint', 'Levels follow the European CEFR scale: A1 beginner … C2 near-native. Update them as you grow; we keep the history.')}</p>
-          <ul className={styles.list}>
+          <ul className={styles.list} data-reveal-children>
             {languages.map((l, i) => (
               <li key={l.language} className={styles.listItem}>
                 <div className={styles.grow}>
@@ -147,7 +147,7 @@ export const Tandems: React.FC = () => {
           {pending.length > 0 && (
             <div className={`${styles.card} ${styles.highlight}`}>
               <h2 className={styles.cardTitle}><i className="pi pi-inbox" /> {t('tandems.incoming', 'Requests for you')}</h2>
-              <ul className={styles.list}>
+              <ul className={styles.list} data-reveal-children>
                 {pending.map((r) => (
                   <li key={r.id} className={styles.listItem}>
                     <div className={styles.grow}>
@@ -173,7 +173,7 @@ export const Tandems: React.FC = () => {
             {suggestions.length === 0 ? (
               <p className={styles.muted}>{t('tandems.noSuggestions', 'Add a language you are learning to see people who can help. New partners appear as more people join.')}</p>
             ) : (
-              <ul className={styles.list}>
+              <ul className={styles.list} data-reveal-children>
                 {suggestions.map((c) => (
                   <li key={`${c.user_id}-${c.they_help}`} className={styles.listItem}>
                     <div className={styles.grow}>
@@ -200,7 +200,7 @@ export const Tandems: React.FC = () => {
           {profile && profile.history.length > 0 && (
             <div className={styles.card}>
               <h2 className={styles.cardTitle}><i className="pi pi-chart-line" /> {t('tandems.progress', 'My progress')}</h2>
-              <ul className={styles.list}>
+              <ul className={styles.list} data-reveal-children>
                 {profile.history.slice().reverse().slice(0, 12).map((h, i) => (
                   <li key={`${h.language}-${h.recorded_at}-${i}`} className={styles.listItem}>
                     <span className={styles.grow}>{languageName(h.language, lang)}</span>
@@ -215,7 +215,7 @@ export const Tandems: React.FC = () => {
           {requests.filter((r) => r.from_user_id === me).length > 0 && (
             <div className={styles.card}>
               <h2 className={styles.cardTitle}><i className="pi pi-send" /> {t('tandems.sentTitle', 'Sent requests')}</h2>
-              <ul className={styles.list}>
+              <ul className={styles.list} data-reveal-children>
                 {requests.filter((r) => r.from_user_id === me).map((r) => (
                   <li key={r.id} className={styles.listItem}>
                     <span className={styles.grow}>{r.to_name} · {languageName(r.learn_language, lang)}</span>

@@ -16,12 +16,12 @@ export const Together: React.FC = () => {
   }, []);
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} data-reveal-children>
       <div className={styles.header}>
         <h1>{t('together.title', 'Together')}</h1>
         <p>{t('together.subtitle', 'Meet people, help each other, build something. Every step here is voluntary — pick what feels good.')}</p>
       </div>
-      <div className={styles.grid3}>
+      <div className={styles.grid3} data-reveal-children>
         {TOGETHER_LINKS.map((l) => (
           <Link key={l.to} to={l.to} className={`${styles.card} ${styles.hubCard}`} style={{ marginTop: 0 }}>
             <i className={l.icon} aria-hidden="true" />

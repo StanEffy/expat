@@ -89,7 +89,7 @@ export const Ventures: React.FC = () => {
   );
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} data-reveal-children>
       <div className={styles.header}>
         <h1>{t('ventures.title', 'My ventures')}</h1>
         <p>{t('ventures.subtitle', 'Started something? Add your company by its business ID. We check it in the Finnish Trade Register, so your passport and the city statistics show real, verified ventures.')}</p>
@@ -152,7 +152,7 @@ export const Ventures: React.FC = () => {
             {t('ventures.empty', 'No companies yet. When you register one — a café, a studio, a startup — add it here.')}
           </div>
         ) : (
-          <ul className={styles.list}>
+          <ul className={styles.list} data-reveal-children>
             {ventures.map((v) => (
               <li key={v.id} className={`${styles.card} ${v.my_confirmed ? '' : styles.highlight}`}>
                 <div className={styles.itemTitle}>{v.name}</div>

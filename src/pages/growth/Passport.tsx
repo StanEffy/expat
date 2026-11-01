@@ -38,7 +38,7 @@ const PassportView: React.FC<{ passport: PassportData; own: boolean }> = ({ pass
         {passport.endorsements.length > 0 && (
           <div className={styles.card} style={{ marginTop: 0 }}>
             <h2 className={styles.cardTitle}><i className="pi pi-thumbs-up" /> {t('passport.endorsements', 'Skills vouched for by people they met')}</h2>
-            <ul className={styles.list}>
+            <ul className={styles.list} data-reveal-children>
               {passport.endorsements.map((e) => (
                 <li key={e.skill} className={styles.listItem}>
                   <span className={`${styles.grow} ${styles.itemTitle}`}>{e.skill}</span>
@@ -53,7 +53,7 @@ const PassportView: React.FC<{ passport: PassportData; own: boolean }> = ({ pass
         {passport.languages.length > 0 && (
           <div className={styles.card} style={{ marginTop: 0 }}>
             <h2 className={styles.cardTitle}><i className="pi pi-language" /> {t('passport.languages', 'Languages')}</h2>
-            <ul className={styles.list}>
+            <ul className={styles.list} data-reveal-children>
               {passport.languages.map((l) => (
                 <li key={l.language} className={styles.listItem}>
                   <span className={styles.grow}>{languageName(l.language, lang)}</span>
@@ -71,7 +71,7 @@ const PassportView: React.FC<{ passport: PassportData; own: boolean }> = ({ pass
         {passport.hours_given > 0 && (
           <div className={styles.card} style={{ marginTop: 0 }}>
             <h2 className={styles.cardTitle}><i className="pi pi-clock" /> {t('passport.helped', 'Helped others with')}</h2>
-            <ul className={styles.list}>
+            <ul className={styles.list} data-reveal-children>
               {passport.helped_with.map((h) => (
                 <li key={h.category} className={styles.listItem}>
                   <span className={styles.grow}>{t(`timebank.categories.${h.category}`)}</span>
@@ -85,7 +85,7 @@ const PassportView: React.FC<{ passport: PassportData; own: boolean }> = ({ pass
         {passport.challenges.length > 0 && (
           <div className={styles.card} style={{ marginTop: 0 }}>
             <h2 className={styles.cardTitle}><i className="pi pi-flag" /> {t('passport.challenges', 'City challenges')}</h2>
-            <ul className={styles.list}>
+            <ul className={styles.list} data-reveal-children>
               {passport.challenges.map((c, i) => (
                 <li key={`${c.challenge}-${i}`} className={styles.listItem}>
                   <div className={styles.grow}>
@@ -106,7 +106,7 @@ const PassportView: React.FC<{ passport: PassportData; own: boolean }> = ({ pass
         {passport.ventures.length > 0 && (
           <div className={styles.card} style={{ marginTop: 0 }}>
             <h2 className={styles.cardTitle}><i className="pi pi-briefcase" /> {t('passport.ventures', 'Companies (verified in the Trade Register)')}</h2>
-            <ul className={styles.list}>
+            <ul className={styles.list} data-reveal-children>
               {passport.ventures.map((v) => (
                 <li key={v.business_id} className={styles.listItem}>
                   <div className={styles.grow}>
@@ -125,7 +125,7 @@ const PassportView: React.FC<{ passport: PassportData; own: boolean }> = ({ pass
         {passport.events.length > 0 && (
           <div className={styles.card} style={{ marginTop: 0 }}>
             <h2 className={styles.cardTitle}><i className="pi pi-calendar" /> {t('passport.eventsTitle', 'Events')}</h2>
-            <ul className={styles.list}>
+            <ul className={styles.list} data-reveal-children>
               {passport.events.slice(0, 12).map((e, i) => (
                 <li key={`${e.title}-${i}`} className={styles.listItem}>
                   <span className={styles.grow}>{e.title}</span>
@@ -166,7 +166,7 @@ export const Passport: React.FC = () => {
   if (!passport) return null;
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} data-reveal-children>
       <div className={styles.header}>
         <h1>{t('passport.title', 'Skills passport')}</h1>
         <p>{t('passport.subtitle', 'Proof of what you have done in Finland, confirmed by the people you did it with. Share it with a future co-founder, employer or a grant program.')}</p>
@@ -217,7 +217,7 @@ export const PublicPassport: React.FC = () => {
 
   if (missing) {
     return (
-      <div className={styles.container}>
+      <div className={styles.container} data-reveal-children>
         <div className={`${styles.card} ${styles.emptyState}`}>
           <i className="pi pi-lock" />
           {t('passport.notFound', 'This passport is not shared, or the link has been turned off.')}
@@ -228,7 +228,7 @@ export const PublicPassport: React.FC = () => {
   if (!passport) return null;
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} data-reveal-children>
       <div className={styles.header}>
         <h1>{t('passport.publicTitle', { name: passport.name })}</h1>
         <p>{t('passport.publicSubtitle', 'Verified activity on EXPAT, the platform for people building their life in Finland.')}</p>

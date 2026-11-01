@@ -81,7 +81,7 @@ export const Timebank: React.FC = () => {
   const pendingForMe = account?.exchanges.filter((x) => x.status === 'pending' && x.proposed_by !== me) ?? [];
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} data-reveal-children>
       <div className={styles.header}>
         <h1>{t('timebank.title', 'Time bank')}</h1>
         <p>{t('timebank.subtitle', 'An hour for an hour. Help someone with Kela forms, get help with your CV. Everyone starts with 3 hours so newcomers can ask first.')}</p>
@@ -99,7 +99,7 @@ export const Timebank: React.FC = () => {
       {pendingForMe.length > 0 && (
         <div className={`${styles.card} ${styles.highlight} ${styles.section}`}>
           <h2 className={styles.cardTitle}><i className="pi pi-inbox" /> {t('timebank.toConfirm', 'Please confirm')}</h2>
-          <ul className={styles.list}>
+          <ul className={styles.list} data-reveal-children>
             {pendingForMe.map((x) => (
               <li key={x.id} className={styles.listItem}>
                 <div className={styles.grow}>
@@ -137,7 +137,7 @@ export const Timebank: React.FC = () => {
           {listings.filter((l) => l.user_id !== me).length === 0 ? (
             <p className={styles.muted}>{t('timebank.noListings', 'Nothing here yet. Be the first to offer an hour!')}</p>
           ) : (
-            <ul className={styles.list}>
+            <ul className={styles.list} data-reveal-children>
               {listings.filter((l) => l.user_id !== me).map((l) => (
                 <li key={l.id} className={styles.listItem}>
                   <div className={styles.grow}>
@@ -182,7 +182,7 @@ export const Timebank: React.FC = () => {
           {account && account.listings.length > 0 && (
             <div className={styles.section}>
               <h3 className={styles.sectionTitle}>{t('timebank.myPosts', 'Your posts')}</h3>
-              <ul className={styles.list}>
+              <ul className={styles.list} data-reveal-children>
                 {account.listings.map((l) => (
                   <li key={l.id} className={styles.listItem}>
                     <span className={styles.grow}>{l.title}</span>
@@ -202,7 +202,7 @@ export const Timebank: React.FC = () => {
       {account && account.exchanges.length > 0 && (
         <div className={`${styles.card} ${styles.section}`}>
           <h2 className={styles.cardTitle}><i className="pi pi-history" /> {t('timebank.history', 'History')}</h2>
-          <ul className={styles.list}>
+          <ul className={styles.list} data-reveal-children>
             {account.exchanges.map((x) => (
               <li key={x.id} className={styles.listItem}>
                 <div className={styles.grow}>

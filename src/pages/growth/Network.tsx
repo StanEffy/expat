@@ -150,7 +150,7 @@ export const Network: React.FC = () => {
   const connectUrl = code ? `${window.location.origin}/connect/${code}` : '';
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} data-reveal-children>
       <div className={styles.header}>
         <h1>{t('network.title', 'My connections')}</h1>
         <p>{t('network.subtitle', 'People you actually met: at events, in tandems, in the time bank, in city challenges or through a quick high five.')}</p>
@@ -209,7 +209,7 @@ export const Network: React.FC = () => {
               {t('network.noConnections', 'No connections yet. Go to an event, join a tandem or a city challenge — or simply high-five someone you met.')}
             </div>
           ) : (
-            <ul className={styles.list}>
+            <ul className={styles.list} data-reveal-children>
               {connections.map((c) => (
                 <li key={c.user_id} className={styles.listItem}>
                   <div className={styles.grow}>
@@ -252,7 +252,7 @@ export const Network: React.FC = () => {
               {t('network.noEvents', 'At an event, scan the organiser\'s QR code or enter the check-in code above.')}
             </div>
           ) : (
-            <ul className={styles.list}>
+            <ul className={styles.list} data-reveal-children>
               {myEvents.map((ev) => (
                 <li key={ev.id} className={styles.listItem}>
                   <div className={styles.grow}>
@@ -275,7 +275,7 @@ export const Network: React.FC = () => {
               {t('network.noIntros', 'Intros from co-founder matches appear here. Send one from Team Up → Matches.')}
             </div>
           ) : (
-            <ul className={styles.list}>
+            <ul className={styles.list} data-reveal-children>
               {intros.map((i) => {
                 const incoming = i.to_user_id === myUserId;
                 return (
@@ -316,7 +316,7 @@ export const Network: React.FC = () => {
               {organised.length === 0 ? (
                 <p className={styles.muted}>{t('network.noOrganised', 'No events yet.')}</p>
               ) : (
-                <ul className={styles.list}>
+                <ul className={styles.list} data-reveal-children>
                   {organised.slice(0, 30).map((ev) => (
                     <li key={ev.id} className={styles.listItem}>
                       <div className={styles.grow}>
@@ -401,7 +401,7 @@ export const Network: React.FC = () => {
         modal
       >
         <p className={styles.muted}>{t('network.endorseHint', 'Vouch for something you have seen them do. Endorsements appear in their skills passport.')}</p>
-        <ul className={styles.list} style={{ margin: '0.75rem 0' }}>
+        <ul className={styles.list} data-reveal-children style={{ margin: '0.75rem 0' }}>
           {endorsements.map((e) => (
             <li key={e.skill} className={styles.listItem}>
               <div className={styles.grow}>

@@ -119,6 +119,7 @@
 }
 
 .listItem {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 0.9rem;
@@ -131,6 +132,11 @@
   @media (max-width: 560px) {
     flex-direction: column;
     align-items: stretch;
+
+    // keep the title clear of the corner remove button
+    &:has(> .iconButton) {
+      padding-right: 3.5rem;
+    }
   }
 }
 
@@ -169,6 +175,15 @@
   white-space: nowrap;
 }
 
+button.chip {
+  font-family: inherit;
+  cursor: pointer;
+
+  &:hover {
+    background: var(--accent);
+  }
+}
+
 .chipGreen {
   background: var(--positive-soft);
   color: var(--positive);
@@ -190,8 +205,17 @@
 .actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: 0.5rem 1rem;
   align-items: center;
+
+  // Single-line checkboxes in a row line up with the controls next to them
+  .checkbox {
+    align-items: center;
+
+    input {
+      margin-top: 0;
+    }
+  }
 }
 
 .primaryButton,
@@ -243,6 +267,35 @@
   background: transparent;
 }
 
+// Square icon-only control (remove, close) that sits at the top of a list row
+.iconButton {
+  flex-shrink: 0;
+  align-self: flex-start;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  color: var(--ink-muted);
+  background: transparent;
+  border: 1px solid var(--rule);
+  cursor: pointer;
+  transition: color 0.12s ease, border-color 0.12s ease;
+
+  &:hover {
+    color: var(--danger);
+    border-color: var(--danger);
+  }
+
+  @media (max-width: 560px) {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+  }
+}
+
 .form {
   display: flex;
   flex-direction: column;
@@ -265,7 +318,8 @@
   gap: 0.35rem;
   min-width: 0;
 
-  label {
+  label,
+  .fieldLabel {
     font-size: 0.82rem;
     font-weight: 700;
     color: var(--ink-2);
@@ -274,6 +328,7 @@
 
 .input {
   font: inherit;
+  min-height: 40px;
   color: var(--ink);
   background: var(--surface);
   border: 1px solid var(--rule);
@@ -294,6 +349,13 @@
   option {
     color: var(--ink);
   }
+}
+
+// Compact input for inline rows (level pickers next to checkboxes)
+.inputCompact {
+  width: auto;
+  min-height: 36px;
+  padding: 0.35rem 0.6rem;
 }
 
 textarea.input {
@@ -462,4 +524,147 @@ textarea.input {
     font-size: 1.5rem;
     color: var(--ink);
   }
+}
+
+// Searchable language picker
+.picker {
+  position: relative;
+  min-width: 0;
+
+  // in a row of filters it takes the free space; in a form column it is just a field
+  .actions > & {
+    flex: 1 1 14rem;
+  }
+}
+
+.pickerInput {
+  padding-right: 2.2rem;
+  cursor: pointer;
+
+  &:focus {
+    cursor: text;
+  }
+}
+
+.pickerChevron {
+  position: absolute;
+  right: 0.8rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.7rem;
+  color: var(--ink-muted);
+  pointer-events: none;
+}
+
+.pickerList {
+  position: absolute;
+  z-index: 20;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  max-height: 16rem;
+  overflow-y: auto;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background: var(--surface);
+  border: 2px solid var(--ink);
+}
+
+.pickerOption {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.55rem 0.8rem;
+  cursor: pointer;
+  color: var(--ink);
+
+  & + & {
+    border-top: 1px solid var(--surface-alt);
+  }
+}
+
+.pickerOwn {
+  font-size: 0.85rem;
+  color: var(--ink-muted);
+  text-align: right;
+}
+
+.pickerActive {
+  background: var(--accent-soft);
+}
+
+.pickerSelected {
+  font-weight: 700;
+  box-shadow: inset 4px 0 0 var(--ink);
+}
+
+.pickerEmpty {
+  padding: 0.7rem 0.8rem;
+  color: var(--ink-muted);
+}
+
+// Open meetups: date plate on the left of each meetup, like a departures board
+.meetupItem {
+  align-items: flex-start;
+}
+
+.dateBlock {
+  flex-shrink: 0;
+  width: 4.5rem;
+  padding: 0.5rem 0.25rem;
+  text-align: center;
+  background: var(--ink);
+  color: var(--paper);
+
+  @media (max-width: 560px) {
+    width: auto;
+    display: flex;
+    gap: 0.5rem;
+    align-items: baseline;
+    justify-content: flex-start;
+    padding: 0.4rem 0.7rem;
+    align-self: flex-start;
+  }
+}
+
+.dateWeekday,
+.dateMonth {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.dateWeekday {
+  color: var(--accent);
+}
+
+.dateDay {
+  display: block;
+  font-size: 1.7rem;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.metaLine {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.9rem;
+  margin-top: 0.45rem;
+  font-size: 0.88rem;
+  color: var(--ink-2);
+
+  i {
+    font-size: 0.8rem;
+    margin-right: 0.3rem;
+    color: var(--ink-muted);
+  }
+}
+
+.meetupLink {
+  overflow-wrap: anywhere;
 }

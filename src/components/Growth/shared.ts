@@ -13,17 +13,33 @@ export const CITY_NAMES: Record<string, string> = {
 
 export const CEFR_LEVELS = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2', 'native'] as const;
 
-// Languages offered in pickers; any ISO code also works through the API
-export const COMMON_LANGUAGES = [
-  'fi', 'sv', 'en', 'ru', 'uk', 'ar', 'fa', 'so', 'et', 'es', 'pt', 'fr', 'de', 'it', 'pl', 'tr', 'zh',
-  'hi', 'bn', 'ur', 'vi', 'th', 'ku', 'ti', 'am', 'sq', 'ro', 'ja', 'ko', 'tl',
+// Everything the searchable picker offers: ISO 639-1 codes of living languages people speak in Finland and beyond
+export const ALL_LANGUAGES = [
+  'fi', 'sv', 'en', 'se', 'af', 'am', 'ar', 'az', 'be', 'bg', 'bn', 'bs', 'ca', 'cs', 'cy', 'da', 'de', 'el', 'eo',
+  'es', 'et', 'eu', 'fa', 'fil', 'fo', 'fr', 'ga', 'gl', 'gu', 'ha', 'he', 'hi', 'hr', 'hu', 'hy', 'id', 'ig', 'is',
+  'it', 'ja', 'ka', 'kk', 'km', 'kn', 'ko', 'ku', 'ky', 'lo', 'lt', 'lv', 'mk', 'ml', 'mn', 'mr', 'ms', 'mt', 'my',
+  'ne', 'nl', 'no', 'om', 'pa', 'pl', 'ps', 'pt', 'ro', 'ru', 'rw', 'sd', 'si', 'sk', 'sl', 'so', 'sq', 'sr', 'sw',
+  'ta', 'te', 'tg', 'th', 'ti', 'tk', 'tr', 'tt', 'ug', 'uk', 'ur', 'uz', 'vi', 'wo', 'xh', 'yi', 'yo', 'zh', 'zu',
 ];
+
+/** The language's own name for itself, e.g. "fi" -> "Suomi"; empty when the browser does not know it. */
+export function endonym(code: string): string {
+  try {
+    const name = new Intl.DisplayNames([code], { type: 'language' }).of(code);
+    if (!name || name === code) return '';
+    return name.charAt(0).toLocaleUpperCase(code) + name.slice(1);
+  } catch {
+    return '';
+  }
+}
 
 /** Human-readable language name in the UI language, e.g. "fi" -> "Finnish" / "финский". */
 export function languageName(code: string, uiLanguage: string): string {
   try {
     const names = new Intl.DisplayNames([uiLanguage], { type: 'language' });
-    return names.of(code) ?? code;
+    const name = names.of(code) ?? code;
+    // Some locales (ru, uk, fi, sv) give lowercase names; they are used as titles here
+    return name.charAt(0).toLocaleUpperCase(uiLanguage) + name.slice(1);
   } catch {
     return code;
   }

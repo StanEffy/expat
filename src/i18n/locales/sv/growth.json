@@ -49,6 +49,10 @@
       "impact": {
         "title": "Mätbar effekt",
         "text": "Anonyma resultat i realtid för städer och finansiärer."
+      },
+      "meetups": {
+        "title": "Öppna träffar",
+        "text": "Språkcaféer, regelbundna samtal och promenader som medlemmarna själva ordnar. Gå med eller starta din egen."
       }
     }
   },
@@ -544,5 +548,69 @@
     "settlingTitle": "Tid att komma i ordning (median dagar från ankomst)",
     "method": "Data i realtid, uppdateras var 10:e minut. Svar räknas bara med separat samtycke, och siffror som bygger på färre än 10 personer döljs. Integration: IPL-12 (Immigration Policy Lab). Brokontakter: lokala broar enligt Granovetter. Företag: PRH:s öppna data (CC BY 4.0).",
     "generated": "Uppdaterad {{date}}."
+  },
+  "meetups": {
+    "title": "Öppna träffar",
+    "subtitle": "Träffar som medlemmarna ordnar själva: ett språkcafé på lördagar, ett samtal varannan vecka, en promenad. Starta din egen eller kom bara dit.",
+    "organize": "Ordna en träff",
+    "organizeHint": "Välj en tid och en plats eller en samtalslänk. Det är din träff, inte ett evenemang från tjänsten: du bestämmer formen.",
+    "openForm": "Ny träff",
+    "closeForm": "Stäng",
+    "fields": {
+      "title": "Namn",
+      "titlePlaceholder": "Finska språkcafé på biblioteket",
+      "description": "Vad händer där",
+      "descriptionPlaceholder": "Vem den är för, vilken nivå, vad man tar med",
+      "languages": "Språk som talas (valfritt, högst 3)",
+      "addLanguage": "Lägg till ett språk",
+      "format": "Form",
+      "link": "Samtalslänk",
+      "place": "Plats",
+      "placePlaceholder": "Oodi, 2:a våningen, vid kaféet",
+      "recurrence": "Hur ofta",
+      "date": "Datum",
+      "firstDate": "Första datum",
+      "from": "Från",
+      "to": "Till",
+      "capacity": "Max antal personer (valfritt)"
+    },
+    "format": {
+      "in_person": "På plats",
+      "online": "Videosamtal"
+    },
+    "recurrence": {
+      "weekly": "Varje vecka",
+      "biweekly": "Varannan vecka",
+      "once": "En gång"
+    },
+    "next": "nästa",
+    "anyCity": "Vilken stad som helst",
+    "anyLanguage": "Vilket språk som helst",
+    "anyFormat": "Online och på plats",
+    "filterLanguage": "Språk",
+    "onlyMine": "Bara mina",
+    "linkPrivate": "Bara de som anmäler sig ser länken.",
+    "linkAfterJoin": "Länken syns efter anmälan",
+    "timezone": "Tiderna är finsk tid. Återkommande träffar sker samma veckodag som den första.",
+    "endAfterStart": "Träffen måste sluta efter att den börjar.",
+    "publish": "Publicera",
+    "created": "Publicerad. Du står på listan som arrangör.",
+    "upcoming": "Kommande",
+    "empty": "Inga träffar här än. Starta en: ofta räcker det med en fast tid.",
+    "organizer": "Arrangör: {{name}}",
+    "members": "Kommer: {{count}}",
+    "membersOf": "Kommer: {{count}} av {{capacity}}",
+    "join": "Jag kommer",
+    "joined": "Du står på listan. Vi ses!",
+    "full": "Fullt",
+    "leave": "Jag kan inte komma",
+    "left": "Du står inte längre på listan",
+    "cancel": "Ställ in träffen",
+    "cancelled": "Träffen är inställd",
+    "cancelConfirm": "Ställa in träffen för alla? Den försvinner från listan."
+  },
+  "languagePicker": {
+    "search": "Skriv ett språk…",
+    "noResults": "Inget språk hittades"
   }
 }

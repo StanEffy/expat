@@ -49,6 +49,10 @@
       "impact": {
         "title": "Measured impact",
         "text": "Anonymous live results for cities and funders."
+      },
+      "meetups": {
+        "title": "Open meetups",
+        "text": "Speaking clubs, regular calls and walks that members run. Join one or start your own."
       }
     }
   },
@@ -544,5 +548,69 @@
     "settlingTitle": "Time to settle (median days from arrival)",
     "method": "Live data, updated every 10 minutes. Answers count only with a separate opt-in, and any figure built from fewer than 10 people is hidden. Integration: IPL-12 (Immigration Policy Lab). Bridging ties: local bridges in Granovetter's sense. Companies: PRH open data (CC BY 4.0).",
     "generated": "Updated {{date}}."
+  },
+  "meetups": {
+    "title": "Open meetups",
+    "subtitle": "Meetups that members run themselves: a Saturday speaking club, a call every other week, a walk. Start your own or just show up.",
+    "organize": "Organize a meetup",
+    "organizeHint": "Pick a time and a place or a call link. It is your meetup, not an event by the platform: you decide the format.",
+    "openForm": "New meetup",
+    "closeForm": "Close",
+    "fields": {
+      "title": "Name",
+      "titlePlaceholder": "Finnish speaking club at the library",
+      "description": "What happens there",
+      "descriptionPlaceholder": "Who it is for, what level, what to bring",
+      "languages": "Languages spoken (optional, up to 3)",
+      "addLanguage": "Add a language",
+      "format": "Format",
+      "link": "Call link",
+      "place": "Place",
+      "placePlaceholder": "Oodi, 2nd floor, café corner",
+      "recurrence": "How often",
+      "date": "Date",
+      "firstDate": "First date",
+      "from": "From",
+      "to": "To",
+      "capacity": "Max people (optional)"
+    },
+    "format": {
+      "in_person": "In person",
+      "online": "Online call"
+    },
+    "recurrence": {
+      "weekly": "Every week",
+      "biweekly": "Every two weeks",
+      "once": "One time"
+    },
+    "next": "next",
+    "anyCity": "Any city",
+    "anyLanguage": "Any language",
+    "anyFormat": "Online and in person",
+    "filterLanguage": "Language",
+    "onlyMine": "Only mine",
+    "linkPrivate": "Only people who sign up see the link.",
+    "linkAfterJoin": "Link appears after you sign up",
+    "timezone": "Times are Finnish time. Repeating meetups happen on the same weekday as the first date.",
+    "endAfterStart": "The meetup has to end after it starts.",
+    "publish": "Publish",
+    "created": "Published. You are on the list as the organizer.",
+    "upcoming": "Upcoming",
+    "empty": "No meetups here yet. Start one: a regular slot is often all it takes.",
+    "organizer": "Organizer: {{name}}",
+    "members": "Coming: {{count}}",
+    "membersOf": "Coming: {{count}} of {{capacity}}",
+    "join": "I’ll come",
+    "joined": "You are on the list. See you there!",
+    "full": "Full",
+    "leave": "I can’t come",
+    "left": "You are off the list",
+    "cancel": "Cancel meetup",
+    "cancelled": "Meetup cancelled",
+    "cancelConfirm": "Cancel this meetup for everyone? It disappears from the list."
+  },
+  "languagePicker": {
+    "search": "Type a language…",
+    "noResults": "No language found"
   }
 }

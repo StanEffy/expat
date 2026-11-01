@@ -364,3 +364,45 @@ export interface ImpactReport {
   };
   settling: { task_id: string; people: number; median_days: number }[];
 }
+
+// --- Open meetups ---
+
+export type MeetupFormat = 'online' | 'in_person';
+export type MeetupRecurrence = 'once' | 'weekly' | 'biweekly';
+
+export interface OpenMeetup {
+  id: number;
+  organizer_id: number;
+  organizer_name: string;
+  title: string;
+  description: string;
+  languages: string[];
+  format: MeetupFormat;
+  /** place or call link; empty while an online link is hidden */
+  location: string;
+  location_hidden: boolean;
+  municipality_id?: string;
+  recurrence: MeetupRecurrence;
+  start_date: string; // YYYY-MM-DD, Europe/Helsinki
+  start_time: string; // HH:MM
+  end_time: string; // HH:MM
+  capacity?: number;
+  member_count: number;
+  joined: boolean;
+  is_organizer: boolean;
+  next_date: string; // YYYY-MM-DD
+}
+
+export interface CreateMeetupPayload {
+  title: string;
+  description: string;
+  languages: string[];
+  format: MeetupFormat;
+  location: string;
+  municipality_id?: string;
+  recurrence: MeetupRecurrence;
+  start_date: string;
+  start_time: string;
+  end_time: string;
+  capacity?: number;
+}

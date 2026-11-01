@@ -38,6 +38,7 @@ const Ventures = lazyWithRetry(() => import('@/pages/growth/Ventures'));
 const Network = lazyWithRetry(() => import('@/pages/growth/Network'));
 const ScanLanding = lazyWithRetry(() => import('@/pages/growth/ScanLanding'));
 const Tandems = lazyWithRetry(() => import('@/pages/growth/Tandems'));
+const Meetups = lazyWithRetry(() => import('@/pages/growth/Meetups'));
 const Timebank = lazyWithRetry(() => import('@/pages/growth/Timebank'));
 const Challenges = lazyWithRetry(() => import('@/pages/growth/Challenges'));
 const Passport = lazyWithRetry(() => import('@/pages/growth/Passport'));
@@ -89,6 +90,7 @@ function App() {
                 <Route path="connect/:code" element={<ScanLanding mode="connect" />} />
                 <Route path="checkin/:code" element={<ScanLanding mode="checkin" />} />
                 <Route path="tandems" element={<Tandems />} />
+                <Route path="meetups" element={<Meetups />} />
                 <Route path="timebank" element={<Timebank />} />
                 <Route path="challenges" element={<Challenges />} />
                 <Route path="passport" element={<Passport />} />

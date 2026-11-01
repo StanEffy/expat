@@ -3,6 +3,7 @@ export const TOGETHER_LINKS = [
   { to: '/cooperate', icon: 'pi pi-sparkles', key: 'cooperate' },
   { to: '/network', icon: 'pi pi-users', key: 'network' },
   { to: '/tandems', icon: 'pi pi-comments', key: 'tandems' },
+  { to: '/meetups', icon: 'pi pi-calendar', key: 'meetups' },
   { to: '/timebank', icon: 'pi pi-clock', key: 'timebank' },
   { to: '/challenges', icon: 'pi pi-flag', key: 'challenges' },
   { to: '/integration', icon: 'pi pi-map', key: 'integration' },

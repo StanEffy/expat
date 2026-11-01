@@ -49,6 +49,10 @@
       "impact": {
         "title": "Mitattu vaikutus",
         "text": "Anonyymit reaaliaikaiset tulokset kaupungeille ja rahoittajille."
+      },
+      "meetups": {
+        "title": "Avoimet tapaamiset",
+        "text": "Jäsenten itse järjestämiä keskustelukerhoja, säännöllisiä puheluita ja kävelyjä. Liity tai perusta oma."
       }
     }
   },
@@ -544,5 +548,69 @@
     "settlingTitle": "Asettumisen kesto (mediaani päivinä saapumisesta)",
     "method": "Reaaliaikaiset tiedot, päivittyvät 10 minuutin välein. Vastaukset lasketaan vain erillisellä suostumuksella, ja alle 10 hengen ryhmiin perustuvat luvut piilotetaan. Kotoutuminen: IPL-12 (Immigration Policy Lab). Siltayhteydet: Granovetterin paikalliset sillat. Yritykset: PRH:n avoin data (CC BY 4.0).",
     "generated": "Päivitetty {{date}}."
+  },
+  "meetups": {
+    "title": "Avoimet tapaamiset",
+    "subtitle": "Jäsenten itse järjestämiä tapaamisia: lauantain keskustelukerho, puhelu joka toinen viikko, kävely. Perusta oma tai tule mukaan.",
+    "organize": "Järjestä tapaaminen",
+    "organizeHint": "Valitse aika ja paikka tai puhelulinkki. Tapaaminen on sinun, ei palvelun järjestämä: sinä päätät muodon.",
+    "openForm": "Uusi tapaaminen",
+    "closeForm": "Sulje",
+    "fields": {
+      "title": "Nimi",
+      "titlePlaceholder": "Suomen kielen keskustelukerho kirjastossa",
+      "description": "Mitä siellä tehdään",
+      "descriptionPlaceholder": "Kenelle, mikä taso, mitä mukaan",
+      "languages": "Puhutut kielet (valinnainen, enintään 3)",
+      "addLanguage": "Lisää kieli",
+      "format": "Muoto",
+      "link": "Puhelulinkki",
+      "place": "Paikka",
+      "placePlaceholder": "Oodi, 2. kerros, kahvilan vieressä",
+      "recurrence": "Kuinka usein",
+      "date": "Päivä",
+      "firstDate": "Ensimmäinen kerta",
+      "from": "Alkaa",
+      "to": "Päättyy",
+      "capacity": "Enintään osallistujia (valinnainen)"
+    },
+    "format": {
+      "in_person": "Paikan päällä",
+      "online": "Verkkopuhelu"
+    },
+    "recurrence": {
+      "weekly": "Joka viikko",
+      "biweekly": "Joka toinen viikko",
+      "once": "Kerran"
+    },
+    "next": "seuraava",
+    "anyCity": "Mikä tahansa kaupunki",
+    "anyLanguage": "Mikä tahansa kieli",
+    "anyFormat": "Verkossa ja paikan päällä",
+    "filterLanguage": "Kieli",
+    "onlyMine": "Vain omat",
+    "linkPrivate": "Linkin näkevät vain ilmoittautuneet.",
+    "linkAfterJoin": "Linkki näkyy ilmoittautumisen jälkeen",
+    "timezone": "Ajat ovat Suomen aikaa. Toistuvat tapaamiset ovat samana viikonpäivänä kuin ensimmäinen.",
+    "endAfterStart": "Tapaamisen täytyy päättyä alkamisen jälkeen.",
+    "publish": "Julkaise",
+    "created": "Julkaistu. Olet listalla järjestäjänä.",
+    "upcoming": "Tulossa",
+    "empty": "Täällä ei ole vielä tapaamisia. Aloita sinä: usein riittää, että sopii vakioajan.",
+    "organizer": "Järjestäjä: {{name}}",
+    "members": "Tulossa: {{count}}",
+    "membersOf": "Tulossa: {{count}} / {{capacity}}",
+    "join": "Tulen",
+    "joined": "Olet listalla. Nähdään!",
+    "full": "Täynnä",
+    "leave": "En pääse",
+    "left": "Et ole enää listalla",
+    "cancel": "Peru tapaaminen",
+    "cancelled": "Tapaaminen peruttu",
+    "cancelConfirm": "Perutaanko tapaaminen kaikilta? Se poistuu listalta."
+  },
+  "languagePicker": {
+    "search": "Kirjoita kieli…",
+    "noResults": "Kieltä ei löytynyt"
   }
 }

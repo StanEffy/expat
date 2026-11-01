@@ -6,6 +6,7 @@ import type {
   CityChallenge,
   Connection,
   CoopIntro,
+  CreateMeetupPayload,
   CreateEventPayload,
   EndorsementSummary,
   EventAttendee,
@@ -13,6 +14,7 @@ import type {
   IntegrationPulse,
   IntegrationPulseAnswers,
   IntegrationPulseStatus,
+  OpenMeetup,
   Passport,
   Person,
   RegistryCompany,
@@ -105,6 +107,15 @@ export const tandemsService = {
     ),
   accept: (id: number) => apiClient.post(`/api/tandems/requests/${id}/accept`, undefined, auth),
   decline: (id: number) => apiClient.post(`/api/tandems/requests/${id}/decline`, undefined, auth),
+};
+
+export const meetupsService = {
+  list: (language = '', municipality = '', format = '') =>
+    apiClient.get<OpenMeetup[]>('/api/meetups', { ...auth, params: { language, municipality_id: municipality, format } }),
+  create: (payload: CreateMeetupPayload) => apiClient.post<{ id: number }>('/api/meetups', payload, auth),
+  cancel: (id: number) => apiClient.delete(`/api/meetups/${id}`, auth),
+  join: (id: number) => apiClient.post(`/api/meetups/${id}/join`, undefined, auth),
+  leave: (id: number) => apiClient.delete(`/api/meetups/${id}/join`, auth),
 };
 
 export const timebankService = {

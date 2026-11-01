@@ -5,7 +5,8 @@ import { tandemsService } from '@/services/growthService';
 import { useNotification } from '@/hooks/useNotification';
 import { getUserId } from '@/utils/auth';
 import type { CefrLevel, TandemCandidate, TandemProfile, TandemRequest, UserLanguage } from '@/types/growth';
-import { CEFR_LEVELS, CITY_IDS, CITY_NAMES, COMMON_LANGUAGES, errorText, formatDate, languageName } from '@/components/Growth/shared';
+import { CEFR_LEVELS, CITY_IDS, CITY_NAMES, errorText, formatDate, languageName } from '@/components/Growth/shared';
+import { LanguagePicker } from '@/components/Growth/LanguagePicker';
 import styles from '@/components/Growth/Growth.module.scss';
 
 registerGrowthTranslations();
@@ -19,7 +20,6 @@ export const Tandems: React.FC = () => {
   const [languages, setLanguages] = useState<UserLanguage[]>([]);
   const [visible, setVisible] = useState(false);
   const [city, setCity] = useState('');
-  const [newLanguage, setNewLanguage] = useState('fi');
   const [suggestions, setSuggestions] = useState<TandemCandidate[]>([]);
   const [requests, setRequests] = useState<TandemRequest[]>([]);
   const [dirty, setDirty] = useState(false);
@@ -46,9 +46,9 @@ export const Tandems: React.FC = () => {
     setDirty(true);
   };
 
-  const addLanguage = () => {
-    if (languages.some((l) => l.language === newLanguage)) return;
-    setLanguages((prev) => [...prev, { language: newLanguage, level: 'A1', learning: true, can_help: false }]);
+  const addLanguage = (code: string) => {
+    if (!code || languages.some((l) => l.language === code)) return;
+    setLanguages((prev) => [...prev, { language: code, level: 'A1', learning: true, can_help: false }]);
     setDirty(true);
   };
 
@@ -93,8 +93,7 @@ export const Tandems: React.FC = () => {
                   <div className={styles.itemTitle}>{languageName(l.language, lang)}</div>
                   <div className={styles.actions} style={{ marginTop: '0.4rem' }}>
                     <select
-                      className={styles.input}
-                      style={{ width: 'auto' }}
+                      className={`${styles.input} ${styles.inputCompact}`}
                       value={l.level}
                       onChange={(e) => update(i, { level: e.target.value as CefrLevel, learning: e.target.value === 'native' ? false : l.learning })}
                       aria-label={t('tandems.level', 'Level')}
@@ -113,17 +112,20 @@ export const Tandems: React.FC = () => {
                     </label>
                   </div>
                 </div>
-                <button type="button" className={styles.dangerButton} aria-label={t('common.remove', 'Remove')} onClick={() => { setLanguages((prev) => prev.filter((_, j) => j !== i)); setDirty(true); }}>
+                <button type="button" className={styles.iconButton} aria-label={t('common.remove', 'Remove')} onClick={() => { setLanguages((prev) => prev.filter((_, j) => j !== i)); setDirty(true); }}>
                   <i className="pi pi-times" />
                 </button>
               </li>
             ))}
           </ul>
           <div className={styles.actions} style={{ marginTop: '0.9rem' }}>
-            <select className={styles.input} style={{ width: 'auto' }} value={newLanguage} onChange={(e) => setNewLanguage(e.target.value)} aria-label={t('tandems.addLanguage', 'Add language')}>
-              {COMMON_LANGUAGES.map((c) => <option key={c} value={c}>{languageName(c, lang)}</option>)}
-            </select>
-            <button type="button" className={styles.secondaryButton} onClick={addLanguage}><i className="pi pi-plus" /> {t('tandems.addLanguage', 'Add language')}</button>
+            <LanguagePicker
+              value=""
+              onChange={addLanguage}
+              exclude={languages.map((l) => l.language)}
+              ariaLabel={t('tandems.addLanguage', 'Add language')}
+              placeholder={`+ ${t('tandems.addLanguage', 'Add language')}`}
+            />
           </div>
           <div className={styles.form} style={{ marginTop: '1.2rem' }}>
             <label className={styles.checkbox}>

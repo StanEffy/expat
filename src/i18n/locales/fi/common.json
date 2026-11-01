@@ -202,7 +202,11 @@
     "tShirt": "Expat T-paita",
     "merch": "Expat Merch",
     "inStock": "Varastossa",
-    "outOfStock": "Loppunut varastosta"
+    "outOfStock": "Loppunut varastosta",
+    "enlarge": "Suurenna kuva",
+    "close": "Sulje",
+    "zoomInHint": "Napauta kohtaa lähentääksesi",
+    "zoomOutHint": "Napauta sovittaaksesi näytölle"
   },
   "polls": {
     "pageTitle": "Yhteisön kyselyt",

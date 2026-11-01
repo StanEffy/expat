@@ -27,76 +27,52 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: 32px;
-
-  @media (min-width: 768px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
 }
 
+// Wide product rows: the photos are 16:9, so they get most of the width
 .itemCard {
-  display: flex;
-  flex-direction: column;
   overflow: hidden;
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
   background-color: var(--surface-alt);
   border-radius: 0;
 
-  &:hover {
-    transform: translateY(-4px);
-    box-shadow: none;
-    background-color: var(--surface-alt);
-  }
-
   :global(.p-card-body) {
-    padding: 14px 16px 18px;
+    padding: 0;
   }
 
   :global(.p-card-content) {
     padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(220px, 1fr);
+
+    @media (max-width: 860px) {
+      grid-template-columns: 1fr;
+    }
   }
 }
 
 .imageContainer {
   position: relative;
   width: 100%;
-  aspect-ratio: 1;
+  aspect-ratio: 1344 / 768;
   overflow: hidden;
   background: var(--surface);
-  border-radius: 0 0 0 0;
 }
 
 .itemImage {
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  padding: 12px;
-  transition: transform 0.3s ease;
-
-  .itemCard:hover & {
-    transform: scale(1.05);
-  }
+  object-fit: cover;
 }
 
 .outOfStockOverlay {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(244, 244, 241, 0.85);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 0 0 0 0;
+  top: 12px;
+  left: 12px;
+  pointer-events: none;
 }
 
 .itemInfo {
-  padding: 16px;
+  padding: 24px;
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -127,4 +103,25 @@
 
 .stockBadge {
   align-self: flex-start;
+}
+
+.enlarge {
+  align-self: flex-start;
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: transparent;
+  color: var(--ink);
+  border: 2px solid var(--ink);
+  border-radius: 0;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+
+  &:hover {
+    background: var(--accent);
+    color: var(--on-accent);
+  }
 }

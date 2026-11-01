@@ -1,8 +1,10 @@
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Card } from 'primereact/card';
 import { Badge } from 'primereact/badge';
 import SEO from '../components/Common/SEO';
 import ImageMagnifier from '../components/Common/ImageMagnifier';
+import ImageLightbox from '../components/Common/ImageLightbox';
 import styles from './Shop.module.scss';
 import tShirtImage from '../assets/shop/t-shirt.png';
 import merchImage from '../assets/shop/merch.png';
@@ -19,6 +21,7 @@ interface ShopItem {
 const Shop = () => {
   const { t } = useTranslation();
   const currentUrl = typeof window !== 'undefined' ? window.location.href : '';
+  const [enlarged, setEnlarged] = useState<ShopItem | null>(null);
 
   const shopItems: ShopItem[] = [
     {
@@ -66,6 +69,8 @@ const Shop = () => {
                   src={item.image}
                   alt={t(item.nameKey)}
                   imageClassName={styles.itemImage}
+                  onClick={() => setEnlarged(item)}
+                  clickLabel={t('shop.enlarge', 'Enlarge photo')}
                 />
                 {!item.inStock && (
                   <div className={styles.outOfStockOverlay}>
@@ -82,11 +87,16 @@ const Shop = () => {
                 {item.inStock && (
                   <Badge value={t('shop.inStock')} severity="success" className={styles.stockBadge} />
                 )}
+                <button type="button" className={styles.enlarge} onClick={() => setEnlarged(item)}>
+                  <i className="pi pi-search-plus" aria-hidden="true" />
+                  {t('shop.enlarge', 'Enlarge photo')}
+                </button>
               </div>
             </Card>
           ))}
         </div>
       </div>
+      {enlarged && <ImageLightbox src={enlarged.image} alt={t(enlarged.nameKey)} onClose={() => setEnlarged(null)} />}
     </>
   );
 };

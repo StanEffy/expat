@@ -202,7 +202,11 @@
     "tShirt": "Expat T-shirt",
     "merch": "Expat Merch",
     "inStock": "I lager",
-    "outOfStock": "Slut i lager"
+    "outOfStock": "Slut i lager",
+    "enlarge": "Förstora bilden",
+    "close": "Stäng",
+    "zoomInHint": "Klicka på en plats för att zooma in",
+    "zoomOutHint": "Klicka för att anpassa till skärmen"
   },
   "polls": {
     "pageTitle": "Gemenskapsomröstningar",

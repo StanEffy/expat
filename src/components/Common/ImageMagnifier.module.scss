@@ -5,6 +5,10 @@
   display: flex;
 }
 
+.clickable {
+  cursor: zoom-in;
+}
+
 .image {
   width: 100%;
   height: 100%;
@@ -13,13 +17,14 @@
   user-select: none;
 }
 
+// Square, like a sign plate; hidden on touch screens, where there is no hover
 .lens {
   position: absolute;
   pointer-events: none;
-  border-radius: 50%;
-  border: 2px solid var(--rule);
-  box-shadow: none;
-  background-color: var(--surface-alt);
-  //
-  mix-blend-mode: screen;
+  border: 2px solid var(--ink);
+  background-color: var(--surface);
+
+  @media (hover: none) {
+    display: none;
+  }
 }

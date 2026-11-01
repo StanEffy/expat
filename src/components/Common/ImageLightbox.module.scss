@@ -1,0 +1,90 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 10050;
+  display: flex;
+  flex-direction: column;
+  background: rgba(7, 8, 10, 0.92);
+  animation: fadeIn 0.15s ease-out;
+}
+
+.viewport {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 56px 16px 8px;
+  overflow: hidden;
+}
+
+// Zoomed in: the photo is bigger than the screen, scroll or drag around it
+.viewportZoomed {
+  display: block;
+  overflow: auto;
+  padding: 0;
+  overscroll-behavior: contain;
+}
+
+.fit {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  cursor: zoom-in;
+  user-select: none;
+}
+
+.zoomed {
+  display: block;
+  max-width: none;
+  height: auto;
+  cursor: zoom-out;
+  user-select: none;
+}
+
+.close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 1;
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent);
+  color: var(--on-accent);
+  border: 2px solid var(--on-accent);
+  border-radius: 0;
+  font-size: 1.1rem;
+  cursor: pointer;
+
+  &:focus-visible {
+    outline: 3px solid var(--on-sign);
+    outline-offset: 2px;
+  }
+}
+
+.hint {
+  margin: 0;
+  padding: 10px 16px 14px;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #a7adb5;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .backdrop {
+    animation: none;
+  }
+}

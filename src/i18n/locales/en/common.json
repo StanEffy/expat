@@ -202,7 +202,11 @@
     "tShirt": "Expat T-Shirt",
     "merch": "Expat Merch",
     "inStock": "In Stock",
-    "outOfStock": "Out of Stock"
+    "outOfStock": "Out of Stock",
+    "enlarge": "Enlarge photo",
+    "close": "Close",
+    "zoomInHint": "Click a spot to zoom in",
+    "zoomOutHint": "Click to fit the screen"
   },
   "polls": {
     "pageTitle": "Community Polls",

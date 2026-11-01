@@ -113,7 +113,8 @@
   }
 
   &:focus-visible {
-    outline: none;
+    outline: 3px solid var(--link);
+    outline-offset: -3px;
     box-shadow: none;
   }
 
@@ -121,17 +122,14 @@
     outline: none;
   }
 
-  &.tabActive {
-    color: var(--ink);
+  // Text sits on the yellow fill, so it stays dark in both themes
+  &.tabActive,
+  &.tabActive:hover {
+    color: var(--on-accent);
     font-weight: 600;
 
     &::after {
       opacity: 1;
-    }
-
-    &:hover::after {
-      background: var(--accent);
-      color: var(--on-accent);
     }
   }
 }

@@ -10,13 +10,17 @@ import { IntegrationFunnel } from '@/components/MunicipalAnalytics/IntegrationFu
 import { TalentRadar } from '@/components/MunicipalAnalytics/TalentRadar';
 import { DemographicsBreakdown } from '@/components/MunicipalAnalytics/DemographicsBreakdown';
 import { SentimentInsights } from '@/components/MunicipalAnalytics/SentimentInsights';
+import { ImpactPanel } from '@/components/Growth/ImpactPanel';
+import { registerGrowthTranslations } from '@/i18n/registerGrowth';
 import styles from './MunicipalDashboard.module.scss';
 
 // Register translations bundle
 registerMunicipalAnalyticsTranslations();
+registerGrowthTranslations();
 
 export const MunicipalDashboard: React.FC = () => {
   const { t } = useTranslation('analytics');
+  const { t: tGrowth } = useTranslation('growth');
   const currentUrl = typeof window !== 'undefined' ? window.location.href : '';
 
   const {
@@ -189,6 +193,14 @@ export const MunicipalDashboard: React.FC = () => {
 
             {/* Sentiment & Citizen Voice */}
             <SentimentInsights sentiment={dataset.sentiment} />
+
+            {/* Live, anonymous outcomes measured on the platform */}
+            <section style={{ marginTop: '2.5rem' }}>
+              <h2 style={{ color: 'var(--ink)', fontSize: '1.5rem', fontWeight: 800, margin: '0 0 1rem' }}>
+                {tGrowth('impact.liveTitle', 'Live impact from platform data')}
+              </h2>
+              <ImpactPanel municipality={selectedCity} />
+            </section>
           </>
         )}
       </div>

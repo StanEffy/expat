@@ -63,5 +63,22 @@
     "load": "Could not load questions. Please try again later.",
     "save": "Could not save the answer",
     "matching": "Could not update matching settings"
+  },
+  "intro": {
+    "button": "Say hi",
+    "title": "Say hi to {{name}}",
+    "hint": "They will see your name and message. If they accept, you become connected and see each other's email.",
+    "placeholder": "A few words about you and what you would like to build",
+    "send": "Send",
+    "sent": "Sent! You will find their answer under My connections → Intros.",
+    "error": "Could not send",
+    "and": " and ",
+    "suggested": "Hi! It looks like we see {{topics}} the same way. Would you like to grab a coffee and talk about building something together?",
+    "suggestedGeneric": "Hi! Our answers match quite well. Would you like to grab a coffee and talk about building something together?",
+    "state": {
+      "pending": "Intro sent — waiting for an answer",
+      "accepted": "Connected",
+      "declined": "They declined this time"
+    }
   }
 }

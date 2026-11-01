@@ -3,11 +3,15 @@ import { useTranslation } from 'react-i18next';
 import type { CoopMatch } from '@/types/coop';
 import styles from './MatchCard.module.scss';
 
+export type IntroState = 'none' | 'pending' | 'accepted' | 'declined';
+
 export interface MatchCardProps {
   match: CoopMatch;
+  introState?: IntroState;
+  onIntro?: () => void;
 }
 
-export const MatchCard: React.FC<MatchCardProps> = ({ match }) => {
+export const MatchCard: React.FC<MatchCardProps> = ({ match, introState = 'none', onIntro }) => {
   const { t } = useTranslation('coop');
 
   return (
@@ -54,6 +58,20 @@ export const MatchCard: React.FC<MatchCardProps> = ({ match }) => {
               <li key={r.question_id}>{r.text}</li>
             ))}
           </ul>
+        </div>
+      )}
+
+      {onIntro && (
+        <div className={styles.introRow}>
+          {introState === 'none' ? (
+            <button type="button" className={styles.introButton} onClick={onIntro}>
+              <i className="pi pi-send" aria-hidden="true" /> {t('intro.button')}
+            </button>
+          ) : (
+            <span className={`${styles.introState} ${introState === 'accepted' ? styles.introAccepted : ''}`}>
+              {t(`intro.state.${introState}`)}
+            </span>
+          )}
         </div>
       )}
     </article>

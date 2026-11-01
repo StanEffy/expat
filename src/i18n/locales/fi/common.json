@@ -18,7 +18,19 @@
     "serviceRequests": "Palvelupyynnöt",
     "community": "Yhteisökeskus",
     "cooperate": "Yhteistyö",
-    "cityServices": "Kuntapalvelut"
+    "cityServices": "Kuntapalvelut",
+    "together": "Yhdessä",
+    "togetherItems": {
+      "cooperate": "Yhteistyö",
+      "network": "Yhteyteni",
+      "tandems": "Kielitandemit",
+      "timebank": "Aikapankki",
+      "challenges": "Kaupungin haasteet",
+      "integration": "Kotoutumiskartta",
+      "ventures": "Yritykseni",
+      "passport": "Taitopassi",
+      "impact": "Mitattu vaikutus"
+    }
   },
   "company": {
     "information": "Yrityksen tiedot",
@@ -69,7 +81,37 @@
   },
   "home": {
     "welcome": "Tervetuloa Expat Appille",
-    "description": "Etsi yrityksiä ja työpaikkoja Suomessa"
+    "description": "Etsi yrityksiä ja työpaikkoja Suomessa",
+    "eyebrow": "01 / Suomi, mistä aloittaa",
+    "headline": "Muutto on sata pientä asiaa. Me pidämme listaa.",
+    "lead": "Rekisteröinti, verokortti, Kela, työ ja ihmiset ympärilläsi. Askel kerrallaan, omalla kielelläsi.",
+    "ctaPlan": "Tee oma suunnitelma",
+    "ctaWork": "Etsi töitä",
+    "boardLabel": "Ensimmäiset päivät",
+    "boardColumn": "Vaihe",
+    "youAreHere": "OLET TÄSSÄ",
+    "steps": {
+      "dvv": "Osoitteen rekisteröinti",
+      "vero": "Verokortti",
+      "bank": "Pankkitili ja pankkitunnukset",
+      "kela": "Sosiaaliturva"
+    },
+    "sectionsLabel": "Osiot",
+    "newBadge": "uusi",
+    "sections": {
+      "work": {
+        "title": "Työ ja yritykset",
+        "text": "Yritykset, jotka palkkaavat kansainvälisiä osaajia, ja CV suomalaiseen tapaan."
+      },
+      "city": {
+        "title": "Kaupunki",
+        "text": "Palvelupyynnöt, osallistuva budjetointi ja tapahtumat kotisi lähellä."
+      },
+      "together": {
+        "title": "Yhdessä",
+        "text": "Tandemit, aikapankki, perustajakumppanit ja ihmiset, jotka oikeasti tunnet."
+      }
+    }
   },
   "favourites": {
     "title": "Suosikkiyritykset",
@@ -499,4 +541,4 @@
       "communityBtn": "Yhteisö"
     }
   }
-} 
+}

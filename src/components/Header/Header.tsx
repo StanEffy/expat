@@ -9,6 +9,8 @@ import LanguageSwitcher from "../Common/LanguageSwitcher";
 import AnimatedLogo from "./AnimatedLogo";
 import styles from "./Header.module.scss";
 import { useUserNotifications } from "../../contexts/UserNotificationsContext";
+import { TOGETHER_LINKS, isTogetherPath } from "@/components/Growth/togetherLinks";
+
 
 const MobileMenu = lazy(() => import("../Navigation/MobileMenu"));
 
@@ -20,11 +22,13 @@ const Header = () => {
   const { unreadCount } = useUserNotifications();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const [isTogetherOpen, setIsTogetherOpen] = useState(false);
+  const togetherRef = useRef<HTMLDivElement>(null);
 
   const isCompaniesActive = location.pathname.startsWith("/companies") || location.pathname === "/categories";
   const isShopActive = location.pathname.startsWith("/shop");
   const isPollsActive = location.pathname.startsWith("/polls");
-  const isCooperateActive = location.pathname.startsWith("/cooperate");
+  const isTogetherActive = isTogetherPath(location.pathname);
   const isOnboardingActive = location.pathname.startsWith("/onboarding");
   const isBudgetingActive = location.pathname.startsWith("/participatory-budget");
   const isServiceRequestsActive = location.pathname.startsWith("/service-requests");
@@ -113,7 +117,33 @@ const Header = () => {
 
   useEffect(() => {
     setIsDropdownOpen(false);
+    setIsTogetherOpen(false);
   }, [location.pathname]);
+
+  useEffect(() => {
+    if (!isTogetherOpen) return;
+
+    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
+      if (togetherRef.current && !togetherRef.current.contains(event.target as Node)) {
+        setIsTogetherOpen(false);
+      }
+    };
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsTogetherOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("touchstart", handleClickOutside);
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchstart", handleClickOutside);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isTogetherOpen]);
 
   const profileButtonContent = useMemo(() => {
     if (!isAuthenticated) {
@@ -196,13 +226,44 @@ const Header = () => {
           onClick={() => navigate("/shop")}
           className={`${styles.navButton} ${isShopActive ? styles.active : ''}`}
         />
-        <Button
-          label={t("navigation.cooperate")}
-          text
-          icon="pi pi-sparkles"
-          onClick={() => navigate("/cooperate")}
-          className={`${styles.navButton} ${isCooperateActive ? styles.active : ''}`}
-        />
+        <div className={styles.dropdownWrapper} ref={togetherRef}>
+          <Button
+            text
+            icon="pi pi-sparkles"
+            onClick={() => setIsTogetherOpen((prev) => !prev)}
+            className={`${styles.navButton} ${styles.dropdownButton} ${isTogetherActive ? styles.active : ''} ${isTogetherOpen ? styles.dropdownOpen : ''}`}
+            aria-haspopup="true"
+            aria-expanded={isTogetherOpen}
+            aria-controls="together_menu"
+          >
+            <span className={styles.dropdownButtonLabel}>
+              {t("navigation.together")}
+              <i className={`pi pi-chevron-down ${styles.dropdownChevron} ${isTogetherOpen ? styles.chevronRotated : ''}`} />
+            </span>
+          </Button>
+          {isTogetherOpen && (
+            <div id="together_menu" className={styles.dropdownMenu} role="menu" aria-label={t("navigation.together")}>
+              <ul className={styles.dropdownList} role="none">
+                {TOGETHER_LINKS.map((item) => (
+                  <li key={item.to} role="none" className={styles.dropdownListItem}>
+                    <button
+                      type="button"
+                      className={`${styles.dropdownMenuItem} ${location.pathname.startsWith(item.to) ? styles.activeMenuItem : ''}`}
+                      onClick={() => {
+                        navigate(item.to);
+                        setIsTogetherOpen(false);
+                      }}
+                      role="menuitem"
+                    >
+                      <i className={`${item.icon} ${styles.menuItemIcon}`} />
+                      <span className={styles.menuItemText}>{t(`navigation.togetherItems.${item.key}`)}</span>
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
         <Button
           label={t("navigation.polls")}
           text

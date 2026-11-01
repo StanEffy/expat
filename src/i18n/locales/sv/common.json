@@ -18,7 +18,19 @@
     "serviceRequests": "Serviceärenden",
     "community": "Gemenskapscenter",
     "cooperate": "Samarbete",
-    "cityServices": "Kommuntjänster"
+    "cityServices": "Kommuntjänster",
+    "together": "Tillsammans",
+    "togetherItems": {
+      "cooperate": "Samarbete",
+      "network": "Mina kontakter",
+      "tandems": "Språktandem",
+      "timebank": "Tidsbank",
+      "challenges": "Stadens utmaningar",
+      "integration": "Inlevelsekarta",
+      "ventures": "Mina företag",
+      "passport": "Kompetenspass",
+      "impact": "Mätbar effekt"
+    }
   },
   "company": {
     "information": "Företagsinformation",
@@ -69,7 +81,37 @@
   },
   "home": {
     "welcome": "Välkommen till Expat App",
-    "description": "Hitta företag och jobb tillgängliga i Finland"
+    "description": "Hitta företag och jobb tillgängliga i Finland",
+    "eyebrow": "01 / Finland, var ska man börja",
+    "headline": "Att flytta är hundra små ärenden. Vi håller listan.",
+    "lead": "Registrering, skattekort, FPA, jobb och människorna omkring dig. Ett steg i taget, på ditt språk.",
+    "ctaPlan": "Gör min plan",
+    "ctaWork": "Hitta jobb",
+    "boardLabel": "De första dagarna",
+    "boardColumn": "Steg",
+    "youAreHere": "DU ÄR HÄR",
+    "steps": {
+      "dvv": "Adressregistrering",
+      "vero": "Skattekort",
+      "bank": "Konto och bankkoder",
+      "kela": "Social trygghet"
+    },
+    "sectionsLabel": "Avsnitt",
+    "newBadge": "nytt",
+    "sections": {
+      "work": {
+        "title": "Jobb och företag",
+        "text": "Företag som anställer internationella, och ett CV enligt finska regler."
+      },
+      "city": {
+        "title": "Staden",
+        "text": "Serviceärenden, medborgarbudget och evenemang nära hemmet."
+      },
+      "together": {
+        "title": "Tillsammans",
+        "text": "Tandem, tidsbank, medgrundare och människor du faktiskt känner."
+      }
+    }
   },
   "favourites": {
     "title": "Favoritföretag",
@@ -499,4 +541,4 @@
       "communityBtn": "Gemenskap"
     }
   }
-} 
+}

@@ -5,6 +5,7 @@ import { registerOnboardingTranslations } from '@/i18n/registerOnboarding';
 import { useOnboarding } from '@/hooks/useOnboarding';
 import { OnboardingWizard } from '@/components/Onboarding/OnboardingWizard';
 import { OnboardingChecklist } from '@/components/Onboarding/OnboardingChecklist';
+import { SettlingCard } from '@/components/Growth/SettlingCard';
 import styles from './Onboarding.module.scss';
 
 // Ensure translations are available
@@ -72,6 +73,8 @@ export const Onboarding: React.FC = () => {
         {!isConfigured || !answers ? (
           <OnboardingWizard initialAnswers={answers} onComplete={setAnswers} />
         ) : (
+          <>
+          <SettlingCard municipalityId={answers.municipality} />
           <OnboardingChecklist
             answers={answers}
             tasks={tasks}
@@ -87,6 +90,7 @@ export const Onboarding: React.FC = () => {
             onSelectCategory={setSelectedCategory}
             onSelectFilterStatus={setFilterStatus}
           />
+          </>
         )}
       </div>
     </>

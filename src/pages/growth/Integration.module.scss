@@ -1,0 +1,93 @@
+.quiz {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.progressLabel {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: var(--ink-2);
+  margin-bottom: 0.45rem;
+}
+
+.progressTrack {
+  height: 6px;
+  border-radius: 0;
+  background: var(--surface-alt);
+  overflow: hidden;
+  margin-bottom: 1.4rem;
+}
+
+.progressFill {
+  height: 100%;
+  background: var(--accent);
+  transition: width 0.3s ease;
+}
+
+.question {
+  font-size: 1.35rem;
+  font-weight: 800;
+  line-height: 1.3;
+  margin: 0 0 1rem;
+
+  @media (max-width: 640px) {
+    font-size: 1.15rem;
+  }
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.2rem;
+}
+
+.option {
+  font: inherit;
+  text-align: left;
+  color: var(--ink);
+  padding: 0.75rem 1rem;
+  border-radius: 0;
+  border: 1px solid var(--rule);
+  background: var(--surface);
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover {
+    border-color: var(--ink);
+    background: var(--accent-soft);
+  }
+}
+
+.selected {
+  border-color: var(--ink);
+  background: var(--accent-soft);
+}
+
+.navRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+.linkButton {
+  font: inherit;
+  font-size: 0.85rem;
+  color: var(--ink-2);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.up {
+  color: var(--positive);
+}
+
+.down {
+  color: var(--warning);
+}

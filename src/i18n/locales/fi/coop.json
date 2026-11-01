@@ -63,5 +63,22 @@
     "load": "Kysymysten lataus epäonnistui. Yritä myöhemmin uudelleen.",
     "save": "Vastauksen tallennus epäonnistui",
     "matching": "Hakuasetusten muuttaminen epäonnistui"
+  },
+  "intro": {
+    "button": "Sano hei",
+    "title": "Sano hei: {{name}}",
+    "hint": "Hän näkee nimesi ja viestisi. Jos hän hyväksyy, teistä tulee yhteyksiä ja näette toistenne sähköpostin.",
+    "placeholder": "Muutama sana itsestäsi ja siitä, mitä haluaisit rakentaa",
+    "send": "Lähetä",
+    "sent": "Lähetetty! Vastaus näkyy kohdassa Yhteyteni → Esittelyt.",
+    "error": "Lähetys epäonnistui",
+    "and": " ja ",
+    "suggested": "Hei! Näyttää siltä, että ajattelemme samoin asioista {{topics}}. Lähdetäänkö kahville juttelemaan, mitä voisimme rakentaa yhdessä?",
+    "suggestedGeneric": "Hei! Vastauksemme sopivat hyvin yhteen. Lähdetäänkö kahville juttelemaan, mitä voisimme rakentaa yhdessä?",
+    "state": {
+      "pending": "Esittely lähetetty — odotetaan vastausta",
+      "accepted": "Yhteydessä",
+      "declined": "Tällä kertaa ei"
+    }
   }
 }

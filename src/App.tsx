@@ -32,11 +32,22 @@ const ParticipatoryBudget = lazyWithRetry(() => import('@/pages/ParticipatoryBud
 const ServiceRequests = lazyWithRetry(() => import('@/pages/ServiceRequests'));
 const Community = lazyWithRetry(() => import('@/pages/Community'));
 const Cooperate = lazyWithRetry(() => import('@/pages/Cooperate'));
+const Together = lazyWithRetry(() => import('@/pages/growth/Together'));
+const Integration = lazyWithRetry(() => import('@/pages/growth/Integration'));
+const Ventures = lazyWithRetry(() => import('@/pages/growth/Ventures'));
+const Network = lazyWithRetry(() => import('@/pages/growth/Network'));
+const ScanLanding = lazyWithRetry(() => import('@/pages/growth/ScanLanding'));
+const Tandems = lazyWithRetry(() => import('@/pages/growth/Tandems'));
+const Timebank = lazyWithRetry(() => import('@/pages/growth/Timebank'));
+const Challenges = lazyWithRetry(() => import('@/pages/growth/Challenges'));
+const Passport = lazyWithRetry(() => import('@/pages/growth/Passport'));
+const PublicPassport = lazyWithRetry(() => import('@/pages/growth/Passport').then((m) => ({ default: m.PublicPassport })));
+const Impact = lazyWithRetry(() => import('@/pages/growth/Impact'));
 const NotFound = lazyWithRetry(() => import('@/pages/NotFound'));
 
 const LoadingScreen = () => (
   <div style={{ minHeight: '60vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-    <span style={{ color: 'rgba(255, 255, 255, 0.7)' }}>Loading…</span>
+    <span style={{ color: 'var(--ink-muted)' }}>Loading…</span>
   </div>
 );
 
@@ -56,6 +67,9 @@ function App() {
               <Route path="participatory-budget" element={<ParticipatoryBudget />} />
               <Route path="service-requests" element={<ServiceRequests />} />
               <Route path="community" element={<Community />} />
+              <Route path="together" element={<Together />} />
+              <Route path="impact" element={<Impact />} />
+              <Route path="p/:token" element={<PublicPassport />} />
               <Route path="municipal-dashboard" element={<MunicipalDashboard />} />
               <Route path="shop" element={<Shop />} />
               <Route path="login" element={<Login />} />
@@ -69,6 +83,15 @@ function App() {
                 <Route path="polls" element={<Polls />} />
                 <Route path="polls/:id" element={<PollDetail />} />
                 <Route path="cooperate" element={<Cooperate />} />
+                <Route path="integration" element={<Integration />} />
+                <Route path="ventures" element={<Ventures />} />
+                <Route path="network" element={<Network />} />
+                <Route path="connect/:code" element={<ScanLanding mode="connect" />} />
+                <Route path="checkin/:code" element={<ScanLanding mode="checkin" />} />
+                <Route path="tandems" element={<Tandems />} />
+                <Route path="timebank" element={<Timebank />} />
+                <Route path="challenges" element={<Challenges />} />
+                <Route path="passport" element={<Passport />} />
                 <Route path="profile" element={<Profile />} />
                 <Route path="profile/resume-builder" element={<ResumeBuilder />} />
               </Route>

@@ -63,5 +63,22 @@
     "load": "Kunde inte ladda frågorna. Försök igen senare.",
     "save": "Kunde inte spara svaret",
     "matching": "Kunde inte ändra matchningsinställningarna"
+  },
+  "intro": {
+    "button": "Säg hej",
+    "title": "Säg hej till {{name}}",
+    "hint": "Hen ser ditt namn och ditt meddelande. Om hen tackar ja blir ni kontakter och ser varandras e-post.",
+    "placeholder": "Några ord om dig och vad du vill bygga",
+    "send": "Skicka",
+    "sent": "Skickat! Svaret syns under Mina kontakter → Introduktioner.",
+    "error": "Kunde inte skicka",
+    "and": " och ",
+    "suggested": "Hej! Det verkar som att vi ser likadant på {{topics}}. Ska vi ta en kaffe och prata om att bygga något tillsammans?",
+    "suggestedGeneric": "Hej! Våra svar matchar ganska bra. Ska vi ta en kaffe och prata om att bygga något tillsammans?",
+    "state": {
+      "pending": "Introduktion skickad — väntar på svar",
+      "accepted": "Ni är kontakter",
+      "declined": "Nej den här gången"
+    }
   }
 }

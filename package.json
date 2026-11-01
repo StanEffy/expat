@@ -19,6 +19,7 @@
     "prettier": "^3.6.2",
     "primeicons": "^7.0.0",
     "primereact": "^10.9.7",
+    "qrcode.react": "^4.2.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-i18next": "^15.4.1",

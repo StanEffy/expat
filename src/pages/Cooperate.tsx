@@ -5,8 +5,12 @@ import { useCoop, type CoopTab } from '@/hooks/useCoop';
 import { useNotification } from '@/hooks/useNotification';
 import { SegmentedControl } from '@/components/UI';
 import { QuestionCard } from '@/components/Coop/QuestionCard';
-import { MatchCard } from '@/components/Coop/MatchCard';
-import type { CoopQuestion, SaveCoopAnswerPayload } from '@/types/coop';
+import { MatchCard, type IntroState } from '@/components/Coop/MatchCard';
+import { Dialog } from 'primereact/dialog';
+import { networkService, experimentsService } from '@/services/growthService';
+import type { CoopIntro } from '@/types/growth';
+import { getUserId } from '@/utils/auth';
+import type { CoopMatch, CoopQuestion, SaveCoopAnswerPayload } from '@/types/coop';
 import styles from './Cooperate.module.scss';
 
 registerCoopTranslations();
@@ -17,6 +21,11 @@ export const Cooperate: React.FC = () => {
   const [skippedIds, setSkippedIds] = useState<number[]>([]);
   const [editingId, setEditingId] = useState<number | null>(null);
   const [isTogglingMatching, setIsTogglingMatching] = useState(false);
+  const [intros, setIntros] = useState<CoopIntro[]>([]);
+  const [introVariant, setIntroVariant] = useState('');
+  const [introFor, setIntroFor] = useState<CoopMatch | null>(null);
+  const [introMessage, setIntroMessage] = useState('');
+  const [sendingIntro, setSendingIntro] = useState(false);
 
   useEffect(() => {
     registerCoopTranslations();
@@ -38,6 +47,43 @@ export const Cooperate: React.FC = () => {
     setMatchingEnabled,
     refreshMatches,
   } = useCoop();
+
+  useEffect(() => {
+    if (activeTab !== 'matches' || !profile.matching_enabled) return;
+    networkService.intros().then(setIntros).catch(() => undefined);
+    experimentsService.variant('coop_intro_prompt').then((r) => setIntroVariant(r.variant)).catch(() => undefined);
+  }, [activeTab, profile.matching_enabled]);
+
+  const me = getUserId();
+  const introState = (userId: number): IntroState => {
+    const intro = intros.find((i) => (i.from_user_id === me && i.to_user_id === userId) || (i.to_user_id === me && i.from_user_id === userId));
+    return intro ? intro.status : 'none';
+  };
+
+  const openIntro = (match: CoopMatch) => {
+    setIntroFor(match);
+    // Experiment coop_intro_prompt: half of the users get a suggested first message
+    const topics = match.agreements.slice(0, 2).map((a) => `"${a.text}"`).join(t('intro.and'));
+    setIntroMessage(introVariant === 'suggested_message'
+      ? (topics ? t('intro.suggested', { topics }) : t('intro.suggestedGeneric'))
+      : '');
+    void experimentsService.track('coop_intro_prompt', 'intro_dialog_opened').catch(() => undefined);
+  };
+
+  const sendIntro = async () => {
+    if (!introFor) return;
+    setSendingIntro(true);
+    try {
+      await networkService.sendIntro(introFor.user_id, introMessage);
+      setIntros(await networkService.intros().catch(() => intros));
+      showNotification(t('intro.sent'), 'success');
+      setIntroFor(null);
+    } catch (err) {
+      showNotification(err instanceof Error ? err.message : t('intro.error'), 'error');
+    } finally {
+      setSendingIntro(false);
+    }
+  };
 
   // Skipped questions go to the back of the queue instead of disappearing
   const currentQuestion = useMemo<CoopQuestion | undefined>(() => {
@@ -237,13 +283,35 @@ export const Cooperate: React.FC = () => {
               </div>
               <div className={styles.cardsGrid}>
                 {matches.map((m) => (
-                  <MatchCard key={m.user_id} match={m} />
+                  <MatchCard key={m.user_id} match={m} introState={introState(m.user_id)} onIntro={() => openIntro(m)} />
                 ))}
               </div>
             </>
           )}
         </div>
       )}
+
+      <Dialog
+        header={introFor ? t('intro.title', { name: introFor.name }) : ''}
+        visible={introFor !== null}
+        onHide={() => setIntroFor(null)}
+        style={{ width: '92vw', maxWidth: '520px' }}
+        modal
+      >
+        <p className={styles.introHint}>{t('intro.hint')}</p>
+        <textarea
+          className={styles.introText}
+          rows={5}
+          maxLength={1000}
+          value={introMessage}
+          placeholder={t('intro.placeholder')}
+          onChange={(e) => setIntroMessage(e.target.value)}
+          aria-label={t('intro.placeholder')}
+        />
+        <button type="button" className={styles.toggleOn} onClick={sendIntro} disabled={sendingIntro}>
+          {sendingIntro ? <i className="pi pi-spin pi-spinner" /> : t('intro.send')}
+        </button>
+      </Dialog>
     </div>
   );
 };

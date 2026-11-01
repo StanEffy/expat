@@ -7,6 +7,8 @@ import type {
 } from '@/types/onboarding';
 import { filterTasksForUser } from '@/constants/onboardingData';
 import { onboardingService } from '@/services/onboardingService';
+import { settlingService } from '@/services/growthService';
+import { isTokenValid } from '@/utils/auth';
 
 export function useOnboarding() {
   const [answers, setAnswersState] = useState<OnboardingAnswers | null>(null);
@@ -61,19 +63,22 @@ export function useOnboarding() {
   }, []);
 
   const toggleTask = useCallback((taskId: string) => {
-    setCompletedTaskIds((prev) => {
-      const exists = prev.includes(taskId);
-      const updated = exists ? prev.filter((id) => id !== taskId) : [...prev, taskId];
-      if (answers) {
-        onboardingService.saveProgress({
-          answers,
-          completedTaskIds: updated,
-          lastUpdated: new Date().toISOString(),
-        });
-      }
-      return updated;
-    });
-  }, [answers]);
+    const exists = completedTaskIds.includes(taskId);
+    const updated = exists ? completedTaskIds.filter((id) => id !== taskId) : [...completedTaskIds, taskId];
+    setCompletedTaskIds(updated);
+    if (answers) {
+      onboardingService.saveProgress({
+        answers,
+        completedTaskIds: updated,
+        lastUpdated: new Date().toISOString(),
+      });
+    }
+    // Logged-in users also keep a dated record, used for anonymous time-to-settle statistics
+    if (isTokenValid()) {
+      const sync = exists ? settlingService.uncomplete(taskId) : settlingService.complete(taskId);
+      sync.catch((err) => console.warn('Failed to sync onboarding step', err));
+    }
+  }, [answers, completedTaskIds]);
 
   const resetWizard = useCallback(() => {
     onboardingService.clearProgress();

@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { useUserNotifications } from "../../contexts/UserNotificationsContext";
+import { isTogetherPath } from "@/components/Growth/togetherLinks";
 import "./MobileMenu.scss";
 
 const MobileMenu = () => {
@@ -105,7 +106,7 @@ const MobileMenu = () => {
   const isCommunityActive = location.pathname.startsWith("/community");
   const isShopActive = location.pathname.startsWith("/shop");
   const isPollsActive = location.pathname.startsWith("/polls");
-  const isCooperateActive = location.pathname.startsWith("/cooperate");
+  const isTogetherActive = isTogetherPath(location.pathname);
   const isMunicipalAnalyticsActive = location.pathname.startsWith("/municipal-dashboard");
   const isAboutActive = location.pathname === "/about";
   const isProfileActive = location.pathname.startsWith("/profile") || location.pathname.startsWith("/admin");
@@ -163,10 +164,10 @@ const MobileMenu = () => {
       command: () => handleNavigation("/shop"),
     },
     {
-      label: t("navigation.cooperate"),
+      label: t("navigation.together"),
       icon: "pi pi-sparkles",
-      className: isCooperateActive ? "active-menuitem" : "",
-      command: () => handleNavigation("/cooperate"),
+      className: isTogetherActive ? "active-menuitem" : "",
+      command: () => handleNavigation("/together"),
     },
     {
       label: t("navigation.polls"),

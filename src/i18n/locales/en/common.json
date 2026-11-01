@@ -18,7 +18,19 @@
     "serviceRequests": "Service Requests",
     "community": "Community Hub",
     "cooperate": "Team Up",
-    "cityServices": "City Services"
+    "cityServices": "City Services",
+    "together": "Together",
+    "togetherItems": {
+      "cooperate": "Team Up",
+      "network": "My connections",
+      "tandems": "Language tandems",
+      "timebank": "Time bank",
+      "challenges": "City challenges",
+      "integration": "Settling-in map",
+      "ventures": "My ventures",
+      "passport": "Skills passport",
+      "impact": "Measured impact"
+    }
   },
   "company": {
     "information": "Company Information",
@@ -69,7 +81,37 @@
   },
   "home": {
     "welcome": "Welcome to Expat App",
-    "description": "Find companies and job opportunities in Finland"
+    "description": "Find companies and job opportunities in Finland",
+    "eyebrow": "01 / Finland, where to start",
+    "headline": "Moving here is a hundred small tasks. We keep the list.",
+    "lead": "Registration, tax card, Kela, work and the people around you. One step at a time, in your language.",
+    "ctaPlan": "Make my plan",
+    "ctaWork": "Find work",
+    "boardLabel": "First days",
+    "boardColumn": "Step",
+    "youAreHere": "YOU ARE HERE",
+    "steps": {
+      "dvv": "Address registration",
+      "vero": "Tax card",
+      "bank": "Account and bank ID",
+      "kela": "Social security"
+    },
+    "sectionsLabel": "Sections",
+    "newBadge": "new",
+    "sections": {
+      "work": {
+        "title": "Work and companies",
+        "text": "Companies that hire internationals, and a CV built the Finnish way."
+      },
+      "city": {
+        "title": "City",
+        "text": "Service requests, participatory budgeting, events near home."
+      },
+      "together": {
+        "title": "Together",
+        "text": "Tandems, a time bank, co-founders and people you actually know."
+      }
+    }
   },
   "favourites": {
     "title": "Favourite Companies",
@@ -103,8 +145,7 @@
     "resumeUploaded": "Resume uploaded successfully",
     "resumeUploadError": "Failed to upload resume",
     "resumeHint": "Upload your resume (PDF, DOC, or DOCX format, max 5MB)",
-    "launchResumeBuilder": "Launch STAR Resume Builder"
-    ,
+    "launchResumeBuilder": "Launch STAR Resume Builder",
     "skills": {
       "title": "Skills & Qualifications",
       "description": "Track your core skills, trade grades, and language proficiency.",
@@ -505,4 +546,4 @@
       "communityBtn": "Join Community"
     }
   }
-} 
+}

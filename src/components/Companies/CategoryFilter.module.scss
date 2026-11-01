@@ -96,7 +96,8 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  color: var(--ink);
+  // the item sets the colour: ink normally, dark on the yellow highlight
+  color: inherit;
   font-size: 0.88rem;
 }
 

@@ -27,6 +27,7 @@ const InviteCodes = lazyWithRetry(() => import('@/pages/admin/InviteCodes'));
 const Polls = lazyWithRetry(() => import('@/pages/Polls'));
 const PollDetail = lazyWithRetry(() => import('@/pages/PollDetail'));
 const Onboarding = lazyWithRetry(() => import('@/pages/Onboarding'));
+const Deadlines = lazyWithRetry(() => import('@/pages/Deadlines'));
 const MunicipalDashboard = lazyWithRetry(() => import('@/pages/MunicipalDashboard'));
 const ParticipatoryBudget = lazyWithRetry(() => import('@/pages/ParticipatoryBudget'));
 const ServiceRequests = lazyWithRetry(() => import('@/pages/ServiceRequests'));
@@ -65,6 +66,7 @@ function App() {
               <Route path="categories" element={<Categories />} />
               <Route path="about" element={<About />} />
               <Route path="onboarding" element={<Onboarding />} />
+              <Route path="deadlines" element={<Deadlines />} />
               <Route path="participatory-budget" element={<ParticipatoryBudget />} />
               <Route path="service-requests" element={<ServiceRequests />} />
               <Route path="community" element={<Community />} />

@@ -1,0 +1,141 @@
+{
+  "title": "Mina tidsfrister",
+  "subtitle": "Datumen för ditt uppehållstillstånd på en lugn tidslinje: när du ska ansöka om fortsatt tillstånd och när permanent tillstånd och medborgarskap blir möjliga.",
+  "privacy": "Sparas bara i den här webbläsaren. Vi ser aldrig dessa datum.",
+  "form": {
+    "title": "Dina datum",
+    "hint": "Fyll i det du vet. Alla fält är frivilliga.",
+    "basis": "På vilken grund har du ditt tillstånd?",
+    "bases": {
+      "work": "Arbete",
+      "studies": "Studier",
+      "family": "Familjeband",
+      "other": "Annat"
+    },
+    "kind": "Typ av tillstånd",
+    "kinds": {
+      "A": "Kontinuerligt (A)",
+      "B": "Tillfälligt (B)"
+    },
+    "kindHint": "Det står på ditt uppehållstillståndskort.",
+    "expiry": "Nuvarande tillstånd gäller till",
+    "residenceStart": "Vistelsetiden räknas från",
+    "residenceStartHint": "Oftast dagen du kom, om A-tillståndet beviljades före flytten. Annars dagen då ditt första tillstånd beviljades.",
+    "hasLanguage": "Jag har ett språkintyg i finska eller svenska på den nivå Migri kräver"
+  },
+  "timeline": {
+    "title": "Tidslinje",
+    "empty": "Lägg till ett datum så visas din tidslinje här.",
+    "passed": "redan passerat",
+    "reached": "redan möjligt",
+    "source": "Källa",
+    "kindBNote": "Tid med tillfälligt (B) tillstånd räknas inte för permanent tillstånd, och för medborgarskap räknas bara hälften. Migri bedömer sådana fall individuellt.",
+    "cutByPermit": "Ditt tillstånd upphör före arbetssökningstiden. Om du har grund att stanna, ansök om fortsatt tillstånd innan det upphör.",
+    "calendar": "Lägg till påminnelser i kalendern",
+    "calendarHint": "Laddar ner en kalenderfil med påminnelser 3 månader, 1 månad och 1 vecka före varje datum. Din kalender sparar dem, inte vi.",
+    "forget": "Glöm mina datum"
+  },
+  "items": {
+    "extendOpens": {
+      "title": "Du kan ansöka om fortsatt tillstånd",
+      "text": "Migri bedömer fortsatt tillstånd från cirka {{months}} månader före att det nuvarande upphör. Ansök på nätet i Enter Finland."
+    },
+    "permitEnds": {
+      "title": "Ditt tillstånd upphör",
+      "text": "Ansök om fortsatt tillstånd senast denna dag. Medan ansökan behandlas kan du bo kvar i Finland."
+    },
+    "jobSearchEnds": {
+      "title": "Arbetssökningstiden tar slut",
+      "text": "Med ett arbetsbaserat tillstånd har du {{period}} månader på dig att hitta nytt arbete eller en annan grund att stanna. Därefter kan Migri inleda återkallande av tillståndet."
+    },
+    "permanentEarly": {
+      "title": "Tidigaste permanenta tillstånd",
+      "text": "Efter 4 år med kontinuerligt tillstånd, om du tjänar över 40 000 € per år eller har 3 års arbetshistorik och goda kunskaper i finska eller svenska."
+    },
+    "permanent": {
+      "title": "Permanent uppehållstillstånd",
+      "text": "Efter 6 år med kontinuerligt tillstånd, med 2 års arbetshistorik i Finland och nöjaktiga kunskaper i finska eller svenska."
+    },
+    "citizenship": {
+      "title": "Medborgarskap",
+      "text": "Oftast efter 8 års vistelse, eller 5 om du visar dina språkkunskaper. Högst 365 dagar utomlands räknas, högst 90 av dem under det senaste året.",
+      "text_language": "Efter 5 års vistelse med språkintyg. Högst 365 dagar utomlands räknas, högst 90 av dem under det senaste året."
+    }
+  },
+  "job": {
+    "title": "Om ditt arbete tar slut",
+    "hint": "För arbetsbaserade tillstånd. En plan för månaderna av arbetssökande, steg för steg. Inget av det behöver göras i dag.",
+    "open": "Mitt arbete har tagit slut",
+    "ended": "Sista arbetsdag",
+    "longProtection": "Jag har tillstånd som specialist, eller jag har bott i Finland med arbetsbaserade tillstånd i över två år (6 månader i stället för 3)",
+    "calm": "Bocka av stegen efter hand — markeringarna stannar i den här webbläsaren. Om det känns tungt, skriv till någon i ditt nätverk. Att be om hjälp är helt vanligt här."
+  },
+  "plan": {
+    "phases": {
+      "week1": "Vecka 1",
+      "month1": "Vecka 2–4",
+      "month2": "Månad 2",
+      "month3": "Månad 3"
+    },
+    "register": {
+      "title": "Anmäl dig som arbetssökande.",
+      "text": "Redan första dagen utan arbete, på Jobbmarknaden. Ersättningarna beror på det.",
+      "link": "Jobbmarknaden"
+    },
+    "benefits": {
+      "title": "Ansök om arbetslöshetsersättning.",
+      "text": "Från din arbetslöshetskassa om du är medlem, annars från FPA.",
+      "link": "InfoFinland: om du blir arbetslös"
+    },
+    "checkPermit": {
+      "title": "Kontrollera när ditt tillstånd upphör.",
+      "text": "Sökperioden kan aldrig vara längre än själva tillståndet.",
+      "link": "InfoFinland: kan jag förlora mitt tillstånd?"
+    },
+    "resume": {
+      "title": "Uppdatera ditt CV.",
+      "text": "En eller två sidor, i finländskt format.",
+      "link": "CV-verktyget"
+    },
+    "askNetwork": {
+      "title": "Be tre personer om en introduktion.",
+      "text": "Inte om ett jobb, bara om ett samtal med någon i din bransch.",
+      "link": "Mina kontakter"
+    },
+    "shortage": {
+      "title": "Titta på bristbranscher.",
+      "text": "I en bransch på statsrådets lista över bristbranscher kan du börja arbeta utan nytt tillstånd medan ditt gäller.",
+      "link": "Jobbmarknaden: bristbranscher"
+    },
+    "companies": {
+      "title": "Titta på företag där folk som du arbetar.",
+      "text": "Fråga dem som redan är där hur de kom in.",
+      "link": "Företag"
+    },
+    "otherBasis": {
+      "title": "Ta reda på andra grunder att stanna.",
+      "text": "Studier, familjeband och eget företag har vart och ett sitt eget tillstånd.",
+      "link": "InfoFinland"
+    },
+    "advice": {
+      "title": "Få kostnadsfri rådgivning.",
+      "text": "Hos fackförbundets jurist om du är medlem, eller hos din stads internationella tjänster.",
+      "link": "InfoFinland"
+    },
+    "newSector": {
+      "title": "Nytt jobb i en annan bransch?",
+      "text": "Om det inte är en bristbransch och ditt tillstånd gällde en annan, ansök om nytt tillstånd innan du börjar.",
+      "link": "Migri"
+    },
+    "applyInTime": {
+      "title": "Ansök i tid.",
+      "text": "Om du har en annan grund, lämna in ansökan innan sökperioden eller tillståndet tar slut.",
+      "link": "Migri: fortsatt tillstånd"
+    }
+  },
+  "disclaimer": "Detta är inte juridisk rådgivning. Datumen är ungefärliga och följer Migris regler som vi kontrollerade {{date}}; ditt fall kan skilja sig. Kontrollera de länkade källorna eller fråga Migri innan du agerar.",
+  "promo": {
+    "title": "Mina tidsfrister",
+    "text": "Fortsatt tillstånd, permanent tillstånd, medborgarskap: dina datum på en tidslinje. Sparas bara i din webbläsare."
+  }
+}

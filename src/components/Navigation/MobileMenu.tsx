@@ -101,6 +101,7 @@ const MobileMenu = () => {
   const isHomeActive = location.pathname === "/";
   const isCompaniesActive = location.pathname.startsWith("/companies") || location.pathname === "/categories";
   const isOnboardingActive = location.pathname.startsWith("/onboarding");
+  const isDeadlinesActive = location.pathname.startsWith("/deadlines");
   const isBudgetingActive = location.pathname.startsWith("/participatory-budget");
   const isServiceRequestsActive = location.pathname.startsWith("/service-requests");
   const isCommunityActive = location.pathname.startsWith("/community");
@@ -131,6 +132,12 @@ const MobileMenu = () => {
       icon: "pi pi-compass",
       className: isOnboardingActive ? "active-menuitem" : "",
       command: () => handleNavigation("/onboarding"),
+    },
+    {
+      label: t("navigation.deadlines"),
+      icon: "pi pi-calendar-clock",
+      className: isDeadlinesActive ? "active-menuitem" : "",
+      command: () => handleNavigation("/deadlines"),
     },
     {
       label: t("navigation.participatoryBudget"),

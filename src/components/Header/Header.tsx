@@ -31,6 +31,7 @@ const Header = () => {
   const isPollsActive = location.pathname.startsWith("/polls");
   const isTogetherActive = isTogetherPath(location.pathname);
   const isOnboardingActive = location.pathname.startsWith("/onboarding");
+  const isDeadlinesActive = location.pathname.startsWith("/deadlines");
   const isBudgetingActive = location.pathname.startsWith("/participatory-budget");
   const isServiceRequestsActive = location.pathname.startsWith("/service-requests");
   const isCommunityActive = location.pathname.startsWith("/community");
@@ -41,6 +42,7 @@ const Header = () => {
 
   const isCityServicesActive =
     isOnboardingActive ||
+    isDeadlinesActive ||
     isBudgetingActive ||
     isServiceRequestsActive ||
     isCommunityActive ||
@@ -53,6 +55,12 @@ const Header = () => {
         icon: "pi pi-compass",
         className: isOnboardingActive ? "active-menuitem" : "",
         command: () => navigate("/onboarding"),
+      },
+      {
+        label: t("navigation.deadlines"),
+        icon: "pi pi-calendar-clock",
+        className: isDeadlinesActive ? "active-menuitem" : "",
+        command: () => navigate("/deadlines"),
       },
       {
         label: t("navigation.participatoryBudget"),
@@ -83,6 +91,7 @@ const Header = () => {
       t,
       navigate,
       isOnboardingActive,
+      isDeadlinesActive,
       isBudgetingActive,
       isServiceRequestsActive,
       isCommunityActive,

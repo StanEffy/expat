@@ -1,0 +1,141 @@
+{
+  "title": "Omat määräajat",
+  "subtitle": "Oleskelulupasi päivämäärät yhdellä rauhallisella aikajanalla: milloin haet jatkolupaa ja milloin pysyvä lupa ja kansalaisuus tulevat mahdollisiksi.",
+  "privacy": "Tallentuu vain tähän selaimeen. Emme näe näitä päivämääriä.",
+  "form": {
+    "title": "Päivämääräsi",
+    "hint": "Täytä se, minkä tiedät. Kaikki kentät ovat vapaaehtoisia.",
+    "basis": "Millä perusteella lupasi on myönnetty?",
+    "bases": {
+      "work": "Työ",
+      "studies": "Opiskelu",
+      "family": "Perheside",
+      "other": "Muu"
+    },
+    "kind": "Luvan tyyppi",
+    "kinds": {
+      "A": "Jatkuva (A)",
+      "B": "Tilapäinen (B)"
+    },
+    "kindHint": "Se lukee oleskelulupakortissasi.",
+    "expiry": "Nykyinen lupa voimassa",
+    "residenceStart": "Asumisaika alkaa",
+    "residenceStartHint": "Yleensä maahantulopäivä, jos A-lupa myönnettiin ennen muuttoa. Muuten päivä, jolloin ensimmäinen lupa myönnettiin.",
+    "hasLanguage": "Minulla on Migrin vaatiman tason suomen tai ruotsin kielitodistus"
+  },
+  "timeline": {
+    "title": "Aikajana",
+    "empty": "Lisää päivämäärä, niin aikajanasi näkyy tässä.",
+    "passed": "jo mennyt",
+    "reached": "jo mahdollista",
+    "source": "Lähde",
+    "kindBNote": "Tilapäisellä (B) luvalla asuttu aika ei kerrytä pysyvän luvan aikaa, ja kansalaisuuteen siitä lasketaan vain puolet. Migri arvioi nämä tapaukset yksilöllisesti.",
+    "cutByPermit": "Lupasi päättyy ennen työnhakuajan loppua. Jos sinulla on peruste jäädä, hae jatkolupaa ennen kuin lupa päättyy.",
+    "calendar": "Lisää muistutukset kalenteriin",
+    "calendarHint": "Lataa kalenteritiedoston, jossa on muistutukset 3 kuukautta, kuukausi ja viikko ennen kutakin päivää. Ne säilyvät kalenterissasi, eivät meillä.",
+    "forget": "Poista päivämääräni"
+  },
+  "items": {
+    "extendOpens": {
+      "title": "Voit hakea jatkolupaa",
+      "text": "Migri arvioi jatkolupaa noin {{months}} kuukautta ennen nykyisen luvan päättymistä. Hae verkossa Enter Finland -palvelussa."
+    },
+    "permitEnds": {
+      "title": "Lupasi päättyy",
+      "text": "Hae jatkolupaa viimeistään tänä päivänä. Hakemuksen käsittelyn ajan voit asua Suomessa."
+    },
+    "jobSearchEnds": {
+      "title": "Työnhakuaika päättyy",
+      "text": "Työperusteisella luvalla sinulla on {{period}} kuukautta aikaa löytää uusi työ tai muu peruste jäädä. Sen jälkeen Migri voi aloittaa luvan peruuttamisen."
+    },
+    "permanentEarly": {
+      "title": "Aikaisin pysyvä lupa",
+      "text": "4 vuoden jälkeen jatkuvalla luvalla, jos vuositulosi ovat yli 40 000 € tai sinulla on 3 vuoden työhistoria ja hyvä suomen tai ruotsin taito."
+    },
+    "permanent": {
+      "title": "Pysyvä oleskelulupa",
+      "text": "6 vuoden jälkeen jatkuvalla luvalla, kun sinulla on 2 vuoden työhistoria Suomessa ja tyydyttävä suomen tai ruotsin taito."
+    },
+    "citizenship": {
+      "title": "Kansalaisuus",
+      "text": "Yleensä 8 vuoden asumisen jälkeen, tai 5 vuoden, jos osoitat kielitaitosi. Ulkomailla saa olla enintään 365 päivää, viimeisen vuoden aikana enintään 90.",
+      "text_language": "5 vuoden asumisen jälkeen kielitodistuksella. Ulkomailla saa olla enintään 365 päivää, viimeisen vuoden aikana enintään 90."
+    }
+  },
+  "job": {
+    "title": "Jos työsi päättyy",
+    "hint": "Työperusteisille luville. Työnhaun kuukausien suunnitelma askel kerrallaan. Mitään ei tarvitse tehdä tänään.",
+    "open": "Työni on päättynyt",
+    "ended": "Viimeinen työpäivä",
+    "longProtection": "Minulla on erityisasiantuntijan lupa, tai olen asunut Suomessa työperusteisilla luvilla yli kaksi vuotta (6 kuukautta 3:n sijaan)",
+    "calm": "Merkitse askeleet tehdyiksi sitä mukaa — merkinnät jäävät tähän selaimeen. Jos tuntuu raskaalta, kirjoita jollekulle verkostostasi. Avun pyytäminen on täällä ihan tavallista."
+  },
+  "plan": {
+    "phases": {
+      "week1": "Viikko 1",
+      "month1": "Viikot 2–4",
+      "month2": "Kuukausi 2",
+      "month3": "Kuukausi 3"
+    },
+    "register": {
+      "title": "Ilmoittaudu työnhakijaksi.",
+      "text": "Heti ensimmäisenä työttömyyspäivänä Työmarkkinatorilla. Etuudet riippuvat siitä.",
+      "link": "Työmarkkinatori"
+    },
+    "benefits": {
+      "title": "Hae työttömyysetuutta.",
+      "text": "Työttömyyskassasta, jos olet jäsen, muuten Kelasta.",
+      "link": "InfoFinland: jos jäät työttömäksi"
+    },
+    "checkPermit": {
+      "title": "Tarkista, milloin lupasi päättyy.",
+      "text": "Työnhakuaika ei voi olla pidempi kuin itse lupa.",
+      "link": "InfoFinland: voinko menettää lupani?"
+    },
+    "resume": {
+      "title": "Päivitä CV:si.",
+      "text": "Yksi tai kaksi sivua, suomalaisessa muodossa.",
+      "link": "CV-työkalu"
+    },
+    "askNetwork": {
+      "title": "Pyydä kolmelta ihmiseltä esittelyä.",
+      "text": "Ei työpaikkaa, vaan keskustelua jonkun alasi ihmisen kanssa.",
+      "link": "Verkostoni"
+    },
+    "shortage": {
+      "title": "Katso pula-alat.",
+      "text": "Valtioneuvoston pula-alaluettelon alalla voit aloittaa työn ilman uutta lupaa, kun lupasi on voimassa.",
+      "link": "Työmarkkinatori: pula-alat"
+    },
+    "companies": {
+      "title": "Katso yrityksiä, joissa kaltaisesi ihmiset työskentelevät.",
+      "text": "Kysy siellä jo olevilta, miten he pääsivät sisään.",
+      "link": "Yritykset"
+    },
+    "otherBasis": {
+      "title": "Selvitä muut perusteet jäädä.",
+      "text": "Opiskelulla, perhesiteellä ja omalla yrityksellä on kullakin oma lupansa.",
+      "link": "InfoFinland"
+    },
+    "advice": {
+      "title": "Hanki maksutonta neuvontaa.",
+      "text": "Liittosi juristilta, jos olet jäsen, tai kaupunkisi kansainvälisistä palveluista.",
+      "link": "InfoFinland"
+    },
+    "newSector": {
+      "title": "Uusi työ toisella alalla?",
+      "text": "Jos ala ei ole pula-ala ja lupasi on myönnetty toiselle alalle, hae uutta lupaa ennen kuin aloitat.",
+      "link": "Migri"
+    },
+    "applyInTime": {
+      "title": "Hae ajoissa.",
+      "text": "Jos sinulla on muu peruste, jätä hakemus ennen kuin työnhakuaika tai lupa päättyy.",
+      "link": "Migri: jatkolupa"
+    }
+  },
+  "disclaimer": "Tämä ei ole oikeudellista neuvontaa. Päivämäärät ovat suuntaa-antavia ja noudattavat Migrin sääntöjä, jotka tarkistimme {{date}}; sinun tapauksesi voi poiketa. Tarkista linkitetyt lähteet tai kysy Migristä ennen kuin toimit.",
+  "promo": {
+    "title": "Omat määräajat",
+    "text": "Jatkolupa, pysyvä lupa, kansalaisuus: päivämääräsi yhdellä aikajanalla. Tallentuvat vain selaimeesi."
+  }
+}

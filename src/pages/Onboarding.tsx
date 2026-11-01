@@ -6,6 +6,7 @@ import { useOnboarding } from '@/hooks/useOnboarding';
 import { OnboardingWizard } from '@/components/Onboarding/OnboardingWizard';
 import { OnboardingChecklist } from '@/components/Onboarding/OnboardingChecklist';
 import { SettlingCard } from '@/components/Growth/SettlingCard';
+import { DeadlinesPromo } from '@/components/Deadlines/DeadlinesPromo';
 import styles from './Onboarding.module.scss';
 
 // Ensure translations are available
@@ -75,6 +76,8 @@ export const Onboarding: React.FC = () => {
         ) : (
           <>
           <SettlingCard municipalityId={answers.municipality} />
+          {/* Residence permit dates only concern people from outside the EU and the Nordics */}
+          {answers.citizenship === 'non_eu' && <DeadlinesPromo />}
           <OnboardingChecklist
             answers={answers}
             tasks={tasks}

@@ -1,0 +1,141 @@
+{
+  "title": "My deadlines",
+  "subtitle": "Your residence permit dates on one calm timeline: when to apply for an extension, and when permanent residence and citizenship come within reach.",
+  "privacy": "Stored only in this browser. We never see these dates.",
+  "form": {
+    "title": "Your dates",
+    "hint": "Fill in what you know. Every field is optional.",
+    "basis": "What is your permit based on?",
+    "bases": {
+      "work": "Work",
+      "studies": "Studies",
+      "family": "Family ties",
+      "other": "Something else"
+    },
+    "kind": "Permit type",
+    "kinds": {
+      "A": "Continuous (A)",
+      "B": "Temporary (B)"
+    },
+    "kindHint": "It is printed on your residence permit card.",
+    "expiry": "Current permit valid until",
+    "residenceStart": "Residence counts from",
+    "residenceStartHint": "Usually the day you arrived, if your A permit was granted before you moved. Otherwise, the day your first permit was granted.",
+    "hasLanguage": "I have a Finnish or Swedish language certificate at the level Migri asks for"
+  },
+  "timeline": {
+    "title": "Timeline",
+    "empty": "Add a date and your timeline appears here.",
+    "passed": "already passed",
+    "reached": "already possible",
+    "source": "Source",
+    "kindBNote": "Time on a temporary (B) permit does not count towards permanent residence, and only half of it counts towards citizenship. Migri works these cases out individually.",
+    "cutByPermit": "Your permit ends before the job search period does. If you have grounds for staying, apply for an extended permit before it ends.",
+    "calendar": "Add reminders to my calendar",
+    "calendarHint": "Downloads a calendar file with reminders 3 months, 1 month and 1 week before each date. Your calendar app keeps them, not us.",
+    "forget": "Forget my dates"
+  },
+  "items": {
+    "extendOpens": {
+      "title": "You can apply for an extension",
+      "text": "Migri assesses an extended permit from about {{months}} months before the current one ends. Apply online in Enter Finland."
+    },
+    "permitEnds": {
+      "title": "Your permit ends",
+      "text": "Apply for an extended permit by this day. While the application is being processed, you can keep living in Finland."
+    },
+    "jobSearchEnds": {
+      "title": "Job search period ends",
+      "text": "With a work-based permit you have {{period}} months to find a new job or another basis for staying. After that, Migri may start withdrawing the permit."
+    },
+    "permanentEarly": {
+      "title": "Earliest permanent residence",
+      "text": "After 4 years on a continuous permit, if you earn over €40,000 a year, or have 3 years of work history and good Finnish or Swedish."
+    },
+    "permanent": {
+      "title": "Permanent residence",
+      "text": "After 6 years on a continuous permit, with 2 years of work history in Finland and satisfactory Finnish or Swedish."
+    },
+    "citizenship": {
+      "title": "Citizenship",
+      "text": "Usually after 8 years of residence, or 5 if you prove your language skills. Up to 365 days abroad count, at most 90 of them in the last year.",
+      "text_language": "After 5 years of residence with a language certificate. Up to 365 days abroad count, at most 90 of them in the last year."
+    }
+  },
+  "job": {
+    "title": "If your job ends",
+    "hint": "For work-based permits. A step-by-step plan for the months of job search. Nothing here has to happen today.",
+    "open": "My job has ended",
+    "ended": "Last day of work",
+    "longProtection": "I have a specialist permit, or I have lived in Finland on work-based permits for over two years (6 months instead of 3)",
+    "calm": "Tick steps off as you go; they stay in this browser. If it gets heavy, write to someone in your network. Asking for help is normal here."
+  },
+  "plan": {
+    "phases": {
+      "week1": "Week 1",
+      "month1": "Weeks 2–4",
+      "month2": "Month 2",
+      "month3": "Month 3"
+    },
+    "register": {
+      "title": "Register as a jobseeker.",
+      "text": "Do it on your first day without work, in Job Market Finland. Benefits depend on it.",
+      "link": "Job Market Finland"
+    },
+    "benefits": {
+      "title": "Apply for unemployment benefit.",
+      "text": "From your unemployment fund if you are a member, otherwise from Kela.",
+      "link": "InfoFinland: if you become unemployed"
+    },
+    "checkPermit": {
+      "title": "Check when your permit ends.",
+      "text": "The search period never lasts longer than the permit itself.",
+      "link": "InfoFinland: can I lose my permit?"
+    },
+    "resume": {
+      "title": "Refresh your CV.",
+      "text": "One or two pages, in the Finnish format.",
+      "link": "CV builder"
+    },
+    "askNetwork": {
+      "title": "Ask three people for an introduction.",
+      "text": "Not for a job, just for a talk with someone in your field.",
+      "link": "My connections"
+    },
+    "shortage": {
+      "title": "Look at shortage sectors.",
+      "text": "You can start a job in a sector on the government's shortage list without a new permit, while yours is valid.",
+      "link": "Job Market Finland: shortage sectors"
+    },
+    "companies": {
+      "title": "Look at companies where people like you work.",
+      "text": "Ask members there how they got in.",
+      "link": "Companies"
+    },
+    "otherBasis": {
+      "title": "Look at other grounds for staying.",
+      "text": "Studies, family ties or your own company each have a permit of their own.",
+      "link": "InfoFinland"
+    },
+    "advice": {
+      "title": "Get free advice.",
+      "text": "From your union's lawyer if you are a member, or from your city's international services.",
+      "link": "InfoFinland"
+    },
+    "newSector": {
+      "title": "New job in another sector?",
+      "text": "If it is not a shortage sector and your permit was for a different one, apply for a new permit before you start.",
+      "link": "Migri"
+    },
+    "applyInTime": {
+      "title": "Apply in time.",
+      "text": "If you have another basis, submit the application before the search period or the permit ends.",
+      "link": "Migri: extended permit"
+    }
+  },
+  "disclaimer": "This is not legal advice. Dates are approximate and follow Migri's rules as checked on {{date}}; your case may differ. Check the linked sources or ask Migri before you act.",
+  "promo": {
+    "title": "My deadlines",
+    "text": "Permit extension, permanent residence, citizenship: your dates on one timeline, stored only in your browser."
+  }
+}

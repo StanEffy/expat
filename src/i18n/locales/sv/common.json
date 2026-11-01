@@ -2,6 +2,12 @@
   "app": {
     "title": "Expat App"
   },
+  "theme": {
+    "label": "Tema",
+    "light": "Ljust",
+    "dark": "Mörkt",
+    "system": "Som systemet"
+  },
   "navigation": {
     "home": "Hem",
     "companies": "Företag",

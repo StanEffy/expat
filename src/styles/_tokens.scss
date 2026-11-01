@@ -1,4 +1,5 @@
 @use "variables" as *;
+@use "theme";
 
 // Runtime colour tokens. Components read these, never the SCSS variables, so the theme can switch.
 :root {
@@ -74,38 +75,36 @@
   --page-gutter-mobile: 1rem;
 }
 
-// Dark theme, picked from the system preference
-@media (prefers-color-scheme: dark) {
-  :root {
-    color-scheme: dark;
+// Dark theme: the system preference, or the user's pick in the header
+@include theme.dark-root {
+  color-scheme: dark;
 
-    --paper: #111315;
-    --surface: #1A1D21;
-    --surface-alt: #23272C;
-    --ink: #ECECE6;
-    --ink-2: #C3C7CC;
-    --ink-muted: #989EA6;
-    --rule: #3A3F45;
-    --accent: #FFD23F;
-    --accent-soft: #3A3115;
-    --link: #8DB2FF;
-    --positive: #5FD39B;
-    --positive-soft: #12301F;
-    --warning: #F0B45C;
-    --warning-soft: #3A2A0E;
-    --danger: #FF8B80;
-    --danger-soft: #3D1714;
-    --info-soft: #1B2540;
+  --paper: #111315;
+  --surface: #1A1D21;
+  --surface-alt: #23272C;
+  --ink: #ECECE6;
+  --ink-2: #C3C7CC;
+  --ink-muted: #989EA6;
+  --rule: #3A3F45;
+  --accent: #FFD23F;
+  --accent-soft: #3A3115;
+  --link: #8DB2FF;
+  --positive: #5FD39B;
+  --positive-soft: #12301F;
+  --warning: #F0B45C;
+  --warning-soft: #3A2A0E;
+  --danger: #FF8B80;
+  --danger-soft: #3D1714;
+  --info-soft: #1B2540;
 
-    --sign: #07080A;
-    --sign-2: #2A2F35;
-    --on-sign: #ECECE6;
-    --on-accent: #121417;
-    --bark: #D6D6CE;
+  --sign: #07080A;
+  --sign-2: #2A2F35;
+  --on-sign: #ECECE6;
+  --on-accent: #121417;
+  --bark: #D6D6CE;
 
-    --secondary-b-2: #4CC089;
-    --complement-1: #D9B23A;
-    --complement-2: #E8C25A;
-    --primary-4: #7C828A;
-  }
+  --secondary-b-2: #4CC089;
+  --complement-1: #D9B23A;
+  --complement-2: #E8C25A;
+  --primary-4: #7C828A;
 }

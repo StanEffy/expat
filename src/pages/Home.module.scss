@@ -1,3 +1,5 @@
+@use "../styles/theme";
+
 .container {
   max-width: 1280px;
   margin: 0 auto;
@@ -118,7 +120,7 @@
 }
 
 // On a dark page the board needs an edge to stand out
-@media (prefers-color-scheme: dark) {
+@include theme.dark-root {
   .board {
     outline: 1px solid var(--rule);
   }

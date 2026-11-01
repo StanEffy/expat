@@ -1,8 +1,10 @@
+@use "theme";
+
 // PrimeReact's Lara theme paints these components with fixed light colours.
 // In the dark theme they read the tokens instead. Inputs, dropdowns, buttons
 // and toasts already use tokens in index.scss and _toast.scss.
 
-@media (prefers-color-scheme: dark) {
+@include theme.dark-root {
   .p-component {
     color: var(--ink);
   }

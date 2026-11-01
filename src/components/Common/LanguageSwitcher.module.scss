@@ -128,6 +128,10 @@
     color: var(--on-accent);
     border: 1px solid var(--ink);
 
+    .checkWrap {
+      color: var(--on-accent);
+    }
+
     .badge {
       background: var(--surface-alt);
       color: var(--ink);

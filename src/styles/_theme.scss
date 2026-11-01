@@ -1,0 +1,14 @@
+// The dark theme is on when the system is dark and the user has not picked light,
+// or when the user picked dark (<html data-theme>, set by utils/theme.ts).
+// Use this instead of a bare prefers-color-scheme query.
+@mixin dark-root {
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      @content;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    @content;
+  }
+}

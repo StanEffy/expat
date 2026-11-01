@@ -2,6 +2,12 @@
   "app": {
     "title": "Expat App"
   },
+  "theme": {
+    "label": "Тема",
+    "light": "Светлая",
+    "dark": "Тёмная",
+    "system": "Как в системе"
+  },
   "navigation": {
     "home": "Главная",
     "companies": "Компании",

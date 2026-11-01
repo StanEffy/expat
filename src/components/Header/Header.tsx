@@ -6,6 +6,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "@/hooks/useAuth";
 import LanguageSwitcher from "../Common/LanguageSwitcher";
+import ThemeSwitcher from "../Common/ThemeSwitcher";
 import AnimatedLogo from "./AnimatedLogo";
 import styles from "./Header.module.scss";
 import { useUserNotifications } from "../../contexts/UserNotificationsContext";
@@ -297,6 +298,7 @@ const Header = () => {
           />
         )}
       </div>
+      <ThemeSwitcher />
       <LanguageSwitcher />
       <Suspense fallback={null}>
         <MobileMenu />

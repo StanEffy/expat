@@ -46,6 +46,18 @@
     <meta name="theme-color" content="#121417" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#07080A" media="(prefers-color-scheme: dark)" />
     <meta name="color-scheme" content="light dark" />
+    <!-- Apply the theme picked in the header before the first paint (see src/utils/theme.ts) -->
+    <script>
+      try {
+        var theme = localStorage.getItem('theme');
+        if (theme === 'light' || theme === 'dark') {
+          document.documentElement.dataset.theme = theme;
+          document.querySelectorAll('meta[name="theme-color"]').forEach(function (meta) {
+            meta.content = theme === 'dark' ? '#07080A' : '#121417';
+          });
+        }
+      } catch (e) {}
+    </script>
 
     <style>
       html {
@@ -85,17 +97,28 @@
         line-height: 1.6;
       }
       @media (prefers-color-scheme: dark) {
-        html,
-        body {
+        html:not([data-theme="light"]),
+        html:not([data-theme="light"]) body {
           background: #111315;
           color: #ECECE6;
         }
-        .initial-hero h1 {
+        html:not([data-theme="light"]) .initial-hero h1 {
           color: #ECECE6;
         }
-        .initial-hero p {
+        html:not([data-theme="light"]) .initial-hero p {
           color: #C3C7CC;
         }
+      }
+      html[data-theme="dark"],
+      html[data-theme="dark"] body {
+        background: #111315;
+        color: #ECECE6;
+      }
+      html[data-theme="dark"] .initial-hero h1 {
+        color: #ECECE6;
+      }
+      html[data-theme="dark"] .initial-hero p {
+        color: #C3C7CC;
       }
     </style>
   </head>

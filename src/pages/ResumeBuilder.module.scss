@@ -2,9 +2,9 @@
 
 .resumeBuilderPage {
   padding: 2.5rem;
-  background: linear-gradient(135deg, rgba-color($primary-0, 0.15), rgba-color($secondary-a-0, 0.15));
+  background: transparent;
   min-height: 100vh;
-  color: $complement-3;
+  color: var(--ink);
   box-sizing: border-box;
 
   @media (max-width: 900px) {
@@ -42,25 +42,24 @@
 }
 
 .pageHeader {
-  background: rgba-color($primary-1, 0.6);
-  border-radius: 1rem;
+  background: var(--surface);
+  border-radius: 0;
   padding: 1.5rem;
-  box-shadow: var(--shadow-md);
-  border: 1px solid rgba-color($primary-3, 0.3);
+  box-shadow: none;
+  border: 1px solid var(--ink);
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-  backdrop-filter: blur(8px);
 
   h1 {
     margin: 0;
-    color: $complement-3;
+    color: var(--ink);
     font-size: 1.75rem;
   }
 
   p {
     margin: 0;
-    color: $complement-4;
+    color: var(--ink);
   }
 }
 
@@ -69,33 +68,32 @@
   gap: 1rem;
   flex-wrap: wrap;
   font-size: 0.9rem;
-  color: $complement-4;
+  color: var(--ink);
 
   strong {
-    color: $secondary-b-3;
+    color: var(--ink);
   }
 }
 
 .sectionCard {
-  background: rgba-color($primary-1, 0.5);
-  border-radius: 1rem;
+  background: var(--surface);
+  border-radius: 0;
   padding: 1.25rem 1.5rem;
-  box-shadow: var(--shadow-sm);
-  border: 1px solid rgba-color($primary-3, 0.3);
+  box-shadow: none;
+  border: 1px solid var(--ink);
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  backdrop-filter: blur(8px);
 
   h2 {
     margin: 0;
     font-size: 1.25rem;
-    color: $complement-3;
+    color: var(--ink);
   }
 
   p {
     margin: 0;
-    color: $complement-4;
+    color: var(--ink);
   }
 }
 
@@ -127,12 +125,12 @@
 
 .label {
   font-weight: 600;
-  color: $complement-3;
+  color: var(--ink);
 }
 
 .helperText {
   font-size: 0.85rem;
-  color: $complement-4;
+  color: var(--ink);
   margin: 0;
 }
 
@@ -141,20 +139,20 @@
 .selectField select,
 .certRow input,
 .emojiPicker input {
-  border: 1px solid rgba-color($primary-2, 0.4);
-  border-radius: 0.75rem;
+  border: 1px solid var(--rule);
+  border-radius: 0;
   padding: 0.75rem 1rem;
   font-size: 0.95rem;
   font-family: inherit;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
-  background: rgba-color($primary-2, 0.4);
-  color: $complement-3;
+  background: var(--surface);
+  color: var(--ink);
 
   &:focus {
     outline: none;
-    border-color: $secondary-b-3;
-    box-shadow: 0 0 0 3px rgba-color($secondary-b-2, 0.25);
-    background: rgba-color($primary-2, 0.6);
+    border-color: var(--ink);
+    box-shadow: none;
+    background: var(--surface);
   }
 }
 
@@ -165,7 +163,7 @@
 
 .characterCount {
   font-size: 0.8rem;
-  color: $complement-4;
+  color: var(--ink);
   text-align: right;
 }
 
@@ -177,13 +175,12 @@
 
 .groupCard {
   padding: 1rem;
-  border-radius: 0.75rem;
-  border: 1px dashed rgba-color($primary-3, 0.4);
+  border-radius: 0;
+  border: 1px dashed var(--ink);
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  background: rgba-color($primary-2, 0.4);
-  backdrop-filter: blur(6px);
+  background: var(--surface);
 }
 
 .sectionRow {
@@ -195,7 +192,7 @@
   h3,
   h4 {
     margin: 0;
-    color: $complement-3;
+    color: var(--ink);
   }
 }
 
@@ -204,8 +201,8 @@
   flex-direction: column;
   gap: 0.75rem;
   padding: 0.75rem;
-  border-radius: 0.75rem;
-  background: rgba(164, 123, 200, 0.12);
+  border-radius: 0;
+  background: var(--accent-soft);
 }
 
 .actionVerbSelector {
@@ -215,7 +212,7 @@
 
   label {
     font-weight: 600;
-    color: $secondary-a-3;
+    color: var(--ink);
   }
 }
 
@@ -226,17 +223,17 @@
 
   select {
     flex: 1;
-    border-radius: 0.75rem;
-    border: 1px solid rgba-color($secondary-a-0, 0.4);
+    border-radius: 0;
+    border: 1px solid var(--ink);
     padding: 0.65rem 0.75rem;
-    background: rgba-color($primary-2, 0.4);
-    color: $complement-3;
+    background: var(--surface);
+    color: var(--ink);
     font-size: 0.95rem;
 
     &:focus {
       outline: none;
-      border-color: $secondary-a-3;
-      box-shadow: 0 0 0 3px rgba-color($secondary-a-3, 0.25);
+      border-color: var(--ink);
+      box-shadow: none;
     }
   }
 }
@@ -254,16 +251,16 @@
 
   button {
     border: none;
-    border-radius: 0.75rem;
+    border-radius: 0;
     padding: 0.5rem;
     font-size: 1.25rem;
     cursor: pointer;
-    background: rgba(205, 229, 135, 0.4);
+    background: var(--accent-soft);
     transition: transform 0.2s ease, background 0.2s ease;
 
     &:hover {
       transform: translateY(-2px);
-      background: rgba(164, 203, 51, 0.65);
+      background: var(--accent);
     }
   }
 }
@@ -278,8 +275,8 @@
   align-items: center;
   justify-content: center;
   padding: 0.5rem 0.75rem;
-  border-radius: 999px;
-  border: 1px solid rgba(57, 14, 94, 0.2);
+  border-radius: 0;
+  border: 1px solid var(--rule);
   cursor: pointer;
   transition: background 0.2s ease, border-color 0.2s ease;
 
@@ -293,7 +290,7 @@
 }
 
 .active {
-  background: rgba(164, 203, 51, 0.2);
+  background: var(--accent-soft);
   border-color: var(--secondary-b-2);
 }
 
@@ -304,7 +301,7 @@
 
   label {
     font-weight: 600;
-    color: $complement-3;
+    color: var(--ink);
   }
 }
 
@@ -315,21 +312,21 @@
 
   h3 {
     margin: 0;
-    color: $secondary-a-3;
+    color: var(--ink);
   }
 
   p {
     margin: 0;
     font-size: 0.85rem;
-    color: $complement-4;
+    color: var(--ink);
   }
 
   input {
-    border: 1px solid rgba-color($primary-2, 0.4);
-    border-radius: 0.75rem;
+    border: 1px solid var(--rule);
+    border-radius: 0;
     padding: 0.65rem 0.75rem;
-    background: rgba-color($primary-2, 0.4);
-    color: $complement-3;
+    background: var(--surface);
+    color: var(--ink);
   }
 }
 
@@ -346,7 +343,7 @@
 
   label {
     font-weight: 600;
-    color: $complement-3;
+    color: var(--ink);
   }
 }
 
@@ -357,7 +354,7 @@
 
   h3 {
     margin: 0;
-    color: $complement-3;
+    color: var(--ink);
   }
 }
 
@@ -375,15 +372,14 @@
 }
 
 .preview {
-  background: rgba-color($primary-1, 0.6);
-  border-radius: 1rem;
+  background: var(--surface);
+  border-radius: 0;
   padding: 2rem;
-  box-shadow: var(--shadow-lg);
-  border: 1px solid rgba-color($primary-3, 0.3);
+  box-shadow: none;
+  border: 1px solid var(--ink);
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  backdrop-filter: blur(8px);
 }
 
 .previewHeader {
@@ -394,7 +390,7 @@
   h1 {
     margin: 0;
     font-size: 2rem;
-    color: $complement-3;
+    color: var(--ink);
   }
 }
 
@@ -403,7 +399,7 @@
   flex-wrap: wrap;
   gap: 0.75rem;
   font-size: 0.95rem;
-  color: $complement-4;
+  color: var(--ink);
 }
 
 .previewSection {
@@ -414,8 +410,8 @@
   h2 {
     margin: 0;
     font-size: 1.15rem;
-    color: $complement-3;
-    border-bottom: 1px solid rgba-color($primary-3, 0.3);
+    color: var(--ink);
+    border-bottom: 1px solid var(--ink);
     padding-bottom: 0.3rem;
   }
 
@@ -443,12 +439,12 @@
   h3 {
     margin: 0;
     font-size: 1.05rem;
-    color: $secondary-a-3;
+    color: var(--ink);
   }
 
   span {
     font-size: 0.9rem;
-    color: $complement-4;
+    color: var(--ink);
   }
 }
 
@@ -464,12 +460,12 @@
 
   h4 {
     margin: 0;
-    color: $secondary-b-3;
+    color: var(--ink);
   }
 
   p {
     margin: 0;
-    color: $complement-4;
+    color: var(--ink);
   }
 }
 
@@ -485,12 +481,12 @@
 
   dt {
     font-weight: 600;
-    color: $complement-3;
+    color: var(--ink);
   }
 
   dd {
     margin: 0;
-    color: $complement-4;
+    color: var(--ink);
     display: flex;
     flex-direction: column;
     gap: 0.15rem;
@@ -498,19 +494,19 @@
 }
 
 .starTooltip {
-  background: rgba-color($secondary-b-4, 0.3);
-  border: 1px solid rgba-color($secondary-b-3, 0.5);
-  border-radius: 0.75rem;
+  background: var(--accent-soft);
+  border: 1px solid var(--ink);
+  border-radius: 0;
   padding: 0.75rem;
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
   font-size: 0.9rem;
-  color: $complement-3;
+  color: var(--ink);
 
   .tooltipLabel {
     font-weight: 700;
-    color: $secondary-b-3;
+    color: var(--ink);
   }
 
   ul {
@@ -522,7 +518,7 @@
   }
 
   li strong {
-    color: $primary-3;
+    color: var(--ink);
   }
 }
 
@@ -553,7 +549,7 @@
 @media print {
   .resumeBuilderPage {
     padding: 0;
-    background: #fff;
+    background: var(--surface);
   }
 
   .formColumn {
@@ -565,7 +561,6 @@
   }
 
   .preview {
-    box-shadow: none;
     border: none;
   }
 }

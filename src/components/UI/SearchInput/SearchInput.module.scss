@@ -9,7 +9,7 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: rgba(255, 255, 255, 0.65);
+  color: var(--ink-2);
   display: flex;
   align-items: center;
   gap: 0.35rem;
@@ -18,7 +18,7 @@
 
   i {
     font-size: 0.75rem;
-    color: rgba(207, 91, 175, 0.9);
+    color: var(--ink);
   }
 }
 
@@ -31,7 +31,7 @@
   .searchIcon {
     position: absolute;
     left: 14px;
-    color: rgba(255, 255, 255, 0.45);
+    color: var(--ink-muted);
     font-size: 0.92rem;
     pointer-events: none;
     z-index: 2;
@@ -42,26 +42,26 @@
     height: 44px !important;
     padding-left: 42px !important;
     padding-right: 38px !important;
-    background: rgba(255, 255, 255, 0.06) !important;
-    border: 1px solid rgba(255, 255, 255, 0.16) !important;
-    border-radius: 12px !important;
-    color: #ffffff !important;
+    background: var(--surface) !important;
+    border: 1px solid var(--rule) !important;
+    border-radius: 0 !important;
+    color: var(--ink) !important;
     font-size: 0.88rem !important;
     transition: all 0.2s ease !important;
 
     &:hover {
-      border-color: rgba(255, 255, 255, 0.28) !important;
-      background: rgba(255, 255, 255, 0.08) !important;
+      border-color: var(--rule) !important;
+      background: var(--surface-alt) !important;
     }
 
     &:focus {
-      border-color: rgba(207, 91, 175, 0.65) !important;
-      box-shadow: 0 0 0 3px rgba(207, 91, 175, 0.25) !important;
-      background: rgba(255, 255, 255, 0.09) !important;
+      border-color: var(--ink) !important;
+      box-shadow: none !important;
+      background: var(--surface-alt) !important;
     }
 
     &::placeholder {
-      color: rgba(255, 255, 255, 0.45) !important;
+      color: var(--ink-muted) !important;
     }
   }
 
@@ -70,7 +70,7 @@
     right: 10px;
     background: transparent;
     border: none;
-    color: rgba(255, 255, 255, 0.45);
+    color: var(--ink-muted);
     cursor: pointer;
     padding: 6px;
     display: flex;
@@ -80,8 +80,8 @@
     transition: all 0.15s ease;
 
     &:hover {
-      color: #ffffff;
-      background: rgba(255, 255, 255, 0.1);
+      color: var(--ink);
+      background: var(--surface-alt);
     }
   }
 }

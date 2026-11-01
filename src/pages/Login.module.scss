@@ -22,18 +22,10 @@
 }
 
 .card {
-  background: linear-gradient(
-    135deg,
-    $primary-2 0%,
-    $primary-1 50%,
-    $primary-0 60%,
-    $primary-2 100%
-  );
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 16px;
-  -webkit-backdrop-filter: blur(16px);
-  backdrop-filter: blur(16px);
+  background: var(--surface);
+  box-shadow: none;
+  border: 1px solid var(--rule);
+  border-radius: 0;
   overflow: hidden; // Strictly clips tabs to rounded top corners
 }
 
@@ -42,9 +34,9 @@
   width: 100%;
   margin: 0;
   padding: 0;
-  background: rgba(0, 0, 0, 0.28);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 15px 15px 0 0;
+  background: var(--surface-alt);
+  border-bottom: 1px solid var(--rule);
+  border-radius: 0 0 0 0;
 }
 
 .tabButton {
@@ -58,7 +50,7 @@
   background: transparent;
   border: none;
   border-radius: 0;
-  color: rgba(255, 255, 255, 0.65);
+  color: var(--ink-2);
   font-family: inherit;
   font-size: 1.05rem;
   font-weight: 500;
@@ -74,7 +66,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: rgba(255, 255, 255, 0.08);
+    background: var(--surface-alt);
     opacity: 0;
     transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     pointer-events: none;
@@ -85,38 +77,34 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-      135deg,
-      rgba(160, 41, 127, 0.88) 0%,
-      rgba(98, 44, 144, 0.98) 100%
-    );
+    background: var(--accent);
     opacity: 0;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22);
+    box-shadow: none;
     transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     pointer-events: none;
   }
 
   &:first-child {
-    border-radius: 15px 0 0 0;
-    border-right: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 0 0 0 0;
+    border-right: 1px solid var(--rule);
 
     &::before,
     &::after {
-      border-radius: 15px 0 0 0;
+      border-radius: 0 0 0 0;
     }
   }
 
   &:last-child {
-    border-radius: 0 15px 0 0;
+    border-radius: 0 0 0 0;
 
     &::before,
     &::after {
-      border-radius: 0 15px 0 0;
+      border-radius: 0 0 0 0;
     }
   }
 
   &:hover {
-    color: #ffffff;
+    color: var(--ink);
 
     &::before {
       opacity: 1;
@@ -125,18 +113,15 @@
 
   &:focus-visible {
     outline: none;
-    box-shadow: 
-      inset 0 0 0 2px rgba(255, 255, 255, 0.35),
-      inset 0 0 0 4px rgba(207, 91, 175, 0.6);
+    box-shadow: none;
   }
 
   &:focus:not(:focus-visible) {
     outline: none;
-    box-shadow: none;
   }
 
   &.tabActive {
-    color: #ffffff;
+    color: var(--ink);
     font-weight: 600;
 
     &::after {
@@ -144,11 +129,7 @@
     }
 
     &:hover::after {
-      background: linear-gradient(
-        135deg,
-        rgba(175, 48, 140, 0.92) 0%,
-        rgba(110, 50, 160, 1) 100%
-      );
+      background: var(--accent);
     }
   }
 }
@@ -166,13 +147,13 @@
   height: 54px;
   margin: 0;
   padding: 0 16px;
-  background: rgba(0, 0, 0, 0.28);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 15px 15px 0 0;
+  background: var(--surface-alt);
+  border-bottom: 1px solid var(--rule);
+  border-radius: 0 0 0 0;
 }
 
 .forgotHeaderTitle {
-  color: #ffffff;
+  color: var(--ink);
   font-size: 1.05rem;
   font-weight: 600;
   letter-spacing: 0.3px;
@@ -214,7 +195,7 @@
 .title {
   text-align: center;
   margin-bottom: 24px;
-  color: #ffffff;
+  color: var(--ink);
   font-weight: 600;
   font-size: 1.5rem;
 }
@@ -231,7 +212,7 @@
 }
 
 :global(label) {
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--ink);
   font-weight: 500;
   font-size: 0.9rem;
   margin-bottom: 6px;
@@ -249,28 +230,28 @@
   height: 44px !important;
   padding-left: 16px !important;
   padding-right: 16px !important;
-  border-radius: 10px !important;
-  background: rgba(255, 255, 255, 0.07) !important;
-  border: 1px solid rgba(255, 255, 255, 0.18) !important;
-  color: #ffffff !important;
+  border-radius: 0 !important;
+  background: var(--surface-alt) !important;
+  border: 1px solid var(--rule) !important;
+  color: var(--ink) !important;
   font-size: 0.95rem !important;
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
 
   &::placeholder {
-    color: rgba(255, 255, 255, 0.4) !important;
+    color: var(--ink-muted) !important;
   }
 
   &:hover {
-    border-color: rgba(255, 255, 255, 0.3) !important;
-    background: rgba(255, 255, 255, 0.1) !important;
+    border-color: var(--rule) !important;
+    background: var(--surface-alt) !important;
   }
 
   &:focus,
   &:global(.p-focus) {
     outline: none !important;
-    border-color: rgba(207, 91, 175, 0.75) !important;
-    background: rgba(255, 255, 255, 0.12) !important;
-    box-shadow: 0 0 0 3px rgba(207, 91, 175, 0.28) !important;
+    border-color: var(--ink) !important;
+    background: var(--surface-alt) !important;
+    box-shadow: none !important;
   }
 }
 
@@ -283,40 +264,40 @@
     height: 44px !important;
     padding-left: 16px !important;
     padding-right: 42px !important; // Room for toggle eye icon
-    border-radius: 10px !important;
-    background: rgba(255, 255, 255, 0.07) !important;
-    border: 1px solid rgba(255, 255, 255, 0.18) !important;
-    color: #ffffff !important;
+    border-radius: 0 !important;
+    background: var(--surface-alt) !important;
+    border: 1px solid var(--rule) !important;
+    color: var(--ink) !important;
     font-size: 0.95rem !important;
     transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
 
     &::placeholder {
-      color: rgba(255, 255, 255, 0.4) !important;
+      color: var(--ink-muted) !important;
     }
 
     &:hover {
-      border-color: rgba(255, 255, 255, 0.3) !important;
-      background: rgba(255, 255, 255, 0.1) !important;
+      border-color: var(--rule) !important;
+      background: var(--surface-alt) !important;
     }
 
     &:focus,
     &:global(.p-focus) {
       outline: none !important;
-      border-color: rgba(207, 91, 175, 0.75) !important;
-      background: rgba(255, 255, 255, 0.12) !important;
-      box-shadow: 0 0 0 3px rgba(207, 91, 175, 0.28) !important;
+      border-color: var(--ink) !important;
+      background: var(--surface-alt) !important;
+      box-shadow: none !important;
     }
   }
 
   :global(.p-password-show-icon),
   :global(.p-password-hide-icon) {
-    color: rgba(255, 255, 255, 0.65) !important;
+    color: var(--ink-2) !important;
     right: 14px !important;
     cursor: pointer;
     transition: color 0.2s ease, transform 0.15s ease;
 
     &:hover {
-      color: #ffffff !important;
+      color: var(--ink) !important;
       transform: scale(1.1);
     }
   }
@@ -325,7 +306,7 @@
 .forgotPasswordButton {
   background: none;
   border: none;
-  color: $secondary-a-3;
+  color: var(--ink);
   text-decoration: underline;
   cursor: pointer;
   text-align: left;
@@ -347,15 +328,11 @@
   font-size: 1rem;
   font-weight: 600;
   letter-spacing: 0.3px;
-  border-radius: 10px;
+  border-radius: 0;
   border: none !important;
-  color: #ffffff !important;
-  background: linear-gradient(
-    135deg,
-    rgba(160, 41, 127, 0.9) 0%,
-    rgba(98, 44, 144, 1) 100%
-  ) !important;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
+  color: var(--ink) !important;
+  background: var(--accent) !important;
+  box-shadow: none !important;
   cursor: pointer;
   overflow: hidden;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
@@ -365,11 +342,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-      135deg,
-      rgba(195, 52, 156, 1) 0%,
-      rgba(120, 55, 175, 1) 100%
-    );
+    background: var(--accent);
     opacity: 0;
     transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     pointer-events: none;
@@ -377,7 +350,7 @@
 
   &:hover {
     transform: translateY(-1px);
-    box-shadow: 0 6px 20px rgba(160, 41, 127, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.35) !important;
+    box-shadow: none !important;
 
     &::before {
       opacity: 1;
@@ -386,7 +359,7 @@
 
   &:active {
     transform: translateY(0);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+    box-shadow: none !important;
   }
 
   :global(.p-button-label) {
@@ -410,7 +383,7 @@
   padding: 24px 16px;
   font-size: 1.1em;
   line-height: 1.6;
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--ink);
 
   p {
     margin: 0;

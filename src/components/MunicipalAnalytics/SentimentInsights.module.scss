@@ -1,14 +1,12 @@
 @use "@/styles/variables" as *;
 
 .container {
-  background: linear-gradient(165deg, rgba(34, 16, 50, 0.88) 0%, rgba(22, 10, 34, 0.94) 100%);
-  border: 1px solid rgba(207, 91, 175, 0.2);
-  border-radius: 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--ink);
+  border-radius: 0;
   padding: 1.75rem;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
   margin-bottom: 2rem;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.36);
+  box-shadow: none;
 }
 
 .header {
@@ -17,20 +15,20 @@
   h2 {
     font-size: 1.4rem;
     font-weight: 700;
-    color: #ffffff;
+    color: var(--ink);
     margin: 0 0 0.35rem 0;
     display: flex;
     align-items: center;
     gap: 0.6rem;
 
     i {
-      color: $secondary-a-3;
+      color: var(--ink);
     }
   }
 
   p {
     font-size: 0.92rem;
-    color: rgba(255, 255, 255, 0.7);
+    color: var(--ink-2);
     margin: 0;
   }
 }
@@ -46,22 +44,22 @@
 }
 
 .scoreCard {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(207, 91, 175, 0.3);
-  border-radius: 1rem;
+  background: var(--surface);
+  border: 1px solid var(--ink);
+  border-radius: 0;
   padding: 1.5rem;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: none;
 }
 
 .scoreLabel {
   font-size: 0.8rem;
   font-weight: 700;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--ink-2);
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin-bottom: 0.5rem;
@@ -70,7 +68,7 @@
 .bigScore {
   font-size: 3.25rem;
   font-weight: 900;
-  color: #34d399;
+  color: var(--positive);
   line-height: 1;
   margin-bottom: 0.5rem;
 }
@@ -78,21 +76,21 @@
 .starsRow {
   display: flex;
   gap: 0.25rem;
-  color: #fbbf24;
+  color: var(--ink);
   margin-bottom: 0.75rem;
   font-size: 1.1rem;
 }
 
 .responsesCount {
   font-size: 0.78rem;
-  color: rgba(255, 255, 255, 0.55);
+  color: var(--ink-muted);
   margin: 0;
 }
 
 .section {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 1rem;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 0;
   padding: 1.25rem;
 
   h3 {
@@ -106,16 +104,16 @@
     gap: 0.5rem;
 
     &.pain {
-      color: #f87171;
+      color: var(--danger);
       i {
-        color: #ef4444;
+        color: var(--danger);
       }
     }
 
     &.attract {
-      color: #34d399;
+      color: var(--positive);
       i {
-        color: #10b981;
+        color: var(--positive);
       }
     }
   }
@@ -128,9 +126,9 @@
 }
 
 .itemCard {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 0.6rem;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 0;
   padding: 0.85rem 1rem;
   display: flex;
   justify-content: space-between;
@@ -139,14 +137,14 @@
   transition: all 0.2s ease;
 
   &:hover {
-    border-color: rgba(207, 91, 175, 0.4);
-    background: rgba(255, 255, 255, 0.06);
+    border-color: var(--ink);
+    background: var(--surface);
   }
 
   p {
     margin: 0;
     font-size: 0.88rem;
-    color: #ffffff;
+    color: var(--ink);
     line-height: 1.45;
     flex: 1;
   }
@@ -155,25 +153,25 @@
     font-size: 0.75rem;
     font-weight: 700;
     padding: 0.2rem 0.55rem;
-    border-radius: 9999px;
+    border-radius: 0;
     white-space: nowrap;
 
     &.high {
-      background: rgba(239, 68, 68, 0.15);
-      color: #f87171;
-      border: 1px solid rgba(239, 68, 68, 0.35);
+      background: var(--danger-soft);
+      color: var(--danger);
+      border: 1px solid var(--danger);
     }
 
     &.medium {
-      background: rgba(245, 158, 11, 0.15);
-      color: #fbbf24;
-      border: 1px solid rgba(245, 158, 11, 0.35);
+      background: var(--warning-soft);
+      color: var(--ink);
+      border: 1px solid var(--warning);
     }
 
     &.positive {
-      background: rgba(16, 185, 129, 0.15);
-      color: #34d399;
-      border: 1px solid rgba(16, 185, 129, 0.35);
+      background: var(--positive-soft);
+      color: var(--positive);
+      border: 1px solid var(--positive);
     }
   }
 }

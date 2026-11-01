@@ -3,20 +3,12 @@
 .walletCard {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(
-    165deg,
-    rgba(32, 14, 48, 0.94) 0%,
-    rgba(18, 8, 28, 0.98) 100%
-  );
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 20px;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 0;
   padding: 1.6rem 1.75rem;
-  color: #ffffff;
-  box-shadow: 
-    0 12px 36px rgba(0, 0, 0, 0.45),
-    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  color: var(--ink);
+  box-shadow: none;
   margin-bottom: 2rem;
 
   @media (max-width: 640px) {
@@ -52,7 +44,7 @@
     font-size: 1.35rem;
     font-weight: 700;
     margin: 0 0 0.45rem 0;
-    color: #ffffff;
+    color: var(--ink);
     letter-spacing: -0.015em;
     line-height: 1.25;
 
@@ -63,7 +55,7 @@
 
   p {
     font-size: 0.95rem;
-    color: rgba(255, 255, 255, 0.74);
+    color: var(--ink-2);
     margin: 0;
     line-height: 1.55;
     width: 100%;
@@ -91,22 +83,22 @@
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 
   &.active {
-    background: linear-gradient(135deg, $secondary-a-0 0%, $secondary-a-3 100%);
-    color: #ffffff;
-    box-shadow: 0 0 12px rgba(207, 91, 175, 0.75);
-    border: 1px solid rgba(255, 255, 255, 0.4);
+    background: var(--accent);
+    color: var(--ink);
+    box-shadow: none;
+    border: 1px solid var(--rule);
     transform: scale(1);
 
     &:hover {
       transform: scale(1.1);
-      box-shadow: 0 0 16px rgba(207, 91, 175, 0.95);
+      box-shadow: none;
     }
   }
 
   &.spent {
-    background: rgba(255, 255, 255, 0.06);
-    color: rgba(255, 255, 255, 0.3);
-    border: 1px dashed rgba(255, 255, 255, 0.22);
+    background: var(--surface);
+    color: var(--ink-muted);
+    border: 1px dashed var(--rule);
   }
 }
 
@@ -120,7 +112,7 @@
     justify-content: space-around;
     width: 100%;
     padding-top: 1.15rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-top: 1px solid var(--rule);
 
     .statBlock {
       text-align: center;
@@ -136,7 +128,7 @@
     font-size: 0.72rem;
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    color: rgba(255, 255, 255, 0.52);
+    color: var(--ink-muted);
     margin-bottom: 0.3rem;
     font-weight: 600;
   }
@@ -144,13 +136,12 @@
   .statValue {
     font-size: 1.65rem;
     font-weight: 800;
-    color: $secondary-a-3;
+    color: var(--ink);
     line-height: 1;
     font-variant-numeric: tabular-nums;
 
     &.gold {
-      color: #fbbf24;
-      text-shadow: 0 0 14px rgba(251, 191, 36, 0.35);
+      color: var(--ink);
     }
   }
 }
@@ -182,13 +173,7 @@
   width: 280px;
   height: 280px;
   border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    rgba(207, 91, 175, 0.24) 0%,
-    rgba(147, 51, 234, 0.12) 45%,
-    transparent 70%
-  );
-  filter: blur(32px);
+  background: transparent;
 }
 
 .glowOrb2 {
@@ -198,13 +183,7 @@
   width: 240px;
   height: 180px;
   border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    rgba(251, 191, 36, 0.12) 0%,
-    rgba(217, 70, 239, 0.08) 50%,
-    transparent 70%
-  );
-  filter: blur(28px);
+  background: transparent;
 }
 
 .abstractSvg {

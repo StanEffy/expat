@@ -35,7 +35,7 @@
 .pageTitle {
   font-size: 2rem;
   font-weight: 700;
-  color: #ffffff;
+  color: var(--ink);
   margin: 0;
   letter-spacing: -0.02em;
 }
@@ -45,16 +45,16 @@
   align-items: center;
   gap: 6px;
   padding: 4px 12px;
-  border-radius: 20px;
-  background: rgba(207, 91, 175, 0.16);
-  border: 1px solid rgba(207, 91, 175, 0.35);
-  color: $secondary-a-3;
+  border-radius: 0;
+  background: var(--accent-soft);
+  border: 1px solid var(--ink);
+  color: var(--ink);
   font-size: 0.85rem;
   font-weight: 600;
 }
 
 .pageSubtitle {
-  color: rgba(255, 255, 255, 0.65);
+  color: var(--ink-2);
   font-size: 0.95rem;
   margin: 0;
   max-width: 680px;
@@ -65,20 +65,12 @@
 // FILTER CONTROLS BAR
 // -----------------------------------------------------------------------------
 .filterCard {
-  background: linear-gradient(
-    165deg,
-    rgba(30, 14, 44, 0.88) 0%,
-    rgba(18, 9, 28, 0.94) 100%
-  );
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 18px;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 0;
   padding: 18px 20px;
   margin-bottom: 24px;
-  box-shadow: 
-    0 10px 32px rgba(0, 0, 0, 0.38),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  box-shadow: none;
   display: flex;
   flex-direction: column;
   gap: 14px;
@@ -122,7 +114,7 @@
   i {
     position: absolute;
     left: 14px;
-    color: rgba(255, 255, 255, 0.45);
+    color: var(--ink-muted);
     font-size: 0.95rem;
     pointer-events: none;
     z-index: 1;
@@ -134,26 +126,26 @@
   height: 44px !important;
   padding-left: 40px !important;
   padding-right: 16px !important;
-  background: rgba(255, 255, 255, 0.06) !important;
-  border: 1px solid rgba(255, 255, 255, 0.16) !important;
-  border-radius: 12px !important;
-  color: #ffffff !important;
+  background: var(--surface) !important;
+  border: 1px solid var(--rule) !important;
+  border-radius: 0 !important;
+  color: var(--ink) !important;
   font-size: 0.88rem !important;
   transition: all 0.2s ease !important;
 
   &:hover {
-    border-color: rgba(255, 255, 255, 0.28) !important;
-    background: rgba(255, 255, 255, 0.08) !important;
+    border-color: var(--rule) !important;
+    background: var(--surface-alt) !important;
   }
 
   &:focus {
-    border-color: rgba(207, 91, 175, 0.65) !important;
-    box-shadow: 0 0 0 3px rgba(207, 91, 175, 0.25) !important;
-    background: rgba(255, 255, 255, 0.09) !important;
+    border-color: var(--ink) !important;
+    box-shadow: none !important;
+    background: var(--surface-alt) !important;
   }
 
   &::placeholder {
-    color: rgba(255, 255, 255, 0.45) !important;
+    color: var(--ink-muted) !important;
   }
 }
 
@@ -167,29 +159,29 @@
   align-items: center;
   justify-content: space-between;
   padding-top: 10px;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-top: 1px solid var(--rule);
   flex-wrap: wrap;
   gap: 10px;
 }
 
 .activeFiltersText {
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--ink-2);
   font-size: 0.82rem;
 }
 
 .clearFiltersBtn {
   font-size: 0.82rem !important;
-  color: rgba(255, 255, 255, 0.85) !important;
+  color: var(--ink) !important;
   padding: 4px 10px !important;
-  border-radius: 8px !important;
-  border: 1px solid rgba(255, 255, 255, 0.15) !important;
-  background: rgba(255, 255, 255, 0.06) !important;
+  border-radius: 0 !important;
+  border: 1px solid var(--rule) !important;
+  background: var(--surface) !important;
   transition: all 0.18s ease !important;
 
   &:hover {
-    color: #ffffff !important;
-    background: rgba(255, 77, 109, 0.18) !important;
-    border-color: rgba(255, 77, 109, 0.35) !important;
+    color: var(--ink) !important;
+    background: var(--danger-soft) !important;
+    border-color: var(--danger) !important;
   }
 }
 
@@ -213,15 +205,9 @@
 .card {
   min-width: 0;
   box-sizing: border-box;
-  background: linear-gradient(
-    165deg,
-    rgba(34, 16, 50, 0.88) 0%,
-    rgba(20, 10, 32, 0.94) 100%
-  );
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 18px;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 0;
   padding: 20px 22px 22px;
   display: flex;
   flex-direction: column;
@@ -229,24 +215,15 @@
   gap: 16px;
   position: relative;
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 
-    0 10px 30px rgba(0, 0, 0, 0.45),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  box-shadow: none;
   animation: cardFadeIn 0.35s ease-out forwards;
   opacity: 0;
 
   &:hover {
-    background: linear-gradient(
-      165deg,
-      rgba(44, 20, 64, 0.92) 0%,
-      rgba(26, 13, 42, 0.97) 100%
-    );
-    border-color: rgba(207, 91, 175, 0.55);
+    background: var(--surface);
+    border-color: var(--ink);
     transform: translateY(-3px);
-    box-shadow: 
-      0 14px 38px rgba(0, 0, 0, 0.55),
-      0 0 24px rgba(160, 41, 127, 0.2),
-      inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    box-shadow: none;
   }
 }
 
@@ -279,21 +256,17 @@
 .companyAvatar {
   width: 44px;
   height: 44px;
-  border-radius: 12px;
-  background: linear-gradient(
-    135deg,
-    rgba(160, 41, 127, 0.4) 0%,
-    rgba(98, 44, 144, 0.55) 100%
-  );
-  border: 1px solid rgba(207, 91, 175, 0.35);
-  color: #ffffff;
+  border-radius: 0;
+  background: var(--accent);
+  border: 1px solid var(--ink);
+  color: var(--ink);
   font-weight: 700;
   font-size: 1.15rem;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: none;
 }
 
 .companyMeta {
@@ -307,7 +280,7 @@
 .cardTitle {
   font-size: 1.05rem;
   font-weight: 600;
-  color: #ffffff !important;
+  color: var(--ink) !important;
   margin: 0;
   line-height: 1.35;
   word-break: break-word;
@@ -315,12 +288,12 @@
   transition: color 0.18s ease;
 
   &:hover {
-    color: $secondary-a-3 !important;
+    color: var(--ink) !important;
   }
 
   &:focus-visible {
     outline: none;
-    color: $secondary-a-3 !important;
+    color: var(--ink) !important;
     text-decoration: underline;
   }
 }
@@ -330,10 +303,10 @@
   align-self: flex-start;
   max-width: 100%;
   padding: 3px 8px;
-  border-radius: 6px;
-  background: rgba(207, 91, 175, 0.12);
-  border: 1px solid rgba(207, 91, 175, 0.28);
-  color: rgba(255, 255, 255, 0.88);
+  border-radius: 0;
+  background: var(--accent-soft);
+  border: 1px solid var(--ink);
+  color: var(--ink);
   font-size: 0.76rem;
   font-weight: 500;
   white-space: nowrap;
@@ -356,7 +329,7 @@
   flex-direction: column;
   gap: 12px;
   padding-top: 12px;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-top: 1px solid var(--rule);
 }
 
 .cardUpdated {
@@ -364,51 +337,47 @@
   align-items: center;
   gap: 6px;
   font-size: 0.78rem;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--ink-2);
 
   i {
     font-size: 0.82rem;
-    color: rgba(255, 255, 255, 0.45);
+    color: var(--ink-muted);
   }
 }
 
 .viewDetailsButton {
   width: 100% !important;
   height: 42px !important;
-  background: rgba(255, 255, 255, 0.08) !important;
-  border: 1px solid rgba(255, 255, 255, 0.16) !important;
-  color: #ffffff !important;
+  background: var(--surface-alt) !important;
+  border: 1px solid var(--rule) !important;
+  color: var(--ink) !important;
   font-size: 0.9rem !important;
   font-weight: 600 !important;
-  border-radius: 12px !important;
+  border-radius: 0 !important;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
 
   :global(.p-button-label) {
-    color: #ffffff !important;
+    color: var(--ink) !important;
     font-weight: 600 !important;
   }
 
   :global(.p-button-icon) {
-    color: rgba(255, 255, 255, 0.85) !important;
+    color: var(--ink) !important;
     transition: transform 0.2s ease;
   }
 
   &:hover {
-    background: linear-gradient(
-      135deg,
-      rgba(160, 41, 127, 0.85) 0%,
-      rgba(98, 44, 144, 0.95) 100%
-    ) !important;
-    border-color: rgba(207, 91, 175, 0.6) !important;
-    box-shadow: 0 4px 18px rgba(160, 41, 127, 0.4) !important;
+    background: var(--accent) !important;
+    border-color: var(--ink) !important;
+    box-shadow: none !important;
     transform: translateY(-1px);
 
     :global(.p-button-label) {
-      color: #ffffff !important;
+      color: var(--ink) !important;
     }
 
     :global(.p-button-icon) {
-      color: #ffffff !important;
+      color: var(--ink) !important;
       transform: translateX(3px);
     }
   }
@@ -426,7 +395,7 @@
   gap: 16px;
 
   p {
-    color: rgba(255, 255, 255, 0.7);
+    color: var(--ink-2);
     font-size: 0.95rem;
   }
 }
@@ -438,9 +407,9 @@
   justify-content: center;
   padding: 60px 20px;
   text-align: center;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px dashed rgba(255, 255, 255, 0.14);
-  border-radius: 16px;
+  background: var(--surface);
+  border: 1px dashed var(--rule);
+  border-radius: 0;
   margin-top: 20px;
 }
 
@@ -448,12 +417,12 @@
   width: 64px;
   height: 64px;
   border-radius: 50%;
-  background: rgba(207, 91, 175, 0.12);
-  border: 1px solid rgba(207, 91, 175, 0.25);
+  background: var(--accent-soft);
+  border: 1px solid var(--ink);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: $secondary-a-3;
+  color: var(--ink);
   font-size: 1.8rem;
   margin-bottom: 16px;
 }
@@ -461,12 +430,12 @@
 .emptyTitle {
   font-size: 1.25rem;
   font-weight: 600;
-  color: #ffffff;
+  color: var(--ink);
   margin: 0 0 8px 0;
 }
 
 .emptySubtitle {
-  color: rgba(255, 255, 255, 0.65);
+  color: var(--ink-2);
   font-size: 0.9rem;
   max-width: 440px;
   margin: 0 0 20px 0;
@@ -474,16 +443,12 @@
 }
 
 .emptyResetBtn {
-  background: linear-gradient(
-    135deg,
-    rgba(160, 41, 127, 0.8) 0%,
-    rgba(98, 44, 144, 0.9) 100%
-  ) !important;
-  border-color: rgba(207, 91, 175, 0.5) !important;
-  color: #ffffff !important;
+  background: var(--accent) !important;
+  border-color: var(--ink) !important;
+  color: var(--ink) !important;
   font-weight: 600 !important;
   padding: 8px 20px !important;
-  border-radius: 10px !important;
+  border-radius: 0 !important;
 }
 
 .loadMoreContainer {
@@ -503,21 +468,17 @@
 .loadMoreBtn {
   min-width: 180px;
   height: 44px;
-  background: rgba(255, 255, 255, 0.08) !important;
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
-  color: #ffffff !important;
+  background: var(--surface-alt) !important;
+  border: 1px solid var(--rule) !important;
+  color: var(--ink) !important;
   font-weight: 600 !important;
-  border-radius: 12px !important;
+  border-radius: 0 !important;
   transition: all 0.2s ease !important;
 
   &:hover:not(:disabled) {
-    background: linear-gradient(
-      135deg,
-      rgba(160, 41, 127, 0.75) 0%,
-      rgba(98, 44, 144, 0.85) 100%
-    ) !important;
-    border-color: rgba(207, 91, 175, 0.55) !important;
-    box-shadow: 0 6px 20px rgba(160, 41, 127, 0.3) !important;
+    background: var(--accent) !important;
+    border-color: var(--ink) !important;
+    box-shadow: none !important;
   }
 
   @media (max-width: 640px) {
@@ -532,7 +493,7 @@
 }
 
 .perPageLabel {
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--ink-2);
   font-size: 0.88rem;
   font-weight: 500;
   white-space: nowrap;
@@ -541,36 +502,35 @@
 .itemsPerPageDropdown {
   width: 88px !important;
   height: 44px !important;
-  background: rgba(255, 255, 255, 0.06) !important;
-  border: 1px solid rgba(255, 255, 255, 0.16) !important;
-  border-radius: 12px !important;
+  background: var(--surface) !important;
+  border: 1px solid var(--rule) !important;
+  border-radius: 0 !important;
   display: flex !important;
   align-items: center !important;
   position: relative !important;
   transition: all 0.2s ease !important;
 
   &:hover {
-    border-color: rgba(255, 255, 255, 0.28) !important;
-    background: rgba(255, 255, 255, 0.08) !important;
+    border-color: var(--rule) !important;
+    background: var(--surface-alt) !important;
   }
 
   &:focus-within,
   &.p-focus {
-    border-color: rgba(207, 91, 175, 0.65) !important;
-    box-shadow: 0 0 0 3px rgba(207, 91, 175, 0.25) !important;
-    background: rgba(255, 255, 255, 0.09) !important;
+    border-color: var(--ink) !important;
+    box-shadow: none !important;
+    background: var(--surface-alt) !important;
   }
 
   :global(.p-dropdown-label) {
     background: transparent !important;
     border: none !important;
-    box-shadow: none !important;
     outline: none !important;
     border-radius: 0 !important;
     display: flex !important;
     align-items: center !important;
     padding: 0 0 0 14px !important;
-    color: #ffffff !important;
+    color: var(--ink) !important;
     font-size: 0.88rem;
     font-weight: 500;
     height: 100% !important;
@@ -579,7 +539,7 @@
   }
 
   :global(.p-dropdown-trigger) {
-    color: rgba(255, 255, 255, 0.6) !important;
+    color: var(--ink-2) !important;
     width: 32px !important;
     height: 100% !important;
     display: flex !important;

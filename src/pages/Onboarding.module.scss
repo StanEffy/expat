@@ -21,26 +21,23 @@
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
-  background: rgba(207, 91, 175, 0.18);
-  color: #f5bde6;
-  border: 1px solid rgba(207, 91, 175, 0.4);
+  background: var(--accent-soft);
+  color: var(--ink);
+  border: 1px solid var(--ink);
   padding: 0.35rem 0.95rem;
-  border-radius: 9999px;
+  border-radius: 0;
   font-size: 0.85rem;
   font-weight: 700;
   margin-bottom: 1rem;
-  box-shadow: 0 0 15px rgba(207, 91, 175, 0.25);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  box-shadow: none;
 }
 
 .title {
   font-size: 2.5rem;
   font-weight: 800;
-  color: #ffffff;
+  color: var(--ink);
   margin: 0 0 0.75rem 0;
   letter-spacing: -0.02em;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 
   @media (max-width: 768px) {
     font-size: 2rem;
@@ -49,7 +46,7 @@
 
 .subtitle {
   font-size: 1.15rem;
-  color: rgba(255, 255, 255, 0.75);
+  color: var(--ink-2);
   max-width: 650px;
   margin: 0 auto;
   line-height: 1.6;
@@ -64,5 +61,5 @@
   justify-content: center;
   align-items: center;
   min-height: 400px;
-  color: #94a3b8;
+  color: var(--link);
 }

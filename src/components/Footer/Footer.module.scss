@@ -1,21 +1,35 @@
-@use "../../styles/variables" as *;
-
 .footer {
-  padding: 24px 16px;
   margin-top: auto;
-  background-color: $primary-0;
   width: 100%;
+  background: var(--ink);
+  color: var(--paper);
+  border-top: 6px solid var(--accent);
 }
 
 .footerContent {
   max-width: 1200px;
   margin: 0 auto;
+  padding: 22px 16px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 24px;
+}
+
+.footerText,
+.footerMark {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
 .footerText {
-  text-align: center;
-  color: $complement-4;
-  margin: 0;
-  font-size: 0.875rem;
+  color: var(--paper);
 }
 
+.footerMark {
+  color: var(--accent);
+}

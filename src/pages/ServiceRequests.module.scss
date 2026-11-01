@@ -28,14 +28,14 @@
   h1 {
     font-size: 2.25rem;
     font-weight: 800;
-    color: #ffffff;
+    color: var(--ink);
     margin: 0 0 0.5rem 0;
     letter-spacing: -0.02em;
   }
 
   p {
     font-size: 1.05rem;
-    color: rgba(255, 255, 255, 0.72);
+    color: var(--ink-2);
     margin: 0;
     max-width: 650px;
     line-height: 1.45;
@@ -70,7 +70,7 @@
 }
 
 .statusTabsWrapper {
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid var(--rule);
   padding-top: 1rem;
   display: flex;
   align-items: center;
@@ -86,28 +86,24 @@
 .emptyState {
   text-align: center;
   padding: 4rem 1rem;
-  background: linear-gradient(
-    165deg,
-    rgba(34, 16, 50, 0.88) 0%,
-    rgba(20, 10, 32, 0.94) 100%
-  );
-  border-radius: 18px;
-  border: 1px dashed rgba(255, 255, 255, 0.16);
+  background: var(--surface);
+  border-radius: 0;
+  border: 1px dashed var(--rule);
 
   i {
     font-size: 3rem;
-    color: rgba(255, 255, 255, 0.4);
+    color: var(--ink-muted);
     margin-bottom: 1rem;
   }
 
   h3 {
     font-size: 1.25rem;
-    color: #ffffff;
+    color: var(--ink);
     margin: 0 0 0.5rem 0;
   }
 
   p {
-    color: rgba(255, 255, 255, 0.65);
+    color: var(--ink-2);
     margin: 0;
   }
 }

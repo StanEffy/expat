@@ -20,7 +20,7 @@ export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   if (isLoading) {
     return (
       <div style={{ minHeight: '60vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <span style={{ color: 'rgba(255, 255, 255, 0.7)' }}>Loading…</span>
+        <span style={{ color: 'var(--ink-muted)' }}>Loading…</span>
       </div>
     );
   }

@@ -9,9 +9,7 @@
   width: 100vw;
   height: 100dvh;
   z-index: 10001;
-  background: rgba(10, 4, 18, 0.45);
-  backdrop-filter: blur(3px);
-  -webkit-backdrop-filter: blur(3px);
+  background: rgba(18, 20, 23, 0.4);
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
   animation: mobileBackdropFadeIn 0.18s cubic-bezier(0.4, 0, 0.2, 1);
@@ -34,39 +32,32 @@
 }
 
 .mobile-menu-trigger {
-  width: 38px !important;
-  height: 38px !important;
-  border-radius: 10px !important;
-  color: rgba(255, 255, 255, 0.85) !important;
-  background: rgba(255, 255, 255, 0.08) !important;
-  border: 1px solid rgba(255, 255, 255, 0.16) !important;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 0 !important;
+  color: var(--paper) !important;
+  background: transparent !important;
+  border: 1px solid var(--ink-muted) !important;
+  transition: background-color 0.12s ease, color 0.12s ease !important;
 
   &:hover {
-    background: rgba(255, 255, 255, 0.14) !important;
-    border-color: rgba(255, 255, 255, 0.28) !important;
-    color: #ffffff !important;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+    background: var(--ink-2) !important;
+    color: var(--paper) !important;
   }
 
   &.mobile-menu-trigger-active {
-    background: rgba(207, 91, 175, 0.25) !important;
-    border-color: rgba(207, 91, 175, 0.6) !important;
-    color: #ffffff !important;
+    background: var(--accent) !important;
+    border-color: var(--accent) !important;
+    color: var(--ink) !important;
   }
 
   &:focus-visible {
-    outline: none !important;
-    border-color: rgba(207, 91, 175, 0.6) !important;
-    box-shadow: 
-      0 0 0 2px rgba(255, 255, 255, 0.35),
-      0 0 0 4px rgba(207, 91, 175, 0.5) !important;
+    outline: 3px solid var(--accent) !important;
+    outline-offset: 2px;
   }
 
   &:focus:not(:focus-visible) {
     outline: none !important;
-    box-shadow: none !important;
   }
 
   @media (min-width: 1024px) {
@@ -77,20 +68,18 @@
 .mobile-menu {
   display: block !important;
   position: fixed !important;
-  top: 54px !important;
+  top: 68px !important;
   right: 16px !important;
   left: auto !important;
   min-width: 220px;
   max-width: calc(100dvw - 32px);
-  max-height: calc(100dvh - 66px) !important;
+  max-height: calc(100dvh - 80px) !important;
   overflow-y: auto !important;
   -webkit-overflow-scrolling: touch;
-  background: rgba(22, 10, 34, 0.97) !important;
-  -webkit-backdrop-filter: blur(20px);
-  backdrop-filter: blur(20px);
-  border-radius: 14px !important;
-  border: 1px solid rgba(207, 91, 175, 0.3) !important;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.65), 0 0 20px rgba(160, 41, 127, 0.15) !important;
+  background: var(--surface) !important;
+  border-radius: 0 !important;
+  border: 2px solid var(--ink) !important;
+  box-shadow: none !important;
   padding: 6px !important;
   z-index: 10002 !important;
   -webkit-tap-highlight-color: transparent;
@@ -103,7 +92,7 @@
     background: transparent;
   }
   &::-webkit-scrollbar-thumb {
-    background: rgba(207, 91, 175, 0.4);
+    background: var(--accent-soft);
     border-radius: 4px;
   }
 
@@ -121,26 +110,26 @@
   }
 
   .p-menu-separator {
-    border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-top: 1px solid var(--rule) !important;
     margin: 6px 4px !important;
   }
 
   .p-menuitem {
     margin: 0 !important;
-    border-radius: 8px !important;
+    border-radius: 0 !important;
 
     /* Override PrimeReact's light-theme container element */
     > .p-menuitem-content {
       background: transparent !important;
-      color: rgba(255, 255, 255, 0.88) !important;
-      border-radius: 8px !important;
+      color: var(--ink) !important;
+      border-radius: 0 !important;
       transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1) !important;
 
       .p-menuitem-link {
         padding: 0.72rem 0.95rem !important;
-        border-radius: 8px !important;
+        border-radius: 0 !important;
         background: transparent !important;
-        color: rgba(255, 255, 255, 0.88) !important;
+        color: var(--ink) !important;
         display: flex !important;
         align-items: center !important;
         gap: 0.75rem !important;
@@ -150,14 +139,14 @@
         -webkit-tap-highlight-color: transparent;
 
         .p-menuitem-text {
-          color: rgba(255, 255, 255, 0.88) !important;
+          color: var(--ink) !important;
           font-weight: 500 !important;
           font-size: 0.92rem !important;
           transition: color 0.15s ease !important;
         }
 
         .p-menuitem-icon {
-          color: rgba(207, 91, 175, 0.85) !important;
+          color: var(--ink) !important;
           font-size: 1.05rem !important;
           margin-right: 0 !important;
           transition: all 0.15s ease, transform 0.15s ease !important;
@@ -165,20 +154,19 @@
 
         &:focus {
           outline: none !important;
-          box-shadow: none !important;
         }
       }
 
       &:hover {
-        background: rgba(207, 91, 175, 0.18) !important;
-        color: #ffffff !important;
+        background: var(--accent-soft) !important;
+        color: var(--ink) !important;
 
         .p-menuitem-link {
           .p-menuitem-text {
-            color: #ffffff !important;
+            color: var(--ink) !important;
           }
           .p-menuitem-icon {
-            color: #ff8adc !important;
+            color: var(--ink) !important;
             transform: scale(1.08);
           }
         }
@@ -188,15 +176,15 @@
     /* Override PrimeReact hover and focus states */
     &:not(.p-highlight):not(.p-disabled).p-focus > .p-menuitem-content,
     &:not(.p-highlight):not(.p-disabled) > .p-menuitem-content:hover {
-      background: rgba(207, 91, 175, 0.18) !important;
-      color: #ffffff !important;
+      background: var(--accent-soft) !important;
+      color: var(--ink) !important;
 
       .p-menuitem-link {
         .p-menuitem-text {
-          color: #ffffff !important;
+          color: var(--ink) !important;
         }
         .p-menuitem-icon {
-          color: #ff8adc !important;
+          color: var(--ink) !important;
         }
       }
     }
@@ -205,32 +193,24 @@
     &.active-menuitem,
     &.p-highlight {
       > .p-menuitem-content {
-        background: linear-gradient(
-          135deg,
-          rgba(160, 41, 127, 0.55) 0%,
-          rgba(98, 44, 144, 0.7) 100%
-        ) !important;
-        border: 1px solid rgba(207, 91, 175, 0.5) !important;
-        box-shadow: 0 4px 14px rgba(160, 41, 127, 0.3) !important;
+        background: var(--accent) !important;
+        border: 1px solid var(--ink) !important;
+        box-shadow: none !important;
 
         .p-menuitem-link {
           .p-menuitem-text {
-            color: #ffffff !important;
+            color: var(--ink) !important;
             font-weight: 600 !important;
           }
           .p-menuitem-icon {
-            color: #ffffff !important;
+            color: var(--ink) !important;
           }
         }
 
         &:hover {
-          background: linear-gradient(
-            135deg,
-            rgba(160, 41, 127, 0.7) 0%,
-            rgba(98, 44, 144, 0.85) 100%
-          ) !important;
-          border-color: rgba(207, 91, 175, 0.75) !important;
-          box-shadow: 0 4px 18px rgba(160, 41, 127, 0.45) !important;
+          background: var(--accent) !important;
+          border-color: var(--ink) !important;
+          box-shadow: none !important;
         }
       }
     }
@@ -238,17 +218,13 @@
     /* Mobile press feedback */
     &:active > .p-menuitem-content {
       transform: scale(0.97);
-      background: rgba(207, 91, 175, 0.28) !important;
+      background: var(--accent-soft) !important;
     }
 
     &.active-menuitem:active > .p-menuitem-content,
     &.p-highlight:active > .p-menuitem-content {
       transform: scale(0.97);
-      background: linear-gradient(
-        135deg,
-        rgba(160, 41, 127, 0.75) 0%,
-        rgba(98, 44, 144, 0.9) 100%
-      ) !important;
+      background: var(--accent) !important;
     }
   }
 }

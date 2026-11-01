@@ -1,37 +1,36 @@
 .dropdown {
   width: 100% !important;
   height: 44px !important;
-  background: rgba(255, 255, 255, 0.06) !important;
-  border: 1px solid rgba(255, 255, 255, 0.16) !important;
-  border-radius: 12px !important;
+  background: var(--surface) !important;
+  border: 1px solid var(--rule) !important;
+  border-radius: 0 !important;
   display: flex !important;
   align-items: center !important;
   position: relative !important;
   transition: all 0.2s ease;
 
   &:hover {
-    border-color: rgba(255, 255, 255, 0.28) !important;
-    background: rgba(255, 255, 255, 0.08) !important;
+    border-color: var(--rule) !important;
+    background: var(--surface-alt) !important;
   }
 
   &:focus-within,
   &.p-focus {
-    border-color: rgba(207, 91, 175, 0.65) !important;
-    box-shadow: 0 0 0 3px rgba(207, 91, 175, 0.25) !important;
-    background: rgba(255, 255, 255, 0.09) !important;
+    border-color: var(--ink) !important;
+    box-shadow: none !important;
+    background: var(--surface-alt) !important;
   }
 
   :global(.p-dropdown-label) {
     background: transparent !important;
     border: none !important;
-    box-shadow: none !important;
     outline: none !important;
     border-radius: 0 !important;
     padding: 0 38px 0 14px !important;
     height: 100% !important;
     display: flex !important;
     align-items: center !important;
-    color: #ffffff !important;
+    color: var(--ink) !important;
     font-size: 0.88rem;
     flex: 1;
     min-width: 0;
@@ -43,7 +42,7 @@
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    color: rgba(255, 255, 255, 0.6) !important;
+    color: var(--ink-2) !important;
     background: transparent !important;
     border: none !important;
     flex-shrink: 0;
@@ -55,7 +54,7 @@
     top: 50% !important;
     margin-top: 0 !important;
     transform: translateY(-50%) !important;
-    color: rgba(255, 255, 255, 0.5) !important;
+    color: var(--ink-muted) !important;
     font-size: 0.82rem !important;
     cursor: pointer;
     z-index: 2;
@@ -65,7 +64,7 @@
     line-height: 1 !important;
 
     &:hover {
-      color: #ffffff !important;
+      color: var(--ink) !important;
     }
   }
 }
@@ -97,7 +96,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--ink);
   font-size: 0.88rem;
 }
 
@@ -105,11 +104,11 @@
   flex-shrink: 0;
   font-size: 0.76rem;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.65);
-  background: rgba(255, 255, 255, 0.08);
+  color: var(--ink-2);
+  background: var(--surface-alt);
   padding: 2px 7px;
-  border-radius: 6px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0;
+  border: 1px solid var(--rule);
 }
 
 .valueContent {
@@ -124,22 +123,20 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  color: #ffffff;
+  color: var(--ink);
   font-size: 0.88rem;
 }
 
 .placeholder {
-  color: rgba(255, 255, 255, 0.48) !important;
+  color: var(--ink-muted) !important;
   font-size: 0.88rem;
 }
 
 .panel {
-  background: rgba(22, 10, 34, 0.98) !important;
-  backdrop-filter: blur(24px) !important;
-  -webkit-backdrop-filter: blur(24px) !important;
-  border: 1px solid rgba(207, 91, 175, 0.35) !important;
-  border-radius: 14px !important;
-  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.7), 0 0 20px rgba(160, 41, 127, 0.15) !important;
+  background: var(--surface) !important;
+  border: 1px solid var(--ink) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
   max-width: calc(100dvw - 32px);
   overflow: hidden;
   z-index: 1000 !important;
@@ -148,19 +145,19 @@
     padding: 6px !important;
 
     :global(.p-dropdown-item) {
-      color: rgba(255, 255, 255, 0.85) !important;
-      border-radius: 8px !important;
+      color: var(--ink) !important;
+      border-radius: 0 !important;
       padding: 8px 12px !important;
       transition: all 0.15s ease;
 
       &:hover,
       &.p-highlight {
-        background: rgba(207, 91, 175, 0.25) !important;
-        color: #ffffff !important;
+        background: var(--accent-soft) !important;
+        color: var(--ink) !important;
 
         .optionCount {
-          background: rgba(207, 91, 175, 0.4);
-          color: #ffffff;
+          background: var(--accent-soft);
+          color: var(--ink);
         }
       }
     }

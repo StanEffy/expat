@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background: rgba-color($primary-2, 0.4);
+  background: var(--surface);
 }
 
 .header {
@@ -12,10 +12,9 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem 1.5rem;
-  background: rgba-color($primary-1, 0.8);
-  border-bottom: 1px solid rgba-color($primary-3, 0.3);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(12px);
+  background: var(--surface);
+  border-bottom: 1px solid var(--ink);
+  box-shadow: none;
 }
 
 .headerLeft {
@@ -48,7 +47,7 @@
   margin: 0;
   font-size: 1.5rem;
   font-weight: 600;
-  color: $complement-3;
+  color: var(--ink);
 }
 
 .headerRight {
@@ -79,7 +78,7 @@
   margin: 0 0 1.5rem 0;
   font-size: 1.25rem;
   font-weight: 600;
-  color: $complement-3;
+  color: var(--ink);
 }
 
 .nav {
@@ -100,7 +99,7 @@
   transition: all 0.2s;
   text-align: left;
   font-size: 1rem;
-  color: $complement-4;
+  color: var(--ink);
   white-space: nowrap;
 
   i {
@@ -108,13 +107,13 @@
   }
 
   &:hover {
-    background: rgba-color($primary-2, 0.5);
-    color: $complement-3;
+    background: var(--surface);
+    color: var(--ink);
   }
 
   &.active {
-    background: rgba-color($primary-3, 0.4);
-    color: $complement-0;
+    background: var(--accent-soft);
+    color: var(--ink);
     font-weight: 500;
   }
 }

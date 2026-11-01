@@ -1,37 +1,22 @@
 @use "../../styles/variables" as *;
 
 .card {
-  background: linear-gradient(
-    165deg,
-    rgba(34, 16, 50, 0.88) 0%,
-    rgba(20, 10, 32, 0.94) 100%
-  );
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 18px;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 0;
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  box-shadow: 
-    0 10px 30px rgba(0, 0, 0, 0.45),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  box-shadow: none;
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  color: #ffffff;
+  color: var(--ink);
 
   &:hover {
-    background: linear-gradient(
-      165deg,
-      rgba(44, 20, 64, 0.92) 0%,
-      rgba(26, 13, 42, 0.97) 100%
-    );
-    border-color: rgba(207, 91, 175, 0.55);
+    background: var(--surface);
+    border-color: var(--ink);
     transform: translateY(-2px);
-    box-shadow: 
-      0 14px 38px rgba(0, 0, 0, 0.55),
-      0 0 24px rgba(160, 41, 127, 0.2),
-      inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    box-shadow: none;
   }
 }
 
@@ -53,7 +38,7 @@
 
 .authorDate {
   font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--ink-muted);
   display: flex;
   align-items: center;
   gap: 0.4rem;
@@ -62,7 +47,7 @@
 .title {
   font-size: 1.25rem;
   font-weight: 700;
-  color: #ffffff;
+  color: var(--ink);
   margin: 0 0 0.5rem 0;
   line-height: 1.35;
   letter-spacing: -0.01em;
@@ -70,7 +55,7 @@
 
 .content {
   font-size: 0.925rem;
-  color: rgba(255, 255, 255, 0.75);
+  color: var(--ink-2);
   line-height: 1.5;
   margin: 0 0 1.25rem 0;
 }
@@ -81,19 +66,19 @@
   justify-content: space-between;
   gap: 0.75rem;
   padding-top: 1rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid var(--rule);
   flex-wrap: wrap;
 }
 
 .contactInfo {
   font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--ink);
   display: flex;
   align-items: center;
   gap: 0.4rem;
   font-weight: 600;
 
   i {
-    color: $secondary-a-3;
+    color: var(--ink);
   }
 }

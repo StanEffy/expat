@@ -1,16 +1,12 @@
 @use "../../styles/variables" as *;
 
 .card {
-  background: linear-gradient(165deg, rgba(34, 16, 50, 0.88) 0%, rgba(20, 10, 32, 0.94) 100%);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 18px;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 0;
   padding: 1.75rem;
-  color: #ffffff;
-  box-shadow:
-    0 10px 30px rgba(0, 0, 0, 0.45),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  color: var(--ink);
+  box-shadow: none;
 
   @media (max-width: 640px) {
     padding: 1.25rem;
@@ -24,27 +20,27 @@
   letter-spacing: 0.06em;
   text-transform: uppercase;
   padding: 0.3rem 0.7rem;
-  border-radius: 999px;
-  background: rgba(207, 91, 175, 0.18);
-  color: #f0a6dc;
-  border: 1px solid rgba(207, 91, 175, 0.35);
+  border-radius: 0;
+  background: var(--accent-soft);
+  color: var(--ink);
+  border: 1px solid var(--ink);
 
   &.money {
-    background: rgba(52, 211, 153, 0.15);
-    color: #8ff0c8;
-    border-color: rgba(52, 211, 153, 0.35);
+    background: var(--positive-soft);
+    color: var(--positive);
+    border-color: var(--positive);
   }
 
   &.risk {
-    background: rgba(251, 146, 60, 0.15);
-    color: #fdc08f;
-    border-color: rgba(251, 146, 60, 0.35);
+    background: var(--warning-soft);
+    color: var(--warning);
+    border-color: var(--warning);
   }
 
   &.values {
-    background: rgba(96, 165, 250, 0.15);
-    color: #a9cdfc;
-    border-color: rgba(96, 165, 250, 0.35);
+    background: var(--info-soft);
+    color: var(--link);
+    border-color: var(--link);
   }
 }
 
@@ -69,13 +65,13 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--ink-2);
   margin: 0 0 0.6rem;
 }
 
 .sectionHint {
   font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--ink-muted);
   margin: -0.3rem 0 0.6rem;
 }
 
@@ -94,29 +90,29 @@
   text-align: left;
   font: inherit;
   font-size: 0.98rem;
-  color: #ffffff;
+  color: var(--ink);
   padding: 0.75rem 1rem;
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  background: rgba(255, 255, 255, 0.04);
+  border-radius: 0;
+  border: 1px solid var(--rule);
+  background: var(--surface);
   cursor: pointer;
   transition: all 0.18s ease;
 
   &:hover {
-    border-color: rgba(207, 91, 175, 0.5);
-    background: rgba(207, 91, 175, 0.08);
+    border-color: var(--ink);
+    background: var(--accent-soft);
   }
 }
 
 .option.selected {
-  border-color: rgba(207, 91, 175, 0.9);
-  background: rgba(207, 91, 175, 0.22);
-  box-shadow: 0 0 18px rgba(160, 41, 127, 0.25);
+  border-color: var(--ink);
+  background: var(--accent-soft);
+  box-shadow: none;
 }
 
 .checkOption {
   input {
-    accent-color: #cf5baf;
+    accent-color: var(--ink);
     width: 1.05rem;
     height: 1.05rem;
     margin: 0;
@@ -124,8 +120,8 @@
   }
 
   &.checked {
-    border-color: rgba(52, 211, 153, 0.55);
-    background: rgba(52, 211, 153, 0.1);
+    border-color: var(--positive);
+    background: var(--positive-soft);
   }
 }
 
@@ -143,22 +139,22 @@
   font: inherit;
   font-size: 0.85rem;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--ink-2);
   padding: 0.55rem 0.4rem;
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  background: rgba(255, 255, 255, 0.04);
+  border-radius: 0;
+  border: 1px solid var(--rule);
+  background: var(--surface);
   cursor: pointer;
   transition: all 0.18s ease;
 
   &:hover {
-    border-color: rgba(207, 91, 175, 0.5);
+    border-color: var(--ink);
   }
 
   &.selected {
-    color: #ffffff;
-    border-color: rgba(207, 91, 175, 0.9);
-    background: rgba(207, 91, 175, 0.25);
+    color: var(--ink);
+    border-color: var(--ink);
+    background: var(--accent-soft);
   }
 }
 
@@ -183,7 +179,7 @@
   font-weight: 700;
   font-size: 0.95rem;
   padding: 0.65rem 1.4rem;
-  border-radius: 12px;
+  border-radius: 0;
   cursor: pointer;
   transition: all 0.18s ease;
 
@@ -195,31 +191,31 @@
 
 .primaryButton {
   min-width: 7rem;
-  color: #ffffff;
+  color: var(--ink);
   border: none;
-  background: linear-gradient(135deg, #a0297f 0%, #cf5baf 100%);
-  box-shadow: 0 6px 18px rgba(160, 41, 127, 0.35);
+  background: var(--accent);
+  box-shadow: none;
 
   &:hover:not(:disabled) {
     transform: translateY(-1px);
-    box-shadow: 0 8px 22px rgba(160, 41, 127, 0.5);
+    box-shadow: none;
   }
 }
 
 .secondaryButton {
-  color: rgba(255, 255, 255, 0.85);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--ink);
+  border: 1px solid var(--rule);
   background: transparent;
 
   &:hover:not(:disabled) {
-    border-color: rgba(255, 255, 255, 0.4);
+    border-color: var(--rule);
   }
 }
 
 .linkButton {
   font: inherit;
   font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.55);
+  color: var(--ink-muted);
   background: none;
   border: none;
   padding: 0;
@@ -227,6 +223,6 @@
   text-decoration: underline;
 
   &:hover:not(:disabled) {
-    color: #fca5a5;
+    color: var(--danger);
   }
 }

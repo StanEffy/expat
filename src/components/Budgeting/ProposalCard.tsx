@@ -92,7 +92,7 @@ export const ProposalCard: React.FC<Props> = ({
           <div className={styles.detailItem}>
             <span className={styles.label}>{t('proposal.votes', 'Votes')}</span>
             <span className={styles.value}>
-              {proposal.votesCount} <span style={{ fontSize: '0.8rem', fontWeight: 'normal', color: 'rgba(255, 255, 255, 0.5)' }}>/ {proposal.targetVotes}</span>
+              {proposal.votesCount} <span style={{ fontSize: '0.8rem', fontWeight: 'normal', color: 'var(--ink-muted)' }}>/ {proposal.targetVotes}</span>
             </span>
           </div>
         </div>

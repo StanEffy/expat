@@ -13,18 +13,10 @@
   max-width: 480px;
   width: 100%;
   padding: 2.25rem 2rem;
-  background: linear-gradient(
-    165deg,
-    rgba(32, 14, 48, 0.94) 0%,
-    rgba(18, 8, 28, 0.98) 100%
-  );
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 20px;
-  box-shadow: 
-    0 16px 40px rgba(0, 0, 0, 0.55),
-    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 0;
+  box-shadow: none;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -35,28 +27,28 @@
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background: rgba(207, 91, 175, 0.18);
-  border: 1px solid rgba(207, 91, 175, 0.4);
+  background: var(--accent-soft);
+  border: 1px solid var(--ink);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: $secondary-a-3;
+  color: var(--ink);
   font-size: 1.65rem;
   margin-bottom: 1.25rem;
-  box-shadow: 0 0 20px rgba(207, 91, 175, 0.35);
+  box-shadow: none;
 }
 
 .card h2 {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #ffffff;
+  color: var(--ink);
   margin: 0 0 0.6rem 0;
   letter-spacing: -0.01em;
 }
 
 .card p {
   font-size: 0.95rem;
-  color: rgba(255, 255, 255, 0.72);
+  color: var(--ink-2);
   line-height: 1.5;
   margin: 0 0 1.75rem 0;
 }

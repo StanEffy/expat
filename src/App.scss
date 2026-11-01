@@ -8,7 +8,7 @@
 }
 
 body {
-  background-color: rgba(20, 8, 40, 1); // Darker background for better readability
+  background-color: var(--surface); // Darker background for better readability
 
 }
 
@@ -19,10 +19,8 @@ body {
   transition: filter 300ms;
 }
 .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
 }
 .logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
 @keyframes logo-spin {
@@ -45,5 +43,5 @@ body {
 }
 
 .read-the-docs {
-  color: $complement-1;
+  color: var(--ink);
 }

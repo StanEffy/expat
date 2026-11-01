@@ -8,7 +8,7 @@
   max-width: 1240px;
   margin: 0 auto;
   box-sizing: border-box;
-  color: #ffffff;
+  color: var(--ink);
 }
 
 // Hero Section
@@ -26,24 +26,22 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background: rgba(0, 210, 255, 0.1);
-  color: #38bdf8;
-  border: 1px solid rgba(0, 210, 255, 0.3);
+  background: var(--info-soft);
+  color: var(--link);
+  border: 1px solid var(--link);
   padding: 0.4rem 1.1rem;
-  border-radius: 9999px;
+  border-radius: 0;
   font-size: 0.85rem;
   font-weight: 700;
   letter-spacing: 0.03em;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  box-shadow: 0 0 16px rgba(0, 210, 255, 0.15);
+  box-shadow: none;
 
   .dot {
     width: 7px;
     height: 7px;
     border-radius: 50%;
-    background: #38bdf8;
-    box-shadow: 0 0 8px #38bdf8;
+    background: var(--info-soft);
+    box-shadow: none;
   }
 }
 
@@ -53,7 +51,7 @@
   line-height: 1.15;
   letter-spacing: -0.03em;
   margin: 0;
-  color: #ffffff;
+  color: var(--ink);
 
   @media (max-width: 768px) {
     font-size: 2.1rem;
@@ -61,14 +59,14 @@
 }
 
 .gradientText {
-  background: linear-gradient(135deg, #00d2ff 0%, #a855f7 50%, #a4cb33 100%);
+  background: var(--ink);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .heroSubtitle {
   font-size: 1.2rem;
-  color: rgba(255, 255, 255, 0.78);
+  color: var(--ink-2);
   line-height: 1.6;
   max-width: 820px;
   margin: 0;
@@ -96,23 +94,21 @@
 }
 
 .metricCard {
-  background: rgba(18, 26, 44, 0.75);
-  border: 1px solid rgba(255, 255, 255, 0.09);
-  border-radius: 14px;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 0;
   padding: 1.5rem 1.25rem;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
   transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 
   &:hover {
     transform: translateY(-3px);
-    border-color: rgba(0, 210, 255, 0.35);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    border-color: var(--link);
+    box-shadow: none;
   }
 }
 
@@ -123,22 +119,22 @@
   margin-bottom: 0.35rem;
 
   &.cyan {
-    color: #38bdf8;
+    color: var(--link);
   }
   &.purple {
-    color: #c084fc;
+    color: var(--ink);
   }
   &.lime {
-    color: #a4cb33;
+    color: var(--ink);
   }
   &.amber {
-    color: #fbbf24;
+    color: var(--ink);
   }
 }
 
 .metricLabel {
   font-size: 0.86rem;
-  color: rgba(255, 255, 255, 0.72);
+  color: var(--ink-2);
   line-height: 1.35;
 }
 
@@ -165,25 +161,25 @@
   text-transform: uppercase;
   letter-spacing: 0.08em;
   padding: 0.25rem 0.85rem;
-  border-radius: 6px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  color: #38bdf8;
+  border-radius: 0;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  color: var(--link);
 
   &.purple {
-    color: #c084fc;
-    background: rgba(192, 132, 252, 0.1);
-    border-color: rgba(192, 132, 252, 0.25);
+    color: var(--ink);
+    background: var(--accent-soft);
+    border-color: var(--ink);
   }
   &.lime {
-    color: #a4cb33;
-    background: rgba(164, 203, 51, 0.1);
-    border-color: rgba(164, 203, 51, 0.25);
+    color: var(--ink);
+    background: var(--accent-soft);
+    border-color: var(--ink);
   }
   &.amber {
-    color: #fbbf24;
-    background: rgba(251, 191, 36, 0.1);
-    border-color: rgba(251, 191, 36, 0.25);
+    color: var(--ink);
+    background: var(--accent-soft);
+    border-color: var(--ink);
   }
 }
 
@@ -192,7 +188,7 @@
   font-weight: 800;
   letter-spacing: -0.02em;
   margin: 0;
-  color: #ffffff;
+  color: var(--ink);
 
   @media (max-width: 768px) {
     font-size: 1.75rem;
@@ -201,22 +197,20 @@
 
 .sectionSubtitle {
   font-size: 1.08rem;
-  color: rgba(255, 255, 255, 0.75);
+  color: var(--ink-2);
   line-height: 1.6;
   margin: 0;
 }
 
 // Stakeholders / Mission
 .missionCard {
-  background: rgba(18, 26, 44, 0.65);
-  border: 1px solid rgba(255, 255, 255, 0.09);
-  border-radius: 16px;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 0;
   padding: 2rem 2.25rem;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
   margin-bottom: 1.5rem;
   line-height: 1.7;
-  color: rgba(255, 255, 255, 0.88);
+  color: var(--ink);
   font-size: 1.05rem;
 }
 
@@ -231,9 +225,9 @@
 }
 
 .stakeholderCard {
-  background: rgba(18, 26, 44, 0.65);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 14px;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 0;
   padding: 1.75rem;
   display: flex;
   flex-direction: column;
@@ -242,19 +236,19 @@
 
   &:hover {
     transform: translateY(-3px);
-    border-color: rgba(255, 255, 255, 0.2);
+    border-color: var(--rule);
   }
 
   h3 {
     font-size: 1.25rem;
     font-weight: 700;
     margin: 0;
-    color: #ffffff;
+    color: var(--ink);
   }
 
   p {
     font-size: 0.95rem;
-    color: rgba(255, 255, 255, 0.72);
+    color: var(--ink-2);
     line-height: 1.55;
     margin: 0;
   }
@@ -263,26 +257,26 @@
 .iconCircle {
   width: 48px;
   height: 48px;
-  border-radius: 12px;
+  border-radius: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.35rem;
 
   &.cyan {
-    background: rgba(0, 210, 255, 0.12);
-    color: #38bdf8;
-    border: 1px solid rgba(0, 210, 255, 0.25);
+    background: var(--info-soft);
+    color: var(--link);
+    border: 1px solid var(--link);
   }
   &.lime {
-    background: rgba(164, 203, 51, 0.12);
-    color: #a4cb33;
-    border: 1px solid rgba(164, 203, 51, 0.25);
+    background: var(--accent-soft);
+    color: var(--ink);
+    border: 1px solid var(--ink);
   }
   &.purple {
-    background: rgba(192, 132, 252, 0.12);
-    color: #c084fc;
-    border: 1px solid rgba(192, 132, 252, 0.25);
+    background: var(--accent-soft);
+    color: var(--ink);
+    border: 1px solid var(--ink);
   }
 }
 
@@ -298,33 +292,31 @@
 }
 
 .offeringCard {
-  background: rgba(18, 26, 44, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 16px;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 0;
   padding: 1.85rem;
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
   transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 
   &:hover {
     transform: translateY(-3px);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+    box-shadow: none;
   }
 
   &.cardCyan:hover {
-    border-color: rgba(0, 210, 255, 0.35);
+    border-color: var(--link);
   }
   &.cardLime:hover {
-    border-color: rgba(164, 203, 51, 0.35);
+    border-color: var(--ink);
   }
   &.cardPurple:hover {
-    border-color: rgba(192, 132, 252, 0.35);
+    border-color: var(--ink);
   }
   &.cardAmber:hover {
-    border-color: rgba(251, 191, 36, 0.35);
+    border-color: var(--ink);
   }
 }
 
@@ -338,7 +330,7 @@
   font-size: 1.35rem;
   font-weight: 700;
   margin: 0;
-  color: #ffffff;
+  color: var(--ink);
 }
 
 .liveTag {
@@ -346,27 +338,27 @@
   align-items: center;
   gap: 0.35rem;
   padding: 0.25rem 0.65rem;
-  border-radius: 9999px;
+  border-radius: 0;
   font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  background: rgba(16, 185, 129, 0.15);
-  color: #34d399;
-  border: 1px solid rgba(16, 185, 129, 0.3);
+  background: var(--positive-soft);
+  color: var(--positive);
+  border: 1px solid var(--positive);
 
   .liveDot {
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: #34d399;
-    box-shadow: 0 0 6px #34d399;
+    background: var(--positive-soft);
+    box-shadow: none;
   }
 }
 
 .offeringDesc {
   font-size: 0.96rem;
-  color: rgba(255, 255, 255, 0.74);
+  color: var(--ink-2);
   line-height: 1.6;
   margin: 0;
   flex: 1;
@@ -378,7 +370,7 @@
   gap: 0.4rem;
   font-size: 0.88rem;
   font-weight: 600;
-  color: #38bdf8;
+  color: var(--link);
   cursor: pointer;
   background: none;
   border: none;
@@ -387,7 +379,7 @@
 
   &:hover {
     gap: 0.65rem;
-    color: #7dd3fc;
+    color: var(--link);
   }
 }
 
@@ -407,9 +399,9 @@
 }
 
 .roadmapStep {
-  background: rgba(18, 26, 44, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 14px;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 0;
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
@@ -419,12 +411,12 @@
 
   &:hover {
     transform: translateY(-3px);
-    border-color: rgba(255, 255, 255, 0.2);
+    border-color: var(--rule);
   }
 
   &.activeStep {
-    border-color: rgba(0, 210, 255, 0.35);
-    box-shadow: 0 0 20px rgba(0, 210, 255, 0.08);
+    border-color: var(--link);
+    box-shadow: none;
   }
 }
 
@@ -438,7 +430,7 @@
   font-size: 0.8rem;
   font-weight: 700;
   letter-spacing: 0.03em;
-  color: #38bdf8;
+  color: var(--link);
 }
 
 .statusTag {
@@ -449,32 +441,32 @@
   text-transform: uppercase;
 
   &.active {
-    background: rgba(0, 210, 255, 0.15);
-    color: #38bdf8;
-    border: 1px solid rgba(0, 210, 255, 0.3);
+    background: var(--info-soft);
+    color: var(--link);
+    border: 1px solid var(--link);
   }
   &.planned {
-    background: rgba(192, 132, 252, 0.15);
-    color: #c084fc;
-    border: 1px solid rgba(192, 132, 252, 0.3);
+    background: var(--accent-soft);
+    color: var(--ink);
+    border: 1px solid var(--ink);
   }
   &.vision {
-    background: rgba(164, 203, 51, 0.15);
-    color: #a4cb33;
-    border: 1px solid rgba(164, 203, 51, 0.3);
+    background: var(--accent-soft);
+    color: var(--ink);
+    border: 1px solid var(--ink);
   }
 }
 
 .stepTitle {
   font-size: 1.15rem;
   font-weight: 700;
-  color: #ffffff;
+  color: var(--ink);
   margin: 0;
 }
 
 .stepDesc {
   font-size: 0.88rem;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--ink-2);
   line-height: 1.55;
   margin: 0;
 }
@@ -491,9 +483,9 @@
 }
 
 .visionCard {
-  background: rgba(18, 26, 44, 0.65);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 14px;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 0;
   padding: 1.75rem;
   display: flex;
   flex-direction: column;
@@ -508,19 +500,19 @@
     left: 0;
     right: 0;
     height: 3px;
-    background: linear-gradient(90deg, #00d2ff, #a855f7);
+    background: var(--accent);
   }
 
   h3 {
     font-size: 1.25rem;
     font-weight: 700;
     margin: 0;
-    color: #ffffff;
+    color: var(--ink);
   }
 
   p {
     font-size: 0.95rem;
-    color: rgba(255, 255, 255, 0.72);
+    color: var(--ink-2);
     line-height: 1.6;
     margin: 0;
   }
@@ -528,12 +520,10 @@
 
 // Team / Leadership Section
 .teamCard {
-  background: rgba(18, 26, 44, 0.65);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 16px;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 0;
   padding: 2.25rem;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -541,7 +531,7 @@
 
 .teamIntro {
   font-size: 1.05rem;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--ink-2);
   line-height: 1.65;
   margin: 0;
   text-align: center;
@@ -560,9 +550,9 @@
 }
 
 .memberBox {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 12px;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 0;
   padding: 1.5rem;
   text-align: center;
   display: flex;
@@ -573,7 +563,7 @@
 
   &:hover {
     transform: translateY(-2px);
-    border-color: rgba(255, 255, 255, 0.15);
+    border-color: var(--rule);
   }
 }
 
@@ -581,52 +571,52 @@
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  background: linear-gradient(135deg, rgba(0, 210, 255, 0.2), rgba(151, 57, 200, 0.2));
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: var(--accent);
+  border: 1px solid var(--rule);
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 700;
   font-size: 1.1rem;
-  color: #38bdf8;
+  color: var(--link);
 }
 
 .memberName {
   font-size: 1.15rem;
   font-weight: 700;
   margin: 0;
-  color: #ffffff;
+  color: var(--ink);
 }
 
 .memberRole {
   font-size: 0.86rem;
-  color: #a4cb33;
+  color: var(--ink);
   font-weight: 600;
 }
 
 // CTA Banner
 .ctaCard {
-  background: linear-gradient(135deg, rgba(18, 26, 44, 0.9) 0%, rgba(30, 20, 60, 0.9) 100%);
-  border: 1px solid rgba(0, 210, 255, 0.3);
-  border-radius: 20px;
+  background: var(--surface);
+  border: 1px solid var(--link);
+  border-radius: 0;
   padding: 3rem 2rem;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1.25rem;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(0, 210, 255, 0.08);
+  box-shadow: none;
 
   h2 {
     font-size: 2.2rem;
     font-weight: 800;
     margin: 0;
-    color: #ffffff;
+    color: var(--ink);
   }
 
   p {
     font-size: 1.08rem;
-    color: rgba(255, 255, 255, 0.78);
+    color: var(--ink-2);
     max-width: 650px;
     margin: 0;
     line-height: 1.6;

@@ -17,12 +17,12 @@
   margin: 0;
   font-size: 2rem;
   font-weight: 600;
-  color: #333;
+  color: var(--ink);
 }
 
 .helperText {
   margin: 0;
-  color: #555;
+  color: var(--ink-2);
   max-width: 720px;
   line-height: 1.5;
 }
@@ -45,11 +45,11 @@
   justify-content: center;
   gap: 1rem;
   text-align: center;
-  color: #555;
+  color: var(--ink-2);
 
   i {
     font-size: 2.5rem;
-    color: #6c63ff;
+    color: var(--link);
   }
 
   p {
@@ -83,7 +83,7 @@
 }
 
 .codeLabel {
-  color: #777;
+  color: var(--ink-muted);
   font-size: 0.875rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -92,7 +92,7 @@
 .codeValue {
   font-size: 2.5rem;
   font-weight: 700;
-  color: #222;
+  color: var(--ink);
   letter-spacing: 0.1em;
   font-family: 'Courier New', Courier, monospace;
 }
@@ -110,12 +110,12 @@
 
   p {
     margin: 0;
-    color: #444;
+    color: var(--ink);
   }
 }
 
 .remaining {
-  color: #6c63ff;
+  color: var(--link);
   font-weight: 600;
 }
 

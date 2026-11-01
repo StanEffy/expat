@@ -1232,7 +1232,7 @@ const Profile = () => {
               <div className={styles.card}>
                 <div className={styles.cardHeader}>
                   <div className={styles.cardHeaderTitle}>
-                    <i className="pi pi-heart-fill" style={{ color: '#ef4444' }} />
+                    <i className="pi pi-heart-fill" style={{ color: 'var(--danger)' }} />
                     <div>
                       <h3>{t('favourites.title', { defaultValue: 'Favourite Companies' })}</h3>
                       <p className={styles.cardSubtitle}>

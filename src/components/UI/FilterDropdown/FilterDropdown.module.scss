@@ -9,7 +9,7 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: rgba(255, 255, 255, 0.65);
+  color: var(--ink-2);
   display: flex;
   align-items: center;
   gap: 0.35rem;
@@ -18,30 +18,30 @@
 
   i {
     font-size: 0.75rem;
-    color: rgba(207, 91, 175, 0.9);
+    color: var(--ink);
   }
 }
 
 .dropdown {
   width: 100% !important;
   height: 44px !important;
-  background: rgba(255, 255, 255, 0.06) !important;
-  border: 1px solid rgba(255, 255, 255, 0.16) !important;
-  border-radius: 12px !important;
+  background: var(--surface) !important;
+  border: 1px solid var(--rule) !important;
+  border-radius: 0 !important;
   display: flex !important;
   align-items: center !important;
   transition: all 0.2s ease;
 
   &:hover {
-    border-color: rgba(255, 255, 255, 0.28) !important;
-    background: rgba(255, 255, 255, 0.08) !important;
+    border-color: var(--rule) !important;
+    background: var(--surface-alt) !important;
   }
 
   &:focus-within,
   &:global(.p-focus) {
-    border-color: rgba(207, 91, 175, 0.65) !important;
-    box-shadow: 0 0 0 3px rgba(207, 91, 175, 0.25) !important;
-    background: rgba(255, 255, 255, 0.09) !important;
+    border-color: var(--ink) !important;
+    box-shadow: none !important;
+    background: var(--surface-alt) !important;
   }
 
   :global(.p-dropdown-label) {
@@ -51,7 +51,7 @@
     height: 100% !important;
     display: flex !important;
     align-items: center !important;
-    color: #ffffff !important;
+    color: var(--ink) !important;
     font-size: 0.88rem;
     font-weight: 500;
   }
@@ -62,7 +62,7 @@
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    color: rgba(255, 255, 255, 0.6) !important;
+    color: var(--ink-2) !important;
     background: transparent !important;
     border: none !important;
   }

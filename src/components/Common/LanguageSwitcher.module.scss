@@ -11,66 +11,54 @@
   align-items: center;
   justify-content: center;
   gap: 7px;
-  height: 38px;
+  height: 40px;
   padding: 0 12px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: 10px;
-  color: #ffffff;
+  background: transparent;
+  border: 1px solid var(--ink-muted);
+  border-radius: 0;
+  color: var(--paper);
   cursor: pointer;
-  font-family: inherit;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  font-family: var(--font-mono);
+  transition: background-color 0.12s ease;
   user-select: none;
 
   &:hover {
-    background: rgba(255, 255, 255, 0.15);
-    border-color: rgba(255, 255, 255, 0.28);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-
-    .arrowIcon {
-      color: #ffffff;
-    }
+    background: var(--ink-2);
   }
 
   &:focus-visible {
-    outline: none;
-    border-color: rgba(207, 91, 175, 0.7);
-    box-shadow: 
-      0 0 0 2px rgba(255, 255, 255, 0.3),
-      0 0 0 4px rgba(207, 91, 175, 0.5);
+    outline: 3px solid var(--accent);
+    outline-offset: 2px;
   }
 
   &.triggerOpen {
-    background: rgba(255, 255, 255, 0.15);
-    border-color: rgba(207, 91, 175, 0.6);
-    box-shadow: 0 0 0 2px rgba(207, 91, 175, 0.25);
+    background: var(--ink-2);
+    border-color: var(--paper);
   }
 }
 
 .globeIcon {
-  font-size: 0.95rem;
-  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.9rem;
+  color: var(--paper);
   line-height: 1;
 }
 
 .triggerCode {
-  font-size: 0.825rem;
-  font-weight: 700;
-  letter-spacing: 0.8px;
-  color: #ffffff;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--paper);
   line-height: 1;
 }
 
 .arrowIcon {
-  font-size: 0.65rem;
-  color: rgba(255, 255, 255, 0.6);
-  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s ease;
+  font-size: 0.6rem;
+  color: var(--paper);
+  transition: transform 0.15s ease;
   line-height: 1;
 
   &.arrowRotated {
     transform: rotate(180deg);
-    color: #ffffff;
   }
 }
 
@@ -83,12 +71,10 @@
   margin: 0;
   padding: 6px;
   list-style: none;
-  background: rgba(26, 12, 45, 0.98);
-  -webkit-backdrop-filter: blur(24px);
-  backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: 12px;
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.55), 0 4px 12px rgba(0, 0, 0, 0.3);
+  background: var(--surface);
+  border: 2px solid var(--ink);
+  border-radius: 0;
+  box-shadow: none;
   z-index: 10002;
   overflow: hidden;
   scrollbar-width: none;
@@ -117,8 +103,8 @@
   gap: 10px;
   padding: 8px 10px;
   margin: 2px 0;
-  border-radius: 8px;
-  color: rgba(255, 255, 255, 0.88);
+  border-radius: 0;
+  color: var(--ink);
   cursor: pointer;
   transition: background-color 0.15s ease, color 0.15s ease;
   user-select: none;
@@ -127,29 +113,25 @@
 
   &:hover,
   &:focus-visible {
-    background: rgba(255, 255, 255, 0.12);
-    color: #ffffff;
+    background: var(--surface-alt);
+    color: var(--ink);
 
     .badge {
-      background: rgba(255, 255, 255, 0.16);
-      color: #ffffff;
-      border-color: rgba(255, 255, 255, 0.22);
+      background: var(--surface-alt);
+      color: var(--ink);
+      border-color: var(--rule);
     }
   }
 
   &.menuItemSelected {
-    background: linear-gradient(
-      135deg,
-      rgba(160, 41, 127, 0.45) 0%,
-      rgba(98, 44, 144, 0.6) 100%
-    );
-    color: #ffffff;
-    border: 1px solid rgba(207, 91, 175, 0.35);
+    background: var(--accent);
+    color: var(--ink);
+    border: 1px solid var(--ink);
 
     .badge {
-      background: rgba(255, 255, 255, 0.22);
-      color: #ffffff;
-      border-color: rgba(255, 255, 255, 0.3);
+      background: var(--surface-alt);
+      color: var(--ink);
+      border-color: var(--rule);
     }
   }
 }
@@ -160,13 +142,13 @@
   justify-content: center;
   width: 32px;
   height: 22px;
-  border-radius: 5px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 0;
+  background: var(--surface-alt);
+  border: 1px solid var(--rule);
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.6px;
-  color: rgba(255, 255, 255, 0.85);
+  color: var(--ink);
   transition: all 0.15s ease;
   text-align: center;
 }
@@ -184,6 +166,6 @@
   width: 18px;
   height: 18px;
   font-size: 0.75rem;
-  color: $secondary-a-3;
+  color: var(--ink);
   font-weight: bold;
 }

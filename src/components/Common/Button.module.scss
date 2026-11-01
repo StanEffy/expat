@@ -13,19 +13,15 @@
       margin-left: 0.5rem;
     }
   }
-  
   &.filled {
     // Default filled style (handled by PrimeReact)
   }
-  
   &.outlined {
     // Outlined style (handled by PrimeReact's outlined prop)
   }
-  
   &.text {
     // Text style (handled by PrimeReact's text prop)
   }
-  
   &.small {
     // Small size styles can be added here if needed
     font-size: 0.875rem;
@@ -33,11 +29,9 @@
     height: auto;
     min-height: auto;
   }
-  
   &.medium {
     // Medium size (default)
   }
-  
   &.large {
     // Large size styles can be added here if needed
     font-size: 1.125rem;

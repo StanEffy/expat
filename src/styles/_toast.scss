@@ -10,14 +10,11 @@
 
 // Toast message card styling
 .p-toast-message {
-  background-color: rgba($primary-1, 0.95) !important;
-  border: 1px solid rgba($primary-3, 0.3) !important;
-  border-radius: 12px !important;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
-  backdrop-filter: blur(12px) saturate(180%) !important;
-  -webkit-backdrop-filter: blur(12px) saturate(180%) !important;
-  color: $complement-3 !important;
-  
+  background-color: var(--surface) !important;
+  border: 1px solid var(--ink) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  color: var(--ink) !important;
   // Remove white background
   &::before {
     display: none !important;
@@ -32,108 +29,96 @@
 
 // Toast summary (title)
 .p-toast-summary {
-  color: $complement-3 !important;
+  color: var(--ink) !important;
   font-weight: 600 !important;
   margin-bottom: 0.5rem !important;
 }
 
 // Toast detail (message)
 .p-toast-detail {
-  color: $complement-4 !important;
+  color: var(--ink) !important;
   margin: 0 !important;
 }
 
 // Toast icon
 .p-toast-icon-close {
-  background-color: rgba($primary-2, 0.6) !important;
-  color: $complement-3 !important; // Light color for visibility against dark background
+  background-color: var(--surface) !important;
+  color: var(--ink) !important; // Light color for visibility against dark background
   border: none !important;
   width: 2rem !important;
   height: 2rem !important;
- 
   transition: all 0.2s ease !important;
   opacity: 0.85 !important;
   padding: 0;
-  
   // Target any icon elements inside
   i,
   .p-icon,
   {
     color: red;
      &::before {
-    color: #ffffff !important;
+    color: var(--ink) !important;
   }
   }
- 
-  
   &:hover {
-    background-color: rgba(255, 255, 255, 0.2) !important;
-    color: #ffffff !important;
+    background-color: var(--surface-alt) !important;
+    color: var(--ink) !important;
     opacity: 1 !important;
-    
     i,
     .p-icon,
     &::before {
-      color: #ffffff !important;
+      color: var(--ink) !important;
     }
   }
-  
   &:focus {
-    outline: 2px solid #ffffff !important;
+    outline: 2px solid var(--rule) !important;
     outline-offset: 2px !important;
-    background-color: rgba(255, 255, 255, 0.15) !important;
-    color: #ffffff !important;
-    
+    background-color: var(--surface-alt) !important;
+    color: var(--ink) !important;
     i,
     .p-icon,
     &::before {
-      color: #ffffff !important;
+      color: var(--ink) !important;
     }
   }
-  
   &:active {
-    background-color: rgba(255, 255, 255, 0.3) !important;
+    background-color: var(--surface-alt) !important;
   }
 }
 
 // Toast severity icons
 .p-toast-icon {
-  color: $complement-3 !important;
+  color: var(--ink) !important;
 }
 
 // Success toast
 .p-toast-message-success {
-  border-left: 4px solid $secondary-b-0 !important;
-  
+  border-left: 4px solid var(--ink) !important;
   .p-toast-icon {
-    color: $secondary-b-0 !important;
+    color: var(--ink) !important;
   }
 }
 
 // Error toast
 .p-toast-message-error {
-  border-left: 4px solid $secondary-a-0 !important;
-  
+  border-left: 4px solid var(--ink) !important;
   .p-toast-icon {
-    color: $secondary-a-0 !important;
+    color: var(--ink) !important;
   }
 }
 
 // Info toast
 .p-toast-message-info {
-  border-left: 4px solid $primary-3 !important;
-  
+  border-left: 4px solid var(--ink) !important;
   .p-toast-icon {
-    color: $primary-3 !important;
+    color: var(--ink) !important;
   }
 }
 
 // Warning toast
 .p-toast-message-warn {
-  border-left: 4px solid $complement-0 !important;
-  
+  border-left: 4px solid var(--ink) !important;
   .p-toast-icon {
-    color: $complement-0 !important;
+    color: var(--ink) !important;
   }
 }
 

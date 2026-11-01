@@ -7,44 +7,73 @@
 
 // Color Variables
 
-// Primary Colors
-$primary-0: rgba(98, 44, 144, 1);
-$primary-1: rgba(82, 52, 108, 1);
-$primary-2: rgba(57, 14, 94, 1);
-$primary-3: rgba(151, 96, 200, 1);
-$primary-4: rgba(164, 123, 200, 1);
+// "Ukazatel" palette: city wayfinding. Paper, ink, signal yellow.
+$paper: #F4F4F1;
+$surface: #FFFFFF;
+$surface-alt: #EBEBE6;
+$ink: #121417;
+$ink-2: #343A42;
+$ink-muted: #5B6068;
+$rule: #C9C9C2;
+$accent: #FFD23F;
+$accent-soft: #FFF1BF;
 
-// Secondary Colors A
-$secondary-a-0: rgba(160, 41, 127, 1);
-$secondary-a-1: rgba(120, 53, 101, 1);
-$secondary-a-2: rgba(104, 13, 79, 1);
-$secondary-a-3: rgba(207, 91, 175, 1);
-$secondary-a-4: rgba(207, 122, 184, 1);
+// Legacy palette names (older components still use them); mapped onto the new palette
+$primary-0: $ink;
+$primary-1: $ink-2;
+$primary-2: $ink;
+$primary-3: $ink-muted;
+$primary-4: #8A9098;
 
-// Secondary Colors B
-$secondary-b-0: rgba(164, 203, 51, 1);
-$secondary-b-1: rgba(130, 152, 67, 1);
-$secondary-b-2: rgba(102, 132, 17, 1);
-$secondary-b-3: rgba(196, 229, 101, 1);
-$secondary-b-4: rgba(205, 229, 135, 1);
+$secondary-a-0: $ink;
+$secondary-a-1: $ink-2;
+$secondary-a-2: $ink;
+$secondary-a-3: $ink;
+$secondary-a-4: $ink-2;
 
-// Complement Colors
-$complement-0: rgba(214, 207, 54, 1);
-$complement-1: rgba(160, 156, 71, 1);
-$complement-2: rgba(139, 134, 18, 1);
-$complement-3: rgba(234, 229, 103, 1);
-$complement-4: rgba(234, 230, 138, 1);
+$secondary-b-0: #1E7F4F;
+$secondary-b-1: #1E7F4F;
+$secondary-b-2: #166A41;
+$secondary-b-3: #1E7F4F;
+$secondary-b-4: #1E7F4F;
+
+$complement-0: $accent;
+$complement-1: #C9A42A;
+$complement-2: #8A6A00;
+$complement-3: $ink;
+$complement-4: $ink-2;
 
 // Shadow Variables
-$shadow-sm: 0px 2px 4px rgba(0, 0, 0, 0.1);
-$shadow-md: 0px 4px 8px rgba(0, 0, 0, 0.15);
-$shadow-lg: 0px 8px 16px rgba(0, 0, 138, 0.3);
+$shadow-sm: none;
+$shadow-md: none;
+$shadow-lg: none;
 
 // Footer Background
-$footer-bg: rgba(224, 224, 224, 1);
+$footer-bg: $ink;
 
 // CSS Variables for runtime usage
 :root {
+  // Ukazatel tokens
+  --paper: #{$paper};
+  --surface: #{$surface};
+  --surface-alt: #{$surface-alt};
+  --ink: #{$ink};
+  --ink-2: #{$ink-2};
+  --ink-muted: #{$ink-muted};
+  --rule: #{$rule};
+  --accent: #{$accent};
+  --accent-soft: #{$accent-soft};
+  --link: #1F4FD1;
+  --positive: #1E7F4F;
+  --positive-soft: #DDF2E6;
+  --warning: #8A5300;
+  --warning-soft: #FBE8C8;
+  --danger: #B42318;
+  --danger-soft: #FCE4E2;
+  --info-soft: #E1E8FA;
+  --font-sans: 'Archivo', 'Archivo Fallback', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
   // Primary
   --primary-0: #{$primary-0};
   --primary-1: #{$primary-1};

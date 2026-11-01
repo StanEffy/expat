@@ -12,9 +12,9 @@
   align-items: center;
   gap: 4px;
   padding: 3px;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0;
+  background: var(--surface);
+  border: 1px solid var(--rule);
   width: fit-content;
 }
 
@@ -23,10 +23,10 @@
   align-items: center;
   gap: 6px;
   padding: 4px 10px;
-  border-radius: 6px;
+  border-radius: 0;
   border: none;
   background: transparent;
-  color: rgba(255, 255, 255, 0.65);
+  color: var(--ink-2);
   font-size: 0.78rem;
   font-weight: 500;
   cursor: pointer;
@@ -38,20 +38,20 @@
   }
 
   &:hover {
-    color: #ffffff;
-    background: rgba(255, 255, 255, 0.08);
+    color: var(--ink);
+    background: var(--surface-alt);
   }
 
   &.scaleTabActive {
-    background: rgba(255, 255, 255, 0.16);
-    color: #ffffff;
+    background: var(--surface-alt);
+    color: var(--ink);
     font-weight: 600;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: none;
   }
 
   &:focus-visible {
     outline: none;
-    box-shadow: 0 0 0 2px rgba(207, 91, 175, 0.6);
+    box-shadow: none;
   }
 
   &:focus:not(:focus-visible) {
@@ -73,10 +73,10 @@
   align-items: center;
   justify-content: center;
   height: 44px;
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  background: rgba(255, 255, 255, 0.06);
-  color: rgba(255, 255, 255, 0.7);
+  border-radius: 0;
+  border: 1px solid var(--rule);
+  background: var(--surface);
+  color: var(--ink-2);
   font-weight: 600;
   font-size: 0.88rem;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
@@ -84,15 +84,15 @@
   user-select: none;
 
   &:hover {
-    background: rgba(255, 255, 255, 0.12);
-    color: #ffffff;
-    border-color: rgba(255, 255, 255, 0.25);
+    background: var(--surface-alt);
+    color: var(--ink);
+    border-color: var(--rule);
     transform: translateY(-1px);
   }
 
   &:focus-visible {
     outline: none;
-    box-shadow: 0 0 0 2px rgba(207, 91, 175, 0.6);
+    box-shadow: none;
   }
 
   &:focus:not(:focus-visible) {
@@ -101,24 +101,16 @@
 }
 
 .active {
-  background: linear-gradient(
-    135deg,
-    rgba(160, 41, 127, 0.45) 0%,
-    rgba(98, 44, 144, 0.55) 100%
-  );
-  border-color: rgba(207, 91, 175, 0.35);
-  color: #ffffff;
+  background: var(--accent);
+  border-color: var(--ink);
+  color: var(--ink);
 }
 
 .selected {
-  background: linear-gradient(
-    135deg,
-    rgba(175, 48, 140, 0.95) 0%,
-    rgba(110, 50, 160, 1) 100%
-  ) !important;
-  border-color: $secondary-a-3 !important;
-  box-shadow: 0 2px 12px rgba(160, 41, 127, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.25);
-  color: #ffffff !important;
+  background: var(--accent) !important;
+  border-color: var(--ink) !important;
+  box-shadow: none;
+  color: var(--ink) !important;
   font-weight: 700 !important;
 }
 
@@ -129,7 +121,7 @@
 
 .levelHint {
   font-size: 0.78rem;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--ink-2);
   display: flex;
   align-items: center;
   gap: 6px;
@@ -137,7 +129,7 @@
 
   i {
     font-size: 0.76rem;
-    color: $secondary-a-3;
+    color: var(--ink);
   }
 }
 
@@ -165,7 +157,7 @@
     padding: 0;
     border-radius: 4px;
     border: none;
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--surface-alt);
 
     .levelLabel {
       display: none;
@@ -173,12 +165,12 @@
   }
 
   .active {
-    background: rgba(207, 91, 175, 0.55);
+    background: var(--accent);
   }
 
   .selected {
-    background: linear-gradient(90deg, #cf5baf, #9a4cd0) !important;
-    box-shadow: 0 0 6px rgba(207, 91, 175, 0.75) !important;
+    background: var(--accent) !important;
+    box-shadow: none !important;
   }
 }
 

@@ -358,46 +358,55 @@ template {
   display: none;
 }
 
-// Fallback font metric overrides to prevent Cumulative Layout Shift (CLS)
+// Fallback font metric override to limit layout shift while Archivo loads
 @font-face {
-  font-family: 'Playfair Display Fallback';
-  src: local('Georgia'), local('Times New Roman'), local('serif');
-  ascent-override: 96%;
-  descent-override: 24%;
-  line-gap-override: 0%;
-  size-adjust: 104%;
-}
-
-@font-face {
-  font-family: 'Inter Fallback';
+  font-family: 'Archivo Fallback';
   src: local('Arial'), local('Helvetica'), local('sans-serif');
-  ascent-override: 90%;
-  descent-override: 22%;
+  ascent-override: 88%;
+  descent-override: 21%;
   line-gap-override: 0%;
-  size-adjust: 100%;
+  size-adjust: 102%;
 }
 
 :root {
-  // Body text font - Inter for readability
-  font-family: 'Inter', 'Inter Fallback', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: var(--font-sans);
   line-height: 1.5;
   font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #140828; // Darker background for better readability
-
+  color-scheme: light;
+  color: var(--ink);
+  background-color: var(--paper);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-// Heading font - Playfair Display for elegant headings
+// Headings: heavy, tight grotesk, like signage
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Playfair Display', 'Playfair Display Fallback', Georgia, serif;
-  font-weight: 600;
-  line-height: 1.2;
+  font-family: var(--font-sans);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+// Small uppercase mono labels (codes, counters, section numbers)
+.mono-label {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+:focus-visible {
+  outline: 3px solid var(--link);
+  outline-offset: 2px;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--ink);
 }
 
 #root {
@@ -411,11 +420,14 @@ h1, h2, h3, h4, h5, h6 {
 
 a {
   font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
 
   &:hover {
-    color: #e8a654;
+    color: var(--link);
+    text-decoration-thickness: 2px;
   }
 }
 
@@ -425,7 +437,7 @@ body {
   min-height: 100vh;
   width: 100%;
   max-width: 100%;
-  background-color: transparent;
+  background-color: var(--paper);
   display: block;
   overflow-x: hidden;
   position: relative;
@@ -470,28 +482,24 @@ body {
 
 h1 {
   font-size: 3.2em;
-  line-height: 1.1;
-  font-family: 'Playfair Display', serif;
+  line-height: 1;
+  letter-spacing: -0.03em;
 }
 
 button {
-  border-radius: 8px;
+  border-radius: 0;
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: var(--surface);
+  color: var(--ink);
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: border-color 0.15s, background-color 0.15s;
 
   &:hover {
-    border-color: #e8a654;
-  }
-
-  &:focus,
-  &:focus-visible {
-    outline: 4px auto -webkit-focus-ring-color;
+    border-color: var(--ink);
   }
 }
 
@@ -501,21 +509,20 @@ button {
 
 // PrimeReact Dropdown Styles
 .p-dropdown {
-  background-color: rgba(255, 255, 255, 0.08);
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.16);
+  background-color: var(--surface-alt);
+  border-radius: 0;
+  border: 1px solid var(--rule);
   height: 40px;
   min-height: 40px;
   position: relative; // For scrollable dropdown panels when appendTo="self"
   transition: all 0.2s ease;
 
   .p-dropdown-label {
-    color: rgba(255, 255, 255, 0.95);
+    color: var(--ink);
     font-size: 0.9rem;
     font-weight: 500;
     background: transparent !important;
     border: none !important;
-    box-shadow: none !important;
     border-radius: 0 !important;
     padding: 0 0.85rem !important;
     height: 100% !important;
@@ -524,34 +531,30 @@ button {
   }
 
   .p-dropdown-trigger {
-    color: rgba(255, 255, 255, 0.75);
+    color: var(--ink-2);
     width: 2rem;
   }
 
   &:not(.p-disabled):hover {
-    background-color: rgba(255, 255, 255, 0.12);
-    border-color: rgba(255, 255, 255, 0.28);
+    background-color: var(--surface-alt);
+    border-color: var(--rule);
   }
 
   &:not(.p-disabled).p-focus,
   &.p-focus {
-    background-color: rgba(255, 255, 255, 0.1);
-    border-color: rgba(207, 91, 175, 0.6);
-    box-shadow: 
-      0 0 0 2px rgba(255, 255, 255, 0.25),
-      0 0 0 4px rgba(207, 91, 175, 0.45);
+    background-color: var(--surface-alt);
+    border-color: var(--ink);
+    box-shadow: none;
     outline: none;
   }
 }
 
 // Dropdown panel/list
 .p-dropdown-panel {
-  background-color: rgba(26, 12, 45, 0.96);
-  -webkit-backdrop-filter: blur(20px);
-  backdrop-filter: blur(20px);
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0px 14px 36px rgba(0, 0, 0, 0.5), 0 4px 12px rgba(0, 0, 0, 0.25) !important;
+  background-color: var(--surface);
+  border-radius: 0;
+  border: 1px solid var(--rule);
+  box-shadow: none !important;
 
   // Override PrimeReact's fixed positioning when panel is appended to self
   // Force absolute positioning so it scrolls with the page
@@ -564,44 +567,40 @@ button {
     padding: 0.4rem;
 
     .p-dropdown-item {
-      color: rgba(255, 255, 255, 0.88);
+      color: var(--ink);
       padding: 0.55rem 0.85rem;
-      border-radius: 8px;
+      border-radius: 0;
       margin: 2px 0;
       font-size: 0.875rem;
       transition: all 0.15s ease;
 
       &:hover {
-        background-color: rgba(255, 255, 255, 0.12);
-        color: #ffffff;
+        background-color: var(--surface-alt);
+        color: var(--ink);
       }
 
       &.p-highlight {
-        background: linear-gradient(
-          135deg,
-          rgba(160, 41, 127, 0.45) 0%,
-          rgba(98, 44, 144, 0.6) 100%
-        );
-        color: #ffffff;
+        background: var(--accent);
+        color: var(--ink);
         font-weight: 600;
-        border: 1px solid rgba(207, 91, 175, 0.35);
+        border: 1px solid var(--ink);
       }
 
       &:focus {
-        background-color: rgba(255, 255, 255, 0.1);
-        color: #ffffff;
+        background-color: var(--surface-alt);
+        color: var(--ink);
         outline: none;
       }
     }
 
     .p-dropdown-item-group {
-      color: rgba(255, 255, 255, 0.6);
+      color: var(--ink-2);
       font-weight: 600;
       padding: 0.5rem 0.85rem;
     }
 
     .p-dropdown-empty-message {
-      color: rgba(255, 255, 255, 0.6);
+      color: var(--ink-2);
       padding: 0.5rem 0.85rem;
     }
   }
@@ -610,18 +609,18 @@ button {
     padding: 0.5rem 1rem;
 
     .p-dropdown-filter {
-      background-color: rgba-color($complement-3, 0.1);
-      color: $complement-3;
-      border-radius: 8px;
-      border: 1px solid rgba-color($complement-3, 0.2);
+      background-color: var(--accent-soft);
+      color: var(--ink);
+      border-radius: 0;
+      border: 1px solid var(--ink);
 
       &:focus {
-        border-color: rgba-color($complement-3, 0.4);
-        box-shadow: 0 0 0 0.2rem rgba-color($complement-3, 0.1);
+        border-color: var(--ink);
+        box-shadow: none;
       }
 
       &::placeholder {
-        color: rgba-color($complement-3, 0.6);
+        color: var(--ink);
       }
     }
   }
@@ -629,104 +628,104 @@ button {
 
 // Filled state (when dropdown has a value) - keep consistent dark glass styling
 .p-dropdown.p-filled {
-  background-color: rgba(255, 255, 255, 0.08);
+  background-color: var(--surface-alt);
 
   .p-dropdown-label {
-    color: #ffffff;
+    color: var(--ink);
     background: transparent !important;
   }
 }
 
 // Disabled state
 .p-dropdown.p-disabled {
-  background-color: rgba(255, 255, 255, 0.04);
+  background-color: var(--surface);
   opacity: 0.6;
 
   .p-dropdown-label {
-    color: rgba(255, 255, 255, 0.45);
+    color: var(--ink-muted);
     background: transparent !important;
   }
 
   .p-dropdown-trigger {
-    color: rgba(255, 255, 255, 0.45);
+    color: var(--ink-muted);
   }
 }
 
 // PrimeReact Input Styles
 .p-inputtext {
-  background-color: rgba(255, 255, 255, 0.06);
-  color: #ffffff;
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.16);
+  background-color: var(--surface);
+  color: var(--ink);
+  border-radius: 0;
+  border: 1px solid var(--rule);
   height: 44px;
   padding: 0 14px;
   width: 100%;
   transition: all 0.2s ease;
 
   &:enabled:hover {
-    background-color: rgba(255, 255, 255, 0.08);
-    border-color: rgba(255, 255, 255, 0.28);
+    background-color: var(--surface-alt);
+    border-color: var(--rule);
   }
 
   &:enabled:focus {
-    background-color: rgba(255, 255, 255, 0.09);
-    border-color: rgba(207, 91, 175, 0.65);
-    box-shadow: 0 0 0 3px rgba(207, 91, 175, 0.25);
+    background-color: var(--surface-alt);
+    border-color: var(--ink);
+    box-shadow: none;
     outline: none;
   }
 
   &::placeholder {
-    color: rgba(255, 255, 255, 0.45);
+    color: var(--ink-muted);
   }
 }
 
 .p-inputtext.p-filled {
-  background-color: rgba(255, 255, 255, 0.06);
-  color: #ffffff;
+  background-color: var(--surface);
+  color: var(--ink);
 }
 
 .p-inputtext.p-disabled {
-  background-color: rgba(255, 255, 255, 0.03);
-  color: rgba(255, 255, 255, 0.4);
+  background-color: var(--surface);
+  color: var(--ink-muted);
   opacity: 0.6;
 }
 
 // PrimeReact Textarea Styles
 .p-inputtextarea {
-  background-color: rgba(255, 255, 255, 0.06);
-  color: #ffffff;
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.16);
+  background-color: var(--surface);
+  color: var(--ink);
+  border-radius: 0;
+  border: 1px solid var(--rule);
   padding: 0.75rem 1rem;
   width: 100%;
   min-height: 44px;
   transition: all 0.2s ease;
 
   &:enabled:hover {
-    background-color: rgba(255, 255, 255, 0.08);
-    border-color: rgba(255, 255, 255, 0.28);
+    background-color: var(--surface-alt);
+    border-color: var(--rule);
   }
 
   &:enabled:focus {
-    background-color: rgba(255, 255, 255, 0.09);
-    border-color: rgba(207, 91, 175, 0.65);
-    box-shadow: 0 0 0 3px rgba(207, 91, 175, 0.25);
+    background-color: var(--surface-alt);
+    border-color: var(--ink);
+    box-shadow: none;
     outline: none;
   }
 
   &::placeholder {
-    color: rgba(255, 255, 255, 0.45);
+    color: var(--ink-muted);
   }
 }
 
 .p-inputtextarea.p-filled {
-  background-color: rgba(255, 255, 255, 0.06);
-  color: #ffffff;
+  background-color: var(--surface);
+  color: var(--ink);
 }
 
 .p-inputtextarea.p-disabled {
-  background-color: rgba(255, 255, 255, 0.03);
-  color: rgba(255, 255, 255, 0.4);
+  background-color: var(--surface);
+  color: var(--ink-muted);
   opacity: 0.6;
 }
 
@@ -735,47 +734,47 @@ button {
   width: 100%;
 
   .p-password-input {
-    background-color: rgba(255, 255, 255, 0.06);
-    color: #ffffff;
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.16);
+    background-color: var(--surface);
+    color: var(--ink);
+    border-radius: 0;
+    border: 1px solid var(--rule);
     height: 44px;
     padding: 0 14px;
     width: 100%;
     transition: all 0.2s ease;
 
     &:enabled:hover {
-      background-color: rgba(255, 255, 255, 0.08);
-      border-color: rgba(255, 255, 255, 0.28);
+      background-color: var(--surface-alt);
+      border-color: var(--rule);
     }
 
     &:enabled:focus {
-      background-color: rgba(255, 255, 255, 0.1);
-      border-color: rgba(207, 91, 175, 0.65);
-      box-shadow: 0 0 0 3px rgba(207, 91, 175, 0.25);
+      background-color: var(--surface-alt);
+      border-color: var(--ink);
+      box-shadow: none;
       outline: none;
     }
 
     &::placeholder {
-      color: rgba(255, 255, 255, 0.45);
+      color: var(--ink-muted);
     }
   }
 
   .p-password-toggle {
-    color: rgba(255, 255, 255, 0.65);
+    color: var(--ink-2);
   }
 
   &.p-inputwrapper-filled {
     .p-password-input {
-      background-color: rgba(255, 255, 255, 0.06);
-      color: #ffffff;
+      background-color: var(--surface);
+      color: var(--ink);
     }
   }
 
   &.p-inputwrapper-disabled {
     .p-password-input {
-      background-color: rgba(255, 255, 255, 0.03);
-      color: rgba(255, 255, 255, 0.4);
+      background-color: var(--surface);
+      color: var(--ink-muted);
       opacity: 0.6;
     }
   }
@@ -787,54 +786,53 @@ button {
   position: relative; // For scrollable panels when appendTo="self"
 
   .p-autocomplete-input {
-    background-color: rgba(255, 255, 255, 0.06);
-    color: #ffffff;
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.16);
+    background-color: var(--surface);
+    color: var(--ink);
+    border-radius: 0;
+    border: 1px solid var(--rule);
     height: 44px;
     padding: 0 14px;
     width: 100%;
     transition: all 0.2s ease;
 
     &:enabled:hover {
-      background-color: rgba(255, 255, 255, 0.08);
-      border-color: rgba(255, 255, 255, 0.28);
+      background-color: var(--surface-alt);
+      border-color: var(--rule);
     }
 
     &:enabled:focus {
-      background-color: rgba(255, 255, 255, 0.09);
-      border-color: rgba(207, 91, 175, 0.65);
-      box-shadow: 0 0 0 3px rgba(207, 91, 175, 0.25);
+      background-color: var(--surface-alt);
+      border-color: var(--ink);
+      box-shadow: none;
       outline: none;
     }
 
     &::placeholder {
-      color: rgba(255, 255, 255, 0.45);
+      color: var(--ink-muted);
     }
   }
 
   &.p-inputwrapper-filled {
     .p-autocomplete-input {
-      background-color: rgba(255, 255, 255, 0.06);
-      color: #ffffff;
+      background-color: var(--surface);
+      color: var(--ink);
     }
   }
 
   &.p-inputwrapper-disabled {
     .p-autocomplete-input {
-      background-color: rgba(255, 255, 255, 0.03);
-      color: rgba(255, 255, 255, 0.4);
+      background-color: var(--surface);
+      color: var(--ink-muted);
       opacity: 0.6;
     }
   }
 }
 
 .p-autocomplete-panel {
-  background-color: rgba(26, 12, 38, 0.95);
-  backdrop-filter: blur(20px);
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.55);
+  background-color: var(--surface);
+  border-radius: 0;
+  border: 1px solid var(--rule);
+  box-shadow: none;
 
   // Override PrimeReact's fixed positioning when panel is appended to self
   // Force absolute positioning so it scrolls with the page
@@ -847,21 +845,21 @@ button {
     padding: 6px;
 
     .p-autocomplete-item {
-      color: rgba(255, 255, 255, 0.85);
+      color: var(--ink);
       padding: 8px 12px;
-      border-radius: 8px;
+      border-radius: 0;
       margin: 2px 0;
       transition: all 0.15s ease;
 
       &:hover,
       &.p-highlight {
-        background-color: rgba(207, 91, 175, 0.25);
-        color: #ffffff;
+        background-color: var(--accent-soft);
+        color: var(--ink);
       }
     }
 
     .p-autocomplete-empty-message {
-      color: rgba(255, 255, 255, 0.55);
+      color: var(--ink-muted);
       padding: 8px 12px;
     }
   }
@@ -869,10 +867,10 @@ button {
 
 // PrimeReact Button Styles
 .p-button {
-  background-color: rgba(255, 255, 255, 0.08);
-  color: #ffffff;
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.16);
+  background-color: var(--surface-alt);
+  color: var(--ink);
+  border-radius: 0;
+  border: 1px solid var(--rule);
   font-weight: 500;
   transition: all 0.2s ease;
 
@@ -887,14 +885,14 @@ button {
   }
 
   &:enabled:hover {
-    background-color: rgba(255, 255, 255, 0.12);
-    border-color: rgba(255, 255, 255, 0.28);
-    color: #ffffff;
+    background-color: var(--surface-alt);
+    border-color: var(--rule);
+    color: var(--ink);
   }
 
   &:enabled:focus {
-    border-color: rgba(207, 91, 175, 0.65);
-    box-shadow: 0 0 0 3px rgba(207, 91, 175, 0.25);
+    border-color: var(--ink);
+    box-shadow: none;
     outline: none;
   }
 
@@ -907,8 +905,8 @@ button {
   }
 
   &.p-disabled {
-    background-color: rgba(255, 255, 255, 0.04);
-    color: rgba(255, 255, 255, 0.35);
+    background-color: var(--surface);
+    color: var(--ink-muted);
     opacity: 0.5;
 
     .p-button-label {
@@ -921,52 +919,52 @@ button {
   }
 
   &.p-button-outlined {
-    background-color: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: #ffffff;
+    background-color: var(--surface);
+    border: 1px solid var(--rule);
+    color: var(--ink);
 
     &:enabled:hover {
-      background-color: rgba(255, 255, 255, 0.1);
-      border-color: rgba(207, 91, 175, 0.6);
-      color: #ffffff;
+      background-color: var(--surface-alt);
+      border-color: var(--ink);
+      color: var(--ink);
     }
 
     &:enabled:focus {
-      background-color: rgba(255, 255, 255, 0.08);
-      border-color: rgba(207, 91, 175, 0.7);
-      box-shadow: 0 0 0 3px rgba(207, 91, 175, 0.25);
+      background-color: var(--surface-alt);
+      border-color: var(--ink);
+      box-shadow: none;
     }
 
     &.p-disabled {
       background-color: transparent;
-      border-color: rgba(255, 255, 255, 0.1);
-      color: rgba(255, 255, 255, 0.35);
+      border-color: var(--rule);
+      color: var(--ink-muted);
     }
   }
 
   &.p-button-text {
     background-color: transparent;
     border: none;
-    color: rgba(255, 255, 255, 0.85);
+    color: var(--ink);
 
     &:enabled:hover {
-      background-color: rgba(255, 255, 255, 0.08);
-      color: #ffffff;
+      background-color: var(--surface-alt);
+      color: var(--ink);
     }
 
     &:enabled:focus {
-      background-color: rgba(255, 255, 255, 0.08);
-      color: #ffffff;
-      box-shadow: 0 0 0 2px rgba(207, 91, 175, 0.35);
+      background-color: var(--surface-alt);
+      color: var(--ink);
+      box-shadow: none;
     }
 
     &:enabled:active {
-      background-color: rgba(255, 255, 255, 0.14);
-      color: #ffffff;
+      background-color: var(--surface-alt);
+      color: var(--ink);
     }
 
     &.p-disabled {
-      color: rgba(255, 255, 255, 0.3);
+      color: var(--ink-muted);
     }
   }
 }
@@ -985,7 +983,7 @@ button {
 .p-dropdown-panel
   .p-dropdown-items
   .p-dropdown-item:not(.p-highlight):not(.p-disabled).p-focus {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: var(--surface-alt);
 }
 
 // Force dropdown panels to use absolute positioning when appended to self
@@ -1009,8 +1007,8 @@ button {
 }
 .p-autocomplete-multiple-container.p-focus {
   outline: none !important;
-  border-color: rgba(207, 91, 175, 0.65) !important;
-  box-shadow: 0 0 0 3px rgba(207, 91, 175, 0.25) !important;
+  border-color: var(--ink) !important;
+  box-shadow: none !important;
 }
 input {
   color: inherit;
@@ -1019,88 +1017,86 @@ input {
 .p-accordion {
   .p-accordion-header {
     .p-accordion-header-link {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 14px;
-      color: #ffffff;
+      background: var(--surface);
+      border: 1px solid var(--rule);
+      border-radius: 0;
+      color: var(--ink);
       padding: 1rem 1.25rem;
       font-weight: 600;
       transition: all 0.2s ease;
 
       &:not(.p-disabled):hover {
-        background: rgba(255, 255, 255, 0.09);
-        border-color: rgba(207, 91, 175, 0.45);
-        color: #ffffff;
+        background: var(--surface-alt);
+        border-color: var(--ink);
+        color: var(--ink);
       }
 
       .p-accordion-toggle-icon {
-        color: rgba(207, 91, 175, 0.9);
+        color: var(--ink);
       }
     }
 
     &:not(.p-disabled).p-highlight .p-accordion-header-link {
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
-      border-color: rgba(207, 91, 175, 0.35);
-      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--ink);
+      background: var(--surface-alt);
     }
   }
 
   .p-accordion-content {
-    background: rgba(22, 10, 34, 0.92);
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: var(--surface);
+    border: 1px solid var(--rule);
     border-top: none;
-    border-bottom-left-radius: 14px;
-    border-bottom-right-radius: 14px;
-    color: rgba(255, 255, 255, 0.9);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    color: var(--ink);
     padding: 1.25rem;
   }
 }
 
 // PrimeReact Dialog Dark Glass Styles
 .p-dialog {
-  background: rgba(22, 10, 34, 0.98) !important;
-  backdrop-filter: blur(24px) !important;
-  -webkit-backdrop-filter: blur(24px) !important;
-  border: 1px solid rgba(207, 91, 175, 0.35) !important;
-  border-radius: 18px !important;
-  color: #ffffff !important;
-  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.8), 0 0 24px rgba(160, 41, 127, 0.2) !important;
+  background: var(--surface) !important;
+  border: 1px solid var(--ink) !important;
+  border-radius: 0 !important;
+  color: var(--ink) !important;
+  box-shadow: none !important;
   overflow: hidden;
 
   .p-dialog-header {
     background: transparent !important;
-    color: #ffffff !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+    color: var(--ink) !important;
+    border-bottom: 1px solid var(--rule) !important;
     padding: 18px 24px !important;
 
     .p-dialog-title {
       font-weight: 700 !important;
       font-size: 1.15rem !important;
-      color: #ffffff !important;
+      color: var(--ink) !important;
     }
 
     .p-dialog-header-icon {
-      color: rgba(255, 255, 255, 0.6) !important;
+      color: var(--ink-2) !important;
       border-radius: 50% !important;
 
       &:hover {
-        background: rgba(255, 255, 255, 0.1) !important;
-        color: #ffffff !important;
+        background: var(--surface-alt) !important;
+        color: var(--ink) !important;
       }
     }
   }
 
   .p-dialog-content {
     background: transparent !important;
-    color: rgba(255, 255, 255, 0.85) !important;
+    color: var(--ink) !important;
     padding: 20px 24px !important;
     line-height: 1.6 !important;
   }
 
   .p-dialog-footer {
     background: transparent !important;
-    border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-top: 1px solid var(--rule) !important;
     padding: 16px 24px !important;
     display: flex;
     justify-content: flex-end;
@@ -1116,23 +1112,23 @@ input {
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba-color($primary-2, 0.4);
-  border-radius: 6px;
+  background: var(--surface);
+  border-radius: 0;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: $complement-4;
-  border-radius: 6px;
+  background: var(--accent);
+  border-radius: 0;
   border: 2px solid transparent;
   background-clip: padding-box;
 
   &:hover {
-    background: $primary-1;
+    background: var(--accent);
     background-clip: padding-box;
   }
 
   &:active {
-    background: $primary-2;
+    background: var(--surface);
     background-clip: padding-box;
   }
 }
@@ -1144,8 +1140,8 @@ input {
 }
 
 .p-autocomplete-token {
-  background-color: $complement-4;
-  border-radius: 12px;
+  background-color: var(--accent);
+  border-radius: 0;
   padding: 0.2rem;
   font-weight: bold;
 }
@@ -1155,20 +1151,20 @@ input {
 
 // PrimeReact ProgressBar Dark Glass Styling
 .p-progressbar {
-  background: rgba(255, 255, 255, 0.08) !important;
-  border: 1px solid rgba(255, 255, 255, 0.08) !important;
-  border-radius: 999px !important;
+  background: var(--surface-alt) !important;
+  border: 1px solid var(--rule) !important;
+  border-radius: 0 !important;
   overflow: hidden !important;
 
   .p-progressbar-value {
-    background: linear-gradient(90deg, $secondary-a-0 0%, $secondary-a-3 100%) !important;
-    border-radius: 999px !important;
-    box-shadow: 0 0 12px rgba(207, 91, 175, 0.4) !important;
+    background: var(--accent) !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
     transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
   }
 
   .p-progressbar-label {
-    color: #ffffff !important;
+    color: var(--ink) !important;
     font-size: 0.75rem !important;
     font-weight: 700 !important;
   }
@@ -1176,116 +1172,112 @@ input {
 
 // PrimeReact Tag Dark Glass Styling
 .p-tag {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: #ffffff;
+  background: var(--surface-alt);
+  border: 1px solid var(--rule);
+  color: var(--ink);
   font-weight: 600;
-  border-radius: 999px;
+  border-radius: 0;
   padding: 0.3rem 0.75rem;
   font-size: 0.75rem;
   letter-spacing: 0.02em;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: none;
 
   &.p-tag-info {
-    background: rgba(56, 189, 248, 0.12) !important;
-    border-color: rgba(56, 189, 248, 0.35) !important;
-    color: #7dd3fc !important;
+    background: var(--info-soft) !important;
+    border-color: var(--link) !important;
+    color: var(--link) !important;
   }
 
   &.p-tag-success {
-    background: rgba(16, 185, 129, 0.12) !important;
-    border-color: rgba(16, 185, 129, 0.35) !important;
-    color: #34d399 !important;
+    background: var(--positive-soft) !important;
+    border-color: var(--positive) !important;
+    color: var(--positive) !important;
   }
 
   &.p-tag-warning {
-    background: rgba(245, 158, 11, 0.12) !important;
-    border-color: rgba(245, 158, 11, 0.35) !important;
-    color: #fbbf24 !important;
+    background: var(--warning-soft) !important;
+    border-color: var(--warning) !important;
+    color: var(--ink) !important;
   }
 
   &.p-tag-danger {
-    background: rgba(239, 68, 68, 0.12) !important;
-    border-color: rgba(239, 68, 68, 0.35) !important;
-    color: #f87171 !important;
+    background: var(--danger-soft) !important;
+    border-color: var(--danger) !important;
+    color: var(--danger) !important;
   }
 
   &.p-tag-primary,
   &:not(.p-tag-info):not(.p-tag-success):not(.p-tag-warning):not(.p-tag-danger) {
-    background: rgba(207, 91, 175, 0.16) !important;
-    border-color: rgba(207, 91, 175, 0.4) !important;
-    color: #f5bde6 !important;
+    background: var(--accent-soft) !important;
+    border-color: var(--ink) !important;
+    color: var(--ink) !important;
   }
 }
 
 // PrimeReact Dropdown Dark Glass Overrides
 .p-dropdown {
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 10px;
-  color: #ffffff;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 0;
+  color: var(--ink);
   transition: all 0.2s ease;
 
   &:not(.p-disabled):hover {
-    border-color: rgba(207, 91, 175, 0.55);
-    background: rgba(255, 255, 255, 0.09);
+    border-color: var(--ink);
+    background: var(--surface-alt);
   }
 
   &:not(.p-disabled).p-focus {
-    border-color: rgba(207, 91, 175, 0.85);
-    box-shadow: 0 0 0 2px rgba(207, 91, 175, 0.25);
+    border-color: var(--ink);
+    box-shadow: none;
   }
 
   .p-dropdown-label {
-    color: #ffffff;
+    color: var(--ink);
     font-size: 0.9rem;
     font-weight: 500;
 
     &.p-placeholder {
-      color: rgba(255, 255, 255, 0.45);
+      color: var(--ink-muted);
     }
   }
 
   .p-dropdown-trigger {
-    color: rgba(255, 255, 255, 0.7);
+    color: var(--ink-2);
   }
 }
 
 .p-dropdown-panel {
-  background: rgba(22, 10, 34, 0.96) !important;
-  backdrop-filter: blur(20px) !important;
-  -webkit-backdrop-filter: blur(20px) !important;
-  border: 1px solid rgba(207, 91, 175, 0.3) !important;
-  border-radius: 12px !important;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7), 0 0 20px rgba(160, 41, 127, 0.15) !important;
-  color: #ffffff !important;
+  background: var(--surface) !important;
+  border: 1px solid var(--ink) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  color: var(--ink) !important;
 
   .p-dropdown-header {
     background: transparent !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
-    color: #ffffff !important;
+    border-bottom: 1px solid var(--rule) !important;
+    color: var(--ink) !important;
   }
 
   .p-dropdown-items {
     padding: 0.4rem !important;
 
     .p-dropdown-item {
-      color: rgba(255, 255, 255, 0.85) !important;
-      border-radius: 6px !important;
+      color: var(--ink) !important;
+      border-radius: 0 !important;
       padding: 0.6rem 0.85rem !important;
       font-size: 0.88rem !important;
       transition: all 0.15s ease !important;
 
       &:not(.p-highlight):not(.p-disabled):hover {
-        background: rgba(255, 255, 255, 0.08) !important;
-        color: #ffffff !important;
+        background: var(--surface-alt) !important;
+        color: var(--ink) !important;
       }
 
       &.p-highlight {
-        background: linear-gradient(135deg, rgba(160, 41, 127, 0.6) 0%, rgba(207, 91, 175, 0.4) 100%) !important;
-        color: #ffffff !important;
+        background: var(--accent) !important;
+        color: var(--ink) !important;
         font-weight: 600 !important;
       }
     }
@@ -1296,12 +1288,10 @@ input {
    PrimeReact Menu Global Dark Glassmorphic Theme (Dropdowns & Mobile Menus)
    ========================================================================== */
 .p-menu {
-  background: rgba(22, 10, 34, 0.97) !important;
-  backdrop-filter: blur(20px) !important;
-  -webkit-backdrop-filter: blur(20px) !important;
-  border: 1px solid rgba(207, 91, 175, 0.3) !important;
-  border-radius: 14px !important;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.65), 0 0 20px rgba(160, 41, 127, 0.15) !important;
+  background: var(--surface) !important;
+  border: 1px solid var(--ink) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
   padding: 6px !important;
 
   .p-menu-list {
@@ -1314,13 +1304,13 @@ input {
   }
 
   .p-menu-separator {
-    border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-top: 1px solid var(--rule) !important;
     margin: 6px 4px !important;
   }
 
   .p-submenu-header {
     background: transparent !important;
-    color: rgba(255, 255, 255, 0.5) !important;
+    color: var(--ink-muted) !important;
     font-size: 0.75rem !important;
     font-weight: 600 !important;
     text-transform: uppercase !important;
@@ -1330,20 +1320,20 @@ input {
 
   .p-menuitem {
     margin: 0 !important;
-    border-radius: 8px !important;
+    border-radius: 0 !important;
 
     /* CRITICAL: Overriding PrimeReact's light-theme .p-menuitem-content */
     > .p-menuitem-content {
       background: transparent !important;
-      color: rgba(255, 255, 255, 0.88) !important;
-      border-radius: 8px !important;
+      color: var(--ink) !important;
+      border-radius: 0 !important;
       transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1) !important;
 
       .p-menuitem-link {
         padding: 0.65rem 0.85rem !important;
-        border-radius: 8px !important;
+        border-radius: 0 !important;
         background: transparent !important;
-        color: rgba(255, 255, 255, 0.88) !important;
+        color: var(--ink) !important;
         display: flex !important;
         align-items: center !important;
         gap: 0.65rem !important;
@@ -1352,14 +1342,14 @@ input {
         user-select: none !important;
 
         .p-menuitem-text {
-          color: rgba(255, 255, 255, 0.88) !important;
+          color: var(--ink) !important;
           font-weight: 500 !important;
           font-size: 0.9rem !important;
           transition: color 0.15s ease !important;
         }
 
         .p-menuitem-icon {
-          color: rgba(207, 91, 175, 0.85) !important;
+          color: var(--ink) !important;
           font-size: 1rem !important;
           margin-right: 0 !important;
           transition: all 0.15s ease, transform 0.15s ease !important;
@@ -1367,21 +1357,20 @@ input {
 
         &:focus {
           outline: none !important;
-          box-shadow: none !important;
         }
       }
 
       /* Hover & Focus state on content */
       &:hover {
-        background: rgba(207, 91, 175, 0.18) !important;
-        color: #ffffff !important;
+        background: var(--accent-soft) !important;
+        color: var(--ink) !important;
 
         .p-menuitem-link {
           .p-menuitem-text {
-            color: #ffffff !important;
+            color: var(--ink) !important;
           }
           .p-menuitem-icon {
-            color: #ff8adc !important;
+            color: var(--ink) !important;
             transform: scale(1.08);
           }
         }
@@ -1391,15 +1380,15 @@ input {
     /* Unfocused / focused states from PrimeReact */
     &:not(.p-highlight):not(.p-disabled).p-focus > .p-menuitem-content,
     &:not(.p-highlight):not(.p-disabled) > .p-menuitem-content:hover {
-      background: rgba(207, 91, 175, 0.18) !important;
-      color: #ffffff !important;
+      background: var(--accent-soft) !important;
+      color: var(--ink) !important;
 
       .p-menuitem-link {
         .p-menuitem-text {
-          color: #ffffff !important;
+          color: var(--ink) !important;
         }
         .p-menuitem-icon {
-          color: #ff8adc !important;
+          color: var(--ink) !important;
         }
       }
     }
@@ -1408,24 +1397,24 @@ input {
     &.active-menuitem,
     &.p-highlight {
       > .p-menuitem-content {
-        background: linear-gradient(135deg, rgba(160, 41, 127, 0.55) 0%, rgba(98, 44, 144, 0.7) 100%) !important;
-        border: 1px solid rgba(207, 91, 175, 0.5) !important;
-        box-shadow: 0 4px 14px rgba(160, 41, 127, 0.3) !important;
+        background: var(--accent) !important;
+        border: 1px solid var(--ink) !important;
+        box-shadow: none !important;
 
         .p-menuitem-link {
           .p-menuitem-text {
-            color: #ffffff !important;
+            color: var(--ink) !important;
             font-weight: 600 !important;
           }
           .p-menuitem-icon {
-            color: #ffffff !important;
+            color: var(--ink) !important;
           }
         }
 
         &:hover {
-          background: linear-gradient(135deg, rgba(160, 41, 127, 0.7) 0%, rgba(98, 44, 144, 0.85) 100%) !important;
-          border-color: rgba(207, 91, 175, 0.75) !important;
-          box-shadow: 0 4px 18px rgba(160, 41, 127, 0.45) !important;
+          background: var(--accent) !important;
+          border-color: var(--ink) !important;
+          box-shadow: none !important;
         }
       }
     }
@@ -1433,13 +1422,13 @@ input {
     /* Active touch / press feedback */
     &:active > .p-menuitem-content {
       transform: scale(0.98);
-      background: rgba(207, 91, 175, 0.28) !important;
+      background: var(--accent-soft) !important;
     }
 
     &.active-menuitem:active > .p-menuitem-content,
     &.p-highlight:active > .p-menuitem-content {
       transform: scale(0.98);
-      background: linear-gradient(135deg, rgba(160, 41, 127, 0.75) 0%, rgba(98, 44, 144, 0.9) 100%) !important;
+      background: var(--accent) !important;
     }
   }
 }

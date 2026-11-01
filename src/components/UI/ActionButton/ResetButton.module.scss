@@ -2,10 +2,10 @@
   width: 44px !important;
   height: 44px !important;
   min-width: 44px !important;
-  border-radius: 12px !important;
-  background: rgba(255, 255, 255, 0.06) !important;
-  border: 1px solid rgba(255, 255, 255, 0.16) !important;
-  color: rgba(255, 255, 255, 0.75) !important;
+  border-radius: 0 !important;
+  background: var(--surface) !important;
+  border: 1px solid var(--rule) !important;
+  color: var(--ink-2) !important;
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -15,9 +15,9 @@
   box-sizing: border-box !important;
 
   &:hover {
-    background: rgba(255, 255, 255, 0.1) !important;
-    border-color: rgba(255, 255, 255, 0.3) !important;
-    color: #ffffff !important;
+    background: var(--surface-alt) !important;
+    border-color: var(--rule) !important;
+    color: var(--ink) !important;
     transform: rotate(30deg);
   }
 

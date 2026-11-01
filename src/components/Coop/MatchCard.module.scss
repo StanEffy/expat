@@ -1,20 +1,16 @@
 @use "../../styles/variables" as *;
 
 .card {
-  background: linear-gradient(165deg, rgba(34, 16, 50, 0.88) 0%, rgba(20, 10, 32, 0.94) 100%);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 18px;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 0;
   padding: 1.5rem;
-  color: #ffffff;
-  box-shadow:
-    0 10px 30px rgba(0, 0, 0, 0.45),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  color: var(--ink);
+  box-shadow: none;
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 
   &:hover {
-    border-color: rgba(207, 91, 175, 0.55);
+    border-color: var(--ink);
     transform: translateY(-2px);
   }
 }
@@ -34,7 +30,7 @@
   border-radius: 50%;
   display: grid;
   place-items: center;
-  background: conic-gradient(#cf5baf var(--score), rgba(255, 255, 255, 0.1) 0);
+  background: var(--accent);
 
   span {
     width: 3.7rem;
@@ -44,7 +40,7 @@
     place-items: center;
     font-weight: 800;
     font-size: 1.05rem;
-    background: rgb(26, 12, 40);
+    background: var(--surface);
   }
 }
 
@@ -63,7 +59,7 @@
 
 .meta {
   font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--ink-2);
   margin: 0.2rem 0 0;
 }
 
@@ -74,7 +70,7 @@
   margin-top: 0.4rem;
   font-size: 0.78rem;
   font-weight: 600;
-  color: #fdc08f;
+  color: var(--warning);
 }
 
 .reasons {
@@ -84,7 +80,7 @@
     margin: 0;
     padding-left: 1.1rem;
     font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.82);
+    color: var(--ink-2);
     line-height: 1.45;
   }
 
@@ -101,10 +97,40 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: #8ff0c8;
+  color: var(--positive);
   margin: 0 0 0.4rem;
 }
 
 .conflicts .reasonsTitle {
-  color: #fdc08f;
+  color: var(--warning);
+}
+
+.introRow {
+  margin-top: 1.1rem;
+  display: flex;
+}
+
+.introButton {
+  font: inherit;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--ink);
+  border: none;
+  border-radius: 0;
+  padding: 0.55rem 1.1rem;
+  cursor: pointer;
+  background: var(--accent);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.introState {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ink-2);
+}
+
+.introAccepted {
+  color: var(--positive);
 }

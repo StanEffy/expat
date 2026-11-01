@@ -1,14 +1,12 @@
 @use "@/styles/variables" as *;
 
 .funnelContainer {
-  background: linear-gradient(165deg, rgba(34, 16, 50, 0.88) 0%, rgba(22, 10, 34, 0.94) 100%);
-  border: 1px solid rgba(207, 91, 175, 0.2);
-  border-radius: 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--ink);
+  border-radius: 0;
   padding: 1.75rem;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
   margin-bottom: 2rem;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.36);
+  box-shadow: none;
 }
 
 .header {
@@ -17,20 +15,20 @@
   h2 {
     font-size: 1.4rem;
     font-weight: 700;
-    color: #ffffff;
+    color: var(--ink);
     margin: 0 0 0.35rem 0;
     display: flex;
     align-items: center;
     gap: 0.6rem;
 
     i {
-      color: $secondary-a-3;
+      color: var(--ink);
     }
   }
 
   p {
     font-size: 0.92rem;
-    color: rgba(255, 255, 255, 0.7);
+    color: var(--ink-2);
     margin: 0;
   }
 }
@@ -42,28 +40,28 @@
 }
 
 .stepItem {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 0.875rem;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 0;
   padding: 1.15rem 1.35rem;
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 
   &:hover {
-    border-color: rgba(207, 91, 175, 0.55);
-    background: rgba(255, 255, 255, 0.08);
-    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25);
+    border-color: var(--ink);
+    background: var(--surface-alt);
+    box-shadow: none;
   }
 
   &.critical {
-    border-left: 4px solid #f87171;
+    border-left: 4px solid var(--danger);
   }
 
   &.warning {
-    border-left: 4px solid #fbbf24;
+    border-left: 4px solid var(--ink);
   }
 
   &.normal {
-    border-left: 4px solid #34d399;
+    border-left: 4px solid var(--positive);
   }
 }
 
@@ -80,16 +78,16 @@
   h3 {
     font-size: 1.1rem;
     font-weight: 700;
-    color: #ffffff;
+    color: var(--ink);
     margin: 0 0 0.25rem 0;
   }
 
   .department {
     font-size: 0.8rem;
-    color: rgba(255, 255, 255, 0.65);
-    background: rgba(255, 255, 255, 0.08);
+    color: var(--ink-2);
+    background: var(--surface-alt);
     padding: 0.15rem 0.55rem;
-    border-radius: 0.3rem;
+    border-radius: 0;
   }
 }
 
@@ -102,18 +100,18 @@
 
 .durationBadge {
   font-size: 0.82rem;
-  color: rgba(255, 255, 255, 0.8);
-  background: rgba(255, 255, 255, 0.06);
+  color: var(--ink-2);
+  background: var(--surface);
   padding: 0.35rem 0.75rem;
-  border-radius: 6px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0;
+  border: 1px solid var(--rule);
 
   strong {
-    color: #ffffff;
+    color: var(--ink);
   }
 
   .benchmark {
-    color: rgba(255, 255, 255, 0.5);
+    color: var(--ink-muted);
     font-size: 0.75rem;
     margin-left: 0.4rem;
   }
@@ -125,26 +123,24 @@
   text-transform: uppercase;
   letter-spacing: 0.04em;
   padding: 0.25rem 0.65rem;
-  border-radius: 9999px;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  border-radius: 0;
 
   &.critical {
-    background: rgba(239, 68, 68, 0.15);
-    color: #f87171;
-    border: 1px solid rgba(239, 68, 68, 0.35);
+    background: var(--danger-soft);
+    color: var(--danger);
+    border: 1px solid var(--danger);
   }
 
   &.warning {
-    background: rgba(245, 158, 11, 0.15);
-    color: #fbbf24;
-    border: 1px solid rgba(245, 158, 11, 0.35);
+    background: var(--warning-soft);
+    color: var(--ink);
+    border: 1px solid var(--warning);
   }
 
   &.normal {
-    background: rgba(16, 185, 129, 0.15);
-    color: #34d399;
-    border: 1px solid rgba(16, 185, 129, 0.35);
+    background: var(--positive-soft);
+    color: var(--positive);
+    border: 1px solid var(--positive);
   }
 }
 
@@ -154,46 +150,46 @@
 
 .progressTrack {
   height: 8px;
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 9999px;
+  background: var(--surface-alt);
+  border-radius: 0;
   overflow: hidden;
   margin-bottom: 0.35rem;
 }
 
 .progressBar {
   height: 100%;
-  border-radius: 9999px;
+  border-radius: 0;
   transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 
   &.critical {
-    background: linear-gradient(90deg, #ef4444, #f97316);
-    box-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
+    background: var(--warning-soft);
+    box-shadow: none;
   }
 
   &.warning {
-    background: linear-gradient(90deg, #f59e0b, #eab308);
-    box-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
+    background: var(--accent);
+    box-shadow: none;
   }
 
   &.normal {
-    background: linear-gradient(90deg, $secondary-a-0 0%, $secondary-a-3 100%);
-    box-shadow: 0 0 10px rgba(207, 91, 175, 0.5);
+    background: var(--accent);
+    box-shadow: none;
   }
 }
 
 .completionLabel {
   font-size: 0.78rem;
-  color: rgba(255, 255, 255, 0.65);
+  color: var(--ink-2);
   display: flex;
   justify-content: space-between;
 }
 
 .insightText {
   font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.85);
-  background: rgba(207, 91, 175, 0.08);
+  color: var(--ink);
+  background: var(--accent-soft);
   padding: 0.55rem 0.85rem;
-  border-radius: 6px;
-  border-left: 3px solid $secondary-a-3;
+  border-radius: 0;
+  border-left: 3px solid var(--ink);
   margin: 0;
 }

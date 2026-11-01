@@ -84,7 +84,7 @@
 
   &.active {
     background: var(--accent);
-    color: var(--ink);
+    color: var(--on-accent);
     box-shadow: none;
     border: 1px solid var(--rule);
     transform: scale(1);

@@ -78,6 +78,7 @@
     position: absolute;
     inset: 0;
     background: var(--accent);
+    color: var(--on-accent);
     opacity: 0;
     box-shadow: none;
     transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1);
@@ -130,6 +131,7 @@
 
     &:hover::after {
       background: var(--accent);
+      color: var(--on-accent);
     }
   }
 }
@@ -330,7 +332,7 @@
   letter-spacing: 0.3px;
   border-radius: 0;
   border: none !important;
-  color: var(--ink) !important;
+  color: var(--on-accent) !important;
   background: var(--accent) !important;
   box-shadow: none !important;
   cursor: pointer;
@@ -343,6 +345,7 @@
     position: absolute;
     inset: 0;
     background: var(--accent);
+    color: var(--on-accent);
     opacity: 0;
     transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     pointer-events: none;

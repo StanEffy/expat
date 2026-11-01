@@ -101,7 +101,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--ink);
+  color: var(--on-accent);
   font-size: 1.15rem;
   flex-shrink: 0;
   box-shadow: none;
@@ -253,7 +253,7 @@
 .submitBtn {
   background: var(--accent) !important;
   border: 1px solid var(--ink) !important;
-  color: var(--ink) !important;
+  color: var(--on-accent) !important;
   border-radius: 0 !important;
   padding: 0 24px !important;
   height: 44px !important;

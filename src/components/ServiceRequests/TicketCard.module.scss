@@ -127,7 +127,7 @@
     .dot {
       background: var(--accent);
       border-color: var(--ink);
-      color: var(--ink);
+      color: var(--on-accent);
       box-shadow: none;
     }
     .stepLabel {
@@ -140,7 +140,7 @@
     .dot {
       background: var(--accent);
       border-color: var(--rule);
-      color: var(--ink);
+      color: var(--on-accent);
       box-shadow: none;
     }
     .stepLabel {
@@ -193,6 +193,7 @@
 
   &.trackActive {
     background: var(--accent);
+    color: var(--on-accent);
     box-shadow: none;
   }
 

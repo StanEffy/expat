@@ -38,7 +38,7 @@
     border: 1px solid var(--ink) !important;
     border-radius: 0 !important;
     padding: 3px 8px !important;
-    color: var(--ink) !important;
+    color: var(--on-accent) !important;
     font-size: 0.82rem;
     font-weight: 500;
     display: inline-flex;
@@ -46,18 +46,18 @@
     gap: 4px;
 
     :global(.p-autocomplete-token-label) {
-      color: var(--ink) !important;
+      color: var(--on-accent) !important;
     }
 
     :global(.p-autocomplete-token-icon) {
       margin-left: 4px;
       font-size: 0.72rem;
-      color: var(--ink-2);
+      color: var(--on-accent);
       cursor: pointer;
       transition: color 0.15s ease;
 
       &:hover {
-        color: var(--ink);
+        color: var(--on-accent);
       }
     }
   }

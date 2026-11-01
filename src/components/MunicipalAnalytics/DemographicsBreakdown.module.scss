@@ -84,12 +84,14 @@
 
   &.eu {
     background: var(--accent);
+    color: var(--on-accent);
   }
   &.nordic {
     background: var(--positive-soft);
   }
   &.nonEu {
     background: var(--accent);
+    color: var(--on-accent);
   }
 }
 
@@ -118,12 +120,14 @@
 
       &.eu {
         background: var(--accent);
+        color: var(--on-accent);
       }
       &.nordic {
         background: var(--positive-soft);
       }
       &.nonEu {
         background: var(--accent);
+        color: var(--on-accent);
       }
     }
   }
@@ -220,6 +224,7 @@
   .fill {
     height: 100%;
     background: var(--accent);
+    color: var(--on-accent);
     border-radius: 0;
   }
 

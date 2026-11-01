@@ -177,7 +177,7 @@
   justify-content: center;
   font-size: 1.7rem;
   font-weight: 700;
-  color: var(--ink);
+  color: var(--on-accent);
   letter-spacing: 0.5px;
   box-shadow: none;
   flex-shrink: 0;
@@ -554,7 +554,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--ink);
+  color: var(--on-accent);
   font-size: 1.3rem;
   flex-shrink: 0;
   box-shadow: none;
@@ -596,7 +596,7 @@
   background: var(--accent);
   border: 1px solid var(--ink);
   border-radius: 0;
-  color: var(--ink);
+  color: var(--on-accent);
   text-decoration: none;
   font-size: 0.9rem;
   font-weight: 600;
@@ -801,7 +801,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--ink);
+  color: var(--on-accent);
   font-size: 1.2rem;
   box-shadow: none;
   transition: all 0.2s ease;

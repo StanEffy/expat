@@ -1,8 +1,8 @@
 .footer {
   margin-top: auto;
   width: 100%;
-  background: var(--ink);
-  color: var(--paper);
+  background: var(--sign);
+  color: var(--on-sign);
   border-top: 6px solid var(--accent);
 }
 
@@ -27,7 +27,7 @@
 }
 
 .footerText {
-  color: var(--paper);
+  color: var(--on-sign);
 }
 
 .footerMark {

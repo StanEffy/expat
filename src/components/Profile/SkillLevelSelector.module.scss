@@ -103,14 +103,14 @@
 .active {
   background: var(--accent);
   border-color: var(--ink);
-  color: var(--ink);
+  color: var(--on-accent);
 }
 
 .selected {
   background: var(--accent) !important;
   border-color: var(--ink) !important;
   box-shadow: none;
-  color: var(--ink) !important;
+  color: var(--on-accent) !important;
   font-weight: 700 !important;
 }
 
@@ -166,10 +166,12 @@
 
   .active {
     background: var(--accent);
+    color: var(--on-accent);
   }
 
   .selected {
     background: var(--accent) !important;
+    color: var(--on-accent) !important;
     box-shadow: none !important;
   }
 }

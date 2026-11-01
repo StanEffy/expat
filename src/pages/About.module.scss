@@ -501,6 +501,7 @@
     right: 0;
     height: 3px;
     background: var(--accent);
+    color: var(--on-accent);
   }
 
   h3 {
@@ -578,7 +579,7 @@
   justify-content: center;
   font-weight: 700;
   font-size: 1.1rem;
-  color: var(--link);
+  color: var(--on-accent);
 }
 
 .memberName {

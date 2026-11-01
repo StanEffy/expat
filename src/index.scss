@@ -1,6 +1,8 @@
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 
 @use "./styles/variables" as *;
+@use "./styles/tokens";
+@use "./styles/prime-dark";
 @use "./styles/toast" as *;
 
 /* Document
@@ -406,7 +408,7 @@ h1, h2, h3, h4, h5, h6 {
 
 ::selection {
   background: var(--accent);
-  color: var(--ink);
+  color: var(--on-accent);
 }
 
 #root {
@@ -581,7 +583,7 @@ button {
 
       &.p-highlight {
         background: var(--accent);
-        color: var(--ink);
+        color: var(--on-accent);
         font-weight: 600;
         border: 1px solid var(--ink);
       }
@@ -1118,12 +1120,14 @@ input {
 
 ::-webkit-scrollbar-thumb {
   background: var(--accent);
+  color: var(--on-accent);
   border-radius: 0;
   border: 2px solid transparent;
   background-clip: padding-box;
 
   &:hover {
     background: var(--accent);
+    color: var(--on-accent);
     background-clip: padding-box;
   }
 
@@ -1141,6 +1145,7 @@ input {
 
 .p-autocomplete-token {
   background-color: var(--accent);
+  color: var(--on-accent);
   border-radius: 0;
   padding: 0.2rem;
   font-weight: bold;
@@ -1158,6 +1163,7 @@ input {
 
   .p-progressbar-value {
     background: var(--accent) !important;
+    color: var(--on-accent) !important;
     border-radius: 0 !important;
     box-shadow: none !important;
     transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
@@ -1277,7 +1283,7 @@ input {
 
       &.p-highlight {
         background: var(--accent) !important;
-        color: var(--ink) !important;
+        color: var(--on-accent) !important;
         font-weight: 600 !important;
       }
     }
@@ -1398,21 +1404,23 @@ input {
     &.p-highlight {
       > .p-menuitem-content {
         background: var(--accent) !important;
+        color: var(--on-accent) !important;
         border: 1px solid var(--ink) !important;
         box-shadow: none !important;
 
         .p-menuitem-link {
           .p-menuitem-text {
-            color: var(--ink) !important;
+            color: var(--on-accent) !important;
             font-weight: 600 !important;
           }
           .p-menuitem-icon {
-            color: var(--ink) !important;
+            color: var(--on-accent) !important;
           }
         }
 
         &:hover {
           background: var(--accent) !important;
+          color: var(--on-accent) !important;
           border-color: var(--ink) !important;
           box-shadow: none !important;
         }
@@ -1429,6 +1437,7 @@ input {
     &.p-highlight:active > .p-menuitem-content {
       transform: scale(0.98);
       background: var(--accent) !important;
+      color: var(--on-accent) !important;
     }
   }
 }

@@ -1,0 +1,111 @@
+@use "variables" as *;
+
+// Runtime colour tokens. Components read these, never the SCSS variables, so the theme can switch.
+:root {
+  color-scheme: light;
+
+  // Ukazatel tokens
+  --paper: #{$paper};
+  --surface: #{$surface};
+  --surface-alt: #{$surface-alt};
+  --ink: #{$ink};
+  --ink-2: #{$ink-2};
+  --ink-muted: #{$ink-muted};
+  --rule: #{$rule};
+  --accent: #{$accent};
+  --accent-soft: #{$accent-soft};
+  --link: #1F4FD1;
+  --positive: #1E7F4F;
+  --positive-soft: #DDF2E6;
+  --warning: #8A5300;
+  --warning-soft: #FBE8C8;
+  --danger: #B42318;
+  --danger-soft: #FCE4E2;
+  --info-soft: #E1E8FA;
+  // Signboards (header bar, footer, the home board, date plates) stay dark in both themes
+  --sign: #{$ink};
+  --sign-2: #{$ink-2};
+  --on-sign: #{$paper};
+  // Text on the yellow accent is always dark
+  --on-accent: #{$ink};
+  // Birch-bark strip under the header
+  --bark: #{$paper};
+  --font-sans: 'Archivo', 'Golos Text', 'Archivo Fallback', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  // Primary
+  --primary-0: var(--ink);
+  --primary-1: var(--ink-2);
+  --primary-2: var(--ink);
+  --primary-3: var(--ink-muted);
+  --primary-4: #{$primary-4};
+
+  // Secondary A
+  --secondary-a-0: var(--ink);
+  --secondary-a-1: var(--ink-2);
+  --secondary-a-2: var(--ink);
+  --secondary-a-3: var(--ink);
+  --secondary-a-4: var(--ink-2);
+
+  // Secondary B
+  --secondary-b-0: var(--positive);
+  --secondary-b-1: var(--positive);
+  --secondary-b-2: #{$secondary-b-2};
+  --secondary-b-3: var(--positive);
+  --secondary-b-4: var(--positive);
+
+  // Complement
+  --complement-0: var(--accent);
+  --complement-1: #{$complement-1};
+  --complement-2: #{$complement-2};
+  --complement-3: var(--ink);
+  --complement-4: var(--ink-2);
+
+  // Shadows
+  --shadow-sm: #{$shadow-sm};
+  --shadow-md: #{$shadow-md};
+  --shadow-lg: #{$shadow-lg};
+
+  // Footer
+  --footer-bg: var(--sign);
+
+  // Container Spacing
+  --page-gutter-desktop: 1.5rem;
+  --page-gutter-mobile: 1rem;
+}
+
+// Dark theme, picked from the system preference
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+
+    --paper: #111315;
+    --surface: #1A1D21;
+    --surface-alt: #23272C;
+    --ink: #ECECE6;
+    --ink-2: #C3C7CC;
+    --ink-muted: #989EA6;
+    --rule: #3A3F45;
+    --accent: #FFD23F;
+    --accent-soft: #3A3115;
+    --link: #8DB2FF;
+    --positive: #5FD39B;
+    --positive-soft: #12301F;
+    --warning: #F0B45C;
+    --warning-soft: #3A2A0E;
+    --danger: #FF8B80;
+    --danger-soft: #3D1714;
+    --info-soft: #1B2540;
+
+    --sign: #07080A;
+    --sign-2: #2A2F35;
+    --on-sign: #ECECE6;
+    --on-accent: #121417;
+    --bark: #D6D6CE;
+
+    --secondary-b-2: #4CC089;
+    --complement-1: #D9B23A;
+    --complement-2: #E8C25A;
+    --primary-4: #7C828A;
+  }
+}

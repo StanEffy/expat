@@ -43,7 +43,9 @@
     <meta name="twitter:image" content="/android-chrome-512x512.png" />
     
     <!-- Theme Color -->
-    <meta name="theme-color" content="#121417" />
+    <meta name="theme-color" content="#121417" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#07080A" media="(prefers-color-scheme: dark)" />
+    <meta name="color-scheme" content="light dark" />
 
     <style>
       html {
@@ -81,6 +83,19 @@
         max-width: 680px;
         margin: 0 auto 32px auto;
         line-height: 1.6;
+      }
+      @media (prefers-color-scheme: dark) {
+        html,
+        body {
+          background: #111315;
+          color: #ECECE6;
+        }
+        .initial-hero h1 {
+          color: #ECECE6;
+        }
+        .initial-hero p {
+          color: #C3C7CC;
+        }
       }
     </style>
   </head>

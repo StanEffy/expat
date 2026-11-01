@@ -35,20 +35,20 @@
   width: 40px !important;
   height: 40px !important;
   border-radius: 0 !important;
-  color: var(--paper) !important;
+  color: var(--on-sign) !important;
   background: transparent !important;
   border: 1px solid var(--ink-muted) !important;
   transition: background-color 0.12s ease, color 0.12s ease !important;
 
   &:hover {
-    background: var(--ink-2) !important;
-    color: var(--paper) !important;
+    background: var(--sign-2) !important;
+    color: var(--on-sign) !important;
   }
 
   &.mobile-menu-trigger-active {
     background: var(--accent) !important;
     border-color: var(--accent) !important;
-    color: var(--ink) !important;
+    color: var(--on-accent) !important;
   }
 
   &:focus-visible {
@@ -194,21 +194,23 @@
     &.p-highlight {
       > .p-menuitem-content {
         background: var(--accent) !important;
+        color: var(--on-accent) !important;
         border: 1px solid var(--ink) !important;
         box-shadow: none !important;
 
         .p-menuitem-link {
           .p-menuitem-text {
-            color: var(--ink) !important;
+            color: var(--on-accent) !important;
             font-weight: 600 !important;
           }
           .p-menuitem-icon {
-            color: var(--ink) !important;
+            color: var(--on-accent) !important;
           }
         }
 
         &:hover {
           background: var(--accent) !important;
+          color: var(--on-accent) !important;
           border-color: var(--ink) !important;
           box-shadow: none !important;
         }
@@ -225,6 +227,7 @@
     &.p-highlight:active > .p-menuitem-content {
       transform: scale(0.97);
       background: var(--accent) !important;
+      color: var(--on-accent) !important;
     }
   }
 }

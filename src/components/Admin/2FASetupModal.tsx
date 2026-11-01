@@ -175,7 +175,7 @@ const TwoFASetupModal = ({ visible, onComplete, onCancel }: TwoFASetupModalProps
               </div>
             ) : (
               <div className={styles.qrCode}>
-                <div style={{ padding: '2rem', textAlign: 'center', color: '#666' }}>
+                <div style={{ padding: '2rem', textAlign: 'center', color: 'var(--ink-muted)' }}>
                   <p>QR code not available.</p>
                   <p style={{ fontSize: '0.9rem', marginTop: '0.5rem' }}>
                     {secret ? 'Please use the secret below to manually set up 2FA.' : 'Please check your connection and try again.'}

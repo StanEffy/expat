@@ -181,6 +181,7 @@ button.chip {
 
   &:hover {
     background: var(--accent);
+    color: var(--on-accent);
   }
 }
 
@@ -241,7 +242,7 @@ button.chip {
 }
 
 .primaryButton {
-  color: var(--ink);
+  color: var(--on-accent);
   border: none;
   background: var(--accent);
   box-shadow: none;
@@ -459,6 +460,7 @@ textarea.input {
   height: 100%;
   border-radius: 0;
   background: var(--accent);
+  color: var(--on-accent);
   transition: width 0.4s ease;
 }
 
@@ -615,8 +617,8 @@ textarea.input {
   width: 4.5rem;
   padding: 0.5rem 0.25rem;
   text-align: center;
-  background: var(--ink);
-  color: var(--paper);
+  background: var(--sign);
+  color: var(--on-sign);
 
   @media (max-width: 560px) {
     width: auto;

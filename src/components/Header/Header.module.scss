@@ -45,7 +45,7 @@
   font-weight: 500 !important;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--paper) !important;
+  color: var(--on-sign) !important;
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
@@ -71,15 +71,15 @@
   }
 
   &:hover {
-    background: var(--ink-2) !important;
-    color: var(--paper) !important;
+    background: var(--sign-2) !important;
+    color: var(--on-sign) !important;
   }
 
   // Current section: the yellow plate, like the "you are here" sign
   &.active,
   &.active:hover {
     background: var(--accent) !important;
-    color: var(--ink) !important;
+    color: var(--on-accent) !important;
 
     :global(.p-button-icon) {
       opacity: 1;
@@ -120,7 +120,7 @@
 }
 
 .dropdownOpen {
-  background: var(--ink-2) !important;
+  background: var(--sign-2) !important;
 }
 
 .dropdownMenu {
@@ -196,9 +196,10 @@
   &.activeMenuItem {
     border-left-color: var(--ink);
     background: var(--accent);
+    color: var(--on-accent);
 
     .menuItemIcon {
-      color: var(--ink);
+      color: var(--on-accent);
     }
   }
 

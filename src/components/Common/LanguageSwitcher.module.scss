@@ -16,14 +16,14 @@
   background: transparent;
   border: 1px solid var(--ink-muted);
   border-radius: 0;
-  color: var(--paper);
+  color: var(--on-sign);
   cursor: pointer;
   font-family: var(--font-mono);
   transition: background-color 0.12s ease;
   user-select: none;
 
   &:hover {
-    background: var(--ink-2);
+    background: var(--sign-2);
   }
 
   &:focus-visible {
@@ -32,14 +32,14 @@
   }
 
   &.triggerOpen {
-    background: var(--ink-2);
-    border-color: var(--paper);
+    background: var(--sign-2);
+    border-color: var(--on-sign);
   }
 }
 
 .globeIcon {
   font-size: 0.9rem;
-  color: var(--paper);
+  color: var(--on-sign);
   line-height: 1;
 }
 
@@ -47,13 +47,13 @@
   font-size: 0.8rem;
   font-weight: 500;
   letter-spacing: 0.08em;
-  color: var(--paper);
+  color: var(--on-sign);
   line-height: 1;
 }
 
 .arrowIcon {
   font-size: 0.6rem;
-  color: var(--paper);
+  color: var(--on-sign);
   transition: transform 0.15s ease;
   line-height: 1;
 
@@ -125,7 +125,7 @@
 
   &.menuItemSelected {
     background: var(--accent);
-    color: var(--ink);
+    color: var(--on-accent);
     border: 1px solid var(--ink);
 
     .badge {

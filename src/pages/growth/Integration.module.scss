@@ -22,6 +22,7 @@
 .progressFill {
   height: 100%;
   background: var(--accent);
+  color: var(--on-accent);
   transition: width 0.3s ease;
 }
 

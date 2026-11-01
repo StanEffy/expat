@@ -51,69 +51,8 @@ $shadow-lg: none;
 // Footer Background
 $footer-bg: $ink;
 
-// CSS Variables for runtime usage
-:root {
-  // Ukazatel tokens
-  --paper: #{$paper};
-  --surface: #{$surface};
-  --surface-alt: #{$surface-alt};
-  --ink: #{$ink};
-  --ink-2: #{$ink-2};
-  --ink-muted: #{$ink-muted};
-  --rule: #{$rule};
-  --accent: #{$accent};
-  --accent-soft: #{$accent-soft};
-  --link: #1F4FD1;
-  --positive: #1E7F4F;
-  --positive-soft: #DDF2E6;
-  --warning: #8A5300;
-  --warning-soft: #FBE8C8;
-  --danger: #B42318;
-  --danger-soft: #FCE4E2;
-  --info-soft: #E1E8FA;
-  --font-sans: 'Archivo', 'Golos Text', 'Archivo Fallback', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+// The runtime CSS custom properties (light and dark) live in _tokens.scss, emitted once from index.scss
 
-  // Primary
-  --primary-0: #{$primary-0};
-  --primary-1: #{$primary-1};
-  --primary-2: #{$primary-2};
-  --primary-3: #{$primary-3};
-  --primary-4: #{$primary-4};
-
-  // Secondary A
-  --secondary-a-0: #{$secondary-a-0};
-  --secondary-a-1: #{$secondary-a-1};
-  --secondary-a-2: #{$secondary-a-2};
-  --secondary-a-3: #{$secondary-a-3};
-  --secondary-a-4: #{$secondary-a-4};
-
-  // Secondary B
-  --secondary-b-0: #{$secondary-b-0};
-  --secondary-b-1: #{$secondary-b-1};
-  --secondary-b-2: #{$secondary-b-2};
-  --secondary-b-3: #{$secondary-b-3};
-  --secondary-b-4: #{$secondary-b-4};
-
-  // Complement
-  --complement-0: #{$complement-0};
-  --complement-1: #{$complement-1};
-  --complement-2: #{$complement-2};
-  --complement-3: #{$complement-3};
-  --complement-4: #{$complement-4};
-
-  // Shadows
-  --shadow-sm: #{$shadow-sm};
-  --shadow-md: #{$shadow-md};
-  --shadow-lg: #{$shadow-lg};
-
-  // Footer
-  --footer-bg: #{$footer-bg};
-
-  // Container Spacing
-  --page-gutter-desktop: 1.5rem;
-  --page-gutter-mobile: 1rem;
-}
 
 // Layout & Container Spacing Variables
 $page-container-max-width: 1200px;
@@ -123,65 +62,65 @@ $page-gutter-mobile: 1rem;    // 16px
 
 // Utility classes for colors
 .primary-0 {
-  color: $primary-0;
+  color: var(--primary-0);
 }
 .primary-1 {
-  color: $primary-1;
+  color: var(--primary-1);
 }
 .primary-2 {
-  color: $primary-2;
+  color: var(--primary-2);
 }
 .primary-3 {
-  color: $primary-3;
+  color: var(--primary-3);
 }
 .primary-4 {
-  color: $primary-4;
+  color: var(--primary-4);
 }
 
 .secondary-a-0 {
-  color: $secondary-a-0;
+  color: var(--secondary-a-0);
 }
 .secondary-a-1 {
-  color: $secondary-a-1;
+  color: var(--secondary-a-1);
 }
 .secondary-a-2 {
-  color: $secondary-a-2;
+  color: var(--secondary-a-2);
 }
 .secondary-a-3 {
-  color: $secondary-a-3;
+  color: var(--secondary-a-3);
 }
 .secondary-a-4 {
-  color: $secondary-a-4;
+  color: var(--secondary-a-4);
 }
 
 .secondary-b-0 {
-  color: $secondary-b-0;
+  color: var(--secondary-b-0);
 }
 .secondary-b-1 {
-  color: $secondary-b-1;
+  color: var(--secondary-b-1);
 }
 .secondary-b-2 {
-  color: $secondary-b-2;
+  color: var(--secondary-b-2);
 }
 .secondary-b-3 {
-  color: $secondary-b-3;
+  color: var(--secondary-b-3);
 }
 .secondary-b-4 {
-  color: $secondary-b-4;
+  color: var(--secondary-b-4);
 }
 
 .complement-0 {
-  color: $complement-0;
+  color: var(--complement-0);
 }
 .complement-1 {
-  color: $complement-1;
+  color: var(--complement-1);
 }
 .complement-2 {
-  color: $complement-2;
+  color: var(--complement-2);
 }
 .complement-3 {
-  color: $complement-3;
+  color: var(--complement-3);
 }
 .complement-4 {
-  color: $complement-4;
+  color: var(--complement-4);
 }

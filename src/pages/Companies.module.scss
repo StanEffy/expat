@@ -259,7 +259,7 @@
   border-radius: 0;
   background: var(--accent);
   border: 1px solid var(--ink);
-  color: var(--ink);
+  color: var(--on-accent);
   font-weight: 700;
   font-size: 1.15rem;
   display: flex;
@@ -368,16 +368,17 @@
 
   &:hover {
     background: var(--accent) !important;
+    color: var(--on-accent) !important;
     border-color: var(--ink) !important;
     box-shadow: none !important;
     transform: translateY(-1px);
 
     :global(.p-button-label) {
-      color: var(--ink) !important;
+      color: var(--on-accent) !important;
     }
 
     :global(.p-button-icon) {
-      color: var(--ink) !important;
+      color: var(--on-accent) !important;
       transform: translateX(3px);
     }
   }
@@ -445,7 +446,7 @@
 .emptyResetBtn {
   background: var(--accent) !important;
   border-color: var(--ink) !important;
-  color: var(--ink) !important;
+  color: var(--on-accent) !important;
   font-weight: 600 !important;
   padding: 8px 20px !important;
   border-radius: 0 !important;
@@ -477,6 +478,7 @@
 
   &:hover:not(:disabled) {
     background: var(--accent) !important;
+    color: var(--on-accent) !important;
     border-color: var(--ink) !important;
     box-shadow: none !important;
   }

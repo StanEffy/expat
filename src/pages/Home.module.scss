@@ -72,7 +72,7 @@
   gap: 12px;
   padding: 18px 28px;
   background: var(--accent);
-  color: var(--ink);
+  color: var(--on-accent);
   font-weight: 700;
   font-size: 1.125rem;
   text-decoration: none;
@@ -84,7 +84,7 @@
   }
 
   &:hover {
-    background: var(--ink);
+    background: var(--sign);
     color: var(--accent);
 
     svg {
@@ -104,8 +104,8 @@
 .board {
   grid-column: span 5;
   min-width: 0;
-  background: var(--ink);
-  color: var(--paper);
+  background: var(--sign);
+  color: var(--on-sign);
   padding: 28px 28px 12px;
 
   @media (max-width: 1023px) {
@@ -114,6 +114,13 @@
 
   @media (max-width: 640px) {
     padding: 20px 18px 8px;
+  }
+}
+
+// On a dark page the board needs an edge to stand out
+@media (prefers-color-scheme: dark) {
+  .board {
+    outline: 1px solid var(--rule);
   }
 }
 
@@ -140,7 +147,7 @@
   letter-spacing: 0.08em;
   color: #A7ADB5;
   padding-bottom: 14px;
-  border-bottom: 2px solid var(--paper);
+  border-bottom: 2px solid var(--on-sign);
 }
 
 .boardList {
@@ -159,7 +166,7 @@
   font-weight: 600;
 
   & + & {
-    border-top: 1px solid var(--ink-2);
+    border-top: 1px solid var(--sign-2);
   }
 
   @media (max-width: 640px) {
@@ -255,6 +262,7 @@
 
 .badge {
   background: var(--accent);
+  color: var(--on-accent);
   font-family: var(--font-mono);
   font-size: 0.8rem;
   font-weight: 600;

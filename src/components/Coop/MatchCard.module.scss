@@ -31,6 +31,7 @@
   display: grid;
   place-items: center;
   background: var(--accent);
+  color: var(--on-accent);
 
   span {
     width: 3.7rem;
@@ -114,7 +115,7 @@
   font: inherit;
   font-weight: 700;
   font-size: 0.9rem;
-  color: var(--ink);
+  color: var(--on-accent);
   border: none;
   border-radius: 0;
   padding: 0.55rem 1.1rem;

@@ -168,11 +168,13 @@
 
   &.warning {
     background: var(--accent);
+    color: var(--on-accent);
     box-shadow: none;
   }
 
   &.normal {
     background: var(--accent);
+    color: var(--on-accent);
     box-shadow: none;
   }
 }

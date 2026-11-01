@@ -1,0 +1,206 @@
+// PrimeReact's Lara theme paints these components with fixed light colours.
+// In the dark theme they read the tokens instead. Inputs, dropdowns, buttons
+// and toasts already use tokens in index.scss and _toast.scss.
+
+@media (prefers-color-scheme: dark) {
+  .p-component {
+    color: var(--ink);
+  }
+
+  .p-card,
+  .p-sidebar,
+  .p-overlaypanel,
+  .p-menu,
+  .p-password-panel,
+  .p-autocomplete-panel {
+    background: var(--surface);
+    color: var(--ink);
+  }
+
+  .p-card .p-card-subtitle {
+    color: var(--ink-muted);
+  }
+
+  .p-dialog {
+    .p-dialog-header,
+    .p-dialog-content,
+    .p-dialog-footer {
+      background: var(--surface);
+      color: var(--ink);
+    }
+
+    .p-dialog-header .p-dialog-header-icon {
+      color: var(--ink-muted);
+
+      &:enabled:hover {
+        background: var(--surface-alt);
+        color: var(--ink);
+      }
+    }
+  }
+
+  .p-dialog-mask.p-component-overlay {
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+
+  .p-sidebar .p-sidebar-header .p-sidebar-close {
+    color: var(--ink-muted);
+  }
+
+  .p-tabview {
+    .p-tabview-nav {
+      background: var(--surface);
+      border-color: var(--rule);
+
+      li .p-tabview-nav-link {
+        background: var(--surface);
+        color: var(--ink-muted);
+        border-color: var(--rule);
+      }
+
+      li:not(.p-highlight):not(.p-disabled):hover .p-tabview-nav-link {
+        background: var(--surface-alt);
+        color: var(--ink);
+        border-color: var(--ink-muted);
+      }
+
+      li.p-highlight .p-tabview-nav-link {
+        background: var(--surface);
+        color: var(--ink);
+        border-color: var(--ink);
+      }
+    }
+
+    .p-tabview-panels {
+      background: var(--surface);
+      color: var(--ink);
+    }
+  }
+
+  .p-datatable {
+    .p-datatable-header,
+    .p-datatable-footer,
+    .p-datatable-thead > tr > th,
+    .p-datatable-tfoot > tr > td {
+      background: var(--surface-alt);
+      color: var(--ink);
+      border-color: var(--rule);
+    }
+
+    .p-datatable-tbody > tr {
+      background: var(--surface);
+      color: var(--ink);
+
+      > td {
+        border-color: var(--rule);
+      }
+
+      &.p-row-odd {
+        background: var(--paper);
+      }
+    }
+
+    .p-sortable-column:not(.p-highlight):hover {
+      background: var(--surface);
+      color: var(--ink);
+    }
+  }
+
+  .p-paginator {
+    background: var(--surface);
+    color: var(--ink-muted);
+
+    .p-paginator-first,
+    .p-paginator-prev,
+    .p-paginator-next,
+    .p-paginator-last,
+    .p-paginator-pages .p-paginator-page {
+      color: var(--ink-muted);
+    }
+  }
+
+  .p-message {
+    &.p-message-info {
+      background: var(--info-soft);
+      color: var(--ink);
+    }
+
+    &.p-message-success {
+      background: var(--positive-soft);
+      color: var(--ink);
+    }
+
+    &.p-message-warn {
+      background: var(--warning-soft);
+      color: var(--ink);
+    }
+
+    &.p-message-error {
+      background: var(--danger-soft);
+      color: var(--ink);
+    }
+
+    .p-message-icon,
+    .p-message-close {
+      color: inherit;
+    }
+  }
+
+  .p-inline-message {
+    &.p-inline-message-info {
+      background: var(--info-soft);
+      color: var(--ink);
+    }
+
+    &.p-inline-message-success {
+      background: var(--positive-soft);
+      color: var(--ink);
+    }
+
+    &.p-inline-message-warn {
+      background: var(--warning-soft);
+      color: var(--ink);
+    }
+
+    &.p-inline-message-error {
+      background: var(--danger-soft);
+      color: var(--ink);
+    }
+  }
+
+  .p-fileupload {
+    .p-fileupload-buttonbar,
+    .p-fileupload-content {
+      background: var(--surface);
+      color: var(--ink);
+      border-color: var(--rule);
+    }
+  }
+
+  .p-progressbar {
+    background: var(--surface-alt);
+  }
+
+  .p-progress-spinner-circle {
+    stroke: var(--accent) !important;
+  }
+
+  .p-tooltip .p-tooltip-text {
+    background: var(--surface-alt);
+    color: var(--ink);
+  }
+
+  .p-confirm-popup {
+    background: var(--surface);
+    color: var(--ink);
+  }
+
+  .p-menu .p-menuitem > .p-menuitem-content {
+    color: var(--ink);
+
+    .p-menuitem-link .p-menuitem-text,
+    .p-menuitem-link .p-menuitem-icon {
+      color: var(--ink);
+    }
+  }
+}

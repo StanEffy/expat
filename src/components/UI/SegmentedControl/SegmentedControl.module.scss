@@ -101,11 +101,11 @@
   &.active {
     background: var(--accent);
     border-color: var(--rule);
-    color: var(--ink);
+    color: var(--on-accent);
     box-shadow: none;
 
     .itemContent i {
-      color: var(--ink);
+      color: var(--on-accent);
     }
 
     .badge {

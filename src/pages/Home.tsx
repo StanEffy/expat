@@ -1,6 +1,6 @@
-import { useEffect, useState, type CSSProperties, type ReactNode } from 'react';
+import { useEffect, useState, type CSSProperties, type FormEvent, type ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { isTokenValid } from '../utils/auth';
 import SEO from '../components/Common/SEO';
 import FlapText from '../components/Decorative/FlapText';
@@ -12,7 +12,7 @@ const Arrow = ({ size = 22 }: { size?: number }) => (
   </svg>
 );
 
-// Pictograms in the style of trail signs: rock, lake, birches
+// Pictograms in the style of trail signs
 const RockIcon = () => (
   <svg width="32" height="32" viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" aria-hidden="true">
     <path d="M4 32 L10 18 L18 12 L28 14 L36 24 L38 32 Z" />
@@ -20,10 +20,17 @@ const RockIcon = () => (
   </svg>
 );
 
-const LakeIcon = () => (
+const SheetIcon = () => (
+  <svg width="32" height="32" viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" aria-hidden="true">
+    <path d="M9 4 H25 L32 11 V36 H9 Z" />
+    <path d="M25 4 V11 H32 M14 18 H27 M14 24 H27 M14 30 H22" />
+  </svg>
+);
+
+const ClockIcon = () => (
   <svg width="32" height="32" viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-    <path d="M6 22 C6 14 16 10 24 12 C32 14 36 20 32 26 C28 32 14 32 9 28 C7 26 6 24 6 22 Z" />
-    <path d="M13 21 H23 M17 25 H26" />
+    <circle cx="20" cy="21" r="14" />
+    <path d="M20 12 V21 L26 25 M16 4 H24" strokeLinecap="square" />
   </svg>
 );
 
@@ -35,16 +42,28 @@ const BirchIcon = () => (
   </svg>
 );
 
-const BOARD_STEPS = [
-  { code: 'DVV', key: 'dvv' },
-  { code: 'VERO', key: 'vero' },
-  { code: 'PANKKI', key: 'bank' },
-  { code: 'KELA', key: 'kela' },
+/**
+ * The Finnish summer internship season (kesäharjoittelu), as a departures board.
+ * Big employers open applications in January, so the board stays useful all year.
+ */
+const SEASON = [
+  { code: 'TAMMI', key: 'jan', months: [1], label: '01' },
+  { code: 'HELMI', key: 'feb', months: [2], label: '02' },
+  { code: 'KEVÄT', key: 'spring', months: [3, 4, 5], label: '03–05' },
+  { code: 'KESÄ', key: 'summer', months: [6, 7, 8], label: '06–08' },
 ] as const;
 
-const SECTIONS: { key: 'work' | 'city' | 'kipina'; to: string; icon: ReactNode; isNew?: boolean }[] = [
-  { key: 'work', to: '/companies', icon: <RockIcon /> },
-  { key: 'city', to: '/service-requests', icon: <LakeIcon /> },
+const seasonMarker = (): { index: number; kind: 'now' | 'soon' } => {
+  const month = new Date().getMonth() + 1;
+  const index = SEASON.findIndex((step) => (step.months as readonly number[]).includes(month));
+  // September to December: the next season opens in January
+  return index >= 0 ? { index, kind: 'now' } : { index: 0, kind: 'soon' };
+};
+
+const SECTIONS: { key: 'industries' | 'resume' | 'deadlines' | 'kipina'; to: string; icon: ReactNode; isNew?: boolean }[] = [
+  { key: 'industries', to: '/categories', icon: <RockIcon /> },
+  { key: 'resume', to: '/profile/resume-builder', icon: <SheetIcon /> },
+  { key: 'deadlines', to: '/deadlines', icon: <ClockIcon /> },
   // the startup side lives next door
   { key: 'kipina', to: '/kipina', icon: <BirchIcon />, isNew: true },
 ];
@@ -66,13 +85,23 @@ const Headline = ({ text }: { text: string }) => {
   );
 };
 
+/** Home of the Expat side: finding a company for an internship or a first job. */
 const Home = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [query, setQuery] = useState('');
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const marker = seasonMarker();
 
   useEffect(() => {
     setIsAuthenticated(isTokenValid());
   }, []);
+
+  const search = (event: FormEvent) => {
+    event.preventDefault();
+    const name = query.trim();
+    navigate(name ? `/companies?name=${encodeURIComponent(name)}` : '/companies');
+  };
 
   const baseUrl = typeof window !== 'undefined' ? window.location.origin : '';
 
@@ -81,7 +110,7 @@ const Home = () => {
       <SEO
         title={`${t('app.title')} - ${t('home.welcome')}`}
         description={t('home.description')}
-        keywords="Finland, expat, job opportunities, companies, careers, Helsinki, Finnish companies, employment, expat jobs, work in Finland"
+        keywords="Finland, internship, harjoittelu, kesätyö, summer job, student jobs, companies, Helsinki, work in Finland"
         url={baseUrl ? `${baseUrl}/expat` : '/expat'}
         structuredData={{
           '@context': 'https://schema.org',
@@ -104,13 +133,32 @@ const Home = () => {
             <p className="mono-label" data-reveal>{t('home.eyebrow')}</p>
             <Headline text={t('home.headline')} />
             <p className={styles.lead} data-reveal>{t('home.lead')}</p>
+
+            <form className={styles.search} onSubmit={search} role="search" data-reveal>
+              <label htmlFor="home-company-search" className={styles.searchLabel}>
+                {t('home.searchLabel')}
+              </label>
+              <div className={styles.searchRow}>
+                <input
+                  id="home-company-search"
+                  type="search"
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  placeholder={t('home.searchPlaceholder')}
+                  className={styles.searchInput}
+                  autoComplete="off"
+                />
+                <button type="submit" className={styles.searchButton}>
+                  {t('home.searchButton')}
+                  <Arrow />
+                </button>
+              </div>
+            </form>
+
             <div className={styles.buttons} data-reveal>
-              <Link to="/onboarding" className={styles.cta}>
-                {t('home.ctaPlan')}
-                <Arrow />
-              </Link>
+              <Link to="/companies" className={styles.secondary}>{t('home.browseAll')}</Link>
               {isAuthenticated ? (
-                <Link to="/companies" className={styles.secondary}>{t('home.ctaWork')}</Link>
+                <Link to="/profile/resume-builder" className={styles.secondary}>{t('home.ctaResume')}</Link>
               ) : (
                 <Link to="/login" className={styles.secondary}>{t('navigation.login')}</Link>
               )}
@@ -118,40 +166,29 @@ const Home = () => {
           </section>
 
           <aside className={styles.board} aria-label={t('home.boardLabel')} data-reveal>
-            <svg className={styles.map} viewBox="0 0 400 150" aria-hidden="true">
-              <g fill="none" stroke="#4A5058" strokeWidth="1.5" className={styles.contours}>
-                <path pathLength={1} d="M60 80 C60 40 130 25 190 35 C250 45 330 30 350 70 C370 110 300 130 230 120 C170 112 110 135 80 115 C65 105 60 95 60 80 Z" />
-                <path pathLength={1} d="M95 80 C95 55 140 48 190 55 C240 62 305 52 318 75 C330 98 280 108 230 102 C180 96 130 112 108 98 C99 92 95 87 95 80 Z" />
-              </g>
-              <path
-                pathLength={1}
-                className={styles.shore}
-                d="M130 80 C130 68 160 64 192 70 C226 76 282 70 288 82 C294 94 258 92 228 90 C196 88 160 96 142 90 C134 87 130 84 130 80 Z"
-                fill="none"
-                stroke="var(--accent)"
-                strokeWidth="2"
-              />
-              <path d="M248 78 C254 72 266 74 268 80 C270 86 258 89 250 87 C245 86 244 82 248 78 Z" fill="#4A5058" />
-              <circle cx="40" cy="36" r="6" className={styles.pulse} />
-              <circle cx="40" cy="36" r="6" fill="var(--accent)" />
-              <text x="54" y="40" className={styles.mapText}>{t('home.youAreHere')}</text>
-              <text x="300" y="140" className={`${styles.mapText} notranslate`}>JÄRVI</text>
-            </svg>
             <div className={styles.boardHead}>
               <span>{t('home.boardLabel')}</span>
-              <span>{t('home.boardColumn')}</span>
+              <span>{t('home.boardMonth')}</span>
             </div>
             <ol className={styles.boardList}>
-              {BOARD_STEPS.map((step, i) => (
-                <li key={step.key} className={styles.boardRow}>
-                  <span>
-                    <FlapText text={step.code} delay={500 + i * 220} className={styles.code} />
-                    {t(`home.steps.${step.key}`)}
-                  </span>
-                  <span className={styles.stepNo}>{String(i + 1).padStart(2, '0')}</span>
-                </li>
-              ))}
+              {SEASON.map((step, i) => {
+                const marked = i === marker.index;
+                return (
+                  <li key={step.key} className={`${styles.boardRow} ${marked ? styles.boardRowMarked : ''}`}>
+                    <span>
+                      <FlapText text={step.code} delay={500 + i * 220} className={styles.code} />
+                      {t(`home.season.${step.key}`)}
+                    </span>
+                    {marked ? (
+                      <span className={styles.boardMarker}>{t(`home.board_${marker.kind}`)}</span>
+                    ) : (
+                      <span className={styles.stepNo}>{step.label}</span>
+                    )}
+                  </li>
+                );
+              })}
             </ol>
+            <p className={styles.boardNote}>{t('home.boardNote')}</p>
           </aside>
         </div>
 

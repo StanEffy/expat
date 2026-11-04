@@ -95,6 +95,83 @@
   }
 }
 
+// Company search right in the hero: the main thing this side offers
+.search {
+  max-width: 600px;
+  margin: 0 0 24px;
+}
+
+.searchLabel {
+  display: block;
+  margin-bottom: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+.searchRow {
+  display: flex;
+  border: 2px solid var(--ink);
+  background: var(--paper);
+
+  &:focus-within {
+    outline: 3px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+  }
+}
+
+.searchInput {
+  flex: 1;
+  min-width: 0;
+  padding: 16px 18px;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-size: 1.125rem;
+
+  &:focus {
+    outline: none;
+  }
+
+  &::placeholder {
+    color: var(--ink-muted);
+  }
+}
+
+.searchButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 24px;
+  border: 0;
+  border-left: 2px solid var(--ink);
+  background: var(--accent);
+  color: var(--on-accent);
+  font: inherit;
+  font-weight: 700;
+  font-size: 1.125rem;
+  cursor: pointer;
+  transition: background-color 0.12s ease;
+
+  &:hover {
+    background: var(--sign);
+    color: var(--accent);
+  }
+
+  @media (max-width: 480px) {
+    border-left: 0;
+    border-top: 2px solid var(--ink);
+  }
+}
+
 .secondary {
   font-weight: 600;
   font-size: 1.125rem;
@@ -188,6 +265,31 @@
 .stepNo {
   font-family: var(--font-mono);
   font-size: 0.85rem;
+  color: #A7ADB5;
+  white-space: nowrap;
+}
+
+.boardRowMarked {
+  color: var(--accent);
+}
+
+.boardMarker {
+  flex-shrink: 0;
+  padding: 2px 8px;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.boardNote {
+  margin: 0;
+  padding: 14px 0 16px;
+  border-top: 1px solid var(--sign-2);
+  font-size: 0.9rem;
+  line-height: 1.5;
   color: #A7ADB5;
 }
 

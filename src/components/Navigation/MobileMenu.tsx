@@ -17,7 +17,7 @@ const MobileMenu = ({ side }: { side: Side | null }) => {
   const location = useLocation();
   const { isAuthenticated } = useAuth();
   const { unreadCount } = useUserNotifications();
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 1024);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 1200);
   const [isOpen, setIsOpen] = useState(false);
 
   const closeMenu = useCallback((event?: React.SyntheticEvent | Event) => {
@@ -39,7 +39,7 @@ const MobileMenu = ({ side }: { side: Side | null }) => {
 
   useEffect(() => {
     const handleResize = () => {
-      const mobile = window.innerWidth < 1024;
+      const mobile = window.innerWidth < 1200;
       setIsMobile(mobile);
       if (!mobile) {
         closeMenu();

@@ -42,7 +42,9 @@
     "logout": "Kirjaudu ulos",
     "teamUp": "Löydä tiimi",
     "people": "Ihmiset",
-    "progress": "Edistyminen"
+    "progress": "Edistyminen",
+    "resume": "CV",
+    "city": "Kaupunki"
   },
   "company": {
     "information": "Yrityksen tiedot",
@@ -96,38 +98,48 @@
     "notFoundDescription": "Hakemasi sivu on ehkä poistettu, nimetty uudelleen tai tilapäisesti poissa käytöstä."
   },
   "home": {
-    "welcome": "Tervetuloa Expat Appille",
-    "description": "Etsi yrityksiä ja työpaikkoja Suomessa",
-    "eyebrow": "01 / Suomi, mistä aloittaa",
-    "headline": "Muutto on sata pientä asiaa. Me pidämme listaa.",
-    "lead": "Rekisteröinti, verokortti, Kela, työ ja ihmiset ympärilläsi. Askel kerrallaan, omalla kielelläsi.",
-    "ctaPlan": "Tee oma suunnitelma",
-    "ctaWork": "Etsi töitä",
-    "boardLabel": "Ensimmäiset päivät",
-    "boardColumn": "Vaihe",
-    "youAreHere": "OLET TÄSSÄ",
-    "steps": {
-      "dvv": "Osoitteen rekisteröinti",
-      "vero": "Verokortti",
-      "bank": "Pankkitili ja pankkitunnukset",
-      "kela": "Sosiaaliturva"
+    "welcome": "Harjoittelupaikat ja työt Suomessa",
+    "description": "Löydä yritys harjoitteluun tai ensimmäiseen työhösi Suomessa: 99 000 yritystä paikkakunnittain ja toimialoittain.",
+    "eyebrow": "01 / Harjoittelupaikat ja työt Suomessa",
+    "headline": "99 000 yritystä. Yksi niistä etsii juuri sinua.",
+    "lead": "Hae nimellä, paikkakunnalla ja toimialalla, tallenna kiinnostavat yritykset ja kirjoita CV suomalaiseen tapaan.",
+    "searchLabel": "Yrityksen nimi",
+    "searchPlaceholder": "esim. Wärtsilä tai Supercell",
+    "searchButton": "Hae",
+    "browseAll": "Selaa paikkakunnan ja toimialan mukaan",
+    "ctaResume": "Kirjoita CV",
+    "boardLabel": "Kesäharjoittelun kausi",
+    "boardMonth": "Kuukausi",
+    "board_now": "nyt",
+    "board_soon": "seuraavaksi",
+    "boardNote": "Jokainen yritys päättää omat päivämääränsä, joten katso sen urasivut.",
+    "season": {
+      "jan": "Isot yritykset avaavat kesäharjoittelut",
+      "feb": "Suurin osa hauista päättyy",
+      "spring": "Haastattelut ja vastaukset",
+      "summer": "Työt alkavat"
     },
-    "sectionsLabel": "Osiot",
-    "newBadge": "uusi",
     "sections": {
-      "work": {
-        "title": "Työ ja yritykset",
-        "text": "Yritykset, jotka palkkaavat kansainvälisiä osaajia, ja CV suomalaiseen tapaan."
+      "industries": {
+        "title": "Yritykset toimialoittain",
+        "text": "IT-alalta metsäalalle: katso, ketkä toimivat sinun alallasi."
       },
-      "city": {
-        "title": "Kaupunki",
-        "text": "Palvelupyynnöt, osallistuva budjetointi ja tapahtumat kotisi lähellä."
+      "resume": {
+        "title": "CV suomalaiseen tapaan",
+        "text": "Selkeä CV, jollaista suomalaiset rekrytoijat odottavat, vaihe vaiheelta."
+      },
+      "deadlines": {
+        "title": "Määräajat kansainvälisille opiskelijoille",
+        "text": "Oleskeluluvan päivämäärät ja mitä uusia milloin, yhdellä aikajanalla."
       },
       "kipina": {
         "title": "Kipinä",
         "text": "Haluatko koota tiimin tai aloittaa jotain omaa? Se löytyy naapurista."
       }
-    }
+    },
+    "sectionsLabel": "Osiot",
+    "newBadge": "uusi",
+    "boardColumn": "Vaihe"
   },
   "favourites": {
     "title": "Suosikkiyritykset",
@@ -610,7 +622,7 @@
       "points": [
         "Noin 99 000 suomalaista yritystä suodattimilla",
         "CV suomalaiseen tapaan",
-        "Oleskeluluvan määräajat ja ensimmäiset askeleet"
+        "Oleskeluluvan määräajat kansainvälisille opiskelijoille"
       ],
       "cta": "Etsi harjoittelupaikka"
     },

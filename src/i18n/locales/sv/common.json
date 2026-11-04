@@ -42,7 +42,9 @@
     "logout": "Logga ut",
     "teamUp": "Hitta ett team",
     "people": "Människor",
-    "progress": "Framsteg"
+    "progress": "Framsteg",
+    "resume": "Cv",
+    "city": "Staden"
   },
   "company": {
     "information": "Företagsinformation",
@@ -96,38 +98,48 @@
     "notFoundDescription": "Sidan du letar efter kan ha tagits bort, bytt namn eller vara tillfälligt otillgänglig."
   },
   "home": {
-    "welcome": "Välkommen till Expat App",
-    "description": "Hitta företag och jobb tillgängliga i Finland",
-    "eyebrow": "01 / Finland, var ska man börja",
-    "headline": "Att flytta är hundra små ärenden. Vi håller listan.",
-    "lead": "Registrering, skattekort, FPA, jobb och människorna omkring dig. Ett steg i taget, på ditt språk.",
-    "ctaPlan": "Gör min plan",
-    "ctaWork": "Hitta jobb",
-    "boardLabel": "De första dagarna",
-    "boardColumn": "Steg",
-    "youAreHere": "DU ÄR HÄR",
-    "steps": {
-      "dvv": "Adressregistrering",
-      "vero": "Skattekort",
-      "bank": "Konto och bankkoder",
-      "kela": "Social trygghet"
+    "welcome": "Praktikplatser och jobb i Finland",
+    "description": "Hitta ett företag för praktik eller ditt första jobb i Finland: 99 000 företag efter ort och bransch.",
+    "eyebrow": "01 / Praktikplatser och jobb i Finland",
+    "headline": "99 000 företag. Ett av dem letar efter dig.",
+    "lead": "Sök på namn, ort och bransch, spara de företag du gillar och skriv ett cv på finländskt vis.",
+    "searchLabel": "Företagets namn",
+    "searchPlaceholder": "t.ex. Wärtsilä eller Supercell",
+    "searchButton": "Sök",
+    "browseAll": "Bläddra efter ort och bransch",
+    "ctaResume": "Skriv mitt cv",
+    "boardLabel": "Säsongen för sommarpraktik",
+    "boardMonth": "Månad",
+    "board_now": "nu",
+    "board_soon": "härnäst",
+    "boardNote": "Varje företag bestämmer sina egna datum, så kolla dess karriärsida.",
+    "season": {
+      "jan": "Stora företag öppnar sommarpraktik",
+      "feb": "De flesta ansökningar stänger",
+      "spring": "Intervjuer och besked",
+      "summer": "Jobbet börjar"
     },
-    "sectionsLabel": "Avsnitt",
-    "newBadge": "nytt",
     "sections": {
-      "work": {
-        "title": "Jobb och företag",
-        "text": "Företag som anställer internationella, och ett CV enligt finska regler."
+      "industries": {
+        "title": "Företag per bransch",
+        "text": "Från IT till skogsbruk: se vilka som verkar inom ditt område."
       },
-      "city": {
-        "title": "Staden",
-        "text": "Serviceärenden, medborgarbudget och evenemang nära hemmet."
+      "resume": {
+        "title": "Cv på finländskt vis",
+        "text": "Ett tydligt cv av det slag finländska rekryterare väntar sig, steg för steg."
+      },
+      "deadlines": {
+        "title": "Tidsfrister för internationella studerande",
+        "text": "Datum för uppehållstillstånd och vad som ska förnyas när, på en tidslinje."
       },
       "kipina": {
         "title": "Kipinä",
         "text": "Vill du bygga ett team eller starta något eget? Det finns nästa dörr."
       }
-    }
+    },
+    "sectionsLabel": "Avsnitt",
+    "newBadge": "nytt",
+    "boardColumn": "Steg"
   },
   "favourites": {
     "title": "Favoritföretag",
@@ -610,7 +622,7 @@
       "points": [
         "Cirka 99 000 finländska företag med filter",
         "Ett CV på finskt vis",
-        "Tidsfrister för uppehållstillstånd och första steg"
+        "Tidsfrister för uppehållstillstånd för internationella studerande"
       ],
       "cta": "Hitta en praktikplats"
     },

@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 import styles from "./Footer.module.scss";
 
 // Open data we show is licensed CC BY 4.0, which requires naming the source.
@@ -14,7 +15,11 @@ const Footer = () => {
     <footer className={styles.footer}>
       <div className={styles.footerContent}>
         <p className={styles.footerText}>
-          © {new Date().getFullYear()} Expat. {t("footer.rights")}
+          © {new Date().getFullYear()} Expat. {t("footer.rights")}{" "}
+          {/* merch is not part of either side, so it lives down here */}
+          <Link to="/shop" className={styles.footerLink}>
+            {t("navigation.shop")}
+          </Link>
         </p>
         <p className={styles.footerMark} translate="no">
           SUOMI / FINLAND <span aria-hidden="true">→</span>

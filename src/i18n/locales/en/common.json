@@ -42,7 +42,9 @@
     "logout": "Log out",
     "teamUp": "Find a team",
     "people": "People",
-    "progress": "Progress"
+    "progress": "Progress",
+    "resume": "CV",
+    "city": "City"
   },
   "company": {
     "information": "Company Information",
@@ -96,38 +98,48 @@
     "notFoundDescription": "The page you are looking for might have been removed, renamed, or is temporarily unavailable."
   },
   "home": {
-    "welcome": "Welcome to Expat App",
-    "description": "Find companies and job opportunities in Finland",
-    "eyebrow": "01 / Finland, where to start",
-    "headline": "Moving here is a hundred small tasks. We keep the list.",
-    "lead": "Registration, tax card, Kela, work and the people around you. One step at a time, in your language.",
-    "ctaPlan": "Make my plan",
-    "ctaWork": "Find work",
-    "boardLabel": "First days",
-    "boardColumn": "Step",
-    "youAreHere": "YOU ARE HERE",
-    "steps": {
-      "dvv": "Address registration",
-      "vero": "Tax card",
-      "bank": "Account and bank ID",
-      "kela": "Social security"
+    "welcome": "Internships and jobs in Finland",
+    "description": "Find a company for your internship or first job in Finland: 99,000 companies by town and industry.",
+    "eyebrow": "01 / Internships and jobs in Finland",
+    "headline": "99,000 companies. One of them is looking for you.",
+    "lead": "Search by name, town and industry, save the companies you like, and write a CV the Finnish way.",
+    "searchLabel": "Company name",
+    "searchPlaceholder": "e.g. Wärtsilä or Supercell",
+    "searchButton": "Search",
+    "browseAll": "Browse by town and industry",
+    "ctaResume": "Write my CV",
+    "boardLabel": "Summer internship season",
+    "boardMonth": "Month",
+    "board_now": "now",
+    "board_soon": "next",
+    "boardNote": "Every company sets its own dates, so check its careers page.",
+    "season": {
+      "jan": "Big companies open summer internships",
+      "feb": "Most applications close",
+      "spring": "Interviews and answers",
+      "summer": "Work starts"
     },
-    "sectionsLabel": "Sections",
-    "newBadge": "new",
     "sections": {
-      "work": {
-        "title": "Work and companies",
-        "text": "Companies that hire internationals, and a CV built the Finnish way."
+      "industries": {
+        "title": "Companies by industry",
+        "text": "From IT to forestry: see who works in your field."
       },
-      "city": {
-        "title": "City",
-        "text": "Service requests, participatory budgeting, events near home."
+      "resume": {
+        "title": "A CV the Finnish way",
+        "text": "A clear CV of the kind Finnish recruiters expect, step by step."
+      },
+      "deadlines": {
+        "title": "Deadlines for international students",
+        "text": "Residence permit dates and what to renew when, on one timeline."
       },
       "kipina": {
         "title": "Kipinä",
         "text": "Want to build a team or start something of your own? That is next door."
       }
-    }
+    },
+    "sectionsLabel": "Sections",
+    "newBadge": "new",
+    "boardColumn": "Step"
   },
   "favourites": {
     "title": "Favourite Companies",
@@ -610,7 +622,7 @@
       "points": [
         "About 99,000 Finnish companies to filter",
         "A CV the Finnish way",
-        "Residence permit deadlines and first steps"
+        "Residence permit deadlines for international students"
       ],
       "cta": "Find an internship"
     },

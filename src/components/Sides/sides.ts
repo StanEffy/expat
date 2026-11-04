@@ -39,27 +39,14 @@ const togetherItem = (key: (typeof TOGETHER_LINKS)[number]['key']): NavLink => {
 };
 
 export const SIDE_NAV: Record<Side, NavEntry[]> = {
+  // Kept short on purpose: the job side is companies, a CV and permit deadlines
   expat: [
     { to: '/companies', icon: 'pi pi-building', label: 'navigation.companies', match: ['/categories'] },
-    {
-      id: 'city_services',
-      icon: 'pi pi-building-columns',
-      label: 'navigation.cityServices',
-      items: [
-        { to: '/onboarding', icon: 'pi pi-compass', label: 'navigation.onboarding' },
-        { to: '/deadlines', icon: 'pi pi-calendar-clock', label: 'navigation.deadlines' },
-        { to: '/participatory-budget', icon: 'pi pi-wallet', label: 'navigation.participatoryBudget' },
-        { to: '/service-requests', icon: 'pi pi-inbox', label: 'navigation.serviceRequests' },
-        { to: '/community', icon: 'pi pi-users', label: 'navigation.community' },
-        { to: '/municipal-dashboard', icon: 'pi pi-chart-line', label: 'navigation.municipalAnalytics' },
-      ],
-    },
-    { to: '/polls', icon: 'pi pi-chart-bar', label: 'navigation.polls' },
-    { to: '/shop', icon: 'pi pi-shopping-bag', label: 'navigation.shop' },
+    { to: '/profile/resume-builder', icon: 'pi pi-file-edit', label: 'navigation.resume' },
+    { to: '/deadlines', icon: 'pi pi-calendar-clock', label: 'navigation.deadlines' },
   ],
   kipina: [
     { to: '/cooperate', icon: 'pi pi-sparkles', label: 'navigation.teamUp' },
-    togetherItem('ventures'),
     {
       id: 'people',
       icon: 'pi pi-users',
@@ -76,7 +63,21 @@ export const SIDE_NAV: Record<Side, NavEntry[]> = {
       id: 'progress',
       icon: 'pi pi-chart-line',
       label: 'navigation.progress',
-      items: [togetherItem('passport'), togetherItem('integration'), togetherItem('impact')],
+      items: [togetherItem('ventures'), togetherItem('passport'), togetherItem('integration'), togetherItem('impact')],
+    },
+    // Settling in and city life belong with the people side, not the job search
+    {
+      id: 'city_services',
+      icon: 'pi pi-building-columns',
+      label: 'navigation.city',
+      items: [
+        { to: '/onboarding', icon: 'pi pi-compass', label: 'navigation.onboarding' },
+        { to: '/community', icon: 'pi pi-users', label: 'navigation.community' },
+        { to: '/participatory-budget', icon: 'pi pi-wallet', label: 'navigation.participatoryBudget' },
+        { to: '/service-requests', icon: 'pi pi-inbox', label: 'navigation.serviceRequests' },
+        { to: '/polls', icon: 'pi pi-chart-bar', label: 'navigation.polls' },
+        { to: '/municipal-dashboard', icon: 'pi pi-chart-line', label: 'navigation.municipalAnalytics' },
+      ],
     },
   ],
 };
@@ -91,8 +92,7 @@ const prefixes = (side: Side): string[] => {
 };
 
 const SIDE_PREFIXES: Record<Side, string[]> = {
-  // the resume builder sits under /profile but belongs to the job side
-  expat: [...prefixes('expat'), '/profile/resume-builder'],
+  expat: prefixes('expat'),
   // QR landings and public passports come from Kipinä features
   kipina: [...prefixes('kipina'), '/together', '/connect/', '/checkin/', '/p/'],
 };

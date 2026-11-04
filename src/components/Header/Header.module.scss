@@ -30,7 +30,7 @@
   gap: 2px;
   align-items: center;
 
-  @media (min-width: 1024px) {
+  @media (min-width: 1200px) {
     display: flex;
   }
 }
@@ -63,6 +63,11 @@
     color: inherit !important;
     margin-right: 0.45rem;
     opacity: 0.7;
+
+    // Finnish labels are long: on narrower desktops the words stay, the icons go
+    @media (max-width: 1439px) {
+      display: none;
+    }
   }
 
   :global(.p-button-label) {
@@ -217,7 +222,7 @@
 
 // The side switch moves into the mobile menu on narrow screens
 .desktopOnly {
-  @media (max-width: 1023px) {
+  @media (max-width: 1199px) {
     display: none !important;
   }
 }

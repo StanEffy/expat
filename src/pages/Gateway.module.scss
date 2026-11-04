@@ -163,25 +163,6 @@
   }
 }
 
-.kipinaMark {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  font-weight: 800;
-  font-size: 3.1rem;
-  line-height: 1;
-  letter-spacing: 0.02em;
-
-  @media (max-width: 640px) {
-    font-size: 2.6rem;
-  }
-}
-
-.spark {
-  width: 46px !important;
-  height: 46px !important;
-}
-
 .tagline {
   font-size: clamp(1.5rem, 2.6vw, 2rem);
   font-weight: 800;

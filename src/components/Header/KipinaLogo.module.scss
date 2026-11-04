@@ -1,63 +1,122 @@
 .logo {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
   height: 40px;
   color: var(--on-sign);
   user-select: none;
 
   @media (max-width: 640px) {
     height: 34px;
-    gap: 6px;
   }
 }
 
-.spark {
-  width: 26px;
-  height: 26px;
+.svg {
+  height: 28px;
+  width: 138px;
   flex-shrink: 0;
+  overflow: visible;
 
   @media (max-width: 640px) {
-    width: 22px;
-    height: 22px;
+    height: 24px;
+    width: 119px;
   }
 }
 
-.word {
-  font-family: var(--font-sans);
-  font-weight: 800;
-  font-size: 1.55rem;
-  letter-spacing: 0.02em;
-  line-height: 1;
+.mark {
+  overflow: visible;
+}
 
-  @media (max-width: 640px) {
-    font-size: 1.3rem;
-  }
+// rotate and scale around each shape's own centre
+.star,
+.piece {
+  transform-box: fill-box;
+  transform-origin: center;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .spark {
-    animation: sparkIn 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  // The four gather from the corners; the spark lights up once they meet
+  .piece {
+    animation: gather 0.55s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
   }
 
-  .logo:hover .spark {
-    animation: twinkle 0.6s ease-in-out;
+  .star {
+    animation: ignite 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) 0.45s backwards;
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .dot {
+    animation: ignite 0.3s ease-out 0.7s backwards;
+  }
+
+  .dot2 {
+    animation-delay: 0.8s;
+  }
+
+  // Like the X of EXPAT, the spark turns a quarter and lands on the same shape
+  .logo:hover .star {
+    transform: rotate(90deg);
+  }
+
+  // Big version: they part a little, the spark fades, they come back together
+  .breathing .piece {
+    animation: gather 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both,
+      breathe 4.8s ease-in-out 1.2s infinite;
+  }
+
+  .breathing .star {
+    animation: ignite 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) 0.6s both,
+      glow 4.8s ease-in-out 1.2s infinite;
   }
 }
 
-@keyframes sparkIn {
+@keyframes gather {
   from {
     opacity: 0;
-    transform: scale(0.3) rotate(-45deg);
+    transform: translate(calc(var(--dx) * 7px), calc(var(--dy) * 7px));
   }
+
   to {
     opacity: 1;
     transform: none;
   }
 }
 
-@keyframes twinkle {
-  50% {
-    transform: scale(1.2) rotate(45deg);
+@keyframes ignite {
+  from {
+    opacity: 0;
+    transform: scale(0.2) rotate(-90deg);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes breathe {
+  0%,
+  30%,
+  100% {
+    transform: none;
+  }
+
+  50%,
+  60% {
+    transform: translate(calc(var(--dx) * 3px), calc(var(--dy) * 3px));
+  }
+}
+
+@keyframes glow {
+  0%,
+  30%,
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+
+  50%,
+  60% {
+    opacity: 0.25;
+    transform: scale(0.55) rotate(45deg);
   }
 }

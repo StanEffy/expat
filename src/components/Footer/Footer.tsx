@@ -15,7 +15,7 @@ const Footer = () => {
     <footer className={styles.footer}>
       <div className={styles.footerContent}>
         <p className={styles.footerText}>
-          © {new Date().getFullYear()} Expat. {t("footer.rights")}{" "}
+          © {new Date().getFullYear()} Expat. {t("footer.rights")}{" · "}
           {/* merch is not part of either side, so it lives down here */}
           <Link to="/shop" className={styles.footerLink}>
             {t("navigation.shop")}

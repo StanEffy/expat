@@ -1,35 +1,16 @@
-// Sparks over the board, in place of the lake map on the Expat home
+// The mark over the board, in place of the lake map on the Expat home
 .sparkRow {
   position: relative;
   height: 150px;
   margin-bottom: 18px;
 }
 
-.bigSpark,
-.smallSpark,
-.tinySpark {
-  position: absolute;
-}
-
-.bigSpark {
-  width: 96px;
-  height: 96px;
-  left: 18%;
-  top: 22px;
-}
-
-.smallSpark {
-  width: 44px;
-  height: 44px;
-  left: 52%;
-  top: 8px;
-}
-
-.tinySpark {
-  width: 26px;
-  height: 26px;
-  left: 66%;
-  top: 92px;
+// The mark at full size: four gather, part a little, come back
+.bigMark {
+  display: block;
+  width: 150px;
+  height: 150px;
+  color: var(--on-sign);
 }
 
 .rowIcon {
@@ -39,30 +20,3 @@
   text-align: center;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .bigSpark,
-  .smallSpark,
-  .tinySpark {
-    animation: twinkle 3.2s ease-in-out infinite;
-  }
-
-  .smallSpark {
-    animation-delay: 0.8s;
-  }
-
-  .tinySpark {
-    animation-delay: 1.6s;
-  }
-}
-
-@keyframes twinkle {
-  0%,
-  100% {
-    transform: scale(1) rotate(0);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(0.82) rotate(45deg);
-    opacity: 0.75;
-  }
-}

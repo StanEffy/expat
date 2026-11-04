@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import SEO from '../components/Common/SEO';
 import AnimatedLogo from '../components/Header/AnimatedLogo';
-import { Spark } from '../components/Header/KipinaLogo';
+import KipinaLogo from '../components/Header/KipinaLogo';
 import { SIDE_HOME, rememberSide, type Side } from '../components/Sides/sides';
 import styles from './Gateway.module.scss';
 
@@ -53,10 +53,7 @@ const Gateway = () => {
                   {side === 'expat' ? (
                     <AnimatedLogo />
                   ) : (
-                    <span className={`${styles.kipinaMark} notranslate`} translate="no" lang="fi">
-                      <Spark className={styles.spark} />
-                      KIPINÄ
-                    </span>
+                    <KipinaLogo />
                   )}
                 </span>
                 <span className={styles.tagline}>{t(`sides.${side}.tagline`)}</span>

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-12 -12 202 60" role="img" aria-label="KIPINÄ">
+<rect x="-12" y="-12" width="202" height="60" fill="#F4F4F1"/>
+<path d="M18 0 A18 18 0 0 0 36 18 A18 18 0 0 0 18 36 A18 18 0 0 0 0 18 A18 18 0 0 0 18 0 Z" fill="#FFD23F"/><g fill="#121417"><path d="M0 0 H16.2 A16.2 16.2 0 0 1 0 16.2 Z"/><path d="M36 0 V16.2 A16.2 16.2 0 0 1 19.8 0 Z"/><path d="M36 36 H19.8 A16.2 16.2 0 0 1 36 19.8 Z"/><path d="M0 36 V19.8 A16.2 16.2 0 0 1 16.2 36 Z"/></g><g transform="translate(44 0)" fill="#121417">
+  <rect x="0" y="3" width="5.5" height="30"/><polygon points="5.5,18 19,3 25.5,3 12,18 25.5,33 19,33"/>
+  <rect x="31" y="3" width="5.5" height="30"/>
+  <rect x="42.5" y="3" width="5.5" height="30"/><circle cx="54" cy="12" r="6.25" fill="none" stroke="#121417" stroke-width="5.5"/>
+  <rect x="69" y="3" width="5.5" height="30"/>
+  <rect x="80.5" y="3" width="5.5" height="30"/><rect x="99" y="3" width="5.5" height="30"/><polygon points="80.5,3 86.5,3 104.5,33 98.5,33"/>
+  <path d="M122 10 L133 33 L111 33 Z M122 17.7 L118.5 26.2 L125.5 26.2 Z" fill-rule="evenodd"/>
+  <circle cx="116.5" cy="4" r="2.9" fill="#FFD23F"/><circle cx="127.5" cy="4" r="2.9" fill="#FFD23F"/>
+</g>
+</svg>

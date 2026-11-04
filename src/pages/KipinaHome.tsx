@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import SEO from '../components/Common/SEO';
 import FlapText from '../components/Decorative/FlapText';
-import { Spark } from '../components/Header/KipinaLogo';
+import { KipinaMark } from '../components/Header/KipinaLogo';
 import { TOGETHER_LINKS } from '../components/Growth/togetherLinks';
 import { registerGrowthTranslations } from '../i18n/registerGrowth';
 import styles from './Home.module.scss';
@@ -60,9 +60,7 @@ const KipinaHome = () => {
 
           <aside className={styles.board} aria-label={t('sides.kipinaHome.boardLabel')} data-reveal>
             <div className={own.sparkRow} aria-hidden="true">
-              <Spark className={own.bigSpark} />
-              <Spark className={own.smallSpark} />
-              <Spark className={own.tinySpark} />
+              <KipinaMark breathing className={own.bigMark} />
             </div>
             <div className={styles.boardHead}>
               <span>{t('sides.kipinaHome.boardLabel')}</span>

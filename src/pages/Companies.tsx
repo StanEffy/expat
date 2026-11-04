@@ -12,7 +12,7 @@ import CompanyFilter from "../components/Companies/CompanyFilter";
 import CategoryFilter from "../components/Companies/CategoryFilter";
 import FavouriteButton from "../components/Common/FavouriteButton";
 import SEO from "../components/Common/SEO";
-import type { Company, BackendCategoryItem, GeneralCategoryItem } from "@/types";
+import type { Company, BackendCategoryItem, GeneralCategoryItem, CityOption } from "@/types";
 import styles from "./Companies.module.scss";
 
 const ITEMS_PER_PAGE_OPTIONS = [10, 25, 50];
@@ -52,7 +52,7 @@ const Companies = () => {
   const [debouncedSearch, setDebouncedSearch] = useState(searchParams.get("name") || "");
 
   // City & Category filters
-  const [cities, setCities] = useState<string[]>([]);
+  const [cities, setCities] = useState<CityOption[]>([]);
   const [selectedCities, setSelectedCities] = useState<string[]>(searchParams.getAll("cities"));
 
   const [categories, setCategories] = useState<BackendCategoryItem[]>([]);

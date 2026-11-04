@@ -39,7 +39,10 @@
       "impact": "Mätbar effekt",
       "meetups": "Öppna träffar"
     },
-    "logout": "Logga ut"
+    "logout": "Logga ut",
+    "teamUp": "Hitta ett team",
+    "people": "Människor",
+    "progress": "Framsteg"
   },
   "company": {
     "information": "Företagsinformation",
@@ -120,9 +123,9 @@
         "title": "Staden",
         "text": "Serviceärenden, medborgarbudget och evenemang nära hemmet."
       },
-      "together": {
-        "title": "Tillsammans",
-        "text": "Tandem, tidsbank, medgrundare och människor du faktiskt känner."
+      "kipina": {
+        "title": "Kipinä",
+        "text": "Vill du bygga ett team eller starta något eget? Det finns nästa dörr."
       }
     }
   },
@@ -592,5 +595,55 @@
     "error": "Fel",
     "warning": "Obs",
     "info": "Info"
+  },
+  "sides": {
+    "switchLabel": "Byt sida",
+    "chooserLink": "Välj sida",
+    "gateway": {
+      "eyebrow": "00 / Där stigen delar sig",
+      "title": "Vart i dag?",
+      "lead": "Två vägar, ett konto. Du kan byta när som helst."
+    },
+    "expat": {
+      "audience": "För studenter och arbetssökande",
+      "tagline": "Praktik och jobb",
+      "points": [
+        "Cirka 99 000 finländska företag med filter",
+        "Ett CV på finskt vis",
+        "Tidsfrister för uppehållstillstånd och första steg"
+      ],
+      "cta": "Hitta en praktikplats"
+    },
+    "kipina": {
+      "audience": "För dig som vill starta något",
+      "tagline": "Bygg ett team och en startup",
+      "points": [
+        "Medgrundare efter kompatibilitet, inte kontakter",
+        "Träffar, tandem och tidsbank",
+        "Företag kontrollerade mot PRH:s register"
+      ],
+      "cta": "Tänd en gnista"
+    },
+    "kipinaHome": {
+      "eyebrow": "Kipinä betyder gnista",
+      "title": "En gnista räcker inte. Gör upp en eld.",
+      "lead": "Hitta människor du vill starta något med: ett kafé, en studio, en tjänst eller en startup. Ingen press, allt är frivilligt.",
+      "cta": "Hitta ett team",
+      "ctaSecondary": "Mina företag",
+      "boardLabel": "Från idé till företag",
+      "steps": {
+        "idea": "Namnge din idé",
+        "team": "Hitta medgrundare",
+        "meet": "Träffas på riktigt",
+        "prh": "Registrera företaget"
+      }
+    }
+  },
+  "footer": {
+    "rights": "Alla rättigheter förbehållna.",
+    "sources": "Datakällor",
+    "companies": "Företag: Patent- och registerstyrelsen (PRH)",
+    "places": "Kommuner och postnummer: Statistikcentralen",
+    "license": "CC BY 4.0"
   }
 }

@@ -21,6 +21,7 @@ interface CompanyDetails {
   street: string;
   postcode: string;
   city: string;
+  municipality?: string | null;
   buildingnumber: string;
   apartmentnumber: string | null;
   company_description: string | null;
@@ -31,6 +32,17 @@ interface CompanyDetails {
   country: string;
   updated_at?: string | null;
 }
+
+// The register stores postal districts in capitals (KOVJOKI); show the
+// municipality and add the district only when it is a different place.
+const titleCase = (s: string) =>
+  s.toLocaleLowerCase('fi').replace(/(^|[\s-])(\p{L})/gu, (_, sep: string, ch: string) => sep + ch.toLocaleUpperCase('fi'));
+
+const placeLabel = (city?: string | null, municipality?: string | null): string => {
+  if (!municipality) return city ? titleCase(city) : '';
+  if (!city || city.toLocaleUpperCase('fi') === municipality.toLocaleUpperCase('fi')) return municipality;
+  return `${titleCase(city)}, ${municipality}`;
+};
 
 const CompanyDetails = () => {
   const { id } = useParams<{ id: string }>();
@@ -223,10 +235,10 @@ const CompanyDetails = () => {
                 <h1 className={styles.title}>{company.name}</h1>
               </div>
               <div className={styles.badgeRow}>
-                {company.city && (
+                {(company.municipality || company.city) && (
                   <span className={styles.badge}>
                     <i className="pi pi-map-marker" />
-                    <span>{company.city}</span>
+                    <span>{placeLabel(company.city, company.municipality)}</span>
                   </span>
                 )}
                 {company.mainbusinesslinename && (

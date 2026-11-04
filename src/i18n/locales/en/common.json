@@ -39,7 +39,10 @@
       "impact": "Measured impact",
       "meetups": "Open meetups"
     },
-    "logout": "Log out"
+    "logout": "Log out",
+    "teamUp": "Find a team",
+    "people": "People",
+    "progress": "Progress"
   },
   "company": {
     "information": "Company Information",
@@ -120,9 +123,9 @@
         "title": "City",
         "text": "Service requests, participatory budgeting, events near home."
       },
-      "together": {
-        "title": "Together",
-        "text": "Tandems, a time bank, co-founders and people you actually know."
+      "kipina": {
+        "title": "Kipinä",
+        "text": "Want to build a team or start something of your own? That is next door."
       }
     }
   },
@@ -592,5 +595,55 @@
     "error": "Error",
     "warning": "Warning",
     "info": "Note"
+  },
+  "sides": {
+    "switchLabel": "Switch side",
+    "chooserLink": "Choose a side",
+    "gateway": {
+      "eyebrow": "00 / The fork in the trail",
+      "title": "Where to today?",
+      "lead": "Two paths, one account. You can switch any time."
+    },
+    "expat": {
+      "audience": "For students and job seekers",
+      "tagline": "Internships and jobs",
+      "points": [
+        "About 99,000 Finnish companies to filter",
+        "A CV the Finnish way",
+        "Residence permit deadlines and first steps"
+      ],
+      "cta": "Find an internship"
+    },
+    "kipina": {
+      "audience": "For people who want to start something",
+      "tagline": "Build a team and a startup",
+      "points": [
+        "Co-founders by compatibility, not connections",
+        "Meetups, tandems and a time bank",
+        "Ventures checked against the PRH register"
+      ],
+      "cta": "Strike a spark"
+    },
+    "kipinaHome": {
+      "eyebrow": "Kipinä means spark",
+      "title": "One spark is not enough. Build a fire.",
+      "lead": "Find people you want to start something with: a café, a studio, a service or a startup. No pressure, everything is optional.",
+      "cta": "Find a team",
+      "ctaSecondary": "My ventures",
+      "boardLabel": "From idea to company",
+      "steps": {
+        "idea": "Name your idea",
+        "team": "Find co-founders",
+        "meet": "Meet in person",
+        "prh": "Register the company"
+      }
+    }
+  },
+  "footer": {
+    "rights": "All rights reserved.",
+    "sources": "Data sources",
+    "companies": "Companies: Finnish Patent and Registration Office (PRH)",
+    "places": "Municipalities and postcodes: Statistics Finland",
+    "license": "CC BY 4.0"
   }
 }

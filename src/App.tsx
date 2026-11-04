@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { Suspense } from 'react';
 import Layout from '@/components/Layouts/Layout';
 import AdminLayout from '@/components/Admin/AdminLayout';
@@ -9,7 +9,9 @@ import AppProviders from '@/providers/AppProviders';
 import { ADMIN_PANEL_PATH } from '@/constants/api';
 import { lazyWithRetry } from '@/utils/lazyWithRetry';
 
-import Home from '@/pages/Home';
+import Gateway from '@/pages/Gateway';
+const Home = lazyWithRetry(() => import('@/pages/Home'));
+const KipinaHome = lazyWithRetry(() => import('@/pages/KipinaHome'));
 const Companies = lazyWithRetry(() => import('@/pages/Companies'));
 const CompanyDetails = lazyWithRetry(() => import('@/pages/CompanyDetails'));
 const Categories = lazyWithRetry(() => import('@/pages/Categories'));
@@ -33,7 +35,6 @@ const ParticipatoryBudget = lazyWithRetry(() => import('@/pages/ParticipatoryBud
 const ServiceRequests = lazyWithRetry(() => import('@/pages/ServiceRequests'));
 const Community = lazyWithRetry(() => import('@/pages/Community'));
 const Cooperate = lazyWithRetry(() => import('@/pages/Cooperate'));
-const Together = lazyWithRetry(() => import('@/pages/growth/Together'));
 const Integration = lazyWithRetry(() => import('@/pages/growth/Integration'));
 const Ventures = lazyWithRetry(() => import('@/pages/growth/Ventures'));
 const Network = lazyWithRetry(() => import('@/pages/growth/Network'));
@@ -62,7 +63,9 @@ function App() {
           <Routes>
             {/* Public routes with persistent Layout */}
             <Route element={<Layout />}>
-              <Route index element={<Home />} />
+              <Route index element={<Gateway />} />
+              <Route path="expat" element={<Home />} />
+              <Route path="kipina" element={<KipinaHome />} />
               <Route path="categories" element={<Categories />} />
               <Route path="about" element={<About />} />
               <Route path="onboarding" element={<Onboarding />} />
@@ -70,7 +73,7 @@ function App() {
               <Route path="participatory-budget" element={<ParticipatoryBudget />} />
               <Route path="service-requests" element={<ServiceRequests />} />
               <Route path="community" element={<Community />} />
-              <Route path="together" element={<Together />} />
+              <Route path="together" element={<Navigate to="/kipina" replace />} />
               <Route path="impact" element={<Impact />} />
               <Route path="p/:token" element={<PublicPassport />} />
               <Route path="municipal-dashboard" element={<MunicipalDashboard />} />

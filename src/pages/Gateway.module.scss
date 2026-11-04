@@ -1,0 +1,242 @@
+@use "../styles/theme";
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 56px 48px 72px;
+  box-sizing: border-box;
+
+  @media (max-width: 900px) {
+    padding: 36px 24px 56px;
+  }
+
+  @media (max-width: 640px) {
+    padding: 28px 16px 48px;
+  }
+}
+
+.head {
+  max-width: 760px;
+  margin-bottom: 48px;
+
+  :global(.mono-label) {
+    margin: 0 0 20px;
+  }
+
+  @media (max-width: 640px) {
+    margin-bottom: 32px;
+  }
+}
+
+.title {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  font-weight: 800;
+  margin: 0 0 20px;
+}
+
+.lead {
+  font-size: 1.2rem;
+  line-height: 1.5;
+  color: var(--ink-2);
+  margin: 0;
+}
+
+.badges {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+
+  @media (max-width: 860px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// Each side is one big signboard you can walk through
+.badge {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-height: 420px;
+  padding: 28px 32px 32px;
+  border: 3px solid var(--ink);
+  text-decoration: none;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+
+  &:hover {
+    transform: translate(-4px, -4px);
+    box-shadow: 8px 8px 0 var(--accent);
+
+    .cta svg {
+      transform: translateX(4px);
+    }
+  }
+
+  &:focus-visible {
+    outline: 3px solid var(--link);
+    outline-offset: 4px;
+  }
+
+  @media (max-width: 640px) {
+    min-height: 0;
+    padding: 22px 20px 24px;
+    gap: 16px;
+  }
+}
+
+.expat {
+  background: var(--surface);
+  color: var(--ink);
+
+  &:hover {
+    color: var(--ink);
+  }
+
+  // The header logo is drawn for the dark bar; here it sits on paper
+  .mark :global(svg) {
+    color: var(--ink);
+  }
+
+  .mark > div {
+    color: var(--ink);
+  }
+}
+
+.kipina {
+  background: var(--sign);
+  color: var(--on-sign);
+
+  &:hover {
+    color: var(--on-sign);
+  }
+
+  .audience,
+  .badgeNo,
+  .points {
+    color: #A7ADB5;
+  }
+
+  .points li::before {
+    background: var(--accent);
+  }
+}
+
+@include theme.dark-root {
+  .kipina {
+    outline: 1px solid var(--rule);
+  }
+}
+
+.badgeTop {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.badgeNo {
+  color: var(--ink-muted);
+}
+
+.audience {
+  color: var(--ink-muted);
+  text-align: right;
+}
+
+.mark {
+  display: flex;
+  align-items: center;
+  min-height: 64px;
+
+  // scale the header logo up for the plate
+  :global(svg) {
+    height: 52px !important;
+    width: auto !important;
+  }
+
+  > div {
+    height: auto;
+  }
+}
+
+.kipinaMark {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 800;
+  font-size: 3.1rem;
+  line-height: 1;
+  letter-spacing: 0.02em;
+
+  @media (max-width: 640px) {
+    font-size: 2.6rem;
+  }
+}
+
+.spark {
+  width: 46px !important;
+  height: 46px !important;
+}
+
+.tagline {
+  font-size: clamp(1.5rem, 2.6vw, 2rem);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+}
+
+.points {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 1.02rem;
+  line-height: 1.45;
+  color: var(--ink-2);
+
+  li {
+    display: flex;
+    gap: 12px;
+
+    &::before {
+      content: "";
+      flex-shrink: 0;
+      width: 10px;
+      height: 10px;
+      margin-top: 0.45em;
+      background: var(--ink);
+    }
+  }
+}
+
+.cta {
+  margin-top: auto;
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 22px;
+  background: var(--accent);
+  color: var(--on-accent);
+  border: 2px solid var(--ink);
+  font-weight: 700;
+  font-size: 1.1rem;
+
+  svg {
+    transition: transform 0.15s ease;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .badge,
+  .badge:hover {
+    transform: none;
+    transition: none;
+  }
+}

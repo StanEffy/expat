@@ -208,3 +208,16 @@
     outline-offset: -3px;
   }
 }
+
+.start {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+// The side switch moves into the mobile menu on narrow screens
+.desktopOnly {
+  @media (max-width: 1023px) {
+    display: none !important;
+  }
+}

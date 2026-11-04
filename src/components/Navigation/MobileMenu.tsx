@@ -6,10 +6,10 @@ import { useTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { useUserNotifications } from "../../contexts/UserNotificationsContext";
-import { isTogetherPath } from "@/components/Growth/togetherLinks";
+import { SIDE_HOME, SIDE_NAV, isGroup, isLinkActive, matchesPath, type NavLink, type Side } from "@/components/Sides/sides";
 import "./MobileMenu.scss";
 
-const MobileMenu = () => {
+const MobileMenu = ({ side }: { side: Side | null }) => {
   const menu = useRef<Menu>(null);
   const triggerRef = useRef<HTMLDivElement>(null);
   const { t } = useTranslation();
@@ -98,97 +98,49 @@ const MobileMenu = () => {
     };
   }, [isOpen, closeMenu]);
 
-  const isHomeActive = location.pathname === "/";
-  const isCompaniesActive = location.pathname.startsWith("/companies") || location.pathname === "/categories";
-  const isOnboardingActive = location.pathname.startsWith("/onboarding");
-  const isDeadlinesActive = location.pathname.startsWith("/deadlines");
-  const isBudgetingActive = location.pathname.startsWith("/participatory-budget");
-  const isServiceRequestsActive = location.pathname.startsWith("/service-requests");
-  const isCommunityActive = location.pathname.startsWith("/community");
-  const isShopActive = location.pathname.startsWith("/shop");
-  const isPollsActive = location.pathname.startsWith("/polls");
-  const isTogetherActive = isTogetherPath(location.pathname);
-  const isMunicipalAnalyticsActive = location.pathname.startsWith("/municipal-dashboard");
-  const isAboutActive = location.pathname === "/about";
-  const isProfileActive = location.pathname.startsWith("/profile") || location.pathname.startsWith("/admin");
-  const isLoginActive = location.pathname === "/login" || location.pathname.startsWith("/password-reset");
+  const pathname = location.pathname;
+  const isAboutActive = pathname === "/about";
+  const isProfileActive =
+    (pathname.startsWith("/profile") && !matchesPath(pathname, "/profile/resume-builder")) || pathname.startsWith("/admin");
+  const isLoginActive = pathname === "/login" || pathname.startsWith("/password-reset");
+
+  const toItem = (link: NavLink): MenuItem => ({
+    label: t(link.label),
+    icon: link.icon,
+    className: isLinkActive(pathname, link) ? "active-menuitem" : "",
+    command: () => handleNavigation(link.to),
+  });
+
+  // Side switch first, then the current side's menu with groups flattened
+  const sideItems: MenuItem[] = (["expat", "kipina"] as Side[]).map((s) => ({
+    label: s === "expat" ? "EXPAT" : "KIPINÄ",
+    icon: s === "expat" ? "pi pi-building" : "pi pi-sparkles",
+    className: `mobile-menu-side ${side === s ? "active-menuitem" : ""}`,
+    command: () => handleNavigation(SIDE_HOME[s]),
+  }));
+
+  const navItems: MenuItem[] = [];
+  if (side) {
+    for (const entry of SIDE_NAV[side]) {
+      if (isGroup(entry)) {
+        navItems.push({ separator: true }, ...entry.items.map(toItem), { separator: true });
+      } else {
+        navItems.push(toItem(entry));
+      }
+    }
+  }
 
   const items: MenuItem[] = [
-    {
-      label: t("navigation.home"),
-      icon: "pi pi-home",
-      className: isHomeActive ? "active-menuitem" : "",
-      command: () => handleNavigation("/"),
-    },
-    {
-      label: t("navigation.companies"),
-      icon: "pi pi-building",
-      className: isCompaniesActive ? "active-menuitem" : "",
-      command: () => handleNavigation("/companies"),
-    },
+    ...sideItems,
     { separator: true },
-    {
-      label: t("navigation.onboarding"),
-      icon: "pi pi-compass",
-      className: isOnboardingActive ? "active-menuitem" : "",
-      command: () => handleNavigation("/onboarding"),
-    },
-    {
-      label: t("navigation.deadlines"),
-      icon: "pi pi-calendar-clock",
-      className: isDeadlinesActive ? "active-menuitem" : "",
-      command: () => handleNavigation("/deadlines"),
-    },
-    {
-      label: t("navigation.participatoryBudget"),
-      icon: "pi pi-wallet",
-      className: isBudgetingActive ? "active-menuitem" : "",
-      command: () => handleNavigation("/participatory-budget"),
-    },
-    {
-      label: t("navigation.serviceRequests"),
-      icon: "pi pi-inbox",
-      className: isServiceRequestsActive ? "active-menuitem" : "",
-      command: () => handleNavigation("/service-requests"),
-    },
-    {
-      label: t("navigation.community"),
-      icon: "pi pi-users",
-      className: isCommunityActive ? "active-menuitem" : "",
-      command: () => handleNavigation("/community"),
-    },
-    {
-      label: t("navigation.municipalAnalytics"),
-      icon: "pi pi-chart-line",
-      className: isMunicipalAnalyticsActive ? "active-menuitem" : "",
-      command: () => handleNavigation("/municipal-dashboard"),
-    },
+    ...navItems,
     { separator: true },
-    {
-      label: t("navigation.shop"),
-      icon: "pi pi-shopping-bag",
-      className: isShopActive ? "active-menuitem" : "",
-      command: () => handleNavigation("/shop"),
-    },
-    {
-      label: t("navigation.together"),
-      icon: "pi pi-sparkles",
-      className: isTogetherActive ? "active-menuitem" : "",
-      command: () => handleNavigation("/together"),
-    },
-    {
-      label: t("navigation.polls"),
-      icon: "pi pi-chart-bar",
-      className: isPollsActive ? "active-menuitem" : "",
-      command: () => handleNavigation("/polls"),
-    },
     {
       label: t("navigation.about"),
       icon: "pi pi-info-circle",
       className: isAboutActive ? "active-menuitem" : "",
       command: () => handleNavigation("/about"),
     },
-    { separator: true },
     isAuthenticated
       ? {
           label: unreadCount > 0 ? `${t("navigation.profile")} (${unreadCount})` : t("navigation.profile"),
@@ -202,7 +154,7 @@ const MobileMenu = () => {
           className: isLoginActive ? "active-menuitem" : "",
           command: () => handleNavigation("/login"),
         },
-  ];
+  ].filter((item, i, all) => !(item.separator && (i === 0 || all[i - 1].separator)));
 
   if (!isMobile) {
     return null;

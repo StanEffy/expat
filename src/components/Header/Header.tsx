@@ -1,301 +1,152 @@
-import { useState, useMemo, useRef, useEffect, lazy, Suspense } from "react";
+import { useState, useRef, useEffect, lazy, Suspense } from "react";
 import Button from "../Common/Button";
 import { Menubar } from "primereact/menubar";
 import { Badge } from "primereact/badge";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "@/hooks/useAuth";
+import { useSide } from "@/hooks/useSide";
 import LanguageSwitcher from "../Common/LanguageSwitcher";
 import ThemeSwitcher from "../Common/ThemeSwitcher";
 import AnimatedLogo from "./AnimatedLogo";
+import KipinaLogo from "./KipinaLogo";
+import SideSwitch from "./SideSwitch";
 import styles from "./Header.module.scss";
 import { useUserNotifications } from "../../contexts/UserNotificationsContext";
-import { TOGETHER_LINKS, isTogetherPath } from "@/components/Growth/togetherLinks";
-
+import { SIDE_NAV, isGroup, isLinkActive, matchesPath, type NavGroup } from "@/components/Sides/sides";
 
 const MobileMenu = lazy(() => import("../Navigation/MobileMenu"));
+
+/** One dropdown of the side menu; closes on outside click, Escape and navigation. */
+const NavDropdown = ({ group }: { group: NavGroup }) => {
+  const { t } = useTranslation();
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  const menuId = `${group.id}_menu`;
+  const active = group.items.some((item) => isLinkActive(pathname, item));
+
+  useEffect(() => setOpen(false), [pathname]);
+
+  useEffect(() => {
+    if (!open) return;
+    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
+      if (ref.current && !ref.current.contains(event.target as Node)) setOpen(false);
+    };
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("touchstart", handleClickOutside);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchstart", handleClickOutside);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [open]);
+
+  return (
+    <div className={styles.dropdownWrapper} ref={ref}>
+      <Button
+        text
+        icon={group.icon}
+        onClick={() => setOpen((prev) => !prev)}
+        className={`${styles.navButton} ${styles.dropdownButton} ${active ? styles.active : ""} ${open ? styles.dropdownOpen : ""}`}
+        aria-haspopup="true"
+        aria-expanded={open}
+        aria-controls={menuId}
+      >
+        <span className={styles.dropdownButtonLabel}>
+          {t(group.label)}
+          <i className={`pi pi-chevron-down ${styles.dropdownChevron} ${open ? styles.chevronRotated : ""}`} />
+        </span>
+      </Button>
+      {open && (
+        <div id={menuId} className={styles.dropdownMenu} role="menu" aria-label={t(group.label)}>
+          <ul className={styles.dropdownList} role="none">
+            {group.items.map((item) => (
+              <li key={item.to} role="none" className={styles.dropdownListItem}>
+                <button
+                  type="button"
+                  className={`${styles.dropdownMenuItem} ${isLinkActive(pathname, item) ? styles.activeMenuItem : ""}`}
+                  onClick={() => {
+                    navigate(item.to);
+                    setOpen(false);
+                  }}
+                  role="menuitem"
+                >
+                  <i className={`${item.icon} ${styles.menuItemIcon}`} />
+                  <span className={styles.menuItemText}>{t(item.label)}</span>
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+  );
+};
 
 const Header = () => {
   const { isAuthenticated } = useAuth();
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const location = useLocation();
+  const { pathname } = useLocation();
   const { unreadCount } = useUserNotifications();
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
-  const [isTogetherOpen, setIsTogetherOpen] = useState(false);
-  const togetherRef = useRef<HTMLDivElement>(null);
+  const side = useSide();
 
-  const isCompaniesActive = location.pathname.startsWith("/companies") || location.pathname === "/categories";
-  const isShopActive = location.pathname.startsWith("/shop");
-  const isPollsActive = location.pathname.startsWith("/polls");
-  const isTogetherActive = isTogetherPath(location.pathname);
-  const isOnboardingActive = location.pathname.startsWith("/onboarding");
-  const isDeadlinesActive = location.pathname.startsWith("/deadlines");
-  const isBudgetingActive = location.pathname.startsWith("/participatory-budget");
-  const isServiceRequestsActive = location.pathname.startsWith("/service-requests");
-  const isCommunityActive = location.pathname.startsWith("/community");
-  const isMunicipalAnalyticsActive = location.pathname.startsWith("/municipal-dashboard");
-  const isAboutActive = location.pathname === "/about";
-  const isProfileActive = location.pathname.startsWith("/profile") || location.pathname.startsWith("/admin");
-  const isLoginActive = location.pathname === "/login" || location.pathname.startsWith("/password-reset");
-
-  const isCityServicesActive =
-    isOnboardingActive ||
-    isDeadlinesActive ||
-    isBudgetingActive ||
-    isServiceRequestsActive ||
-    isCommunityActive ||
-    isMunicipalAnalyticsActive;
-
-  const cityServicesItems = useMemo(
-    () => [
-      {
-        label: t("navigation.onboarding"),
-        icon: "pi pi-compass",
-        className: isOnboardingActive ? "active-menuitem" : "",
-        command: () => navigate("/onboarding"),
-      },
-      {
-        label: t("navigation.deadlines"),
-        icon: "pi pi-calendar-clock",
-        className: isDeadlinesActive ? "active-menuitem" : "",
-        command: () => navigate("/deadlines"),
-      },
-      {
-        label: t("navigation.participatoryBudget"),
-        icon: "pi pi-wallet",
-        className: isBudgetingActive ? "active-menuitem" : "",
-        command: () => navigate("/participatory-budget"),
-      },
-      {
-        label: t("navigation.serviceRequests"),
-        icon: "pi pi-inbox",
-        className: isServiceRequestsActive ? "active-menuitem" : "",
-        command: () => navigate("/service-requests"),
-      },
-      {
-        label: t("navigation.community"),
-        icon: "pi pi-users",
-        className: isCommunityActive ? "active-menuitem" : "",
-        command: () => navigate("/community"),
-      },
-      {
-        label: t("navigation.municipalAnalytics"),
-        icon: "pi pi-chart-line",
-        className: isMunicipalAnalyticsActive ? "active-menuitem" : "",
-        command: () => navigate("/municipal-dashboard"),
-      },
-    ],
-    [
-      t,
-      navigate,
-      isOnboardingActive,
-      isDeadlinesActive,
-      isBudgetingActive,
-      isServiceRequestsActive,
-      isCommunityActive,
-      isMunicipalAnalyticsActive,
-    ]
-  );
-
-  useEffect(() => {
-    if (!isDropdownOpen) return;
-
-    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setIsDropdownOpen(false);
-      }
-    };
-
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setIsDropdownOpen(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    document.addEventListener("touchstart", handleClickOutside);
-    document.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-      document.removeEventListener("touchstart", handleClickOutside);
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [isDropdownOpen]);
-
-  useEffect(() => {
-    setIsDropdownOpen(false);
-    setIsTogetherOpen(false);
-  }, [location.pathname]);
-
-  useEffect(() => {
-    if (!isTogetherOpen) return;
-
-    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
-      if (togetherRef.current && !togetherRef.current.contains(event.target as Node)) {
-        setIsTogetherOpen(false);
-      }
-    };
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setIsTogetherOpen(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    document.addEventListener("touchstart", handleClickOutside);
-    document.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-      document.removeEventListener("touchstart", handleClickOutside);
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [isTogetherOpen]);
-
-  const profileButtonContent = useMemo(() => {
-    if (!isAuthenticated) {
-      return t("navigation.profile");
-    }
-
-    return (
-      <span className={styles.profileButtonLabel}>
-        {t("navigation.profile")}
-        {unreadCount > 0 && (
-          <Badge value={unreadCount} severity="danger" />
-        )}
-      </span>
-    );
-  }, [isAuthenticated, t, unreadCount]);
+  const isAboutActive = pathname === "/about";
+  const isProfileActive =
+    (pathname.startsWith("/profile") && !matchesPath(pathname, "/profile/resume-builder")) || pathname.startsWith("/admin");
+  const isLoginActive = pathname === "/login" || pathname.startsWith("/password-reset");
 
   const start = (
-    <Link to="/" className={styles.startLink} aria-label="Home">
-      <AnimatedLogo />
-    </Link>
+    <div className={styles.start}>
+      <Link to="/" className={styles.startLink} aria-label={t("sides.chooserLink")}>
+        {side === "kipina" ? <KipinaLogo /> : <AnimatedLogo />}
+      </Link>
+      <SideSwitch side={side} className={styles.desktopOnly} />
+    </div>
   );
 
   const end = (
     <div className={styles.end}>
       <div className={styles.desktopNavButtons}>
-        <Button
-          label={t("navigation.companies")}
-          text
-          icon="pi pi-building"
-          onClick={() => navigate("/companies")}
-          className={`${styles.navButton} ${isCompaniesActive ? styles.active : ''}`}
-        />
-        <div className={styles.dropdownWrapper} ref={dropdownRef}>
-          <Button
-            text
-            icon="pi pi-building-columns"
-            onClick={() => setIsDropdownOpen((prev) => !prev)}
-            className={`${styles.navButton} ${styles.dropdownButton} ${isCityServicesActive ? styles.active : ''} ${isDropdownOpen ? styles.dropdownOpen : ''}`}
-            aria-haspopup="true"
-            aria-expanded={isDropdownOpen}
-            aria-controls="city_services_menu"
-          >
-            <span className={styles.dropdownButtonLabel}>
-              {t("navigation.cityServices")}
-              <i className={`pi pi-chevron-down ${styles.dropdownChevron} ${isDropdownOpen ? styles.chevronRotated : ''}`} />
-            </span>
-          </Button>
-          {isDropdownOpen && (
-            <div
-              id="city_services_menu"
-              className={styles.dropdownMenu}
-              role="menu"
-              aria-label={t("navigation.cityServices")}
-            >
-              <ul className={styles.dropdownList} role="none">
-                {cityServicesItems.map((item) => (
-                  <li key={item.label} role="none" className={styles.dropdownListItem}>
-                    <button
-                      type="button"
-                      className={`${styles.dropdownMenuItem} ${item.className === 'active-menuitem' ? styles.activeMenuItem : ''}`}
-                      onClick={() => {
-                        item.command();
-                        setIsDropdownOpen(false);
-                      }}
-                      role="menuitem"
-                    >
-                      <i className={`${item.icon} ${styles.menuItemIcon}`} />
-                      <span className={styles.menuItemText}>{item.label}</span>
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </div>
+        {side &&
+          SIDE_NAV[side].map((entry) =>
+            isGroup(entry) ? (
+              <NavDropdown key={entry.id} group={entry} />
+            ) : (
+              <Button
+                key={entry.to}
+                label={t(entry.label)}
+                text
+                icon={entry.icon}
+                onClick={() => navigate(entry.to)}
+                className={`${styles.navButton} ${isLinkActive(pathname, entry) ? styles.active : ""}`}
+              />
+            ),
           )}
-        </div>
-        <Button
-          label={t("navigation.shop")}
-          text
-          icon="pi pi-shopping-bag"
-          onClick={() => navigate("/shop")}
-          className={`${styles.navButton} ${isShopActive ? styles.active : ''}`}
-        />
-        <div className={styles.dropdownWrapper} ref={togetherRef}>
-          <Button
-            text
-            icon="pi pi-sparkles"
-            onClick={() => setIsTogetherOpen((prev) => !prev)}
-            className={`${styles.navButton} ${styles.dropdownButton} ${isTogetherActive ? styles.active : ''} ${isTogetherOpen ? styles.dropdownOpen : ''}`}
-            aria-haspopup="true"
-            aria-expanded={isTogetherOpen}
-            aria-controls="together_menu"
-          >
-            <span className={styles.dropdownButtonLabel}>
-              {t("navigation.together")}
-              <i className={`pi pi-chevron-down ${styles.dropdownChevron} ${isTogetherOpen ? styles.chevronRotated : ''}`} />
-            </span>
-          </Button>
-          {isTogetherOpen && (
-            <div id="together_menu" className={styles.dropdownMenu} role="menu" aria-label={t("navigation.together")}>
-              <ul className={styles.dropdownList} role="none">
-                {TOGETHER_LINKS.map((item) => (
-                  <li key={item.to} role="none" className={styles.dropdownListItem}>
-                    <button
-                      type="button"
-                      className={`${styles.dropdownMenuItem} ${location.pathname.startsWith(item.to) ? styles.activeMenuItem : ''}`}
-                      onClick={() => {
-                        navigate(item.to);
-                        setIsTogetherOpen(false);
-                      }}
-                      role="menuitem"
-                    >
-                      <i className={`${item.icon} ${styles.menuItemIcon}`} />
-                      <span className={styles.menuItemText}>{t(`navigation.togetherItems.${item.key}`)}</span>
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-        </div>
-        <Button
-          label={t("navigation.polls")}
-          text
-          icon="pi pi-chart-bar"
-          onClick={() => navigate("/polls")}
-          className={`${styles.navButton} ${isPollsActive ? styles.active : ''}`}
-        />
         <Button
           label={t("navigation.about")}
           text
           icon="pi pi-info-circle"
           onClick={() => navigate("/about")}
-          className={`${styles.navButton} ${isAboutActive ? styles.active : ''}`}
+          className={`${styles.navButton} ${isAboutActive ? styles.active : ""}`}
         />
         {isAuthenticated ? (
           <Button
             text
             icon="pi pi-user"
             onClick={() => navigate("/profile")}
-            className={`${styles.navButton} ${isProfileActive ? styles.active : ''}`}
+            className={`${styles.navButton} ${isProfileActive ? styles.active : ""}`}
           >
-            {profileButtonContent}
+            <span className={styles.profileButtonLabel}>
+              {t("navigation.profile")}
+              {unreadCount > 0 && <Badge value={unreadCount} severity="danger" />}
+            </span>
           </Button>
         ) : (
           <Button
@@ -303,14 +154,14 @@ const Header = () => {
             text
             icon="pi pi-sign-in"
             onClick={() => navigate("/login")}
-            className={`${styles.navButton} ${isLoginActive ? styles.active : ''}`}
+            className={`${styles.navButton} ${isLoginActive ? styles.active : ""}`}
           />
         )}
       </div>
       <ThemeSwitcher />
       <LanguageSwitcher />
       <Suspense fallback={null}>
-        <MobileMenu />
+        <MobileMenu side={side} />
       </Suspense>
     </div>
   );
@@ -319,4 +170,3 @@ const Header = () => {
 };
 
 export default Header;
-

@@ -237,3 +237,10 @@
     display: none;
   }
 }
+
+// Side switch rows at the top of the menu read as signage plates
+.mobile-menu .mobile-menu-side .p-menuitem-text {
+  font-family: var(--font-mono);
+  letter-spacing: 0.08em;
+  font-weight: 700;
+}

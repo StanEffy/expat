@@ -12,6 +12,7 @@ import type {
   BackendCategoryItem,
   GeneralCategoryItem,
   BackendCityItem,
+  CityOption,
   PaginatedCompanies,
 } from '@/types';
 
@@ -95,15 +96,19 @@ export const companyService = {
     return res as CompanyDetails;
   },
 
-  async getCities(): Promise<string[]> {
+  async getCities(): Promise<CityOption[]> {
     const res = await apiClient.get<{ data?: BackendCityItem[] } | BackendCityItem[]>(
       CITY_ENDPOINTS.LIST,
       { requireAuth: true },
     );
     const list = Array.isArray(res) ? res : res?.data ?? [];
     return list
-      .map((item) => (item.city ?? '').toString().trim())
-      .filter((city): city is string => Boolean(city));
+      .map((item) => ({
+        name: (item.city ?? '').toString().trim(),
+        nameSv: item.name_sv ?? null,
+        count: typeof item.company_count === 'number' ? item.company_count : 0,
+      }))
+      .filter((city) => Boolean(city.name));
   },
 
   async getCategories(): Promise<BackendCategoryItem[]> {

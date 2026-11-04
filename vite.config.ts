@@ -49,6 +49,9 @@ function compressionPlugin(): Plugin {
   };
 }
 
+// Where the dev server sends /api and /auth; override with API_PROXY_TARGET
+const apiTarget = process.env.API_PROXY_TARGET || 'http://localhost:8000'
+
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), compressionPlugin()],
@@ -69,12 +72,12 @@ export default defineConfig({
     allowedHosts: ['localhost', '127.0.0.1', 'x-pat.duckdns.org'],
     proxy: {
       '/api': {
-        target: 'http://localhost:8000',
+        target: apiTarget,
         changeOrigin: true,
         secure: false,
       },
       '/auth': {
-        target: 'http://localhost:8000',
+        target: apiTarget,
         changeOrigin: true,
         secure: false,
       },

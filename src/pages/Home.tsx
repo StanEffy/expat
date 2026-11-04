@@ -42,10 +42,11 @@ const BOARD_STEPS = [
   { code: 'KELA', key: 'kela' },
 ] as const;
 
-const SECTIONS: { key: 'work' | 'city' | 'together'; to: string; icon: ReactNode; isNew?: boolean }[] = [
+const SECTIONS: { key: 'work' | 'city' | 'kipina'; to: string; icon: ReactNode; isNew?: boolean }[] = [
   { key: 'work', to: '/companies', icon: <RockIcon /> },
   { key: 'city', to: '/service-requests', icon: <LakeIcon /> },
-  { key: 'together', to: '/together', icon: <BirchIcon />, isNew: true },
+  // the startup side lives next door
+  { key: 'kipina', to: '/kipina', icon: <BirchIcon />, isNew: true },
 ];
 
 // Headline words rise one by one out of their own line
@@ -81,13 +82,13 @@ const Home = () => {
         title={`${t('app.title')} - ${t('home.welcome')}`}
         description={t('home.description')}
         keywords="Finland, expat, job opportunities, companies, careers, Helsinki, Finnish companies, employment, expat jobs, work in Finland"
-        url={baseUrl ? `${baseUrl}/` : '/'}
+        url={baseUrl ? `${baseUrl}/expat` : '/expat'}
         structuredData={{
           '@context': 'https://schema.org',
           '@type': 'WebApplication',
           name: t('app.title'),
           description: t('home.description'),
-          url: `${baseUrl}/`,
+          url: `${baseUrl}/expat`,
           applicationCategory: 'BusinessApplication',
           operatingSystem: 'Web',
           offers: {
